@@ -13,7 +13,7 @@ class Anamneses extends Migration
      */
     public function up()
     {
-        Schema::create('ananmeses', function (Blueprint $table) {
+        Schema::create('anamneses', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('possui_doenca')->nullable();
             $table->boolean('toma_medicacao')->nullable();
@@ -40,6 +40,6 @@ class Anamneses extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ananmeses');
+        Schema::dropIfExists('anamneses');
     }
 }
