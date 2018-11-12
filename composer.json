@@ -13,6 +13,7 @@
         "lubusin/laravel-decomposer": "^1.2",
         "maatwebsite/excel": "^3.1",
         "orangehill/iseed": "dev-master",
+        "owen-it/laravel-auditing": "^8.0",
         "skydiver/laravel-materialize-css": "dev-master"
     },
     "require-dev": {
