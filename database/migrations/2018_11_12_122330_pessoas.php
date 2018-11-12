@@ -46,6 +46,6 @@ class Pessoas extends Migration
      */
     public function down()
     {
-        Schema::drop('pessoas');
+        Schema::dropIfExists('pessoas');
     }
 }

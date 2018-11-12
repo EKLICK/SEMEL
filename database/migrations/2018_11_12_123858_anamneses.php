@@ -40,6 +40,6 @@ class Anamneses extends Migration
      */
     public function down()
     {
-        Schema::drop('ananmeses');
+        Schema::dropIfExists('ananmeses');
     }
 }
