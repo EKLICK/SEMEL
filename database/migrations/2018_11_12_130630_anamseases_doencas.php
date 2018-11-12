@@ -30,6 +30,6 @@ class AnamseasesDoencas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anamseases_doencas');
+        Schema::dropIfExists('anamneses_doencas');
     }
 }
