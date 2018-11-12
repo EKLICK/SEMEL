@@ -13,7 +13,7 @@ class Turmas extends Migration
      */
     public function up()
     {
-        Schema::create('turma', function (Blueprint $table) {
+        Schema::create('turmas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
             $table->string('limite')->nullable();
@@ -30,6 +30,6 @@ class Turmas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turma');
+        Schema::dropIfExists('turmas');
     }
 }
