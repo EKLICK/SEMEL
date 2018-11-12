@@ -30,6 +30,6 @@ class TurmasProfessores extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('turmas_professores');
     }
 }
