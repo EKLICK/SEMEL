@@ -12,10 +12,24 @@
     <body>
         <nav>
             <div class="nav-wrapper lighten-3 green">
-                <a href="{{route('welcome')}}" class="brand-logo">SEMEL</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a href="#" class="brand-logo center">SEMEL</a>
+                @guest
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="{{route('login')}}">Login</a></li>
+                        <li><a href="{{route('register')}}">Cadastro</a></li>
+                    </ul>
+                @else
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
                     
-                </ul>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down"> 
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                @endguest
             </div>
         </nav>
         <main class="py-4">

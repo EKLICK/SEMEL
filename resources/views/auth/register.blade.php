@@ -5,7 +5,7 @@
         <div class="form">
             <form class="login-form" action="{{route('register')}}" method="post">
                 @csrf
-                <input name="name" id="nome" type="text" class="validate" placeholder="nome"/>
+                <input name="name" id="nome" type="text" class="validate" placeholder="usuario"/>
                 <input name="email" id="email" type="email" class="validate" placeholder="endereço de email"/>
                 <input name="password" id="senha" type="password" class="validate" placeholder="senha"/>
                 <input name="password_confirmation" id="c_senha" type="password" class="validate" placeholder="confirmar senha"/>
