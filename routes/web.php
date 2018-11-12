@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index');
 
 Route::get('/', function () {
