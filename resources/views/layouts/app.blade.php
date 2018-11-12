@@ -20,7 +20,15 @@
                     </ul>
                 @else
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    
+                            <ul id="dropdown1" class="dropdown-content">
+                                <li><a href="#!">Professor</a></li>
+                                <li><a href="#!">Cliente</a></li>
+                            </ul>
+                            <nav>
+                                <ul class="right hide-on-med-and-down lighten-3 green">
+                                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
+                                </ul>
+                            </nav>
                     </ul>
                     <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
