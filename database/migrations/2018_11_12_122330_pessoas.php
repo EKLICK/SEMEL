@@ -15,7 +15,7 @@ class Pessoas extends Migration
     {
         Schema::create('pessoas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('nome');
             $table->string('nascimento')->nullable();
             $table->enum('sexo', ['M','F'])->nullable();
             $table->string('rg')->nullable();
