@@ -15,7 +15,7 @@ Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@ind
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 

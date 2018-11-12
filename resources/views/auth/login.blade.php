@@ -8,7 +8,7 @@
                 <input name="identity" id="identity" type="text" class="validate" placeholder="username"/>
                 <input name="password" id="senha" type="password" class="validate" placeholder="password"/>
                 <button type="submit">login</button>
-                <p class="message">Não é registrado? <a href="#">Crie uma conta</a></p>
+                <p class="message">Não é registrado? <a href="{{route('register')}}">Crie uma conta</a></p>
             </form>
         </div>
     </div>

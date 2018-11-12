@@ -12,7 +12,7 @@
     <body>
         <nav>
             <div class="nav-wrapper lighten-3 green">
-                <a href="{{route('home')}}" class="brand-logo">SEMEL</a>
+                <a href="{{route('welcome')}}" class="brand-logo">SEMEL</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     
                 </ul>
