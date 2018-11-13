@@ -73,7 +73,10 @@ class professorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $professor = Professor::find($id);
+        $dataForm = $request->all();
+        $professor->update($dataForm);
+        return redirect()->Route('professor.index');
     }
 
     /**

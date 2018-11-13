@@ -10,6 +10,7 @@
             <div class="row">
                 <form class="col s12" action="{{route('professor.update', $professor->id)}}" method="post">
                     @csrf
+                    <input type="hidden" name="_method" value="PUT">
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
