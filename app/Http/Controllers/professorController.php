@@ -85,8 +85,10 @@ class professorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $professor = Professor::find($request['id']);
+        $professor->delete();
+        return redirect()->Route('professor.index');
     }
 }

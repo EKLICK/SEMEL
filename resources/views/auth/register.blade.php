@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css.personalizado')
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+@endsection
+
 @section('content')
     <div class="login-page">
         <div class="form">

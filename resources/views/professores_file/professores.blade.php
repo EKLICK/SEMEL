@@ -26,7 +26,7 @@
                 @endforeach 
             </tbody>
         </table>
-        <a href="{{route('professor.create')}}"><i class="large material-icons" style="color: green;">add_circle_outline</i></a>
+        <a href="{{route('professor.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
     </div>
 
     <div id="modaldelete" class="modal">
