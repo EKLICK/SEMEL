@@ -11,4 +11,12 @@ class Professor extends Model
     protected $fillable = [
         'nome', 'matricula', 'telefone', 'email', 'cpf', 'rg','user_id',
     ];
+
+    public function users(){
+        return $this->HasOne(User::class);
+    }
+
+    public function turmas(){
+        return $this->hasMany(Turma::class);
+    }
 }

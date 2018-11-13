@@ -17,6 +17,6 @@ class Pessoa extends Model
     }
 
     public function turmas(){
-        return $this->belongsToMany(Anamnese::class, 'turmas_pessoas');
+        return $this->belongsToMany(Turma::class, 'turmas_pessoas');
     }
 }
