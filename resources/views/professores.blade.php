@@ -7,17 +7,23 @@
                 <tr>
                     <th>Nome do professor</th>
                     <th>Matricula</th>
-                    <th>Melefone</th>
+                    <th>Telefone</th>
                     <th>E-mail</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    
-                </tr>
+                @foreach ($professoreslist as $professor)
+                    <tr>
+                        <td><h3>{{$professor->nome}}</h3></td>
+                        <td><h3>{{$professor->matricula}}</h3></td>
+                        <td><h3>{{$professor->telefone}}</h3></td>
+                        <td><h3>{{$professor->email}}</h3></td>
+                        <td><a href=""><i class="large material-icons" style="color: green;">edit</i></a></td>
+                        <td><a href=""><i class="large material-icons" style="color: green;">delete</i></a></td>
+                    </tr>
+                @endforeach 
             </tbody>
         </table>
         <a href=""><i class="large material-icons" style="color: green;">add_circle_outline</i></a>
