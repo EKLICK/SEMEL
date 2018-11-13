@@ -15,7 +15,7 @@ class professorController extends Controller
     public function index()
     {
         $professoreslist = Professor::all();
-        return view ('professores', compact('professoreslist'));
+        return view ('professores_file.professores', compact('professoreslist'));
     }
 
     /**
@@ -25,7 +25,7 @@ class professorController extends Controller
      */
     public function create()
     {
-        //
+        return view ('professores_file.professores_create');
     }
 
     /**
@@ -36,7 +36,9 @@ class professorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $professor = $request->all();
+        Professor::create($professor);
+        return redirect()->Route('professor.index');
     }
 
     /**

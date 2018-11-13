@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('css.personalizado')
+@endsection
+
 @section('content')
     <div class="login-page">
         <div class="form">

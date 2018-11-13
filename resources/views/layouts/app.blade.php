@@ -7,9 +7,9 @@
         <title>Document</title>
 
         {!! MaterializeCSS::include_full() !!}
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        @yield('css.personalizado')
     </head>
-    <body>
+    <body style="background-color:#4CAF50;">
         <nav>
             <div class="nav-wrapper lighten-3 green">
                 <a href="#" class="brand-logo center">SEMEL</a>
@@ -21,7 +21,7 @@
                 @else
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                             <ul id="dropdown1" class="dropdown-content">
-                                <li><a href="#!">Professor</a></li>
+                                <li><a href="{{route('professor.index')}}">Professor</a></li>
                                 <li><a href="#!">Cliente</a></li>
                             </ul>
                             <nav>
@@ -40,7 +40,7 @@
                 @endguest
             </div>
         </nav>
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
