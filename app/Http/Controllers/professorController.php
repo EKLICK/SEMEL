@@ -60,7 +60,8 @@ class professorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $professor = Professor::find($id);
+        return view ('professores_file.professores_edit', compact('professor'));
     }
 
     /**
@@ -72,7 +73,7 @@ class professorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

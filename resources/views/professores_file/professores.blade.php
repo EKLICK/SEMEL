@@ -20,7 +20,7 @@
                         <td><h5>{{$professor->matricula}}</h5></td>
                         <td><h5>{{$professor->telefone}}</h5></td>
                         <td><h5>{{$professor->email}}</h5></td>
-                        <td><a href=""><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a href="{{Route('professor.edit', $professor->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a href=""><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach 
