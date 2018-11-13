@@ -13,7 +13,7 @@ class Anamnese extends Model
     ];
 
     public function pessoa(){
-        return $this->hasMany(Pessoa::class);
+        return $this->hasOne(Pessoa::class);
     }
 
     public function doencas(){

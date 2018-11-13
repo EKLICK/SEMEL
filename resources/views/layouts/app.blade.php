@@ -23,7 +23,7 @@
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                             <ul id="dropdown1" class="dropdown-content">
                                 <li><a href="{{route('professor.index')}}">Professor</a></li>
-                                <li><a href="#!">Cliente</a></li>
+                                <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
                             </ul>
                             <nav>
                                 <ul class="right hide-on-med-and-down lighten-3 green">

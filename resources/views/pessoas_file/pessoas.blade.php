@@ -5,23 +5,23 @@
         <table class="centered">
             <thead>
                 <tr>
-                    <th>Nome do professor</th>
-                    <th>Matricula</th>
+                    <th>Nome da pessoa</th>
                     <th>Telefone</th>
-                    <th>E-mail</th>
+                    <th>Telefone de Emergência</th>
+                    <th>Bairro</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($professoreslist as $professor)
+                @foreach ($pessoaslist as $pessoa)
                     <tr>
-                        <td><h5>{{$professor->nome}}</h4></td>
-                        <td><h5>{{$professor->telefone}}</h5></td>
-                        <td><h5>{{$professor->telefone_emergencia}}</h5></td>
-                        <td><h5>{{$professor->telefone_bairro}}</h5></td>
-                        <td><a href="{{Route('professor.edit', $professor->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                        <td><h5>{{$pessoa->nome}}</h4></td>
+                        <td><h5>{{$pessoa->telefone}}</h5></td>
+                        <td><h5>{{$pessoa->telefone_emergencia}}</h5></td>
+                        <td><h5>{{$pessoa->bairro}}</h5></td>
+                        <td><a href="{{Route('professor.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach 
             </tbody>
