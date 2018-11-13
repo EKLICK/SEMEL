@@ -13,7 +13,7 @@ class professorController extends Controller
      */
     public function index()
     {
-        //
+        return view ('professores');
     }
 
     /**
