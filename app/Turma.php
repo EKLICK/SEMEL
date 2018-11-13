@@ -17,4 +17,8 @@ class Turma extends Model
     public function nucleos(){
         return $this->BelongsTo(Nucleo::class);
     }
+
+    public function professores(){
+        return $THIS->BelongsToMany(Professor::class, 'turmas_professores');
+    } 
 }
