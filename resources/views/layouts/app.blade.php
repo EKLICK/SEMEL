@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         {!! MaterializeCSS::include_full() !!}
         @yield('css.personalizado')
@@ -44,5 +45,6 @@
             @yield('content')
         </main>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/delete.js')}}"></script>
     </body>
 </html>
