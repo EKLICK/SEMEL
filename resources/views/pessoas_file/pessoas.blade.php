@@ -20,17 +20,17 @@
                         <td><h5>{{$pessoa->telefone}}</h5></td>
                         <td><h5>{{$pessoa->telefone_emergencia}}</h5></td>
                         <td><h5>{{$pessoa->bairro}}</h5></td>
-                        <td><a href="{{Route('professor.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach 
             </tbody>
         </table>
-        <a href="{{route('professor.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+        <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
     </div>
 
     <div id="modaldelete" class="modal">
-        <form action="{{route('professor.destroy', 'delete')}}" method="POST">
+        <form action="{{route('pessoas.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-content">

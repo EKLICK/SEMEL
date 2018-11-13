@@ -25,7 +25,7 @@ class PessoasController extends Controller
      */
     public function create()
     {
-        //
+        return view ('pessoas_file.pessoas_create');
     }
 
     /**
