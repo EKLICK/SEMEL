@@ -8,7 +8,7 @@ class Anamnese extends Model
 {
     protected $table = "anamneses";
     protected $fillable = [
-        'pessoa_id', 'peso', 'altura', 'possui_doenca', 'toma_medicacao', 'alergia_medicacao',
+        'ano', 'pessoas_id', 'peso', 'altura', 'possui_doenca', 'toma_medicacao', 'alergia_medicacao',
         'fumante', 'cirurgia', 'dor_ossea', 'dor_muscular', 'dor_articular','atestado', 'observacao',
     ];
 

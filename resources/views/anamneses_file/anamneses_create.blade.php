@@ -11,6 +11,7 @@
                 <form class="col s12" action="{{route('anamneses.store')}}" method="post">
                     @csrf
                     <div class="row">
+                        <input type="text" name="ano" id="ano" value="{{date('Y')}}" hidden>
                         <input type="number" name="pessoas_id" id="pessoas_id" value="{{$pessoa['id']}}" hidden>
                         <h4>Nome do Usuário: {{$pessoa['nome']}}</h4>
                         <div class="input-field col s3">
