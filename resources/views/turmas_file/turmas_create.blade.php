@@ -20,7 +20,7 @@
                     <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">assignment</i>
-                                <input name="nome" id="icon_prefix" type="number" class="validate">
+                                <input name="limite" id="icon_prefix" type="number" class="validate">
                                 <label for="icon_prefix">Limite:</label>
                             </div>
                     </div>

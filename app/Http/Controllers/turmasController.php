@@ -60,7 +60,8 @@ class turmasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $turma = Turma::find($id);
+        return view ('turmas_file.turmas_edit', compact('turma'));
     }
 
     /**
@@ -72,7 +73,10 @@ class turmasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $turma = Turma::find($id);
+        $turma->update($dataForm);
+        return redirect()->Route('turmas.index');
     }
 
     /**
