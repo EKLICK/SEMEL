@@ -17,7 +17,7 @@
                         <td><h5>{{$doenca->nome}}</h4></td>
                         <td><h5>{{$doenca->descricao}}</h5></td>
                         <td><a href="{{Route('doencas.edit', $doenca->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$doencas->id}}" data-nome="{{$doencass->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                        <td><a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach 
             </tbody>

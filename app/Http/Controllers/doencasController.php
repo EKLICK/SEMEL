@@ -25,7 +25,7 @@ class doencasController extends Controller
      */
     public function create()
     {
-        //
+        return view ('doencas_file.doencas_create');
     }
 
     /**
@@ -36,7 +36,9 @@ class doencasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Doenca::create($dataForm);
+        return redirect()->Route('doencas.index');
     }
 
     /**
