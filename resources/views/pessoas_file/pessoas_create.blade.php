@@ -170,23 +170,3 @@
         </div>
     </div>
 @endsection
-
-<!--
-    <div class="input-field col s2">
-        Sexo:
-        <label>
-            <p>
-                <label>
-                    <input name="sexo" type="radio"/>
-                    <span>Masculino</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input name="sexo" type="radio"/>
-                    <span>Feminino</span>
-                </label>
-            </p>
-        </label>
-    </div>
--->

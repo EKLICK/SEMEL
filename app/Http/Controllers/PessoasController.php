@@ -60,7 +60,8 @@ class PessoasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pessoa = Pessoa::find($id);
+        return view ('pessoas_file.pessoas_edit', compact('pessoa'));
     }
 
     /**
@@ -72,7 +73,10 @@ class PessoasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pessoa = Pessoa::find($id);
+        $dataForm = $request->all();
+        $pessoa->update($dataForm);
+        return redirect()->Route('pessoas.index');
     }
 
     /**

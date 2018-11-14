@@ -26,7 +26,7 @@ class Pessoas extends Migration
             $table->string('telefone')->nullable();
             $table->string('telefone_emergencia')->nullable();
             $table->string('nome_do_pai')->nullable();
-            $table->string('nome_do_mae')->nullable();
+            $table->string('nome_da_mae')->nullable();
             $table->string('pessoa_emergencia')->nullable();
             $table->string('convenio_medico')->nullable();
             $table->integer('filhos')->default(0);
