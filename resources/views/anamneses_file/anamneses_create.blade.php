@@ -182,6 +182,20 @@
                                 </p>
                             </label>
                         </div>
+                        <div class="input-field col s3 left">
+                            Se sim, quais?
+                            <label>
+                                <p>
+                                    <label>
+                                        @foreach ($doencaslist as $doenca)
+                                        <input type="checkbox" />
+                                        <span>{{$doenca->nome}}</span>
+                                        <br>
+                                        @endforeach
+                                    </label>
+                                </p>
+                            </label>
+                        </div>
                     </div>
                     <br><br><br>
                     <div class="row">
