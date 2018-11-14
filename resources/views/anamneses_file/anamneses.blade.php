@@ -16,7 +16,7 @@
             <tbody>
                 @foreach ($anamneseslist as $anamnese)
                     <tr>
-                        <td><h5>{{$anamnese->pessoa->nome}}</h4></td>
+                        <td><h5>{{$anamnese->pessoas->nome}}</h4></td>
                         <td><h5>{{$anamnese->peso}}</h5></td>
                         <td><h5>{{$anamnese->altura}}</h5></td>
                         <td><h5>{{$anamnese->dor_articular}}</h5></td>
