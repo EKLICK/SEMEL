@@ -81,8 +81,10 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $pessoa = Pessoa::find($request['id']);
+        $pessoa->delete();
+        return redirect()->Route('pessoas.index');
     }
 }
