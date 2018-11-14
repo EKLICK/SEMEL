@@ -60,7 +60,8 @@ class doencasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doenca = Doenca::find($id);
+        return view ('doencas_file.doencas_edit', compact('doenca'));
     }
 
     /**
