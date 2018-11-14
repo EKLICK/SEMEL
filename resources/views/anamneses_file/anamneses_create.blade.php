@@ -11,6 +11,7 @@
                 <form class="col s12" action="{{route('anamneses.store')}}" method="post">
                     @csrf
                     <div class="row">
+                        <input type="number" name="pessoa_id" id="pessoa_id" value="1" hidden>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
                             <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate">
@@ -45,13 +46,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="toma_medicamento" type="radio"/>
+                                        <input value="1" name="toma_medicacao" type="radio"/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="toma_medicamento" type="radio"/>
+                                        <input value="0" name="toma_medicacao" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -62,13 +63,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="alergia_medica" type="radio"/>
+                                        <input value="1" name="alergia_medicacao" type="radio"/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="alergia_medica" type="radio"/>
+                                        <input value="0" name="alergia_medicacao" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -183,7 +184,7 @@
                     <br><br><br>
                     <div class="row">
                         <div class="input-field col s8">
-                          <textarea id="observacao" class="materialize-textarea"></textarea>
+                          <textarea name="observacao" id="observacao" class="materialize-textarea"></textarea>
                           <label for="observacao">Observação</label>
                         </div>
                     </div>

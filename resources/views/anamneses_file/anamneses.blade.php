@@ -16,10 +16,10 @@
             <tbody>
                 @foreach ($anamneseslist as $anamnese)
                     <tr>
-                        <td><h5>{{$anamnese->nome}}</h4></td>
-                        <td><h5>{{$anamnese->matricula}}</h5></td>
-                        <td><h5>{{$anamnese->telefone}}</h5></td>
-                        <td><h5>{{$anamnese->email}}</h5></td>
+                        <td><h5>{{$anamnese->pessoa->nome}}</h4></td>
+                        <td><h5>{{$anamnese->peso}}</h5></td>
+                        <td><h5>{{$anamnese->altura}}</h5></td>
+                        <td><h5>{{$anamnese->dor_articular}}</h5></td>
                         <td><a href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$anamnese->id}}" data-nome="{{$anamnese->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>

@@ -36,7 +36,9 @@ class AnamneseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Anamnese::create($dataForm);
+        return redirect()->Route('anamneses.index');
     }
 
     /**

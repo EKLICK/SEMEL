@@ -13,7 +13,7 @@ class Pessoa extends Model
     ];
 
     public function anamneses(){
-        return $this->belongsTo(Anamnese::class);
+        return $this->hasOne(Anamnese::class);
     }
 
     public function turmas(){
