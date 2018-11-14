@@ -26,7 +26,6 @@
                 @endforeach 
             </tbody>
         </table>
-        <a href="{{route('anamneses.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
     </div>
 
     <div id="modaldelete" class="modal">

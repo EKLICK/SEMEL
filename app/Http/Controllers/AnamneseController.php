@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anamnese;
+use App\Pessoa;
+use Illuminate\Support\Facades\Session;
 
 class AnamneseController extends Controller
 {
@@ -25,7 +27,10 @@ class AnamneseController extends Controller
      */
     public function create()
     {
-        return view ('anamneses_file.anamneses_create');
+        $pessoa_id = Session::get('pessoa');
+        Session::forget('pessoa');
+        $pessoa = Pessoa::find($pessoa_id);
+        return view ('anamneses_file.anamneses_create', compact('pessoa'));
     }
 
     /**
@@ -38,7 +43,7 @@ class AnamneseController extends Controller
     {
         $dataForm = $request->all();
         Anamnese::create($dataForm);
-        return redirect()->Route('anamneses.index');
+        return redirect()->Route('pessoas.index');
     }
 
     /**

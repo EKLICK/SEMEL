@@ -11,7 +11,8 @@
                 <form class="col s12" action="{{route('anamneses.store')}}" method="post">
                     @csrf
                     <div class="row">
-                        <input type="number" name="pessoa_id" id="pessoa_id" value="1" hidden>
+                        <input type="number" name="pessoas_id" id="pessoas_id" value="{{$pessoa['id']}}" hidden>
+                        <h4>Nome do Usuário: {{$pessoa['nome']}}</h4>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
                             <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate">

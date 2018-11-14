@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pessoa;
+use Illuminate\Support\Facades\Session;
 
 class PessoasController extends Controller
 {
@@ -37,8 +38,9 @@ class PessoasController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        Pessoa::create($dataForm);
-        return redirect()->Route('pessoas.index');
+        $pessoa =  Pessoa::create($dataForm);
+        Session::put('pessoa', $pessoa->id);
+        return redirect()->Route('anamneses.create');
     }
 
     /**
