@@ -25,7 +25,7 @@ class turmasController extends Controller
      */
     public function create()
     {
-        //
+        return view ('turmas_file.turmas_create');
     }
 
     /**
@@ -36,7 +36,9 @@ class turmasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Turma::create($dataForm);
+        return redirect()->Route('turmas.index');
     }
 
     /**

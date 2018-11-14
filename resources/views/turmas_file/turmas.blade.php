@@ -14,19 +14,19 @@
             <tbody>
                 @foreach ($turmaslist as $turma)
                     <tr>
-                        <td><h5>{{$anamnese->nome}}</h4></td>
-                        <td><h5>{{$anamnese->limite}}</h5></td>
-                        <td><a href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                        <td><h5>{{$turma->nome}}</h4></td>
+                        <td><h5>{{$turma->limite}}</h5></td>
+                        <td><a href="{{Route('turmas.edit', $turma->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach 
             </tbody>
         </table>
-        <a href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+        <a href="{{route('turmas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
     </div>
 
     <div id="modaldelete" class="modal">
-        <form action="{{route('doencas.destroy', 'delete')}}" method="POST">
+        <form action="{{route('turmas.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-content">
