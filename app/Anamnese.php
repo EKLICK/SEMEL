@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anamnese extends Model
 {
+    protected $table = "anamneses";
     protected $fillable = [
         'possui_doenca', 'toma_medicacao', 'alergia_medicacao', 'peso', 'altura',
         'fumante', 'cirurgia', 'dor_muscular', 'dor_ossea', 'dor_articular',

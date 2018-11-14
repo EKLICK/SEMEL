@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Anamnese;
 
 class AnamneseController extends Controller
 {
@@ -13,7 +14,8 @@ class AnamneseController extends Controller
      */
     public function index()
     {
-        //
+        $anamneseslist = Anamnese::all();
+        return view ('anamneses_file.anamneses', compact('anamneseslist'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AnamneseController extends Controller
      */
     public function create()
     {
-        //
+        return view ('anamneses_file.anamneses_create');
     }
 
     /**

@@ -24,3 +24,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('professor', 'professorController');
 Route::resource('pessoas', 'PessoasController');
+Route::resource('anamneses', 'anamneseController');

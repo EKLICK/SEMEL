@@ -15,36 +15,36 @@
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
                             <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$professor->nome}}">
-                            <label for="icon_prefix">Nome</label>
+                            <label for="icon_prefix">Nome:</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">recent_actors</i>
                             <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->matricula}}">
-                            <label for="icon_matricula">Matricula</label>
+                            <label for="icon_matricula">Matricula:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">phone</i>
                             <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->telefone}}">
-                            <label for="icon_telephone">Telephone</label>
+                            <label for="icon_telephone">Telephone:</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">email</i>
                             <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->email}}">
-                            <label for="icon_email">E-mail</label>
+                            <label for="icon_email">E-mail:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">recent_actors</i>
                             <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->cpf}}">
-                            <label for="icon_matricula">CPF</label>
+                            <label for="icon_matricula">CPF:</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">recent_actors</i>
                             <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->rg}}">
-                            <label for="icon_matricula">RG</label>
+                            <label for="icon_matricula">RG:</label>
                         </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar

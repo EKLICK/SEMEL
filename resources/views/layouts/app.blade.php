@@ -30,7 +30,9 @@
                                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
                                 </ul>
                             </nav>
-                            <li><a href="{{route('register')}}">Anamneses</a></li>
+                    </ul>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="{{route('anamneses.index')}}">Anamneses</a></li>
                     </ul>
                     <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
