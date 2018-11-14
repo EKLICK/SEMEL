@@ -36,7 +36,9 @@ class PessoasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Pessoa::create($dataForm);
+        return redirect()->Route('pessoas.index');
     }
 
     /**

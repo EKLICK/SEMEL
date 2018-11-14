@@ -15,24 +15,24 @@ class Pessoas extends Migration
     {
         Schema::create('pessoas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('cidade')->nullable();
             $table->string('nome');
             $table->string('nascimento')->nullable();
-            $table->enum('sexo', ['M','F'])->nullable();
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();
-            $table->string('cidade')->nullable();
             $table->string('endereco')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cep')->nullable();
             $table->string('telefone')->nullable();
-            $table->string('estado_civil')->nullable();
+            $table->string('telefone_emergencia')->nullable();
             $table->string('nome_do_pai')->nullable();
             $table->string('nome_do_mae')->nullable();
             $table->string('pessoa_emergencia')->nullable();
-            $table->string('telefone_emergencia')->nullable();
-            $table->integer('filhos')->default(0);
             $table->string('convenio_medico')->nullable();
+            $table->integer('filhos')->default(0);
             $table->integer('irmaos')->default(0);
+            $table->enum('sexo', ['M','F'])->nullable();
+            $table->string('estado_civil')->nullable();
             $table->boolean('mora_com_os_pais')->default(false);
             $table->boolean('inativo')->default(false);
             $table->timestamps();

@@ -54,7 +54,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">contact_phone</i>
-                            <input name="telefone" id="icon_telephone" type="tel" class="validate">
+                            <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate">
                             <label for="icon_telephone">Telephone de emergência:</label>
                         </div>
                     </div>
@@ -98,13 +98,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input name="sexo" type="radio"/>
+                                        <input value="M" name="sexo" type="radio"/>
                                         <span>Masculino</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input name="sexo" type="radio"/>
+                                        <input value="F" name="sexo" type="radio"/>
                                         <span>Feminino</span>
                                     </label>
                                 </p>
@@ -115,13 +115,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input name="estado_civil" type="radio"/>
+                                        <input value="solteiro" name="estado_civil" type="radio"/>
                                         <span>Solteiro</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input name="estado_civil" type="radio"/>
+                                        <input value="casado" name="estado_civil" type="radio"/>
                                         <span>Casado</span>
                                     </label>
                                 </p>
@@ -132,13 +132,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input name="mora_com_os_pais" type="radio"/>
+                                        <input value="1" name="mora_com_os_pais" type="radio"/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input name="mora_com_os_pais" type="radio"/>
+                                        <input value="2" name="mora_com_os_pais" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -149,13 +149,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input name="inativo" type="radio"/>
+                                        <input value="1" name="inativo" type="radio"/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input name="inativo" type="radio"/>
+                                        <input value="0" name="inativo" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
