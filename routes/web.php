@@ -26,3 +26,4 @@ Route::resource('professor', 'professorController');
 Route::resource('pessoas', 'PessoasController');
 Route::resource('anamneses', 'anamneseController');
 Route::resource('doencas', 'doencasController');
+Route::resource('turmas', 'turmasController');
