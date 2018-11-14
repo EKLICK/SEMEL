@@ -73,7 +73,10 @@ class doencasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $doenca = Doenca::find($id);
+        $doenca->update($dataForm);
+        return redirect()->Route('doencas.index');
     }
 
     /**
@@ -82,8 +85,10 @@ class doencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $doenca = Doenca::find($request['id']);
+        $doenca->delete();
+        return redirect()->Route('doencas.index');
     }
 }
