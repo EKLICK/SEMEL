@@ -26,7 +26,7 @@ class nucleosController extends Controller
      */
     public function create()
     {
-        //
+        return view ('nucleos_file.nucleos_create');
     }
 
     /**
