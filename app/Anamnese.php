@@ -17,6 +17,6 @@ class Anamnese extends Model
     }
 
     public function doencas(){
-        return $this->BelongsToMany(Doenca::class, 'anamseases_doencas');
+        return $this->BelongsToMany(Doenca::class, 'anamneses_doencas');
     }
 }

@@ -13,7 +13,7 @@ class Pessoa extends Model
     ];
 
     public function anamneses(){
-        return $this->hasMany(Anamnese::class);
+        return $this->hasMany(Anamnese::class, 'pessoas_id');
     }
 
     public function turmas(){

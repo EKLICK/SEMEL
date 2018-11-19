@@ -16,7 +16,9 @@ class PessoasController extends Controller
     public function index()
     {
         $pessoaslist = Pessoa::all();
-        return view ('pessoas_file.pessoas', compact('pessoaslist'));
+        $data = new \DateTime();
+        $ano = date('Y');
+        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
 
     /**

@@ -6,24 +6,20 @@
             <thead>
                 <tr>
                     <th>Nome da pessoa</th>
-                    <th>Telefone</th>
-                    <th>Telefone de Emergência</th>
-                    <th>Bairro</th>
+                    <th>Anamnese atual</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($pessoaslist as $pessoa)
-                    <tr>
+                    <tr @if($pessoa->anamneses->last()->ano != $ano) class="red lighten-1" @else class="green lighten-2" @endif>
                         <td><h5>{{$pessoa->nome}}</h4></td>
-                        <td><h5>{{$pessoa->telefone}}</h5></td>
-                        <td><h5>{{$pessoa->telefone_emergencia}}</h5></td>
-                        <td><h5>{{$pessoa->bairro}}</h5></td>
+                        <td>{{$pessoa->anamneses->last()->ano}}</td>
                         <td><a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
-                @endforeach 
+                @endforeach s
             </tbody>
         </table>
         <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>

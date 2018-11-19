@@ -27,7 +27,7 @@
                             </ul>
                             <nav>
                                 <ul class="right hide-on-med-and-down lighten-3 green">
-                                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right">arrow_drop_down</i></a></li>
+                                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuarios<i class="material-icons right"></i></a></li>
                                 </ul>
                             </nav>
                     </ul>

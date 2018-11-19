@@ -18,7 +18,8 @@ class AnamneseController extends Controller
     public function index()
     {
         $anamneseslist = Anamnese::all();
-        return view ('anamneses_file.anamneses', compact('anamneseslist'));
+        $ano = date('Y');
+        return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano'));
     }
 
     /**
@@ -44,8 +45,9 @@ class AnamneseController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
+        $dataForm += ['ano' => date('Y')];
 
-        if(isset($dataForm['musicas'])){
+        if(isset($dataForm['doencas'])){
             $anamnese = Anamnese::create($dataForm);;
             $anamnese->doencas()->attach($dataForm['doencas']);
         }else{
@@ -74,7 +76,8 @@ class AnamneseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $anamnese = Anamnese::find($id);
+        return view ('anamneses_file.anamneses_edit', compact ('anamnese'));
     }
 
     /**
