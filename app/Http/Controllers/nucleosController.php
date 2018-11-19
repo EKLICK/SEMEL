@@ -61,7 +61,8 @@ class nucleosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $nucleo = Nucleo::find($id);
+        return view ('nucleos_file.nucleos_edit', compact('nucleo'));
     }
 
     /**
@@ -73,7 +74,11 @@ class nucleosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $nucleo = Nucleo::find($id);
+        $nucleo->update($dataForm);
+        
+        return redirect()->Route('nucleos.index'); 
     }
 
     /**
