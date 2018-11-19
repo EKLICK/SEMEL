@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\regrasTurma;
+use Illuminate\Support\Facades\Session;
 use App\Turma;
+use App\Nucleo;
 
 class turmasController extends Controller
 {
@@ -25,7 +28,9 @@ class turmasController extends Controller
      */
     public function create()
     {
-        return view ('turmas_file.turmas_create');
+        $nucleoslist = Nucleo::all();
+
+        return view ('turmas_file.turmas_create', compact('nucleoslist'));
     }
 
     /**
@@ -34,10 +39,12 @@ class turmasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(regrasTurma $request)
     {
         $dataForm = $request->all();
-        Turma::create($dataForm);
+        $turma = Turma::create($dataForm);
+
+        Session::put('mensagem', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
         return redirect()->Route('turmas.index');
     }
 
