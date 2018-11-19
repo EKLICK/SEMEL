@@ -95,4 +95,16 @@ class PessoasController extends Controller
         $pessoa->delete();
         return redirect()->Route('pessoas.index');
     }
+
+    public function lista_anamnese($id){
+        $anamneselist = Anamnese::find();
+
+        return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneselist'));
+    }
+
+    public function pessoa_info($id){
+        $pessoa = Pessoa::find($id);
+
+        return view ('Pessoas_file.pessoas_info', compact('pessoa'));
+    }
 }
