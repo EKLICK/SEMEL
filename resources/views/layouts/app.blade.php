@@ -35,6 +35,7 @@
                         <li><a href="{{route('anamneses.index')}}">Anamneses</a></li>
                         <li><a href="{{route('doencas.index')}}">Doenças</a></li>
                         <li><a href="{{route('turmas.index')}}">Turmas</a></li>
+                        <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
                     </ul>
                     <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
