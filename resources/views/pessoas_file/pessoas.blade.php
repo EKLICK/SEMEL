@@ -23,7 +23,7 @@
                         <td><a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
-                @endforeach s
+                @endforeach
             </tbody>
         </table>
         <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>

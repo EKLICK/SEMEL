@@ -97,9 +97,8 @@ class PessoasController extends Controller
     }
 
     public function lista_anamnese($id){
-        $anamneselist = Anamnese::find();
-
-        return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneselist'));
+        $pessoa = Pessoa::find($id);
+        return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa'));
     }
 
     public function pessoa_info($id){
