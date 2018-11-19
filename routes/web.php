@@ -23,12 +23,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('professor', 'professorController');
-Route::resource('pessoas', 'PessoasController');
-Route::resource('anamneses', 'anamneseController');
-Route::resource('doencas', 'doencasController');
-Route::resource('turmas', 'turmasController');
-Route::resource('nucleos', 'nucleosController');
 
-Route::get('/pessoas_lista_anamneses/{id}', 'PessoasController@lista_anamnese')->name('lista_anamnese');
+Route::resource('pessoas', 'PessoasController');
 Route::get('/pessoas_info/{id}', 'PessoasController@pessoas_info')->name('pessoa_info');
+Route::get('/pessoas_lista_anamneses/{id}', 'PessoasController@lista_anamnese')->name('lista_anamnese');
+Route::get('/pessoas_turmas/{id}', 'PessoasController@pessoas_turmas')->name('pessoas_turmas');
+
+Route::resource('anamneses', 'anamneseController');
+
+Route::resource('doencas', 'doencasController');
+
+Route::resource('turmas', 'turmasController');
+
+Route::resource('nucleos', 'nucleosController');
 Route::get('/nucleos_turmas/{id}', 'NucleosController@turmas_cadastradas')->name('turmas_cadastradas');

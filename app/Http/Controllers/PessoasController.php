@@ -101,9 +101,15 @@ class PessoasController extends Controller
         return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa'));
     }
 
-    public function pessoa_info($id){
+    public function pessoas_info($id){
         $pessoa = Pessoa::find($id);
 
         return view ('Pessoas_file.pessoas_info', compact('pessoa'));
+    }
+
+    public function pessoas_turmas($id){
+        $pessoa = Pessoa::find($id);
+
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa'));
     }
 }
