@@ -13,11 +13,10 @@
             </thead>
             <tbody>
                 @foreach ($nucleoslist as $nucleo)
-                    <tr @if($nucleo->anamneses->last()->ano != $ano) class="red lighten-1" @else class="green lighten-2" @endif>
                         <td><h5>{{$nucleo->nome}}</h4></td>
-                        <td>{{$nucleo->Bairro}}</td>
-                        <td><a href="{{Route('nucleos.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                        <td>{{$nucleo->bairro}}</td>
+                        <td><a href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>
                 @endforeach
             </tbody>

@@ -37,7 +37,9 @@ class nucleosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        $nucleo =  Nucleo::create($dataForm);
+        return redirect()->Route('nucleos.index');
     }
 
     /**
@@ -80,8 +82,11 @@ class nucleosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $nucleo = Nucleo::find($dataForm['id']);
+        $nucleo->delete();
+        return redirect()->Route('nucleos.index');
     }
 }
