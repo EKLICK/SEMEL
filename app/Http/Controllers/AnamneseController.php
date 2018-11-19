@@ -76,8 +76,9 @@ class AnamneseController extends Controller
      */
     public function edit($id)
     {
+        $doencaslist = Doenca::all();
         $anamnese = Anamnese::find($id);
-        return view ('anamneses_file.anamneses_edit', compact ('anamnese'));
+        return view ('anamneses_file.anamneses_edit', compact ('anamnese', 'doencaslist'));
     }
 
     /**
@@ -89,7 +90,12 @@ class AnamneseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $anamnese = Anamnese::find($id);
+        $anamnese->update($dataForm);
+        if(isset($dataForm['doencas']))
+            $anamnese->doencas()->sync($dataForm['doencas']);
+        return redirect()->Route('anamneses.index');
     }
 
     /**

@@ -187,7 +187,7 @@
                                 <p>
                                     <label>
                                         @foreach ($doencaslist as $doenca)
-                                        <input type="checkbox" />
+                                        <input type="checkbox" value="{{$doenca->id}}" name="doencas[]"/>
                                         <span>{{$doenca->nome}}</span>
                                         <br>
                                         @endforeach
