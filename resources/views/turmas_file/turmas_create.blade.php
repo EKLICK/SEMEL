@@ -36,7 +36,6 @@
                                             <span>{{$nucleo->nome}}</span>
                                         </label>
                                     </p>
-                                    <br>
                                 @endforeach
                             </label>
                         </div>
@@ -44,7 +43,7 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">assignment</i>
-                            <input name="limite" id="icon_limite" type="text" class="validate">
+                            <input name="limite" id="icon_limite" type="number" class="validate">
                             <label for="icon_limite">Limite:</label>
                         </div>
                     </div>

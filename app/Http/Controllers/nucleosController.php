@@ -94,4 +94,9 @@ class nucleosController extends Controller
         $nucleo->delete();
         return redirect()->Route('nucleos.index');
     }
+
+    public function turmas_cadastradas(Request $id){
+        $nucleo = Nucleo::find($id);
+        return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
+    }
 }

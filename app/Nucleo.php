@@ -11,6 +11,6 @@ class Nucleo extends Model
     ];
 
     public function turmas(){
-        return $this->HasOne(Turma::class);
+        return $this->HasMany(Turma::class);
     }
 }

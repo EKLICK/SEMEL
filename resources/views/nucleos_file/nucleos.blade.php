@@ -5,8 +5,9 @@
         <table class="centered">
             <thead>
                 <tr>
-                    <th>Nome da pessoa</th>
+                    <th>Nome da turma</th>
                     <th>Bairro</th>
+                    <th>Turmas cadastradas</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
@@ -15,6 +16,7 @@
                 @foreach ($nucleoslist as $nucleo)
                         <td><h5>{{$nucleo->nome}}</h4></td>
                         <td>{{$nucleo->bairro}}</td>
+                        <td><a href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="material-icons medium" style="color: green;">people</i></a></td>
                         <td><a href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>

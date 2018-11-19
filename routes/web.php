@@ -31,3 +31,4 @@ Route::resource('nucleos', 'nucleosController');
 
 Route::get('/pessoas_lista_anamneses/{id}', 'PessoasController@lista_anamnese')->name('lista_anamnese');
 Route::get('/pessoas_info/{id}', 'PessoasController@pessoas_info')->name('pessoa_info');
+Route::get('/nucleos_turmas/{id}', 'NucleosController@turmas_cadastradas')->name('turmas_cadastradas');

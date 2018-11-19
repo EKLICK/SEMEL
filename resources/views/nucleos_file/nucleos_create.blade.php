@@ -20,7 +20,7 @@
                     <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">location_city</i>
-                                <input name="bairro" id="icon_bairro" type="number" class="validate">
+                                <input name="bairro" id="icon_bairro" type="text" class="validate">
                                 <label for="icon_bairro">Bairro:</label>
                             </div>
                     </div>

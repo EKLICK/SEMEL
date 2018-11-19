@@ -5,28 +5,29 @@
         <table class="centered">
             <thead>
                 <tr>
-                    <th>Nome da doença</th>
-                    <th>Descrição</th>
+                    <th>Nome da turma</th>
+                    <th>limite</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($doencaslist as $doenca)
-                    <tr>
-                        <td><h5>{{$doenca->nome}}</h4></td>
-                        <td><h5>{{$doenca->descricao}}</h5></td>
-                        <td><a href="{{Route('doencas.edit', $doenca->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
-                    </tr>
-                @endforeach 
+                @if (isset($nucleo->turmas))
+                    @foreach ($nucleo->turmas as $turma)
+                        <td><h5>{{$turma->nome}}</h4></td>
+                        <td>{{$turma->limite}}</td>
+                        <td><a href="{{Route('turmas.edit', $turma->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                        <td><a id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
-        <a href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+        <a href="{{route('turmas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
     </div>
 
     <div id="modaldelete" class="modal">
-        <form action="{{route('doencas.destroy', 'delete')}}" method="POST">
+        <form action="{{route('turmas.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
             <div class="modal-content">
