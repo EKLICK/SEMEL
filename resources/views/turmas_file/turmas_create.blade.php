@@ -29,12 +29,13 @@
                         </div>
                         <div class="input-field col s5 right">
                             <label>
+                                    Nucleos:
                                 @foreach ($nucleoslist as $nucleo)
                                     <p>
-                                        <label>
-                                            <input value="{{$nucleo->id}}" name="nucleos" type="radio"/>
-                                            <span>{{$nucleo->nome}}</span>
-                                        </label>
+                                    <label>
+                                        <input type="radio" value="{{$nucleo->id}}" name="nucleo_id"/>
+                                      <span>{{$nucleo->nome}}</span>
+                                    </label>
                                     </p>
                                 @endforeach
                             </label>

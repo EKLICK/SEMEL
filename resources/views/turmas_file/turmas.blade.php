@@ -15,7 +15,7 @@
         <table class="centered">
             <thead>
                 <tr>
-                    <th>Nome da pessoa</th>
+                    <th>Nome da turma</th>
                     <th>Limite de alunos</th>
                     <th>Editar</th>
                     <th>Deletar</th>

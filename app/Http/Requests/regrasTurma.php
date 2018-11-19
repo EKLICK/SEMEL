@@ -24,13 +24,13 @@ class regrasTurma extends FormRequest
     public function rules()
     {
         return [
-            'nucleos' =>'required',
+            'nucleo_id' =>'required',
         ];
     }
 
     public function messages(){
         return [
-            'nucleos.required' => 'A turma necessita obrigatoriamente de um núcleo!',
+            'nucleo_id.required' => 'A turma necessita obrigatoriamente de um núcleo!',
         ];
     }
 }

@@ -12,15 +12,13 @@
                 </tr>
             </thead>
             <tbody>
-                @if (isset($nucleo->turmas))
-                    @foreach ($nucleo->turmas as $turma)
-                        <td><h5>{{$turma->nome}}</h4></td>
-                        <td>{{$turma->limite}}</td>
-                        <td><a href="{{Route('turmas.edit', $turma->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
-                        </tr>
-                    @endforeach
-                @endif
+                @foreach ($nucleo->turmas as $turma)
+                    <td><h5>{{$turma->nome}}</h4></td>
+                    <td>{{$turma->limite}}</td>
+                    <td><a href="{{Route('turmas.edit', $turma->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
+                    <td><a id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         <a href="{{route('turmas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>

@@ -95,7 +95,7 @@ class nucleosController extends Controller
         return redirect()->Route('nucleos.index');
     }
 
-    public function turmas_cadastradas(Request $id){
+    public function turmas_cadastradas($id){
         $nucleo = Nucleo::find($id);
         return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
     }
