@@ -10,14 +10,14 @@
         </div>
         {{Session::forget('mensagem_green')}}
     @endif
-    @if(Session::get('mensagem_red'))
+    @if(Session::get('mensagem_yellow'))
         <div class="center-align">
-            <div class="chip red lighten-2">
-                {{Session::get('mensagem_red')}}
+            <div class="chip yellow darken-2">
+                {{Session::get('mensagem_yellow')}}
                 <i class="close material-icons">close</i>
             </div>
         </div>
-        {{Session::forget('mensagem_red')}}
+        {{Session::forget('mensagem_yellow')}}
     @endif
 
     <div class="white container" style="margin-top: 3%;">
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach ($turmas as $turma)
-                    <tr>
+                    <tr @if(count($turma->pessoas) >= $turma->limite) class="yellow darken-2" @endif>
                         <td><h5>{{$turma->nome}}</h4></td>
                         <td><h5>{{count($turma->pessoas)}} / {{$turma->limite}}</h5></td>
                         <td>

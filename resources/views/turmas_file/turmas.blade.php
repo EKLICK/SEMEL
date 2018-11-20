@@ -23,9 +23,9 @@
             </thead>
             <tbody>
                 @foreach ($turmaslist as $turma)
-                    <tr>
+                    <tr @if(count($turma->pessoas) >= $turma->limite) class="yellow darken-2" @endif>
                         <td><h5>{{$turma->nome}}</h4></td>
-                        <td><h5>{{$turma->limite}}</h5></td>
+                        <td><h5>{{count($turma->pessoas)}} / {{$turma->limite}}</h5></td>
                         <td><a href="{{Route('turmas.edit', $turma->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>

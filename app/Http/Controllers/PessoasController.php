@@ -127,8 +127,9 @@ class PessoasController extends Controller
     public function pessoas_turmas_vincular($idpessoa, $idturma){
         $pessoa = Pessoa::find($idpessoa);
         $turma = Turma::find($idturma);
-        if(count($turma->pessoas) == $turma->limite){
-            Session::put('mensagem_red', "A turma " . $turma->nome . " está cheia!");
+        if(count($turma->pessoas) >= $turma->limite){
+            $pessoa->turmas()->attach($idturma);
+            Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
         }
         else{
             $pessoa->turmas()->attach($idturma);
