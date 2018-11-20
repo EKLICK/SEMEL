@@ -126,7 +126,14 @@ class PessoasController extends Controller
 
     public function pessoas_turmas_vincular($idpessoa, $idturma){
         $pessoa = Pessoa::find($idpessoa);
-        $pessoa->turmas()->attach($idturma);
+        $turma = Turma::find($idturma);
+        if(count($turma->pessoas) == $turma->limite){
+            Session::put('mensagem_red', "A turma " . $turma->nome . " está cheia!");
+        }
+        else{
+            $pessoa->turmas()->attach($idturma);
+            Session::put('mensagem_green', $pessoa->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
+        }
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 

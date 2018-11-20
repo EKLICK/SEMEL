@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(Session::get('mensagem'))
-    <div class="center-align">
+    @if(Session::get('mensagem_green'))
+        <div class="center-align">
             <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
+                {{Session::get('mensagem_green')}}
                 <i class="close material-icons">close</i>
             </div>
         </div>
-    {{Session::forget('mensagem')}}
+        {{Session::forget('mensagem_green')}}
+    @endif
+    @if(Session::get('mensagem_red'))
+        <div class="center-align">
+            <div class="chip red lighten-2">
+                {{Session::get('mensagem_red')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem_red')}}
     @endif
 
     <div class="white container" style="margin-top: 3%;">
@@ -24,7 +33,7 @@
                 @foreach ($turmas as $turma)
                     <tr>
                         <td><h5>{{$turma->nome}}</h4></td>
-                        <td><h5>{{$turma->limite}}</h5></td>
+                        <td><h5>{{count($turma->pessoas)}} / {{$turma->limite}}</h5></td>
                         <td>
                             @if (!isset($pessoasTurmas))
                                 <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
