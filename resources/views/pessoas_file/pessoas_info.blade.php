@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+@extends('layouts.app')
 
-        {!! MaterializeCSS::include_full() !!}
-    </head>
-    <body>
-        <div class="container">
+@section('content')
+    <div class="container" style="background: white;">
+        <div>
+        <div class="col s6">
             <table class="centered" style="margin-top: 3%;">
                 <tr>
                     <td><h6>Nome:</h6></td>
@@ -140,9 +133,8 @@
                     <td><h6>Observação:</h6></td>
                     <td><h6>{{$anamnese->observacao}}</h6></td>
                 </tr>
-                
             </table>
-            <a href="" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
         </div>
-    </body>
-</html>
+        <a href="" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
+    </div>
+@endsection
