@@ -108,4 +108,10 @@ class AnamneseController extends Controller
     {
         //
     }
+
+    public function anamnese_info($id){
+        $anamnese = Anamnese::find($id);
+
+        return view ('anamneses_file.anamneses_info', compact('anamnese'));
+    }
 }

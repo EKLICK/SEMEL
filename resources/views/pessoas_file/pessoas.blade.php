@@ -18,7 +18,7 @@
                 @foreach ($pessoaslist as $pessoa)
                     <tr @if($pessoa->anamneses->last()->ano != $ano) class="red lighten-1" @else class="green lighten-2" @endif>
                         <td><h5>{{$pessoa->nome}}</h4></td>
-                        <td>{{$pessoa->anamneses->last()->ano}}</td>
+                        <td><h5>{{$pessoa->anamneses->last()->ano}}</h5></td>
                         <td><a href="{{Route('pessoa_info', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">info</i></a></td>
                         <td><a href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">description</i></a></td>
                         <td><a href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">group</i></a></td>
