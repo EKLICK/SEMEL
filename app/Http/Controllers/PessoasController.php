@@ -99,7 +99,13 @@ class PessoasController extends Controller
 
     public function lista_anamnese($id){
         $pessoa = Pessoa::find($id);
-        return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa'));
+        $ano = date('Y');
+        return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa', 'ano'));
+    }
+
+    public function lista_anamnese_create($id){
+        Session::put('pessoa', $id);
+        return redirect()->Route('anamneses.create');
     }
 
     public function pessoas_info($id){
