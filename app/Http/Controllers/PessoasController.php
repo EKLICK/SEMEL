@@ -111,13 +111,21 @@ class PessoasController extends Controller
     public function pessoas_turmas($id){
         $turmas = Turma::all();
         $pessoa = Pessoa::find($id);
-
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmas'));
+        foreach($pessoa->turmas as $p){
+            $pessoasTurmas[] = $p->id;
+        }
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmas', 'pessoasTurmas'));
     }
 
-    public function pessoas_turmas_vincular($id){
-        $pessoa = Pessoa::all();
+    public function pessoas_turmas_vincular($idpessoa, $idturma){
+        $pessoa = Pessoa::find($idpessoa);
+        $pessoa->turmas()->attach($idturma);
+        return redirect()->Route('pessoas_turmas', $pessoa->id);
+    }
 
-        return view ();
+    public function pessoas_turmas_desvincular($idpessoa, $idturma){
+        $pessoa = Pessoa::find($idpessoa);
+        $pessoa->turmas()->detach($idturma);
+        return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 }

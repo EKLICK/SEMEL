@@ -28,7 +28,8 @@ Route::resource('pessoas', 'PessoasController');
 Route::get('/pessoas_info/{id}', 'PessoasController@pessoas_info')->name('pessoa_info');
 Route::get('/pessoas_lista_anamneses/{id}', 'PessoasController@lista_anamnese')->name('lista_anamnese');
 Route::get('/pessoas_turmas/{id}', 'PessoasController@pessoas_turmas')->name('pessoas_turmas');
-Route::get('/pessoas_turmas/vincular/{id}', 'PessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');
+Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}', 'PessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');
+Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}', 'PessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');
 
 Route::resource('anamneses', 'anamneseController');
 
