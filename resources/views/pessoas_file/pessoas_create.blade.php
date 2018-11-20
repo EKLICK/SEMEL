@@ -66,7 +66,7 @@
                         </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">person_outline</i>
-                            <input name="nome_do_mae" id="nome_da_mae" type="text" class="validate">
+                            <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate">
                             <label for="nome_da_mae">Nome do mãe:</label>
                         </div>
                         <div class="input-field col s4">
@@ -115,13 +115,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="solteiro" name="estado_civil" type="radio"/>
+                                        <input value="Solteiro" name="estado_civil" type="radio"/>
                                         <span>Solteiro</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="casado" name="estado_civil" type="radio"/>
+                                        <input value="Casado" name="estado_civil" type="radio"/>
                                         <span>Casado</span>
                                     </label>
                                 </p>
