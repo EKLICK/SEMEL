@@ -11,6 +11,6 @@ class Doenca extends Model
     ];
 
     public function anamneses(){
-        return $this->hasMany(Anamnses::class);
+        return $this->belongsToMany(Anamnese::class);
     }
 }

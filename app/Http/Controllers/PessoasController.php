@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pessoa;
+use App\Turma;
 use Illuminate\Support\Facades\Session;
 
 class PessoasController extends Controller
@@ -108,8 +109,15 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas($id){
+        $turmas = Turma::all();
         $pessoa = Pessoa::find($id);
 
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa'));
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmas'));
+    }
+
+    public function pessoas_turmas_vincular($id){
+        $pessoa = Pessoa::all();
+
+        return view ();
     }
 }

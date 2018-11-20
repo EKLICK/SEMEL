@@ -11,7 +11,7 @@ class Turma extends Model
     ];
 
     public function pessoas(){
-        return $this->hasMany(Pessoa::class);
+        return $this->belongsToMany(Pessoa::class, 'turmas_pessoas');
     }
 
     public function nucleos(){
@@ -19,6 +19,6 @@ class Turma extends Model
     }
 
     public function professores(){
-        return $THIS->BelongsToMany(Professor::class, 'turmas_professores');
+        return $THIS->belongsToMany(Professor::class, 'turmas_professores');
     } 
 }

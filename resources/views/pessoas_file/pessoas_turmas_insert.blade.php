@@ -17,22 +17,14 @@
                 <tr>
                     <th>Nome da turma</th>
                     <th>Limite de alunos</th>
-                    <th>Vinculo</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($turmas as $turma)
+                @foreach ($turmaslist as $turma)
                     <tr>
                         <td><h5>{{$turma->nome}}</h4></td>
                         <td><h5>{{$turma->limite}}</h5></td>
-                        @foreach ($turma->pessoas as $pessoanaturma)
-                            @if ($pessoanaturma->id == $pessoa->id)
-                                <a href="" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Vincular</a>
-                            @else
-                                <a href="" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Desvincular</a>
-                            @endif
-                        @endforeach
-                        <td>
+                        <a href="" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Vincular</a>
                     </tr>
                 @endforeach 
             </tbody>

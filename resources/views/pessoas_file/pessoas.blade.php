@@ -7,8 +7,8 @@
                 <tr>
                     <th>Nome da pessoa</th>
                     <th>Anamnese atual</th>
-                    <th>Lista de anamneses</th>
                     <th>Informações</th>
+                    <th>Lista de anamneses</th>
                     <th>Turmas</th>
                     <th>Editar</th>
                     <th>Deletar</th>
@@ -19,8 +19,8 @@
                     <tr @if($pessoa->anamneses->last()->ano != $ano) class="red lighten-1" @else class="green lighten-2" @endif>
                         <td><h5>{{$pessoa->nome}}</h4></td>
                         <td>{{$pessoa->anamneses->last()->ano}}</td>
-                        <td><a href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">description</i></a></td>
                         <td><a href="{{Route('pessoa_info', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">info</i></a></td>
+                        <td><a href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">description</i></a></td>
                         <td><a href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">group</i></a></td>
                         <td><a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
