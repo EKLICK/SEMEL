@@ -27,12 +27,12 @@
                         <td><h5>{{$turma->limite}}</h5></td>
                         <td>
                             @if (!isset($pessoasTurmas))
-                                <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                                <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
                             @else
                                 @if(in_array($turma->id, $pessoasTurmas))
-                                    <a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Desvincular</a>
+                                    <a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a>
                                 @else
-                                    <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                                    <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
                                 @endif
                             @endif
                         </td>
