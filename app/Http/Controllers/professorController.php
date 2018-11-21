@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Professor;
+use App\Turma;
+use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller
 {
@@ -92,13 +94,33 @@ class professorController extends Controller
         return redirect()->Route('professor.index');
     }
 
-    public function professor_turmas($id){
-
-    }
-
     public function professor_info($id){
         $professor = Professor::find($id);
 
         return view ('professores_file.professor_info', compact('professor'));
+    }
+
+    public function professor_turmas($id){
+        $turmas = Turma::all();
+        $professor = Professor::find($id);
+        foreach($professor->turmas as $p){
+            $professorTurmas[] = $p->id;
+        }
+        return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
+    }
+
+    public function professores_turmas_vincular($idprofessor, $idturma){
+        $professor = Professor::find($idprofessor);
+        $turma = Turma::find($idturma);
+
+        $professor->turmas()->attach($idturma);
+        Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
+        return redirect()->Route('professor_turmas', $professor->id);
+    }
+
+    public function professores_turmas_desvincular($idprofessor, $idturma){
+        $professor = Professor::find($idprofessor);
+        $professor->turmas()->detach($idturma);
+        return redirect()->Route('professor_turmas', $professor->id);
     }
 }
