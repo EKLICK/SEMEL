@@ -85,12 +85,12 @@
                     <div class="row">
                         <div class="input-field col s2 left">
                             <i class="material-icons prefix">child_care</i>
-                            <input name="filhos" id="filhos" type="number" class="validate">
+                            <input name="filhos" id="filhos" type="number" class="validate" value="0">
                             <label for="filhos">Filhos:</label>
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">people</i>
-                            <input name="irmaos" id="irmaos" type="number" class="validate">
+                            <input name="irmaos" id="irmaos" type="number" class="validate" value="0">
                             <label for="irmaos">Irmãos:</label>
                         </div>
                         <div class="input-field col s2 right">

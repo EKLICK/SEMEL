@@ -21,7 +21,7 @@
                         <div class="input-field col s3">
                             <i class="material-icons prefix">format_color_text</i>
                             <input name="altura" id="icon_altura" type="number" step="0.01" class="validate">
-                            <label for="icon_matricula">Altura:</label>
+                            <label for="icon_altura">Altura:</label>
                         </div>
                     </div>
                     <div class="row">
@@ -93,8 +93,9 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 left">
+                        <div class="input-field col s3 left">
                             O usuário já fez cirurgia?
+                            <br>
                             <label>
                                 <p>
                                     <label>
@@ -183,17 +184,15 @@
                         </div>
                         <div class="input-field col s3 left">
                             Se sim, quais?
-                            <label>
+                            @foreach ($doencaslist as $doenca)
                                 <p>
                                     <label>
-                                        @foreach ($doencaslist as $doenca)
                                         <input type="checkbox" value="{{$doenca->id}}" name="doencas[]"/>
                                         <span>{{$doenca->nome}}</span>
                                         <br>
-                                        @endforeach
                                     </label>
                                 </p>
-                            </label>
+                            @endforeach
                         </div>
                     </div>
                     <br><br><br>
