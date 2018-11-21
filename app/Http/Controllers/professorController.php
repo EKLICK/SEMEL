@@ -91,4 +91,12 @@ class professorController extends Controller
         $professor->delete();
         return redirect()->Route('professor.index');
     }
+
+    public function professor_turmas(){
+
+    }
+
+    public function professor_info(){
+        
+    }
 }

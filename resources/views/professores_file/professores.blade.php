@@ -6,9 +6,8 @@
             <thead>
                 <tr>
                     <th>Nome do professor</th>
-                    <th>Matricula</th>
-                    <th>Telefone</th>
-                    <th>E-mail</th>
+                    <th>Informações</th>
+                    <th>Turmas</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
@@ -17,9 +16,8 @@
                 @foreach ($professoreslist as $professor)
                     <tr>
                         <td><h5>{{$professor->nome}}</h4></td>
-                        <td><h5>{{$professor->matricula}}</h5></td>
-                        <td><h5>{{$professor->telefone}}</h5></td>
-                        <td><h5>{{$professor->email}}</h5></td>
+                        <td><a href="{{Route('professor_info', $professor->id)}}"><i class="material-icons medium" style="color: green;">info</i></a></td>
+                        <td><a href="{{Route('professor_turmas', $professor->id)}}"><i class="material-icons medium" style="color: green;">group</i></a></td>
                         <td><a href="{{Route('professor.edit', $professor->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
                         <td><a id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
                     </tr>

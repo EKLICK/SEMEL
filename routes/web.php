@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('professor', 'professorController');
+Route::get('/professor_info/{id}', 'ProfessorController@professor_info')->name('professor_info');
+Route::get('/professor_turmas/{id}', 'ProfessorController@professor_turmas')->name('professor_turmas');
 
 Route::resource('pessoas', 'PessoasController');
 Route::get('/pessoas_info/{id}', 'PessoasController@pessoas_info')->name('pessoa_info');
