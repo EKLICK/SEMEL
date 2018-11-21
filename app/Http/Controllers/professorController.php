@@ -92,11 +92,13 @@ class professorController extends Controller
         return redirect()->Route('professor.index');
     }
 
-    public function professor_turmas(){
+    public function professor_turmas($id){
 
     }
 
-    public function professor_info(){
-        
+    public function professor_info($id){
+        $professor = Professor::find($id);
+
+        return view ('professores_file.professor_info', compact('professor'));
     }
 }
