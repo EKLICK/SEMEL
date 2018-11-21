@@ -8,11 +8,10 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         {!! MaterializeCSS::include_full() !!}
-        @yield('css.personalizado')
     </head>
-    <body style="background-color:#4CAF50;">
+    <body>
         <nav>
-            <div class="nav-wrapper lighten-3 green">
+            <div class="nav-wrapper #039be5 light-blue darken-1">
                 <a href="#" class="brand-logo center">SEMEL</a>
                 @guest
                     <ul id="nav-mobile" class="right hide-on-med-and-down">

@@ -1,29 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="white container" style="margin-top: 3%;">
-        <table class="centered">
-            <thead>
-                <tr>
-                    <th>Nome da turma</th>
-                    <th>Bairro</th>
-                    <th>Turmas cadastradas</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($nucleoslist as $nucleo)
-                        <td><h5>{{$nucleo->nome}}</h4></td>
-                        <td>{{$nucleo->bairro}}</td>
-                        <td><a href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="material-icons medium" style="color: green;">people</i></a></td>
-                        <td><a href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <a href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+    <div class="section">
+        <div class="container">
+            <h4>Turmas</h4>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="container z-depth-4">
+            <div class="card-panel">
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nome da turma</th>
+                            <th>Bairro</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($nucleoslist as $nucleo)
+                                <td><p>{{$nucleo->nome}}</p></td>
+                                <td><p>{{$nucleo->bairro}}</p></td>
+                                <td>
+                                    <a href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
+                                    <a href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                    <a id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <a href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            </div>
+        </div>
     </div>
 
     <div id="modaldelete" class="modal">

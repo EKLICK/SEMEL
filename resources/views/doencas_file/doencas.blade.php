@@ -1,28 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="white container" style="margin-top: 3%;">
-        <table class="centered">
-            <thead>
-                <tr>
-                    <th>Nome da doença</th>
-                    <th>Descrição</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($doencaslist as $doenca)
-                    <tr>
-                        <td><h5>{{$doenca->nome}}</h4></td>
-                        <td><h6>{{$doenca->descricao}}</h6></td>
-                        <td><a href="{{Route('doencas.edit', $doenca->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
-                    </tr>
-                @endforeach 
-            </tbody>
-        </table>
-        <a href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+    <div class="section">
+        <div class="container">
+            <h4>Doenças</h4>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="container z-depth-4">
+            <div class="card-panel">
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nome da doença</th>
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($doencaslist as $doenca)
+                            <tr>
+                                <td><p>{{$doenca->nome}}</p></td>
+                                <td><p>{{$doenca->descricao}}</p></td>
+                                <td>
+                                    <a href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                    <a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                </td>
+                            </tr>
+                        @endforeach 
+                    </tbody>
+                </table>
+                <a href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            </div>
+        </div>
     </div>
 
     <div id="modaldelete" class="modal">

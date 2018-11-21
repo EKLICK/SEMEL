@@ -1,34 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="white container" style="margin-top: 3%;">
-        <table class="centered">
-            <thead>
-                <tr>
-                    <th>Nome da pessoa</th>
-                    <th>Anamnese atual</th>
-                    <th>Informações</th>
-                    <th>Lista de anamneses</th>
-                    <th>Turmas</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($pessoaslist as $pessoa)
-                    <tr @if($pessoa->anamneses->last()->ano != $ano) class="red lighten-1" @else class="green lighten-2" @endif>
-                        <td><h5>{{$pessoa->nome}}</h4></td>
-                        <td><h5>{{$pessoa->anamneses->last()->ano}}</h5></td>
-                        <td><a href="{{Route('pessoa_info', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">info</i></a></td>
-                        <td><a href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">description</i></a></td>
-                        <td><a href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">group</i></a></td>
-                        <td><a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="material-icons medium" style="color: green;">edit</i></a></td>
-                        <td><a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="material-icons medium" style="color: green;">delete</i></a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: green;">add_circle_outline</i></a>
+    <div class="section">
+        <div class="container">
+            <h4>Pessoas registradas</h4>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="container z-depth-4">
+            <div class="card-panel">
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nome da pessoa</th>
+
+                            <th>Atualizações</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pessoaslist as $pessoa)
+                            <tr>
+                                <td><p>{{$pessoa->nome}}</p></td>
+                                <td><p>{{$pessoa->anamneses->last()->ano}}</p><i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
+                                <td>
+                                    <a href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                    <a href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">description</i></a>
+                                    <a href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
+                                    <a href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                    <a id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            </div>
+        </div>
     </div>
 
     <div id="modaldelete" class="modal">
