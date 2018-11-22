@@ -1,21 +1,42 @@
 @extends('layouts.app')
 
 @section('css.personalizado')
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+@endsection
+
+@section('js.personalizado')
+    <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
 @endsection
 
 @section('content')
-    <div class="login-page">
-        <div class="form">
-            <form class="login-form" action="{{route('register')}}" method="post">
-                @csrf
-                <input name="name" id="nome" type="text" class="validate" placeholder="usuario"/>
-                <input name="email" id="email" type="email" class="validate" placeholder="endereço de email"/>
-                <input name="password" id="senha" type="password" class="validate" placeholder="senha"/>
-                <input name="password_confirmation" id="c_senha" type="password" class="validate" placeholder="confirmar senha"/>
-                <button type="submit">Criar</button>
-                <p class="message">Já possui uma conta? <a href="{{route('login')}}">Login</a></p>
-            </form>
+    <form class="login-form" action="{{route('register')}}" method="post">
+        @csrf
+        <div class="login-wrap" style="min-height:680px;">
+            <div class="login-html">
+                <h4>Cadastrar</h4>
+                <div class="login-form">
+                    <div class="group">
+                        <label for="identity" class="label">Nome</label>
+                        <input name="name" id="nome" type="text" class="validate input"/>
+                    </div>
+                    <div class="group">
+                        <label for="identity" class="label">Username</label>
+                        <input name="email" id="email" type="email" class="validate input"/>
+                    </div>
+                    <div class="group">
+                        <label for="identity" class="label">Senha</label>
+                        <input name="password" id="senha" type="password" class="validate input"/>
+                    </div>
+                    <div class="group">
+                        <label for="identity" class="label">Confirmar Senha</label>
+                        <input name="password_confirmation" id="c_senha" type="password" class="validate input"/>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Registrar">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 @endsection
+
