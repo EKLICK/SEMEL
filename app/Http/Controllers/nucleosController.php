@@ -14,7 +14,7 @@ class nucleosController extends Controller
      */
     public function index()
     {
-        $nucleoslist = Nucleo::all();
+        $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
 
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }

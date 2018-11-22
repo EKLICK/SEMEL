@@ -16,7 +16,7 @@ class professorController extends Controller
      */
     public function index()
     {
-        $professoreslist = Professor::all();
+        $professoreslist = Professor::orderBy('nome')->paginate(10);
         return view ('professores_file.professores', compact('professoreslist'));
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="section">
         <div class="container">
             <h4>Anamneses de {{$pessoa->nome}}</h4>
@@ -31,6 +30,7 @@
                         @endfor
                     </tbody>
                 </table>
+                {{$pessoa->anamneses->links()}}
                 <a href="{{Route('lista_anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
             </div>
         </div>

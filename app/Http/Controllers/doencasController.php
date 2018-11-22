@@ -14,7 +14,7 @@ class doencasController extends Controller
      */
     public function index()
     {
-        $doencaslist = Doenca::all();
+        $doencaslist = Doenca::orderBy('nome')->paginate(10);
         return view ('doencas_file.doencas', compact('doencaslist'));
     }
 

@@ -17,7 +17,7 @@ class AnamneseController extends Controller
      */
     public function index()
     {
-        $anamneseslist = Anamnese::orderBy('ano', 'desc')->paginate(10);
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->paginate(10);
         $ano = date('Y');
         return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano'));
     }

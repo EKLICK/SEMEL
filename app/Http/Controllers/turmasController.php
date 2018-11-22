@@ -17,7 +17,7 @@ class turmasController extends Controller
      */
     public function index()
     {
-        $turmaslist = Turma::all();
+        $turmaslist = Turma::orderBy('nome')->paginate(10);
         return view ('turmas_file.turmas', compact('turmaslist'));
     }
 

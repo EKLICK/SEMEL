@@ -13,7 +13,6 @@
                     <thead>
                         <tr>
                             <th>Nome da pessoa</th>
-
                             <th>Atualizações</th>
                             <th>Ações</th>
                         </tr>
@@ -34,6 +33,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$pessoaslist->links()}}
                 <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>

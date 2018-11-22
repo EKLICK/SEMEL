@@ -16,7 +16,7 @@ class PessoasController extends Controller
      */
     public function index()
     {
-        $pessoaslist = Pessoa::all();
+        $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         $data = new \DateTime();
         $ano = date('Y');
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
@@ -98,7 +98,7 @@ class PessoasController extends Controller
     }
 
     public function lista_anamnese($id){
-        $pessoa = Pessoa::find($id);
+        $pessoa = Pessoa::find($id)->paginate(10);
         $ano = date('Y');
         return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa', 'ano'));
     }

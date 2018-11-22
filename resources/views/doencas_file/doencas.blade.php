@@ -30,6 +30,7 @@
                         @endforeach 
                     </tbody>
                 </table>
+                {{$doencaslist->links()}}
                 <a href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>

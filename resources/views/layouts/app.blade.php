@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>SEMEL</title>
-        <link rel="stylesheet" href="{{'css/style.css'}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         {!! MaterializeCSS::include_full() !!}
@@ -36,7 +36,7 @@
                 </nav>
             </div>
             <div class="row">
-                <div class="col 3 white">
+                <div class="col 2 white">
                     <div id='cssmenu'>
                         <ul>
                             <li class='active has-sub'><a href='#'>Usuarios</a>

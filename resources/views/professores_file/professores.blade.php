@@ -20,7 +20,7 @@
                     <tbody>
                         @foreach ($professoreslist as $professor)
                             <tr>
-                                <td><h5>{{$professor->nome}}</h4></td>
+                                <td>{{$professor->nome}}</td>
                                 <td><a href="{{Route('professor_info', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a></td>
                                 <td><a href="{{Route('professor_turmas', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
                                     <a href="{{Route('professor.edit', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
@@ -30,6 +30,7 @@
                         @endforeach 
                     </tbody>
                 </table>
+                {{$professoreslist->links()}}
                 <a href="{{route('professor.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>

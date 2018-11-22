@@ -20,15 +20,13 @@
                     </thead>
                     <tbody >
                         @foreach ($anamneseslist as $anamnese)
-                            @if($anamnese->ano == $ano)
-                                <tr>
-                                    <td><p>@if(isset($anamnese->pessoas->nome)) {{$anamnese->pessoas->nome}} @else Usuário não cadastrado @endif</p></td>
-                                    <td><p>{{$anamnese->ano}}</p></td>
-                                    <td><p>{{count($anamnese->doencas)}}</p></td>
-                                    <td><a href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                    <a href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td><p>@if(isset($anamnese->pessoas->nome)) {{$anamnese->pessoas->nome}} @else Usuário não cadastrado @endif</p></td>
+                                <td><p>{{$anamnese->ano}}</p></td>
+                                <td><p>{{count($anamnese->doencas)}}</p></td>
+                                <td><a href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                <a href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            </tr>
                         @endforeach 
                     </tbody>
                 </table>
