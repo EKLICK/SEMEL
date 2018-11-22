@@ -45,7 +45,12 @@
                                     <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{route('anamneses.index')}}">Anamneses</a></li>
+                            <li class='active has-sub'><a href='#'>anamneses</a>
+                                <ul>
+                                    <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
+                                    <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
+                                </ul>
+                            </li>
                             <li><a href="{{route('doencas.index')}}">Doenças</a></li>
                             <li><a href="{{route('turmas.index')}}">Turmas</a></li>
                             <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>

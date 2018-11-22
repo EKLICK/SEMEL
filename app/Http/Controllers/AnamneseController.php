@@ -17,9 +17,15 @@ class AnamneseController extends Controller
      */
     public function index()
     {
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->paginate(10);
         $ano = date('Y');
-        return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano'));
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->paginate(10);
+        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano'));
+    }
+
+    public function index2(){
+        $ano = date('Y');
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->paginate(10);
+        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano'));
     }
 
     /**
