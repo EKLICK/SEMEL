@@ -24,7 +24,9 @@
                         <tr>
                             <th>Nome da turma</th>
                             <th>Quantidade de professores</th>
-                            <th>Vinculo</th>
+                            @if(auth()->user()->admin_professor == 1)
+                                <th>Vinculo</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -32,17 +34,19 @@
                             <tr>
                                 <td><p>{{$turma->nome}}</p></td>
                                 <td><p>{{count($turma->professores)}}</p></td>
-                                <td>
-                                    @if (!isset($professorTurmas))
-                                        <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
-                                    @else
-                                        @if(in_array($turma->id, $professorTurmas))
-                                            <a href="{{Route('professores_turmas_desvincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a>
-                                        @else
+                                @if(auth()->user()->admin_professor == 1)
+                                    <td>
+                                        @if (!isset($professorTurmas))
                                             <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                                        @else
+                                            @if(in_array($turma->id, $professorTurmas))
+                                                <a href="{{Route('professores_turmas_desvincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a>
+                                            @else
+                                                <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                                            @endif
                                         @endif
-                                    @endif
-                                </td>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach 
                     </tbody>

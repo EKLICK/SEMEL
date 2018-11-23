@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('professor', 'professorController');
 Route::get('/professor_info/{id}', 'ProfessorController@professor_info')->name('professor_info');
 Route::get('/professor_turmas/{id}', 'ProfessorController@professor_turmas')->name('professor_turmas');
+Route::get('/professor_meus_alunos', 'ProfessorController@professor_meus_alunos')->name('professor_meus_alunos');
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_vincular')->name('professores_turmas_vincular');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 

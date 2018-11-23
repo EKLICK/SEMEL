@@ -112,11 +112,20 @@ class professorController extends Controller
 
     public function professor_turmas($id){
         $turmas = Turma::all();
-        $professor = Professor::find($id);
-        foreach($professor->turmas as $p){
-            $professorTurmas[] = $p->id;
+        if(auth()->user()->admin_professor == 1){
+            $professor = Professor::find($id);
+            foreach($professor->turmas as $p){
+                $professorTurmas[] = $p->id;
+            }
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
         }
-        return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
+        else{
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+            foreach($professor->turmas as $p){
+                $professorTurmas[] = $p->id;
+            }
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
+        }
     }
 
     public function professores_turmas_vincular($idprofessor, $idturma){
@@ -132,5 +141,9 @@ class professorController extends Controller
         $professor = Professor::find($idprofessor);
         $professor->turmas()->detach($idturma);
         return redirect()->Route('professor_turmas', $professor->id);
+    }
+
+    public function professor_meus_alunos(){
+
     }
 }

@@ -69,8 +69,8 @@
                                     </ul>
                                 @else
                                     <ul>
-                                        <li><a href="{{route('doencas.index')}}">Minhas turmas</a></li>
-                                        <li><a href="{{route('turmas.index')}}">Meus alunos</a></li>
+                                        <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
+                                        <li><a href="{{route('professor_meus_alunos')}}">Meus alunos</a></li>
                                     </ul>
                                 @endif
                             </div>
