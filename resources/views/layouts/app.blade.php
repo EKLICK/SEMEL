@@ -23,9 +23,11 @@
                                     <li><a href="{{route('login')}}">Login</a></li>
                                 </ul>
                             @else
-                                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                                    <li><a href="{{route('register')}}">Cadastrar</a></li>
-                                </ul>
+                                @if(auth()->user()->admin_professor == 0)
+                                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                                        <li><a href="{{route('register')}}">Cadastrar</a></li>
+                                    </ul>
+                                @endif
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
