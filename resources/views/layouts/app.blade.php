@@ -25,7 +25,8 @@
                             @else
                                 @if(auth()->user()->admin_professor == 0)
                                     <ul id="nav-mobile" class="left hide-on-med-and-down">
-                                        <li><a href="{{route('register')}}">Cadastrar</a></li>
+                                        <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
+                                        <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
                                     </ul>
                                 @endif
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 

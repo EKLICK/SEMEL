@@ -11,7 +11,7 @@
 @section('content')
     <form class="login-form" action="{{route('register')}}" method="post">
         @csrf
-        <div class="login-wrap" style="min-height:680px;">
+        <div class="login-wrap" style="min-height:650px;">
             <div class="login-html">
                 <h4>Cadastrar</h4>
                 <div class="login-form">
@@ -31,24 +31,7 @@
                         <label for="identity" class="label">Confirmar Senha</label>
                         <input name="password_confirmation" id="c_senha" type="password" class="validate input"/>
                     </div>
-                    <div class="row">
-                        <div class="col 6">
-                            <p>
-                                <label>
-                                    <input value="0" name="admin_professor" type="radio"/>
-                                    <span>Administrador</span>
-                                </label>
-                            </p>
-                        </div>
-                        <div class="col 6">
-                            <p>
-                                <label>
-                                    <input value="1" name="admin_professor" type="radio"/>
-                                    <span>Professor</span>
-                                </label>
-                            </p>
-                        </div>
-                    </div>
+                    <input value="1" name="admin_professor" type="text" hidden/>
                     <div class="group">
                         <input type="submit" class="button" value="Registrar">
                     </div>

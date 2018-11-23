@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Professor;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
@@ -38,8 +39,17 @@ class professorController extends Controller
      */
     public function store(Request $request)
     {
-        $professor = $request->all();
-        Professor::create($professor);
+        $dataForm = $request->all();
+        $user = User::create([
+            'name' => $dataForm['nome'],
+            'email' => strtolower($dataForm['email']),
+            'password' => bcrypt($dataForm['password']),
+            'admin_professor' => 0,
+        ]);
+        $dataForm += ['user_id' => $user->id];
+        unset($dataForm->password);
+
+        Professor::create($dataForm);
         return redirect()->Route('professor.index');
     }
 

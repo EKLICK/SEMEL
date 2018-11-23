@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('professor', 'professorController');
 Route::get('/professor_info/{id}', 'ProfessorController@professor_info')->name('professor_info');
+Route::get('/professor/store/{id}', 'ProfessorController@professor.store')->name('professor_store');
 Route::get('/professor_turmas/{id}', 'ProfessorController@professor_turmas')->name('professor_turmas');
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_vincular')->name('professores_turmas_vincular');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
@@ -43,6 +44,7 @@ Route::get('/anamneses_info/{id}', 'AnamneseController@anamnese_info')->name('an
 Route::resource('doencas', 'doencasController');
 
 Route::resource('turmas', 'turmasController');
+
 
 Route::resource('nucleos', 'nucleosController');
 Route::get('/nucleos_turmas/{id}', 'NucleosController@turmas_cadastradas')->name('turmas_cadastradas');
