@@ -32,6 +32,7 @@
                                 <th>Vinculo</th>
                             @else
                                 <th>Quantidade de alunos</th>
+                                <th>Alunos da turma</th>
                             @endif
                         </tr>
                     </thead>
@@ -56,9 +57,12 @@
                             @endforeach 
                         @else
                             @foreach ($professor->turmas as $turma)
-                                <td><p>{{$turma->nome}}</p></td>
-                                <td><p>{{count($turma->professores)}}</p></td>
-                                <td><p>{{count($turma->pessoas) / $turma->limite}}</p></td>
+                                <tr>
+                                    <td><p>{{$turma->nome}}</p></td>
+                                    <td><p>{{count($turma->professores)}}</p></td>
+                                    <td><p>{{count($turma->pessoas)."/".$turma->limite}}</p></td>
+                                    <td><a href="{{Route('professor_meus_alunos', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a></td>
+                                </tr>
                             @endforeach
                         @endif
                     </tbody>

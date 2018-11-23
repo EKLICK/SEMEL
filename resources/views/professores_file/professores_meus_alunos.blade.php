@@ -3,7 +3,7 @@
 @section('content')
     <div class="section">
         <div class="container">
-            <h4>Professores</h4>
+            <h4>Nome da turma: {{$turma->nome}}</h4>
             <div class="divider"></div>
         </div>
         
@@ -17,18 +17,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alunos as $aluno)
+                        @foreach ($turma->pessoas as $aluno)
                             <tr>
                                 <td>{{$aluno->nome}}</td>
-                                <td>
-                                    @foreach ($aluno->turmas as $turmadoaluno)
-                                        @foreach ($professor->turmas as $turmadoprofessor)
-                                            @if($turmadoaluno->id == $turmadoprofessor->id)
-                                                <td>{{$turmadoaluno->nome}}</td>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </td>
+                                <td>{{$aluno->telefone}}</td>
                             </tr>
                         @endforeach 
                     </tbody>

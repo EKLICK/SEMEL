@@ -70,7 +70,6 @@
                                 @else
                                     <ul>
                                         <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
-                                        <li><a href="{{route('professor_meus_alunos')}}">Meus alunos</a></li>
                                     </ul>
                                 @endif
                             </div>

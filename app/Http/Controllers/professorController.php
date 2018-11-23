@@ -140,18 +140,9 @@ class professorController extends Controller
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
-    public function professor_meus_alunos(){
-        $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-        if(isset($professor->turmas)){
-            $alunos = [];
-        }
-        else{
-            foreach($professor->turmas as $turma){
-                foreach($turma->pessoas as $pessoa){
-                    $alunos[] += $pessoa;
-                }
-            }
-        }
-        return view ('professores_file.professores_meus_alunos', compact('professor', 'alunos'));
+    public function professor_meus_alunos($id){
+        $turma = Turma::find($id);
+        
+        return view ('professores_file.professores_meus_alunos', compact('turma'));
     }
 }
