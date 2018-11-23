@@ -23,7 +23,7 @@
                                     <li><a href="{{route('login')}}">Login</a></li>
                                 </ul>
                             @else
-                                @if(auth()->user()->admin_professor == 0)
+                                @if(auth()->user()->admin_professor == 1)
                                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                                         <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
                                         <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
@@ -49,23 +49,30 @@
                     <div class="row">
                         <div class="col 2 white">
                             <div id='cssmenu'>
-                                <ul>
-                                    <li class='active has-sub'><a href='#'>Usuarios</a>
-                                        <ul>
-                                            <li><a href="{{route('professor.index')}}">Professores</a></li>
-                                            <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class='active has-sub'><a href='#'>anamneses</a>
-                                        <ul>
-                                            <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
-                                            <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{route('doencas.index')}}">Doenças</a></li>
-                                    <li><a href="{{route('turmas.index')}}">Turmas</a></li>
-                                    <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
-                                </ul>
+                                @if(auth()->user()->admin_professor == 1)
+                                    <ul>
+                                        <li class='active has-sub'><a href='#'>Usuarios</a>
+                                            <ul>
+                                                <li><a href="{{route('professor.index')}}">Professores</a></li>
+                                                <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class='active has-sub'><a href='#'>anamneses</a>
+                                            <ul>
+                                                <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
+                                                <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{route('doencas.index')}}">Doenças</a></li>
+                                        <li><a href="{{route('turmas.index')}}">Turmas</a></li>
+                                        <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
+                                    </ul>
+                                @else
+                                    <ul>
+                                        <li><a href="{{route('doencas.index')}}">Minhas turmas</a></li>
+                                        <li><a href="{{route('turmas.index')}}">Meus alunos</a></li>
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                         <div class="col s9">
