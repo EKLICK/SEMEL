@@ -121,10 +121,7 @@ class professorController extends Controller
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-            foreach($professor->turmas as $p){
-                $professorTurmas[] = $p->id;
-            }
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas'));
         }
     }
 
@@ -144,6 +141,17 @@ class professorController extends Controller
     }
 
     public function professor_meus_alunos(){
-
+        $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+        if(isset($professor->turmas)){
+            $alunos = [];
+        }
+        else{
+            foreach($professor->turmas as $turma){
+                foreach($turma->pessoas as $pessoa){
+                    $alunos[] += $pessoa;
+                }
+            }
+        }
+        return view ('professores_file.professores_meus_alunos', compact('professor', 'alunos'));
     }
 }

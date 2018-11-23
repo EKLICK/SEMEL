@@ -13,7 +13,11 @@
 
     <div class="section">
         <div class="container">
-            <h4>Turmas</h4>
+            @if(auth()->user()->admin_professor == 1)
+                <h4>Turmas</h4>
+            @else
+                <h4>Suas turmas</h4>
+            @endif
             <div class="divider"></div>
         </div>
         
@@ -26,15 +30,17 @@
                             <th>Quantidade de professores</th>
                             @if(auth()->user()->admin_professor == 1)
                                 <th>Vinculo</th>
+                            @else
+                                <th>Quantidade de alunos</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($turmas as $turma)
-                            <tr>
-                                <td><p>{{$turma->nome}}</p></td>
-                                <td><p>{{count($turma->professores)}}</p></td>
-                                @if(auth()->user()->admin_professor == 1)
+                        @if(auth()->user()->admin_professor == 1)
+                            @foreach ($turmas as $turma)
+                                <tr>
+                                    <td><p>{{$turma->nome}}</p></td>
+                                    <td><p>{{count($turma->professores)}}</p></td>
                                     <td>
                                         @if (!isset($professorTurmas))
                                             <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
@@ -46,9 +52,15 @@
                                             @endif
                                         @endif
                                     </td>
-                                @endif
-                            </tr>
-                        @endforeach 
+                                </tr>
+                            @endforeach 
+                        @else
+                            @foreach ($professor->turmas as $turma)
+                                <td><p>{{$turma->nome}}</p></td>
+                                <td><p>{{count($turma->professores)}}</p></td>
+                                <td><p>{{count($turma->pessoas) / $turma->limite}}</p></td>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
