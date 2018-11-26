@@ -23,6 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(is_null(auth()->user()->admin_professor)){
+            return view ('auth.login');
+        }
+        else {
+            if(auth()->user()->admin_professor == 1){
+                return redirect()->route('pessoas.index');
+            }
+            else{
+                return redirect()->route('professor_turmas', 1);
+            }   
+        }
     }
 }

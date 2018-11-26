@@ -28,6 +28,10 @@
                                         <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
                                         <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
                                     </ul>
+                                @else
+                                    <ul>
+                                        <li><a href="{{route('professor.edit', 1)}}">Mudar informações da conta</a></li>
+                                    </ul>
                                 @endif
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
@@ -41,46 +45,46 @@
                     </div>
                 </nav>
             </div>
-                @guest
-                    <main>
-                        @yield('content')
-                    </main>
-                @else
-                    <div class="row">
-                        <div class="col 2 white">
-                            <div id='cssmenu'>
-                                @if(auth()->user()->admin_professor == 1)
-                                    <ul>
-                                        <li class='active has-sub'><a href='#'>Usuarios</a>
-                                            <ul>
-                                                <li><a href="{{route('professor.index')}}">Professores</a></li>
-                                                <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class='active has-sub'><a href='#'>anamneses</a>
-                                            <ul>
-                                                <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
-                                                <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="{{route('doencas.index')}}">Doenças</a></li>
-                                        <li><a href="{{route('turmas.index')}}">Turmas</a></li>
-                                        <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
-                                    </ul>
+            @guest
+                <main>
+                    @yield('content')
+                </main>
+            @else
+                <div class="row">
+                    <div class="col 2 white">
+                        <div id='cssmenu'>
+                            @if(auth()->user()->admin_professor == 1)
+                                <ul>
+                                    <li class='active has-sub'><a href='#'>Usuarios</a>
+                                        <ul>
+                                            <li><a href="{{route('professor.index')}}">Professores</a></li>
+                                            <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class='active has-sub'><a href='#'>anamneses</a>
+                                        <ul>
+                                            <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
+                                            <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{route('doencas.index')}}">Doenças</a></li>
+                                    <li><a href="{{route('turmas.index')}}">Turmas</a></li>
+                                    <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
+                                </ul>
                                 @else
-                                    <ul>
-                                        <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
-                                    </ul>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col s9">
-                            <main>
-                                @yield('content')
-                            </main>
+                                <ul>
+                                    <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
+                                </ul>
+                            @endif
                         </div>
                     </div>
-                @endguest
+                    <div class="col s9">
+                        <main>
+                            @yield('content')
+                        </main>
+                    </div>
+                </div>
+            @endguest
         </header>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/delete.js')}}"></script>

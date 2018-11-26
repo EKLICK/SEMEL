@@ -14,7 +14,7 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 })->name('welcome');
 
 Auth::routes();
@@ -26,6 +26,8 @@ Route::resource('professor', 'professorController');
 Route::get('/professor_info/{id}', 'ProfessorController@professor_info')->name('professor_info');
 Route::get('/professor_turmas/{id}', 'ProfessorController@professor_turmas')->name('professor_turmas');
 Route::get('/professor_meus_alunos/{id}', 'ProfessorController@professor_meus_alunos')->name('professor_meus_alunos');
+Route::get('/professor/edit/senha', 'ProfessorController@editar_senha')->name('editar_senha');
+Route::put('/professor/update/senha/{id}', 'ProfessorController@update_senha')->name('update_senha');
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_vincular')->name('professores_turmas_vincular');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 

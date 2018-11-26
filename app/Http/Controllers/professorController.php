@@ -72,7 +72,12 @@ class professorController extends Controller
      */
     public function edit($id)
     {
-        $professor = Professor::find($id);
+        if(auth()->user()->admin_professor == 1){
+            $professor = Professor::find($id);
+        }
+        else{
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+        }
         return view ('professores_file.professores_edit', compact('professor'));
     }
 
@@ -88,7 +93,12 @@ class professorController extends Controller
         $professor = Professor::find($id);
         $dataForm = $request->all();
         $professor->update($dataForm);
-        return redirect()->Route('professor.index');
+        if(auth()->user()->admin_professor == 1){
+            return redirect()->Route('professor.index');
+        }
+        else{
+            return redirect()->Route('professor_turmas', 1);
+        }
     }
 
     /**
@@ -144,5 +154,21 @@ class professorController extends Controller
         $turma = Turma::find($id);
         
         return view ('professores_file.professores_meus_alunos', compact('turma'));
+    }
+
+    public function editar_senha(){
+        $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
+        return view('professores_file.professores_edit_senha', compact('professor'));
+    }
+
+    public function update_senha(Request $request, $id){
+        $dataForm = $request->all();
+        $professor = Professor::find($id);
+        $user = User::where('id', '=', $professor->user_id)->first();
+        $dataForm['password'] = bcrypt($dataForm['password']);
+        $dataForm["admin_professor"] = "0";
+        $user->update($dataForm);
+        return view('home');
     }
 }
