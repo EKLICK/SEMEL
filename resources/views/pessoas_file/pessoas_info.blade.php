@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="background: white;">
-        <div>
+    <div class="container" style="margin-top: 3%;">
         <div class="col s6">
-            <table class="centered" style="margin-top: 3%;">
+            <table class="centered">
                 <tr>
                     <td><h6>Nome:</h6></td>
                     <td><h6>{{$pessoa->nome}}</h6></td>
@@ -69,6 +68,10 @@
                     <td><h6>Nome da mãe:</h6></td>
                     <td><h6>{{$pessoa->nome_da_mae}}</h6></td>
                 </tr>
+            </table>
+        </div>
+        <div class="col s6">
+            <table>
                 <tr>
                     <td><h6>Pessoa para emergência:</h6></td>
                     <td><h6>{{$pessoa->pessoa_emergencia}}</h6></td>
