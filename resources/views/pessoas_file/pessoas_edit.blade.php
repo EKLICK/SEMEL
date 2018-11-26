@@ -53,19 +53,24 @@
                             <input name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">contact_phone</i>
                             <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
                             <label for="icon_telephone">Telephone de emergência:</label>
                         </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">add_box</i>
+                            <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{$pessoa->convenio_medico}}">
+                            <label for="convenio_medico">Convênio médico:</label>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">person</i>
                             <input name="nome_do_pai" id="nome_da_pai" type="text" class="validate" value="{{$pessoa->nome_do_pai}}">
                             <label for="nome_da_pai">Nome do pai:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">person_outline</i>
                             <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{$pessoa->nome_da_mae}}">
                             <label for="nome_da_mae">Nome da mãe:</label>
@@ -77,14 +82,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
-                            <i class="material-icons prefix">add_box</i>
-                            <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{$pessoa->convenio_medico}}">
-                            <label for="convenio_medico">Convênio médico:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s2 left">
+                        <div class="input-field col s2">
                             <i class="material-icons prefix">child_care</i>
                             <input name="filhos" id="filhos" type="number" class="validate" value="{{$pessoa->filhos}}">
                             <label for="filhos">Filhos:</label>
@@ -94,7 +92,9 @@
                             <input name="irmaos" id="irmaos" type="number" class="validate" value="{{$pessoa->irmaos}}">
                             <label for="irmaos">Irmãos:</label>
                         </div>
-                        <div class="input-field col s2 right">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
                             Sexo:
                             <label>
                                 <p>
@@ -111,7 +111,7 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 right">
+                        <div class="input-field col s3">
                             Estado Civil:
                             <label>
                                 <p>
@@ -128,24 +128,7 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 right">
-                            Mora com os pais?
-                            <label>
-                                <p>
-                                    <label>
-                                        <input value="1" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 1) checked @endif/>
-                                        <span>Sim</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input value="2" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 0) checked @endif/>
-                                        <span>Não</span>
-                                    </label>
-                                </p>
-                            </label>
-                        </div>
-                        <div class="input-field col s2 right">
+                        <div class="input-field col s3">
                             Inativo?
                             <label>
                                 <p>
@@ -162,10 +145,34 @@
                                 </p>
                             </label>
                         </div>
+                        <div class="input-field col s3">
+                            Mora com os pais?
+                            <label>
+                                <p>
+                                    <label>
+                                        <input value="1" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 1) checked @endif/>
+                                        <span>Sim</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input value="2" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 0) checked @endif/>
+                                        <span>Não</span>
+                                    </label>
+                                </p>
+                            </label>
+                        </div>
                     </div>
-                    <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

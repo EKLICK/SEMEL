@@ -12,7 +12,7 @@
                     @csrf
                     <div class="row">
                         <input type="number" name="pessoas_id" id="pessoas_id" value="{{$pessoa['id']}}" hidden>
-                        <h4>Nome do Usuário: {{$pessoa['nome']}}</h4>
+                        <h4 class="center">Nome do Usuário: {{$pessoa['nome']}}</h4>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
                             <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate">
@@ -25,24 +25,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s2 left">
-                            Possui alguma doença?
+                        <div class="input-field col s3">
+                            Possui atestado?
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="possui_doenca" type="radio"/>
+                                        <input value="1" name="atestado" type="radio"/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="possui_doenca" type="radio"/>
+                                        <input value="0" name="atestado" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s3 left">
+                        <div class="input-field col s3">
                             Toma algum medicamento?
                             <label>
                                 <p>
@@ -59,7 +59,7 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 left">
+                        <div class="input-field col s3 ">
                             Possui alergia médica?
                             <label>
                                 <p>
@@ -93,6 +93,9 @@
                                 </p>
                             </label>
                         </div>
+                    </div>
+                    <br><br><br>
+                    <div class="row">
                         <div class="input-field col s3 left">
                             O usuário já fez cirurgia?
                             <br>
@@ -111,10 +114,7 @@
                                 </p>
                             </label>
                         </div>
-                    </div>
-                    <br><br><br>
-                    <div class="row">
-                        <div class="input-field col s2 left">
+                        <div class="input-field col s3">
                             Possui dores ósseas?
                             <label>
                                 <p>
@@ -148,7 +148,7 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 left">
+                        <div class="input-field col s3">
                             Possui dores articulares?
                             <label>
                                 <p>
@@ -165,37 +165,19 @@
                                 </p>
                             </label>
                         </div>
-                        <div class="input-field col s2 left">
-                            Possui atestado?
-                            <label>
-                                <p>
-                                    <label>
-                                        <input value="1" name="atestado" type="radio"/>
-                                        <span>Sim</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input value="0" name="atestado" type="radio"/>
-                                        <span>Não</span>
-                                    </label>
-                                </p>
-                            </label>
-                        </div>
-                        <div class="input-field col s3 left">
-                            Se sim, quais?
-                            @foreach ($doencaslist as $doenca)
-                                <p>
-                                    <label>
-                                        <input type="checkbox" value="{{$doenca->id}}" name="doencas[]"/>
-                                        <span>{{$doenca->nome}}</span>
-                                        <br>
-                                    </label>
-                                </p>
-                            @endforeach
-                        </div>
                     </div>
                     <br><br><br>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            Possui doenças?
+                            <select multiple>
+                                @foreach ($doencaslist as $doenca)
+                                    <option value="{{$doenca->id}}" name="doencas[]">{{$doenca->nome}}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" value="Não" name="possui_doenca" hidden>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="input-field col s8">
                           <textarea name="observacao" id="observacao" class="materialize-textarea"></textarea>
