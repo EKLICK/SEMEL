@@ -13,7 +13,6 @@
                     <thead>
                         <tr>
                             <th>Nome do professor</th>
-                            <th>Informações</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -21,10 +20,11 @@
                         @foreach ($professoreslist as $professor)
                             <tr>
                                 <td>{{$professor->nome}}</td>
-                                <td><a href="{{Route('professor_info', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a></td>
-                                <td><a href="{{Route('professor_turmas', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
-                                    <a href="{{Route('professor.edit', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                    <a id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                <td>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$professor->nome}}" href="{{Route('professor_info', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$professor->nome}}" href="{{Route('professor_turmas', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Editar {{$professor->nome}}" href="{{Route('professor.edit', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Deletar {{$professor->nome}}" id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
                                 </td>
                             </tr>
                         @endforeach 

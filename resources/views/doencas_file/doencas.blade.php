@@ -23,8 +23,8 @@
                                 <td><p>{{$doenca->nome}}</p></td>
                                 <td><p>{{$doenca->descricao}}</p></td>
                                 <td>
-                                    <a href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                    <a id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                    <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar doença" id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
                                 </td>
                             </tr>
                         @endforeach 

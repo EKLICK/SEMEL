@@ -61,7 +61,7 @@
                                     <td><p>{{$turma->nome}}</p></td>
                                     <td><p>{{count($turma->professores)}}</p></td>
                                     <td><p>{{count($turma->pessoas)."/".$turma->limite}}</p></td>
-                                    <td><a href="{{Route('professor_meus_alunos', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a></td>
+                                    <td><a class="tooltipped" data-position="top" data-tooltip="Alunos da turma {{$turma->nome}}" href="{{Route('professor_meus_alunos', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a></td>
                                 </tr>
                             @endforeach
                         @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pessoa;
 use App\Turma;
+use App\Anamnese;
 use Illuminate\Support\Facades\Session;
 
 class PessoasController extends Controller
@@ -98,9 +99,10 @@ class PessoasController extends Controller
     }
 
     public function lista_anamnese($id){
-        $pessoa = Pessoa::find($id)->paginate(10);
+        $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->paginate(10);
+        $pessoa = Pessoa::find($id);
         $ano = date('Y');
-        return view ('Pessoas_file.pessoas_lista_anamnese', compact('pessoa', 'ano'));
+        return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneses', 'pessoa', 'ano'));
     }
 
     public function lista_anamnese_create($id){
