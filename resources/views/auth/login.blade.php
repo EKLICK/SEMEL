@@ -28,4 +28,13 @@
             </div>
         </div>
     </form>
+    @if(Session::get('mensagem'))
+        <div class="center-align sessao" style="margin-top: 3%;">
+            <div class="chip red lighten-2">
+                {{Session::get('mensagem')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem')}}
+    @endif
 @endsection
