@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Doenca;
+use Illuminate\Support\Facades\Session;
 
 class doencasController extends Controller
 {
@@ -38,6 +39,7 @@ class doencasController extends Controller
     {
         $dataForm = $request->all();
         Doenca::create($dataForm);
+        Session::put('mensagem', 'Doença adicionada com sucesso!');
         return redirect()->Route('doencas.index');
     }
 
@@ -75,7 +77,12 @@ class doencasController extends Controller
     {
         $dataForm = $request->all();
         $doenca = Doenca::find($id);
+        $olddoenca = (array)$doenca;
         $doenca->update($dataForm);
+        $newdoenca = (array)$doenca;
+        if($olddoenca != $newdoenca){
+            Session::put('mensagem', 'Doença editada com sucesso!');
+        }
         return redirect()->Route('doencas.index');
     }
 
@@ -89,6 +96,7 @@ class doencasController extends Controller
     {
         $doenca = Doenca::find($request['id']);
         $doenca->delete();
+        Session::put('mensagem', 'Doença deletada com sucesso!');
         return redirect()->Route('doencas.index');
     }
 }
