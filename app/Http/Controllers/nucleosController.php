@@ -39,6 +39,7 @@ class nucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo =  Nucleo::create($dataForm);
+        Session::put('mensagem', $nucleo->nome.' adicionado com sucesso!');
         return redirect()->Route('nucleos.index');
     }
 
@@ -76,8 +77,12 @@ class nucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo = Nucleo::find($id);
+        $oldnucleo = (array)$nucleo;
         $nucleo->update($dataForm);
-        
+        $newnucleo = (array)$nucleo;
+        if($newnucleo != $oldnucleo){
+            Session::put('mensagem', $nucleo->nome.' editado com sucesso!');
+        }
         return redirect()->Route('nucleos.index'); 
     }
 
@@ -97,6 +102,8 @@ class nucleosController extends Controller
 
     public function turmas_cadastradas($id){
         $nucleo = Nucleo::find($id);
+        $nome = $nucleo->nome;
+        Session::put('mensagem', $nome.' editado com sucesso!');
         return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
     }
 }

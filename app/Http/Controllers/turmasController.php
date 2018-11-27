@@ -86,7 +86,7 @@ class turmasController extends Controller
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
-            Session::put('mensagem', $dataForm->nome.' adicionada com sucesso!');
+            Session::put('mensagem', $turma->nome.' adicionada com sucesso!');
         }
         return redirect()->Route('turmas.index');
     }
@@ -100,8 +100,9 @@ class turmasController extends Controller
     public function destroy(Request $request, $id)
     {
         $turma = Turma::find($request['id']);
+        $nome = $nucleo->nome;
         $turma->delete();
-        Session::put('mensagem', $dataForm->nome.' deletada com sucesso!');
+        Session::put('mensagem', $nome.' editado com sucesso!');
         return redirect()->Route('turmas.index');
     }
 }
