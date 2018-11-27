@@ -53,6 +53,8 @@
                 </form>
             </div>
         </div>
-        <a href="{{route('editar_senha')}}" class="waves-effect waves-light btn-large">Mudar senha</a>
+        @if(auth()->user()->admin_professor == 0)
+            <a href="{{route('editar_senha')}}" class="waves-effect waves-light btn-large">Mudar senha</a>
+        @endif
     </div>
 @endsection

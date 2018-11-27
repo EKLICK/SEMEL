@@ -54,7 +54,7 @@ class AnamneseController extends Controller
         $dataForm += ['ano' => date('Y')];
 
         if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 'Sim';
+            $dataForm['possui_doenca'] = 1;
         }
         if(isset($dataForm['doencas'])){
             $anamnese = Anamnese::create($dataForm);;
@@ -101,7 +101,7 @@ class AnamneseController extends Controller
     {
         $dataForm = $request->all();
         if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 'Sim';
+            $dataForm['possui_doenca'] = 1;
         }
         $anamnese = Anamnese::find($id);
         $anamnese->update($dataForm);

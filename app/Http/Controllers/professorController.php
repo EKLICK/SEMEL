@@ -50,6 +50,7 @@ class professorController extends Controller
         unset($dataForm->password);
 
         Professor::create($dataForm);
+        Session::put('mensagem', $dataForm->nome.' adicionado com sucesso!');
         return redirect()->Route('professor.index');
     }
 
@@ -92,7 +93,12 @@ class professorController extends Controller
     {
         $professor = Professor::find($id);
         $dataForm = $request->all();
+        $oldprofessor = (array)$professor;
         $professor->update($dataForm);
+        $newprofessor = (array)$professor;
+        if($newprofessor != $oldprofessor){
+            Session::put('mensagem', $professor->nome.' editado com sucesso!');
+        }
         if(auth()->user()->admin_professor == 1){
             return redirect()->Route('professor.index');
         }
@@ -110,7 +116,9 @@ class professorController extends Controller
     public function destroy(Request $request, $id)
     {
         $professor = Professor::find($request['id']);
+        $nome = $professor->nome;
         $professor->delete();
+        Session::put('mensagem', $nome.' deletado com sucesso!');
         return redirect()->Route('professor.index');
     }
 

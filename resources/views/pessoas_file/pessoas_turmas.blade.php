@@ -2,7 +2,7 @@
 
 @section('content')
     @if(Session::get('mensagem_green'))
-        <div class="center-align">
+        <div class="center-align sessao">
             <div class="chip green lighten-2">
                 {{Session::get('mensagem_green')}}
                 <i class="close material-icons">close</i>
@@ -11,7 +11,7 @@
         {{Session::forget('mensagem_green')}}
     @endif
     @if(Session::get('mensagem_yellow'))
-        <div class="center-align">
+        <div class="center-align sessao">
             <div class="chip yellow darken-2">
                 {{Session::get('mensagem_yellow')}}
                 <i class="close material-icons">close</i>
@@ -22,7 +22,7 @@
 
     <div class="section">
         <div class="container">
-            <h4>Turmas que {{$pessoa->nome}} está registrado(a)</h4>
+            <h4>Turmas</h4>
             <div class="divider"></div>
         </div>
         <div class="container z-depth-4">

@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(Session::get('mensagem'))
+        <div class="center-align sessao">
+            <div class="chip green lighten-2">
+                {{Session::get('mensagem')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem')}}
+    @endif
     <div class="section">
         <div class="container">
             <h4>Professores</h4>
@@ -24,7 +33,7 @@
                                     <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$professor->nome}}" href="{{Route('professor_info', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
                                     <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$professor->nome}}" href="{{Route('professor_turmas', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
                                     <a class="tooltipped" data-position="top" data-tooltip="Editar {{$professor->nome}}" href="{{Route('professor.edit', $professor->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Deletar {{$professor->nome}}" id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete" class="modal-trigger"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                    <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$professor->nome}}" id="btn-delete" data-id="{{$professor->id}}" data-nome="{{$professor->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
                                 </td>
                             </tr>
                         @endforeach 

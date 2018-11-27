@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(Session::get('mensagem'))
+        <div class="center-align sessao">
+            <div class="chip green lighten-2">
+                {{Session::get('mensagem')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem')}}
+    @endif
+
     <div class="section">
         <div class="container">
             <h4>Pessoas registradas</h4>
@@ -34,7 +44,7 @@
                     </tbody>
                 </table>
                 {{$pessoaslist->links()}}
-                <a href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+                <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>
     </div>

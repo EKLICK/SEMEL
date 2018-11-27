@@ -3,7 +3,7 @@
 @section('content')
     <div class="section">
         <div class="container">
-            <h4>Turmas</h4>
+            <h4>Núcleos</h4>
             <div class="divider"></div>
         </div>
         
@@ -31,7 +31,7 @@
                     </tbody>
                 </table>
                 {{$nucleoslist->links()}}
-                <a href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+                <a class="tooltipped" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>
     </div>

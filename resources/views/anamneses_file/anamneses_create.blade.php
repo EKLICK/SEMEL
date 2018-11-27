@@ -175,7 +175,7 @@
                                     <option value="{{$doenca->id}}" name="doencas[]">{{$doenca->nome}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" value="Não" name="possui_doenca" hidden>
+                            <input type="text" value="0" name="possui_doenca" hidden>
                         </div>
                     </div>
                     <div class="row">

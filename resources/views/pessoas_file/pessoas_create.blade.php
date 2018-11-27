@@ -12,7 +12,7 @@
                     @csrf
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">account_circle</i>
                             <input name="nome" id="nome" type="text" class="validate">
                             <label for="nome">Nome:</label>
@@ -27,7 +27,7 @@
                             <input name="rg" id="rg" type="text" class="validate">
                             <label for="rg">RG:</label>
                         </div>
-                        <div class="input-field col s2">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input name="cpf" id="cpf" type="text" class="validate">
                             <label for="cpf">CPF:</label>

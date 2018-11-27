@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'welcome';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -63,6 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Session::put('mensagem', 'Administrador '.$data['name'].' adicionado com sucesso!');
         return User::create([
             'name' => $data['name'],
             'admin_professor' => $data['admin_professor'],

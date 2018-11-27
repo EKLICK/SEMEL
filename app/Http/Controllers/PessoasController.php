@@ -43,7 +43,7 @@ class PessoasController extends Controller
     {
         $dataForm = $request->all();
         $pessoa =  Pessoa::create($dataForm);
-        Session::put('pessoa', $pessoa->id);
+        Session::put('mensagem', $pessoa->nome.' editado com sucesso!');
         return redirect()->Route('anamneses.create');
     }
 
@@ -81,7 +81,12 @@ class PessoasController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
+        $oldpessoa = (array)$pessoa;
         $pessoa->update($dataForm);
+        $newpessoa = (array)$pessoa;
+        if($newpessoa != $oldpessoa){
+            Session::put('mensagem', $pessoa->nome.' editado com sucesso!');
+        }
         return redirect()->Route('pessoas.index');
     }
 
@@ -130,7 +135,7 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($idpessoa);
         $turma = Turma::find($idturma);
         $pessoa->turmas()->attach($idturma);
-        if(count($turma->pessoas) >= $turma->limite){
+        if(count($turma->pessoas) > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
         }
         else{

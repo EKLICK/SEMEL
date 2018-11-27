@@ -3,7 +3,7 @@
 @section('content')
     <div class="section">
         <div class="container">
-            <h4>Anamneses de {{$ano}}</h4>
+            <h4>Anamneses históricas</h4>
             <div class="divider"></div>
         </div>
     

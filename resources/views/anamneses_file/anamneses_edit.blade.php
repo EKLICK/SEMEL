@@ -173,11 +173,11 @@
                             Possui doenças?
                             <select multiple name="doencas[]">
                                 @foreach ($doencaslist as $doenca)
-                                    <option value="{{$doenca->id}}" @foreach ($anamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) checked @endif @endforeach>{{$doenca->nome}}</option>
+                                    <option value="{{$doenca->id}}" @foreach ($anamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach>{{$doenca->nome}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <input type="text" value="Não" name="possui_doenca" hidden>
+                        <input type="text" value="0" name="possui_doenca" hidden>
                     </div>
                     <br><br><br><br>
                     <div class="row">

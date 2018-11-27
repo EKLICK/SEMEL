@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
                 {{$turmaslist->links()}}
-                <a href="{{Route('turmas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+                <a class="tooltipped" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
             </div>
         </div>
     </div>
