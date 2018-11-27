@@ -16,7 +16,7 @@
                 <h4>Cadastrar</h4>
                 <div class="login-form">
                     <div class="group">
-                        <label for="identity" class="label">Nome</label>
+                        <label for="identity" class="label">Username</label>
                         <input name="name" id="nome" type="text" class="validate input"/>
                     </div>
                     <div class="group">

@@ -17,6 +17,19 @@
                             <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$turma->nome}}">
                             <label for="icon_prefix">Nome da turma:</label>
                         </div>
+                        <div class="input-field col s5 right">
+                            <label>
+                                    Nucleos:
+                                @foreach ($nucleoslist as $nucleo)
+                                    <p>
+                                        <label>
+                                            <input type="radio" value="{{$nucleo->id}}" name="nucleo_id" @if($nucleo->id == $turma->nucleo_id) checked @endif/>
+                                            <span>{{$nucleo->nome}}</span>
+                                        </label>
+                                    </p>
+                                @endforeach
+                            </label>
+                        </div>
                     </div>
                     <div class="row">
                             <div class="input-field col s6">

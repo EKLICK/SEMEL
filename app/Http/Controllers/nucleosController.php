@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Nucleo;
+use App\Turma;
+use Illuminate\Support\Facades\Session;
 
 class nucleosController extends Controller
 {
@@ -39,7 +41,7 @@ class nucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo =  Nucleo::create($dataForm);
-        Session::put('mensagem', $nucleo->nome.' adicionado com sucesso!');
+        Session::put('mensagem_green', $nucleo->nome.' adicionado com sucesso!');
         return redirect()->Route('nucleos.index');
     }
 
@@ -81,7 +83,7 @@ class nucleosController extends Controller
         $nucleo->update($dataForm);
         $newnucleo = (array)$nucleo;
         if($newnucleo != $oldnucleo){
-            Session::put('mensagem', $nucleo->nome.' editado com sucesso!');
+            Session::put('mensagem_green', $nucleo->nome.' editado com sucesso!');
         }
         return redirect()->Route('nucleos.index'); 
     }
@@ -96,14 +98,23 @@ class nucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo = Nucleo::find($dataForm['id']);
-        $nucleo->delete();
+        $turmas = Turma::all();
+        foreach($turmas as $turma){
+            if($turma->nucleo_id == $nucleo->id){
+                Session::put('mensagem_red', 'É necessario excluir todas as turmas vinculadas neste núcleo antes de exclui-lo');
+                break;
+            }
+            else{
+                $nome = $nucleo->nome;
+                $nucleo->delete();
+                Session::put('mensagem_green', $nome.' editado com sucesso!');
+            }
+        }
         return redirect()->Route('nucleos.index');
     }
 
     public function turmas_cadastradas($id){
         $nucleo = Nucleo::find($id);
-        $nome = $nucleo->nome;
-        Session::put('mensagem', $nome.' editado com sucesso!');
         return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
     }
 }

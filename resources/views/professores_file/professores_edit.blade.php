@@ -26,24 +26,24 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">phone</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->telefone}}">
+                            <input name="telefone" id="icon_matricula" type="text" class="validate" value="{{$professor->telefone}}">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
                         <div class="input-field col s5">
                             <i class="material-icons prefix">email</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->email}}">
+                            <input name="email" id="icon_matricula" type="text" class="validate" value="{{$professor->email}}">
                             <label for="icon_email">E-mail:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->cpf}}">
+                            <input name="cpf" id="icon_matricula" type="text" class="validate" value="{{$professor->cpf}}">
                             <label for="icon_matricula">CPF:</label>
                         </div>
                         <div class="input-field col s5">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->rg}}">
+                            <input name="rg" id="icon_matricula" type="text" class="validate" value="{{$professor->rg}}">
                             <label for="icon_matricula">RG:</label>
                         </div>
                     </div>

@@ -68,7 +68,8 @@ class turmasController extends Controller
     public function edit($id)
     {
         $turma = Turma::find($id);
-        return view ('turmas_file.turmas_edit', compact('turma'));
+        $nucleoslist = Nucleo::all();
+        return view ('turmas_file.turmas_edit', compact('turma', 'nucleoslist'));
     }
 
     /**
@@ -100,7 +101,7 @@ class turmasController extends Controller
     public function destroy(Request $request, $id)
     {
         $turma = Turma::find($request['id']);
-        $nome = $nucleo->nome;
+        $nome = $turma->nome;
         $turma->delete();
         Session::put('mensagem', $nome.' editado com sucesso!');
         return redirect()->Route('turmas.index');

@@ -32,10 +32,10 @@
                                     Nucleos:
                                 @foreach ($nucleoslist as $nucleo)
                                     <p>
-                                    <label>
-                                        <input type="radio" value="{{$nucleo->id}}" name="nucleo_id"/>
-                                      <span>{{$nucleo->nome}}</span>
-                                    </label>
+                                        <label>
+                                            <input type="radio" value="{{$nucleo->id}}" name="nucleo_id"/>
+                                            <span>{{$nucleo->nome}}</span>
+                                        </label>
                                     </p>
                                 @endforeach
                             </label>

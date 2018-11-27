@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(Session::get('mensagem'))
+    @if(Session::get('mensagem_red'))
         <div class="center-align sessao">
-            <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
+            <div class="chip red lighten-2">
+                {{Session::get('mensagem_red')}}
                 <i class="close material-icons">close</i>
             </div>
         </div>
-        {{Session::forget('mensagem')}}
+        {{Session::forget('mensagem_red')}}
+    @endif
+    @if(Session::get('mensagem_green'))
+        <div class="center-align sessao">
+            <div class="chip green lighten-2">
+                {{Session::get('mensagem_green')}}
+                <i class="close material-icons">close</i> 
+            </div>
+        </div>
+        {{Session::forget('mensagem_green')}}
     @endif
     <div class="section">
         <div class="container">

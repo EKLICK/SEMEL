@@ -50,7 +50,7 @@ class professorController extends Controller
         unset($dataForm->password);
 
         Professor::create($dataForm);
-        Session::put('mensagem', $dataForm->nome.' adicionado(a) com sucesso!');
+        Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
         return redirect()->Route('professor.index');
     }
 

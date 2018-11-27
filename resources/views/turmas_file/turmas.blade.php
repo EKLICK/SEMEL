@@ -2,7 +2,7 @@
 
 @section('content')
     @if(Session::get('mensagem'))
-        <div class="center-align">
+        <div class="center-align sessao">
             <div class="chip green lighten-2">
                 {{Session::get('mensagem')}}
                 <i class="close material-icons">close</i>

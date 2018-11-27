@@ -43,6 +43,7 @@ class PessoasController extends Controller
     {
         $dataForm = $request->all();
         $pessoa =  Pessoa::create($dataForm);
+        Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
         return redirect()->Route('anamneses.create');
     }
