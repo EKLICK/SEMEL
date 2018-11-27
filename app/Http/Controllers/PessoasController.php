@@ -43,7 +43,7 @@ class PessoasController extends Controller
     {
         $dataForm = $request->all();
         $pessoa =  Pessoa::create($dataForm);
-        Session::put('mensagem', $pessoa->nome.' editado com sucesso!');
+        Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
         return redirect()->Route('anamneses.create');
     }
 
@@ -85,7 +85,7 @@ class PessoasController extends Controller
         $pessoa->update($dataForm);
         $newpessoa = (array)$pessoa;
         if($newpessoa != $oldpessoa){
-            Session::put('mensagem', $pessoa->nome.' editado com sucesso!');
+            Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
         }
         return redirect()->Route('pessoas.index');
     }
@@ -99,7 +99,9 @@ class PessoasController extends Controller
     public function destroy(Request $request, $id)
     {
         $pessoa = Pessoa::find($request['id']);
+        $nome = $pessoa->nome;
         $pessoa->delete();
+        Session::put('mensagem', $nome.' deletado(a) com sucesso!');
         return redirect()->Route('pessoas.index');
     }
 

@@ -51,6 +51,7 @@ class AnamneseController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
+        $pessoa = Pessoa::find($dataForm['pessoas_id']);
         $dataForm += ['ano' => date('Y')];
 
         if(!empty($dataForm['doencas'])){
@@ -62,7 +63,7 @@ class AnamneseController extends Controller
         }else{
             Anamnese::create($dataForm);
         }
-
+        Session::put('mensagem', "Anamnese de ". $pessoa->nome." Adicionada com sucesso!");
         return redirect()->Route('pessoas.index');
     }
 
@@ -104,9 +105,14 @@ class AnamneseController extends Controller
             $dataForm['possui_doenca'] = 1;
         }
         $anamnese = Anamnese::find($id);
+        $oldanamnese = (array)$anamnese;
         $anamnese->update($dataForm);
         if(isset($dataForm['doencas']))
             $anamnese->doencas()->sync($dataForm['doencas']);
+        $newanamnese = (array)$anamnese;
+        if($newanamnese != $oldanamnese){
+            Session::put('mensagem', "Anamnese editada com sucesso!");
+        } 
         return redirect()->Route('anamneses.index');
     }
 
