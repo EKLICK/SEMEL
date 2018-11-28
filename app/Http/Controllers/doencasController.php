@@ -39,7 +39,7 @@ class doencasController extends Controller
     {
         $dataForm = $request->all();
         Doenca::create($dataForm);
-        Session::put('mensagem', $dataForm->nome.' adicionada com sucesso!');
+        Session::put('mensagem', $dataForm['nome'].' adicionada com sucesso!');
         return redirect()->Route('doencas.index');
     }
 
@@ -95,7 +95,7 @@ class doencasController extends Controller
     public function destroy(Request $request, $id)
     {
         $doenca = Doenca::find($request['id']);
-        $nome = $doeca->nome;
+        $nome = $doenca->nome;
         $doenca->delete();
         Session::put('mensagem', $nome.' deletada com sucesso!');
         return redirect()->Route('doencas.index');

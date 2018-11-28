@@ -22,7 +22,7 @@ class Professores extends Migration
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
             $table->unsignedInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

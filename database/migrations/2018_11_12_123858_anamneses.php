@@ -29,7 +29,7 @@ class Anamneses extends Migration
             $table->string('observacao')->nullable();
             $table->integer('ano')->nullable();
             $table->unsignedInteger('pessoas_id')->nullable();
-            $table->foreign('pessoas_id')->references('id')->on('pessoas')->onDelete('set null');
+            $table->foreign('pessoas_id')->references('id')->on('pessoas')->onDelete('cascade');
             $table->timestamps();
         });
     }
