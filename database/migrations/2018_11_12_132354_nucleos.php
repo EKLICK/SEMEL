@@ -18,6 +18,7 @@ class Nucleos extends Migration
             $table->string('nome');
             $table->string('bairro')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

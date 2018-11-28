@@ -20,6 +20,7 @@ class AnamnesesDoencas extends Migration
             $table->foreign('anamnese_id')->references('id')->on('anamneses')->onDelete('set null');
             $table->foreign('doenca_id')->references('id')->on('doencas')->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

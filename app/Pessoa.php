@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pessoa extends Model
 {
+    use softDeletes;
+
     protected $fillable = [
         'cidade', 'nome', 'nascimento', 'rg', 'cpf', 'endereco', 'bairro', 'cep',
         'telefone', 'telefone_emergencia', 'nome_do_pai', 'nome_da_mae', 'pessoa_emergencia',

@@ -20,6 +20,7 @@ class TurmasPessoas extends Migration
             $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('set null');
             $table->foreign('pessoa_id')->references('id')->on('pessoas')->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -36,6 +36,7 @@ class Pessoas extends Migration
             $table->boolean('mora_com_os_pais')->default(false);
             $table->boolean('inativo')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

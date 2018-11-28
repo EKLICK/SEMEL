@@ -31,6 +31,7 @@ class Anamneses extends Migration
             $table->unsignedInteger('pessoas_id')->nullable();
             $table->foreign('pessoas_id')->references('id')->on('pessoas')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
