@@ -12,8 +12,8 @@ class auditsController extends Controller
         return view ('audits_file.audits', compact('auditslist'));
     }
 
-    public function audits_info($id){
-        $auditoria = Audit::find($id);
-        return view ('historico_file.historicoVizualizar', compact('auditoria'));
+    public function info($id){
+        $audit = Audit::find($id);
+        return view ('audits_file.audits_info', compact('audit'));
     }
 }

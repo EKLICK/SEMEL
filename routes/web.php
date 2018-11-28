@@ -55,4 +55,5 @@ Route::resource('turmas', 'turmasController');
 Route::resource('nucleos', 'nucleosController');
 Route::get('/nucleos_turmas/{id}', 'nucleosController@turmas_cadastradas')->name('turmas_cadastradas');
 
-Route::get('/audits','auditsController@index')->name('audits.index');
+Route::get('/audits','AuditsController@index')->name('audits.index');
+Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info');
