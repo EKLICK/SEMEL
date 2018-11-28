@@ -66,7 +66,7 @@
                                                     <li><a href="{{route('professor_softdeletes')}}">Professores deletados</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">Auditorias</a></li>
+                                            <li><a href="{{route('audits.index')}}">Auditorias</a></li>
                                         </ul>
                                     </li>
                                     <li class='active has-sub'><a href='#'>Usuarios</a>

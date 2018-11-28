@@ -23,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('professor', 'professorController');
-Route::get('/professor/audits','professorController@audits')->name('professor_audits');
 Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore');
 Route::get('/professor/edit/senha', 'professorController@editar_senha')->name('editar_senha');
 Route::get('/professor_info/{id}', 'professorController@professor_info')->name('professor_info');
@@ -35,7 +34,6 @@ Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'professorContr
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 
 Route::resource('pessoas', 'pessoasController');
-Route::get('/pessoas/audits','pessoasController@audits')->name('pessoas_audits');
 Route::get('/pessoas_info/{id}', 'pessoasController@pessoas_info')->name('pessoa_info');
 Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
 Route::get('/pessoas_turmas/{id}', 'pessoasController@pessoas_turmas')->name('pessoas_turmas');
@@ -46,17 +44,15 @@ Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}', 'pessoasController@p
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}', 'pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');
 
 Route::resource('anamneses', 'anamneseController');
-Route::get('/anamneses/audits','anamneseController@audits')->name('anamneses_audits');
 Route::get('/anamneses_antigas', 'anamneseController@index2')->name('anamneses.index2');
 Route::get('/anamneses_info/{id}', 'anamneseController@anamnese_info')->name('anamnese_info');
 
 Route::resource('doencas', 'doencasController');
-Route::get('/doencas/audits','doencasController@audits')->name('doencas_audits');
 
 Route::resource('turmas', 'turmasController');
-Route::get('/turmas/audits','turmasController@audits')->name('turmas_audits');
 
 
 Route::resource('nucleos', 'nucleosController');
-Route::get('/nucleos/audits','nucleosController@audits')->name('nucleos_audits');
 Route::get('/nucleos_turmas/{id}', 'nucleosController@turmas_cadastradas')->name('turmas_cadastradas');
+
+Route::get('/audits','auditsController@index')->name('audits.index');
