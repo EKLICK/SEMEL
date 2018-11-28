@@ -18,7 +18,6 @@ class Doencas extends Migration
             $table->string('nome');
             $table->string('descricao')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

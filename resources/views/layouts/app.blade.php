@@ -64,10 +64,6 @@
                                                 <ul>
                                                     <li><a href="{{route('pessoas_softdeletes')}}">Pessoas deletados</a></li>
                                                     <li><a href="{{route('professor_softdeletes')}}">Professores deletados</a></li>
-                                                    <li><a href="">Anamneses deletados</a></li>
-                                                    <li><a href="">turmas deletados</a></li>
-                                                    <li><a href="">doenças deletados</a></li>
-                                                    <li><a href="">núcleos deletados</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="">Auditorias</a></li>

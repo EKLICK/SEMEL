@@ -49,18 +49,14 @@ Route::resource('anamneses', 'anamneseController');
 Route::get('/anamneses/audits','anamneseController@audits')->name('anamneses_audits');
 Route::get('/anamneses_antigas', 'anamneseController@index2')->name('anamneses.index2');
 Route::get('/anamneses_info/{id}', 'anamneseController@anamnese_info')->name('anamnese_info');
-Route::get('/softdeletes/anamneses','anamneseController@softdeletes')->name('anamneses_softdeletes');
 
 Route::resource('doencas', 'doencasController');
 Route::get('/doencas/audits','doencasController@audits')->name('doencas_audits');
-Route::get('/softdeletes/doencas','doencasController@softdeletes')->name('doencas_softdeletes');
 
 Route::resource('turmas', 'turmasController');
 Route::get('/turmas/audits','turmasController@audits')->name('turmas_audits');
-Route::get('/softdeletes/doencas','doencasController@softdeletes')->name('doencas_softdeletes');
 
 
 Route::resource('nucleos', 'nucleosController');
 Route::get('/nucleos/audits','nucleosController@audits')->name('nucleos_audits');
-Route::get('/softdeletes/turmas','turmasController@softdeletes')->name('turmas_softdeletes');
 Route::get('/nucleos_turmas/{id}', 'nucleosController@turmas_cadastradas')->name('turmas_cadastradas');

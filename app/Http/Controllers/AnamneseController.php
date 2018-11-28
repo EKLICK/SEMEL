@@ -129,6 +129,10 @@ class AnamneseController extends Controller
 
     public function anamnese_info($id){
         $anamnese = Anamnese::find($id);
+        if($anamnese == null){
+            $anamneseslist = Anamnese::onlyTrashed()->get();
+            $anamnese = $anamneseslist->find($id);
+        }
         $pessoa = Pessoa::find($anamnese->pessoas);
 
         return view ('anamneses_file.anamneses_info', compact('anamnese', 'pessoa'));

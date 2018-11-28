@@ -20,7 +20,6 @@ class Turmas extends Migration
             $table->unsignedInteger('nucleo_id')->nullable();
             $table->foreign('nucleo_id')->references('id')->on('nucleos')->onDelete('set null');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
