@@ -15,24 +15,21 @@
         <header>
             <div class="navbar-fixed">
                 <nav class="#039be5 light-blue darken-1">
+                    @guest
+                    @else
+                        <div class="subtitle">
+                            <h6><b>Usuário: &emsp;@if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                            <h6><b>Nome: &emsp;&emsp;{{auth()->user()->name}}</b></h6>
+                        </div>
+                    @endguest
                     <div class="container nav-wrapper">
-                        <a href="#" class="brand-logo center">SEMEL</a>
+                        <a href="{{route('home')}}" class="brand-logo center">SEMEL</a>
                         <div class="col 12">
                             @guest
                                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                                     <li><a href="{{route('login')}}">Login</a></li>
                                 </ul>
                             @else
-                                @if(auth()->user()->admin_professor == 1)
-                                    <ul id="nav-mobile" class="left hide-on-med-and-down">
-                                        <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
-                                        <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
-                                    </ul>
-                                @else
-                                    <ul>
-                                        <li><a href="{{route('professor.edit', 1)}}">Mudar informações da conta</a></li>
-                                    </ul>
-                                @endif
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -55,6 +52,27 @@
                         <div id='cssmenu'>
                             @if(auth()->user()->admin_professor == 1)
                                 <ul>
+                                    <li class='active has-sub'><a href='#'>Ferramentas de administração</a>
+                                        <ul>
+                                            <li class='active has-sub'><a href='#'>Registrar usuário</a>
+                                                <ul>
+                                                    <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
+                                                    <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class='active has-sub'><a href='#'>Registros deletados</a>
+                                                <ul>
+                                                    <li><a href="{{route('pessoas_softdeletes')}}">Pessoas deletados</a></li>
+                                                    <li><a href="{{route('professor_softdeletes')}}">Professores deletados</a></li>
+                                                    <li><a href="">Anamneses deletados</a></li>
+                                                    <li><a href="">turmas deletados</a></li>
+                                                    <li><a href="">doenças deletados</a></li>
+                                                    <li><a href="">núcleos deletados</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="">Auditorias</a></li>
+                                        </ul>
+                                    </li>
                                     <li class='active has-sub'><a href='#'>Usuarios</a>
                                         <ul>
                                             <li><a href="{{route('professor.index')}}">Professores</a></li>
@@ -73,6 +91,7 @@
                                 </ul>
                                 @else
                                 <ul>
+                                    <li><a href="{{route('professor.edit', 1)}}">Mudar informações da conta</a></li>
                                     <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
                                 </ul>
                             @endif

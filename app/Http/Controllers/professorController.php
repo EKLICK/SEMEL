@@ -179,4 +179,19 @@ class professorController extends Controller
         $user->update($dataForm);
         return view('home');
     }
+
+    public function softdeletes(){
+        $professoreslist = Professor::onlyTrashed()->paginate(10);
+        
+        return view ('professores_file.professores_softdeletes', compact('professoreslist'));
+    }
+
+    public function restore($id){
+        $professoreslist = Pessoa::onlyTrashed()->get();
+        $professor = $professoreslist->find($id);
+
+        $professor->restore();
+
+        return redirect()->route('professores.index');
+    }
 }

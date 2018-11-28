@@ -23,7 +23,9 @@
                         <tr>
                             <th>Ano</th>
                             <th>Doença</th>
-                            <th>Editar</th>
+                            @if($pessoa->deleted_at == null)
+                                <th>Editar</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -31,14 +33,18 @@
                         <tr>
                             <td><p>{{$anamnese->ano}}</p><i class="small material-icons" @if($anamnese->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                             <td><p>{{count($anamnese->doencas)}}</p></td>
-                            <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            @if($pessoa->deleted_at == null)
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
                 {{$anamneses->links()}}
                 <br><br>
-                <a href="{{Route('lista_anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
+                @if($pessoa->deleted_at == null)
+                    <a href="{{Route('lista_anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
+                @endif
             </div>
         </div>
     </div>

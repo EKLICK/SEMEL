@@ -20,6 +20,7 @@ class PessoasController extends Controller
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         $data = new \DateTime();
         $ano = date('Y');
+
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
 
@@ -45,6 +46,7 @@ class PessoasController extends Controller
         $pessoa =  Pessoa::create($dataForm);
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
+
         return redirect()->Route('anamneses.create');
     }
 
@@ -68,6 +70,7 @@ class PessoasController extends Controller
     public function edit($id)
     {
         $pessoa = Pessoa::find($id);
+
         return view ('pessoas_file.pessoas_edit', compact('pessoa'));
     }
 
@@ -88,6 +91,7 @@ class PessoasController extends Controller
         if($newpessoa != $oldpessoa){
             Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
         }
+
         return redirect()->Route('pessoas.index');
     }
 
@@ -103,23 +107,34 @@ class PessoasController extends Controller
         $nome = $pessoa->nome;
         $pessoa->delete();
         Session::put('mensagem', $nome.' deletado(a) com sucesso!');
+
         return redirect()->Route('pessoas.index');
     }
 
     public function lista_anamnese($id){
         $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->paginate(10);
         $pessoa = Pessoa::find($id);
+        if($pessoa == null){
+            $pessoaslist = Pessoa::onlyTrashed()->get();
+            $pessoa = $pessoaslist->find($id);
+        }
         $ano = date('Y');
+
         return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneses', 'pessoa', 'ano'));
     }
 
     public function lista_anamnese_create($id){
         Session::put('pessoa', $id);
+
         return redirect()->Route('anamneses.create');
     }
 
     public function pessoas_info($id){
         $pessoa = Pessoa::find($id);
+        if($pessoa == null){
+            $pessoaslist = Pessoa::onlyTrashed()->get();
+            $pessoa = $pessoaslist->find($id);
+        }
         $anamnese = $pessoa->anamneses->last();
 
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese'));
@@ -131,6 +146,7 @@ class PessoasController extends Controller
         foreach($pessoa->turmas as $p){
             $pessoasTurmas[] = $p->id;
         }
+
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmas', 'pessoasTurmas'));
     }
 
@@ -144,12 +160,35 @@ class PessoasController extends Controller
         else{
             Session::put('mensagem_green', $pessoa->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
         }
+
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
     public function pessoas_turmas_desvincular($idpessoa, $idturma){
         $pessoa = Pessoa::find($idpessoa);
         $pessoa->turmas()->detach($idturma);
+
         return redirect()->Route('pessoas_turmas', $pessoa->id);
+    }
+
+    public function softdeletes(){
+        $pessoaslist = Pessoa::onlyTrashed()->paginate(10);
+        $data = new \DateTime();
+        $ano = date('Y');
+        
+        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
+    }
+
+    public function restore($id){
+        $pessoaslist = Pessoa::onlyTrashed()->get();
+        $pessoa = $pessoaslist->find($id);
+
+        $pessoa->restore();
+
+        return redirect()->route('pessoas.index');
+    }
+
+    public function audits(){
+
     }
 }
