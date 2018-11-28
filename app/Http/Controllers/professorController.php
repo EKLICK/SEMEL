@@ -51,6 +51,7 @@ class professorController extends Controller
 
         Professor::create($dataForm);
         Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
+
         return redirect()->Route('professor.index');
     }
 
@@ -79,6 +80,7 @@ class professorController extends Controller
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
         }
+
         return view ('professores_file.professores_edit', compact('professor'));
     }
 
@@ -100,9 +102,11 @@ class professorController extends Controller
             Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
         }
         if(auth()->user()->admin_professor == 1){
+
             return redirect()->Route('professor.index');
         }
         else{
+
             return redirect()->Route('professor_turmas', 1);
         }
     }
@@ -117,13 +121,21 @@ class professorController extends Controller
     {
         $professor = Professor::find($request['id']);
         $nome = $professor->nome;
+        $userslist = User::all();
+        $user = $userslist->where('id', '=', $professor->user_id)->last();
+        $user->delete();
         $professor->delete();
         Session::put('mensagem', $nome.' deletado(a) com sucesso!');
+
         return redirect()->Route('professor.index');
     }
 
     public function professor_info($id){
         $professor = Professor::find($id);
+        if($professor == null){
+            $professoreslist = Professor::onlyTrashed()->get();
+            $professor = $professoreslist->find($id);
+        }
 
         return view ('professores_file.professor_info', compact('professor'));
     }
@@ -139,6 +151,7 @@ class professorController extends Controller
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
             return view ('professores_file.professores_turmas', compact('professor', 'turmas'));
         }
     }
@@ -149,12 +162,14 @@ class professorController extends Controller
 
         $professor->turmas()->attach($idturma);
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
+
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
     public function professores_turmas_desvincular($idprofessor, $idturma){
         $professor = Professor::find($idprofessor);
         $professor->turmas()->detach($idturma);
+
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
@@ -177,6 +192,7 @@ class professorController extends Controller
         $dataForm['password'] = bcrypt($dataForm['password']);
         $dataForm["admin_professor"] = "0";
         $user->update($dataForm);
+
         return view('home');
     }
 
@@ -187,11 +203,14 @@ class professorController extends Controller
     }
 
     public function restore($id){
-        $professoreslist = Pessoa::onlyTrashed()->get();
+        $professoreslist = Professor::onlyTrashed()->get();
         $professor = $professoreslist->find($id);
 
+        $userslist = User::onlyTrashed()->get();
+        $user = $userslist->where('id', '=', $professor->user_id)->last();
+        $user->restore();
         $professor->restore();
 
-        return redirect()->route('professores.index');
+        return redirect()->route('professor.index');
     }
 }
