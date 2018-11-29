@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            <a href="anamneses_PDF" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
+            <a href="{{route('pdfanamnese', $anamnese->id)}}" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
         </div>
     </div>
 @endsection

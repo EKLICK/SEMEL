@@ -45,6 +45,7 @@ Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pe
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');
 
 Route::resource('anamneses','anamneseController');
+Route::get('/anamnese/pdf/{id}','anamneseController@pdfanamnese')->name('pdfanamnese');
 Route::get('/anamneses_antigas','anamneseController@index2')->name('anamneses.index2');
 Route::get('/anamneses_info/{id}','anamneseController@anamnese_info')->name('anamnese_info');
 

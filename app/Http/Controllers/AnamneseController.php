@@ -129,12 +129,16 @@ class AnamneseController extends Controller
 
     public function anamnese_info($id){
         $anamnese = Anamnese::find($id);
-        if($anamnese == null){
-            $anamneseslist = Anamnese::onlyTrashed()->get();
-            $anamnese = $anamneseslist->find($id);
-        }
         $pessoa = Pessoa::find($anamnese->pessoas);
 
         return view ('anamneses_file.anamneses_info', compact('anamnese', 'pessoa'));
+    }
+
+    public function pdfanamnese($id){
+        $anamnese = Anamnese::find($id);
+        $pessoa = Pessoa::find($anamnese->pessoas->id);
+        $nome = $pessoa->nome;
+
+        return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese', 'nome'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

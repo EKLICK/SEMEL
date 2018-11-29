@@ -190,7 +190,10 @@ class PessoasController extends Controller
 
     public function pdfpessoas($id){
         $pessoa = Pessoa::find($id);
-
+        if($pessoa == null){
+            $pessoaslist = Pessoa::onlyTrashed()->get();
+            $pessoa = $pessoaslist->find($id);
+        }
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }
