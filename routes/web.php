@@ -23,13 +23,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('professor','professorController');
-Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore');
 Route::get('/professor/edit/senha','professorController@editar_senha')->name('editar_senha');
-Route::get('/professor_info/{id}','professorController@professor_info')->name('professor_info');
+Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore');
 Route::put('/professor/update/senha/{id}','professorController@update_senha')->name('update_senha');
 Route::get('/softdeletes/professor','professorController@softdeletes')->name('professor_softdeletes');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas');
-Route::get('/professor_meus_alunos/{id}','professorController@professor_meus_alunos')->name('professor_meus_alunos');
+Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController@professor_meus_alunos')->name('professor_meus_alunos');
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'professorController@professores_turmas_vincular')->name('professores_turmas_vincular');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 

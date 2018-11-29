@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
+    <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
+@endsection
+@section('title') Editar @if(auth()->user()->admin_professor == 1) {{$professor->nome}} @else sua conta @endif @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">

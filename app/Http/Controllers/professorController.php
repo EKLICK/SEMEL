@@ -131,16 +131,6 @@ class professorController extends Controller
         return redirect()->Route('professor.index');
     }
 
-    public function professor_info($id){
-        $professor = Professor::find($id);
-        if($professor == null){
-            $professoreslist = Professor::onlyTrashed()->get();
-            $professor = $professoreslist->find($id);
-        }
-
-        return view ('professores_file.professor_info', compact('professor'));
-    }
-
     public function professor_turmas($id){
         $turmas = Turma::all();
         if(auth()->user()->admin_professor == 1){
@@ -174,10 +164,12 @@ class professorController extends Controller
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
-    public function professor_meus_alunos($id){
-        $turma = Turma::find($id);
+    public function professor_meus_alunos($idprofessor, $idturma){
+        $turma = Turma::find($idturma);
+        $professor = Professor::find($idprofessor);
+        $professorid = $professor->id;
         
-        return view ('professores_file.professores_meus_alunos', compact('turma'));
+        return view ('professores_file.professores_meus_alunos', compact('turma', 'professorid'));
     }
 
     public function editar_senha(){

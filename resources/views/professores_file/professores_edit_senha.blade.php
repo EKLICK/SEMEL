@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('css.personalizado')
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+@section('css.personalizado')<link rel="stylesheet" href="{{asset('css/login.css')}}">@endsection
+@section('js.personalizado')<script type="text/javascript" src="{{asset('js/login.js')}}"></script>@endsection
+@section('breadcrumbs')
+    <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
+    <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
+    <a href="{{route('editar_senha')}}" class="breadcrumb">Editar senha</a>
 @endsection
-
-@section('js.personalizado')
-    <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
-@endsection
-
+@section('title') <p style="color: black;">Editar sua senha</p> @endsection
 @section('content')
     <form class="login-form" action="{{route('update_senha', $professor->id)}}" method="post">
         @csrf
