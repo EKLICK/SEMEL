@@ -188,7 +188,9 @@ class PessoasController extends Controller
         return redirect()->route('pessoas.index');
     }
 
-    public function audits(){
+    public function pdfpessoas($id){
+        $pessoa = Pessoa::find($id);
 
+        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

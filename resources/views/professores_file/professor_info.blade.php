@@ -24,8 +24,5 @@
                 </table>
             </div>
         </div>
-        <div>
-            <a href="" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
-        </div>
     </div>
 @endsection
