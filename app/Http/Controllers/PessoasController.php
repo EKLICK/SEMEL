@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pessoa;
+use App\Doenca;
 use App\Turma;
 use App\Anamnese;
 use Illuminate\Support\Facades\Session;
@@ -29,9 +30,20 @@ class PessoasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function deletarPessoaCriada($id){
+        Session::forget('mensagem');
+        $pessoa = Pessoa::find($id);
+        $pessoa->remove();
+
+        return redirect()->route('pessoa.create');
+    }
+
     public function create()
     {
-        return view ('pessoas_file.pessoas_create');
+        $doencaslist = Doenca::all();
+
+        return view ('pessoas_file.pessoas_create', compact('doencaslist'));
     }
 
     /**
@@ -43,9 +55,46 @@ class PessoasController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        $pessoa =  Pessoa::create($dataForm);
+        $pessoa = Pessoa::create([
+            'nome' => $dataForm['nome'],
+            'nascimento' => $dataForm['nascimento'],
+            'sexo' => $dataForm['sexo'],
+            'rg' => $dataForm['rg'],
+            'cpf' => $dataForm['cpf'],
+            'cidade' => $dataForm['cidade'],
+            'endereco' => $dataForm['endereco'],
+            'bairro' => $dataForm['bairro'],
+            'cep' => $dataForm['cep'],
+            'telefone' => $dataForm['telefone'],
+            'estado_civil' => $dataForm['estado_civil'],
+            'nome_do_pai' => $dataForm['nome_do_pai'],
+            'nome_da_mae' => $dataForm['nome_da_mae'],
+            'pessoa_emergencia' => $dataForm['pessoa_emergencia'],
+            'filhos' => $dataForm['filhos'],
+            'convenio_medico' => $dataForm['convenio_medico'],
+            'irmao' => $dataForm['irmaos'],
+            'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
+            'inativo' => $dataForm['inativo'],
+        ]);
+        
+
+
+        $dataForm = $request->all();
+        $pessoa = Pessoa::find($dataForm['pessoas_id']);
+        $dataForm += ['ano' => date('Y')];
+
+        if(!empty($dataForm['doencas'])){
+            $dataForm['possui_doenca'] = 1;
+        }
+        if(isset($dataForm['doencas'])){
+            $anamnese = Anamnese::create($dataForm);;
+            $anamnese->doencas()->attach($dataForm['doencas']);
+        }else{
+            Anamnese::create($dataForm);
+        }
+
         Session::put('pessoa', $pessoa->id);
-        Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
+        Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
 
         return redirect()->Route('anamneses.create');
     }
@@ -85,14 +134,8 @@ class PessoasController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
-        $oldpessoa = (array)$pessoa;
-        $pessoa->update($dataForm);
-        $newpessoa = (array)$pessoa;
-        if($newpessoa != $oldpessoa){
-            Session::put('mensagem', $pessoa->nome.' editado(a) com sucesso!');
-        }
 
-        return redirect()->Route('pessoas.index');
+        return redirect()->Route('pessoas.index', 'pessoa', 'dataForm');
     }
 
     /**

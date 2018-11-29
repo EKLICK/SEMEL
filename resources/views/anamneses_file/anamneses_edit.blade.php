@@ -1,10 +1,11 @@
 @extends('layouts.app')
-
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
+    <a href="{{route('anamneses.edit', $anamnese->id)}}" class="breadcrumb">Editar</a>
+@endsection
+@section('title') <h4>Editar anamnese de {{$anamnese->pessoas->nome}}</h4> @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">

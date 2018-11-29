@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('breadcrumbs')
+    <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
+    <a href="{{route('anamnese_info', $anamnese->id)}}" class="breadcrumb">Informações</a>
+@endsection
+@section('title') <h4>Informações da anamnese</h4> @endsection
 @section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="row">

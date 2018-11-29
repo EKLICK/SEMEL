@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
 @endsection
-@section('title') Professores registradas @endsection
+@section('title') Professores registrados @endsection
 @section('content')
     @if(Session::get('mensagem'))
         <div class="center-align sessao">

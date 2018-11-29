@@ -25,7 +25,7 @@ class AnamneseController extends Controller
     public function index2(){
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->paginate(10);
-        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano'));
+        return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano'));
     }
 
     /**
@@ -50,21 +50,7 @@ class AnamneseController extends Controller
      */
     public function store(Request $request)
     {
-        $dataForm = $request->all();
-        $pessoa = Pessoa::find($dataForm['pessoas_id']);
-        $dataForm += ['ano' => date('Y')];
-
-        if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 1;
-        }
-        if(isset($dataForm['doencas'])){
-            $anamnese = Anamnese::create($dataForm);;
-            $anamnese->doencas()->attach($dataForm['doencas']);
-        }else{
-            Anamnese::create($dataForm);
-        }
-        Session::put('mensagem', "Anamnese de ". $pessoa->nome." Adicionada com sucesso!");
-        return redirect()->Route('pessoas.index');
+        //
     }
 
     /**

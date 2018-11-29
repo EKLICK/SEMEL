@@ -39,6 +39,7 @@ Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_
 Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas');
 Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes');
+Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar');
 Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->name('lista_anamnese');
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create');
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');

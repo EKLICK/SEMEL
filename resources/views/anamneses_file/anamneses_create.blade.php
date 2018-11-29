@@ -1,18 +1,17 @@
 @extends('layouts.app')
-
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{route('pessoas.create')}}" class="breadcrumb">Criar pessoa/anamnese</a>
+@endsection
+@section('title') <h4>Criar anamneses de {{$cadastropessoa->nome}}</h4> @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
                 <form class="col s12" action="{{route('anamneses.store')}}" method="post">
                     @csrf
                     <div class="row">
-                        <input type="number" name="pessoas_id" id="pessoas_id" value="{{$pessoa['id']}}" hidden>
-                        <h4 class="center">Nome do Usuário: {{$pessoa['nome']}}</h4>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
                             <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate">

@@ -2,7 +2,7 @@
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
     <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
-    <a href="{{route('professor.create')}}" class="breadcrumb">Criar</a>
+    <a href="{{route('professor.create')}}" class="breadcrumb">Criar anamnese</a>
 @endsection
 @section('title') Criar professor @endsection
 @section('content')
