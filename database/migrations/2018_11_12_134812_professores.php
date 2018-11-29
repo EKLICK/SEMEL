@@ -18,7 +18,6 @@ class Professores extends Migration
             $table->string('nome');
             $table->string('matricula')->nullable();
             $table->string('telefone')->nullable();
-            $table->string('email')->nullable();
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
             $table->unsignedInteger('user_id')->nullable();
