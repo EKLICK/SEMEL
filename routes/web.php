@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('professor','professorController');
 Route::get('/professor/edit/senha','professorController@editar_senha')->name('editar_senha');
 Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore');
+Route::get('/professors_info/{id}','professorController@professor_info')->name('professor_info');
 Route::put('/professor/update/senha/{id}','professorController@update_senha')->name('update_senha');
 Route::get('/softdeletes/professor','professorController@softdeletes')->name('professor_softdeletes');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas');

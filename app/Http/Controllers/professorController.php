@@ -131,6 +131,15 @@ class professorController extends Controller
         return redirect()->Route('professor.index');
     }
 
+    public function professor_info($id){
+        $professor = Professor::find($id);
+        if($professor == null){
+            $professoreslist = Professor::onlyTrashed()->get();
+            $professor = $professoreslist->find($id);
+        }
+        return view ('professores_file.professor_info', compact('professor'));
+    }
+
     public function professor_turmas($id){
         $turmas = Turma::all();
         if(auth()->user()->admin_professor == 1){
