@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{Route('pessoa_info', $pessoa->id)}}" class="breadcrumb">Informações</a>
+@endsection
+@section('title') Informações de {{$pessoa->nome}} @endsection
 @section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="col s6">

@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{route('pessoas.create')}}" class="breadcrumb">Criar</a>
+@endsection
+@section('title') Criar pessoa @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">

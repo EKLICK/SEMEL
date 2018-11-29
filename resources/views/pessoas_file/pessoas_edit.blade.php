@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{Route('pessoas.edit', $pessoa->id)}}" class="breadcrumb">Editar</a>
+@endsection
+@section('title') Editar {{$pessoa->nome}} @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">

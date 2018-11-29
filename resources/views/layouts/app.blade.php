@@ -43,9 +43,9 @@
                 </nav>
             </div>
             @guest
-                <main>
-                    @yield('content')
-                </main>
+            <main>
+                @yield('content')
+            </main>
             @else
                 <div class="row">
                     <div class="col 2 white">
@@ -95,7 +95,20 @@
                     </div>
                     <div class="col s9">
                         <main>
-                            @yield('content')
+                            <div class="section">
+                                <div class="container">
+                                    <nav>
+                                        <div class="nav-wrapper blue">
+                                            <div class="col s12 ">
+                                                @yield('breadcrumbs')
+                                            </div>
+                                        </div>
+                                    </nav>
+                                    <h4>@yield('title')</h4>
+                                    <div class="divider"></div>
+                                </div>
+                                @yield('content');
+                            </div>
                         </main>
                     </div>
                 </div>
