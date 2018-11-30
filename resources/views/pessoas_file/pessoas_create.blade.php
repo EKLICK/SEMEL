@@ -328,9 +328,9 @@
                     <div class="row">
                         <div class="input-field col s3">
                             Possui doenças?
-                            <select multiple>
+                            <select multiple name="doencas[]">
                                 @foreach ($doencaslist as $doenca)
-                                    <option value="{{$doenca->id}}" name="doencas[]">{{$doenca->nome}}</option>
+                                    <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                                 @endforeach
                             </select>
                             <input type="text" value="0" name="possui_doenca" hidden>

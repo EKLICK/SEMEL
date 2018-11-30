@@ -49,7 +49,7 @@ class professorController extends Controller
         $dataForm += ['user_id' => $user->id];
         unset($dataForm->password);
         unset($dataForm->email);
-
+        dd($dataForm);
         Professor::create($dataForm);
         Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
 

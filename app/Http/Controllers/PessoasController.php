@@ -76,12 +76,30 @@ class PessoasController extends Controller
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'inativo' => $dataForm['inativo'],
         ]);
+
+        unset($dataForm['nome']);
+        unset($dataForm['nascimento']);
+        unset($dataForm['sexo']);
+        unset($dataForm['rg']);
+        unset($dataForm['cpf']);
+        unset($dataForm['cidade']);
+        unset($dataForm['endereco']);
+        unset($dataForm['bairro']);
+        unset($dataForm['cep']);
+        unset($dataForm['telefone']);
+        unset($dataForm['telefone_emergencia']);
+        unset($dataForm['estado_civil']);
+        unset($dataForm['nome_do_pai']);
+        unset($dataForm['nome_da_mae']);
+        unset($dataForm['pessoa_emergencia']);
+        unset($dataForm['filhos']);
+        unset($dataForm['convenio_medico']);
+        unset($dataForm['irmaos']);
+        unset($dataForm['mora_com_os_pais']);
+        unset($dataForm['inativo']);
         
-
-
-        $dataForm = $request->all();
-        $pessoa = Pessoa::find($dataForm['pessoas_id']);
         $dataForm += ['ano' => date('Y')];
+        $dataForm += ['pessoas_id' => $pessoa->id];
 
         if(!empty($dataForm['doencas'])){
             $dataForm['possui_doenca'] = 1;
@@ -93,10 +111,11 @@ class PessoasController extends Controller
             Anamnese::create($dataForm);
         }
 
+
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
 
-        return redirect()->Route('anamneses.create');
+        return redirect()->Route('pessoas.index');
     }
 
     /**
