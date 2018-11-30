@@ -1,11 +1,12 @@
 @extends('layouts.app')
-
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
-    @if( isset($errors) && count($errors) > 0 )
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
+    <a href="{{route('turmas.create')}}" class="breadcrumb">Criar</a>
+@endsection
+@section('title') Criar turma @endsection
+@section('content')
+    @if(isset($errors) && count($errors) > 0 )
         <div class="center-align">
             @foreach( $errors->all() as $error )
                 <div class="chip red">
@@ -29,7 +30,7 @@
                         </div>
                         <div class="input-field col s5 right">
                             <label>
-                                    Nucleos:
+                                Nucleos:
                                 @foreach ($nucleoslist as $nucleo)
                                     <p>
                                         <label>
