@@ -110,8 +110,6 @@ class PessoasController extends Controller
         }else{
             Anamnese::create($dataForm);
         }
-
-
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
 

@@ -1,10 +1,11 @@
 @extends('layouts.app')
-
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('doencas.index')}}" class="breadcrumb">Doenças</a>
+    <a href="{{route('doencas.create')}}" class="breadcrumb">Criar</a>
+@endsection
+@section('title') Criar doença @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">

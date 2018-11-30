@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('breadcrumbs')
+    <a href="{{route('doencas.index')}}" class="breadcrumb">Doenças</a>
+@endsection
+@section('title') Doenças registradas @endsection
 @section('content')
     @if(Session::get('mensagem'))
         <div class="center-align sessao">
@@ -9,39 +12,32 @@
             </div>
         </div>
         {{Session::forget('mensagem')}}
-    @endif
-    <div class="section">
-        <div class="container">
-            <h4>Doenças</h4>
-            <div class="divider"></div>
-        </div>
-        
-        <div class="container z-depth-4">
-            <div class="card-panel">
-                <table class="centered">
-                    <thead>
+    @endif  
+    <div class="container z-depth-4">
+        <div class="card-panel">
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Nome da doença</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($doencaslist as $doenca)
                         <tr>
-                            <th>Nome da doença</th>
-                            <th>Descrição</th>
-                            <th>Ações</th>
+                            <td><p>{{$doenca->nome}}</p></td>
+                            <td><p>{{$doenca->descricao}}</p></td>
+                            <td>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar doença" id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($doencaslist as $doenca)
-                            <tr>
-                                <td><p>{{$doenca->nome}}</p></td>
-                                <td><p>{{$doenca->descricao}}</p></td>
-                                <td>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                    <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar doença" id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
-                                </td>
-                            </tr>
-                        @endforeach 
-                    </tbody>
-                </table>
-                {{$doencaslist->links()}}
-                <a class="tooltipped" data-position="top" data-tooltip="Adicionar doença" href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
-            </div>
+                    @endforeach 
+                </tbody>
+            </table>
+            {{$doencaslist->links()}}
+            <a class="tooltipped" data-position="top" data-tooltip="Adicionar doença" href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
 
