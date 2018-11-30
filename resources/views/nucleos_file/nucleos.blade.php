@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('breadcrumbs')
+    <a href="{{route('nucleos.index')}}" class="breadcrumb">Nucleos</a>
+@endsection
+@section('title') Núcleos registrados @endsection
 @section('content')
     @if(Session::get('mensagem_red'))
         <div class="center-align sessao">
@@ -19,37 +22,31 @@
         </div>
         {{Session::forget('mensagem_green')}}
     @endif
-    <div class="section">
-        <div class="container">
-            <h4>Núcleos</h4>
-            <div class="divider"></div>
-        </div>
-        <div class="container z-depth-4">
-            <div class="card-panel">
-                <table class="centered">
-                    <thead>
-                        <tr>
-                            <th>Nome da turma</th>
-                            <th>Bairro</th>
-                            <th>Ações</th>
+    <div class="container z-depth-4">
+        <div class="card-panel">
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Nome da turma</th>
+                        <th>Bairro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($nucleoslist as $nucleo)
+                            <td><p>{{$nucleo->nome}}</p></td>
+                            <td><p>{{$nucleo->bairro}}</p></td>
+                            <td>
+                                <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($nucleoslist as $nucleo)
-                                <td><p>{{$nucleo->nome}}</p></td>
-                                <td><p>{{$nucleo->bairro}}</p></td>
-                                <td>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                    <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{$nucleoslist->links()}}
-                <a class="tooltipped" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
+            {{$nucleoslist->links()}}
+            <a class="tooltipped" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
 

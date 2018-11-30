@@ -1,10 +1,11 @@
 @extends('layouts.app')
-
-    @section('css.personalizado')
-    @endsection
-
-    @section('content')
-
+@section('css.personalizado')@endsection
+@section('breadcrumbs')
+    <a href="{{route('nucleos.index')}}" class="breadcrumb">Nucleos</a>
+    <a href="{{route('nucleos.edit', $nucleo->id)}}" class="breadcrumb">Editar</a>
+@endsection
+@section('title') Editar {{$nucleo->nome}} @endsection
+@section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -21,7 +22,7 @@
                     <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">location_city</i>
-                                <input name="bairro" id="icon_bairro" type="number" class="validate" value="{{$nucleo->bairro}}">
+                                <input name="bairro" id="icon_bairro" type="text" class="validate" value="{{$nucleo->bairro}}">
                                 <label for="icon_bairro">Bairro:</label>
                             </div>
                     </div>
