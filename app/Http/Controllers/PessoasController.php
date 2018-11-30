@@ -256,4 +256,9 @@ class PessoasController extends Controller
         }
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
+
+    public function pessoas_procurar(Request $request){
+        $dataForm = $request->all();
+        dd($dataForm);
+    }
 }

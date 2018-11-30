@@ -115,18 +115,7 @@
   opacity: 1;
   transform: rotate3d(0, 0, 0, 0);
 }
-#cssmenu ul ul::after {
-  position: absolute;
-  left: -8px;
-  top: 14px;
-  z-index: 1;
-  display: block;
-  width: 0;
-  height: 0;
-  border: 4px solid transparent;
-  border-right-color: #039be5;
-  content: "";
-}
+
 #cssmenu ul ul a {
   padding: 12px 15px;
   font-size: 12px;
@@ -145,7 +134,8 @@
 
 .sessao{
   position: absolute;
-  margin-top: 0.5%;
+  margin-top: -3%;
+  margin-left: 20%;
   left: 0;
   right: 0;
 }

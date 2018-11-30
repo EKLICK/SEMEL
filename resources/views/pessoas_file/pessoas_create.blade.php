@@ -57,8 +57,8 @@
                         </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">contact_phone</i>
-                            <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate">
-                            <label for="icon_telephone">Telephone de emergência:</label>
+                            <input name="telefone_emergencia" id="icon_telephone_emergencia" type="tel" class="validate">
+                            <label for="icon_telephone_emergencia">Telephone de emergência:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">add_box</i>

@@ -31,10 +31,9 @@
                                 </ul>
                             @else
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 
-                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><b>{{ __('Logout') }}</b></a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><b>{{ __('Logout') }}</b></a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                                     </li>
                                 </ul>
                             @endguest
@@ -48,7 +47,7 @@
             </main>
             @else
                 <div class="row">
-                    <div class="col 2 white">
+                    <div class="col s2 white">
                         <div id='cssmenu'>
                             @if(auth()->user()->admin_professor == 1)
                                 <ul>
@@ -85,7 +84,7 @@
                                     <li><a href="{{route('turmas.index')}}">Turmas</a></li>
                                     <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
                                 </ul>
-                                @else
+                            @else
                                 <ul>
                                     <li><a href="{{route('professor.edit', 1)}}">Mudar informações da conta</a></li>
                                     <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>

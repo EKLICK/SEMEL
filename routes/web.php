@@ -10,18 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Rotas de administração geral
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index');
-
 Route::get('/', function () {
     return redirect()->route('login');
 })->name('welcome');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//Rotas de professores
 Route::resource('professor','professorController');
 Route::get('/professor/edit/senha','professorController@editar_senha')->name('editar_senha');
 Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore');
@@ -33,7 +31,9 @@ Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'professorController@professores_turmas_vincular')->name('professores_turmas_vincular');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 
+//Rotas de pessoas
 Route::resource('pessoas','pessoasController');
+Route::post('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar');
 Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas');
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info');
 Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
@@ -45,16 +45,19 @@ Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamn
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');
 
+//Rotas de anamneses
 Route::resource('anamneses','anamneseController');
 Route::get('/anamnese/pdf/{id}','anamneseController@pdfanamnese')->name('pdfanamnese');
 Route::get('/anamneses_antigas','anamneseController@index2')->name('anamneses.index2');
 Route::get('/anamneses_info/{id}','anamneseController@anamnese_info')->name('anamnese_info');
 
+//Rotas de doenças
 Route::resource('doencas','doencasController');
 
+//Rotas de turmas
 Route::resource('turmas','turmasController');
 
-
+//Rotas de núcleos
 Route::resource('nucleos','nucleosController');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas');
 
