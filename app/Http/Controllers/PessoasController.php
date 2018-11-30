@@ -16,6 +16,22 @@ class PessoasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //protected privadas
+    public function filtrar($arraylists, $arrayfiltros){
+        $arraylistfiltradas = [];
+        foreach($arrayfiltros as $arrayfiltro){
+            foreach($arraylists as $arraylist){
+                if($arraylist == $arrayfiltro){
+                    array_push($arraylistfiltradas, $arraylist);
+                }
+            }
+        }
+
+        return $arraylistfiltradas;
+    }
+    
+    //public variaveis
     public function index()
     {
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
@@ -259,6 +275,23 @@ class PessoasController extends Controller
 
     public function pessoas_procurar(Request $request){
         $dataForm = $request->all();
-        dd($dataForm);
+        $pessoaslist = Pessoa::all();
+        if($dataForm['nome'] != null){
+            $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'])->get();
+            $pessoaslist = $this->filtrar($pessoaslist, $pessoasnome);
+        }
+        if($dataForm['de'] != null){
+            foreach($pessoaslist as $pessoa){
+                list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
+                $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+                $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+                $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+                dd($idade);
+            }
+        }
+        $data = new \DateTime();
+        $ano = date('Y');
+
+        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
 }

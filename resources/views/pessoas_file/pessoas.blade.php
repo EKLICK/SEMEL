@@ -36,6 +36,7 @@
                                     <label for="ate_search">Até:</label>
                                 </div>  
                             </div>
+                            <!--
                             <div class="row">
                                 <div class="input-field col s3">
                                     <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
@@ -101,6 +102,7 @@
                                     </p>
                                 </div>
                             </div>
+                            -->
                             <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
