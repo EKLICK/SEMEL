@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
-@section('css.personalizado')
-    <link rel="stylesheet" href="{{asset('css/table_audits.css')}}">
+@section('css.personalizado')<link rel="stylesheet" href="{{asset('css/table_audits.css')}}">@endsection
+@section('breadcrumbs')
+    <a href="{{route('audits.index')}}" class="breadcrumb">Auditorias</a>
+    <a href="{{route('audits_info', $audit->id)}}" class="breadcrumb">Informações</a>
 @endsection
-
+@section('title') Informações de auditoria @endsection
 @section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="row">

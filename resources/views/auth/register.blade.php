@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-@section('css.personalizado')
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+@section('css.personalizado')<link rel="stylesheet" href="{{asset('css/login.css')}}">@endsection
+@section('js.personalizado')<script type="text/javascript" src="{{asset('js/login.js')}}"></script>@endsection
+@section('breadcrumbs')
+    <a href="{{route('register')}}" class="breadcrumb">Cadastrar</a>
 @endsection
-
-@section('js.personalizado')
-    <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
-@endsection
-
+@section('title') <p style="color: black;">Cadastrar administrador</p> @endsection
 @section('content')
     <div class="formulario">
         <form class="login-form" action="{{route('register')}}" method="post">
