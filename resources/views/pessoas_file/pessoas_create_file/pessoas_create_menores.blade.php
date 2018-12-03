@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="bairro" type="text" class="validate">
                             <label for="bairro">Bairro:</label>
@@ -78,6 +78,8 @@
                             <input name="cep" id="cep" type="text" class="validate">
                             <label for="cep">CEP:</label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
                             <input name="telefone" id="icon_telephone" type="tel" class="validate">

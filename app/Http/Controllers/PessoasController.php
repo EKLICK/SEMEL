@@ -101,12 +101,12 @@ class PessoasController extends Controller
         return view ('pessoas_file.pessoas_select_create');
     }
 
-    public function pessoas_menores(){
+    public function pessoas_create_menores(){
         $doencaslist = Doenca::all();
         return view ('pessoas_file.pessoas_create_file.pessoas_create_menores', compact('doencaslist'));
     }
 
-    public function pessoas_maiores(){
+    public function pessoas_create_maiores(){
         $doencaslist = Doenca::all();
         return view ('pessoas_file.pessoas_create_file.pessoas_create_maiores', compact('doencaslist'));
     }
@@ -235,6 +235,20 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
 
         return view ('pessoas_file.pessoas_edit', compact('pessoa'));
+    }
+
+    public function pessoas_edit_menores($id){
+        $pessoa = Pessoa::find($id);
+        $doencaslist = Doenca::all();
+
+        return view ('pessoas_file.pessoas_edit_file.pessoas_edit_menores', compact('doencaslist', 'pessoa'));
+    }
+
+    public function pessoas_edit_maiores($id){
+        $pessoa = Pessoa::find($id);
+        $doencaslist = Doenca::all();
+
+        return view ('pessoas_file.pessoas_edit_file.pessoas_edit_maiores', compact('doencaslist','pessoa'));
     }
 
     /**

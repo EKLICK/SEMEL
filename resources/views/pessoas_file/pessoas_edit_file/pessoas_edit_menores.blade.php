@@ -14,7 +14,22 @@
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
+                    <input type="number" name="escolha" value="1" hidden>
+                    <input type="text" name="atestado" value="0" hidden>
                     <div class="row">
+                        <div class="input-field col s4">
+                            <div class="file-field input-field">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Foto 3x4</span>
+                                        <input type="file" name="img_3x4">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">account_circle</i>
                             <input name="nome" id="nome" type="text" class="validate" value="{{$pessoa->nome}}">
@@ -25,12 +40,14 @@
                             <input name="nascimento" id="nascimento" type="text" class="validate" value="{{$pessoa->nascimento}}">
                             <label for="nascimento">Data de nascimento:</label>
                         </div>
-                        <div class="input-field col s2">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
                                 <i class="material-icons prefix">assignment_ind</i>
                             <input name="rg" id="rg" type="text" class="validate" value="{{$pessoa->rg}}">
                             <label for="rg">RG:</label>
                         </div>
-                        <div class="input-field col s2">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
                             <label for="cpf">CPF:</label>
@@ -40,7 +57,9 @@
                             <input name="endereco" id="endereco" type="text" class="validate" value="{{$pessoa->endereco}}">
                             <label for="endereco">Endereço:</label>
                         </div>
-                        <div class="input-field col s4">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="bairro" type="text" class="validate" value="{{$pessoa->bairro}}">
                             <label for="bairro">Bairro:</label>
@@ -50,6 +69,8 @@
                             <input name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
                             <label for="cep">CEP:</label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
                             <input name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">

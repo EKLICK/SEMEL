@@ -34,16 +34,18 @@ Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorCo
 //Rotas de pessoas
 Route::resource('pessoas','pessoasController');
 Route::post('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar');
-Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select');
 Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas');
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info');
 Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
-Route::get('/create/menores', 'pessoasController@pessoas_menores')->name('pessoas_menores');
-Route::get('/create/maiores', 'pessoasController@pessoas_maiores')->name('pessoas_maiores');
+Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas');
 Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes');
 Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar');
+Route::get('/edit/menores/{id}', 'pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores');
+Route::get('/edit/maiores/{id}', 'pessoasController@pessoas_edit_maiores')->name('pessoas_edit_maiores');
 Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->name('lista_anamnese');
+Route::get('/create/menores', 'pessoasController@pessoas_create_menores')->name('pessoas_create_menores');
+Route::get('/create/maiores', 'pessoasController@pessoas_create_maiores')->name('pessoas_create_maiores');
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create');
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');

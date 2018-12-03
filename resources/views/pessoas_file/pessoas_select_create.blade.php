@@ -12,7 +12,7 @@
                     <table>
                         <tr>
                             <td><img src="{{asset('/img/kid.png')}}"></td>
-                            <td><a href="{{route('pessoas_menores')}}" class="waves-effect waves-light btn">Menor de idade</a></td>
+                            <td><a href="{{route('pessoas_create_menores')}}" class="waves-effect waves-light btn">Menor de idade</a></td>
                         </tr>
                     </table>
                 </div>
@@ -22,7 +22,7 @@
                     <table>
                         <tr>
                             <td><img src="{{asset('/img/man.png')}}"></td>
-                            <td><a href="{{route('pessoas_maiores')}}" class="waves-effect waves-light btn">Maior de idade</a></td>
+                            <td><a href="{{route('pessoas_create_maiores')}}" class="waves-effect waves-light btn">Maior de idade</a></td>
                         </tr>
                     </table>
                 </div>
