@@ -48,6 +48,30 @@ class PessoasController extends Controller
 
         return $pessoasfiltradasde;
     }
+
+    public function saveDbImage3x4($req){
+        $data = $req->all();
+        $imagem = $req->file('img_3x4');
+        $num = rand(1111, 9999);
+        $dir = "img/img_3x4";
+        $ex = $imagem->guessClientExtension();
+        $nomeImagem = "imagem_".$num.".".$ex;
+        $imagem->move($dir, $nomeImagem);
+        $data['img_3x4'] = $dir."/".$nomeImagem;
+        return $data['img_3x4'];
+    }
+
+    public function saveDbImageMatricula($req){
+        $data = $req->all();
+        $imagem = $req->file('img_matricula');
+        $num = rand(1111, 9999);
+        $dir = "img/img_matricula";
+        $ex = $imagem->guessClientExtension();
+        $nomeImagem = "imagem_".$num.".".$ex;
+        $imagem->move($dir, $nomeImagem);
+        $data['img_matricula'] = $dir."/".$nomeImagem;
+        return $data['img_matricula'];
+    }
     
     //public variaveis
     public function index()
@@ -104,7 +128,28 @@ class PessoasController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
+        $escolha = $dataForm['escolha'];
+        unset($dataForm['escolha']);
+        $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+        if($escolha == 1){
+            $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
+        }
+        else{
+            $pessoalist = Pessoa::all();
+            foreach($pessoalist as $pessoa){
+                if($pessoa['cpf'] == $dataForm['cpf']){
+                    Session::put('mensagem', 'Erro, CPF já registrado no banco de dados!');
+                    return redirect()->route('pessoas_maiores');
+                }
+                if($pessoa['rg'] == $dataForm['rg']){
+                    Session::put('mensagem', 'Erro, RG já registrado no banco de dados!');
+                    return redirect()->route('pessoas_maiores');
+                }
+            }
+            $dataForm['matricula'] = null;
+        }
         $pessoa = Pessoa::create([
+            'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],
             'nascimento' => $dataForm['nascimento'],
             'sexo' => $dataForm['sexo'],
@@ -115,6 +160,7 @@ class PessoasController extends Controller
             'bairro' => $dataForm['bairro'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
+            'telefone_emergencia' => $dataForm['telefone_emergencia'],
             'estado_civil' => $dataForm['estado_civil'],
             'nome_do_pai' => $dataForm['nome_do_pai'],
             'nome_da_mae' => $dataForm['nome_da_mae'],
@@ -123,8 +169,12 @@ class PessoasController extends Controller
             'convenio_medico' => $dataForm['convenio_medico'],
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
+            'matricula' => $dataForm['img_matricula'],
         ]);
-
+        unset($dataForm['img_3x4']);
+        if($escolha == 1){
+            unset($dataForm['img_matricula']);
+        }
         unset($dataForm['nome']);
         unset($dataForm['nascimento']);
         unset($dataForm['sexo']);
@@ -144,7 +194,6 @@ class PessoasController extends Controller
         unset($dataForm['convenio_medico']);
         unset($dataForm['irmaos']);
         unset($dataForm['mora_com_os_pais']);
-        unset($dataForm['inativo']);
         
         $dataForm += ['ano' => date('Y')];
         $dataForm += ['pessoas_id' => $pessoa->id];

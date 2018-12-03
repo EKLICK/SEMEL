@@ -7,21 +7,31 @@
 @endsection
 @section('title') Criar pessoa @endsection
 @section('content')
+    @if(Session::get('mensagem'))
+        <div class="center-align sessao">
+            <div class="chip red lighten-2">
+                {{Session::get('mensagem')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem')}}
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
-                <form class="col s12" action="{{route('pessoas.store')}}" method="post">
+                <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
-                    <h5>Registro da pessoa:</h5>
                     <input type="number" name="escolha" value="1" hidden>
+                    <input type="text" name="atestado" value="0" hidden>
+                    <h5>Registro da pessoa:</h5>
                     <div class="row">
                         <div class="input-field col s4">
                             <div class="file-field input-field">
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Foto 3x4</span>
-                                        <input type="file" name="img_profissao">
+                                        <input type="file" name="img_3x4">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">
@@ -117,7 +127,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Matricula escolar</span>
-                                        <input type="file" name="img_profissao">
+                                        <input type="file" name="img_matricula">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">
