@@ -139,7 +139,7 @@
                 </tbody>
             </table>
             {{$pessoaslist->links()}}
-            <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas_select')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
 

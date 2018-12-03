@@ -34,9 +34,12 @@ Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorCo
 //Rotas de pessoas
 Route::resource('pessoas','pessoasController');
 Route::post('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar');
+Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select');
 Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas');
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info');
 Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
+Route::get('/create/menores', 'pessoasController@pessoas_menores')->name('pessoas_menores');
+Route::get('/create/maiores', 'pessoasController@pessoas_maiores')->name('pessoas_maiores');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas');
 Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes');
 Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar');

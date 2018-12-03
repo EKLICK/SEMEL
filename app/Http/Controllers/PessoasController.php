@@ -18,7 +18,7 @@ class PessoasController extends Controller
      */
 
     //protected privadas
-    public function filtrar($arraylists, $arrayfiltros){
+    public function filtrar_nome($arraylists, $arrayfiltros){
         $arraylistfiltradas = [];
         foreach($arrayfiltros as $arrayfiltro){
             foreach($arraylists as $arraylist){
@@ -29,6 +29,24 @@ class PessoasController extends Controller
         }
 
         return $arraylistfiltradas;
+    }
+
+    public function filtrar_de($pessoasnalista, $anofiltro){
+        $pessoasfiltradasde = [];
+        foreach($pessoasnalista as $pessoanalista){
+            list($dia, $mes, $ano) = explode('/', $pessoanalista['nascimento']);
+            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+            $idade = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+            if($idade >= $anofiltro){
+                array_pust($pessoasfiltradasde, $pessoanalista);
+            }
+            if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
+                array_pust($pessoasfiltradasde, $pessoanalista);
+            }
+        }
+
+        return $pessoasfiltradasde;
     }
     
     //public variaveis
@@ -55,11 +73,25 @@ class PessoasController extends Controller
         return redirect()->route('pessoa.create');
     }
 
+    public function pessoas_select(){
+        return view ('pessoas_file.pessoas_select_create');
+    }
+
+    public function pessoas_menores(){
+        $doencaslist = Doenca::all();
+        return view ('pessoas_file.pessoas_create_file.pessoas_create_menores', compact('doencaslist'));
+    }
+
+    public function pessoas_maiores(){
+        $doencaslist = Doenca::all();
+        return view ('pessoas_file.pessoas_create_file.pessoas_create_maiores', compact('doencaslist'));
+    }
+
     public function create()
     {
         $doencaslist = Doenca::all();
 
-        return view ('pessoas_file.pessoas_create', compact('doencaslist'));
+        return view ('pessoas_file.pessoas_create', compact('doencaslist', compact('classe')));
     }
 
     /**
@@ -68,6 +100,7 @@ class PessoasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         $dataForm = $request->all();
@@ -90,7 +123,6 @@ class PessoasController extends Controller
             'convenio_medico' => $dataForm['convenio_medico'],
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
-            'inativo' => $dataForm['inativo'],
         ]);
 
         unset($dataForm['nome']);
@@ -278,16 +310,10 @@ class PessoasController extends Controller
         $pessoaslist = Pessoa::all();
         if($dataForm['nome'] != null){
             $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'])->get();
-            $pessoaslist = $this->filtrar($pessoaslist, $pessoasnome);
+            $pessoaslist = $this->filtrar_nome($pessoaslist, $pessoasnome);
         }
         if($dataForm['de'] != null){
-            foreach($pessoaslist as $pessoa){
-                list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
-                $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-                $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-                $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-                dd($idade);
-            }
+            $pessoaslist = filtrar_de($pessoaslist, $dataForm['de']);
         }
         $data = new \DateTime();
         $ano = date('Y');
