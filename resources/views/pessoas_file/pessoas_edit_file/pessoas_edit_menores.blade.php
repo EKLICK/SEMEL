@@ -165,23 +165,6 @@
                             </label>
                         </div>
                         <div class="input-field col s3">
-                            Inativo?
-                            <label>
-                                <p>
-                                    <label>
-                                        <input value="1" name="inativo" type="radio" @if ($pessoa->mora_com_os_pais == 1) checked @endif/>
-                                        <span>Sim</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input value="0" name="inativo" type="radio" @if ($pessoa->mora_com_os_pais == 1) checked @endif/>
-                                        <span>Não</span>
-                                    </label>
-                                </p>
-                            </label>
-                        </div>
-                        <div class="input-field col s3">
                             Mora com os pais?
                             <label>
                                 <p>
@@ -192,7 +175,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 0) checked @endif/>
+                                        <input value="2" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>

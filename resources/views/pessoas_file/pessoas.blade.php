@@ -36,7 +36,6 @@
                                     <label for="ate_search">Até:</label>
                                 </div>  
                             </div>
-                            <!--
                             <div class="row">
                                 <div class="input-field col s3">
                                     <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
@@ -86,23 +85,8 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s1"><label>Inativo:</label></div>
-                                <div class="input-field col s2">
-                                    <p>
-                                        <label>
-                                            <input value="0" name="inativo" type="radio"/>
-                                            <span>Sim</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input value="1" name="inativo" type="radio"/>
-                                            <span>Não</span>
-                                        </label>
-                                    </p>
-                                </div>
+                                <div class="input-field col s1"><label>Mora com os pais:</label></div>
                             </div>
-                            -->
                             <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar

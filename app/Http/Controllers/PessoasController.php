@@ -18,7 +18,7 @@ class PessoasController extends Controller
      */
 
     //protected privadas
-    public function filtrar_nome($arraylists, $arrayfiltros){
+    public function filtrar_dados($arraylists, $arrayfiltros){
         $arraylistfiltradas = [];
         foreach($arrayfiltros as $arrayfiltro){
             foreach($arraylists as $arraylist){
@@ -31,18 +31,28 @@ class PessoasController extends Controller
         return $arraylistfiltradas;
     }
 
-    public function filtrar_de($pessoasnalista, $anofiltro){
+    public function filtrar_ano($pessoasnalista, $anofiltro, $option){
         $pessoasfiltradasde = [];
         foreach($pessoasnalista as $pessoanalista){
             list($dia, $mes, $ano) = explode('/', $pessoanalista['nascimento']);
             $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
             $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
             $idade = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-            if($idade >= $anofiltro){
-                array_pust($pessoasfiltradasde, $pessoanalista);
+            if($option == 1){
+                if($idade >= $anofiltro){
+                    array_push($pessoasfiltradasde, $pessoanalista);
+                }
+                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
+                    array_pust($pessoasfiltradasde, $pessoanalista);
+                }
             }
-            if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
-                array_pust($pessoasfiltradasde, $pessoanalista);
+            else{
+                if($idade <= $anofiltro){
+                    array_push($pessoasfiltradasde, $pessoanalista);
+                }
+                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
+                    array_pust($pessoasfiltradasde, $pessoanalista);
+                }
             }
         }
 
@@ -420,12 +430,44 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoaslist = Pessoa::all();
         if($dataForm['nome'] != null){
-            $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'])->get();
-            $pessoaslist = $this->filtrar_nome($pessoaslist, $pessoasnome);
+            $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasnome);
         }
         if($dataForm['de'] != null){
-            $pessoaslist = filtrar_de($pessoaslist, $dataForm['de']);
+            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['de'], 1);
         }
+        if($dataForm['ate'] != null){
+            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['ate'], 2);
+        }
+        if($dataForm['rg'] != null){
+            $pessoasrg = Pessoa::where('rg', 'like', $dataForm['rg'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrg);
+        }
+        if($dataForm['cpf'] != null){
+            $pessoascpf = Pessoa::where('cpf', 'like', $dataForm['cpf'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoascpf);
+        }
+        if($dataForm['bairro'] != null){
+            $pessoasbairro = Pessoa::where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasbairro);
+        }
+        if($dataForm['telefone'] != null){
+            $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoastelefone);
+        }
+        if($dataForm['sexo'] != null){
+            $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+        }
+        if($dataForm['estado_civil'] != null){
+            $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+        }
+        if($dataForm['sexo'] != null){
+            $pessoassexo = Pessoa::where('sexo', '=', $dataForm['estado_civil'])->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+        }
+        dd($pessoaslist);
         $data = new \DateTime();
         $ano = date('Y');
 
