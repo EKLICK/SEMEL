@@ -85,7 +85,6 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s1"><label>Mora com os pais:</label></div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">

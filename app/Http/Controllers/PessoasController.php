@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Pessoa;
 use App\Doenca;
 use App\Turma;
@@ -17,7 +18,7 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //protected privadas
+    //Funções ferramentas
     public function filtrar_dados($arraylists, $arrayfiltros){
         $arraylistfiltradas = [];
         foreach($arrayfiltros as $arrayfiltro){
@@ -83,7 +84,7 @@ class PessoasController extends Controller
         return $data['img_matricula'];
     }
     
-    //public variaveis
+    //Funções de Redirecionamento
     public function index()
     {
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
@@ -218,7 +219,20 @@ class PessoasController extends Controller
             $dataForm['possui_doenca'] = 1;
         }
         if(isset($dataForm['doencas'])){
-            $anamnese = Anamnese::create($dataForm);;
+            $anamnese = Anamnese::create([
+                'possui_doenca' => $dataForm['possui_doenca'],
+                'toma_medicacao' => $dataForm['toma_medicacao'],
+                'alergia_medicacao' => $dataForm['alergia_medicacao'],
+                'peso' => $dataForm['peso'],
+                'altura' => $dataForm['altura'],
+                'fumante' => $dataForm['fumante'],
+                'cirurgia' => $dataForm['cirurgia'],
+                'dor_muscular' => $dataForm['dor_muscular'],
+                'dor_articular' => $dataForm['dor_articular'],
+                'dor_ossea' => $dataForm['dor_ossea'],
+                'atestado' => $dataForm['atestado'],
+                'observacao' => $dataForm['observacao']
+            ]);
             $anamnese->doencas()->attach($dataForm['doencas']);
         }else{
             Anamnese::create($dataForm);
@@ -428,7 +442,7 @@ class PessoasController extends Controller
 
     public function pessoas_procurar(Request $request){
         $dataForm = $request->all();
-        $pessoaslist = Pessoa::all();
+        $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         if($dataForm['nome'] != null){
             $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'].'%')->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasnome);
@@ -440,7 +454,7 @@ class PessoasController extends Controller
             $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['ate'], 2);
         }
         if($dataForm['rg'] != null){
-            $pessoasrg = Pessoa::where('rg', 'like', $dataForm['rg'].'%')->get();
+            $pessoasrg = Pessoa::where('rg', 'like', $dataForm['rg'].'%')->orderBy('nome')->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrg);
         }
         if($dataForm['cpf'] != null){
@@ -455,19 +469,16 @@ class PessoasController extends Controller
             $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoastelefone);
         }
-        if($dataForm['sexo'] != null){
+        if(isset($dataForm['sexo'])){
             $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
-        if($dataForm['estado_civil'] != null){
+        if(isset($dataForm['estado_civil'])){
             $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
-        if($dataForm['sexo'] != null){
-            $pessoassexo = Pessoa::where('sexo', '=', $dataForm['estado_civil'])->get();
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
-        }
-        dd($pessoaslist);
+        
+        $pessoaslist = new LengthAwarePaginator($pessoaslist, count($pessoaslist), 10, null);
         $data = new \DateTime();
         $ano = date('Y');
 

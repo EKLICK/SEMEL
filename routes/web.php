@@ -55,6 +55,7 @@ Route::resource('anamneses','anamneseController');
 Route::get('/anamnese/pdf/{id}','anamneseController@pdfanamnese')->name('pdfanamnese');
 Route::get('/anamneses_antigas','anamneseController@index2')->name('anamneses.index2');
 Route::get('/anamneses_info/{id}','anamneseController@anamnese_info')->name('anamnese_info');
+Route::post('/anamneses/procurar', 'anamneseController@anamnese_procurar')->name('anamnese_procurar');
 
 //Rotas de doenças
 Route::resource('doencas','doencasController');
