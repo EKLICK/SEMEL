@@ -10,7 +10,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
-                <form class="col s12" action="{{route('pessoas.update', $pessoa->id)}}" method="post">
+                <form class="col s12" action="{{route('pessoas.update', $pessoa->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
@@ -25,7 +25,7 @@
                                         <input type="file" name="img_3x4">
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text">
+                                        <input name="img_3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                         <input type="file" name="img_matricula">
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text">
+                                        <input name="img_matricula" class="file-path validate" type="text" value="{{$pessoa->matricula}}">
                                     </div>
                                 </div>
                             </div>
@@ -152,13 +152,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="solteiro" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'solteiro') checked @endif/>
+                                        <input value="Solteiro" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'Solteiro') checked @endif/>
                                         <span>Solteiro</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="casado" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'casado') checked @endif/>
+                                        <input value="Casado" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'Casado') checked @endif/>
                                         <span>Casado</span>
                                     </label>
                                 </p>

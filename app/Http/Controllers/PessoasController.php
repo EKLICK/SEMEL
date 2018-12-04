@@ -268,8 +268,50 @@ class PessoasController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
+        $escolha = $dataForm['escolha'];
+        
+        if($dataForm['img_3x4'] != $pessoa['foto']){
+            if(!empty($pessoa['foto'])){
+                unlink($pessoa['foto']);
+            }
+            $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+        }
+        if($escolha == 1){
+            if($dataForm['img_matricula'] != $pessoa['matricula']){
+                if(!empty($pessoa['matricula'])){
+                    unlink($pessoa['matricula']);
+                }
+                $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
+            }
+        }
+        else{
+            $dataForm['img_matricula'] = null;
+        }
+        $pessoa->update([
+            'foto' => $dataForm['img_3x4'],
+            'nome' => $dataForm['nome'],
+            'nascimento' => $dataForm['nascimento'],
+            'sexo' => $dataForm['sexo'],
+            'rg' => $dataForm['rg'],
+            'cpf' => $dataForm['cpf'],
+            'cidade' => $dataForm['cidade'],
+            'endereco' => $dataForm['endereco'],
+            'bairro' => $dataForm['bairro'],
+            'cep' => $dataForm['cep'],
+            'telefone' => $dataForm['telefone'],
+            'telefone_emergencia' => $dataForm['telefone_emergencia'],
+            'estado_civil' => $dataForm['estado_civil'],
+            'nome_do_pai' => $dataForm['nome_do_pai'],
+            'nome_da_mae' => $dataForm['nome_da_mae'],
+            'pessoa_emergencia' => $dataForm['pessoa_emergencia'],
+            'filhos' => $dataForm['filhos'],
+            'convenio_medico' => $dataForm['convenio_medico'],
+            'irmao' => $dataForm['irmaos'],
+            'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
+            'matricula' => $dataForm['img_matricula'], 
+        ]);
 
-        return redirect()->Route('pessoas.index', 'pessoa', 'dataForm');
+        return redirect()->Route('pessoas.index');
     }
 
     /**
