@@ -16,7 +16,7 @@
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <input type="number" name="escolha" value="2" hidden>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <div class="file-field input-field">
                                 <div class="file-field input-field">
                                     <div class="btn">
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">account_circle</i>
                             <input name="nome" id="nome" type="text" class="validate" value="{{$pessoa->nome}}">
                             <label for="nome">Nome:</label>
@@ -39,22 +39,26 @@
                             <input name="nascimento" id="nascimento" type="text" class="validate" value="{{$pessoa->nascimento}}">
                             <label for="nascimento">Data de nascimento:</label>
                         </div>
-                        <div class="input-field col s2">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
                                 <i class="material-icons prefix">assignment_ind</i>
                             <input name="rg" id="rg" type="text" class="validate" value="{{$pessoa->rg}}">
                             <label for="rg">RG:</label>
                         </div>
-                        <div class="input-field col s2">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
                             <label for="cpf">CPF:</label>
                         </div>
-                        <div class="input-field col s4">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_on</i>
                             <input name="endereco" id="endereco" type="text" class="validate" value="{{$pessoa->endereco}}">
                             <label for="endereco">Endereço:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="bairro" type="text" class="validate" value="{{$pessoa->bairro}}">
                             <label for="bairro">Bairro:</label>
@@ -64,12 +68,14 @@
                             <input name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
                             <label for="cep">CEP:</label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
                             <input name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">contact_phone</i>
                             <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
                             <label for="icon_telephone">Telephone de emergência:</label>
@@ -91,7 +97,7 @@
                             <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{$pessoa->nome_da_mae}}">
                             <label for="nome_da_mae">Nome da mãe:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">person_add</i>
                             <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{$pessoa->pessoa_emergencia}}">
                             <label for="pessoa_emergencia">Pessoa para emergência:</label>

@@ -77,6 +77,12 @@ class PessoasController extends Controller
     public function index()
     {
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        foreach($pessoaslist as $pessoa){
+            list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
+            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+            $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
+        }
         $data = new \DateTime();
         $ano = date('Y');
 
