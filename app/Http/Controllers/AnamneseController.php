@@ -291,6 +291,24 @@ class AnamneseController extends Controller
                 $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesfumante);
             }
         }
+        if(isset($dataForm['doencas'])){
+            $anamnesesdoencas = [];
+            foreach($anamneseslist as $anamnese){
+                $quant = 0;
+                foreach($anamnese['doencas'] as $doenca){
+                    
+                    foreach($dataForm['doencas'] as $doencadalista){
+                        if($doenca['id'] == $doencadalista){
+                            $quant++;
+                        }
+                    }
+                }
+                if($quant == count($anamnese['doencas']) and $quant == count($dataForm['doencas'])){
+                    array_push($anamnesesdoencas, $anamnese);
+                }
+            }
+            $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdoencas);
+        }
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
 
         $anamneseslist = new LengthAwarePaginator($anamneseslist, count($anamneseslist), 10, null);
