@@ -96,7 +96,6 @@
                                                 <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                                             @endforeach
                                         </select>
-                                        <input type="text" value="0" name="possui_doenca" hidden>
                                     </div>
                                 </div>
                             </div>

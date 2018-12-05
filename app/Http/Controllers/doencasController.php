@@ -101,25 +101,13 @@ class doencasController extends Controller
         return redirect()->Route('doencas.index');
     }
 
-    public function doenca_procurar(){
-        if(isset($dataForm['doencas'])){
-            $anamnesesselecionadas = [];
-            foreach($anamneseslist as $anamnese){
-                $quantidade = 0;
-                foreach($anamnese['doencas'] as $doencasdapessoa){
-                    foreach($dataForm['doencas'] as $doencasdalista){
-                        if($doencasdalista == $doencasdapessoa['id']){
-                            $quantidade++;
-                        }
-                    }
-                }
-                if($quantidade == count($dataForm['doencas']) and $quantidade == count($anamnese['doencas'])){
-                    dd($quantidade);
-                    array_push($anamnesesselecionadas, $anamnese);
-                }
-            }
-            dd($anamnesesselecionadas);
+    public function doencas_procurar(Request $request){
+        $dataForm = $request->all();
+        $doencaslist = Doenca::all();
+        if($dataForm['nome'] != null){
+            $doencaslist = $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
         }
-        dd($anamneseslist);
+
+        return view ('doencas_file.doencas', compact('doencaslist'));
     }
 }

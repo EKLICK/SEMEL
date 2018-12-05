@@ -36,7 +36,7 @@ Route::resource('pessoas','pessoasController');
 Route::post('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar');
 Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas');
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info');
-Route::get('/restore/pessoas{id}','pessoasController@restore')->name('pessoas_restore');
+Route::get('/restore/pessoas/{id}','pessoasController@restore')->name('pessoas_restore');
 Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas');
 Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes');
@@ -59,6 +59,7 @@ Route::post('/anamneses/procurar', 'anamneseController@anamnese_procurar')->name
 
 //Rotas de doenças
 Route::resource('doencas','doencasController');
+Route::post('/doencas/procurar', 'doencasController@doencas_procurar')->name('doencas_procurar');
 
 //Rotas de turmas
 Route::resource('turmas','turmasController');
