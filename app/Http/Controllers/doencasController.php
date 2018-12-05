@@ -100,4 +100,26 @@ class doencasController extends Controller
         Session::put('mensagem', $nome.' deletada com sucesso!');
         return redirect()->Route('doencas.index');
     }
+
+    public function doenca_procurar(){
+        if(isset($dataForm['doencas'])){
+            $anamnesesselecionadas = [];
+            foreach($anamneseslist as $anamnese){
+                $quantidade = 0;
+                foreach($anamnese['doencas'] as $doencasdapessoa){
+                    foreach($dataForm['doencas'] as $doencasdalista){
+                        if($doencasdalista == $doencasdapessoa['id']){
+                            $quantidade++;
+                        }
+                    }
+                }
+                if($quantidade == count($dataForm['doencas']) and $quantidade == count($anamnese['doencas'])){
+                    dd($quantidade);
+                    array_push($anamnesesselecionadas, $anamnese);
+                }
+            }
+            dd($anamnesesselecionadas);
+        }
+        dd($anamneseslist);
+    }
 }

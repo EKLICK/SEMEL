@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Anamnese;
 use App\Pessoa;
 use App\Doenca;
@@ -29,20 +30,85 @@ class AnamneseController extends Controller
 
         return $arraylistfiltradas;
     }
+
+    public function ordenar_alfabeto($lista){
+        $listapessoas = Pessoa::all();
+        $listanomes = [];
+        foreach($listapessoas as $pessoa){
+            foreach($lista as $arquivo){
+                if($pessoa['id'] == $arquivo['pessoas_id']){
+                    array_push($listanomes, $pessoa['nome']);
+                }
+            }
+        }
+        sort($listanomes);
+        $listaordenadapessoas = [];
+        foreach($listanomes as $nome){
+            foreach($listapessoas as $pessoa){
+                if($pessoa['nome'] == $nome){
+                    array_push($listaordenadapessoas, $pessoa);
+                }
+            }
+        }
+        $listaordenadanome = [];
+        foreach($listaordenadapessoas as $pessoa){
+            foreach($lista as $arquivo){
+                if($pessoa['id'] == $arquivo['pessoas_id']){
+                    array_push($listaordenadanome, $arquivo);
+                }
+            }
+        }
+
+        return $listaordenadanome;
+    }
+
+    public function ordenar_ano($lista, $option){
+        $listaordenada = [];
+        if($option == 0){
+            $ano = (int)date('Y') - 1;
+        }
+        else{
+            $ano = (int)date('Y');
+        }
+        for($i = $ano; $i > 1900; $i--){
+            $listafiltradaano = [];
+            foreach($lista as $arquivo){
+                if($arquivo['ano'] == $i){
+                    array_push($listafiltradaano, $arquivo);
+                }
+            }
+
+            $listaordenadanome = $this->ordenar_alfabeto($listafiltradaano);
+
+            foreach($listaordenadanome as $arquivo){
+                array_push($listaordenada, $arquivo);
+            }
+            
+            if($option == 1){
+                break;
+            }
+        }
+        return $listaordenada;
+    }
     
     //Funções de Redirecionamento
     public function index()
     {
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->paginate(10);
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
+        $anamnesesordenadas = $this->ordenar_alfabeto($anamneseslist);
+        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10, null);
+
         return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
     public function index2(){
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->paginate(10);
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
+        $anamnesesordenadas = $this->ordenar_ano($anamneseslist, 0);
+        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10, null);
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
@@ -157,7 +223,7 @@ class AnamneseController extends Controller
         }
         if($dataForm['de_peso'] != null){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('peso', '>=', $dataForm['de_peso'])->where('ano', '<=', date('Y'))->get();
+                $anamnesesdepeso = Anamnese::where('peso', '>=', $dataForm['de_peso'])->where('ano', '<', date('Y'))->get();
                 $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
             }
             else{
@@ -167,80 +233,75 @@ class AnamneseController extends Controller
         }
         if($dataForm['ate_peso'] != null){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('peso', '<=', $dataForm['ate_peso'])->where('ano', '<=', date('Y'))->get();
+                $anamnesesatepeso = Anamnese::where('peso', '<=', $dataForm['ate_peso'])->where('ano', '<', date('Y'))->get();
                 $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('peso', '<=', $dataForm['ate_peso'])->where('ano', '=', date('Y'))->get();
+                $anamnesesatepeso = Anamnese::where('peso', '<=', $dataForm['ate_peso'])->where('ano', '=', date('Y'))->get();
                 $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
             }
         }
         if($dataForm['de_altura'] != null){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('altura', '>=', $dataForm['de_altura'])->where('ano', '<=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesdealtura = Anamnese::where('altura', '>=', $dataForm['de_altura'])->where('ano', '<', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdealtura);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('altura', '>=', $dataForm['de_altura'])->where('ano', '=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesdealtura = Anamnese::where('altura', '>=', $dataForm['de_altura'])->where('ano', '=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdealtura);
             }
         }
         if($dataForm['ate_altura'] != null){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('altura', '<=', $dataForm['ate_altura'])->where('ano', '<=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesatealtura = Anamnese::where('altura', '<=', $dataForm['ate_altura'])->where('ano', '<', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesatealtura);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('altura', '<=', $dataForm['ate_altura'])->where('ano', '=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesatealtura = Anamnese::where('altura', '<=', $dataForm['ate_altura'])->where('ano', '=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesatealtura);
             }
         }
         if(isset($dataForm['toma_medicacao'])){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('toma_medicacao', '=', $dataForm['toma_medicacao'])->where('ano', '<=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesestomamedicacao = Anamnese::where('toma_medicacao', '=', $dataForm['toma_medicacao'])->where('ano', '<=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesestomamedicacao);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('toma_medicacao', '=', $dataForm['toma_medicacao'])->where('ano', '=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesestomamedicacao = Anamnese::where('toma_medicacao', '=', $dataForm['toma_medicacao'])->where('ano', '=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesestomamedicacao);
             }
         }
         if(isset($dataForm['cirurgia'])){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('cirurgia', '=', $dataForm['cirurgia'])->where('ano', '<=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesescirurgia = Anamnese::where('cirurgia', '=', $dataForm['cirurgia'])->where('ano', '<=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesescirurgia);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('cirurgia', '=', $dataForm['cirurgia'])->where('ano', '=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesescirurgia = Anamnese::where('cirurgia', '=', $dataForm['cirurgia'])->where('ano', '=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesescirurgia);
             }
         }
         if(isset($dataForm['fumante'])){
             if($dataForm['escolha'] == 0){
-                $anamnesesdepeso = Anamnese::where('fumante', '=', $dataForm['fumante'])->where('ano', '<=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesfumante = Anamnese::where('fumante', '=', $dataForm['fumante'])->where('ano', '<=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesfumante);
             }
             else{
-                $anamnesesdepeso = Anamnese::where('fumante', '=', $dataForm['fumante'])->where('ano', '=', date('Y'))->get();
-                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdepeso);
+                $anamnesesfumante = Anamnese::where('fumante', '=', $dataForm['fumante'])->where('ano', '=', date('Y'))->get();
+                $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesfumante);
             }
         }
-        if(isset($dataForm['doencas'])){
-            $anamnesesselecionadas = [];
-            foreach($anamneseslist as $anamnese){
-                $count = 0;
-                foreach($anamnese['doencas'] as $doencasdapessoa){
-                    foreach($dataForm['doencas'] as $doencasdalista){
-                        if($doencasdalista['id'] == $doencasdapessoa['id']){
-                            $count++;
-                        }
-                    }
-                }
-                if($count == count($dataForm['doencas'])){
-                    array_push($anamnesesselecionadas, $anamnese);
-                }
-            }
+        $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
+
+        $anamneseslist = new LengthAwarePaginator($anamneseslist, count($anamneseslist), 10, null);
+        $doencaslist = Doenca::all();
+        $ano = date('Y');
+
+        if($dataForm['escolha'] == 0){
+            return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
         }
-        dd($anamneseslist);
+        else{
+            return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
+        }
     }
 }
