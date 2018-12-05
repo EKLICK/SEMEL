@@ -106,4 +106,8 @@ class turmasController extends Controller
         Session::put('mensagem', $nome.' editado com sucesso!');
         return redirect()->Route('turmas.index');
     }
+
+    public function turmas_procurar(Request $request){
+        
+    }
 }

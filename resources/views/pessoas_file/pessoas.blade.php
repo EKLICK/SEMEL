@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input placeholder="Nome" id="nome_search" type="text" class="validate" name="nome">
-                                    <label for="nome_search">Nome</label>
+                                    <label for="nome_search">Nome da pessoa</label>
                                 </div>
                                 <div class="col s1"><label>Idade:</label></div>
                                 <div class="input-field col s2">
