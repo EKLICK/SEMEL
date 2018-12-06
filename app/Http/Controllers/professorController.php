@@ -295,6 +295,7 @@ class professorController extends Controller
         }
         $professoreslist = $this->ordenar_alfabeto($professoreslist);
         $professoreslist = new LengthAwarePaginator($professoreslist, count($professoreslist), 10, null);
+        $professoreslist->setPath('/professor');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }

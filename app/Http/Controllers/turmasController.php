@@ -166,6 +166,7 @@ class turmasController extends Controller
         }
         $turmaslist = $this->ordenar_alfabeto($turmaslist);
         $turmaslist = new LengthAwarePaginator($turmaslist, count($turmaslist), 10, null);
+        $turmaslist->setPath('/turmas');
         $nucleoslist = Nucleo::All();
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));

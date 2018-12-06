@@ -98,7 +98,9 @@ class AnamneseController extends Controller
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
         $anamnesesordenadas = $this->ordenar_alfabeto($anamneseslist);
-        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10, null);
+
+        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10);
+        $anamneseslist->setPath('/anamneses_atualizadas');
 
         return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
     }
@@ -108,7 +110,10 @@ class AnamneseController extends Controller
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
         $anamnesesordenadas = $this->ordenar_ano($anamneseslist, 0);
-        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10, null);
+
+        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10);
+        $anamneseslist->setPath('/anamneses_antigas');
+
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
@@ -310,14 +315,16 @@ class AnamneseController extends Controller
         }
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
 
-        $anamneseslist = new LengthAwarePaginator($anamneseslist, count($anamneseslist), 10, null);
+        $anamneseslist = new LengthAwarePaginator($anamneseslist, 10, count($anamneseslist), null);
         $doencaslist = Doenca::all();
         $ano = date('Y');
 
         if($dataForm['escolha'] == 0){
+            $anamneseslist->setPath('/anamneses_antigas');
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
         }
         else{
+            $anamneseslist->setPath('/anamneses_atualizadas');
             return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
         }
     }

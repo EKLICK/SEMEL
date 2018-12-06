@@ -498,6 +498,7 @@ class PessoasController extends Controller
 
         $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
         $pessoaslist = new LengthAwarePaginator($pessoaslist, count($pessoaslist), 10, null);
+        $pessoaslist->setPath('/pessoas');
         $data = new \DateTime();
         $ano = date('Y');
 
