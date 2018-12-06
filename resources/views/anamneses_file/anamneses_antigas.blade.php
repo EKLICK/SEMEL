@@ -92,6 +92,7 @@
                                     <div class="input-field col s3">
                                         Possui doenças?
                                         <select multiple name="doencas[]">
+                                                <option value="" selected disabled>Selecione a doença</option>
                                             @foreach ($doencaslist as $doenca)
                                                 <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                                             @endforeach

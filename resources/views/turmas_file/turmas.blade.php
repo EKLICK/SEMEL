@@ -28,9 +28,20 @@
                                         <label for="nome_search">Nome:</label>
                                     </div>
                                     <div class="col s2"><label>Quantidade limite:</label></div>
-                                    <div class="input-field col s4">
-                                        <input id="limite_search" type="text" class="validate" name="limite">
+                                    <div class="input-field col s2">
+                                        <input id="limite_search" type="number" class="validate" name="limite">
                                         <label for="limite_search">Limite:</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s2"><label>Núcleo vinculado:</label></div>
+                                    <div class="input-field col s4">
+                                        <select name="nucleo_id">
+                                            <option value="" selected disabled>Selecione o núcleo</option>
+                                            @foreach ($nucleoslist as $nucleo)
+                                                <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">

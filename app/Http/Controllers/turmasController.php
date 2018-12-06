@@ -52,8 +52,9 @@ class turmasController extends Controller
     //Funções de Redirecionamento
     public function index()
     {
+        $nucleoslist = Nucleo::all();
         $turmaslist = Turma::orderBy('nome')->paginate(10);
-        return view ('turmas_file.turmas', compact('turmaslist'));
+        return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
     }
 
     /**
@@ -154,9 +155,19 @@ class turmasController extends Controller
             $turmaslimite = Turma::orderBy('nome')->where('limite', '=', $dataForm['limite'])->get();
             $turmaslist = $this->filtrar_dados($turmaslist, $turmaslimite);
         }
+        if(isset($dataForm['nucleo_id'])){
+            $turmasdoencas = [];
+            foreach($turmaslist as $turma){
+                if($turma['nucleo_id'] == $dataForm['nucleo_id']){
+                    array_push($turmasdoencas, $turma);
+                }
+            }
+            $turmaslist = $turmasdoencas;
+        }
         $turmaslist = $this->ordenar_alfabeto($turmaslist);
         $turmaslist = new LengthAwarePaginator($turmaslist, count($turmaslist), 10, null);
+        $nucleoslist = Nucleo::All();
 
-        return view ('turmas_file.turmas', compact('turmaslist'));
+        return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
     }
 }
