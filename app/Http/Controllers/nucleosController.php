@@ -48,6 +48,15 @@ class nucleosController extends Controller
         return $listaordenadanome;
     }
 
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/anamneses_antigas');
+        return $itemCollection;
+    }
+
     //Funções de Redirecionamento
     public function index()
     {
@@ -166,8 +175,7 @@ class nucleosController extends Controller
             $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosbairro);
         }
         $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
-        $nucleoslist = new LengthAwarePaginator($nucleoslist, count($nucleoslist), 10, null);
-        $nucleoslist->setPath('/nucleos');
+        $nucleoslist = $this->gerar_paginate($nucleoslist);
         
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }

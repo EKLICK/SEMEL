@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use App\Anamnese;
 use App\Pessoa;
 use App\Doenca;
@@ -90,6 +91,15 @@ class AnamneseController extends Controller
         }
         return $listaordenada;
     }
+
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/anamneses_antigas');
+        return $itemCollection;
+    }
     
     //Funções de Redirecionamento
     public function index()
@@ -97,10 +107,9 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
-        $anamnesesordenadas = $this->ordenar_alfabeto($anamneseslist);
+        $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
 
-        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10);
-        $anamneseslist->setPath('/anamneses_atualizadas');
+        $anamneseslist = $this->gerar_paginate($anamneseslist);
 
         return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
     }
@@ -109,10 +118,8 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
-        $anamnesesordenadas = $this->ordenar_ano($anamneseslist, 0);
-
-        $anamneseslist = new LengthAwarePaginator($anamnesesordenadas, count($anamnesesordenadas), 10);
-        $anamneseslist->setPath('/anamneses_antigas');
+        $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
+        $anamneseslist = $this->gerar_paginate($anamneseslist);
 
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
     }
@@ -314,17 +321,14 @@ class AnamneseController extends Controller
             $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdoencas);
         }
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
-
-        $anamneseslist = new LengthAwarePaginator($anamneseslist, 10, count($anamneseslist), null);
+        $anamneseslist = $this->gerar_paginate($anamnesesordenadas);
         $doencaslist = Doenca::all();
         $ano = date('Y');
 
         if($dataForm['escolha'] == 0){
-            $anamneseslist->setPath('/anamneses_antigas');
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
         }
         else{
-            $anamneseslist->setPath('/anamneses_atualizadas');
             return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
         }
     }

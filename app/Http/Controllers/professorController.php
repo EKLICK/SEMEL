@@ -48,6 +48,15 @@ class professorController extends Controller
         return $listaordenadanome;
     }
 
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/anamneses_antigas');
+        return $itemCollection;
+    }
+
     //Funções de Redirecionamento
     public function index()
     {
@@ -294,8 +303,7 @@ class professorController extends Controller
             $professoreslist = $this->filtrar_dados($professoreslist, $professoresturmas);
         }
         $professoreslist = $this->ordenar_alfabeto($professoreslist);
-        $professoreslist = new LengthAwarePaginator($professoreslist, count($professoreslist), 10, null);
-        $professoreslist->setPath('/professor');
+        $professoreslist = $this->gerar_paginate($professoreslist);
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }

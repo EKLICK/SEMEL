@@ -101,6 +101,15 @@ class PessoasController extends Controller
         $data['img_matricula'] = $dir."/".$nomeImagem;
         return $data['img_matricula'];
     }
+
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/anamneses_antigas');
+        return $itemCollection;
+    }
     
     //Funções de Redirecionamento
     public function index()
@@ -497,8 +506,7 @@ class PessoasController extends Controller
         }
 
         $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
-        $pessoaslist = new LengthAwarePaginator($pessoaslist, count($pessoaslist), 10, null);
-        $pessoaslist->setPath('/pessoas');
+        $pessoaslist = $this->gerar_paginate($pessoaslist);
         $data = new \DateTime();
         $ano = date('Y');
 

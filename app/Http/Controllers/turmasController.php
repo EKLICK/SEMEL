@@ -49,6 +49,15 @@ class turmasController extends Controller
         return $listaordenadanome;
     }
 
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/anamneses_antigas');
+        return $itemCollection;
+    }
+
     //Funções de Redirecionamento
     public function index()
     {
@@ -165,8 +174,7 @@ class turmasController extends Controller
             $turmaslist = $turmasdoencas;
         }
         $turmaslist = $this->ordenar_alfabeto($turmaslist);
-        $turmaslist = new LengthAwarePaginator($turmaslist, count($turmaslist), 10, null);
-        $turmaslist->setPath('/turmas');
+        $turmaslist = $this->gerar_paginate($turmaslist);
         $nucleoslist = Nucleo::All();
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
