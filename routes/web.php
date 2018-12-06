@@ -68,6 +68,7 @@ Route::post('/turmas/procurar','turmasController@turmas_procurar')->name('turmas
 //Rotas de núcleos
 Route::resource('nucleos','nucleosController');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas');
+Route::post('/nucleos/procurar', 'nucleosController@nucleos_procurar')->name('nucleos_procurar');
 
 Route::get('/audits','AuditsController@index')->name('audits.index');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info');

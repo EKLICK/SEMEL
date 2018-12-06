@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Nucleo;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
@@ -14,6 +15,40 @@ class nucleosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funções ferramentas
+    public function filtrar_dados($arraylists, $arrayfiltros){
+        $arraylistfiltradas = [];
+        foreach($arrayfiltros as $arrayfiltro){
+            foreach($arraylists as $arraylist){
+                if($arraylist == $arrayfiltro){
+                    array_push($arraylistfiltradas, $arraylist);
+                }
+            }
+        }
+
+        return $arraylistfiltradas;
+    }
+
+    public function ordenar_alfabeto($lista){
+        $listanomes = [];
+        foreach($lista as $arquivo){
+            array_push($listanomes, $arquivo['nome']);
+        }
+        sort($listanomes);
+        $listaordenadanome = [];
+        foreach($listanomes as $nome){
+            foreach($lista as $arquivo){
+                if($arquivo['nome'] == $nome){
+                    array_push($listaordenadanome, $arquivo);
+                }
+            }
+        }
+        
+        return $listaordenadanome;
+    }
+
+    //Funções de Redirecionamento
     public function index()
     {
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
@@ -116,5 +151,22 @@ class nucleosController extends Controller
     public function turmas_cadastradas($id){
         $nucleo = Nucleo::find($id);
         return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
+    }
+
+    public function nucleos_procurar(Request $request){
+        $dataForm = $request->all();
+        $nucleoslist = Nucleo::all();
+        
+        if($dataForm['nome'] != null){
+            $nucleosnome = Nucleo::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
+            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosnome);
+        }
+        if($dataForm['bairro'] != null){
+            $nucleosbairro = Nucleo::orderBy('nome')->where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosbairro);
+        }
+        $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
+        $nucleoslist = new LengthAwarePaginator($nucleoslist, count($nucleoslist), 10, null);
+        return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }
 }

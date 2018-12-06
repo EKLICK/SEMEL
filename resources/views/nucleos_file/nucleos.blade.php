@@ -24,6 +24,35 @@
     @endif
     <div class="container z-depth-4">
         <div class="card-panel">
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                        <div class="collapsible-body">
+                            <form action="{{route('nucleos_procurar')}}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col s2"><label>Nome do núcleo:</label></div>
+                                    <div class="input-field col s4">
+                                        <input id="nome_search" type="text" class="validate" name="nome">
+                                        <label for="nome_search">Nome:</label>
+                                    </div>
+                                    <div class="col s2"><label>Bairro do núcleo:</label></div>
+                                    <div class="input-field col s2">
+                                        <input id="bairro_search" type="text" class="validate" name="bairro">
+                                        <label for="bairro_search">Bairro:</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s3">
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                            <i class="material-icons right">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             <table class="centered">
                 <thead>
                     <tr>
