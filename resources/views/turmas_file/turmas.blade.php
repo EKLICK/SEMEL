@@ -19,13 +19,18 @@
                     <li>
                         <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
                         <div class="collapsible-body">
-                            <form action="{{route('doencas_procurar')}}" method="POST">
+                            <form action="{{route('turmas_procurar')}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col s2"><label>Nome da turma:</label></div>
                                     <div class="input-field col s4">
-                                        <input id="de_peso_search" type="text" class="validate" name="nome">
-                                        <label for="de_peso_search">Nome:</label>
+                                        <input id="nome_search" type="text" class="validate" name="nome">
+                                        <label for="nome_search">Nome:</label>
+                                    </div>
+                                    <div class="col s2"><label>Quantidade limite:</label></div>
+                                    <div class="input-field col s4">
+                                        <input id="limite_search" type="text" class="validate" name="limite">
+                                        <label for="limite_search">Limite:</label>
                                     </div>
                                 </div>
                                 <div class="row">

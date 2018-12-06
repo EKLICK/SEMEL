@@ -32,6 +32,24 @@ class PessoasController extends Controller
         return $arraylistfiltradas;
     }
 
+    public function ordenar_alfabeto($lista){
+        $listanomes = [];
+        foreach($lista as $arquivo){
+            array_push($listanomes, $arquivo['nome']);
+        }
+        sort($listanomes);
+        $listaordenadanome = [];
+        foreach($listanomes as $nome){
+            foreach($lista as $arquivo){
+                if($arquivo['nome'] == $nome){
+                    array_push($listaordenadanome, $arquivo);
+                }
+            }
+        }
+        
+        return $listaordenadanome;
+    }
+
     public function filtrar_ano($pessoasnalista, $anofiltro, $option){
         $pessoasfiltradasde = [];
         foreach($pessoasnalista as $pessoanalista){
@@ -477,7 +495,8 @@ class PessoasController extends Controller
             $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
-        
+
+        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
         $pessoaslist = new LengthAwarePaginator($pessoaslist, count($pessoaslist), 10, null);
         $data = new \DateTime();
         $ano = date('Y');

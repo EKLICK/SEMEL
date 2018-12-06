@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\regrasTurma;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Turma;
 use App\Nucleo;
 
@@ -15,6 +16,40 @@ class turmasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funções ferramentas
+    public function filtrar_dados($arraylists, $arrayfiltros){
+        $arraylistfiltradas = [];
+        foreach($arrayfiltros as $arrayfiltro){
+            foreach($arraylists as $arraylist){
+                if($arraylist == $arrayfiltro){
+                    array_push($arraylistfiltradas, $arraylist);
+                }
+            }
+        }
+
+        return $arraylistfiltradas;
+    }
+
+    public function ordenar_alfabeto($lista){
+        $listanomes = [];
+        foreach($lista as $arquivo){
+            array_push($listanomes, $arquivo['nome']);
+        }
+        sort($listanomes);
+        $listaordenadanome = [];
+        foreach($listanomes as $nome){
+            foreach($lista as $arquivo){
+                if($arquivo['nome'] == $nome){
+                    array_push($listaordenadanome, $arquivo);
+                }
+            }
+        }
+        
+        return $listaordenadanome;
+    }
+
+    //Funções de Redirecionamento
     public function index()
     {
         $turmaslist = Turma::orderBy('nome')->paginate(10);
@@ -108,6 +143,20 @@ class turmasController extends Controller
     }
 
     public function turmas_procurar(Request $request){
-        
+        $dataForm = $request->all();
+        $turmaslist = Turma::all();
+
+        if($dataForm['nome'] != null){
+            $turmasnome = Turma::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
+            $turmaslist = $this->filtrar_dados($turmaslist, $turmasnome);
+        }
+        if($dataForm['limite'] != null){
+            $turmaslimite = Turma::orderBy('nome')->where('limite', '=', $dataForm['limite'])->get();
+            $turmaslist = $this->filtrar_dados($turmaslist, $turmaslimite);
+        }
+        $turmaslist = $this->ordenar_alfabeto($turmaslist);
+        $turmaslist = new LengthAwarePaginator($turmaslist, count($turmaslist), 10, null);
+
+        return view ('turmas_file.turmas', compact('turmaslist'));
     }
 }
