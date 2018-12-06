@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Professor;
 use App\Turma;
@@ -15,10 +16,44 @@ class professorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Funções ferramentas
+    public function filtrar_dados($arraylists, $arrayfiltros){
+        $arraylistfiltradas = [];
+        foreach($arrayfiltros as $arrayfiltro){
+            foreach($arraylists as $arraylist){
+                if($arraylist == $arrayfiltro){
+                    array_push($arraylistfiltradas, $arraylist);
+                }
+            }
+        }
+
+        return $arraylistfiltradas;
+    }
+
+    public function ordenar_alfabeto($lista){
+        $listanomes = [];
+        foreach($lista as $arquivo){
+            array_push($listanomes, $arquivo['nome']);
+        }
+        sort($listanomes);
+        $listaordenadanome = [];
+        foreach($listanomes as $nome){
+            foreach($lista as $arquivo){
+                if($arquivo['nome'] == $nome){
+                    array_push($listaordenadanome, $arquivo);
+                }
+            }
+        }
+        
+        return $listaordenadanome;
+    }
+
+    //Funções de Redirecionamento
     public function index()
     {
         $professoreslist = Professor::orderBy('nome')->paginate(10);
-        return view ('professores_file.professores', compact('professoreslist'));
+        $turmaslist = Turma::all();
+        return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
     /**
@@ -214,5 +249,53 @@ class professorController extends Controller
         $professor->restore();
 
         return redirect()->route('professor.index');
+    }
+
+    public function professor_procurar(Request $request){
+        $dataForm = $request->all();
+        $professoreslist = Professor::all();
+        $turmaslist = Turma::all();
+
+        if($dataForm['nome'] != null){
+            $professoresnome = Professor::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresnome);
+        }
+        if($dataForm['email'] != null){
+            $professoresemail = [];
+            $useremails= User::orderBy('name')->where('email', 'like', $dataForm['email'])->where('admin_professor', '=', 0)->get();
+            foreach($professoreslist as $professor){
+                foreach($useremails as $useremail){
+                    if($professor['user_id'] == $useremail['id']){
+                        array_push($professoresemail, $professor);
+                    }
+                }
+            }
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresemail);
+        }
+        if($dataForm['matricula'] != null){
+            $professoresmatricula = Professor::orderBy('nome')->where('matricula', 'like', $dataForm['matricula'].'%')->get();
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresmatricula);
+        }
+        if(isset($dataForm['turmas'])){
+            $professoresturmas = [];
+            foreach($professoreslist as $professor){
+                $quant = 0;
+                foreach ($professor['turmas'] as $turmasdoprofessor) {
+                    foreach($dataForm['turmas'] as $turmasselecionadas){
+                        if($turmasdoprofessor['id'] == $turmasselecionadas){
+                            $quant++;
+                        }
+                    }
+                }
+                if($quant == count($dataForm['turmas'])){
+                    array_push($professoresturmas, $professor);
+                }
+            }
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresturmas);
+        }
+        $professoreslist = $this->ordenar_alfabeto($professoreslist);
+        $professoreslist = new LengthAwarePaginator($professoreslist, count($professoreslist), 10, null);
+
+        return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 }

@@ -167,6 +167,7 @@ class nucleosController extends Controller
         }
         $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
         $nucleoslist = new LengthAwarePaginator($nucleoslist, count($nucleoslist), 10, null);
+        
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }
 }

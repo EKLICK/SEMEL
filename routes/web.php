@@ -27,9 +27,10 @@ Route::get('/professors_info/{id}','professorController@professor_info')->name('
 Route::put('/professor/update/senha/{id}','professorController@update_senha')->name('update_senha');
 Route::get('/softdeletes/professor','professorController@softdeletes')->name('professor_softdeletes');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas');
+Route::post('/professor/procurar','professorController@professor_procurar')->name('professor_procurar');
 Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController@professor_meus_alunos')->name('professor_meus_alunos');
-Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}', 'professorController@professores_turmas_vincular')->name('professores_turmas_vincular');
-Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}', 'ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
+Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}','professorController@professores_turmas_vincular')->name('professores_turmas_vincular');
+Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}','ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular');
 
 //Rotas de pessoas
 Route::resource('pessoas','pessoasController');
@@ -41,11 +42,11 @@ Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas');
 Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes');
 Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar');
-Route::get('/edit/menores/{id}', 'pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores');
-Route::get('/edit/maiores/{id}', 'pessoasController@pessoas_edit_maiores')->name('pessoas_edit_maiores');
+Route::get('/edit/menores/{id}','pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores');
+Route::get('/edit/maiores/{id}','pessoasController@pessoas_edit_maiores')->name('pessoas_edit_maiores');
 Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->name('lista_anamnese');
-Route::get('/create/menores', 'pessoasController@pessoas_create_menores')->name('pessoas_create_menores');
-Route::get('/create/maiores', 'pessoasController@pessoas_create_maiores')->name('pessoas_create_maiores');
+Route::get('/create/menores','pessoasController@pessoas_create_menores')->name('pessoas_create_menores');
+Route::get('/create/maiores','pessoasController@pessoas_create_maiores')->name('pessoas_create_maiores');
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create');
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular');
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular');
@@ -68,7 +69,7 @@ Route::post('/turmas/procurar','turmasController@turmas_procurar')->name('turmas
 //Rotas de núcleos
 Route::resource('nucleos','nucleosController');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas');
-Route::post('/nucleos/procurar', 'nucleosController@nucleos_procurar')->name('nucleos_procurar');
+Route::post('/nucleos/procurar','nucleosController@nucleos_procurar')->name('nucleos_procurar');
 
 Route::get('/audits','AuditsController@index')->name('audits.index');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info');

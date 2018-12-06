@@ -106,7 +106,7 @@
                                     <h4>@yield('title')</h4>
                                     <div class="divider"></div>
                                 </div>
-                                @yield('content');
+                                @yield('content')
                             </div>
                         </main>
                     </div>

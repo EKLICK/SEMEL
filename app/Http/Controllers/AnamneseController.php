@@ -296,14 +296,13 @@ class AnamneseController extends Controller
             foreach($anamneseslist as $anamnese){
                 $quant = 0;
                 foreach($anamnese['doencas'] as $doenca){
-                    
                     foreach($dataForm['doencas'] as $doencadalista){
                         if($doenca['id'] == $doencadalista){
                             $quant++;
                         }
                     }
                 }
-                if($quant == count($anamnese['doencas']) and $quant == count($dataForm['doencas'])){
+                if($quant == count($dataForm['doencas'])){
                     array_push($anamnesesdoencas, $anamnese);
                 }
             }

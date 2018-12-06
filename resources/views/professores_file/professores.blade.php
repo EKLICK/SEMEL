@@ -16,6 +16,50 @@
     @endif
     <div class="container z-depth-4">
         <div class="card-panel">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-body">
+                        <form action="{{route('professor_procurar')}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col s1"><label>Nome:</label></div>
+                                <div class="input-field col s3">
+                                    <input id="nome_search" type="text" class="validate" name="nome">
+                                    <label for="nome_search">Nome:</label>
+                                </div>
+                                <div class="col s1"><label>E-mail:</label></div>
+                                <div class="input-field col s3">
+                                    <input id="email_search" type="text" class="validate" name="email">
+                                    <label for="email_search">E-mail:</label>
+                                </div>
+                                <div class="col s1"><label>Matricula:</label></div>
+                                <div class="input-field col s2">
+                                    <input id="matricula_search" type="text" class="validate" name="matricula">
+                                    <label for="matricula_search">matricula:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s2"><label>Turmas vinculadas:</label></div>
+                                <div class="input-field col s4">
+                                    <select multiple name="turmas[]">
+                                        @foreach ($turmaslist as $turma)
+                                            <option value="{{$turma->id}}">{{$turma->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
             <table class="centered">
                 <thead>
                     <tr>
