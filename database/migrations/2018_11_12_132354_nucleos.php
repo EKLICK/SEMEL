@@ -16,8 +16,12 @@ class Nucleos extends Migration
         Schema::create('nucleos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
+            $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();
-            $table->timestamps();
+            $table->string('rua')->nullable();
+            $table->string('n_casa')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('inativo')->nullable();
         });
     }
 
