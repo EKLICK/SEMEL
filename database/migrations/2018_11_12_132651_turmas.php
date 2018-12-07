@@ -17,6 +17,8 @@ class Turmas extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('limite')->nullable();
+            $table->string('data_semanal')->nullable();
+            $table->string('horario')->nullable();
             $table->unsignedInteger('nucleo_id')->nullable();
             $table->foreign('nucleo_id')->references('id')->on('nucleos')->onDelete('set null');
             $table->timestamps();
