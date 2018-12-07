@@ -61,6 +61,7 @@ class nucleosController extends Controller
     public function index()
     {
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
 
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }

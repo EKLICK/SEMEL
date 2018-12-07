@@ -55,6 +55,7 @@ class turmasController extends Controller
         $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
         $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
         $itemCollection->setPath('/anamneses_antigas');
+
         return $itemCollection;
     }
 
@@ -63,6 +64,8 @@ class turmasController extends Controller
     {
         $nucleoslist = Nucleo::all();
         $turmaslist = Turma::orderBy('nome')->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
     }
 

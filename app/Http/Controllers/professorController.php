@@ -62,6 +62,7 @@ class professorController extends Controller
     {
         $professoreslist = Professor::orderBy('nome')->paginate(10);
         $turmaslist = Turma::all();
+        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
@@ -244,6 +245,7 @@ class professorController extends Controller
 
     public function softdeletes(){
         $professoreslist = Professor::onlyTrashed()->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($professoreslist).' pessoas deletadas no banco de dados.');
         
         return view ('professores_file.professores_softdeletes', compact('professoreslist'));
     }

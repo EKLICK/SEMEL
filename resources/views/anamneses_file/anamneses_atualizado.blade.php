@@ -13,6 +13,15 @@
         </div>
         {{Session::forget('mensagem')}}
     @endif
+    @if(Session::get('quant'))
+        <div class="center-align sessao">
+            <div class="chip light-blue accent-2 lighten-2">
+                {{Session::get('quant')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('quant')}}
+    @endif
     <div class="container z-depth-4">
         <div class="card-panel">
             <ul class="collapsible">

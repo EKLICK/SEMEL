@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Session;
 use App\Pessoa;
 use App\Doenca;
 use App\Turma;
 use App\Anamnese;
-use Illuminate\Support\Facades\Session;
 
 class PessoasController extends Controller
 {
@@ -123,6 +123,7 @@ class PessoasController extends Controller
         }
         $data = new \DateTime();
         $ano = date('Y');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
@@ -445,6 +446,7 @@ class PessoasController extends Controller
         $pessoaslist = Pessoa::onlyTrashed()->paginate(10);
         $data = new \DateTime();
         $ano = date('Y');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas deletadas no banco de dados.');
         
         return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
     }
