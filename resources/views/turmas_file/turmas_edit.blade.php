@@ -33,11 +33,21 @@
                         </div>
                     </div>
                     <div class="row">
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">assignment</i>
-                                <input name="limite" id="icon_prefix" type="number" class="validate" value="{{$turma->limite}}">
-                                <label for="icon_prefix">Limite:</label>
-                            </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">assignment</i>
+                            <input name="limite" id="icon_prefix" type="number" class="validate" value="{{$turma->limite}}">
+                            <label for="icon_prefix">Limite:</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">date_range</i>
+                            <input name="data_semanal" id="icon_data_semanal" type="text" class="validate">
+                            <label for="icon_data_semanal">Dias da semana:</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">hourglass_full</i>
+                            <input name="horario" id="icon_horario" type="text" class="validate">
+                            <label for="icon_horario">Horário:</label>
+                        </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
                         <i class="material-icons right">send</i>
