@@ -130,6 +130,7 @@ class nucleosController extends Controller
         if($newnucleo != $oldnucleo){
             Session::put('mensagem_green', $nucleo->nome.' editado com sucesso!');
         }
+        
         return redirect()->Route('nucleos.index'); 
     }
 
