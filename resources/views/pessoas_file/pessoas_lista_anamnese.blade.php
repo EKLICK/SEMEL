@@ -6,17 +6,17 @@
 @endsection
 @section('title') Anamneses de {{$pessoa->nome}} @endsection
 @section('content')
-    @if(Session::get('mensagem'))
-        <div class="center-align sessao">
-            <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem')}}
-    @endif   
     <div class="container z-depth-4">
         <div class="card-panel">
+            @if(Session::get('quant'))
+                <div class="center-align quantmens">
+                    <div class="chip light-blue accent-2 lighten-2">
+                        {{Session::get('quant')}}
+                        <i class="close material-icons">close</i>
+                    </div>
+                </div>
+                {{Session::forget('quant')}}
+            @endif
             <table class="centered">
                 <thead>
                     <tr>

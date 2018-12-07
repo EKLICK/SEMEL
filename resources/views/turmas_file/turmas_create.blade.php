@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s2">
                             <i class="material-icons prefix">assignment</i>
                             <input name="limite" id="icon_limite" type="number" class="validate">
                             <label for="icon_limite">Limite:</label>
