@@ -177,6 +177,7 @@ class nucleosController extends Controller
         }
         $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
         $nucleoslist = $this->gerar_paginate($nucleoslist);
+        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
         
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }

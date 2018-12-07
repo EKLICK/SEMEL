@@ -179,6 +179,7 @@ class turmasController extends Controller
         $turmaslist = $this->ordenar_alfabeto($turmaslist);
         $turmaslist = $this->gerar_paginate($turmaslist);
         $nucleoslist = Nucleo::All();
+        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
     }

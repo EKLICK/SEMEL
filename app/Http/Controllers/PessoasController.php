@@ -511,6 +511,8 @@ class PessoasController extends Controller
         $pessoaslist = $this->gerar_paginate($pessoaslist);
         $data = new \DateTime();
         $ano = date('Y');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+
 
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }

@@ -63,6 +63,7 @@ class professorController extends Controller
         $professoreslist = Professor::orderBy('nome')->paginate(10);
         $turmaslist = Turma::all();
         Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
+
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
@@ -306,6 +307,7 @@ class professorController extends Controller
         }
         $professoreslist = $this->ordenar_alfabeto($professoreslist);
         $professoreslist = $this->gerar_paginate($professoreslist);
+        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }

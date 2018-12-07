@@ -109,6 +109,8 @@ class doencasController extends Controller
         if($dataForm['nome'] != null){
             $doencaslist = $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
         }
+        Session::put('quant', 'Foram encontrados '.count($doencaslist).' doenças no banco de dados.');
+
 
         return view ('doencas_file.doencas', compact('doencaslist'));
     }

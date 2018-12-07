@@ -325,6 +325,7 @@ class AnamneseController extends Controller
         $anamneseslist = $this->gerar_paginate($anamnesesordenadas);
         $doencaslist = Doenca::all();
         $ano = date('Y');
+        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
 
         if($dataForm['escolha'] == 0){
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
