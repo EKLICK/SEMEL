@@ -15,14 +15,15 @@ class Pessoas extends Migration
     {
         Schema::create('pessoas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cidade')->nullable();
             $table->string('foto')->nullable();
             $table->string('nome');
             $table->string('nascimento')->nullable();
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();
-            $table->string('endereco')->nullable();
+            $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();
+            $table->string('rua')->nullable();
+            $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();
             $table->string('telefone')->nullable();
             $table->string('telefone_emergencia')->nullable();
