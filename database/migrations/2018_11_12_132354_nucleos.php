@@ -19,7 +19,7 @@ class Nucleos extends Migration
             $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
-            $table->string('n_casa')->nullable();
+            $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();
             $table->string('inativo')->nullable();
         });

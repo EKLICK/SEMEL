@@ -20,6 +20,11 @@ class Professores extends Migration
             $table->string('telefone')->nullable();
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('rua')->nullable();
+            $table->string('numero_endereco')->nullable();
+            $table->string('cep')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

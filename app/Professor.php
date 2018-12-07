@@ -14,7 +14,7 @@ class Professor extends model implements Auditable
     protected $table = "professores";
 
     protected $fillable = [
-        'nome', 'matricula', 'telefone', 'cpf', 'rg','user_id',
+        'nome', 'matricula', 'telefone', 'cidade', 'bairro', 'rua', 'numero_endereco', 'cep', 'cpf', 'rg','user_id',
     ];
 
     public function users(){
