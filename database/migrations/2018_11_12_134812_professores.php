@@ -16,6 +16,7 @@ class Professores extends Migration
         Schema::create('professores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
+            $table->string('nascimento')->nullable();
             $table->string('matricula')->nullable();
             $table->string('telefone')->nullable();
             $table->string('cpf')->nullable();
@@ -25,6 +26,8 @@ class Professores extends Migration
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();
+            $table->string('curso')->nullable();
+            $table->string('formacao')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
