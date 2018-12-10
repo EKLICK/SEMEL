@@ -14,7 +14,7 @@
                     <input type="hidden" name="_method" value="PUT">
                     <div class="row">
                         <div class="input-field col s5">
-                            <i class="material-icons prefix">warning</i>
+                            <i class="material-icons prefix">group</i>
                             <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$turma->nome}}">
                             <label for="icon_prefix">Nome da turma:</label>
                         </div>

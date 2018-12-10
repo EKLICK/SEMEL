@@ -64,9 +64,10 @@ class turmasController extends Controller
     {
         $nucleoslist = Nucleo::all();
         $turmaslist = Turma::orderBy('nome')->paginate(10);
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
 
-        return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist'));
+        return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
     }
 
     /**

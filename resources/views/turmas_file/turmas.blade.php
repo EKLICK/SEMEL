@@ -31,20 +31,33 @@
                             <form action="{{route('turmas_procurar')}}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col s2"><label>Nome da turma:</label></div>
-                                    <div class="input-field col s4">
-                                        <input id="nome_search" type="text" class="validate" name="nome">
-                                        <label for="nome_search">Nome:</label>
+                                    <div class="input-field col s5">
+                                        <i class="material-icons prefix">group</i>
+                                        <input name="nome" id="icon_nome" type="text" class="validate">
+                                        <label for="icon_nome">Nome da turma:</label>
                                     </div>
-                                    <div class="col s2"><label>Quantidade limite:</label></div>
                                     <div class="input-field col s2">
+                                        <i class="material-icons prefix">assignment</i>
                                         <input id="limite_search" type="number" class="validate" name="limite">
                                         <label for="limite_search">Limite:</label>
                                     </div>
+                                    <div class="input-field col s3">
+                                        <i class="material-icons prefix">hourglass_full</i>
+                                        <input name="horario" id="icon_horario" type="text" class="validate">
+                                        <label for="icon_horario">Horário:</label>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s2"><label>Núcleo vinculado:</label></div>
                                     <div class="input-field col s4">
+                                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
+                                        <select name="data_semanal[]" multiple>
+                                            @foreach ($dias_semana as $dia)
+                                                <option value="{{$dia}}">{{$dia}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
                                         <select name="nucleo_id">
                                             <option value="" selected disabled>Selecione o núcleo</option>
                                             @foreach ($nucleoslist as $nucleo)

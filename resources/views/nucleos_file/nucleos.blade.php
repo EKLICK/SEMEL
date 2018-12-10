@@ -87,14 +87,14 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
-                        <th>Bairro</th>
+                        <th>Endereço</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($nucleoslist as $nucleo)
                             <td><p>{{$nucleo->nome}}</p></td>
-                            <td><p>{{$nucleo->bairro}}</p></td>
+                            <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>

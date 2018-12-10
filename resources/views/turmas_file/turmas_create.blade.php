@@ -24,7 +24,7 @@
                     @csrf
                     <div class="row">
                         <div class="input-field col s5">
-                            <i class="material-icons prefix">warning</i>
+                            <i class="material-icons prefix">group</i>
                             <input name="nome" id="icon_nome" type="text" class="validate">
                             <label for="icon_nome">Nome da turma:</label>
                         </div>

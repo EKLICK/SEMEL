@@ -173,8 +173,20 @@ class nucleosController extends Controller
             $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosnome);
         }
         if($dataForm['bairro'] != null){
-            $nucleosbairro = Nucleo::orderBy('nome')->where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            $nucleosbairro = Nucleo::orderBy('nome')->where('bairro', 'like', '%'.$dataForm['bairro'].'%')->get();
             $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosbairro);
+        }
+        if($dataForm['rua'] != null){
+            $nucleosrua = Nucleo::orderBy('nome')->where('rua', 'like', '%'.$dataForm['rua'].'%')->get();
+            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosrua);
+        }
+        if($dataForm['numero_endereco'] != null){
+            $nucleosendereco_numero = Nucleo::orderBy('nome')->where('numero_endereco', 'like', '%'.$dataForm['numero_endereco'].'%')->get();
+            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosendereco_numero);
+        }
+        if($dataForm['cep'] != null){
+            $nucleoscep = Nucleo::orderBy('nome')->where('cep', 'like', '%'.$dataForm['cep'].'%')->get();
+            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleoscep);
         }
         $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
         $nucleoslist = $this->gerar_paginate($nucleoslist);
