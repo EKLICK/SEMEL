@@ -76,9 +76,9 @@ class turmasController extends Controller
      */
     public function create()
     {
-        $nucleoslist = Nucleo::all();
-
-        return view ('turmas_file.turmas_create', compact('nucleoslist'));
+        $nucleoslist = Nucleo::orderBy('nome')->get();
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        return view ('turmas_file.turmas_create', compact('nucleoslist', 'dias_semana'));
     }
 
     /**
@@ -90,8 +90,12 @@ class turmasController extends Controller
     public function store(regrasTurma $request)
     {
         $dataForm = $request->all();
+        $dias_da_semana = '';
+        foreach($dataForm['data_semanal'] as $data){
+            $dias_da_semana = $dias_da_semana.$data.',';
+        }
+        $dataForm['data_semanal'] = $dias_da_semana;
         $turma = Turma::create($dataForm);
-
         Session::put('mensagem', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
         return redirect()->Route('turmas.index');
     }
@@ -117,7 +121,10 @@ class turmasController extends Controller
     {
         $turma = Turma::find($id);
         $nucleoslist = Nucleo::all();
-        return view ('turmas_file.turmas_edit', compact('turma', 'nucleoslist'));
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $datas_escolhidas = explode(',', $turma['data_semanal']);
+        unset($datas_escolhidas[count($datas_escolhidas) - 1]);
+        return view ('turmas_file.turmas_edit', compact('turma', 'nucleoslist', 'dias_semana', 'datas_escolhidas'));
     }
 
     /**
@@ -132,6 +139,11 @@ class turmasController extends Controller
         $dataForm = $request->all();
         $turma = Turma::find($id);
         $oldturma = (array)$turma;
+        $dias_da_semana = '';
+        foreach($dataForm['data_semanal'] as $data){
+            $dias_da_semana = $dias_da_semana.$data.',';
+        }
+        $dataForm['data_semanal'] = $dias_da_semana;
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
