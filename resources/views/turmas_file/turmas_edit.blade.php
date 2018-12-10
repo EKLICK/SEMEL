@@ -53,6 +53,13 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s7">
+                                <i class="material-icons prefix">description</i>
+                                <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" value="{{$turma->descricao}}"></textarea>
+                                <label for="icon_descricao">Numero de endereço:</label>
+                            </div>
+                        </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
                         <i class="material-icons right">send</i>

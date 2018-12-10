@@ -19,6 +19,24 @@
                             <input name="nome" id="icon_nome" type="text" class="validate">
                             <label for="icon_nome">Nome do núcleo:</label>
                         </div>
+                        <div class="input-field col s3"></div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                            <div style="margin-left: 30%;">
+                            <p>
+                                <label>
+                                    <input value="1" name="inativo" type="radio"/>
+                                    <span>Ativo</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input value="0" name="inativo" type="radio"/>
+                                    <span>Inativo</span>
+                                </label>
+                            </p>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
@@ -42,6 +60,13 @@
                             <i class="material-icons prefix">location_city</i>
                             <input name="cep" id="icon_cep" type="text" class="validate">
                             <label for="icon_cep">CEP:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s7">
+                            <i class="material-icons prefix">description</i>
+                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea"></textarea>
+                            <label for="icon_descricao">Numero de endereço:</label>
                         </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar

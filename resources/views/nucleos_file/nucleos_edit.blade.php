@@ -18,6 +18,24 @@
                             <input name="nome" id="icon_nome" type="text" class="validate" value="{{$nucleo->nome}}">
                             <label for="icon_nome">Nome da turma:</label>
                         </div>
+                        <div class="input-field col s3"></div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                            <div style="margin-left: 30%;">
+                            <p>
+                                <label>
+                                    <input value="1" name="inativo" type="radio" @if($nucleo->inativo == 1) checked @endif/>
+                                    <span>Ativo</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input value="0" name="inativo" type="radio" @if($nucleo->inativo == 0) checked @endif/>
+                                    <span>Inativo</span>
+                                </label>
+                            </p>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">

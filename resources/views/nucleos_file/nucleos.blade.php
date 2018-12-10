@@ -45,6 +45,24 @@
                                         <input name="nome" id="icon_nome" type="text" class="validate">
                                         <label for="icon_nome">Nome da turma:</label>
                                     </div>
+                                    <div class="input-field col s3"></div>
+                                    <div class="input-field col s4">
+                                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                                        <div style="margin-left: 30%;">
+                                            <p>
+                                                <label>
+                                                    <input value="0" name="inativo" type="radio"/>
+                                                    <span>Ativo</span>
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input value="1" name="inativo" type="radio"/>
+                                                    <span>Inativo</span>
+                                                </label>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="row">
@@ -88,6 +106,7 @@
                     <tr>
                         <th>Nome da turma</th>
                         <th>Endereço</th>
+                        <th>Estado</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -95,6 +114,7 @@
                     @foreach ($nucleoslist as $nucleo)
                             <td><p>{{$nucleo->nome}}</p></td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
+                            <td>@if($nucleo->inativo == 0) inativo <br> <i class="small material-icons" style="color: red;">sim_card_alert</i> @else ativo <br> <i class="small material-icons" style="color: green;">sim_card_alert</i> @endif</td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
