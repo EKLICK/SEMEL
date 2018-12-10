@@ -28,6 +28,8 @@
                             <input name="nome" id="icon_nome" type="text" class="validate">
                             <label for="icon_nome">Nome da turma:</label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s2">
                             <i class="material-icons prefix">assignment</i>
                             <input name="limite" id="icon_limite" type="number" class="validate">
@@ -35,8 +37,13 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">hourglass_full</i>
-                            <input name="horario" id="icon_horario" type="text" class="validate">
-                            <label for="icon_horario">Horário:</label>
+                            <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
+                            <label for="icon_horario_inicial">Horário Inicial:</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">hourglass_empty</i>
+                            <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
+                            <label for="icon_horario_final">Horário Final:</label>
                         </div>
                     </div>
                     <div class="row">
