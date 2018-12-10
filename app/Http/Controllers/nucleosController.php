@@ -169,7 +169,7 @@ class nucleosController extends Controller
         $nucleoslist = Nucleo::all();
         
         if($dataForm['nome'] != null){
-            $nucleosnome = Nucleo::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
+            $nucleosnome = Nucleo::orderBy('nome')->where('nome', 'like', '%'.$dataForm['nome'].'%')->get();
             $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosnome);
         }
         if($dataForm['bairro'] != null){

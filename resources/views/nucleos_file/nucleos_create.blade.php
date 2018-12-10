@@ -12,8 +12,9 @@
                 <form class="col s12" action="{{route('nucleos.store')}}" method="post">
                     @csrf
                     <input type="text" name="cidade" value="São Leopoldo" hidden>
+                    <input type="number" name="inativo" value="1" hidden>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">filter_tilt_shift</i>
                             <input name="nome" id="icon_nome" type="text" class="validate">
                             <label for="icon_nome">Nome do núcleo:</label>
@@ -25,7 +26,7 @@
                             <input name="bairro" id="icon_bairro" type="text" class="validate">
                             <label for="icon_bairro">Bairro:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">confirmation_number</i>
                             <input name="rua" id="icon_rua" type="text" class="validate">
                             <label for="icon_rua">Rua:</label>
@@ -34,12 +35,12 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <i class="material-icons prefix">location_on</i>
-                            <input name="numero_endereco" id="icon_numero_endereco" type="text" class="validate">
+                            <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
                             <label for="icon_numero_endereco">Numero de endereço:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="numero_cep" id="icon_cep" type="text" class="validate">
+                            <input name="cep" id="icon_cep" type="text" class="validate">
                             <label for="icon_cep">CEP:</label>
                         </div>
                     </div>

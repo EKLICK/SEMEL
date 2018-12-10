@@ -21,7 +21,8 @@ class Nucleos extends Migration
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();
-            $table->string('inativo')->nullable();
+            $table->integer('inativo')->nullable();
+            $table->timestamps();
         });
     }
 

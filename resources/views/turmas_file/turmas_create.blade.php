@@ -23,7 +23,7 @@
                 <form class="col s12" action="{{route('turmas.store')}}" method="post">
                     @csrf
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s5">
                             <i class="material-icons prefix">warning</i>
                             <input name="nome" id="icon_nome" type="text" class="validate">
                             <label for="icon_nome">Nome da turma:</label>
