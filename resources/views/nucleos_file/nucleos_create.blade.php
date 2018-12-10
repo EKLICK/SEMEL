@@ -66,7 +66,7 @@
                         <div class="input-field col s7">
                             <i class="material-icons prefix">description</i>
                             <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea"></textarea>
-                            <label for="icon_descricao">Numero de endereço:</label>
+                            <label for="icon_descricao">Descrição do núcleo:</label>
                         </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar

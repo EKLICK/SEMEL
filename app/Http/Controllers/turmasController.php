@@ -145,6 +145,7 @@ class turmasController extends Controller
             $dias_da_semana = $dias_da_semana.$data.',';
         }
         $dataForm['data_semanal'] = $dias_da_semana;
+        $turma['inativo'] = $dataForm['inativo'];
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
@@ -175,6 +176,10 @@ class turmasController extends Controller
         if($dataForm['nome'] != null){
             $turmasnome = Turma::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
             $turmaslist = $this->filtrar_dados($turmaslist, $turmasnome);
+        }
+        if($dataForm['inativo'] != null){
+            $turmasinativo = Turma::orderBy('nome')->where('inativo', '=', $dataForm['inativo'])->get();
+            $turmaslist = $this->filtrar_dados($turmaslist, $turmasinativo);
         }
         if($dataForm['limite'] != null){
             $turmaslimite = Turma::orderBy('nome')->where('limite', '=', $dataForm['limite'])->get();

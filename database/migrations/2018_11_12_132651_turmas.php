@@ -20,7 +20,7 @@ class Turmas extends Migration
             $table->string('data_semanal')->nullable();
             $table->string('horario_inicial')->nullable();
             $table->string('horario_final')->nullable();
-            $table->string('aviso')->nullable();
+            $table->integer('inativo')->nullable();
             $table->string('descricao')->nullable();
             $table->unsignedInteger('nucleo_id')->nullable();
             $table->foreign('nucleo_id')->references('id')->on('nucleos')->onDelete('set null');

@@ -18,6 +18,24 @@
                             <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$turma->nome}}">
                             <label for="icon_prefix">Nome da turma:</label>
                         </div>
+                        <div class="input-field col s3"></div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativo | inativo:
+                            <div style="margin-left: 30%;">
+                            <p>
+                                <label>
+                                    <input value="1" name="inativo" type="radio" @if($turma->inativo == 1) checked @endif/>
+                                    <span>Ativo</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input value="0" name="inativo" type="radio" @if($turma->inativo == 0) checked @endif/>
+                                    <span>Inativo</span>
+                                </label>
+                            </p>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s2">
@@ -53,12 +71,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s7">
-                                <i class="material-icons prefix">description</i>
-                                <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" value="{{$turma->descricao}}"></textarea>
-                                <label for="icon_descricao">Numero de endereço:</label>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <i class="material-icons prefix">description</i>
+                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{$turma->descricao}}</textarea>
+                            <label for="icon_descricao">Descrição da turma:</label>
                         </div>
                     </div>
                     <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
