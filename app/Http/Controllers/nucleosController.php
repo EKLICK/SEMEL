@@ -164,6 +164,11 @@ class nucleosController extends Controller
         return view ('nucleos_file.nucleos_turmas', compact('nucleo'));
     }
 
+    public function nucleo_info($id){
+        $nucleo = Nucleo::find($id);
+        return view ('nucleos_file.nucleos_info', compact('nucleo'));
+    }
+
     public function nucleos_procurar(Request $request){
         $dataForm = $request->all();
         $nucleoslist = Nucleo::all();

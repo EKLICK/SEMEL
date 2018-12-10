@@ -68,8 +68,9 @@ Route::post('/turmas/procurar','turmasController@turmas_procurar')->name('turmas
 
 //Rotas de núcleos
 Route::resource('nucleos','nucleosController')->middleware('Authenticate');
-Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('Authenticate');
+Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
 Route::post('/nucleos/procurar','nucleosController@nucleos_procurar')->name('nucleos_procurar')->middleware('Authenticate');
+Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('Authenticate');
 
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('Authenticate');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('Authenticate');
