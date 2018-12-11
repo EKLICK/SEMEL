@@ -18,7 +18,7 @@ class Professor extends model implements Auditable
         'rua', 'numero_endereco', 'cep', 'cpf', 'rg','user_id', 'curso', 'formacao',
     ];
 
-    public function users(){
+    public function user(){
         return $this->HasOne(User::class);
     }
 

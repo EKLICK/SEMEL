@@ -36,7 +36,7 @@ class User extends Authenticatable implements Auditable
         'password', 'remember_token',
     ];
 
-    public function professores(){
+    public function professore(){
         return $this->HasOne(Professor::class);
     }
 }

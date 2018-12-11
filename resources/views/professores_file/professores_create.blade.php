@@ -11,6 +11,7 @@
             <div class="row">
                 <form class="col s12" action="{{route('professor.store')}}" method="post">
                     @csrf
+                    <h6>Registro do perfil do professor:</h6>
                     <div class="row">
                         <div class="input-field col s5">
                             <i class="material-icons prefix">account_circle</i>
@@ -86,6 +87,7 @@
                             <label for="icon_formacao">Formação:</label>
                         </div>
                     </div>
+                    <h6>Registro da conta:</h6>
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">perm_contact_calendar</i>

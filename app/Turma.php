@@ -10,7 +10,7 @@ class Turma extends model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
-        'nome', 'limite', 'nucleo_id', 'data_semanal', 'horario_inicial', 'horario_final', 'aviso', 'descricao',
+        'nome', 'limite', 'nucleo_id', 'data_semanal', 'horario_inicial', 'horario_final', 'inativo', 'descricao',
     ];
 
     public function pessoas(){

@@ -30,6 +30,7 @@
                     <div class="collapsible-body">
                         <form action="{{route('turmas_procurar')}}" method="POST">
                             @csrf
+                            <input type="text" name="id" value="-1" hidden>
                             <div class="row">
                                 <div class="input-field col s5">
                                     <i class="material-icons prefix">group</i>
@@ -136,7 +137,7 @@
                                 </i>
                             </td>
                             <td>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
                                 <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$turma->nome}}" id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
                             </td>

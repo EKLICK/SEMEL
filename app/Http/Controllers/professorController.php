@@ -7,6 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Professor;
 use App\Turma;
+use App\Nucleo;
 use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller
@@ -121,12 +122,16 @@ class professorController extends Controller
     {
         if(auth()->user()->admin_professor == 1){
             $professor = Professor::find($id);
+            $user = User::find($professor->user_id);
+            $useremail = $user->email;
+
+            return view ('professores_file.professores_edit', compact('professor', 'useremail'));
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-        }
 
-        return view ('professores_file.professores_edit', compact('professor'));
+            return view ('professores_file.professores_edit', compact('professor'));
+        }
     }
 
     /**
@@ -139,11 +144,18 @@ class professorController extends Controller
     public function update(Request $request, $id)
     {
         $professor = Professor::find($id);
+        $user = User::find($professor->user_id);
         $dataForm = $request->all();
+        $olduser = (array)$user;
+        $user->update($dataForm);
+        $newuser = (array)$user;
         $oldprofessor = (array)$professor;
         $professor->update($dataForm);
         $newprofessor = (array)$professor;
         if($newprofessor != $oldprofessor){
+            Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
+        }
+        else if($newuser != $olduser){
             Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
         }
         if(auth()->user()->admin_professor == 1){
@@ -185,13 +197,34 @@ class professorController extends Controller
     }
 
     public function professor_turmas($id){
-        $turmas = Turma::all();
+        $turmas = Turma::orderBy('nome')->get();
+        $nucleoslist = Nucleo::orderBy('nome')->get();
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if(auth()->user()->admin_professor == 1){
             $professor = Professor::find($id);
             foreach($professor->turmas as $p){
                 $professorTurmas[] = $p->id;
             }
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'professorTurmas'));
+            return view ('professores_file.professores_turmas', compact('professor','turmas','professorTurmas','dias_semana','nucleoslist'));
+        }
+        else{
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas'));
+        }
+    }
+
+    public function filtros_professor_turmas($id){
+        $turmas = Session::get('turmaslist');
+        Session::forget('turmaslist');
+        $nucleoslist = Nucleo::orderBy('nome')->get();
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        if(auth()->user()->admin_professor == 1){
+            $professor = Professor::find($id);
+            foreach($professor->turmas as $turma){
+                $professorTurmas[] = $turma->id;
+            }
+            return view ('professores_file.professores_turmas', compact('professor','turmas','professorTurmas','dias_semana','nucleoslist'));
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();

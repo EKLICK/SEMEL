@@ -181,12 +181,11 @@ class turmasController extends Controller
     public function turmas_procurar(Request $request){
         $dataForm = $request->all();
         $turmaslist = Turma::all();
-
         if($dataForm['nome'] != null){
             $turmasnome = Turma::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
             $turmaslist = $this->filtrar_dados($turmaslist, $turmasnome);
         }
-        if($dataForm['inativo'] != null){
+        if(isset($dataForm['inativo'])){
             $turmasinativo = Turma::orderBy('nome')->where('inativo', '=', $dataForm['inativo'])->get();
             $turmaslist = $this->filtrar_dados($turmaslist, $turmasinativo);
         }
@@ -231,11 +230,17 @@ class turmasController extends Controller
             $turmaslist = $turmasdoencas;
         }
         $turmaslist = $this->ordenar_alfabeto($turmaslist);
-        $turmaslist = $this->gerar_paginate($turmaslist);
         $nucleoslist = Nucleo::All();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
 
-        return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
+        if($dataForm['id'] == -1){
+            $turmaslist = $this->gerar_paginate($turmaslist);
+            return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
+        }
+        else{
+            Session::put('turmaslist', $turmaslist);
+            return redirect()->route('filtros_professor_turmas', $dataForm['id']);
+        }
     }
 }

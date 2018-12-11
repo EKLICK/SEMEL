@@ -28,6 +28,7 @@ Route::put('/professor/update/senha/{id}','professorController@update_senha')->n
 Route::get('/softdeletes/professor','professorController@softdeletes')->name('professor_softdeletes')->middleware('Authenticate');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas')->middleware('Authenticate');
 Route::post('/professor/procurar','professorController@professor_procurar')->name('professor_procurar')->middleware('Authenticate');
+Route::get('/filtros_professor_turmas/{id}','professorController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
 Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController@professor_meus_alunos')->name('professor_meus_alunos')->middleware('Authenticate');
 Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}','professorController@professores_turmas_vincular')->name('professores_turmas_vincular')->middleware('Authenticate');
 Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}','ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular')->middleware('Authenticate');

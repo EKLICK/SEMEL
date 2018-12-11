@@ -28,12 +28,92 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-body">
+                        <form action="{{route('turmas_procurar')}}" method="POST">
+                            @csrf
+                            <input type="text" name="id" value="{{$professor->id}}" hidden>
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    <i class="material-icons prefix">group</i>
+                                    <input name="nome" id="icon_nome" type="text" class="validate">
+                                    <label for="icon_nome">Nome da turma:</label>
+                                </div>
+                                <div class="input-field col s3"></div>
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="inativo" type="radio"/>
+                                                <span>Ativo</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="0" name="inativo" type="radio"/>
+                                                <span>Inativo</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s2">
+                                    <i class="material-icons prefix">assignment</i>
+                                    <input id="limite_search" type="number" class="validate" name="limite">
+                                    <label for="limite_search">Limite:</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <i class="material-icons prefix">hourglass_full</i>
+                                    <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
+                                    <label for="icon_horario_inicial">Horário:</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <i class="material-icons prefix">hourglass_empty</i>
+                                    <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
+                                    <label for="icon_horario_final">Horário:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
+                                    <select name="data_semanal[]" multiple>
+                                        @foreach ($dias_semana as $dia)
+                                            <option value="{{$dia}}">{{$dia}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
+                                    <select name="nucleo_id">
+                                        <option value="" selected disabled>Selecione o núcleo</option>
+                                        @foreach ($nucleoslist as $nucleo)
+                                            <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
             <table class="centered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
                         <th>Quantidade de professores</th>
                         @if(auth()->user()->admin_professor == 1)
+                            <th>Estado</th>
                             <th>Vinculo</th>
                         @else
                             <th>Quantidade de alunos</th>
@@ -47,17 +127,18 @@
                             <tr>
                                 <td><p>{{$turma->nome}}</p></td>
                                 <td><p>{{count($turma->professores)}}</p></td>
-                                <td>
-                                    @if (!isset($professorTurmas))
-                                        <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                                @if (!isset($professorTurmas))
+                                    <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
+                                    <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
+                                @else
+                                    @if(in_array($turma->id, $professorTurmas))
+                                        <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                        <td><a href="{{Route('professores_turmas_desvincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a></td>
                                     @else
-                                        @if(in_array($turma->id, $professorTurmas))
-                                            <a href="{{Route('professores_turmas_desvincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a>
-                                        @else
-                                            <a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
-                                        @endif
+                                        <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
+                                        <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
                                     @endif
-                                </td>
+                                @endif
                             </tr>
                         @endforeach 
                     @else
