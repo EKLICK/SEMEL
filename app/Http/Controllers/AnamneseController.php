@@ -162,7 +162,7 @@ class AnamneseController extends Controller
         $dataForm += ['ano' => date('Y')];
         Anamnese::create($dataForm);
         Session::put('mensagem', 'Anamnese adicionada com sucesso!');
-        
+
         return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);
     }
 
@@ -187,6 +187,9 @@ class AnamneseController extends Controller
     {
         $doencaslist = Doenca::all();
         $anamnese = Anamnese::find($id);
+        if($anamnese->ano != date('Y')){
+            return redirect()->route('anamneses.index2');
+        }
         return view ('anamneses_file.anamneses_edit', compact ('anamnese', 'doencaslist'));
     }
 
@@ -212,7 +215,7 @@ class AnamneseController extends Controller
         if($newanamnese != $oldanamnese){
             Session::put('mensagem', "Anamnese editada com sucesso!");
         } 
-        return redirect()->Route('anamneses.index');
+        return redirect()->route('anamneses.index');
     }
 
     /**

@@ -87,15 +87,13 @@ class professorController extends Controller
     {
         $dataForm = $request->all();
         $user = User::create([
-            'name' => $dataForm['nome'],
+            'name' => $dataForm['usuario'],
             'email' => strtolower($dataForm['email']),
             'password' => bcrypt($dataForm['password']),
             'admin_professor' => 0,
         ]);
+        $dataForm += ['cidade' => 'São Leopoldo'];
         $dataForm += ['user_id' => $user->id];
-        unset($dataForm->password);
-        unset($dataForm->email);
-        dd($dataForm);
         Professor::create($dataForm);
         Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
 
