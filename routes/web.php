@@ -64,6 +64,7 @@ Route::post('/doencas/procurar', 'doencasController@doencas_procurar')->name('do
 
 //Rotas de turmas
 Route::resource('turmas','turmasController')->middleware('Authenticate');
+Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info')->middleware('Authenticate');
 Route::post('/turmas/procurar','turmasController@turmas_procurar')->name('turmas_procurar')->middleware('Authenticate');
 
 //Rotas de núcleos

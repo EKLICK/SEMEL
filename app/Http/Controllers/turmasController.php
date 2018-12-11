@@ -166,7 +166,16 @@ class turmasController extends Controller
         $nome = $turma->nome;
         $turma->delete();
         Session::put('mensagem', $nome.' editado com sucesso!');
+
         return redirect()->Route('turmas.index');
+    }
+
+    public function turma_info($id){
+        $turma = Turma::find($id);
+        $dias = explode(',', $turma['data_semanal']);
+        unset($dias[count($dias) - 1]);
+
+        return view('turmas_file.turmas_info', compact('turma', 'dias'));
     }
 
     public function turmas_procurar(Request $request){
