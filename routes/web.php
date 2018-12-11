@@ -53,6 +53,7 @@ Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController
 
 //Rotas de anamneses
 Route::resource('anamneses','anamneseController')->middleware('Authenticate');
+Route::get('/anamnese_create/{id}','anamneseController@anamnese_create')->name('anamnese_create')->middleware('Authenticate');
 Route::get('/anamnese/pdf/{id}','anamneseController@pdfanamnese')->name('pdfanamnese')->middleware('Authenticate');
 Route::get('/anamneses_antigas','anamneseController@index2')->name('anamneses.index2')->middleware('Authenticate');
 Route::get('/anamneses_info/{id}','anamneseController@anamnese_info')->name('anamnese_info')->middleware('Authenticate');

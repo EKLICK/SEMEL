@@ -132,9 +132,16 @@ class AnamneseController extends Controller
      */
     public function create()
     {
-        $pessoa_id = Session::get('pessoa');
-        Session::forget('pessoa');
+        //
+    }
+
+    public function anamnese_create($id){
+        $pessoa_id = $id;
         $pessoa = Pessoa::find($pessoa_id);
+        $hoje = date('Y');
+        list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
+        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+        $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
         $doencaslist = Doenca::all();
         return view ('anamneses_file.anamneses_create', compact('pessoa', 'doencaslist'));
     }
@@ -147,7 +154,16 @@ class AnamneseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        if(!empty($dataForm['doencas'])){
+            $dataForm['possui_doenca'] = 1;
+            $anamnese->doencas()->attach($dataForm['doencas']);
+        }
+        $dataForm += ['ano' => date('Y')];
+        Anamnese::create($dataForm);
+        Session::put('mensagem', 'Anamnese adicionada com sucesso!');
+        
+        return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);
     }
 
     /**

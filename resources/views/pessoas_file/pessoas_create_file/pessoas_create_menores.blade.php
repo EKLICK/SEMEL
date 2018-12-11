@@ -56,22 +56,32 @@
                             <input name="rg" id="rg" type="text" class="validate">
                             <label for="rg">RG:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input name="cpf" id="cpf" type="text" class="validate">
-                            <label for="cpf">CPF (próprio|responsavel):</label>
+                            <label for="cpf">CPF próprio [op]:</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">credit_card</i>
+                            <input name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate">
+                            <label for="cpf_responsavel">CPF do responsável:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
-                            <i class="material-icons prefix">location_on</i>
-                            <input name="endereco" id="endereco" type="text" class="validate">
-                            <label for="endereco">Endereço:</label>
-                        </div>
-                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="bairro" type="text" class="validate">
                             <label for="bairro">Bairro:</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <i class="material-icons prefix">confirmation_number</i>
+                            <input name="rua" id="rua" type="text" class="validate">
+                            <label for="rua">Rua:</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <i class="material-icons prefix">location_on</i>
+                            <input name="numero_endereco" id="numero_endereco" type="number" class="validate">
+                            <label for="numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">markunread_mailbox</i>
@@ -88,7 +98,7 @@
                         <div class="input-field col s4">
                             <i class="material-icons prefix">contact_phone</i>
                             <input name="telefone_emergencia" id="icon_telephone_emergencia" type="tel" class="validate">
-                            <label for="icon_telephone_emergencia">Telephone de emergência:</label>
+                            <label for="icon_telephone_emergencia">Telephone emergência:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">add_box</i>
@@ -107,10 +117,10 @@
                             <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate">
                             <label for="nome_da_mae">Nome do mãe:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">person_add</i>
                             <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate">
-                            <label for="pessoa_emergencia">Pessoa para emergência:</label>
+                            <label for="pessoa_emergencia">Pessoa emergência:</label>
                         </div>
                     </div>
                     <div class="row">

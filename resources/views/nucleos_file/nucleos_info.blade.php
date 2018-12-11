@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    <a href="{{route('anamneses.index')}}" class="breadcrumb">Núcleo</a>
-    <a href="{{route('anamnese_info', $nucleo->id)}}" class="breadcrumb">Informações</a>
+    <a href="{{route('nucleos.index')}}" class="breadcrumb">Núcleos</a>
+    <a href="{{route('nucleo_info', $nucleo->id)}}" class="breadcrumb">Informações</a>
 @endsection
 @section('title') <h4>Informações do Núcleo</h4> @endsection
 @section('content')

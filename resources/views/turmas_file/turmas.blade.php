@@ -106,6 +106,7 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
+                        <th>Núcleo pertencente</th>
                         <th>Limite de alunos</th>
                         <th>Estado</th>
                         <th>Ações</th>
@@ -115,8 +116,25 @@
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
+                            <td><p>{{$turma->nucleo->nome}}</p></td>
                             <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                            <td> <p>@if($turma->inativo == 1)Ativo @else Inativo @endif</p><i class="small material-icons" @if($turma->inativo == 1)  style="color: green;" @else style="color: red;" @endif>sim_card_alert</i></td>
+                            <td> 
+                                <p>
+                                    @if($turma->inativo == 0)
+                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @else Turma inativa @endif
+                                    @else 
+                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @else Turma ativa @endif @endif
+                                </p>
+                                <i class="small material-icons" 
+                                    @if($turma->inativo == 0 || $turma->nucleo->inativo == 0)  
+                                        style="color: red;" 
+                                    @else 
+                                        style="color: green;" 
+                                    @endif>sim_card_alert
+                                </i>
+                            </td>
                             <td>
                                     <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>

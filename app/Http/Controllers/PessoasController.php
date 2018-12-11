@@ -176,7 +176,7 @@ class PessoasController extends Controller
         $escolha = $dataForm['escolha'];
         unset($dataForm['escolha']);
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
-        if($escolha == 1){
+        if($escolha == 1 && $dataForm['img_matricula'] != null){
             $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
         }
         else{
@@ -191,6 +191,7 @@ class PessoasController extends Controller
                     return redirect()->route('pessoas_maiores');
                 }
             }
+            $dataForm['cpf_responsavel'] = null;
             $dataForm['matricula'] = null;
         }
         $pessoa = Pessoa::create([
@@ -200,9 +201,11 @@ class PessoasController extends Controller
             'sexo' => $dataForm['sexo'],
             'rg' => $dataForm['rg'],
             'cpf' => $dataForm['cpf'],
+            'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
-            'endereco' => $dataForm['endereco'],
+            'rua' => $dataForm['rua'],
             'bairro' => $dataForm['bairro'],
+            'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
             'telefone_emergencia' => $dataForm['telefone_emergencia'],
@@ -390,14 +393,13 @@ class PessoasController extends Controller
             $pessoa = $pessoaslist->find($id);
         }
         $ano = date('Y');
+        Session::put('quant', 'Foram encontradas '. count($pessoa->anamneses).' anamneses de '. $pessoa->nome);
 
         return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneses', 'pessoa', 'ano'));
     }
 
     public function lista_anamnese_create($id){
-        Session::put('pessoa', $id);
-
-        return redirect()->Route('anamneses.create');
+        return redirect()->Route('anamnese_create', $id);
     }
 
     public function pessoas_info($id){

@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="icon_bairro" type="text" class="validate">
                             <label for="icon_bairro">Bairro:</label>
@@ -49,12 +49,10 @@
                             <input name="rua" id="icon_rua" type="text" class="validate">
                             <label for="icon_rua">Rua:</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
                             <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
-                            <label for="icon_numero_endereco">Numero de endereço:</label>
+                            <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>

@@ -20,6 +20,7 @@ class Pessoas extends Migration
             $table->string('nascimento')->nullable();
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();
+            $table->string('cpf_responsavel')->nullable();
             $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();
             $table->string('rua')->nullable();

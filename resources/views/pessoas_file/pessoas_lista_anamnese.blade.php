@@ -6,6 +6,15 @@
 @endsection
 @section('title') Anamneses de {{$pessoa->nome}} @endsection
 @section('content')
+    @if(Session::get('mensagem'))
+        <div class="center-align sessao">
+            <div class="chip green lighten-2">
+                {{Session::get('mensagem')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem')}}
+    @endif
     <div class="container z-depth-4">
         <div class="card-panel">
             @if(Session::get('quant'))
@@ -33,7 +42,9 @@
                         <td><p>{{$anamnese->ano}}</p><i class="small material-icons" @if($anamnese->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                         <td><p>{{count($anamnese->doencas)}}</p></td>
                         @if($pessoa->deleted_at == null)
-                            <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            @if($anamnese->ano == $ano)
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            @endif
                         @endif
                     </tr>
                     @endforeach

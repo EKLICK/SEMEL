@@ -17,7 +17,7 @@ class Turma extends model implements Auditable
         return $this->belongsToMany(Pessoa::class, 'turmas_pessoas');
     }
 
-    public function nucleos(){
+    public function nucleo(){
         return $this->BelongsTo(Nucleo::class);
     }
 

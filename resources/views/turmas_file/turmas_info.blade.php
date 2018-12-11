@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    <a href="{{route('anamneses.index')}}" class="breadcrumb">Núcleo</a>
-    <a href="{{route('anamnese_info', $turma->id)}}" class="breadcrumb">Informações</a>
+    <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
+    <a href="{{route('turma_info', $turma->id)}}" class="breadcrumb">Informações</a>
 @endsection
 @section('title') <h4>Informações da Turma</h4> @endsection
 @section('content')
@@ -22,7 +22,7 @@
                         <td><h6>@if($turma->inativo == 1) Não @else Sim @endif</h6></td>
                     </tr>
                     <tr>
-                        <td><h6>Horario Inicial: <br> Horario Final</h6></td>
+                        <td><h6>Horario Inicial:<br>Horario Final: </h6></td>
                         <td><h6>{{$turma->horario_inicial}} <br> {{$turma->horario_final}}</h6></td>
                     </tr>
                     <tr>
