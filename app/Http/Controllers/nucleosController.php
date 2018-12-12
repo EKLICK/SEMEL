@@ -60,8 +60,9 @@ class nucleosController extends Controller
     //Funções de Redirecionamento
     public function index()
     {
+        $nucleoall = Nucleo::all();
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco de dados.');
 
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }
@@ -197,9 +198,9 @@ class nucleosController extends Controller
             $nucleoscep = Nucleo::orderBy('nome')->where('cep', 'like', '%'.$dataForm['cep'].'%')->get();
             $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleoscep);
         }
+        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
         $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
         $nucleoslist = $this->gerar_paginate($nucleoslist);
-        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
         
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }

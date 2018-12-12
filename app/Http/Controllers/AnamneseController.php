@@ -107,10 +107,10 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
-        $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
-        $anamneseslist = $this->gerar_paginate($anamneseslist);
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
 
+        $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
+        $anamneseslist = $this->gerar_paginate($anamneseslist);
         return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
@@ -118,9 +118,9 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
+        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses históricas no banco de dados.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
         $anamneseslist = $this->gerar_paginate($anamneseslist);
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses históricas no banco de dados.');
 
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
     }
@@ -340,11 +340,11 @@ class AnamneseController extends Controller
             }
             $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdoencas);
         }
+        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
         $anamneseslist = $this->gerar_paginate($anamneseslist);
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
 
         if($dataForm['escolha'] == 0){
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));

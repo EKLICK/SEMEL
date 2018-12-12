@@ -92,7 +92,8 @@ class professorController extends Controller
     {
         $professoreslist = Professor::orderBy('nome')->paginate(10);
         $turmaslist = Turma::all();
-        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
+        $professorall = Professor::all();
+        Session::put('quant', 'Foram encontrados '.count($professorall).' professores no banco de dados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
@@ -276,16 +277,17 @@ class professorController extends Controller
     public function professores_turmas_desvincular($idprofessor, $idturma){
         $professor = Professor::find($idprofessor);
         $professor->turmas()->detach($idturma);
-
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
     public function professor_meus_alunos($idprofessor, $idturma){
         $turma = Turma::find($idturma);
         $pessoaslist = $turma->pessoas;
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
+        $pessoaslist = $this->gerar_paginate($pessoaslist);
         $professor = Professor::find($idprofessor);
         $professorid = $professor->id;
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
 
         return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
     }
@@ -386,9 +388,9 @@ class professorController extends Controller
             }
             $professoreslist = $this->filtrar_dados($professoreslist, $professoresturmas);
         }
+        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
         $professoreslist = $this->ordenar_alfabeto($professoreslist);
         $professoreslist = $this->gerar_paginate($professoreslist);
-        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
@@ -414,14 +416,11 @@ class professorController extends Controller
             $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
-
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
         $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
         $pessoaslist = $this->gerar_paginate($pessoaslist);
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-
         $turma = Turma::find($dataForm['idturma']);
         $professorid = $dataForm['professorid'];
-        Session::put('quant', 'Foram encontrados '.count($turma->pessoas).' pessoas no banco de dados.');
 
         return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professorid'));
     }

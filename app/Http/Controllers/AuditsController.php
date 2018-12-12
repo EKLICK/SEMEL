@@ -10,7 +10,8 @@ class auditsController extends Controller
 {
     public function index(){
         $auditslist = Audit::orderBy('created_at')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($auditslist).' auditorias no banco de dados.');
+        $auditall = Audit::all();
+        Session::put('quant', 'Foram encontrados '.count($auditall).' auditorias no banco de dados.');
 
         return view ('audits_file.audits', compact('auditslist'));
     }

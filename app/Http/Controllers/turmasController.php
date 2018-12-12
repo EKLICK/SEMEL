@@ -66,7 +66,8 @@ class turmasController extends Controller
         $nucleoslist = Nucleo::all();
         $turmaslist = Turma::orderBy('nome')->paginate(10);
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+        $turmaall = Turma::all();
+        Session::put('quant', 'Foram encontrados '.count($turmaall).' turmas no banco de dados.');
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
     }
@@ -233,9 +234,9 @@ class turmasController extends Controller
         $nucleoslist = Nucleo::All();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] == -1){
+            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
             $turmaslist = $this->ordenar_alfabeto($turmaslist);
             $turmaslist = $this->gerar_paginate($turmaslist);
-            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
             return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
         }
         else{
@@ -244,8 +245,9 @@ class turmasController extends Controller
                 $turmasprofessor = $professor->turmas;
                 $turmaslist = $this->filtrar_dados($turmaslist, $turmasprofessor);
             }
-            $turmaslist = $this->ordenar_alfabeto($turmaslist);
             Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+            $turmaslist = $this->ordenar_alfabeto($turmaslist);
+            $turmaslist = $this->gerar_paginate($turmaslist);
             Session::put('turmaslist', $turmaslist);
 
             return redirect()->route('filtros_professor_turmas', $dataForm['id']);

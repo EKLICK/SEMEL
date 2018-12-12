@@ -123,7 +123,8 @@ class PessoasController extends Controller
         }
         $data = new \DateTime();
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+        $pessoall = Pessoa::all();
+        Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco de dados.');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
@@ -192,7 +193,7 @@ class PessoasController extends Controller
                 }
             }
             $dataForm['cpf_responsavel'] = null;
-            $dataForm['matricula'] = null;
+            $dataForm['img_matricula'] = null;
         }
         $pessoa = Pessoa::create([
             'foto' => $dataForm['img_3x4'],
@@ -512,13 +513,11 @@ class PessoasController extends Controller
             $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
-
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
         $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
         $pessoaslist = $this->gerar_paginate($pessoaslist);
         $data = new \DateTime();
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-
 
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }

@@ -70,6 +70,7 @@
                 <thead>
                     <tr>
                         <th>Nome do Alunos</th>
+                        <th>Data de nascimento</th>
                         <th>Telefone</th>
                     </tr>
                 </thead>
@@ -77,11 +78,13 @@
                     @foreach ($pessoaslist as $aluno)
                         <tr>
                             <td>{{$aluno->nome}}</td>
+                            <td>{{$aluno->nascimento}}</td>
                             <td>{{$aluno->telefone}}</td>
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
+            {{$pessoaslist->links()}}
         </div>
     </div>
 @endsection
