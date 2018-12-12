@@ -8,6 +8,7 @@ use App\User;
 use App\Professor;
 use App\Turma;
 use App\Nucleo;
+use App\Pessoa;
 use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller
@@ -281,10 +282,12 @@ class professorController extends Controller
 
     public function professor_meus_alunos($idprofessor, $idturma){
         $turma = Turma::find($idturma);
+        $pessoaslist = $turma->pessoas;
         $professor = Professor::find($idprofessor);
         $professorid = $professor->id;
-        
-        return view ('professores_file.professores_meus_alunos', compact('turma', 'professorid'));
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+
+        return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
     }
 
     public function editar_senha(){
@@ -388,5 +391,38 @@ class professorController extends Controller
         Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
+    }
+
+    public function professor_procurar_aluno(Request $request){
+        $dataForm = $request->all();
+        $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
+        if($dataForm['nome'] != null){
+            $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasnome);
+        }
+        if($dataForm['de'] != null){
+            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['de'], 1);
+        }
+        if($dataForm['ate'] != null){
+            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['ate'], 2);
+        }
+        if($dataForm['telefone'] != null){
+            $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoastelefone);
+        }
+        if(isset($dataForm['sexo'])){
+            $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+        }
+
+        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
+        $pessoaslist = $this->gerar_paginate($pessoaslist);
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+
+        $turma = Turma::find($dataForm['idturma']);
+        $professorid = $dataForm['professorid'];
+        Session::put('quant', 'Foram encontrados '.count($turma->pessoas).' pessoas no banco de dados.');
+
+        return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professorid'));
     }
 }

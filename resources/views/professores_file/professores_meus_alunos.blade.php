@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('breadcrumbs')
-    <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
+    <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Professor</a>
     <a href="{{Route('professor.edit', $professorid)}}" class="breadcrumb">Alunos</a>
 @endsection
 @section('title') <h4>Alunos de: {{$turma->nome}}</h4> @endsection
@@ -12,12 +12,15 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('pessoas_procurar')}}" method="POST">
+                        <form action="{{route('professor_procurar_aluno')}}" method="POST">
                             @csrf
+                            <input type="text" name="professorid" value="{{$professorid}}" hidden>
+                            <input type="text" name="idturma" value="{{$turma->id}}" hidden>
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="Nome" id="nome_search" type="text" class="validate" name="nome">
-                                    <label for="nome_search">Nome da pessoa</label>
+                                <div class="input-field col s5">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="nome_search" type="text" class="validate" name="nome">
+                                    <label for="nome_search">Nome:</label>
                                 </div>
                                 <div class="col s1"><label>Idade:</label></div>
                                 <div class="input-field col s2">
@@ -27,27 +30,15 @@
                                 <div class="input-field col s2">
                                     <input id="ate_search" type="number" class="validate" name="ate">
                                     <label for="ate_search">Até:</label>
-                                </div>  
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s3">
-                                    <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
-                                    <label for="rg_search">RG</label>
-                                </div>
-                                <div class="input-field col s3">
-                                    <input placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
-                                    <label for="cpf_search">CPF</label>
-                                </div>
-                                <div class="input-field col s3">
-                                    <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
-                                    <label for="bairro_search">Bairro</label>
-                                </div>
-                                <div class="input-field col s3">
-                                    <input placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
-                                    <label for="telefone_search">Telefone</label>
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input name="telefone" id="icon_telephone" type="tel" class="validate">
+                                    <label for="icon_telephone">Telephone:</label>
+                                </div>
+                                <div class="input-field col s1"></div>
                                 <div class="input-field col s1"><label>Sexo:</label></div>
                                 <div class="input-field col s3">
                                     <p>
@@ -60,21 +51,6 @@
                                         <label>
                                             <input value="M" name="sexo" type="radio"/>
                                             <span>Masculino</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="input-field col s2"><label>Estado civil:</label></div>
-                                <div class="input-field col s3">
-                                    <p>
-                                        <label>
-                                            <input value="Casado" name="estado_civil" type="radio"/>
-                                            <span>Casado</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input value="Solteiro" name="estado_civil" type="radio"/>
-                                            <span>Solteiro</span>
                                         </label>
                                     </p>
                                 </div>
@@ -94,11 +70,11 @@
                 <thead>
                     <tr>
                         <th>Nome do Alunos</th>
-                        <th>Turmas vinculadas</th>
+                        <th>Telefone</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($turma->pessoas as $aluno)
+                    @foreach ($pessoaslist as $aluno)
                         <tr>
                             <td>{{$aluno->nome}}</td>
                             <td>{{$aluno->telefone}}</td>

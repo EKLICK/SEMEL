@@ -2,8 +2,12 @@
 
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
-    <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
+    @if(auth()->user()->admin_professor == 1) 
+        <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
+        <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
+    @else
+        <a href="{{route('professor.edit', 1)}}" class="breadcrumb">Mudar informações da conta</a>
+    @endif
 @endsection
 @section('title') Editar @if(auth()->user()->admin_professor == 1) {{$professor->nome}} @else sua conta @endif @endsection
 @section('content')
