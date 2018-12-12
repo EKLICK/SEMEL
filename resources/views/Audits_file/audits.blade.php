@@ -24,21 +24,21 @@
                             <div class="row">
                                 <div class="input-field col s4">
                                     Evento
-                                    <select name="evento[]">
+                                    <select name="eventos[]">
                                         <option value="" selected disabled>Selecione o evento</option>
-                                        @foreach ($eventos as $evento)
-                                            <option value="{{$evento}}">{{$evento}}</option>
-                                        @endforeach
+                                        @for($i = 0; $i < count($eventos); $i++)
+                                            <option value="{{$i}}">{{$eventos[$i]}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                                 <div class="input-field col s2"></div>
                                 <div class="input-field col s4">
                                     Tabela
-                                    <select name="tabela[]">
+                                    <select name="tabelas[]">
                                         <option value="" selected disabled>Selecione a tabela</option>
-                                        @foreach ($tabelas as $tabela)
-                                            <option value="{{$tabela}}">{{$tabela}}</option>
-                                        @endforeach
+                                        @for($i = 0; $i < count($tabelas); $i++)
+                                            <option value="{{$i}}">{{$tabelas[$i]}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>

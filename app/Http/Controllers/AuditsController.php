@@ -72,48 +72,50 @@ class auditsController extends Controller
         $dataForm = $request->all();
         $auditslist = Audit::all();
         if(isset($dataForm['eventos'])){
-            switch ($dataForm['eventos']) {
-                case 'Criação':
+            $i = $dataForm['eventos'];
+            switch ($i[0]) {
+                case 0:
                     $auditsevento = Audit::orderBy('created_at')->where('event', '=', 'created')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditsevento);
                     break;
-                case 'Edição':
+                case 1:
                     $auditsevento = Audit::orderBy('created_at')->where('event', '=', 'updated')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditsevento);
                     break;
-                case 'Exclusão':
+                case 2:
                     $auditsevento = Audit::orderBy('created_at')->where('event', '=', 'delete')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditsevento);
                     break;
             }
         }
         if(isset($dataForm['tabelas'])){
-            switch ($dataForm['tabelas']) {
-                case 'Usuários':
+            $i = $dataForm['tabelas'];
+            switch ($i[0]) {
+                case 0:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\user')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Professores':
+                case 1:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Professor')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Clientes':
+                case 2:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Pessoa')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Anamneses':
+                case 3:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Anamnese')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Doenças':
+                case 4:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Doenca')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Turmas':
+                case 5:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Turma')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;
-                case 'Núcleos':
+                case 6:
                     $auditstabela = Audit::orderBy('created_at')->where('auditable_type', '=', 'App\Nucleo')->get();
                     $auditslist = $this->filtrar_dados($auditslist, $auditstabela);
                     break;

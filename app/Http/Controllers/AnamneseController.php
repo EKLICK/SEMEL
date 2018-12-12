@@ -92,12 +92,17 @@ class AnamneseController extends Controller
         return $listaordenada;
     }
 
-    public function gerar_paginate($array){
+    public function gerar_paginate($array, $option){
         $itemCollection = collect($array);
         $currentpage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
         $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/anamneses_antigas');
+        if($option == 1){
+            $itemCollection->setPath('/anamneses');
+        }
+        else{
+            $itemCollection->setPath('/anamneses_antigas');
+        }
         return $itemCollection;
     }
     
@@ -110,7 +115,7 @@ class AnamneseController extends Controller
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
 
         $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
-        $anamneseslist = $this->gerar_paginate($anamneseslist);
+        $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
         return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
@@ -120,7 +125,7 @@ class AnamneseController extends Controller
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses históricas no banco de dados.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
-        $anamneseslist = $this->gerar_paginate($anamneseslist);
+        $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
 
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
     }
@@ -343,13 +348,14 @@ class AnamneseController extends Controller
         $ano = date('Y');
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
-        $anamneseslist = $this->gerar_paginate($anamneseslist);
         $doencaslist = Doenca::all();
         
         if($dataForm['escolha'] == 0){
+            $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
         }
         else{
+            $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
             return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
         }
     }
