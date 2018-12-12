@@ -129,8 +129,10 @@ class professorController extends Controller
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+            $user = User::find(auth()->user()->id);
+            $useremail = $user->email;
 
-            return view ('professores_file.professores_edit', compact('professor'));
+            return view ('professores_file.professores_edit', compact('professor', 'useremail'));
         }
     }
 
@@ -210,13 +212,12 @@ class professorController extends Controller
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
 
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas'));
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'dias_semana', 'nucleoslist'));
         }
     }
 
     public function filtros_professor_turmas($id){
         $turmas = Session::get('turmaslist');
-        Session::forget('turmaslist');
         $nucleoslist = Nucleo::orderBy('nome')->get();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if(auth()->user()->admin_professor == 1){
@@ -229,7 +230,7 @@ class professorController extends Controller
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
 
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas'));
+            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'dias_semana', 'nucleoslist'));
         }
     }
 

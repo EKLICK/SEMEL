@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Turma;
 use App\Nucleo;
+use App\Professor;
 
 class turmasController extends Controller
 {
@@ -22,7 +23,7 @@ class turmasController extends Controller
         $arraylistfiltradas = [];
         foreach($arrayfiltros as $arrayfiltro){
             foreach($arraylists as $arraylist){
-                if($arraylist == $arrayfiltro){
+                if($arraylist->id == $arrayfiltro->id){
                     array_push($arraylistfiltradas, $arraylist);
                 }
             }
@@ -229,17 +230,24 @@ class turmasController extends Controller
             }
             $turmaslist = $turmasdoencas;
         }
-        $turmaslist = $this->ordenar_alfabeto($turmaslist);
         $nucleoslist = Nucleo::All();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
-
         if($dataForm['id'] == -1){
+            $turmaslist = $this->ordenar_alfabeto($turmaslist);
             $turmaslist = $this->gerar_paginate($turmaslist);
+            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
             return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
         }
         else{
+            $professor = Professor::find($dataForm['id']);
+            if($professor != null){
+                $turmasprofessor = $professor->turmas;
+                $turmaslist = $this->filtrar_dados($turmaslist, $turmasprofessor);
+            }
+            $turmaslist = $this->ordenar_alfabeto($turmaslist);
+            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
             Session::put('turmaslist', $turmaslist);
+
             return redirect()->route('filtros_professor_turmas', $dataForm['id']);
         }
     }

@@ -142,7 +142,7 @@
                             </tr>
                         @endforeach 
                     @else
-                        @foreach ($professor->turmas as $turma)
+                        @foreach ($turmas as $turma)
                             <tr>
                                 <td><p>{{$turma->nome}}</p></td>
                                 <td><p>{{count($turma->professores)}}</p></td>
