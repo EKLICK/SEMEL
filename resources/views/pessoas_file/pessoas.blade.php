@@ -31,11 +31,11 @@
                         <form action="{{route('pessoas_procurar')}}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="Nome" id="nome_search" type="text" class="validate" name="nome">
-                                    <label for="nome_search">Nome da pessoa</label>
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input placeholder="Nome da pessoa" id="nome_search" type="text" class="validate" name="nome">
                                 </div>
-                                <div class="col s1"><label>Idade:</label></div>
+                                <div class="input-field col s1"><i class="material-icons prefix">date_range</i></div>
                                 <div class="input-field col s2">
                                     <input id="de_search" type="number" class="validate" name="de">
                                     <label for="de_search">De:</label>
@@ -43,24 +43,33 @@
                                 <div class="input-field col s2">
                                     <input id="ate_search" type="number" class="validate" name="ate">
                                     <label for="ate_search">Até:</label>
-                                </div>  
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
+                                    <i class="material-icons prefix">assignment_ind</i>
                                     <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
-                                    <label for="rg_search">RG</label>
                                 </div>
                                 <div class="input-field col s3">
+                                    <i class="material-icons prefix">credit_card</i>
                                     <input placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
-                                    <label for="cpf_search">CPF</label>
                                 </div>
                                 <div class="input-field col s3">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
+                                    <label for="telefone_search">Telefone</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">location_city</i>
                                     <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
                                     <label for="bairro_search">Bairro</label>
                                 </div>
-                                <div class="input-field col s3">
-                                    <input placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
-                                    <label for="telefone_search">Telefone</label>
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">confirmation_number</i>
+                                    <input name="rua" id="rua" type="text" class="validate">
+                                    <label for="rua">Rua:</label>
                                 </div>
                             </div>
                             <div class="row">

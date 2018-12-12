@@ -31,6 +31,34 @@ class professorController extends Controller
         return $arraylistfiltradas;
     }
 
+    public function filtrar_ano($professoresnalista, $anofiltro, $option){
+        $professoresfiltrados = [];
+        foreach($professoresnalista as $professornalista){
+            list($dia, $mes, $ano) = explode('/', $professornalista['nascimento']);
+            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+            $idade = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+            if($option == 1){
+                if($idade >= $anofiltro){
+                    array_push($professoresfiltrados, $professornalista);
+                }
+                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
+                    array_pust($professoresfiltradas, $professornalista);
+                }
+            }
+            else{
+                if($idade <= $anofiltro){
+                    array_push($professoresfiltrados, $professornalista);
+                }
+                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
+                    array_pust($professoresfiltrados, $professornalista);
+                }
+            }
+        }
+
+        return $professoresfiltrados;
+    }
+
     public function ordenar_alfabeto($lista){
         $listanomes = [];
         foreach($lista as $arquivo){
@@ -95,7 +123,7 @@ class professorController extends Controller
         ]);
         $dataForm += ['cidade' => 'São Leopoldo'];
         $dataForm += ['user_id' => $user->id];
-        Professor::create($dataForm);
+        $pr = Professor::create($dataForm);
         Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
 
         return redirect()->Route('professor.index');
@@ -304,6 +332,12 @@ class professorController extends Controller
             $professoresnome = Professor::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
             $professoreslist = $this->filtrar_dados($professoreslist, $professoresnome);
         }
+        if($dataForm['de'] != null){
+            $professoreslist = $this->filtrar_ano($professoreslist, $dataForm['de'], 1);
+        }
+        if($dataForm['ate'] != null){
+            $professoreslist = $this->filtrar_ano($professoreslist, $dataForm['ate'], 2);
+        }
         if($dataForm['email'] != null){
             $professoresemail = [];
             $useremails= User::orderBy('name')->where('email', 'like', $dataForm['email'])->where('admin_professor', '=', 0)->get();
@@ -319,6 +353,18 @@ class professorController extends Controller
         if($dataForm['matricula'] != null){
             $professoresmatricula = Professor::orderBy('nome')->where('matricula', 'like', $dataForm['matricula'].'%')->get();
             $professoreslist = $this->filtrar_dados($professoreslist, $professoresmatricula);
+        }
+        if($dataForm['telefone'] != null){
+            $professorestelefone = Professor::where('telefone', 'like', $dataForm['telefone'].'%')->get();
+            $professoreslist = $this->filtrar_dados($professoreslist, $professorestelefone);
+        }
+        if($dataForm['bairro'] != null){
+            $professoresbairro = Professor::where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresbairro);
+        }
+        if($dataForm['rua'] != null){
+            $professoresrua = Professor::where('rua', 'like', $dataForm['rua'].'%')->get();
+            $professoreslist = $this->filtrar_dados($professoreslist, $professoresrua);
         }
         if(isset($dataForm['turmas'])){
             $professoresturmas = [];

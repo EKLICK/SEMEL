@@ -31,10 +31,10 @@
                         <form action="{{route('doencas_procurar')}}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col s2"><label>Nome da doença:</label></div>
                                 <div class="input-field col s4">
-                                    <input id="de_peso_search" type="text" class="validate" name="nome">
-                                    <label for="de_peso_search">Nome:</label>
+                                    <i class="material-icons prefix">warning</i>
+                                    <input name="nome" id="icon_nome" type="text" class="validate">
+                                    <label for="icon_nome">Nome da doença:</label>
                                 </div>
                             </div>
                             <div class="row">

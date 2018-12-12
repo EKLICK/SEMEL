@@ -51,7 +51,7 @@ class PessoasController extends Controller
     }
 
     public function filtrar_ano($pessoasnalista, $anofiltro, $option){
-        $pessoasfiltradasde = [];
+        $pessoasfiltradas = [];
         foreach($pessoasnalista as $pessoanalista){
             list($dia, $mes, $ano) = explode('/', $pessoanalista['nascimento']);
             $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -59,23 +59,23 @@ class PessoasController extends Controller
             $idade = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
             if($option == 1){
                 if($idade >= $anofiltro){
-                    array_push($pessoasfiltradasde, $pessoanalista);
+                    array_push($pessoasfiltradas, $pessoanalista);
                 }
                 if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
-                    array_pust($pessoasfiltradasde, $pessoanalista);
+                    array_pust($pessoasfiltradas, $pessoanalista);
                 }
             }
             else{
                 if($idade <= $anofiltro){
-                    array_push($pessoasfiltradasde, $pessoanalista);
+                    array_push($pessoasfiltradas, $pessoanalista);
                 }
                 if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
-                    array_pust($pessoasfiltradasde, $pessoanalista);
+                    array_pust($pessoasfiltradas, $pessoanalista);
                 }
             }
         }
 
-        return $pessoasfiltradasde;
+        return $pessoasfiltradas;
     }
 
     public function saveDbImage3x4($req){
@@ -495,6 +495,10 @@ class PessoasController extends Controller
         if($dataForm['bairro'] != null){
             $pessoasbairro = Pessoa::where('bairro', 'like', $dataForm['bairro'].'%')->get();
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasbairro);
+        }
+        if($dataForm['rua'] != null){
+            $pessoasrua = Pessoa::where('rua', 'like', $dataForm['rua'].'%')->get();
+            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrua);
         }
         if($dataForm['telefone'] != null){
             $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();

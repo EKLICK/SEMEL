@@ -26,7 +26,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input name="nascimento" id="icon_nascimento" type="text" class="validate" value="{{$professor->nacimento}}">
+                            <input name="nascimento" id="icon_nascimento" type="text" class="validate" value="{{$professor->nascimento}}">
                             <label for="icon_nascimento">Nascimento:</label>
                         </div>
                     </div>
