@@ -16,16 +16,20 @@
                         <td><h6>{{$audit->user_id}}</h6></td>
                     </tr>
                     <tr>
-                        <td><h6></h6>User Type</td>
-                        <td><h6>{{$audit->user_type}}</h6></td>
-                    </tr>
-                    <tr>
                         <td><h6>Auditable id</h6></td>
                         <td><h6>{{$audit->auditable_id}}</h6></td>
                     </tr>
                     <tr>
+                        <td><h6></h6>User Type</td>
+                        <td><h6>{{$audit->user_type}}</h6></td>
+                    </tr>
+                    <tr>
                         <td><h6>Auditable Type</h6></td>
                         <td><h6>{{$audit->auditable_type}}</h6></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Evento</h6></td>
+                        <td><h6>{{$audit->event}}</h6></td>
                     </tr>
                     <tr>
                         <td><h6>URL</h6></td>
@@ -41,12 +45,12 @@
                     </tr>
                     <tr>
                         <td><h6>Old value</h6></td>
-                        <td><h6>@if($audit->old_values == '[]') nenhum valor velhor substituido @else {{$audit->old_values}} @endif</h6></td>
+                        <td><h6>@if($audit->old_values == '[]') nenhum valor substituido @else {{$audit->old_values}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>New value</h6></td>
-                        <td><h6>@if($audit->new_values == '[]') nenhum valor velhor criado @else {{$audit->new_values}} @endif</h6></td>
-                    </tr>ue
+                        <td><h6>@if($audit->new_values == '[]') nenhum valor criado @else {{$audit->new_values}} @endif</h6></td>
+                    </tr>
                     <tr>
                         <td><h6>User agent</h6></td>
                         <td><h6>{{$audit->user_agent}}</h6></td>

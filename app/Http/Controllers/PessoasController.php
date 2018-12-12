@@ -107,7 +107,7 @@ class PessoasController extends Controller
         $currentpage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
         $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/anamneses_antigas');
+        $itemCollection->setPath('/pessoas.index');
         return $itemCollection;
     }
     

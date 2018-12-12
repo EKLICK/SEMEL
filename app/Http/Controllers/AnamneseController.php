@@ -340,12 +340,12 @@ class AnamneseController extends Controller
             }
             $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdoencas);
         }
+        $ano = date('Y');
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, $dataForm['escolha']);
         $anamneseslist = $this->gerar_paginate($anamneseslist);
         $doencaslist = Doenca::all();
-        $ano = date('Y');
-
+        
         if($dataForm['escolha'] == 0){
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
         }

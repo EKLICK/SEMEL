@@ -15,6 +15,44 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-body">
+                        <form action="{{route('audits_procurar')}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    Evento
+                                    <select name="evento[]">
+                                        <option value="" selected disabled>Selecione o evento</option>
+                                        @foreach ($eventos as $evento)
+                                            <option value="{{$evento}}">{{$evento}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-field col s2"></div>
+                                <div class="input-field col s4">
+                                    Tabela
+                                    <select name="tabela[]">
+                                        <option value="" selected disabled>Selecione a tabela</option>
+                                        @foreach ($tabelas as $tabela)
+                                            <option value="{{$tabela}}">{{$tabela}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
             <table class="centered">
                 <thead>
                     <tr>

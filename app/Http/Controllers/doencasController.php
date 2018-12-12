@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Doenca;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Pagination\LengthAwarePaginator; 
 
 class doencasController extends Controller
 {
@@ -38,7 +39,7 @@ class doencasController extends Controller
         $currentpage = LengthAwarePaginator::resolveCurrentPage();
         $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
         $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/anamneses_antigas');
+        $itemCollection->setPath('/doencas.index');
 
         return $itemCollection;
     }
@@ -142,8 +143,8 @@ class doencasController extends Controller
             $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
         }
         Session::put('quant', 'Foram encontrados '.count($doencaslist).' doenças no banco de dados.');
-        $doencaslist = ordenar_alfabeto($doencaslist);
-        $doencaslist = gerar_paginate($doencaslist);
+        $doencaslist = $this->ordenar_alfabeto($doencaslist);
+        $doencaslist = $this->gerar_paginate($doencaslist);
 
         return view ('doencas_file.doencas', compact('doencaslist'));
     }
