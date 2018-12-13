@@ -117,7 +117,8 @@ class PessoasController extends Controller
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         foreach($pessoaslist as $pessoa){
-            list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
+            $dia_hora = explode(' ', $pessoa['nascimento']);
+            list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
             $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
             $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
         }
@@ -195,6 +196,8 @@ class PessoasController extends Controller
             $dataForm['cpf_responsavel'] = null;
             $dataForm['img_matricula'] = null;
         }
+        $nascimento = explode('/', $dataForm['nascimento']);
+        $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $pessoa = Pessoa::create([
             'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],
@@ -473,102 +476,146 @@ class PessoasController extends Controller
     }
 
     public function pessoas_procurar(Request $request){
-        $dataForm = $request->all();
-        if(isset($dataForm['softdelete'])){
-            $pessoaslist = Pessoa::onlyTrashed()->get();
-        }
-        else{
-            $pessoaslist = Pessoa::orderBy('nome')->get();
-        }
-        if($dataForm['nome'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoasnome = Pessoa::onlyTrashed()->where('nome', 'like', $dataForm['nome'].'%')->get();
+        $dataForm = array_filter($request->all());
+
+        $pessoaslist = Pessoa::where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', "{{$filtro}}%");
             }
-            else{
-                $pessoasnome = Pessoa::where('nome', 'like', $dataForm['nome'].'%')->get();
+            if(array_key_exists('de', $dataForm)){
+                $filtro = explode(' ',$dataForm['de']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '>=', $nascimento);
             }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasnome);
-        }
-        if($dataForm['de'] != null){
-            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['de'], 1);
-        }
-        if($dataForm['ate'] != null){
-            $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['ate'], 2);
-        }
-        if($dataForm['rg'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoasrg = Pessoa::onlyTrashed()->where('rg', 'like', $dataForm['rg'].'%')->orderBy('nome')->get();
+            if(array_key_exists('ate', $dataForm)){
+                $filtro = explode(' ',$dataForm['ate']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '<=', $nascimento);
             }
-            else{
-                $pessoasrg = Pessoa::where('rg', 'like', $dataForm['rg'].'%')->orderBy('nome')->get();
+            if(array_key_exists('rg', $dataForm)){
+                $filtro = $dataForm['rg'];
+                $query->where('rg', 'like', "{{$filtro}}%");
             }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrg);
-        }
-        if($dataForm['cpf'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoascpf = Pessoa::onlyTrashed()->where('cpf', 'like', $dataForm['cpf'].'%')->get();
+            if(array_key_exists('cpf', $dataForm)){
+                $filtro = $dataForm['cpf'];
+                $query->where('cpf', 'like', "{{$filtro}}%");
             }
-            else{
-                $pessoascpf = Pessoa::where('cpf', 'like', $dataForm['cpf'].'%')->get();
+            if(array_key_exists('bairro', $dataForm)){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', 'like', "{{$filtro}}%");
             }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoascpf);
-        }
-        if($dataForm['bairro'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoasbairro = Pessoa::onlyTrashed()->where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            if(array_key_exists('rua', $dataForm)){
+                $filtro = $dataForm['rua'];
+                $query->where('rua', 'like', "{{$filtro}}%");
             }
-            else{
-                $pessoasbairro = Pessoa::where('bairro', 'like', $dataForm['bairro'].'%')->get();
+            if(array_key_exists('telefone', $dataForm)){
+                $filtro = $dataForm['telefone'];
+                $query->where('telefone', 'like', "{{$filtro}}%");
             }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasbairro);
-        }
-        if($dataForm['rua'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoasrua = Pessoa::onlyTrashed()->where('rua', 'like', $dataForm['rua'].'%')->get();
+            if(array_key_exists('sexo', $dataForm)){
+                $filtro = $dataForm['sexo'];
+                $query->where('sexo', '=', "{{$filtro}}");
             }
-            else{
-                $pessoasrua = Pessoa::where('rua', 'like', $dataForm['rua'].'%')->get();
+            if(array_key_exists('estado_civil', $dataForm)){
+                $filtro = $dataForm['estado_civil'];
+                $query->where('estado_civil', '=', "{{$filtro}}");
             }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrua);
-        }
-        if($dataForm['telefone'] != null){
-            if(isset($dataForm['softdelete'])){
-                $pessoastelefone = Pessoa::onlyTrashed()->where('telefone', 'like', $dataForm['telefone'].'%')->get();
-            }
-            else{
-                $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();
-            }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoastelefone);
-        }
-        if(isset($dataForm['sexo'])){
-            if(isset($dataForm['softdelete'])){
-                $pessoassexo = Pessoa::onlyTrashed()->where('sexo', '=', $dataForm['sexo'])->get();
-            }
-            else{
-                $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
-            }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
-        }
-        if(isset($dataForm['estado_civil'])){
-            if(isset($dataForm['softdelete'])){
-                $pessoassexo = Pessoa::onlyTrashed()->where('estado_civil', '=', $dataForm['estado_civil'])->get();
-            }
-            else{
-                $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
-            }
-            $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
-        }
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
-        $pessoaslist = $this->gerar_paginate($pessoaslist);
-        $data = new \DateTime();
+        })->orderBy('nome')->paginate(10);
         $ano = date('Y');
 
-        if(isset($dataForm['softdelete'])){
-            return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
-        }
-        else{
-            return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
-        }
+        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
     }
 }
+
+//if($dataForm['nome'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $query->onlyTrashed()->where('nome', 'like', $dataForm['nome'].'%')->get();
+//    }
+//    else{
+//        $query->where('nome', 'like', $dataForm['nome'].'%')->get();
+//    }
+//}
+//if($dataForm['de'] != null){
+//    $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['de'], 1);
+//}
+//if($dataForm['ate'] != null){
+//    $pessoaslist = $this->filtrar_ano($pessoaslist, $dataForm['ate'], 2);
+//}
+//if($dataForm['rg'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoasrg = Pessoa::onlyTrashed()->where('rg', 'like', $dataForm['rg'].'%')->orderBy('nome')->get();
+//    }
+//    else{
+//        $pessoasrg = Pessoa::where('rg', 'like', $dataForm['rg'].'%')->orderBy('nome')->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrg);
+//}
+//if($dataForm['cpf'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoascpf = Pessoa::onlyTrashed()->where('cpf', 'like', $dataForm['cpf'].'%')->get();
+//    }
+//    else{
+//        $pessoascpf = Pessoa::where('cpf', 'like', $dataForm['cpf'].'%')->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoascpf);
+//}
+//if($dataForm['bairro'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoasbairro = Pessoa::onlyTrashed()->where('bairro', 'like', $dataForm['bairro'].'%')->get();
+//    }
+//    else{
+//        $pessoasbairro = Pessoa::where('bairro', 'like', $dataForm['bairro'].'%')->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasbairro);
+//}
+//if($dataForm['rua'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoasrua = Pessoa::onlyTrashed()->where('rua', 'like', $dataForm['rua'].'%')->get();
+//    }
+//    else{
+//        $pessoasrua = Pessoa::where('rua', 'like', $dataForm['rua'].'%')->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoasrua);
+//}
+//if($dataForm['telefone'] != null){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoastelefone = Pessoa::onlyTrashed()->where('telefone', 'like', $dataForm['telefone'].'%')->get();
+//    }
+//    else{
+//        $pessoastelefone = Pessoa::where('telefone', 'like', $dataForm['telefone'].'%')->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoastelefone);
+//}
+//if(isset($dataForm['sexo'])){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoassexo = Pessoa::onlyTrashed()->where('sexo', '=', $dataForm['sexo'])->get();
+//    }
+//    else{
+//        $pessoassexo = Pessoa::where('sexo', '=', $dataForm['sexo'])->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+//}
+//if(isset($dataForm['estado_civil'])){
+//    if(isset($dataForm['softdelete'])){
+//        $pessoassexo = Pessoa::onlyTrashed()->where('estado_civil', '=', $dataForm['estado_civil'])->get();
+//    }
+//    else{
+//        $pessoassexo = Pessoa::where('estado_civil', '=', $dataForm['estado_civil'])->get();
+//    }
+//    $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
+//}
+//Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+//$pessoaslist = $this->ordenar_alfabeto($pessoaslist);
+//$pessoaslist = $this->gerar_paginate($pessoaslist);
+//$data = new \DateTime();
+//$ano = date('Y');//
+
+//if(isset($dataForm['softdelete'])){
+//    return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
+//}
+//else{
+//    return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
+//}

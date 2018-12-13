@@ -232,6 +232,7 @@ class professorController extends Controller
         $turmas = Turma::orderBy('nome')->get();
         $nucleoslist = Nucleo::orderBy('nome')->get();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        Session::put('quant', 'Foram encontrados '.count($turmas).' pessoas no banco de dados.');
         if(auth()->user()->admin_professor == 1){
             $professor = Professor::find($id);
             foreach($professor->turmas as $p){

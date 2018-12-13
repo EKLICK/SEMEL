@@ -4,7 +4,7 @@
     @if(auth()->user()->admin_professor == 1)
         <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
     @endif
-    <a href="{{route('professor_turmas', $professor->id)}}" class="breadcrumb">Turmas</a>
+        <a href="{{route('professor_turmas', $professor->id)}}" class="breadcrumb">Turmas</a>
 @endsection
 @section('title') @if(auth()->user()->admin_professor == 1) <h4>Turmas</h4> @else <h4>Suas turmas</h4> @endif @endsection
 @section('content')
@@ -115,6 +115,7 @@
                         @if(auth()->user()->admin_professor == 1)
                             <th>Estado</th>
                             <th>Vinculo</th>
+                            <th>Mudar vinculo</th>
                         @else
                             <th>Estado</th>
                             <th>Limite</th>
@@ -158,11 +159,13 @@
                                     @endif
                                 @endif
                             @else
-                                <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                                <td>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{Route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                </td>
+                                @if(in_array($))
+                                    <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                                    <td>
+                                        <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{Route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
+                                        <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                    </td>
+                                @endif
                             @endif
                         </tr>
                     @endforeach

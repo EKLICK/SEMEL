@@ -17,7 +17,7 @@ class Pessoas extends Migration
             $table->increments('id');
             $table->string('foto')->nullable();
             $table->string('nome');
-            $table->string('nascimento')->nullable();
+            $table->timestamp('nascimento')->nullable();
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();
             $table->string('cpf_responsavel')->nullable();

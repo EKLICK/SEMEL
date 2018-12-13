@@ -24,9 +24,9 @@
                             <label for="icon_matricula">Matricula:</label>
                         </div>
                         <div class="input-field col s3">
-                            <i class="material-icons prefix">recent_actors</i>
-                            <input name="nascimento" id="icon_nascimento" type="text" class="validate">
-                            <label for="icon_nascimento">Nascimento:</label>
+                            <i class="material-icons prefix">child_friendly</i>
+                            <input id="nascimento" type="text" class="datepicker validate" name="nascimento">
+                            <label for="nascimento">Nascimento:</label>
                         </div>
                     </div>
                     <div class="row">

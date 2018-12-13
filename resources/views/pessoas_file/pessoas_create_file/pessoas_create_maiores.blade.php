@@ -45,7 +45,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">child_friendly</i>
-                            <input name="nascimento" id="nascimento" type="text" class="validate">
+                            <input id="nascimento" type="text" class="datepicker validate" name="nascimento">
                             <label for="nascimento">Data de nascimento:</label>
                         </div>
                     </div>

@@ -30,11 +30,11 @@
                                 </div>
                                 <div class="input-field col s1"><i class="material-icons prefix">date_range</i></div>
                                 <div class="input-field col s2">
-                                    <input id="de_search" type="number" class="validate" name="de">
+                                    <input id="de_search" type="text" class="datepicker validate" name="de">
                                     <label for="de_search">De:</label>
                                 </div>
                                 <div class="input-field col s2">
-                                    <input id="ate_search" type="number" class="validate" name="ate">
+                                    <input id="ate_search" type="text" class="datepicker validate" name="ate">
                                     <label for="ate_search">Até:</label>
                                 </div>
                             </div>
