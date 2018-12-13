@@ -18,7 +18,7 @@
             @endif
             <ul class="collapsible">
                 <li>
-                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
                         <form action="{{route('professor_procurar')}}" method="POST">
                             @csrf

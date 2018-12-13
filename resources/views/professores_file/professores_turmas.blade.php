@@ -30,7 +30,7 @@
             @endif
             <ul class="collapsible">
                 <li>
-                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
                         <form action="{{route('turmas_procurar')}}" method="POST">
                             @csrf
@@ -69,12 +69,12 @@
                                 <div class="input-field col s3">
                                     <i class="material-icons prefix">hourglass_full</i>
                                     <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
-                                    <label for="icon_horario_inicial">Horário:</label>
+                                    <label for="icon_horario_inicial">Horário Inicial:</label>
                                 </div>
                                 <div class="input-field col s3">
                                     <i class="material-icons prefix">hourglass_empty</i>
                                     <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
-                                    <label for="icon_horario_final">Horário:</label>
+                                    <label for="icon_horario_final">Horário Final:</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -111,22 +111,40 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
-                        <th>Quantidade de professores</th>
+                        <th>Núcleo pertencente</th>
                         @if(auth()->user()->admin_professor == 1)
                             <th>Estado</th>
                             <th>Vinculo</th>
                         @else
-                            <th>Quantidade de alunos</th>
-                            <th>Alunos da turma</th>
+                            <th>Estado</th>
+                            <th>Limite</th>
+                            <th>Ações</th>
                         @endif
                     </tr>
                 </thead>
                 <tbody>
-                    @if(auth()->user()->admin_professor == 1)
-                        @foreach ($turmas as $turma)
-                            <tr>
-                                <td><p>{{$turma->nome}}</p></td>
-                                <td><p>{{count($turma->professores)}}</p></td>
+                    @foreach ($turmas as $turma)
+                        <tr>
+                            <td><p>{{$turma->nome}}</p></td>
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                            <td> 
+                                <p>
+                                    @if($turma->inativo == 0)
+                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @else Turma inativa @endif
+                                    @else 
+                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @else Turma ativa @endif @endif
+                                </p>
+                                <i class="small material-icons" 
+                                    @if($turma->inativo == 0 || $turma->nucleo->inativo == 0)  
+                                        style="color: red;" 
+                                    @else 
+                                        style="color: green;" 
+                                    @endif>sim_card_alert
+                                </i>
+                            </td>
+                            @if(auth()->user()->admin_professor == 1)
                                 @if (!isset($professorTurmas))
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
                                     <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
@@ -139,18 +157,15 @@
                                         <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
                                     @endif
                                 @endif
-                            </tr>
-                        @endforeach 
-                    @else
-                        @foreach ($turmas as $turma)
-                            <tr>
-                                <td><p>{{$turma->nome}}</p></td>
-                                <td><p>{{count($turma->professores)}}</p></td>
-                                <td><p>{{count($turma->pessoas)."/".$turma->limite}}</p></td>
-                                <td><a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{Route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a></td>
-                            </tr>
-                        @endforeach
-                    @endif
+                            @else
+                                <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                                <td>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{Route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

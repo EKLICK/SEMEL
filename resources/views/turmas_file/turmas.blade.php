@@ -26,7 +26,7 @@
             @endif
             <ul class="collapsible">
                 <li>
-                    <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
+                    <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
                         <form action="{{route('turmas_procurar')}}" method="POST">
                             @csrf
@@ -65,12 +65,12 @@
                                 <div class="input-field col s3">
                                     <i class="material-icons prefix">hourglass_full</i>
                                     <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
-                                    <label for="icon_horario_inicial">Horário:</label>
+                                    <label for="icon_horario_inicial">Horário Inicial:</label>
                                 </div>
                                 <div class="input-field col s3">
                                     <i class="material-icons prefix">hourglass_empty</i>
                                     <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
-                                    <label for="icon_horario_final">Horário:</label>
+                                    <label for="icon_horario_final">Horário Final:</label>
                                 </div>
                             </div>
                             <div class="row">
