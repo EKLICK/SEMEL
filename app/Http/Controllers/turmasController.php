@@ -18,48 +18,6 @@ class turmasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //Funções ferramentas
-    public function filtrar_dados($arraylists, $arrayfiltros){
-        $arraylistfiltradas = [];
-        foreach($arrayfiltros as $arrayfiltro){
-            foreach($arraylists as $arraylist){
-                if($arraylist->id == $arrayfiltro->id){
-                    array_push($arraylistfiltradas, $arraylist);
-                }
-            }
-        }
-
-        return $arraylistfiltradas;
-    }
-
-    public function ordenar_alfabeto($lista){
-        $listanomes = [];
-        foreach($lista as $arquivo){
-            array_push($listanomes, $arquivo['nome']);
-        }
-        sort($listanomes);
-        $listaordenadanome = [];
-        foreach($listanomes as $nome){
-            foreach($lista as $arquivo){
-                if($arquivo['nome'] == $nome){
-                    array_push($listaordenadanome, $arquivo);
-                }
-            }
-        }
-        
-        return $listaordenadanome;
-    }
-
-    public function gerar_paginate($array){
-        $itemCollection = collect($array);
-        $currentpage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
-        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/turmas');
-
-        return $itemCollection;
-    }
-
     //Funções de Redirecionamento
     public function index()
     {
@@ -98,6 +56,20 @@ class turmasController extends Controller
             $dias_da_semana = $dias_da_semana.$data.',';
         }
         $dataForm['data_semanal'] = $dias_da_semana;
+        $horario = explode(' ', $dataForm['horario_inicial']);
+        if($horario[1] == 'PM'){
+            $separador = explode(':', $horario[0]);
+            $separador[0] = 12 + (int)$separador[0];
+            $horario[0] = $separador[0].':'.$separador[1];
+        }
+        $dataForm['horario_inicial'] = $horario[0].':00';
+        $horario = explode(' ', $dataForm['horario_final']);
+        if($horario[1] == 'PM'){
+            $separador = explode(':', $horario[0]);
+            $separador[0] = 12 + (int)$separador[0];
+            $horario[0] = $separador[0].':'.$separador[1];
+        }
+        $dataForm['horario_final'] = $horario.':00';
         $turma = Turma::create($dataForm);
         Session::put('mensagem', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
         return redirect()->Route('turmas.index');
@@ -148,6 +120,14 @@ class turmasController extends Controller
         }
         $dataForm['data_semanal'] = $dias_da_semana;
         $turma['inativo'] = $dataForm['inativo'];
+        list($hora, $horario) = explode(' ', $dataForm['hora_horario_inicial']);
+        $dataForm += ['hora_inicial' => '00-00-00 '.$hora.':00'];
+        $dataForm += ['horario_inicial' => $horario];
+        unset($dataForm['hora_horario_inicial']);
+        list($hora, $horario) = explode(' ', $dataForm['hora_horario_final']);
+        $dataForm += ['hora_final' => '00-00-00 '.$hora.':00'];
+        $dataForm += ['horario_final' => $horario];
+        unset($dataForm['hora_horario_final']);
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
@@ -181,62 +161,64 @@ class turmasController extends Controller
     }
 
     public function turmas_procurar(Request $request){
-        $dataForm = $request->all();
-        $turmaslist = Turma::all();
-        if($dataForm['nome'] != null){
-            $turmasnome = Turma::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
-            $turmaslist = $this->filtrar_dados($turmaslist, $turmasnome);
-        }
-        if(isset($dataForm['inativo'])){
-            $turmasinativo = Turma::orderBy('nome')->where('inativo', '=', $dataForm['inativo'])->get();
-            $turmaslist = $this->filtrar_dados($turmaslist, $turmasinativo);
-        }
-        if($dataForm['limite'] != null){
-            $turmaslimite = Turma::orderBy('nome')->where('limite', '=', $dataForm['limite'])->get();
-            $turmaslist = $this->filtrar_dados($turmaslist, $turmaslimite);
-        }
-        if($dataForm['horario_inicial'] != null){
-            $turmashorario_inicial = Turma::orderBy('nome')->where('horario_inicial', 'like', $dataForm['horario_inicial'])->get();
-            $turmaslist = $this->filtrar_dados($turmaslist, $turmashorario_inicial);
-        }
-        if($dataForm['horario_final'] != null){
-            $turmashorario_final = Turma::orderBy('nome')->where('horario_final', 'like', $dataForm['horario_final'])->get();
-            $turmaslist = $this->filtrar_dados($turmaslist, $turmashorario_final);
-        }
-        if(isset($dataForm['data_semanal'])){
-            $turmasfiltradas = [];
-            foreach($turmaslist as $turma){
-                $quant = 0;
-                $datas_da_turma = explode(',', $turma['data_semanal']);
-                unset($datas_da_turma[count($datas_da_turma) - 1]);
-                foreach($datas_da_turma as $data){
-                    foreach($dataForm['data_semanal'] as $data_escolhida){
-                        if($data == $data_escolhida){
-                            $quant++;
-                        }
-                    }
-                }
-                if($quant == count($dataForm['data_semanal'])){
-                    array_push($turmasfiltradas, $turma);
-                }
+        $dataForm = array_filter($request->all());
+        $turmaslist = Turma::where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $data['nome'];
+                $quer->where('nome', 'like', $filtro."%");
             }
-            $turmaslist = $turmasfiltradas;
-        }
-        if(isset($dataForm['nucleo_id'])){
-            $turmasdoencas = [];
-            foreach($turmaslist as $turma){
-                if($turma['nucleo_id'] == $dataForm['nucleo_id']){
-                    array_push($turmasdoencas, $turma);
-                }
+            if(array_key_exists('inativo', $dataForm)){
+                $filtro = $data['inativo'];
+                $quer->where('inativo', '=', $filtro."%");
             }
-            $turmaslist = $turmasdoencas;
-        }
-        $nucleoslist = Nucleo::All();
+            if(array_key_exists('limite', $dataForm)){
+                $filtro = $data['nome'];
+                $quer->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $data['nome'];
+                $quer->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $data['nome'];
+                $quer->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('horario_inicial', $dataForm)){
+                $horario = explode(' ', $dataForm['horario_inicial']);
+                if($horario[1] == 'PM'){
+                    $separador = explode(':', $horario[0]);
+                    $separador[0] = 12 + (int)$separador[0];
+                    $horario[0] = $separador[0].':'.$separador[1];
+                }
+                $filtro = $horario[0].':00';
+                $query->where('horario_inicial', '>=', $filtro);
+            }
+            if(array_key_exists('horario_final', $dataForm)){
+                $horario = explode(' ', $dataForm['horario_final']);
+                if($horario[1] == 'PM'){
+                    $separador = explode(':', $horario[0]);
+                    $separador[0] = 12 + (int)$separador[0];
+                    $horario[0] = $separador[0].':'.$separador[1];
+                }
+                $filtro = $horario[0].':00';
+                $query->where('horario_final', '<=', $filtro);
+            }
+            if(array_key_exists('data_semanal')){
+                $filtro = $dataForm['data_semanal'];
+                $query->where('horario_semanal', 'like', '%'.$filtro.'%');
+            }
+            if(array_key_exists('nucleo_id')){
+                $filtro = $dataForm['nucleo_id'];
+                $query->where('nucleo_id', '=', '$filtro');
+            }
+            if($dataForm['id'] != -1){
+
+            }
+        })->orderBy('nome')->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] == -1){
-            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
-            $turmaslist = $this->ordenar_alfabeto($turmaslist);
-            $turmaslist = $this->gerar_paginate($turmaslist);
+
             return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
         }
         else{
@@ -245,9 +227,6 @@ class turmasController extends Controller
                 $turmasprofessor = $professor->turmas;
                 $turmaslist = $this->filtrar_dados($turmaslist, $turmasprofessor);
             }
-            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
-            $turmaslist = $this->ordenar_alfabeto($turmaslist);
-            $turmaslist = $this->gerar_paginate($turmaslist);
             Session::put('turmaslist', $turmaslist);
 
             return redirect()->route('filtros_professor_turmas', $dataForm['id']);

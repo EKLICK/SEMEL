@@ -19,6 +19,19 @@ class professorController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Funções ferramentas
+    public function filtrar_dados($arraylists, $arrayfiltros){
+        $arraylistfiltradas = [];
+        foreach($arrayfiltros as $arrayfiltro){
+            foreach($arraylists as $arraylist){
+                if($arraylist->id == $arrayfiltro->id){
+                    array_push($arraylistfiltradas, $arraylist);
+                }
+            }
+        }
+
+        return $arraylistfiltradas;
+    }
+
     public function filtrar_ano($professoresnalista, $anofiltro, $option){
         $professoresfiltrados = [];
         foreach($professoresnalista as $professornalista){
@@ -45,6 +58,16 @@ class professorController extends Controller
         }
 
         return $professoresfiltrados;
+    }
+
+    public function gerar_paginate($array){
+        $itemCollection = collect($array);
+        $currentpage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
+        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
+        $itemCollection->setPath('/professor_meus_alunos');
+
+        return $itemCollection;
     }
 
     //Funções de Redirecionamento
@@ -193,39 +216,21 @@ class professorController extends Controller
     }
 
     public function professor_turmas($id){
-        $turmas = Turma::orderBy('nome')->get();
+        $turmaslist = Turma::orderBy('nome')->get();
         $nucleoslist = Nucleo::orderBy('nome')->get();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        Session::put('quant', 'Foram encontrados '.count($turmas).' pessoas no banco de dados.');
-        if(auth()->user()->admin_professor == 1){
-            $professor = Professor::find($id);
-            foreach($professor->turmas as $p){
-                $professorTurmas[] = $p->id;
-            }
-            return view ('professores_file.professores_turmas', compact('professor','turmas','professorTurmas','dias_semana','nucleoslist'));
-        }
-        else{
-            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'dias_semana', 'nucleoslist'));
-        }
-    }
-
-    public function filtros_professor_turmas($id){
-        $turmas = Session::get('turmaslist');
-        $nucleoslist = Nucleo::orderBy('nome')->get();
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        Session::put('quant', 'Foram encontrados '.count($turmaslist).' pessoas no banco de dados.');
         if(auth()->user()->admin_professor == 1){
             $professor = Professor::find($id);
             foreach($professor->turmas as $turma){
                 $professorTurmas[] = $turma->id;
             }
-            return view ('professores_file.professores_turmas', compact('professor','turmas','professorTurmas','dias_semana','nucleoslist'));
+            return view ('professores_file.professores_turmas', compact('professor','turmaslist','professorTurmas','dias_semana','nucleoslist'));
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
 
-            return view ('professores_file.professores_turmas', compact('professor', 'turmas', 'dias_semana', 'nucleoslist'));
+            return view ('professores_file.professores_turmas', compact('professor', 'turmaslist', 'dias_semana', 'nucleoslist'));
         }
     }
 
@@ -247,10 +252,9 @@ class professorController extends Controller
 
     public function professor_meus_alunos($idprofessor, $idturma){
         $turma = Turma::find($idturma);
-        $pessoaslist = $turma->pessoas;
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
+        $pessoaslist = $turma->pessoas->sortBy('nome');
         $pessoaslist = $this->gerar_paginate($pessoaslist);
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
         $professor = Professor::find($idprofessor);
         $professorid = $professor->id;
 
@@ -276,7 +280,6 @@ class professorController extends Controller
 
     public function professor_procurar(Request $request){
         $dataForm = array_filter($request->all());
-        
         $professoreslist = Professor::where(function($query) use($dataForm){
             if(array_key_exists('nome', $dataForm)){
                 $filtro = $dataForm['nome'];
@@ -321,6 +324,81 @@ class professorController extends Controller
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
+    public function filtros_professor_turmas(Request $request, $id){
+        $dataForm = array_filter($request->all());
+        $professor = Professor::find($id);
+        $turmas_professor = $professor->turmas->sortBy('nome');
+        $turmaslist = Turma::where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('inativo', $dataForm)){
+                $filtro = $dataForm['inativo'];
+                $query->where('inativo', '=', $filtro."%");
+            }
+            if(array_key_exists('limite', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('horario_inicial', $dataForm)){
+                $horario = explode(' ', $dataForm['horario_inicial']);
+                if($horario[1] == 'PM'){
+                    $separador = explode(':', $horario[0]);
+                    $separador[0] = 12 + (int)$separador[0];
+                    $horario[0] = $separador[0].':'.$separador[1];
+                }
+                $filtro = $horario[0].':00';
+                $query->where('horario_inicial', '>=', $filtro);
+            }
+            if(array_key_exists('horario_final', $dataForm)){
+                $horario = explode(' ', $dataForm['horario_final']);
+                if($horario[1] == 'PM'){
+                    $separador = explode(':', $horario[0]);
+                    $separador[0] = 12 + (int)$separador[0];
+                    $horario[0] = $separador[0].':'.$separador[1];
+                }
+                $filtro = $horario[0].':00';
+                $query->where('horario_final', '<=', $filtro);
+            }
+            if(array_key_exists('data_semanal', $dataForm)){
+                $filtro = $dataForm['data_semanal'];
+                $query->where('horario_semanal', 'like', '%'.$filtro.'%');
+            }
+            if(array_key_exists('nucleo_id', $dataForm)){
+                $filtro = $dataForm['nucleo_id'];
+                $query->where('nucleo_id', '=', $filtro);
+            }
+        })->orderBy('nome')->get();
+        $nucleoslist = Nucleo::orderBy('nome')->get();
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+
+        if(auth()->user()->admin_professor == 1){
+            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+            $turmaslist = $this->gerar_paginate($turmaslist);
+            foreach($professor->turmas as $turma){
+                $professorTurmas[] = $turma->id;
+            }
+            return view ('professores_file.professores_turmas', compact('professor','turmaslist','professorTurmas','dias_semana','nucleoslist'));
+        }
+        else{
+            $turmaslist = $this->filtrar_dados($turmaslist, $turmas_professor);
+            Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+            $turmaslist = $this->gerar_paginate($turmaslist);
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
+            return view ('professores_file.professores_turmas', compact('professor', 'turmaslist', 'dias_semana', 'nucleoslist'));
+        }
+    }
+
     public function professor_procurar_aluno(Request $request){
         $dataForm = $request->all();
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
@@ -343,7 +421,7 @@ class professorController extends Controller
             $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoassexo);
         }
         Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-        $pessoaslist = $this->ordenar_alfabeto($pessoaslist);
+        
         $pessoaslist = $this->gerar_paginate($pessoaslist);
         $turma = Turma::find($dataForm['idturma']);
         $professorid = $dataForm['professorid'];

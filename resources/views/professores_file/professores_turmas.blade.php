@@ -32,7 +32,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('turmas_procurar')}}" method="POST">
+                        <form action="{{route('filtros_professor_turmas', $professor->id)}}" method="POST">
                             @csrf
                             <input type="text" name="id" value="{{$professor->id}}" hidden>
                             <div class="row">
@@ -124,7 +124,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($turmas as $turma)
+                    @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
                             <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
@@ -159,18 +159,17 @@
                                     @endif
                                 @endif
                             @else
-                                @if(in_array($))
-                                    <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                                    <td>
-                                        <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{Route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
-                                        <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                    </td>
-                                @endif
+                                <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                                <td>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
+                                </td>
                             @endif
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            {{$turmaslist->links()}}
         </div>
     </div>
 @endsection
