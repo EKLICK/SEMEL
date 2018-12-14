@@ -19,7 +19,7 @@ class DeleteController extends Controller
         return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
     }
 
-    public function professor_softdeletes(){
+    public function professores_softdeletes(){
         $professoreslist = Professor::onlyTrashed()->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores deletadas no banco de dados.');
         
@@ -99,5 +99,53 @@ class DeleteController extends Controller
         $ano = date('Y');
 
         return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
+    }
+
+    public function professor_procurar_softdelete(Request $request){
+        $dataForm = array_filter($request->all());
+        $turmaslist = Turma::all();
+        
+        $professoreslist = Professor::onlyTrashed()->where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('de', $dataForm)){
+                $filtro = explode(' ',$dataForm['de']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '>=', $nascimento);
+            }
+            if(array_key_exists('ate', $dataForm)){
+                $filtro = explode(' ',$dataForm['ate']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '<=', $nascimento);
+            }
+            if(array_key_exists('email', $dataForm)){
+                $filtro = $dataForm['email'];
+                $useremails= User::onlyTrashed()->where('email', 'like', $filtro)."%"->where('admin_professor', '=', 0);
+                $query->where('user_id', '=', $useremails->id);
+            }
+            if(array_key_exists('matricula', $dataForm)){
+                $filtro = $dataForm['matricula'];
+                $query->where('matricula', 'like', $filtro."%");
+            }
+            if(array_key_exists('telefone', $dataForm)){
+                $filtro = $dataForm['telefone'];
+                $query->where('telefone', 'like', $filtro."%");
+            }
+            if(array_key_exists('bairro', $dataForm)){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', 'like', $filtro."%");
+            }
+            if(array_key_exists('rua', $dataForm)){
+                $filtro = $dataForm['rua'];
+                $query->where('rua', 'like', $filtro."%");
+            }
+        })->orderBy('nome')->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
+
+        return view ('professores_file.professores_softdeletes', compact('professoreslist'));
     }
 }

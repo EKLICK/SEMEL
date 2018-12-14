@@ -77,16 +77,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col s2"><label>Turmas vinculadas:</label></div>
-                                <div class="input-field col s4">
-                                    <select multiple name="turmas[]">
-                                        @foreach ($turmaslist as $turma)
-                                            <option value="{{$turma->id}}">{{$turma->nome}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>

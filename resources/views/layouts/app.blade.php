@@ -62,7 +62,7 @@
                                             <li class='active has-sub'><a href='#'>Registros deletados</a>
                                                 <ul>
                                                     <li><a href="{{route('pessoas_softdeletes')}}">Pessoas deletados</a></li>
-                                                    <li><a href="{{route('professor_softdeletes')}}">Professores deletados</a></li>
+                                                    <li><a href="{{route('professores_softdeletes')}}">Professores deletados</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="{{route('audits.index')}}">Auditorias</a></li>

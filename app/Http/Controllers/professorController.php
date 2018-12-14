@@ -47,33 +47,6 @@ class professorController extends Controller
         return $professoresfiltrados;
     }
 
-    public function ordenar_alfabeto($lista){
-        $listanomes = [];
-        foreach($lista as $arquivo){
-            array_push($listanomes, $arquivo['nome']);
-        }
-        sort($listanomes);
-        $listaordenadanome = [];
-        foreach($listanomes as $nome){
-            foreach($lista as $arquivo){
-                if($arquivo['nome'] == $nome){
-                    array_push($listaordenadanome, $arquivo);
-                }
-            }
-        }
-        
-        return $listaordenadanome;
-    }
-
-    public function gerar_paginate($array){
-        $itemCollection = collect($array);
-        $currentpage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
-        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/professor');
-        return $itemCollection;
-    }
-
     //Funções de Redirecionamento
     public function index()
     {
@@ -110,6 +83,8 @@ class professorController extends Controller
             'password' => bcrypt($dataForm['password']),
             'admin_professor' => 0,
         ]);
+        $nascimento = explode('/', $dataForm['nascimento']);
+        $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $dataForm += ['cidade' => 'São Leopoldo'];
         $dataForm += ['user_id' => $user->id];
         $pr = Professor::create($dataForm);
@@ -165,6 +140,8 @@ class professorController extends Controller
         $professor = Professor::find($id);
         $user = User::find($professor->user_id);
         $dataForm = $request->all();
+        $nascimento = explode('/', $dataForm['nascimento']);
+        $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $olduser = (array)$user;
         $user->update($dataForm);
         $newuser = (array)$user;
@@ -298,110 +275,50 @@ class professorController extends Controller
     }
 
     public function professor_procurar(Request $request){
-        $dataForm = $request->all();
-        $turmaslist = Turma::all();
-        if(isset($dataForm['softdelete'])){
-            $pessoaslist = Professor::onlyTrashed()->get();
-        }
-        else{
-            $professoreslist = Professor::orderBy('nome')->get();
-        }
-
-        if($dataForm['nome'] != null){
-            if(isset($dataForm['softdelete'])){
-                $professoresnome = Professor::onlyTrashed()->where('nome', 'like', $dataForm['nome'].'%')->get();
+        $dataForm = array_filter($request->all());
+        
+        $professoreslist = Professor::where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
             }
-            else{
-                $professoresnome = Professor::where('nome', 'like', $dataForm['nome'].'%')->get();
+            if(array_key_exists('de', $dataForm)){
+                $filtro = explode(' ',$dataForm['de']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '>=', $nascimento);
             }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresnome);
-        }
-        if($dataForm['de'] != null){
-            $professoreslist = $this->filtrar_ano($professoreslist, $dataForm['de'], 1);
-        }
-        if($dataForm['ate'] != null){
-            $professoreslist = $this->filtrar_ano($professoreslist, $dataForm['ate'], 2);
-        }
-        if($dataForm['email'] != null){
-            $professoresemail = [];
-            if(isset($dataForm['softdelete'])){
-                $useremails= User::onlyTrashed()->where('email', 'like', $dataForm['email'])->where('admin_professor', '=', 0)->get();
+            if(array_key_exists('ate', $dataForm)){
+                $filtro = explode(' ',$dataForm['ate']);
+                list($dia, $mes, $ano) = explode('/', $filtro[0]);
+                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $query->where('nascimento',  '<=', $nascimento);
             }
-            else{
-                $useremails= User::where('email', 'like', $dataForm['email'])->where('admin_professor', '=', 0)->get();
+            if(array_key_exists('email', $dataForm)){
+                $filtro = $dataForm['email'];
+                $useremails= User::onlyTrashed()->where('email', 'like', $filtro)."%"->where('admin_professor', '=', 0);
+                $query->where('user_id', '=', $useremails->id);
             }
-            foreach($professoreslist as $professor){
-                foreach($useremails as $useremail){
-                    if($professor['user_id'] == $useremail['id']){
-                        array_push($professoresemail, $professor);
-                    }
-                }
+            if(array_key_exists('matricula', $dataForm)){
+                $filtro = $dataForm['matricula'];
+                $query->where('matricula', 'like', $filtro."%");
             }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresemail);
-        }
-        if($dataForm['matricula'] != null){
-            if(isset($dataForm['softdelete'])){
-                $professoresmatricula = Professor::onlyTrashed()->where('matricula', 'like', $dataForm['matricula'].'%')->get();
+            if(array_key_exists('telefone', $dataForm)){
+                $filtro = $dataForm['telefone'];
+                $query->where('telefone', 'like', $filtro."%");
             }
-            else{
-                $professoresmatricula = Professor::where('matricula', 'like', $dataForm['matricula'].'%')->get();
+            if(array_key_exists('bairro', $dataForm)){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', 'like', $filtro."%");
             }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresmatricula);
-        }
-        if($dataForm['telefone'] != null){
-            if(isset($dataForm['softdelete'])){
-                $professorestelefone = Professor::onlyTrashed()->where('telefone', 'like', $dataForm['telefone'].'%')->get();
+            if(array_key_exists('rua', $dataForm)){
+                $filtro = $dataForm['rua'];
+                $query->where('rua', 'like', $filtro."%");
             }
-            else{
-                $professorestelefone = Professor::where('telefone', 'like', $dataForm['telefone'].'%')->get();
-            }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professorestelefone);
-        }
-        if($dataForm['bairro'] != null){
-            if(isset($dataForm['softdelete'])){
-                $professoresbairro = Professor::onlyTrashed()->where('bairro', 'like', $dataForm['bairro'].'%')->get();
-            }
-            else{
-                $professoresbairro = Professor::where('bairro', 'like', $dataForm['bairro'].'%')->get();
-            }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresbairro);
-        }
-        if($dataForm['rua'] != null){
-            if(isset($dataForm['softdelete'])){
-                $professoresrua = Professor::onlyTrashed()->where('rua', 'like', $dataForm['rua'].'%')->get();
-            }
-            else{
-                $professoresrua = Professor::where('rua', 'like', $dataForm['rua'].'%')->get();
-            }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresrua);
-        }
-        if(isset($dataForm['turmas'])){
-            $professoresturmas = [];
-            foreach($professoreslist as $professor){
-                $quant = 0;
-                foreach ($professor['turmas'] as $turmasdoprofessor) {
-                    foreach($dataForm['turmas'] as $turmasselecionadas){
-                        if($turmasdoprofessor['id'] == $turmasselecionadas){
-                            $quant++;
-                        }
-                    }
-                }
-                if($quant == count($dataForm['turmas'])){
-                    array_push($professoresturmas, $professor);
-                }
-            }
-            $professoreslist = $this->filtrar_dados($professoreslist, $professoresturmas);
-        }
+        })->orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($professoreslist).' professores no banco de dados.');
-        $professoreslist = $this->ordenar_alfabeto($professoreslist);
-        $professoreslist = $this->gerar_paginate($professoreslist);
 
-        if(isset($dataForm['softdelete'])){
-            return view ('professores_file.professores_softdeletes', compact('professoreslist'));
-        }
-        else{
-            return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
-        }
+        return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
     public function professor_procurar_aluno(Request $request){

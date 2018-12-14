@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('breadcrumbs')
     <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
-    <a href="{{route('professor_softdeletes')}}" class="breadcrumb">Deletados</a>
+    <a href="{{route('professores_softdeletes')}}" class="breadcrumb">Deletados</a>
 @endsection
 @section('title') Professores deletadas @endsection
 @section('content')
@@ -20,7 +20,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('professor_procurar')}}" method="POST">
+                        <form action="{{route('professores_procurar_softdelete')}}" method="POST">
                             @csrf
                             <input type="text" value="softdelete" name="softdelete" hidden>
                             <div class="row">

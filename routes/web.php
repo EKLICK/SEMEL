@@ -81,6 +81,6 @@ Route::post('/audits_procurar','AuditsController@audits_procurar')->name('audits
 Route::get('/restore/pessoas/{id}','deleteController@pessoas_restore')->name('pessoas_restore')->middleware('Authenticate');
 Route::get('/softdeletes/pessoas','deleteController@pessoas_softdeletes')->name('pessoas_softdeletes')->middleware('Authenticate');
 Route::get('/restore/professor{id}','deleteController@professores_restore')->name('professores_restore')->middleware('Authenticate');
-Route::get('/softdeletes/professor','deleteController@professor_softdeletes')->name('professor_softdeletes')->middleware('Authenticate');
+Route::get('/softdeletes/professor','deleteController@professores_softdeletes')->name('professores_softdeletes')->middleware('Authenticate');
 Route::post('/softdeletes/procurar/pessoas', 'deleteController@pessoas_procurar_softdelete')->name('pessoas_procurar_softdelete')->middleware('Authenticate');
 Route::post('/softdeletes/procurar/professores', 'deleteController@professores_procurar_softdelete')->name('professores_procurar_softdelete')->middleware('Authenticate');
