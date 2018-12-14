@@ -20,9 +20,8 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('pessoas_procurar')}}" method="POST">
+                        <form action="{{route('pessoas_procurar_softdelete')}}" method="POST">
                             @csrf
-                            <input type="text" value="{{'softdelete'}}" name="softdelete" hidden>
                             <div class="row">
                                 <div class="input-field col s4">
                                     <i class="material-icons prefix">account_circle</i>

@@ -22,10 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Rotas de professores
 Route::resource('professor','professorController')->middleware('Authenticate');
 Route::get('/professor/edit/senha','professorController@editar_senha')->name('editar_senha')->middleware('Authenticate');
-Route::get('/restore/professor{id}','professorController@restore')->name('professor_restore')->middleware('Authenticate');
 Route::get('/professors_info/{id}','professorController@professor_info')->name('professor_info')->middleware('Authenticate');
 Route::put('/professor/update/senha/{id}','professorController@update_senha')->name('update_senha')->middleware('Authenticate');
-Route::get('/softdeletes/professor','professorController@softdeletes')->name('professor_softdeletes')->middleware('Authenticate');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas')->middleware('Authenticate');
 Route::post('/professor/procurar','professorController@professor_procurar')->name('professor_procurar')->middleware('Authenticate');
 Route::get('/filtros_professor_turmas/{id}','professorController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
@@ -38,10 +36,8 @@ Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}','ProfessorCon
 Route::resource('pessoas','pessoasController')->middleware('Authenticate');
 Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas')->middleware('Authenticate');
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info')->middleware('Authenticate');
-Route::get('/restore/pessoas/{id}','pessoasController@restore')->name('pessoas_restore')->middleware('Authenticate');
 Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select')->middleware('Authenticate');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('Authenticate');
-Route::get('/softdeletes/pessoas','PessoasController@softdeletes')->name('pessoas_softdeletes')->middleware('Authenticate');
 Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar')->middleware('Authenticate');
 Route::post('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('Authenticate');
 Route::get('/edit/menores/{id}','pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores')->middleware('Authenticate');
@@ -80,3 +76,11 @@ Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name(
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('Authenticate');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('Authenticate');
 Route::post('/audits_procurar','AuditsController@audits_procurar')->name('audits_procurar')->middleware('Authenticate');
+
+//Softdeletes
+Route::get('/restore/pessoas/{id}','deleteController@pessoas_restore')->name('pessoas_restore')->middleware('Authenticate');
+Route::get('/softdeletes/pessoas','deleteController@pessoas_softdeletes')->name('pessoas_softdeletes')->middleware('Authenticate');
+Route::get('/restore/professor{id}','deleteController@professores_restore')->name('professores_restore')->middleware('Authenticate');
+Route::get('/softdeletes/professor','deleteController@professor_softdeletes')->name('professor_softdeletes')->middleware('Authenticate');
+Route::post('/softdeletes/procurar/pessoas', 'deleteController@pessoas_procurar_softdelete')->name('pessoas_procurar_softdelete')->middleware('Authenticate');
+Route::post('/softdeletes/procurar/professores', 'deleteController@professores_procurar_softdelete')->name('professores_procurar_softdelete')->middleware('Authenticate');

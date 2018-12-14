@@ -19,19 +19,6 @@ class PessoasController extends Controller
      */
 
     //Funções ferramentas
-    public function filtrar_dados($arraylists, $arrayfiltros){
-        $arraylistfiltradas = [];
-        foreach($arrayfiltros as $arrayfiltro){
-            foreach($arraylists as $arraylist){
-                if($arraylist == $arrayfiltro){
-                    array_push($arraylistfiltradas, $arraylist);
-                }
-            }
-        }
-
-        return $arraylistfiltradas;
-    }
-
     public function ordenar_alfabeto($lista){
         $listanomes = [];
         foreach($lista as $arquivo){
@@ -448,24 +435,6 @@ class PessoasController extends Controller
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
-    public function softdeletes(){
-        $pessoaslist = Pessoa::onlyTrashed()->paginate(10);
-        $data = new \DateTime();
-        $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas deletadas no banco de dados.');
-        
-        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
-    }
-
-    public function restore($id){
-        $pessoaslist = Pessoa::onlyTrashed()->get();
-        $pessoa = $pessoaslist->find($id);
-
-        $pessoa->restore();
-
-        return redirect()->route('pessoas.index');
-    }
-
     public function pdfpessoas($id){
         $pessoa = Pessoa::find($id);
         if($pessoa == null){
@@ -481,7 +450,7 @@ class PessoasController extends Controller
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             if(array_key_exists('nome', $dataForm)){
                 $filtro = $dataForm['nome'];
-                $query->where('nome', 'like', "{{$filtro}}%");
+                $query->where('nome', 'like', $filtro."%");
             }
             if(array_key_exists('de', $dataForm)){
                 $filtro = explode(' ',$dataForm['de']);
@@ -497,33 +466,34 @@ class PessoasController extends Controller
             }
             if(array_key_exists('rg', $dataForm)){
                 $filtro = $dataForm['rg'];
-                $query->where('rg', 'like', "{{$filtro}}%");
+                $query->where('rg', 'like', $filtro."%");
             }
             if(array_key_exists('cpf', $dataForm)){
                 $filtro = $dataForm['cpf'];
-                $query->where('cpf', 'like', "{{$filtro}}%");
+                $query->where('cpf', 'like', $filtro."%");
             }
             if(array_key_exists('bairro', $dataForm)){
                 $filtro = $dataForm['bairro'];
-                $query->where('bairro', 'like', "{{$filtro}}%");
+                $query->where('bairro', 'like', $filtro."%");
             }
             if(array_key_exists('rua', $dataForm)){
                 $filtro = $dataForm['rua'];
-                $query->where('rua', 'like', "{{$filtro}}%");
+                $query->where('rua', 'like', $filtro."%");
             }
             if(array_key_exists('telefone', $dataForm)){
                 $filtro = $dataForm['telefone'];
-                $query->where('telefone', 'like', "{{$filtro}}%");
+                $query->where('telefone', 'like', $filtro."%");
             }
             if(array_key_exists('sexo', $dataForm)){
                 $filtro = $dataForm['sexo'];
-                $query->where('sexo', '=', "{{$filtro}}");
+                $query->where('sexo', '=', $filtro."%");
             }
             if(array_key_exists('estado_civil', $dataForm)){
                 $filtro = $dataForm['estado_civil'];
-                $query->where('estado_civil', '=', "{{$filtro}}");
+                $query->where('estado_civil', '=', $filtro."%");
             }
         })->orderBy('nome')->paginate(10);
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
         $ano = date('Y');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));

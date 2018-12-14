@@ -19,19 +19,6 @@ class professorController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Funções ferramentas
-    public function filtrar_dados($arraylists, $arrayfiltros){
-        $arraylistfiltradas = [];
-        foreach($arrayfiltros as $arrayfiltro){
-            foreach($arraylists as $arraylist){
-                if($arraylist == $arrayfiltro){
-                    array_push($arraylistfiltradas, $arraylist);
-                }
-            }
-        }
-
-        return $arraylistfiltradas;
-    }
-
     public function filtrar_ano($professoresnalista, $anofiltro, $option){
         $professoresfiltrados = [];
         foreach($professoresnalista as $professornalista){
@@ -308,25 +295,6 @@ class professorController extends Controller
         $user->update($dataForm);
 
         return view('home');
-    }
-
-    public function softdeletes(){
-        $professoreslist = Professor::onlyTrashed()->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($professoreslist).' pessoas deletadas no banco de dados.');
-        
-        return view ('professores_file.professores_softdeletes', compact('professoreslist'));
-    }
-
-    public function restore($id){
-        $professoreslist = Professor::onlyTrashed()->get();
-        $professor = $professoreslist->find($id);
-
-        $userslist = User::onlyTrashed()->get();
-        $user = $userslist->where('id', '=', $professor->user_id)->last();
-        $user->restore();
-        $professor->restore();
-
-        return redirect()->route('professor.index');
     }
 
     public function professor_procurar(Request $request){
