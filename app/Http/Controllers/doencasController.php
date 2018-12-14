@@ -14,35 +14,6 @@ class doencasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    //Funções ferramentas
-    public function ordenar_alfabeto($lista){
-        $listanomes = [];
-        foreach($lista as $arquivo){
-            array_push($listanomes, $arquivo['nome']);
-        }
-        sort($listanomes);
-        $listaordenadanome = [];
-        foreach($listanomes as $nome){
-            foreach($lista as $arquivo){
-                if($arquivo['nome'] == $nome){
-                    array_push($listaordenadanome, $arquivo);
-                }
-            }
-        }
-        
-        return $listaordenadanome;
-    }
-
-    public function gerar_paginate($array){
-        $itemCollection = collect($array);
-        $currentpage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
-        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/doencas');
-
-        return $itemCollection;
-    }
     
     //Funções de Redirecionamento
     public function index()
@@ -143,8 +114,6 @@ class doencasController extends Controller
             $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
         }
         Session::put('quant', 'Foram encontrados '.count($doencaslist).' doenças no banco de dados.');
-        $doencaslist = $this->ordenar_alfabeto($doencaslist);
-        $doencaslist = $this->gerar_paginate($doencaslist);
 
         return view ('doencas_file.doencas', compact('doencaslist'));
     }

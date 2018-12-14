@@ -16,47 +16,6 @@ class nucleosController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //Funções ferramentas
-    public function filtrar_dados($arraylists, $arrayfiltros){
-        $arraylistfiltradas = [];
-        foreach($arrayfiltros as $arrayfiltro){
-            foreach($arraylists as $arraylist){
-                if($arraylist == $arrayfiltro){
-                    array_push($arraylistfiltradas, $arraylist);
-                }
-            }
-        }
-
-        return $arraylistfiltradas;
-    }
-
-    public function ordenar_alfabeto($lista){
-        $listanomes = [];
-        foreach($lista as $arquivo){
-            array_push($listanomes, $arquivo['nome']);
-        }
-        sort($listanomes);
-        $listaordenadanome = [];
-        foreach($listanomes as $nome){
-            foreach($lista as $arquivo){
-                if($arquivo['nome'] == $nome){
-                    array_push($listaordenadanome, $arquivo);
-                }
-            }
-        }
-        
-        return $listaordenadanome;
-    }
-
-    public function gerar_paginate($array){
-        $itemCollection = collect($array);
-        $currentpage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
-        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        $itemCollection->setPath('/nucleos');
-        return $itemCollection;
-    }
-
     //Funções de Redirecionamento
     public function index()
     {
@@ -171,37 +130,35 @@ class nucleosController extends Controller
     }
 
     public function nucleos_procurar(Request $request){
-        $dataForm = $request->all();
-        $nucleoslist = Nucleo::all();
-        
-        if($dataForm['nome'] != null){
-            $nucleosnome = Nucleo::orderBy('nome')->where('nome', 'like', '%'.$dataForm['nome'].'%')->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosnome);
-        }
-        if($dataForm['inativo'] != null){
-            $nucleosinativo = Nucleo::orderBy('nome')->where('inativo', '=', $dataForm['inativo'])->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosinativo);
-        }
-        if($dataForm['bairro'] != null){
-            $nucleosbairro = Nucleo::orderBy('nome')->where('bairro', 'like', '%'.$dataForm['bairro'].'%')->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosbairro);
-        }
-        if($dataForm['rua'] != null){
-            $nucleosrua = Nucleo::orderBy('nome')->where('rua', 'like', '%'.$dataForm['rua'].'%')->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosrua);
-        }
-        if($dataForm['numero_endereco'] != null){
-            $nucleosendereco_numero = Nucleo::orderBy('nome')->where('numero_endereco', 'like', '%'.$dataForm['numero_endereco'].'%')->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleosendereco_numero);
-        }
-        if($dataForm['cep'] != null){
-            $nucleoscep = Nucleo::orderBy('nome')->where('cep', 'like', '%'.$dataForm['cep'].'%')->get();
-            $nucleoslist = $this->filtrar_dados($nucleoslist, $nucleoscep);
-        }
+        $dataForm = array_filter($request->all());
+        $nucleoslist = Nucleo::where(function($query) use($dataForm){
+            if(array_key_exists('nome', $dataForm)){
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
+            }
+            if(array_key_exists('inativo', $dataForm)){
+                $filtro = $dataForm['inativo'];
+                $query->where('inativo', '=', $filtro);
+            }
+            if(array_key_exists('bairro', $dataForm)){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', 'like', $filtro."%");
+            }
+            if(array_key_exists('rua', $dataForm)){
+                $filtro = $dataForm['rua'];
+                $query->where('rua', 'like', $filtro."%");
+            }
+            if(array_key_exists('numero_endereco', $dataForm)){
+                $filtro = $dataForm['numero_endereco'];
+                $query->where('numero_endereco', 'like', $filtro."%");
+            }
+            if(array_key_exists('cep', $dataForm)){
+                $filtro = $dataForm['cep'];
+                $query->where('cep', 'like', $filtro."%");
+            }
+        })->orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
-        $nucleoslist = $this->ordenar_alfabeto($nucleoslist);
-        $nucleoslist = $this->gerar_paginate($nucleoslist);
-        
+            
         return view ('nucleos_file.nucleos', compact('nucleoslist'));
     }
 }
