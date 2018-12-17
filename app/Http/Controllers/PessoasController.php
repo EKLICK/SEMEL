@@ -137,6 +137,7 @@ class PessoasController extends Controller
     public function store(PessoaCreateFromRequest $request)
     {
         $dataForm = $request->all();
+        dd('fdf');
         $escolha = $dataForm['escolha'];
         unset($dataForm['escolha']);
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);

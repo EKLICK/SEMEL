@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Pessoa;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,25 +25,25 @@ class PessoaCreateFromRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'nascimento' => 'required|date-format:d/m/Y',
-            'sexo' => ['required', Rule::in(['M','F']),],
-            'rg' => 'sometimes|nullable|max:13|min:6',
-            'cpf' => 'sometimes|nullable|digits:11|unique:pessoas|unique:professores|',
-            'cpf_responsavel' => 'sometimes|nullable|digits:11',
-            'cidade' => 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'rua' => 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'numero_endereco' => 'digits_between:0,5',
-            'bairro' => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
-            'cep' => 'sometimes|nullable|digits:8',
-            'telefone' => 'sometimes|nullable|digits_between:8, 16',
-            'telefone_emergencia' => 'sometimes|nullable|digits:digits_between:8, 16',
-            'nome_do_pai' => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'nome_da_mae' => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'pessoa_emergencia' => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'filhos' => 'digits_between:0,4',
-            'estado_civil'=> ['sometimes|nullable', Rule::in(['Casado', 'Solteiro']),],
-            'mora_com_os_pais'=> ['sometimes|nullable', Rule::in(['1', '2']),],
+            'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nascimento'            => 'required|date-format:d/m/Y',
+            'sexo'                  => ['required', Rule::in(['M','F'])],
+            'rg'                    => 'sometimes|nullable|max:13|min:6',
+            'cpf'                   => 'sometimes|nullable|digits:14|unique:pessoas|unique:professores|',
+            'cpf_responsavel'       => 'sometimes|nullable|digits:14',
+            'cidade'                => 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'rua'                   => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'numero_endereco'       => 'sometimes|nullable|digits_between:0,5',
+            'bairro'                => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'cep'                   => 'sometimes|nullable|digits:10',
+            'telefone'              => 'sometimes|nullable|digits_between:8, 16',
+            'telefone_emergencia'   => 'sometimes|nullable|digits:digits_between:8, 16',
+            'nome_do_pai'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nome_da_mae'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'filhos'                => 'digits_between:0,4',
+            'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
+            'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
         ];
     }
 
@@ -88,8 +88,6 @@ class PessoaCreateFromRequest extends FormRequest
             'pessoa_emergencia.between' => 'Insira o nome da pessoa de emergência entre 3 ou 100 caracteres!',
 
             'filhos.digits_between' => 'É permitido somente 4 digitos para quantidade de filhos'
-
-
         ];
     }
 }
