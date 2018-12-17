@@ -419,52 +419,52 @@ class PessoasController extends Controller
     }
 
     public function pessoas_procurar(Request $request){
-        $dataForm = array_filter($request->all());
+        $dataForm = $request->all();
 
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
-            if(array_key_exists('nome', $dataForm)){
+            if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
                 $query->where('nome', 'like', $filtro."%");
             }
-            if(array_key_exists('de', $dataForm)){
+            if(!empty($dataForm['de'])){
                 $filtro = explode(' ',$dataForm['de']);
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
                 $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
                 $query->where('nascimento',  '>=', $nascimento);
             }
-            if(array_key_exists('ate', $dataForm)){
+            if(!empty($dataForm['ate'])){
                 $filtro = explode(' ',$dataForm['ate']);
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
                 $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
                 $query->where('nascimento',  '<=', $nascimento);
             }
-            if(array_key_exists('rg', $dataForm)){
+            if(!empty($dataForm['rg'])){
                 $filtro = $dataForm['rg'];
                 $query->where('rg', 'like', $filtro."%");
             }
-            if(array_key_exists('cpf', $dataForm)){
+            if(!empty($dataForm['cpf'])){
                 $filtro = $dataForm['cpf'];
                 $query->where('cpf', 'like', $filtro."%");
             }
-            if(array_key_exists('bairro', $dataForm)){
+            if(!empty($dataForm['bairro'])){
                 $filtro = $dataForm['bairro'];
                 $query->where('bairro', 'like', $filtro."%");
             }
-            if(array_key_exists('rua', $dataForm)){
+            if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
                 $query->where('rua', 'like', $filtro."%");
             }
-            if(array_key_exists('telefone', $dataForm)){
+            if(!empty($dataForm['telefone'])){
                 $filtro = $dataForm['telefone'];
                 $query->where('telefone', 'like', $filtro."%");
             }
-            if(array_key_exists('sexo', $dataForm)){
+            if(!empty($dataForm['sexo'])){
                 $filtro = $dataForm['sexo'];
-                $query->where('sexo', '=', $filtro."%");
+                $query->where('sexo', '=', $filtro);
             }
-            if(array_key_exists('estado_civil', $dataForm)){
+            if(!empty($dataForm['estado_civil'])){
                 $filtro = $dataForm['estado_civil'];
-                $query->where('estado_civil', '=', $filtro."%");
+                $query->where('estado_civil', '=', $filtro);
             }
         })->orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');

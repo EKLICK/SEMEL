@@ -39,7 +39,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="atestado" type="radio" @if ($anamnese->atestado == 0) checked @endif/>
+                                        <input value="2" name="atestado" type="radio" @if ($anamnese->atestado == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -56,7 +56,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="toma_medicacao" type="radio" @if ($anamnese->toma_medicacao == 0) checked @endif/>
+                                        <input value="2" name="toma_medicacao" type="radio" @if ($anamnese->toma_medicacao == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -73,7 +73,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="alergia_medicacao" type="radio" @if ($anamnese->alergia_medicacao == 0) checked @endif/>
+                                        <input value="2" name="alergia_medicacao" type="radio" @if ($anamnese->alergia_medicacao == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -90,7 +90,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="fumante" type="radio" @if ($anamnese->fumante == 0) checked @endif/>
+                                        <input value="2" name="fumante" type="radio" @if ($anamnese->fumante == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -110,7 +110,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="cirurgia" type="radio"  @if ($anamnese->cirurgia == 0) checked @endif/>
+                                        <input value="2" name="cirurgia" type="radio"  @if ($anamnese->cirurgia == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -127,7 +127,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_ossea" type="radio" @if ($anamnese->dor_ossea == 0) checked @endif/>
+                                        <input value="2" name="dor_ossea" type="radio" @if ($anamnese->dor_ossea == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -144,7 +144,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_muscular" type="radio" @if ($anamnese->dor_muscular == 0) checked @endif/>
+                                        <input value="2" name="dor_muscular" type="radio" @if ($anamnese->dor_muscular == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -161,7 +161,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_articular" type="radio" @if ($anamnese->dor_articular == 0) checked @endif/>
+                                        <input value="2" name="dor_articular" type="radio" @if ($anamnese->dor_articular == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -178,7 +178,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <input type="text" value="0" name="possui_doenca" hidden>
+                        <input type="text" value="2" name="possui_doenca" hidden>
                     </div>
                     <br><br><br><br>
                     <div class="row">

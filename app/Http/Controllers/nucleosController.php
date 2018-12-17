@@ -130,29 +130,29 @@ class nucleosController extends Controller
     }
 
     public function nucleos_procurar(Request $request){
-        $dataForm = array_filter($request->all());
+        $dataForm = $request->all();
         $nucleoslist = Nucleo::where(function($query) use($dataForm){
-            if(array_key_exists('nome', $dataForm)){
+            if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
                 $query->where('nome', 'like', $filtro."%");
             }
-            if(array_key_exists('inativo', $dataForm)){
+            if(!empty($dataForm['inativo'])){
                 $filtro = $dataForm['inativo'];
                 $query->where('inativo', '=', $filtro);
             }
-            if(array_key_exists('bairro', $dataForm)){
+            if(!empty($dataForm['bairro'])){
                 $filtro = $dataForm['bairro'];
                 $query->where('bairro', 'like', $filtro."%");
             }
-            if(array_key_exists('rua', $dataForm)){
+            if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
                 $query->where('rua', 'like', $filtro."%");
             }
-            if(array_key_exists('numero_endereco', $dataForm)){
+            if(!empty($dataForm['numero_endereco'])){
                 $filtro = $dataForm['numero_endereco'];
                 $query->where('numero_endereco', 'like', $filtro."%");
             }
-            if(array_key_exists('cep', $dataForm)){
+            if(!empty($dataForm['cep'])){
                 $filtro = $dataForm['cep'];
                 $query->where('cep', 'like', $filtro."%");
             }

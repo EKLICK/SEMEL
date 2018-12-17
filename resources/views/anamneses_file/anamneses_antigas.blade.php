@@ -34,21 +34,21 @@
                             <div class="row">
                                 <div class="input-field col s1"><i class="material-icons prefix">local_parking</i></div>
                                 <div class="input-field col s2">
-                                    <input id="de_search" type="number" step="0.01" class="validate" name="de_peso">
-                                    <label for="de_search">De:</label>
-                                </div>
-                                <div class="input-field col s2">
-                                    <input id="ate_altura_search" type="number" step="0.01" class="validate" name="ate_peso">
-                                    <label for="ate_altura_search">Até:</label>
-                                </div>
-                                <div class="input-field col s1"><i class="material-icons prefix">format_color_text</i></div>
-                                <div class="input-field col s2">
-                                    <input id="de_peso_search" type="number" step="0.01" class="validate" name="de_altura">
+                                    <input id="de_peso_search" type="number" step="0.01" class="validate" name="de_peso">
                                     <label for="de_peso_search">De:</label>
                                 </div>
                                 <div class="input-field col s2">
-                                    <input id="ate_search" type="number" step="0.01" class="validate" name="ate_altura">
-                                    <label for="ate_search">Até:</label>
+                                    <input id="ate_peso_search" type="number" step="0.01" class="validate" name="ate_peso">
+                                    <label for="ate_peso_search">Até:</label>
+                                </div>
+                                <div class="input-field col s1"><i class="material-icons prefix">format_color_text</i></div>
+                                <div class="input-field col s2">
+                                    <input id="de_altura_search" type="number" step="0.01" class="validate" name="de_altura">
+                                    <label for="de_altura_search">De:</label>
+                                </div>
+                                <div class="input-field col s2">
+                                    <input id="ate_altura_search" type="number" step="0.01" class="validate" name="ate_altura">
+                                    <label for="ate_altura_search">Até:</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -62,7 +62,7 @@
                                     </p>
                                     <p>
                                         <label>
-                                            <input value="0" name="toma_medicacao" type="radio"/>
+                                            <input value="2" name="toma_medicacao" type="radio"/>
                                             <span>Não</span>
                                         </label>
                                     </p>
@@ -77,7 +77,7 @@
                                     </p>
                                     <p>
                                         <label>
-                                            <input value="0" name="cirurgia" type="radio"/>
+                                            <input value="2" name="cirurgia" type="radio"/>
                                             <span>Não</span>
                                         </label>
                                     </p>
@@ -92,7 +92,7 @@
                                     </p>
                                     <p>
                                         <label>
-                                            <input value="0" name="fumante" type="radio"/>
+                                            <input value="2" name="fumante" type="radio"/>
                                             <span>Não</span>
                                         </label>
                                     </p>

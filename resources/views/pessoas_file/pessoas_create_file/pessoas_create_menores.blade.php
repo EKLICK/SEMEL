@@ -230,7 +230,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="toma_medicacao" type="radio"/>
+                                        <input value="2" name="toma_medicacao" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -247,7 +247,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="alergia_medicacao" type="radio"/>
+                                        <input value="2" name="alergia_medicacao" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -264,7 +264,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="fumante" type="radio"/>
+                                        <input value="2" name="fumante" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -285,7 +285,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="cirurgia" type="radio"/>
+                                        <input value="2" name="cirurgia" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -302,7 +302,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_ossea" type="radio"/>
+                                        <input value="2" name="dor_ossea" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -319,7 +319,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_muscular" type="radio"/>
+                                        <input value="2" name="dor_muscular" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -336,7 +336,7 @@
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="0" name="dor_articular" type="radio"/>
+                                        <input value="2" name="dor_articular" type="radio"/>
                                         <span>Não</span>
                                     </label>
                                 </p>
