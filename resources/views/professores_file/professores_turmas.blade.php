@@ -32,7 +32,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('filtros_professor_turmas', $professor->id)}}" method="POST">
+                        <form action="{{route('filtros_professor_turmas', $professor->id)}}" method="GET">
                             @csrf
                             <input type="text" name="id" value="{{$professor->id}}" hidden>
                             <div class="row">

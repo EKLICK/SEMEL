@@ -19,7 +19,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
-                <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
+                <form class="col s12" action="{{route('pessoas.store')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <input type="number" name="escolha" value="2" hidden>

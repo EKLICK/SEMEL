@@ -12,7 +12,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('professor_procurar_aluno')}}" method="POST">
+                        <form action="{{route('professor_procurar_aluno')}}" method="GET">
                             @csrf
                             <input type="text" name="professorid" value="{{$professorid}}" hidden>
                             <input type="text" name="idturma" value="{{$turma->id}}" hidden>

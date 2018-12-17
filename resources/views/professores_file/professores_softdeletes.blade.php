@@ -20,7 +20,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('professores_procurar_softdelete')}}" method="POST">
+                        <form action="{{route('professores_procurar_softdelete')}}" method="GET">
                             @csrf
                             <input type="text" value="softdelete" name="softdelete" hidden>
                             <div class="row">

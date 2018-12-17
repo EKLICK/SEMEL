@@ -19,7 +19,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('audits_procurar')}}" method="POST">
+                        <form action="{{route('audits_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
                                 <div class="input-field col s4">

@@ -28,7 +28,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('turmas_procurar')}}" method="POST">
+                        <form action="{{route('turmas_procurar')}}" method="GET">
                             @csrf
                             <input type="text" name="id" value="-1" hidden>
                             <div class="row">
