@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\Pessoa\PessoaCreateFromRequest;
+use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Pessoa;
 use App\Doenca;
 use App\Turma;
@@ -134,7 +134,7 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(PessoaCreateFromRequest $request)
+    public function store(PessoaCreateFormRequest $request)
     {
         $dataForm = $request->all();
         dd('fdf');
@@ -291,7 +291,7 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PessoaCreateFormRequest $request, $id)
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
