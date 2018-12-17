@@ -61,13 +61,18 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="bairro" id="bairro" type="text" class="validate" value="{{$pessoa->bairro}}">
+                            <input name="bairro" id="bairro" type="text" class="validate">
                             <label for="bairro">Bairro:</label>
                         </div>
                         <div class="input-field col s3">
+                            <i class="material-icons prefix">confirmation_number</i>
+                            <input name="rua" id="rua" type="text" class="validate">
+                            <label for="rua">Rua:</label>
+                        </div>
+                        <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input name="endereco" id="endereco" type="text" class="validate" value="{{$pessoa->endereco}}">
-                            <label for="endereco">Endereço:</label>
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate">
+                            <label for="numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">markunread_mailbox</i>

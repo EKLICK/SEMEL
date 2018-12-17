@@ -47,7 +47,7 @@
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{$professor->numero_endereco}}">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{$professor->numero_endereco}}">
                             <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">

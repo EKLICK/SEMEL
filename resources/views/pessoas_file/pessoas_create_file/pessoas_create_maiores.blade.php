@@ -74,7 +74,7 @@
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input name="numero_endereco" id="numero_endereco" type="number" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate">
                             <label for="numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
