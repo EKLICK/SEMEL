@@ -49,13 +49,13 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
-                            <input name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
-                            <label for="cpf">CPF:</label>
+                            <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
+                            <label for="cpf">CPF próprio [op]:</label>
                         </div>
                         <div class="input-field col s3">
-                            <i class="material-icons prefix">location_on</i>
-                            <input name="endereco" id="endereco" type="text" class="validate" value="{{$pessoa->endereco}}">
-                            <label for="endereco">Endereço:</label>
+                            <i class="material-icons prefix">credit_card</i>
+                            <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="{{$pessoa->cpf_responsavel}}">
+                            <label for="cpf_responsavel">CPF do responsável:</label>
                         </div>
                     </div>
                     <div class="row">
@@ -65,20 +65,25 @@
                             <label for="bairro">Bairro:</label>
                         </div>
                         <div class="input-field col s3">
+                            <i class="material-icons prefix">location_on</i>
+                            <input name="endereco" id="endereco" type="text" class="validate" value="{{$pessoa->endereco}}">
+                            <label for="endereco">Endereço:</label>
+                        </div>
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">markunread_mailbox</i>
-                            <input name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
                             <label for="cep">CEP:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
-                            <input name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
+                            <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">contact_phone</i>
-                            <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
+                            <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
                             <label for="icon_telephone">Telephone de emergência:</label>
                         </div>
                         <div class="input-field col s3">
@@ -98,7 +103,7 @@
                             <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{$pessoa->nome_da_mae}}">
                             <label for="nome_da_mae">Nome da mãe:</label>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">person_add</i>
                             <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{$pessoa->pessoa_emergencia}}">
                             <label for="pessoa_emergencia">Pessoa para emergência:</label>

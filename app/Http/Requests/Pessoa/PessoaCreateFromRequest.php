@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class regrasTurma extends FormRequest
+class PessoaCreateFromRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +25,11 @@ class regrasTurma extends FormRequest
     public function rules()
     {
         return [
-            'nucleo_id' =>'required',
-        ];
-    }
-
-    public function messages(){
-        return [
-            'nucleo_id.required' => 'A turma necessita obrigatoriamente de um núcleo!',
+            'nome' => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nascimento' => 'required|date-format:d/m/Y',
+            'sexo' => ['required', Rule::in(['M','F']),],
+            'rg' => 'sometimes|nullable|max:13|min:6',
+            
         ];
     }
 }

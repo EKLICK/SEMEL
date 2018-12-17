@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Pessoa\PessoaCreateFromRequest;
 use App\Pessoa;
 use App\Doenca;
 use App\Turma;
@@ -132,7 +134,7 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(Request $request)
+    public function store(PessoaCreateFromRequest $request)
     {
         $dataForm = $request->all();
         $escolha = $dataForm['escolha'];
@@ -258,12 +260,14 @@ class PessoasController extends Controller
     public function edit($id)
     {
         $pessoa = Pessoa::find($id);
-
         return view ('pessoas_file.pessoas_edit', compact('pessoa'));
     }
 
     public function pessoas_edit_menores($id){
         $pessoa = Pessoa::find($id);
+        $dia_hora = explode(' ', $pessoa['nascimento']);
+        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        $pessoa['nascimento'] = $dia.'/'.$mes.'/'.$ano;
         $doencaslist = Doenca::all();
 
         return view ('pessoas_file.pessoas_edit_file.pessoas_edit_menores', compact('doencaslist', 'pessoa'));

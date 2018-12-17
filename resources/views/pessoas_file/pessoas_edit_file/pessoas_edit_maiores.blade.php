@@ -48,7 +48,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
-                            <input name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
+                            <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{$pessoa->cpf}}">
                             <label for="cpf">CPF:</label>
                         </div>
                     </div>
@@ -65,19 +65,19 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">markunread_mailbox</i>
-                            <input name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{$pessoa->cep}}">
                             <label for="cep">CEP:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
-                            <input name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
+                            <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone}}">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">contact_phone</i>
-                            <input name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
+                            <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="{{$pessoa->telefone_emergencia}}">
                             <label for="icon_telephone">Telephone de emergência:</label>
                         </div>
                         <div class="input-field col s3">
