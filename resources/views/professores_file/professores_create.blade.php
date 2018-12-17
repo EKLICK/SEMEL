@@ -47,14 +47,14 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="cep" id="icon_cep" type="text" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
                             <label for="icon_cep">CEP:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">phone</i>
-                            <input name="telefone" id="icon_telephone" type="tel" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate">
                             <label for="icon_telephone">Telephone:</label>
                         </div>
                         <div class="input-field col s3">
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
-                            <input name="cpf" id="icon_cpf" type="text" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="icon_cpf" type="text" class="validate">
                             <label for="icon_cpf">CPF:</label>
                         </div>
                         <div class="input-field col s3">

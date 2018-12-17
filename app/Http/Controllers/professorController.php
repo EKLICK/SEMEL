@@ -137,6 +137,9 @@ class professorController extends Controller
     {
         if(auth()->user()->admin_professor == 1){
             $professor = Professor::find($id);
+            $dia_hora = explode(' ', $professor['nascimento']);
+            list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+            $professor['nascimento'] = $dia.'/'.$mes.'/'.$ano;
             $user = User::find($professor->user_id);
             $useremail = $user->email;
 

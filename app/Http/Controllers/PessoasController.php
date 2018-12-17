@@ -275,6 +275,9 @@ class PessoasController extends Controller
 
     public function pessoas_edit_maiores($id){
         $pessoa = Pessoa::find($id);
+        $dia_hora = explode(' ', $pessoa['nascimento']);
+        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        $pessoa['nascimento'] = $dia.'/'.$mes.'/'.$ano;
         $doencaslist = Doenca::all();
 
         return view ('pessoas_file.pessoas_edit_file.pessoas_edit_maiores', compact('doencaslist','pessoa'));

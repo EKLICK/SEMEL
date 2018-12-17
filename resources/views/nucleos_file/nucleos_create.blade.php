@@ -56,7 +56,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="cep" id="icon_cep" type="text" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
                             <label for="icon_cep">CEP:</label>
                         </div>
                     </div>
