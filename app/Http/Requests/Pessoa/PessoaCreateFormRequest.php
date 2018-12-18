@@ -46,6 +46,8 @@ class PessoaCreateFormRequest extends FormRequest
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
+            'peso'                  => 'sometimes|nullable|numeric|digits:300',
+            'altura'                => 'sometimes|nullable|numeric|digits:4',
             'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['sometimes','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],

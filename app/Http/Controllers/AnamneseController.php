@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Requests\Anamnese\AnamneseEditFormRequest;
 use Illuminate\Pagination\Paginator;
 use App\Anamnese;
 use App\Pessoa;
@@ -205,7 +206,7 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AnamneseEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
         if(!empty($dataForm['doencas'])){
