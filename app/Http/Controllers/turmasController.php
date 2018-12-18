@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\regrasTurma;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Turma\TurmaCreateFormRequest;
+use App\Http\Requests\Turma\TurmaCreateEditFormRequest;
 use App\Turma;
 use App\Nucleo;
 use App\Professor;
@@ -49,7 +49,7 @@ class turmasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TurmaCreateFormRequest $request)
+    public function store(TurmaCreateEditFormRequest $request)
     {
         $dataForm = $request->all();
         $dias_da_semana = '';
@@ -110,7 +110,7 @@ class turmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TurmaCreateEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
         $turma = Turma::find($id);

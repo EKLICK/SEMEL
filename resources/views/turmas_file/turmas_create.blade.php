@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="input-field col s5">
                             <i class="material-icons prefix">group</i>
-                            <input name="nome" id="icon_nome" type="text" class="validate">
+                            <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}">
                             <label for="icon_nome">Turma da turma:</label>
                         </div>
                         <div class="input-field col s3"></div>
@@ -33,13 +33,13 @@
                             <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio"/>
+                                    <input value="1" name="inativo" type="radio" @if(old('inativo') == 1) checked @endif/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="2" name="inativo" type="radio"/>
+                                    <input value="2" name="inativo" type="radio" @if(old('inativo') == 2) checked @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
@@ -49,17 +49,17 @@
                     <div class="row">
                         <div class="input-field col s2">
                             <i class="material-icons prefix">assignment</i>
-                            <input name="limite" id="icon_limite" type="number" class="validate">
+                            <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}">
                             <label for="icon_limite">Limite:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">hourglass_full</i>
-                            <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
+                            <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}">
                             <label for="icon_horario_inicial">Horário Inicial:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">hourglass_empty</i>
-                            <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
+                            <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}">
                             <label for="icon_horario_final">Horário Final:</label>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="input-field col s8">
                             <i class="material-icons prefix">description</i>
-                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea"></textarea>
+                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
                             <label for="icon_descricao">Descrição da turma:</label>
                         </div>
                     </div>

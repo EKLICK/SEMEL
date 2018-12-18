@@ -5,7 +5,7 @@ namespace App\Http\Requests\Turma;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class TurmaCreateFormRequest extends FormRequest
+class TurmaCreateEditFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,6 +31,7 @@ class TurmaCreateFormRequest extends FormRequest
             'horario_inicial'   => 'required|regex:/^[0-9AMP:]+$/|',
             'horario_final'     => 'required|regex:/^[0-9AMP:]+$/|',
             'data_semana'       => 'required|array|',
+            'nucleo_id'         => 'required',
             'descricao'         => 'sometimes|nullable|between:5,100',
         ];
     }
@@ -52,6 +53,8 @@ class TurmaCreateFormRequest extends FormRequest
             'horario_final' => 'Digite um horário final válido!',
 
             'data_semana.required' => 'O campo dias da semana é de preenchimento obrigatório!',
+
+            'nucleo_id.required' => 'O campo núcleo é de preenchimento obrigatório!',
 
             'descricao.between' => 'O campo descrição deve estar entre 5 e 100 caracteres!',
         ];

@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="input-field col s5">
                             <i class="material-icons prefix">group</i>
-                            <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$turma->nome}}">
+                            <input name="nome" id="icon_prefix" type="text" class="validate" value="@if(is_null(old('nome'))) {{$turma->nome}} @else {{old('nome')}} @endif">
                             <label for="icon_prefix">Nome da turma:</label>
                         </div>
                         <div class="input-field col s3"></div>
@@ -50,17 +50,17 @@
                     <div class="row">
                         <div class="input-field col s2">
                             <i class="material-icons prefix">assignment</i>
-                            <input name="limite" id="icon_prefix" type="number" class="validate" value="{{$turma->limite}}">
+                            <input name="limite" id="icon_prefix" type="number" class="validate" @if(is_null(old('limite'))) value="{{$turma->limite}}" @else value="{{old('limite')}}" @endif>
                             <label for="icon_prefix">Limite:</label>
                         </div>
                         <div class="input-field col 3">
                             <i class="material-icons prefix">hourglass_full</i>
-                            <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{$turma->horario_inicial}}">
+                            <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="@if(is_null(old('horario_inicial'))) {{$turma->horario_inicial}} @else {{old('horario_inicial')}} @endif">
                             <label for="icon_horario_inicial">Horário Inicial:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">hourglass_empty</i>
-                            <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{$turma->horario_final}}">
+                            <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="@if(is_null(old('horario_final'))) {{$turma->horario_final}} @else {{old('horario_final')}} @endif">
                             <label for="icon_horario_final">Horário Final:</label>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="input-field col s8">
                             <i class="material-icons prefix">description</i>
-                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{$turma->descricao}}</textarea>
+                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">@if(is_null(old('descricao'))) {{$turma->descricao}} @else {{old('descricao')}} @endif</textarea>
                             <label for="icon_descricao">Descrição da turma:</label>
                         </div>
                     </div>
