@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Requests\Professor\ProfessoresCreateFormRequest;
+use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
 use App\Turma;
@@ -97,7 +99,7 @@ class professorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfessoresCreateFormRequest $request)
     {
         $dataForm = $request->all();
         $user = User::create([

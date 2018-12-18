@@ -83,7 +83,7 @@ class PessoaCreateFormRequest extends FormRequest
             'rua.max' => 'Insira uma rua válida!',
             'rua.regex' => 'Não insira caracteres especiais na rua',
 
-            'numero.digits_between' => 'Insira um número com no máximo 5 dígitos!',
+            'numero_endereco.digits_between' => 'Insira um número com no máximo 5 dígitos!',
 
             'telefone.digits_between' => 'Insira um telefone válido!',
             'telefone_emergencia.digits_between' => 'Insira um telefone válido!',

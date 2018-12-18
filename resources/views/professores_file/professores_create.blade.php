@@ -6,6 +6,16 @@
 @endsection
 @section('title') Criar professor @endsection
 @section('content')
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -20,7 +30,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="icon_matricula" type="text" class="validate">
                             <label for="icon_matricula">Matricula:</label>
                         </div>
                         <div class="input-field col s3">
