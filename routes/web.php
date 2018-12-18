@@ -21,9 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Rotas de professores
 Route::resource('professor','professorController')->middleware('Authenticate');
-Route::get('/professor/edit/senha','professorController@editar_senha')->name('editar_senha')->middleware('Authenticate');
+Route::get('/professor/edit/senha/{id}','professorController@editar_senha')->name('editar_senha')->middleware('Authenticate');
 Route::get('/professors_info/{id}','professorController@professor_info')->name('professor_info')->middleware('Authenticate');
-Route::put('/professor/update/senha/{id}','professorController@update_senha')->name('update_senha')->middleware('Authenticate');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas')->middleware('Authenticate');
 Route::get('/professor/procurar','professorController@professor_procurar')->name('professor_procurar')->middleware('Authenticate');
 Route::get('/filtros_professor_turmas/{id}','professorController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
@@ -38,7 +37,7 @@ Route::get('/pessoas/pdf/{id}','pessoasController@pdfpessoas')->name('pdfpessoas
 Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_info')->middleware('Authenticate');
 Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select')->middleware('Authenticate');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('Authenticate');
-Route::get('/professor/deletarpessoa/','pessoaController@deletarPessoaCriada')->name('recriar')->middleware('Authenticate');
+Route::get('/professor/deletar_pessoa/','pessoasController@deletarPessoaCriada')->name('recriar')->middleware('Authenticate');
 Route::get('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('Authenticate');
 Route::get('/edit/menores/{id}','pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores')->middleware('Authenticate');
 Route::get('/edit/maiores/{id}','pessoasController@pessoas_edit_maiores')->name('pessoas_edit_maiores')->middleware('Authenticate');

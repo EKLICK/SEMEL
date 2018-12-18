@@ -137,23 +137,13 @@ class professorController extends Controller
      */
     public function edit($id)
     {
-        if(auth()->user()->admin_professor == 1){
-            $professor = Professor::find($id);
-            $dia_hora = explode(' ', $professor['nascimento']);
-            list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
-            $professor['nascimento'] = $dia.'/'.$mes.'/'.$ano;
-            $user = User::find($professor->user_id);
-            $useremail = $user->email;
+        $professor = Professor::find($id);
+        $dia_hora = explode(' ', $professor['nascimento']);
+        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        $professor['nascimento'] = $dia.'/'.$mes.'/'.$ano;
+        $user = User::find($professor->user_id);
 
-            return view ('professores_file.professores_edit', compact('professor', 'useremail'));
-        }
-        else{
-            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-            $user = User::find(auth()->user()->id);
-            $useremail = $user->email;
-
-            return view ('professores_file.professores_edit', compact('professor', 'useremail'));
-        }
+        return view ('professores_file.professores_edit', compact('professor', 'user'));
     }
 
     /**
@@ -163,7 +153,7 @@ class professorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfessoresCreateFormRequest $request, $id)
     {
         $professor = Professor::find($id);
         $user = User::find($professor->user_id);
@@ -266,23 +256,6 @@ class professorController extends Controller
         $professorid = $professor->id;
 
         return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
-    }
-
-    public function editar_senha(){
-        $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-
-        return view('professores_file.professores_edit_senha', compact('professor'));
-    }
-
-    public function update_senha(Request $request, $id){
-        $dataForm = $request->all();
-        $professor = Professor::find($id);
-        $user = User::where('id', '=', $professor->user_id)->first();
-        $dataForm['password'] = bcrypt($dataForm['password']);
-        $dataForm["admin_professor"] = "0";
-        $user->update($dataForm);
-
-        return view('home');
     }
 
     public function professor_procurar(Request $request){

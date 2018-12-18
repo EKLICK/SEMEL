@@ -2,15 +2,21 @@
 
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    @if(auth()->user()->admin_professor == 1) 
-        <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
-        <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
-    @else
-        <a href="{{route('professor.edit', 1)}}" class="breadcrumb">Mudar informações da conta</a>
-    @endif
+    <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
+    <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
 @endsection
 @section('title') Editar @if(auth()->user()->admin_professor == 1) {{$professor->nome}} @else sua conta @endif @endsection
 @section('content')
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -25,7 +31,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->matricula}}">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="icon_matricula" type="text" class="validate" value="{{$professor->matricula}}">
                             <label for="icon_matricula">Matricula:</label>
                         </div>
                         <div class="input-field col s3">
@@ -64,7 +70,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">email</i>
-                            <input name="email" id="icon_email" type="tel" class="validate" value="{{$useremail}}">
+                            <input name="email" id="icon_email" type="tel" class="validate" value="{{$user->email}}">
                             <label for="icon_email">E-mail:</label>
                         </div>
                     </div>
@@ -98,8 +104,5 @@
                 </form>
             </div>
         </div>
-        @if(auth()->user()->admin_professor == 0)
-            <a href="{{route('editar_senha')}}" class="waves-effect waves-light btn-large">Mudar senha</a>
-        @endif
     </div>
 @endsection
