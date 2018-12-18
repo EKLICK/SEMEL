@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Doenca;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator; 
+use App\Http\Requests\Doenca\DoencaCreateEditFormRequest;
 
 class doencasController extends Controller
 {
@@ -41,7 +42,7 @@ class doencasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoencaCreateEditFormRequest $request)
     {
         $dataForm = $request->all();
         Doenca::create($dataForm);
@@ -79,7 +80,7 @@ class doencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DoencaCreateEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
         $doenca = Doenca::find($id);
