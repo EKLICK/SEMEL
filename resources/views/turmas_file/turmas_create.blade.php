@@ -6,17 +6,16 @@
 @endsection
 @section('title') Criar turma @endsection
 @section('content')
-    @if(isset($errors) && count($errors) > 0 )
-        <div class="center-align">
-            @foreach( $errors->all() as $error )
-                <div class="chip red">
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
                     {{$error}}
                     <i class="close material-icons">close</i>
                 </div>
-            @endforeach
-        </div>
-     @endif
-
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -40,7 +39,7 @@
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio"/>
+                                    <input value="2" name="inativo" type="radio"/>
                                     <span>Inativo</span>
                                 </label>
                             </p>

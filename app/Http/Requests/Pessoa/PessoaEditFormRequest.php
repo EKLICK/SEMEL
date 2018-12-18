@@ -52,7 +52,7 @@ class PessoaEditFormRequest extends FormRequest
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
-            'name.between' => 'Insira um nome entre 3 ou 100 caracteres!',
+            'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'nascimento.required' => 'O campo nascimento é de preenchimento obrigatório',
             'nascimento.date' => 'Insira uma data sem letras',

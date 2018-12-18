@@ -6,6 +6,16 @@
 @endsection
 @section('title') Editar {{$turma->nome}} @endsection
 @section('content')
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -30,7 +40,7 @@
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio" @if($turma->inativo == 0) checked @endif/>
+                                    <input value="0" name="inativo" type="radio" @if($turma->inativo == 2) checked @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>

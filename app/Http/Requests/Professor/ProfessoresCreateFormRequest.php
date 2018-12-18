@@ -48,7 +48,7 @@ class ProfessoresCreateFormRequest extends FormRequest
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
-            'name.between' => 'Insira um nome entre 3 ou 100 caracteres!',
+            'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'matricula.required' => 'O campo matricula é de preenchimento obrigatório!',
             'matricula.unique' => 'Número de matricula já cadastrada!',

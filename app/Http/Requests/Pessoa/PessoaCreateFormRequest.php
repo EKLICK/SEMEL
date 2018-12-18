@@ -25,7 +25,7 @@ class PessoaCreateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,50',
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],
             'rg'                    => 'sometimes|nullable|max:13|min:6',
@@ -61,14 +61,14 @@ class PessoaCreateFormRequest extends FormRequest
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
-            'name.between' => 'Insira um nome entre 3 ou 100 caracteres!',
+            'nome.between' => 'Insira um nome entre 3 e 50 caracteres!',
 
             'nascimento.required' => 'O campo nascimento é de preenchimento obrigatório',
             'nascimento.date' => 'Insira uma data sem letras',
 
             'sexo.required' => 'O campo sexo é de preencimento obrigatório',
 
-            'rg.max:' => 'O rg deve ter entr 6 ou 13 caracteres!',
+            'rg.max:' => 'O rg deve ter entr 6 e 13 caracteres!',
 
             'cpf.digits' => 'Insira um CPF de 11 caracteres!',
             'cpf.unique' => 'CPF já cadastrado no sistema!',
@@ -89,13 +89,13 @@ class PessoaCreateFormRequest extends FormRequest
             'telefone_emergencia.digits_between' => 'Insira um telefone válido!',
 
             'nome_do_pai.regex' => 'Insira o nome do pai sem caractéres especiais!',
-            'nome_do_pai.between' => 'Insira o nome do pai entre 3 ou 100 caracteres!',
+            'nome_do_pai.between' => 'O nome do nome do pai deve estar entre 3 e 100 caracteres!',
 
             'nome_da_mae.regex' => 'Insira o nome da mãe sem caractéres especiais!',
-            'nome_da_mae.between' => 'Insira o nome da mãe entre 3 ou 100 caracteres!',
+            'nome_da_mae.between' => 'O nome da mãe deve estar entre 3 e 100 caracteres!',
 
             'pessoa_emergencia.regex' => 'Insira o nome da pessoa de emergência sem caractéres especiais!',
-            'pessoa_emergencia.between' => 'Insira o nome da pessoa de emergência entre 3 ou 100 caracteres!',
+            'pessoa_emergencia.between' => 'Insira o nome da pessoa de emergência entre 3 e 100 caracteres!',
 
             'filhos.digits_between' => 'É permitido somente 4 digitos para quantidade de filhos',
             

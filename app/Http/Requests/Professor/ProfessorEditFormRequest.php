@@ -25,7 +25,7 @@ class ProfessorEditFormRequest extends FormRequest
     {
         return [
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'matricula'             => 'sometimes|nullable|integer|unique:professores|',
+            'matricula'             => 'required|integer|unique:professores|',
             'nascimento'            => 'required|date-format:d/m/Y',
             'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
@@ -44,7 +44,7 @@ class ProfessorEditFormRequest extends FormRequest
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
-            'name.between' => 'Insira um nome entre 3 ou 100 caracteres!',
+            'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'matricula.required' => 'O campo matricula é de preenchimento obrigatório!',
             'matricula.unique' => 'Número de matricula já cadastrada!',
