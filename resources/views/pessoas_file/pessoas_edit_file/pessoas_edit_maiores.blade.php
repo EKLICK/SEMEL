@@ -70,7 +70,7 @@
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">confirmation_number</i>
-                            <input name="rua" id="rua" type="text" class="validate" value="{{$pessoa->rua or ld('rua')}}"/>
+                            <input name="rua" id="rua" type="text" class="validate" value="{{$pessoa->rua or old('rua')}}"/>
                             <label for="rua">Rua:</label>
                         </div>
                         <div class="input-field col s2">

@@ -110,8 +110,8 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">person</i>
-                            <input name="nome_do_pai" id="nome_da_pai" type="text" class="validate" value="{{old('nome_do_pai')}}">
-                            <label for="nome_da_pai">Nome do pai:</label>
+                            <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="{{old('nome_do_pai')}}">
+                            <label for="nome_do_pai">Nome do pai:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">person_outline</i>

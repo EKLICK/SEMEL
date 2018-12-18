@@ -7,6 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
+use App\Http\Requests\Pessoa\PessoaEditFormRequest;
 use App\Pessoa;
 use App\Doenca;
 use App\Turma;
@@ -291,7 +292,7 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PessoaCreateFormRequest $request, $id)
+    public function update(PessoaEditFormRequest $request, $id)
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Pessoa;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PessoaCreateFormRequest extends FormRequest
+class PessoaEditFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -45,15 +45,6 @@ class PessoaCreateFormRequest extends FormRequest
             'irmaos'                => 'digits_between:0,4',
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
-
-            'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'alergia_medicacao'     => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'cirurgia'              => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_ossea'             => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_muscular'          => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_articular'         => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'doencas_id'            => 'sometimes|nullable|integer|exists:doencas,id',
         ];
     }
 
