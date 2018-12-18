@@ -6,6 +6,16 @@
 @endsection
 @section('title') Editar {{$nucleo->nome}} @endsection
 @section('content')
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -15,7 +25,7 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <i class="material-icons prefix">filter_tilt_shift</i>
-                            <input name="nome" id="icon_nome" type="text" class="validate" value="{{$nucleo->nome}}">
+                            <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif">
                             <label for="icon_nome">Nome da turma:</label>
                         </div>
                         <div class="input-field col s3"></div>
@@ -30,7 +40,7 @@
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio" @if($nucleo->inativo == 0) checked @endif/>
+                                    <input value="2" name="inativo" type="radio" @if($nucleo->inativo == 2) checked @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
@@ -40,29 +50,29 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="bairro" id="icon_bairro" type="text" class="validate" value="{{$nucleo->bairro}}">
+                            <input name="bairro" id="icon_bairro" type="text" class="validate" value="@if(is_null(old('bairro'))) {{$nucleo->bairro}} @else {{old('bairro')}} @endif">
                             <label for="icon_bairro">Bairro:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">confirmation_number</i>
-                            <input name="rua" id="icon_rua" type="text" class="validate" value="{{$nucleo->rua}}">
+                            <input name="rua" id="icon_rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif">
                             <label for="icon_rua">Rua:</label>
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{$nucleo->numero_endereco}}">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="@if(is_null(old('numero_endereco'))) {{$nucleo->numero_endereco}} @else {{old('numero_endereco')}} @endif">
                             <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{$nucleo->cep}}">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif">
                             <label for="icon_cep">CEP:</label>
                         </div>
                     </div>
                     <div class="row">
                             <div class="input-field col s7">
                                 <i class="material-icons prefix">description</i>
-                                <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{$nucleo->descricao}}</textarea>
+                                <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">@if(is_null(old('descricao'))) {{$nucleo->descricao}} @else {{old('descricao')}} @endif</textarea>
                                 <label for="icon_descricao">Descrição do núcleo:</label>
                             </div>
                         </div>

@@ -6,6 +6,16 @@
 @endsection
 @section('title') Criar núcleo @endsection
 @section('content')
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
             <div class="row">
@@ -16,7 +26,7 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <i class="material-icons prefix">filter_tilt_shift</i>
-                            <input name="nome" id="icon_nome" type="text" class="validate">
+                            <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}">
                             <label for="icon_nome">Nome do núcleo:</label>
                         </div>
                         <div class="input-field col s3"></div>
@@ -25,13 +35,13 @@
                             <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio"/>
+                                    <input value="1" name="inativo" type="radio" @if(old('nome') == 1) checked @endif/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio"/>
+                                    <input value="2" name="inativo" type="radio" @if(old('nome') == 2) checked @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
@@ -41,29 +51,29 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input name="bairro" id="icon_bairro" type="text" class="validate">
+                            <input name="bairro" id="icon_bairro" type="text" class="validate" value="{{old('bairro')}}">
                             <label for="icon_bairro">Bairro:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">confirmation_number</i>
-                            <input name="rua" id="icon_rua" type="text" class="validate">
+                            <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}">
                             <label for="icon_rua">Rua:</label>
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}">
                             <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">location_city</i>
-                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
+                            <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{old('cep')}}">
                             <label for="icon_cep">CEP:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s7">
                             <i class="material-icons prefix">description</i>
-                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea"></textarea>
+                            <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
                             <label for="icon_descricao">Descrição do núcleo:</label>
                         </div>
                     </div>

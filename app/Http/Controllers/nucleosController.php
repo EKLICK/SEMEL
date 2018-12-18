@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
 use App\Nucleo;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
@@ -42,7 +43,7 @@ class nucleosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NucleoCreateEditFormRequest $request)
     {
         $dataForm = $request->all();
         $nucleo =  Nucleo::create($dataForm);
@@ -80,7 +81,7 @@ class nucleosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NucleoCreateEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
         $nucleo = Nucleo::find($id);
