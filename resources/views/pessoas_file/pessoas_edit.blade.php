@@ -58,12 +58,12 @@
                         <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="@if(is_null(old('cpf'))) {{$pessoa->cpf}} @else {{old('cpf')}} @endif">
-                            <label for="cpf">CPF próprio [op]:</label>
+                            <label for="cpf">CPF próprio:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">credit_card</i>
                             <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="@if(is_null(old('cpf_responsavel'))) {{$pessoa->cpf_responsavel}} @else {{old('cpf_responsavel')}} @endif">
-                            <label for="cpf_responsavel">CPF do responsável:</label>
+                            <label for="cpf_responsavel">CPF opcional:</label>
                         </div>
                     </div>
                     <div class="row">

@@ -129,40 +129,12 @@ class PessoasController extends Controller
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-        if($escolha == 1 && $nascimento > 18){
-            $errors = new MessageBag();
-            $errors->add('idade', 'É necessario idade menor que 18 anos para menores de idade!');
-            $doencaslist = Doenca::all();
-
-            return view ('pessoas_file.pessoas_create_file.pessoas_create_menores', compact('doencaslist'))->withErrors();
+        $errors = [];
+        if($nascimento > 18){
+            unset($dataForm['img_matricula']);
+            unset($dataForm['cpf_responsavel']);
         }
-        elseif($escolha == 2 && $nascimento < 18){
-            $errors = new MessageBag();
-            $errors->add('idade', 'É necessario idade maior que 18 anos para maiores de idade!');
-            $doencaslist = Doenca::all();
-            return view ('pessoas_file.pessoas_create_file.pessoas_create_maiores', compact('doencaslist'));
-        }
-        dd('fd');
-        unset($dataForm['escolha']);
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
-        if($escolha == 1 && $dataForm['img_matricula'] != null){
-            $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
-        }
-        else{
-            $pessoalist = Pessoa::all();
-            foreach($pessoalist as $pessoa){
-                if($pessoa['cpf'] == $dataForm['cpf']){
-                    Session::put('mensagem', 'Erro, CPF já registrado no banco de dados!');
-                    return redirect()->route('pessoas_maiores');
-                }
-                if($pessoa['rg'] == $dataForm['rg']){
-                    Session::put('mensagem', 'Erro, RG já registrado no banco de dados!');
-                    return redirect()->route('pessoas_maiores');
-                }
-            }
-            $dataForm['cpf_responsavel'] = null;
-            $dataForm['img_matricula'] = null;
-        }
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $pessoa = Pessoa::create([
@@ -191,9 +163,6 @@ class PessoasController extends Controller
             'matricula' => $dataForm['img_matricula'],
         ]);
         unset($dataForm['img_3x4']);
-        if($escolha == 1){
-            unset($dataForm['img_matricula']);
-        }
         unset($dataForm['nome']);
         unset($dataForm['nascimento']);
         unset($dataForm['sexo']);
@@ -291,16 +260,17 @@ class PessoasController extends Controller
             }
             $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         }
-        if($escolha == 1){
+        if($nascimento > 18){
+            unset($dataForm['img_matricula']);
+            unset($dataForm['cpf_responsavel']);
+        }
+        else{
             if($dataForm['img_matricula'] != $pessoa['matricula']){
                 if(!empty($pessoa['matricula'])){
                     unlink($pessoa['matricula']);
                 }
                 $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
             }
-        }
-        else{
-            $dataForm['img_matricula'] = null;
         }
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
