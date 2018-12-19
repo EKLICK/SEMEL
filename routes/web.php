@@ -39,11 +39,7 @@ Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('Authenticate');
 Route::get('/professor/deletar_pessoa/','pessoasController@deletarPessoaCriada')->name('recriar')->middleware('Authenticate');
 Route::get('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('Authenticate');
-Route::get('/edit/menores/{id}','pessoasController@pessoas_edit_menores')->name('pessoas_edit_menores')->middleware('Authenticate');
-Route::get('/edit/maiores/{id}','pessoasController@pessoas_edit_maiores')->name('pessoas_edit_maiores')->middleware('Authenticate');
 Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->name('lista_anamnese')->middleware('Authenticate');
-Route::get('/create/menores','pessoasController@pessoas_create_menores')->name('pessoas_create_menores')->middleware('Authenticate');
-Route::get('/create/maiores','pessoasController@pessoas_create_maiores')->name('pessoas_create_maiores')->middleware('Authenticate');
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create')->middleware('Authenticate');
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('Authenticate');
 Route::get('/pessoas_turmas/desvincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_desvincular')->name('pessoas_turmas_desvincular')->middleware('Authenticate');

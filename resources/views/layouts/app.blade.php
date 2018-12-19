@@ -42,9 +42,9 @@
                 </nav>
             </div>
             @guest
-            <main>
-                @yield('content')
-            </main>
+                <main>
+                    @yield('content')
+                </main>
             @else
                 <div class="row">
                     <div class="col s2 white">

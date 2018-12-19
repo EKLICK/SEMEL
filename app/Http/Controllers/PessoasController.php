@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\MessageBag;
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Http\Requests\Pessoa\PessoaEditFormRequest;
 use App\Pessoa;
@@ -107,25 +108,10 @@ class PessoasController extends Controller
         return redirect()->route('pessoa.create');
     }
 
-    public function pessoas_select(){
-        return view ('pessoas_file.pessoas_select_create');
-    }
-
-    public function pessoas_create_menores(){
-        $doencaslist = Doenca::all();
-        return view ('pessoas_file.pessoas_create_file.pessoas_create_menores', compact('doencaslist'));
-    }
-
-    public function pessoas_create_maiores(){
-        $doencaslist = Doenca::all();
-        return view ('pessoas_file.pessoas_create_file.pessoas_create_maiores', compact('doencaslist'));
-    }
-
     public function create()
     {
         $doencaslist = Doenca::all();
-
-        return view ('pessoas_file.pessoas_create', compact('doencaslist', compact('classe')));
+        return view ('pessoas_file.pessoas_create', compact('doencaslist'));
     }
 
     /**
@@ -138,8 +124,25 @@ class PessoasController extends Controller
     public function store(PessoaCreateFormRequest $request)
     {
         $dataForm = $request->all();
-        dd('fdf');
         $escolha = $dataForm['escolha'];
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
+        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+        $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+        if($escolha == 1 && $nascimento > 18){
+            $errors = new MessageBag();
+            $errors->add('idade', 'É necessario idade menor que 18 anos para menores de idade!');
+            $doencaslist = Doenca::all();
+
+            return view ('pessoas_file.pessoas_create_file.pessoas_create_menores', compact('doencaslist'))->withErrors();
+        }
+        elseif($escolha == 2 && $nascimento < 18){
+            $errors = new MessageBag();
+            $errors->add('idade', 'É necessario idade maior que 18 anos para maiores de idade!');
+            $doencaslist = Doenca::all();
+            return view ('pessoas_file.pessoas_create_file.pessoas_create_maiores', compact('doencaslist'));
+        }
+        dd('fd');
         unset($dataForm['escolha']);
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         if($escolha == 1 && $dataForm['img_matricula'] != null){
@@ -262,27 +265,12 @@ class PessoasController extends Controller
     public function edit($id)
     {
         $pessoa = Pessoa::find($id);
-        return view ('pessoas_file.pessoas_edit', compact('pessoa'));
-    }
-
-    public function pessoas_edit_menores($id){
-        $pessoa = Pessoa::find($id);
         $dia_hora = explode(' ', $pessoa['nascimento']);
         list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
         $pessoa['nascimento'] = $dia.'/'.$mes.'/'.$ano;
         $doencaslist = Doenca::all();
 
-        return view ('pessoas_file.pessoas_edit_file.pessoas_edit_menores', compact('doencaslist', 'pessoa'));
-    }
-
-    public function pessoas_edit_maiores($id){
-        $pessoa = Pessoa::find($id);
-        $dia_hora = explode(' ', $pessoa['nascimento']);
-        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
-        $pessoa['nascimento'] = $dia.'/'.$mes.'/'.$ano;
-        $doencaslist = Doenca::all();
-
-        return view ('pessoas_file.pessoas_edit_file.pessoas_edit_maiores', compact('doencaslist','pessoa'));
+        return view ('pessoas_file.pessoas_edit', compact('doencaslist', 'pessoa'));
     }
 
     /**
