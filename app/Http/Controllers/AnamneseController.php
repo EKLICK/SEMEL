@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Anamnese\AnamneseEditFormRequest;
+use App\Http\Requests\Anamnese\AnamneseCreateEditFormRequest;
 use Illuminate\Pagination\Paginator;
 use App\Anamnese;
 use App\Pessoa;
@@ -145,10 +145,12 @@ class AnamneseController extends Controller
         $pessoa_id = $id;
         $pessoa = Pessoa::find($pessoa_id);
         $hoje = date('Y');
-        list($dia, $mes, $ano) = explode('/', $pessoa['nascimento']);
+        $data = explode(' ', $pessoa['nascimento']);
+        list($dia, $mes, $ano) = explode('-', $data[0]);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
         $doencaslist = Doenca::all();
+
         return view ('anamneses_file.anamneses_create', compact('pessoa', 'doencaslist'));
     }
 
@@ -158,7 +160,7 @@ class AnamneseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnamneseCreateEditFormRequest $request)
     {
         $dataForm = $request->all();
         if(!empty($dataForm['doencas'])){
@@ -206,7 +208,7 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AnamneseEditFormRequest $request, $id)
+    public function update(AnamneseCreateEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
         if(!empty($dataForm['doencas'])){

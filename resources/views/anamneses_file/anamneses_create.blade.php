@@ -8,14 +8,15 @@
 @endsection
 @section('title') Criar anamnese para {{$pessoa->nome}} @endsection
 @section('content')
-    @if(Session::get('mensagem'))
-        <div class="center-align sessao">
-            <div class="chip red lighten-2">
-                {{Session::get('mensagem')}}
-                <i class="close material-icons">close</i>
+    @if(isset($errors) && count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div style="margin-left: 15%; margin-top: 1%;">
+                <div class="chip red lighten-2">
+                    {{$error}}
+                    <i class="close material-icons">close</i>
+                </div>
             </div>
-        </div>
-        {{Session::forget('mensagem')}}
+        @endforeach
     @endif
     <div class="container" style="margin-top: 3%;">
         <div class="card">
@@ -41,13 +42,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="toma_medicacao" type="radio"/>
+                                        <input value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="toma_medicacao" type="radio"/>
+                                        <input value="2" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -58,13 +59,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="alergia_medicacao" type="radio"/>
+                                        <input value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="alergia_medicacao" type="radio"/>
+                                        <input value="2" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -75,13 +76,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="fumante" type="radio"/>
+                                        <input value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="fumante" type="radio"/>
+                                        <input value="2" name="fumante" type="radio" @if(old('fumante') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -96,13 +97,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="cirurgia" type="radio"/>
+                                        <input value="1" name="cirurgia" type="radio" @if(old('cirurgia') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="cirurgia" type="radio"/>
+                                        <input value="2" name="cirurgia" type="radio" @if(old('cirurgia') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -113,13 +114,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="dor_ossea" type="radio"/>
+                                        <input value="1" name="dor_ossea" type="radio" @if(old('dor_ossea') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="dor_ossea" type="radio"/>
+                                        <input value="2" name="dor_ossea" type="radio" @if(old('dor_ossea') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -130,13 +131,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="dor_muscular" type="radio"/>
+                                        <input value="1" name="dor_muscular" type="radio" @if(old('dor_muscular') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="dor_muscular" type="radio"/>
+                                        <input value="2" name="dor_muscular" type="radio" @if(old('dor_muscular') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -147,13 +148,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="dor_articular" type="radio"/>
+                                        <input value="1" name="dor_articular" type="radio" @if(old('dor_articular') == 1) checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="dor_articular" type="radio"/>
+                                        <input value="2" name="dor_articular" type="radio" @if(old('dor_articular') == 2) checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
@@ -174,7 +175,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s8">
-                            <textarea name="observacao" id="observacao" class="materialize-textarea"></textarea>
+                            <textarea name="observacao" id="observacao" class="materialize-textarea">{{old('observacao')}}</textarea>
                             <label for="observacao">Observação</label>
                         </div>
                     </div>

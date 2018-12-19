@@ -155,13 +155,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="M" name="sexo" type="radio" @if ($pessoa->sexo == 'M') checked @endif/>
+                                        <input value="M" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'M') checked @else @if ($pessoa->sexo == 'M') checked @endif @endif/>
                                         <span>Masculino</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="F" name="sexo" type="radio" @if ($pessoa->sexo == 'F') checked @endif/>
+                                        <input value="F" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'F') checked @else @if ($pessoa->sexo == 'F') checked @endif @endif/>
                                         <span>Feminino</span>
                                     </label>
                                 </p>
@@ -172,13 +172,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="Solteiro" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'Solteiro') checked @endif/>
+                                        <input value="Solteiro" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Solteiro') checked @else @if ($pessoa->estado_civil == 'Solteiro') checked @endif @endif/>
                                         <span>Solteiro</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="Casado" name="estado_civil" type="radio" @if ($pessoa->estado_civil == 'Casado') checked @endif/>
+                                        <input value="Casado" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Casado') checked @else @if ($pessoa->estado_civil == 'Casado') checked @endif @endif/>
                                         <span>Casado</span>
                                     </label>
                                 </p>
@@ -189,13 +189,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 1) checked @endif/>
+                                        <input value="1" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '1') checked @else @if ($pessoa->mora_com_os_pais == 1) checked @endif @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="mora_com_os_pais" type="radio" @if ($pessoa->mora_com_os_pais == 2) checked @endif/>
+                                        <input value="2" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '2') checked @else @if ($pessoa->mora_com_os_pais == 2) checked @endif @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>

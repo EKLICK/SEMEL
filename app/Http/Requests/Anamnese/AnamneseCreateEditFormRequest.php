@@ -5,7 +5,7 @@ namespace App\Http\Requests\Anamnese;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AnamneseEditFormRequest extends FormRequest
+class AnamneseCreateEditFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,8 +40,19 @@ class AnamneseEditFormRequest extends FormRequest
 
     public function messages(){
         return [
+            'peso.required' => 'O campo peso é de preenchimento obrigatório!',
             'peso.digits' => 'Insira um peso válido!',
+
+            'altura.required' => 'O campo altura é de preenchimento obrigatório!',
             'altura.digits' => 'Insira uma altura válida!',
+
+            'toma_medicacao.required' => 'é necessario preencher se o usuário toma medicamentos no formulario',
+            'alergia_medicacao.required' => 'é necessario preencher se o usuário possui alergia médica no formulario',
+            'fumante.required' => 'é necessario preencher se o usuário fuma no formulario',
+            'cirurgia.required' => 'é necessario preencher se o usuário já fez cirurgia no formulario',
+            'dor_ossea.required' => 'é necessario preencher se o usuário possui dor ossea no formulario',
+            'dor_muscular.required' => 'é necessario preencher se o usuário possui dor muscular no formulario',
+            'dor_articular.required' => 'é necessario preencher se o usuário possui dor articular no formulario',
         ];
     }
 }
