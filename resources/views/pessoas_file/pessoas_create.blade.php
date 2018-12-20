@@ -27,14 +27,14 @@
                     <h5>Registro da pessoa:</h5>
                     <div class="row">
                         <div class="input-field col s2">
-                            <img id="3x4_image" class="materialboxed" width="150" src="{{asset('img/img_3x4.png')}}">
+                            <img id="3x4_image" class="materialboxed" width="150" src="">
                         </div>
                         <div class="input-field col s4">
                             <div class="file-field input-field" style="margin-left: 10%;">
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Foto 3x4</span>
-                                        <input id="3x4" type="file" name="img_3x4">
+                                        <input id="img_3x4" type="file" name="img_3x4">
                                     </div>
                                     <br><br><br>
                                     <div class="file-path-wrapper">
@@ -142,7 +142,7 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <div class="input-field col s2">
-                                <img id="matricula_image" class="materialboxed" width="250" src="{{asset('img/img_matricula.png')}}">
+                                <img id="matricula_image" class="materialboxed" width="250" src="">
                             </div>
                         </div>
                         <div class="input-field col s4">

@@ -25,27 +25,31 @@
                     <input type="hidden" name="_method" value="PUT">
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <div class="row">
-                        <div class="input-field col s3">
-                            <div class="file-field input-field">
+                        <div class="input-field col s2">
+                            <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null(old('img_3x4'))) {{isset($pessoa->foto)}} @endif">
+                        </div>
+                        <div class="input-field col s4">
+                            <div class="file-field input-field" style="margin-left: 10%;">
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Foto 3x4</span>
-                                        <input type="file" name="img_3x4">
+                                        <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{old('img_3x4')}} @else {{$pessoa->foto}} @endif">
                                     </div>
+                                    <br><br><br>
                                     <div class="file-path-wrapper">
-                                        <input name="img_3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
+                                        <input name="3x4" class="file-path validate" type="text" value="@if(is_null(old('3x4'))) {{old('3x4')}} @endif">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">account_circle</i>
-                            <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif">
+                            <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}">
                             <label for="nome">Nome:</label>
                         </div>
                         <div class="input-field col s3">
-                                <i class="material-icons prefix">child_friendly</i>
-                            <input name="nascimento" id="nascimento" type="text" class="validate" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif">
+                            <i class="material-icons prefix">child_friendly</i>
+                            <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}">
                             <label for="nascimento">Data de nascimento:</label>
                         </div>
                     </div>
@@ -133,20 +137,30 @@
                             <input name="irmaos" id="irmaos" type="number" class="validate" @if(is_null(old('irmaos'))) value="{{$pessoa->irmaos}}" @else value="{{old('irmaos')}}" @endif>
                             <label for="irmaos">Irmãos:</label>
                         </div>
-                        <div class="input-field col s5">
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <div class="input-field col s2">
+                                <img id="matricula_image" class="materialboxed" width="250" src="@if(!is_null(old('img_matricula'))) {{isset($pessoa->matricula)}} @endif">
+                            </div>
+                        </div>
+                        <div class="input-field col s4">
                             <div class="file-field input-field">
-                                <div class="file-field input-field">
-                                    <div class="btn">
-                                        <span>Matricula escolar</span>
-                                        <input type="file" name="img_matricula">
-                                    </div>
-                                    <div class="file-path-wrapper">
-                                        <input name="img_matricula" class="file-path validate" type="text" value="{{$pessoa->matricula}}">
+                                <div class="file-field input-field" style="margin-left: 10%;">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>matricula escolar</span>
+                                            <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('img_matricula'))) {{old('img_matricula')}} @else {{$pessoa->foto}} @endif">
+                                        </div>
+                                        <br><br><br>
+                                        <div class="file-path-wrapper">
+                                            <input id="matricula" class="file-path validate" type="text" value="@if(is_null(old('matricula'))) {{old('matricula')}} @endif">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>             
                     <div class="row">
                         <div class="input-field col s3">
                             Sexo:
