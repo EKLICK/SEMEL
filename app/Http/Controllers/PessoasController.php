@@ -124,15 +124,17 @@ class PessoasController extends Controller
     public function store(PessoaCreateFormRequest $request)
     {
         $dataForm = $request->all();
-        $escolha = $dataForm['escolha'];
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
         $errors = [];
         if($nascimento > 18){
-            unset($dataForm['img_matricula']);
-            unset($dataForm['cpf_responsavel']);
+            $dataForm['img_matricula'] = null;
+            $dataForm['cpf_responsavel'] = null;
+        }
+        else{
+            $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
         }
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         $nascimento = explode('/', $dataForm['nascimento']);
@@ -315,6 +317,10 @@ class PessoasController extends Controller
         Session::put('mensagem', $nome.' deletado(a) com sucesso!');
 
         return redirect()->Route('pessoas.index');
+    }
+
+    public function chegar_estato(){
+        
     }
 
     public function lista_anamnese($id){

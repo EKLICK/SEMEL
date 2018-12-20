@@ -35,19 +35,19 @@ class PessoaCreateFormRequest extends FormRequest
             'rua'                   => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'sometimes|nullable|digits_between:0,5',
             'bairro'                => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
-            'cep'                   => 'sometimes|nullable|digits:10',
-            'telefone'              => 'sometimes|nullable|digits_between:8,16',
-            'telefone_emergencia'   => 'sometimes|nullable|digits:digits_between:8,16',
+            'cep'                   => 'sometimes|nullable|max:10|min:10',
+            'telefone'              => 'sometimes|nullable|max:16|min:8',
+            'telefone_emergencia'   => 'sometimes|nullable|max:16|min:8',
             'nome_do_pai'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'nome_da_mae'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|between:3,100',
             'filhos'                => 'digits_between:0,4',
             'irmaos'                => 'digits_between:0,4',
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
-            'peso'                  => 'sometimes|nullable|numeric|digits:300',
-            'altura'                => 'sometimes|nullable|numeric|digits:4',
+            'peso'                  => 'sometimes|nullable|numeric|max:300',
+            'altura'                => 'sometimes|nullable|numeric|max:4',
             'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['sometimes','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
@@ -70,24 +70,31 @@ class PessoaCreateFormRequest extends FormRequest
 
             'sexo.required' => 'O campo sexo é de preencimento obrigatório',
 
-            'rg.max:' => 'O rg deve ter entr 6 e 13 caracteres!',
+            'rg.max:' => 'O rg deve ter entrw 6 e 13 digitos!',
 
             'cpf.max' => 'Insira um CPF de 11 caracteres!',
             'cpf.min' => 'Insira um CPF de 11 caracteres!',
             'cpf.unique' => 'CPF já cadastrado no sistema!',
 
-            'cpf_responsavel.min' => 'Insira um CPF de 11 caracteres!',
+            'cpf_responsavel.max' => 'Insira um CPF de 11 digitos!',
+            'cpf_responsavel.min' => 'Insira um CPF de 11 digitos!',
 
             'bairro.max' => 'Insira um bairro válido!',
             'bairro.regex' => 'Não insira caracteres especiais no bairro',
+
+            'cep.max' => 'Insira um CEP de 8 digitos!',
+            'cep.min' => 'Insira um CEP de 8 digitos!',
 
             'rua.max' => 'Insira uma rua válida!',
             'rua.regex' => 'Não insira caracteres especiais na rua',
 
             'numero_endereco.digits_between' => 'Insira um número com no máximo 5 dígitos!',
 
-            'telefone.digits_between' => 'Insira um telefone válido!',
-            'telefone_emergencia.digits_between' => 'Insira um telefone válido!',
+            'telefone.max' => 'Insira um telefone válido!',
+            'telefone.min' => 'Insira um telefone válido!',
+
+            'telefone_emergencia.max' => 'Insira um telefone válido!',
+            'telefone_emergencia.min' => 'Insira um telefone válido!',
 
             'nome_do_pai.regex' => 'Insira o nome do pai sem caractéres especiais!',
             'nome_do_pai.between' => 'O nome do nome do pai deve estar entre 3 e 100 caracteres!',
@@ -101,6 +108,9 @@ class PessoaCreateFormRequest extends FormRequest
             'filhos.digits_between' => 'É permitido somente 4 digitos para quantidade de filhos',
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
+
+            'peso.max' => 'Limite de peso: 300Kg',
+            'altura.max' => 'Limite de altura: 4 metros',
         ];
     }
 }

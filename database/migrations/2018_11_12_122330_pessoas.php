@@ -37,8 +37,9 @@ class Pessoas extends Migration
             $table->enum('sexo', ['M','F'])->nullable();
             $table->string('estado_civil')->nullable();
             $table->string('matricula')->nullable();
-            $table->boolean('mora_com_os_pais')->default(false);
-            $table->boolean('inativo')->default(false);
+            $table->boolean('mora_com_os_pais')->nullable();
+            $table->boolean('inativo')->nullable();
+            $table->boolean('estato')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

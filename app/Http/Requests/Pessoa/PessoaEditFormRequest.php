@@ -29,18 +29,18 @@ class PessoaEditFormRequest extends FormRequest
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],
             'rg'                    => 'sometimes|nullable|max:13|min:6',
-            'cpf'                   => 'sometimes|nullable|digits:14|unique:pessoas|unique:professores|',
-            'cpf_responsavel'       => 'sometimes|nullable|digits:14',
+            'cpf'                   => 'sometimes|nullable|max:14|min:14|unique:pessoas|unique:professores|',
+            'cpf_responsavel'       => 'sometimes|nullable|max:14|min:14',
             'cidade'                => 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'rua'                   => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'sometimes|nullable|digits_between:0,5',
             'bairro'                => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'cep'                   => 'sometimes|nullable|digits:10',
-            'telefone'              => 'sometimes|nullable|digits_between:8, 16',
-            'telefone_emergencia'   => 'sometimes|nullable|digits:digits_between:8, 16',
+            'telefone'              => 'sometimes|nullable|max:16|min:8',
+            'telefone_emergencia'   => 'sometimes|nullable|max:16|min:8',
             'nome_do_pai'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'nome_da_mae'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|between:3,100',
             'filhos'                => 'digits_between:0,4',
             'irmaos'                => 'digits_between:0,4',
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
@@ -61,10 +61,12 @@ class PessoaEditFormRequest extends FormRequest
 
             'rg.max:' => 'O rg deve ter entr 6 ou 13 caracteres!',
 
-            'cpf.digits' => 'Insira um CPF de 11 caracteres!',
+            'cpf.max' => 'Insira um CPF de 11 caracteres!',
+            'cpf.min' => 'Insira um CPF de 11 caracteres!',
             'cpf.unique' => 'CPF já cadastrado no sistema!',
-
-            'cpf_responsavel.digits' => 'Insira um CPF de 11 caracteres!',
+            
+            'cpf_responsavel.max' => 'Insira um CPF de 11 digitos!',
+            'cpf_responsavel.min' => 'Insira um CPF de 11 digitos!',
 
             'cep.digits' => 'Insira um cep válido!',
 
@@ -76,8 +78,11 @@ class PessoaEditFormRequest extends FormRequest
 
             'numero.digits_between' => 'Insira um número com no máximo 5 dígitos!',
 
-            'telefone.digits_between' => 'Insira um telefone válido!',
-            'telefone_emergencia.digits_between' => 'Insira um telefone válido!',
+            'telefone.max' => 'Insira um telefone válido!',
+            'telefone.min' => 'Insira um telefone válido!',
+
+            'telefone_emergencia.max' => 'Insira um telefone válido!',
+            'telefone_emergencia.min' => 'Insira um telefone válido!',
 
             'nome_do_pai.regex' => 'Insira o nome do pai sem caractéres especiais!',
             'nome_do_pai.between' => 'Insira o nome do pai entre 3 ou 100 caracteres!',

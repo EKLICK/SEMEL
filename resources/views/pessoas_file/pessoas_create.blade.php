@@ -23,7 +23,7 @@
                 <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
-                    <input type="text" name="atestado" value="0" hidden>
+                    <input type="text" name="atestado" value="2" hidden>
                     <h5>Registro da pessoa:</h5>
                     <div class="row">
                         <div class="input-field col s2">
@@ -131,12 +131,12 @@
                     <div class="row">
                         <div class="input-field col s2">
                             <i class="material-icons prefix">child_care</i>
-                            <input name="filhos" id="filhos" type="number" class="validate" value="0" value="{{old('filhos')}}">
+                            <input name="filhos" id="filhos" type="number" class="validate" @if(is_null(old('filhos'))) value="0" @else value="{{old('filhos')}}" @endif>
                             <label for="filhos">Filhos:</label>
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">people</i>
-                            <input name="irmaos" id="irmaos" type="number" class="validate" value="0" value="{{old('irmaos')}}">
+                            <input name="irmaos" id="irmaos" type="number" class="validate" @if(is_null(old('irmaos'))) value="0" @else  value="{{old('irmaos')}}" @endif>
                             <label for="irmaos">Irmãos:</label>
                         </div>
                     </div>
@@ -368,7 +368,7 @@
                                     <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" value="0" name="possui_doenca" hidden>
+                            <input type="text" value="2" name="possui_doenca" hidden>
                         </div>
                     </div>
                     <div class="row">
