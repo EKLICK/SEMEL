@@ -34,7 +34,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Foto 3x4</span>
-                                        <input type="file" name="img_3x4">
+                                        <input id="3x4" type="file" name="img_3x4">
                                     </div>
                                     <br><br><br>
                                     <div class="file-path-wrapper">
@@ -140,9 +140,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s2">
+                        <div class="input-field col s4">
                             <div class="input-field col s2">
-                                <img id="matricula_image" class="materialboxed" width="150" src="{{asset('img/img_3x4.png')}}">
+                                <img id="matricula_image" class="materialboxed" width="250" src="{{asset('img/img_matricula.png')}}">
                             </div>
                         </div>
                         <div class="input-field col s4">
@@ -151,7 +151,7 @@
                                     <div class="file-field input-field">
                                         <div class="btn">
                                             <span>matricula escolar</span>
-                                            <input type="file" name="img_matricula">
+                                            <input id="img_matricula" type="file" name="img_matricula">
                                         </div>
                                         <br><br><br>
                                         <div class="file-path-wrapper">

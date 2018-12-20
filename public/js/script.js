@@ -16,7 +16,7 @@ M.Datepicker.init(Calendario_nascimento,{
 });
 
 
-//Formatação de inputs:
+//FORMATAÇÃO DE INPUTS:
 
 function fMasc(objeto,mascara) {
     obj=objeto
@@ -60,3 +60,23 @@ function mNum(num){
     num=num.replace(/\D/g,"")
     return num
 }
+
+//UPLOAD DE IMAGE PÁGINA PESSOAS:
+
+document.getElementById("3x4").onchange = function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById("3x4_image").src = e.target.result;
+    };
+
+    reader.readAsDataURL(this.files[0]);
+};
+
+document.getElementById("img_matricula").onchange = function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById("matricula_image").src = e.target.result;
+    };
+    
+    reader.readAsDataURL(this.files[0]);
+};
