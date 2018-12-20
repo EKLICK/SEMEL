@@ -36,9 +36,10 @@
                                         <span>Foto 3x4</span>
                                         <input id="img_3x4" type="file" name="img_3x4">
                                     </div>
+                                    <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
                                     <br><br><br>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text">
+                                        <input id="3x4" class="file-path validate" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +146,7 @@
                                 <img id="matricula_image" class="materialboxed" width="250" src="">
                             </div>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s5">
                             <div class="file-field input-field">
                                 <div class="file-field input-field" style="margin-left: 10%;">
                                     <div class="file-field input-field">
@@ -153,9 +154,10 @@
                                             <span>matricula escolar</span>
                                             <input id="img_matricula" type="file" name="img_matricula">
                                         </div>
+                                        <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_matricula">Limpar</a>
                                         <br><br><br>
                                         <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text">
+                                            <input id="matricula" class="file-path validate" type="text">
                                         </div>
                                     </div>
                                 </div>

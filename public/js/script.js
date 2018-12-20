@@ -63,7 +63,7 @@ function mNum(num){
 
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
 
-document.getElementById("img_3x4").onchange = function () {
+document.getElementById("img_3x4").onchange = function (){
     var reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById("3x4_image").src = e.target.result;
@@ -72,7 +72,7 @@ document.getElementById("img_3x4").onchange = function () {
     reader.readAsDataURL(this.files[0]);
 };
 
-document.getElementById("img_matricula").onchange = function () {
+document.getElementById("img_matricula").onchange = function (){
     var reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById("matricula_image").src = e.target.result;
@@ -80,3 +80,15 @@ document.getElementById("img_matricula").onchange = function () {
     
     reader.readAsDataURL(this.files[0]);
 };
+
+document.getElementById('limpar_3x4').onclick = function (){
+    document.getElementById('3x4_image').src = '';
+    document.getElementById('img_3x4').value = '';
+    document.getElementById('3x4').value = '';
+}
+
+document.getElementById('limpar_matricula').onclick = function (){
+    document.getElementById('matricula_image').src = '';
+    document.getElementById('img_matricula').value = '';
+    document.getElementById('matricula').value = '';
+}

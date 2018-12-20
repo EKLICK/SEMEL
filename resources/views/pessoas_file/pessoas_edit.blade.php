@@ -35,6 +35,7 @@
                                         <span>Foto 3x4</span>
                                         <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{old('img_3x4')}} @else {{$pessoa->foto}} @endif">
                                     </div>
+                                    <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
                                     <br><br><br>
                                     <div class="file-path-wrapper">
                                         <input name="3x4" class="file-path validate" type="text" value="@if(is_null(old('3x4'))) {{old('3x4')}} @endif">
@@ -152,6 +153,7 @@
                                             <span>matricula escolar</span>
                                             <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('img_matricula'))) {{old('img_matricula')}} @else {{$pessoa->foto}} @endif">
                                         </div>
+                                        <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_matricula">Limpar</a>
                                         <br><br><br>
                                         <div class="file-path-wrapper">
                                             <input id="matricula" class="file-path validate" type="text" value="@if(is_null(old('matricula'))) {{old('matricula')}} @endif">
