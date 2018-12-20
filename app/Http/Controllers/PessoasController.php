@@ -74,6 +74,26 @@ class PessoasController extends Controller
         $data['img_matricula'] = $dir."/".$nomeImagem;
         return $data['img_matricula'];
     }
+
+    public function chegar_estado($listadados, $nascimento){
+        if($listadados['rg'] == null){return 0;}
+        if($listadados['cpf'] == null){return 0;}
+        if($listadados['bairro'] == null){return 0;}
+        if($listadados['rua'] == null){return 0;}
+        if($listadados['numero_endereco'] == null){return 0;}
+        if($listadados['cep'] == null){return 0;}
+        if($listadados['telefone'] == null){return 0;}
+        if($listadados['telefone_emergencia'] == null){return 0;}
+        if($listadados['convenio_medico'] == null){return 0;}
+        if($listadados['pessoa_emergencia'] == null){return 0;}
+        if($listadados['estado_civil'] == null){return 0;}
+        if($listadados['mora_com_os_pais'] == null){return 0;}
+        if($nascimento < 18){
+            if($listadados['matricula'] == null){return 0;}
+            if($listadados['cpf_responsavel'] == null){return 0;}
+        }
+        return 1;
+    }
     
     //Funções de Redirecionamento
     public function index()
@@ -128,6 +148,7 @@ class PessoasController extends Controller
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+        $estado = $this->chegar_estado($dataForm, $nascimento);
         $errors = [];
         if($nascimento > 18){
             $dataForm['img_matricula'] = null;
@@ -163,6 +184,7 @@ class PessoasController extends Controller
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
+            'estado' =>$estado,
         ]);
         unset($dataForm['img_3x4']);
         unset($dataForm['nome']);
@@ -255,7 +277,11 @@ class PessoasController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
-        $escolha = $dataForm['escolha'];
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
+        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+        $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+        $estado = $this->chegar_estado($dataForm, $nascimento);
         if($dataForm['img_3x4'] != $pessoa['foto']){
             if(!empty($pessoa['foto'])){
                 unlink($pessoa['foto']);
@@ -317,10 +343,6 @@ class PessoasController extends Controller
         Session::put('mensagem', $nome.' deletado(a) com sucesso!');
 
         return redirect()->Route('pessoas.index');
-    }
-
-    public function chegar_estato(){
-        
     }
 
     public function lista_anamnese($id){

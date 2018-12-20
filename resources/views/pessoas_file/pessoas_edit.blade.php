@@ -26,7 +26,7 @@
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <div class="row">
                         <div class="input-field col s2">
-                            <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null(old('img_3x4'))) {{isset($pessoa->foto)}} @endif">
+                            <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null($pessoa->foto)) {{asset($pessoa->foto)}} @endif">
                         </div>
                         <div class="input-field col s4">
                             <div class="file-field input-field" style="margin-left: 10%;">
@@ -45,12 +45,12 @@
                         </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">account_circle</i>
-                            <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}">
+                            <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif">
                             <label for="nome">Nome:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">child_friendly</i>
-                            <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}">
+                            <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif">
                             <label for="nascimento">Data de nascimento:</label>
                         </div>
                     </div>
@@ -142,10 +142,10 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <div class="input-field col s2">
-                                <img id="matricula_image" class="materialboxed" width="250" src="@if(!is_null(old('img_matricula'))) {{isset($pessoa->matricula)}} @endif">
+                                <img id="matricula_image" class="materialboxed" width="250" src="@if(!is_null($pessoa->matricula)) {{asset($pessoa->matricula)}} @endif">
                             </div>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s5">
                             <div class="file-field input-field">
                                 <div class="file-field input-field" style="margin-left: 10%;">
                                     <div class="file-field input-field">
@@ -169,13 +169,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="M" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'M') checked @endif @else @if ($pessoa->sexo == 'M') checked @endif @endif/>
+                                        <input value="M" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'M') checked @else @if ($pessoa->sexo == 'M') checked @endif @endif @endif />
                                         <span>Masculino</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="F" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'F') checked @endif @else @if ($pessoa->sexo == 'F') checked @endif @endif/>
+                                        <input value="F" name="sexo" type="radio" @if(is_null(old('sexo'))) @if(old('sexo') == 'F') checked @else @if ($pessoa->sexo == 'F') checked @endif @endif @endif />
                                         <span>Feminino</span>
                                     </label>
                                 </p>
@@ -186,13 +186,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="Solteiro" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Solteiro') checked @endif @else @if ($pessoa->estado_civil == 'Solteiro') checked @endif @endif/>
+                                        <input value="Solteiro" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Solteiro') checked @else @if ($pessoa->estado_civil == 'Solteiro') checked @endif @endif @endif/>
                                         <span>Solteiro</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="Casado" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Casado') checked @endif @else @if ($pessoa->estado_civil == 'Casado') checked @endif @endif/>
+                                        <input value="Casado" name="estado_civil" type="radio" @if(is_null(old('estado_civil'))) @if(old('estado_civil') == 'Casado') checked @endif @if ($pessoa->estado_civil == 'Casado') checked @else @endif @endif/>
                                         <span>Casado</span>
                                     </label>
                                 </p>
@@ -203,13 +203,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input value="1" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '1') checked @endif @else @if ($pessoa->mora_com_os_pais == 1) checked @endif @endif/>
+                                        <input value="1" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '1') checked @else @if ($pessoa->mora_com_os_pais == 1) checked @endif @endif @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input value="2" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '2') checked @endif @else @if ($pessoa->mora_com_os_pais == 2) checked @endif @endif/>
+                                        <input value="2" name="mora_com_os_pais" type="radio" @if(is_null(old('mora_com_os_pais'))) @if(old('mora_com_os_pais') == '2') checked @else @if ($pessoa->mora_com_os_pais == 2) checked @endif @endif @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
