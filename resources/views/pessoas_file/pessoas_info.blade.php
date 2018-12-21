@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{Route('pessoa_info', $pessoa->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') Informações de {{$pessoa->nome}} @endsection
+@section('title') Informações de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="col s6">

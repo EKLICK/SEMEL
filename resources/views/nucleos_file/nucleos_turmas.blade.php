@@ -3,7 +3,7 @@
     <a href="{{route('nucleos.index')}}" class="breadcrumb">Nucleos</a>
     <a href="{{route('turmas_cadastradas', $nucleo->id)}}" class="breadcrumb">Turmas cadastradas</a>
 @endsection
-@section('title') Turmas cadastradas em {{$nucleo->nome}}@endsection
+@section('title') Turmas cadastradas em {{$nucleo->nome}} @endsection
 @section('content') 
     <div class="container z-depth-4">
         <div class="card-panel">

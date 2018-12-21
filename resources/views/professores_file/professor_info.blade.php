@@ -3,7 +3,7 @@
     <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
     <a href="{{route('professor_info', $professor->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') Informações de {{$professor->nome}} @endsection
+@section('title') Informações de <?php $nomes = explode(' ',$professor->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     <div class="container right" style="margin-top: 3%;">
         <div class="row">

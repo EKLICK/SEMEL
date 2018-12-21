@@ -25,8 +25,8 @@ class AnamneseCreateEditFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'peso'                  => 'required|numeric|digits:300',
-            'altura'                => 'required|numeric|digits:4',
+            'peso'                  => 'required|numeric|max:300',
+            'altura'                => 'required|numeric|max:4',
             'toma_medicacao'        => ['required', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['required', Rule::in(['1', '2']),],
             'fumante'               => ['required', Rule::in(['1', '2']),],

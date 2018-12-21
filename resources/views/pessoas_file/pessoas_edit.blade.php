@@ -5,7 +5,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{Route('pessoas.edit', $pessoa->id)}}" class="breadcrumb">Editar</a>
 @endsection
-@section('title') Editar {{$pessoa->nome}} @endsection
+@section('title') Editar <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     @if(isset($errors) && count($errors) > 0)
         @foreach($errors->all() as $error)

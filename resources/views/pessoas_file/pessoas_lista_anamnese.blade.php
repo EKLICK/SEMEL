@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('lista_anamnese', $pessoa->id)}}" class="breadcrumb">Anamneses</a>
 @endsection
-@section('title') Anamneses de {{$pessoa->nome}} @endsection
+@section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     @if(Session::get('mensagem'))
         <div class="center-align sessao">
@@ -32,7 +32,7 @@
                         <th>Ano</th>
                         <th>Doença</th>
                         @if($pessoa->deleted_at == null)
-                            <th>Editar</th>
+                            <th style="width:200px; display:block: center;">Editar</th>
                         @endif
                     </tr>
                 </thead>
@@ -44,6 +44,8 @@
                         @if($pessoa->deleted_at == null)
                             @if($anamnese->ano == $ano)
                                 <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                            @else
+                                <td><p>Está anamnese não <br> pode ser mais editada</p></td>
                             @endif
                         @endif
                     </tr>

@@ -5,7 +5,7 @@
     <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
     <a href="{{route('professor.edit', $professor->id)}}" class="breadcrumb">Editar</a>
 @endsection
-@section('title') Editar @if(auth()->user()->admin_professor == 1) {{$professor->nome}} @else sua conta @endif @endsection
+@section('title') Editar <?php $nomes = explode(' ',$professor->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     @if(isset($errors) && count($errors) > 0)
         @foreach($errors->all() as $error)
