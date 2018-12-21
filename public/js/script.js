@@ -63,10 +63,7 @@ function mNum(num){
 
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
 
-document.getElementById("img_3x4").onchange = vizualizacao_image();
-
-
-function vizualizacao_image(){
+document.getElementById("img_3x4").onchange = function (){
     var reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById("3x4_image").src = e.target.result;

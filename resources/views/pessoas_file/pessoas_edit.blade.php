@@ -23,6 +23,7 @@
                 <form class="col s12" action="{{route('pessoas.update', $pessoa->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
+                    <input type="text" id="id" name="id" value="{{$pessoa->id}}" hidden/>
                     <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <div class="row">
                         <div class="input-field col s2">
@@ -33,12 +34,12 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Foto 3x4</span>
-                                        <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{old('img_3x4')}} @else {{$pessoa->foto}} @endif">
+                                        <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
                                     </div>
                                     <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
                                     <br><br><br>
                                     <div class="file-path-wrapper">
-                                        <input name="3x4" class="file-path validate" type="text" value="@if(is_null(old('3x4'))) {{old('3x4')}} @endif">
+                                        <input name="3x4" id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
                                     </div>
                                 </div>
                             </div>
@@ -151,12 +152,12 @@
                                     <div class="file-field input-field">
                                         <div class="btn">
                                             <span>matricula escolar</span>
-                                            <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('img_matricula'))) {{old('img_matricula')}} @else {{$pessoa->foto}} @endif">
+                                            <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('matricula'))) {{$pessoa->matricula}} @else {{old('matricula')}} @endif">
                                         </div>
                                         <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_matricula">Limpar</a>
                                         <br><br><br>
                                         <div class="file-path-wrapper">
-                                            <input id="matricula" class="file-path validate" type="text" value="@if(is_null(old('matricula'))) {{old('matricula')}} @endif">
+                                            <input id="matricula" class="file-path validate" type="text" value="@if(is_null(old('matricula'))) {{$pessoa->matricula}} @else {{old('matricula')}} @endif">
                                         </div>
                                     </div>
                                 </div>

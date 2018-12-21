@@ -157,7 +157,7 @@
                                         <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_matricula">Limpar</a>
                                         <br><br><br>
                                         <div class="file-path-wrapper">
-                                            <input id="matricula" class="file-path validate" type="text">
+                                            <input name="matricula" class="file-path validate" type="text">
                                         </div>
                                     </div>
                                 </div>

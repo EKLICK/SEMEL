@@ -76,6 +76,7 @@ class PessoasController extends Controller
     }
 
     public function chegar_estado($listadados, $nascimento){
+        if($listadados['img_3x4'] == null){return 0;}
         if($listadados['rg'] == null){return 0;}
         if($listadados['cpf'] == null){return 0;}
         if($listadados['bairro'] == null){return 0;}
@@ -89,7 +90,7 @@ class PessoasController extends Controller
         if($listadados['estado_civil'] == null){return 0;}
         if($listadados['mora_com_os_pais'] == null){return 0;}
         if($nascimento < 18){
-            if($listadados['matricula'] == null){return 0;}
+            if($listadados['img_matricula'] == null){return 0;}
             if($listadados['cpf_responsavel'] == null){return 0;}
         }
         return 1;
@@ -148,7 +149,6 @@ class PessoasController extends Controller
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-        $estado = $this->chegar_estado($dataForm, $nascimento);
         $errors = [];
         if($nascimento > 18){
             $dataForm['img_matricula'] = null;
@@ -158,6 +158,7 @@ class PessoasController extends Controller
             $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
         }
         $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+        $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $pessoa = Pessoa::create([
@@ -186,26 +187,6 @@ class PessoasController extends Controller
             'matricula' => $dataForm['img_matricula'],
             'estado' =>$estado,
         ]);
-        unset($dataForm['img_3x4']);
-        unset($dataForm['nome']);
-        unset($dataForm['nascimento']);
-        unset($dataForm['sexo']);
-        unset($dataForm['rg']);
-        unset($dataForm['cpf']);
-        unset($dataForm['cidade']);
-        unset($dataForm['endereco']);
-        unset($dataForm['bairro']);
-        unset($dataForm['cep']);
-        unset($dataForm['telefone']);
-        unset($dataForm['telefone_emergencia']);
-        unset($dataForm['estado_civil']);
-        unset($dataForm['nome_do_pai']);
-        unset($dataForm['nome_da_mae']);
-        unset($dataForm['pessoa_emergencia']);
-        unset($dataForm['filhos']);
-        unset($dataForm['convenio_medico']);
-        unset($dataForm['irmaos']);
-        unset($dataForm['mora_com_os_pais']);
         
         $dataForm += ['ano' => date('Y')];
         $dataForm += ['pessoas_id' => $pessoa->id];
@@ -277,29 +258,41 @@ class PessoasController extends Controller
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
-        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-        list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
-        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-        $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-        $estado = $this->chegar_estado($dataForm, $nascimento);
-        if($dataForm['img_3x4'] != $pessoa['foto']){
+        if(isset($dataForm['img_3x4'])){
             if(!empty($pessoa['foto'])){
                 unlink($pessoa['foto']);
             }
             $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         }
-        if($nascimento > 18){
-            unset($dataForm['img_matricula']);
-            unset($dataForm['cpf_responsavel']);
+        elseif(!empty($pessoa['foto'])){
+            $dataForm += ['img_3x4' => $pessoa['foto']];
         }
         else{
-            if($dataForm['img_matricula'] != $pessoa['matricula']){
+            $dataForm += ['img_3x4' => null];
+        }
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
+        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+        $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+        if($nascimento > 18){
+            $dataForm['img_matricula'] = null;
+            $dataForm['cpf_responsavel'] = null;
+        }
+        else{
+            if(isset($dataForm['img_matricula'])){
                 if(!empty($pessoa['matricula'])){
                     unlink($pessoa['matricula']);
                 }
                 $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
             }
+            elseif(!empty($pessoa['matricula'])){
+                $dataForm += ['img_matricula' => $pessoa['matricula']];
+            }
+            else{
+                $dataForm += ['img_matricula' => null];
+            }
         }
+        $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $pessoa->update([
@@ -309,9 +302,11 @@ class PessoasController extends Controller
             'sexo' => $dataForm['sexo'],
             'rg' => $dataForm['rg'],
             'cpf' => $dataForm['cpf'],
+            'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
-            'endereco' => $dataForm['endereco'],
+            'rua' => $dataForm['rua'],
             'bairro' => $dataForm['bairro'],
+            'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
             'telefone_emergencia' => $dataForm['telefone_emergencia'],
@@ -323,7 +318,8 @@ class PessoasController extends Controller
             'convenio_medico' => $dataForm['convenio_medico'],
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
-            'matricula' => $dataForm['img_matricula'], 
+            'matricula' => $dataForm['img_matricula'],
+            'estado' => $estado,
         ]);
 
         return redirect()->Route('pessoas.index');
