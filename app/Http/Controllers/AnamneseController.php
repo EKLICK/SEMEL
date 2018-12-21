@@ -265,6 +265,7 @@ class AnamneseController extends Controller
             if(!empty($dataForm['de_peso'])){
                 $filtro = $dataForm['de_peso'];
                 $query->where('peso', '>=', $filtro);
+                dd($query->get());
             }
             if(!empty($dataForm['ate_peso'])){
                 $filtro = $dataForm['ate_peso'];
@@ -311,7 +312,6 @@ class AnamneseController extends Controller
         $ano = date('Y');
         Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
         $doencaslist = Doenca::all();
-        
         if($dataForm['escolha'] == 0){
             $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
             return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));

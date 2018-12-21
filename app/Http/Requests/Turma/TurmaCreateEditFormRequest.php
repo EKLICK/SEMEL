@@ -26,9 +26,9 @@ class TurmaCreateEditFormRequest extends FormRequest
     {
         return [
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'limite'                => 'required|integer|digits:100',
+            'limite'                => 'required|integer|max:200',
             'inativo'               => ['required', Rule::in(['1', '2']),],
-            'horario_inicial'       => 'required|regex:/^[0-9AMP:]+$/|',
+            'horario_inicial'       => 'required|regex:/^\d{2}\:\d{2} (A|P){1}M$/',
             'horario_final'         => 'required|regex:/^[0-9AMP:]+$/|',
             'data_semana'           => 'required|array|',
             'nucleo_id'             => 'required',
@@ -43,14 +43,15 @@ class TurmaCreateEditFormRequest extends FormRequest
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'limite.required' => 'O campo limite é de preenchimento obrigatório!',
+            'limite.max' => 'O campo limite tem possui limite de 200 pessoas!',
 
             'inativo.required' => 'O campo inativo é de preenchimento obrigatório!',
 
             'horario_inicial.required' => 'O campo horário inicial é de preenchimento obrigatório!',
-            'horario_inicial' => 'Digite um horário inicial válido!',
+            'horario_inicial.regex' => 'Digite um horário inicial válido!',
 
             'horario_final.required' => 'O campo horário final é de preenchimento obrigatório!',
-            'horario_final' => 'Digite um horário final válido!',
+            'horario_final.regex' => 'Digite um horário final válido!',
 
             'data_semana.required' => 'O campo dias da semana é de preenchimento obrigatório!',
 

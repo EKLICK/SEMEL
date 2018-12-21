@@ -27,12 +27,12 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
-                            <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate">
+                            <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate" value="{{old('peso')}}">
                             <label for="icon_prefix">Peso:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">format_color_text</i>
-                            <input name="altura" id="icon_altura" type="number" step="0.01" class="validate">
+                            <input name="altura" id="icon_altura" type="number" step="0.01" class="validate" value="{{old('altura')}}">
                             <label for="icon_altura">Altura:</label>
                         </div>
                     </div>

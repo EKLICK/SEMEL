@@ -41,10 +41,10 @@ class AnamneseCreateEditFormRequest extends FormRequest
     public function messages(){
         return [
             'peso.required' => 'O campo peso é de preenchimento obrigatório!',
-            'peso.digits' => 'Insira um peso válido!',
+            'peso.max' => 'Limite de peso: 300Kg',
 
             'altura.required' => 'O campo altura é de preenchimento obrigatório!',
-            'altura.digits' => 'Insira uma altura válida!',
+            'altura.max' => 'Limite de altura: 4 metros',
 
             'toma_medicacao.required' => 'é necessario preencher se o usuário toma medicamentos no formulario',
             'alergia_medicacao.required' => 'é necessario preencher se o usuário possui alergia médica no formulario',

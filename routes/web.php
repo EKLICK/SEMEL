@@ -24,7 +24,7 @@ Route::resource('professor','professorController')->middleware('Authenticate');
 Route::get('/professor/edit/senha/{id}','professorController@editar_senha')->name('editar_senha')->middleware('Authenticate');
 Route::get('/professors_info/{id}','professorController@professor_info')->name('professor_info')->middleware('Authenticate');
 Route::get('/professor_turmas/{id}','professorController@professor_turmas')->name('professor_turmas')->middleware('Authenticate');
-Route::get('/professor/procurar','professorController@professor_procurar')->name('professor_procurar')->middleware('Authenticate');
+Route::get('/procurar/professor','professorController@professor_procurar')->name('professor_procurar')->middleware('Authenticate');
 Route::get('/filtros_professor_turmas/{id}','professorController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
 Route::get('/professor_meus_alunos/procurar/', 'professorController@professor_procurar_aluno')->name('professor_procurar_aluno')->middleware('Authenticate');
 Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController@professor_meus_alunos')->name('professor_meus_alunos')->middleware('Authenticate');
@@ -38,7 +38,7 @@ Route::get('/pessoas_info/{id}','pessoasController@pessoas_info')->name('pessoa_
 Route::get('/select/pessoas', 'pessoasController@pessoas_select')->name('pessoas_select')->middleware('Authenticate');
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('Authenticate');
 Route::get('/professor/deletar_pessoa/','pessoasController@deletarPessoaCriada')->name('recriar')->middleware('Authenticate');
-Route::get('/pessoas/procurar','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('Authenticate');
+Route::get('/procurar/pessoas','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('Authenticate');
 Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->name('lista_anamnese')->middleware('Authenticate');
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create')->middleware('Authenticate');
 Route::get('/pessoas_turmas/vincular/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('Authenticate');
@@ -50,27 +50,27 @@ Route::get('/anamnese_create/{id}','anamneseController@anamnese_create')->name('
 Route::get('/anamnese/pdf/{id}','anamneseController@pdfanamnese')->name('pdfanamnese')->middleware('Authenticate');
 Route::get('/anamneses_antigas','anamneseController@index2')->name('anamneses.index2')->middleware('Authenticate');
 Route::get('/anamneses_info/{id}','anamneseController@anamnese_info')->name('anamnese_info')->middleware('Authenticate');
-Route::get('/anamneses/procurar','anamneseController@anamnese_procurar')->name('anamnese_procurar')->middleware('Authenticate');
+Route::get('/procurar/anamneses','anamneseController@anamnese_procurar')->name('anamnese_procurar')->middleware('Authenticate');
 
 //Rotas de doenças
 Route::resource('doencas','doencasController')->middleware('Authenticate');
-Route::get('/doencas/procurar', 'doencasController@doencas_procurar')->name('doencas_procurar')->middleware('Authenticate');
+Route::get('/procurar/doencas', 'doencasController@doencas_procurar')->name('doencas_procurar')->middleware('Authenticate');
 
 //Rotas de turmas
 Route::resource('turmas','turmasController')->middleware('Authenticate');
 Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info')->middleware('Authenticate');
-Route::get('/turmas/procurar','turmasController@turmas_procurar')->name('turmas_procurar')->middleware('Authenticate');
+Route::get('/procurar/turmas','turmasController@turmas_procurar')->name('turmas_procurar')->middleware('Authenticate');
 
 //Rotas de núcleos
 Route::resource('nucleos','nucleosController')->middleware('Authenticate');
 Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
-Route::get('/nucleos/procurar','nucleosController@nucleos_procurar')->name('nucleos_procurar')->middleware('Authenticate');
+Route::get('/procurar/nucleos','nucleosController@nucleos_procurar')->name('nucleos_procurar')->middleware('Authenticate');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('Authenticate');
 
 //Rotas de Audits
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('Authenticate');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('Authenticate');
-Route::get('/audits_procurar','AuditsController@audits_procurar')->name('audits_procurar')->middleware('Authenticate');
+Route::get('/procurar/audits','AuditsController@audits_procurar')->name('audits_procurar')->middleware('Authenticate');
 
 //Softdeletes
 Route::get('/restore/pessoas/{id}','deleteController@pessoas_restore')->name('pessoas_restore')->middleware('Authenticate');

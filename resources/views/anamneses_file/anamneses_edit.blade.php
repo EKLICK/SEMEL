@@ -28,12 +28,12 @@
                         <h4 class="center">Nome do Usuário: {{$anamnese->pessoas->nome}}</h4>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">local_parking</i>
-                            <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate" value="@if(is_null(old('peso'))) {{$anamnese->peso}} @else {{old('peso')}} @endif">
+                            <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate" @if(is_null(old('peso'))) value="{{$anamnese->peso}}" @else value="{{old('peso')}}" @endif>
                             <label for="icon_prefix">Peso:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">format_color_text</i>
-                            <input name="altura" id="icon_altura" type="number" step="0.01" class="validate" value="@if(is_null(old('altura'))) {{$anamnese->altura}} @else {{old('altura')}} @endif">
+                            <input name="altura" id="icon_altura" type="number" step="0.01" class="validate" @if(is_null(old('altura'))) value="{{$anamnese->altura}}" @else value="{{old('altura')}}" @endif>
                             <label for="icon_matricula">Altura:</label>
                         </div>
                     </div>
