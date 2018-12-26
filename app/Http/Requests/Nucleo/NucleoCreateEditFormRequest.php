@@ -30,7 +30,7 @@ class NucleoCreateEditFormRequest extends FormRequest
             'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'required|digits_between:0,5',
-            'cep'                   => 'required|digits:10',
+            'cep'                   => 'required|max:10|min:10',
             'descricao'             => 'sometimes|nullable|between:5,100',
         ];
     }
@@ -55,7 +55,8 @@ class NucleoCreateEditFormRequest extends FormRequest
             'numero_endereco.digits_between' => 'Insira um número com no máximo 5 dígitos!',
 
             'cep.required' => 'O campo CEP é de preenchimento obrigatório!',
-            'cep.digits' => 'Insira um cep válido!',
+            'cep.max' => 'Insira um cep válido!',
+            'cep.min' => 'Insira um cep válido!',
 
             'descricao.between' => 'O campo descrição deve estar entre 5 e 100 caracteres!',
         ];

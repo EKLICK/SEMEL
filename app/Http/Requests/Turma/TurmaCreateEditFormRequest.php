@@ -28,9 +28,9 @@ class TurmaCreateEditFormRequest extends FormRequest
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'limite'                => 'required|integer|max:200',
             'inativo'               => ['required', Rule::in(['1', '2']),],
-            'horario_inicial'       => 'required|regex:/^\d{2}\:\d{2} (A|P){1}M$/',
-            'horario_final'         => 'required|regex:/^[0-9AMP:]+$/|',
-            'data_semana'           => 'required|array|',
+            'horario_inicial'       => ['required','regex:/^[0-2][0-3]:[0-5][0-9]+ (A|P)+M$/'],
+            'horario_final'         => ['required','regex:/^[0-2][0-3]:[0-5][0-9]+ (A|P)+M$/'],
+            'data_semanal'          => 'required|array|',
             'nucleo_id'             => 'required',
             'descricao'             => 'sometimes|nullable|between:5,100',
         ];
@@ -53,7 +53,7 @@ class TurmaCreateEditFormRequest extends FormRequest
             'horario_final.required' => 'O campo horário final é de preenchimento obrigatório!',
             'horario_final.regex' => 'Digite um horário final válido!',
 
-            'data_semana.required' => 'O campo dias da semana é de preenchimento obrigatório!',
+            'data_semanal.required' => 'O campo dias da semana é de preenchimento obrigatório!',
 
             'nucleo_id.required' => 'O campo núcleo é de preenchimento obrigatório!',
 

@@ -34,13 +34,13 @@
                             <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if ($turma->inativo == 1) checked @endif @endif/>
+                                    <input value="1" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if ($turma->inativo == 1) checked @endif @endif @endif/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 2) checked @else @if($turma->inativo == 2) checked @endif @endif/>
+                                    <input value="0" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 2) checked @else @if($turma->inativo == 2) checked @endif @endif @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>

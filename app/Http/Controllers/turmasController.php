@@ -70,7 +70,7 @@ class turmasController extends Controller
             $separador[0] = 12 + (int)$separador[0];
             $horario[0] = $separador[0].':'.$separador[1];
         }
-        $dataForm['horario_final'] = $horario.':00';
+        $dataForm['horario_final'] = $horario[0].':00';
         $turma = Turma::create($dataForm);
         Session::put('mensagem', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
         return redirect()->Route('turmas.index');
@@ -97,6 +97,26 @@ class turmasController extends Controller
     {
         $turma = Turma::find($id);
         $nucleoslist = Nucleo::all();
+        $horario = explode(':', $turma['horario_inicial']);
+        if($horario[0] > 12){
+            $horario[0] = (int)$horario[0] - 12;
+            $horario[2] = 'PM';
+            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        else{
+            $horario[2] = 'AM';
+            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        $horario = explode(':', $turma['horario_final']);
+        if($horario[0] > 12){
+            $horario[0] = (int)$horario[0] - 12;
+            $horario[2] = 'PM';
+            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        else{
+            $horario[2] = 'AM';
+            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $datas_escolhidas = explode(',', $turma['data_semanal']);
         unset($datas_escolhidas[count($datas_escolhidas) - 1]);
@@ -120,15 +140,20 @@ class turmasController extends Controller
             $dias_da_semana = $dias_da_semana.$data.',';
         }
         $dataForm['data_semanal'] = $dias_da_semana;
-        $turma['inativo'] = $dataForm['inativo'];
-        list($hora, $horario) = explode(' ', $dataForm['hora_horario_inicial']);
-        $dataForm += ['hora_inicial' => '00-00-00 '.$hora.':00'];
-        $dataForm += ['horario_inicial' => $horario];
-        unset($dataForm['hora_horario_inicial']);
-        list($hora, $horario) = explode(' ', $dataForm['hora_horario_final']);
-        $dataForm += ['hora_final' => '00-00-00 '.$hora.':00'];
-        $dataForm += ['horario_final' => $horario];
-        unset($dataForm['hora_horario_final']);
+        $horario = explode(' ', $dataForm['horario_inicial']);
+        if($horario[1] == 'PM'){
+            $separador = explode(':', $horario[0]);
+            $separador[0] = 12 + (int)$separador[0];
+            $horario[0] = $separador[0].':'.$separador[1];
+        }
+        $dataForm['horario_inicial'] = $horario[0].':00';
+        $horario = explode(' ', $dataForm['horario_final']);
+        if($horario[1] == 'PM'){
+            $separador = explode(':', $horario[0]);
+            $separador[0] = 12 + (int)$separador[0];
+            $horario[0] = $separador[0].':'.$separador[1];
+        }
+        $dataForm['horario_final'] = $horario[0].':00';
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
