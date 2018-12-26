@@ -1,33 +1,35 @@
 @extends('layouts.app')
-@section('css.personalizado')
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
-@endsection
-@section('js.personalizado')
-    <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
-@endsection
 
 @section('content')
-    <form class="login-form" action="{{route('login')}}" method="post">
-        @csrf
-        <div class="login-wrap">
-            <div class="login-html">
-                <h4>Login</h4>
-                <div class="login-form">
-                    <div class="group">
-                        <label for="identity" class="label">Username</label>
-                        <input name="identity" id="identity" type="text" class="input">
+    <div class="container" style="width: 35%; height: 25%; margin-top: 5%;">
+        <div class="row">
+            <div class="col s12 14 offset-14">
+                <form action="{{route('login')}}" method="post">
+                    @csrf
+                    <div class="card">
+                        <div class="card-action" style="background-color: #039be5;">
+                            <h3 style="color: white;">Fazer Login</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-field">
+                                <label for="identity"><h6>Usuario</h6></label>
+                                <input type="text" id="identity" name="identity">
+                            </div>
+                            <br>
+                            <div class="form-field">
+                                <label for="password"><h6>Senha</h6></label>
+                                <input type="password" id="password" name="password">
+                            </div>
+                            <br>
+                            <div class="form-field center-align">
+                                <button class="btn-large">Login</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="group">
-                        <label for="senha" class="label">Password</label>
-                        <input name="password" id="senha" type="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Entrar">
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
     @if(Session::get('mensagem'))
         <div class="center-align sessao" style="margin-top: 3%;">
             <div class="chip red lighten-2">

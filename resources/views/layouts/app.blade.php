@@ -48,7 +48,7 @@
             @else
                 <div class="row">
                     <div class="col s2 white">
-                        <div id='cssmenu'>
+                        <div id='cssmenu' style="margin-left: 10%;">
                             @if(auth()->user()->admin_professor == 1)
                                 <ul>
                                     <li class='active has-sub'><a href='#'>Ferramentas de administração</a>
