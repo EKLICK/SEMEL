@@ -34,13 +34,13 @@
                             <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if($nucleo->inativo == 1) checked @endif @endif/>
+                                    <input value="1" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if($nucleo->inativo == 1) checked @endif @endif @endif/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="2" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if($nucleo->inativo == 2) checked @endif @endif/>
+                                    <input value="2" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if($nucleo->inativo == 2) checked @endif @endif @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
-                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="@if(is_null(old('numero_endereco'))) {{$nucleo->numero_endereco}} @else {{old('numero_endereco')}} @endif">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else {{old('numero_endereco')}} @endif>
                             <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">

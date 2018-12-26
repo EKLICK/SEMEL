@@ -180,6 +180,26 @@ class turmasController extends Controller
 
     public function turma_info($id){
         $turma = Turma::find($id);
+        $horario = explode(':', $turma['horario_inicial']);
+        if($horario[0] > 12){
+            $horario[0] = (int)$horario[0] - 12;
+            $horario[2] = 'PM';
+            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        else{
+            $horario[2] = 'AM';
+            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        $horario = explode(':', $turma['horario_final']);
+        if($horario[0] > 12){
+            $horario[0] = (int)$horario[0] - 12;
+            $horario[2] = 'PM';
+            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+        else{
+            $horario[2] = 'AM';
+            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
+        }
         $dias = explode(',', $turma['data_semanal']);
         unset($dias[count($dias) - 1]);
 
@@ -188,26 +208,27 @@ class turmasController extends Controller
 
     public function turmas_procurar(Request $request){
         $dataForm = array_filter($request->all());
+        
         $turmaslist = Turma::where(function($query) use($dataForm){
             if(array_key_exists('nome', $dataForm)){
-                $filtro = $data['nome'];
-                $quer->where('nome', 'like', $filtro."%");
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
             }
             if(array_key_exists('inativo', $dataForm)){
-                $filtro = $data['inativo'];
-                $quer->where('inativo', '=', $filtro."%");
+                $filtro = $dataForm['inativo'];
+                $query->where('inativo', '=', $filtro."%");
             }
             if(array_key_exists('limite', $dataForm)){
-                $filtro = $data['nome'];
-                $quer->where('nome', 'like', $filtro."%");
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
             }
             if(array_key_exists('nome', $dataForm)){
-                $filtro = $data['nome'];
-                $quer->where('nome', 'like', $filtro."%");
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
             }
             if(array_key_exists('nome', $dataForm)){
-                $filtro = $data['nome'];
-                $quer->where('nome', 'like', $filtro."%");
+                $filtro = $dataForm['nome'];
+                $query->where('nome', 'like', $filtro."%");
             }
             if(array_key_exists('horario_inicial', $dataForm)){
                 $horario = explode(' ', $dataForm['horario_inicial']);
@@ -217,7 +238,7 @@ class turmasController extends Controller
                     $horario[0] = $separador[0].':'.$separador[1];
                 }
                 $filtro = $horario[0].':00';
-                $query->where('horario_inicial', '>=', $filtro);
+                $query->where('horario_inicial', '=', $filtro);
             }
             if(array_key_exists('horario_final', $dataForm)){
                 $horario = explode(' ', $dataForm['horario_final']);
@@ -227,13 +248,16 @@ class turmasController extends Controller
                     $horario[0] = $separador[0].':'.$separador[1];
                 }
                 $filtro = $horario[0].':00';
-                $query->where('horario_final', '<=', $filtro);
+                $query->where('horario_final', '=', $filtro);
             }
-            if(array_key_exists('data_semanal')){
-                $filtro = $dataForm['data_semanal'];
-                $query->where('horario_semanal', 'like', '%'.$filtro.'%');
+            if(array_key_exists('data_semanal', $dataForm)){
+                $filtro = '';
+                foreach($dataForm['data_semanal'] as $data){
+                    $filtro = $filtro.$data.',';
+                }
+                $query->where('data_semanal', 'like', '%'.$filtro.'%');
             }
-            if(array_key_exists('nucleo_id')){
+            if(array_key_exists('nucleo_id', $dataForm)){
                 $filtro = $dataForm['nucleo_id'];
                 $query->where('nucleo_id', '=', '$filtro');
             }
@@ -242,6 +266,7 @@ class turmasController extends Controller
             }
         })->orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
+        $nucleoslist = Nucleo::all();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] == -1){
 

@@ -25,12 +25,12 @@
                     <div class="row">
                         <div class="input-field col s5">
                             <i class="material-icons prefix">account_circle</i>
-                            <input name="nome" id="icon_prefix" type="text" class="validate">
+                            <input name="nome" id="icon_prefix" type="text" class="validate" value="{{old('nome')}}">
                             <label for="icon_prefix">Nome:</label>
                         </div>
                         <div class="input-field col s3">
                             <i class="material-icons prefix">recent_actors</i>
-                            <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="icon_matricula" type="text" class="validate" value="{{old('nome')}}">
+                            <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="icon_matricula" type="text" class="validate" value="{{old('matricula')}}">
                             <label for="icon_matricula">Matricula:</label>
                         </div>
                         <div class="input-field col s3">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="input-field col s4">
                             <i class="material-icons prefix">school</i>
-                            <input name="formacao" id="icon_formacao" type="text" class="validate" value="{{old('formacar')}}">
+                            <input name="formacao" id="icon_formacao" type="text" class="validate" value="{{old('formacao')}}">
                             <label for="icon_formacao">Formação:</label>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">perm_contact_calendar</i>
-                            <input name="usuario" id="icon_usuario" type="password" class="validate">
+                            <input name="usuario" id="icon_usuario" type="text" class="validate">
                             <label for="icon_usuario">Usuário:</label>
                         </div>
                         <div class="input-field col s3">

@@ -111,9 +111,9 @@
                 </tbody>
             </table>
             {{$professoreslist->links()}}
+            <a class="tooltipped" data-position="top" data-tooltip="Adicionar professor" href="{{Route('professor.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
-
     <div id="modaldelete" class="modal">
         <form action="{{route('professor.destroy', 'delete')}}" method="POST">
             @method('DELETE')

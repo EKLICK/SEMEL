@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Professor\ProfessoresCreateFormRequest;
+use App\Http\Requests\Professor\ProfessorCreateFormRequest;
+use App\Http\Requests\Professor\ProfessorEditFormRequest;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -99,7 +100,7 @@ class professorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProfessoresCreateFormRequest $request)
+    public function store(ProfessorCreateFormRequest $request)
     {
         $dataForm = $request->all();
         $user = User::create([
@@ -153,7 +154,7 @@ class professorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfessoresCreateFormRequest $request, $id)
+    public function update(ProfessorEditFormRequest $request, $id)
     {
         $professor = Professor::find($id);
         $user = User::find($professor->user_id);

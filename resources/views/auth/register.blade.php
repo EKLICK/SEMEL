@@ -1,43 +1,45 @@
 @extends('layouts.app')
-
-@section('css.personalizado')<link rel="stylesheet" href="{{asset('css/login.css')}}">@endsection
-@section('js.personalizado')<script type="text/javascript" src="{{asset('js/login.js')}}"></script>@endsection
 @section('breadcrumbs')
     <a href="{{route('register')}}" class="breadcrumb">Cadastrar</a>
 @endsection
 @section('title') <p style="color: black;">Cadastrar administrador</p> @endsection
 @section('content')
-    <div class="formulario">
-        <form class="login-form" action="{{route('register')}}" method="post">
-            @csrf
-            <div class="login-wrap" style="min-height:650px;">
-                <div class="login-html">
-                    <h4>Cadastrar</h4>
-                    <div class="login-form">
-                        <div class="group">
-                            <label for="identity" class="label">Username</label>
-                            <input name="name" id="nome" type="text" class="validate input"/>
-                        </div>
-                        <div class="group">
-                            <label for="identity" class="label">E-mail</label>
-                            <input name="email" id="email" type="email" class="validate input"/>
-                        </div>
-                        <div class="group">
-                            <label for="identity" class="label">Senha</label>
-                            <input name="password" id="senha" type="password" class="validate input"/>
-                        </div>
-                        <div class="group">
-                            <label for="identity" class="label">Confirmar Senha</label>
-                            <input name="password_confirmation" id="c_senha" type="password" class="validate input"/>
-                        </div>
-                        <input value="1" name="admin_professor" type="text" hidden/>
-                        <div class="group">
-                            <input type="submit" class="button" value="Registrar">
-                        </div>
+    <div class="container" style="margin-top: 3%;">
+        <div class="card">
+            <form class="col s12" action="{{route('professor.store')}}" method="post">
+                @csrf
+                <h6>Registro da conta:</h6>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">perm_contact_calendar</i>
+                        <input name="usuario" id="icon_usuario" type="password" class="validate">
+                        <label for="icon_usuario">Usuário:</label>
                     </div>
                 </div>
-            </div>
-        </form>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">email</i>
+                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}">
+                        <label for="icon_email">E-mail:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input name="password" id="icon_lockout" type="password" class="validate">
+                        <label for="icon_lockout">Senha:</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">lock</i>
+                        <input name="confirm_password" id="icon_lock" type="password" class="validate" >
+                        <label for="icon_lock">Confirmar senha:</label>
+                    </div>
+                </div>
+                <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
     </div>
 @endsection
 

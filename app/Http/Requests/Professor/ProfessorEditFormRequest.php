@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Professor;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfessorEditFormRequest extends FormRequest
 {
@@ -25,15 +26,15 @@ class ProfessorEditFormRequest extends FormRequest
     {
         return [
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'matricula'             => 'required|integer|unique:professores|',
+            'matricula'             => 'required|integer|unique:professores,matricula,'.$this->id.'|',
             'nascimento'            => 'required|date-format:d/m/Y',
             'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'required|digits_between:0,5',
-            'cep'                   => 'required|digits:10',
-            'telefone'              => 'required|digits_between:8, 16',
-            'email'                 => 'required|string|email|max:255|unique:users',
-            'cpf'                   => 'required|digits:14|unique:pessoas|unique:professores|',
+            'cep'                   => 'required|max:10|min:10',
+            'telefone'              => 'required|max:16|min:8',
+            'email'                 => 'required|string|email|max:255|unique:users,email,'.$this->id_user.'|',
+            'cpf'                   => 'required|max:14|min:14|unique:professores,cpf,'.$this->id.'|unique:pessoas|',
             'rg'                    => 'required|max:13|min:6',
             'curso'                 => 'required|between:3,100',
             'formacao'              => 'required|between:3,100',
@@ -67,14 +68,16 @@ class ProfessorEditFormRequest extends FormRequest
             'cep.digits' => 'Insira um cep válido!',
 
             'telefone.required' => 'O campo telefone é de preenchimento obrigatório!',
-            'telefone.digits_between' => 'Insira um telefone válido!',
+            'telefone.max' => 'Insira um telefone válido!',
+            'telefone.min' => 'Insira um telefone válido!',
 
             'email.required' => 'O campo email é de preenchimento obrigatório!',
             'email.unique' => 'Email já registrado!',
             'email.max' => 'O email deve ter no maximo 255 caractéres',
 
             'cpf.required' => 'O campo CPF é de preenchimento obrigatório!',
-            'cpf.digits' => 'Insira um CPF de 11 caracteres!',
+            'cpf.max' => 'Insira um CPF de 11 caracteres!',
+            'cpf.min' => 'Insira um CPF de 11 caracteres!',
             'cpf.unique' => 'CPF já cadastrado no sistema!',
 
             'rg.required' => 'O campo RG é de preenchimento obrigatório!',

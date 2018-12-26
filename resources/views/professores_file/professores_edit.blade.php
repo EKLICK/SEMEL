@@ -22,6 +22,8 @@
             <div class="row">
                 <form class="col s12" action="{{route('professor.update', $professor->id)}}" method="post">
                     @csrf
+                    <input type="text" id="id" name="id" value="{{$professor->id}}" hidden/>
+                    <input type="text" id="id" name="id_user" value="{{$professor->user_id}}" hidden/>
                     <input type="hidden" name="_method" value="PUT">
                     <div class="row">
                         <div class="input-field col s5">

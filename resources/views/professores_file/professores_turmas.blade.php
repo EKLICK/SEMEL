@@ -169,7 +169,6 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$turmaslist->links()}}
         </div>
     </div>
 @endsection

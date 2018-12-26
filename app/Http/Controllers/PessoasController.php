@@ -411,7 +411,7 @@ class PessoasController extends Controller
 
     public function pessoas_procurar(Request $request){
         $dataForm = $request->all();
-
+        
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
