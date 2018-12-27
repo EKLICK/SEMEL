@@ -100,6 +100,7 @@ class turmasController extends Controller
         $horario = explode(':', $turma['horario_inicial']);
         if($horario[0] > 12){
             $horario[0] = (int)$horario[0] - 12;
+            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
             $horario[2] = 'PM';
             $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
         }
@@ -110,6 +111,7 @@ class turmasController extends Controller
         $horario = explode(':', $turma['horario_final']);
         if($horario[0] > 12){
             $horario[0] = (int)$horario[0] - 12;
+            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
             $horario[2] = 'PM';
             $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
         }
@@ -183,6 +185,7 @@ class turmasController extends Controller
         $horario = explode(':', $turma['horario_inicial']);
         if($horario[0] > 12){
             $horario[0] = (int)$horario[0] - 12;
+            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
             $horario[2] = 'PM';
             $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
         }
@@ -193,6 +196,7 @@ class turmasController extends Controller
         $horario = explode(':', $turma['horario_final']);
         if($horario[0] > 12){
             $horario[0] = (int)$horario[0] - 12;
+            if($horario[0] < 10){$horario[0] = '0'.$horario[0];} 
             $horario[2] = 'PM';
             $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
         }

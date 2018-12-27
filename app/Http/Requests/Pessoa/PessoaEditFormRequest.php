@@ -25,6 +25,8 @@ class PessoaEditFormRequest extends FormRequest
     public function rules()
     {
         return [
+            '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpeg)|(img))+$/'],
+            'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpeg)|(img))+$/'],
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],
@@ -50,6 +52,8 @@ class PessoaEditFormRequest extends FormRequest
 
     public function messages(){
         return[
+            '3x4.regex' => 'O arquivo de perfil deve ser uma imagem ( .png | .jpeg | .img )',
+            'matricula.regex' => 'O arquivo de matricula deve ser uma imagem ( .png | .jpeg | .img )',
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',

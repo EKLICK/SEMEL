@@ -11,8 +11,8 @@ class Anamnese extends model implements Auditable
 
     protected $table = "anamneses";
     protected $fillable = [
-        'ano', 'pessoas_id', 'peso', 'altura', 'possui_doenca', 'toma_medicacao', 'alergia_medicacao',
-        'fumante', 'cirurgia', 'dor_ossea', 'dor_muscular', 'dor_articular','atestado', 'observacao',
+        'peso', 'altura', 'possui_doenca', 'toma_medicacao', 'alergia_medicacao','fumante','cirurgia', 
+        'dor_ossea', 'dor_muscular', 'dor_articular','atestado', 'observacao', 'ano', 'pessoas_id', 
     ];
 
     public function pessoas(){

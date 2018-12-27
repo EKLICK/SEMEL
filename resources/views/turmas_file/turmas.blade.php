@@ -121,15 +121,15 @@
                             <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             <td> 
                                 <p>
-                                    @if($turma->inativo == 0)
-                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                    @if($turma->inativo == 2)
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
                                         @else Turma inativa @endif
                                     @else 
-                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
                                         @else Turma ativa @endif @endif
                                 </p>
                                 <i class="small material-icons" 
-                                    @if($turma->inativo == 0 || $turma->nucleo->inativo == 0)  
+                                    @if($turma->inativo == 2 || $turma->nucleo->inativo == 2)  
                                         style="color: red;" 
                                     @else 
                                         style="color: green;" 

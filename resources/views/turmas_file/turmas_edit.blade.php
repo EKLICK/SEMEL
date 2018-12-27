@@ -34,13 +34,13 @@
                             <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 1) checked @else @if ($turma->inativo == 1) checked @endif @endif @endif/>
+                                    <input value="1" name="inativo" type="radio" @if(old('inativo') == 1) checked @else @if ($turma->inativo == 1) checked @endif @endif/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="0" name="inativo" type="radio" @if(is_null(old('inativo'))) @if(old('inativo') == 2) checked @else @if($turma->inativo == 2) checked @endif @endif @endif/>
+                                    <input value="2" name="inativo" type="radio" @if(old('inativo') == 2) checked @else @if($turma->inativo == 2) checked @endif @endif/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
@@ -76,8 +76,8 @@
                         <div class="input-field col s4">
                             <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
                             <select name="nucleo_id">
-                                @foreach ($nucleoslist as $nucleo)  
-                                    <option value="{{$nucleo->id}}" @if($nucleo->id == $turma->nucleo_id) checked @endif>{{$nucleo->nome}}</option>
+                                @foreach ($nucleoslist as $nucleo)
+                                    <option value="{{$nucleo->id}}" @if($nucleo->id == $turma->nucleo_id) selected @endif>{{$nucleo->nome}}</option>
                                 @endforeach
                             </select>
                         </div>

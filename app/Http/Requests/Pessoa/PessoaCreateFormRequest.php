@@ -25,6 +25,8 @@ class PessoaCreateFormRequest extends FormRequest
     public function rules()
     {
         return [
+            '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpeg)|(img))+$/'],
+            'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpeg)|(img))+$/'],
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,50',
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],
@@ -46,8 +48,8 @@ class PessoaCreateFormRequest extends FormRequest
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
-            'peso'                  => 'sometimes|nullable|numeric|max:300',
-            'altura'                => 'sometimes|nullable|numeric|max:4',
+            'peso'                  => 'sometimes|nullable|numeric|max:300|min:0',
+            'altura'                => 'sometimes|nullable|numeric|max:4|min:0',
             'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['sometimes','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
@@ -61,6 +63,8 @@ class PessoaCreateFormRequest extends FormRequest
 
     public function messages(){
         return[
+            '3x4.regex' => 'O arquivo de perfil deve ser uma imagem ( .png | .jpeg | .img )',
+            'matricula.regex' => 'O arquivo de matricula deve ser uma imagem ( .png | .jpeg | .img )',
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
             'nome.regex' => 'Insira um nome sem caractéres especiais!',
             'nome.between' => 'Insira um nome entre 3 e 50 caracteres!',
@@ -109,8 +113,11 @@ class PessoaCreateFormRequest extends FormRequest
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
 
-            'peso.max' => 'Limite de peso: 300Kg',
-            'altura.max' => 'Limite de altura: 4 metros',
+            'peso.max' => 'Limite de máximo peso: 300Kg',
+            'peso.min' => 'Limite de mínimo peso: 300Kg',
+
+            'altura.max' => 'Limite de máximo altura: 4 metros',
+            'altura.min' => 'Limite de mínimo altura: 4 metros',
         ];
     }
 }

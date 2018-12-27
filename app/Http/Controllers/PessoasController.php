@@ -187,31 +187,27 @@ class PessoasController extends Controller
             'matricula' => $dataForm['img_matricula'],
             'estado' =>$estado,
         ]);
-        
-        $dataForm += ['ano' => date('Y')];
-        $dataForm += ['pessoas_id' => $pessoa->id];
-
         if(!empty($dataForm['doencas'])){
             $dataForm['possui_doenca'] = 1;
         }
+        $anamnese = Anamnese::create([
+            'possui_doenca' => $dataForm['possui_doenca'],
+            'toma_medicacao' => $dataForm['toma_medicacao'],
+            'alergia_medicacao' => $dataForm['alergia_medicacao'],
+            'peso' => $dataForm['peso'],
+            'altura' => $dataForm['altura'],
+            'fumante' => $dataForm['fumante'],
+            'cirurgia' => $dataForm['cirurgia'],
+            'dor_muscular' => $dataForm['dor_muscular'],
+            'dor_articular' => $dataForm['dor_articular'],
+            'dor_ossea' => $dataForm['dor_ossea'],
+            'atestado' => $dataForm['atestado'],
+            'observacao' => $dataForm['observacao'],
+            'ano' => date('Y'),
+            'pessoas_id' => $pessoa->id,
+        ]);
         if(isset($dataForm['doencas'])){
-            $anamnese = Anamnese::create([
-                'possui_doenca' => $dataForm['possui_doenca'],
-                'toma_medicacao' => $dataForm['toma_medicacao'],
-                'alergia_medicacao' => $dataForm['alergia_medicacao'],
-                'peso' => $dataForm['peso'],
-                'altura' => $dataForm['altura'],
-                'fumante' => $dataForm['fumante'],
-                'cirurgia' => $dataForm['cirurgia'],
-                'dor_muscular' => $dataForm['dor_muscular'],
-                'dor_articular' => $dataForm['dor_articular'],
-                'dor_ossea' => $dataForm['dor_ossea'],
-                'atestado' => $dataForm['atestado'],
-                'observacao' => $dataForm['observacao']
-            ]);
             $anamnese->doencas()->attach($dataForm['doencas']);
-        }else{
-            Anamnese::create($dataForm);
         }
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
