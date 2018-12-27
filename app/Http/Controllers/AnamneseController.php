@@ -163,12 +163,15 @@ class AnamneseController extends Controller
     public function store(AnamneseCreateEditFormRequest $request)
     {
         $dataForm = $request->all();
+        $dataForm += ['ano' => date('Y')];
         if(!empty($dataForm['doencas'])){
             $dataForm['possui_doenca'] = 1;
+            $anamnese = Anamnese::create($dataForm);
             $anamnese->doencas()->attach($dataForm['doencas']);
         }
-        $dataForm += ['ano' => date('Y')];
-        Anamnese::create($dataForm);
+        else{
+            Anamnese::create($dataForm);
+        }
         Session::put('mensagem', 'Anamnese adicionada com sucesso!');
 
         return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);

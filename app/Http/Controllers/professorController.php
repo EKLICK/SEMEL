@@ -73,6 +73,14 @@ class professorController extends Controller
         return $itemCollection;
     }
 
+    public function mostrar_nascimento($data){
+        $dia_hora = explode(' ', $data);
+        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        $data = $dia.'/'.$mes.'/'.$ano;
+
+        return $data;
+    }
+
     //Funções de Redirecionamento
     public function index()
     {
@@ -139,10 +147,8 @@ class professorController extends Controller
     public function edit($id)
     {
         $professor = Professor::find($id);
-        $dia_hora = explode(' ', $professor['nascimento']);
-        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
-        $professor['nascimento'] = $dia.'/'.$mes.'/'.$ano;
         $user = User::find($professor->user_id);
+        $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
 
         return view ('professores_file.professores_edit', compact('professor', 'user'));
     }
@@ -173,14 +179,8 @@ class professorController extends Controller
         else if($newuser != $olduser){
             Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
         }
-        if(auth()->user()->admin_professor == 1){
-
-            return redirect()->Route('professor.index');
-        }
-        else{
-
-            return redirect()->Route('professor_turmas', 1);
-        }
+        
+        return redirect()->Route('professor.index');
     }
 
     /**
@@ -208,7 +208,11 @@ class professorController extends Controller
             $professoreslist = Professor::onlyTrashed()->get();
             $professor = $professoreslist->find($id);
         }
-        return view ('professores_file.professor_info', compact('professor'));
+        $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
+        $user = User::find($professor['user_id']);
+        $useremail = $user->email;
+
+        return view ('professores_file.professor_info', compact('professor','useremail'));
     }
 
     public function professor_turmas($id){

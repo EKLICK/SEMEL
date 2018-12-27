@@ -6,7 +6,7 @@
     <a href="{{route('lista_anamnese', $pessoa->id)}}" class="breadcrumb">Anamneses</a>
     <a href="{{route('pessoas.create')}}" class="breadcrumb">Criar Anamneses</a>
 @endsection
-@section('title') Criar anamnese para {{$pessoa->nome}} @endsection
+@section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
     @if(isset($errors) && count($errors) > 0)
         @foreach($errors->all() as $error)

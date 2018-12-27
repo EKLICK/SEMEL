@@ -95,19 +95,28 @@ class PessoasController extends Controller
         }
         return 1;
     }
+
+    public function mostrar_nascimento($data, $opcao){
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        $dia_hora = explode(' ', $data);
+        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        if($opcao == 1){
+            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+            $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
+        }
+        else{
+            $data = $dia.'/'.$mes.'/'.$ano;
+        }
+        return $data;
+    }
     
     //Funções de Redirecionamento
     public function index()
     {
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
-        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         foreach($pessoaslist as $pessoa){
-            $dia_hora = explode(' ', $pessoa['nascimento']);
-            list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
-            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-            $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
+           $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
-        $data = new \DateTime();
         $ano = date('Y');
         $pessoall = Pessoa::all();
         Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco de dados.');
@@ -235,9 +244,7 @@ class PessoasController extends Controller
     public function edit($id)
     {
         $pessoa = Pessoa::find($id);
-        $dia_hora = explode(' ', $pessoa['nascimento']);
-        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
-        $pessoa['nascimento'] = $dia.'/'.$mes.'/'.$ano;
+        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $doencaslist = Doenca::all();
 
         return view ('pessoas_file.pessoas_edit', compact('doencaslist', 'pessoa'));
@@ -361,6 +368,7 @@ class PessoasController extends Controller
             $pessoa = $pessoaslist->find($id);
         }
         $anamnese = $pessoa->anamneses->last();
+        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
 
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese'));
     }
