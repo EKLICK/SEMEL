@@ -30,7 +30,7 @@
                     <div class="collapsible-body">
                         <form action="{{route('turmas_procurar')}}" method="GET">
                             @csrf
-                            <input type="text" name="id" value="0" hidden>
+                            <input type="text" name="id" value="x" hidden>
                             <div class="row">
                                 <div class="input-field col s5">
                                     <i class="material-icons prefix">group</i>

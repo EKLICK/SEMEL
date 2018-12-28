@@ -18,8 +18,7 @@
                     @guest
                     @else
                         <div class="subtitle">
-                            <h6><b>Usuário: &emsp;@if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
-                            <h6><b>Nome: &emsp;&emsp;{{auth()->user()->name}}</b></h6>
+                            <h6><b>@if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
                         </div>
                     @endguest
                     <div class="container nav-wrapper">

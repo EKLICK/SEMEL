@@ -192,6 +192,9 @@ class professorController extends Controller
     public function destroy(Request $request, $id)
     {
         $professor = Professor::find($request['id']);
+        foreach($professor->turmas as $turma){
+            $professor->turmas()->detach($turma->id);
+        }
         $nome = $professor->nome;
         $userslist = User::all();
         $user = $userslist->where('id', '=', $professor->user_id)->last();

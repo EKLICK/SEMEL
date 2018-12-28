@@ -338,6 +338,9 @@ class PessoasController extends Controller
     public function destroy(Request $request, $id)
     {
         $pessoa = Pessoa::find($request['id']);
+        foreach($pessoa->turmas as $turma){
+            $pessoa->turmas()->detach($turma->id);
+        }
         $nome = $pessoa->nome;
         $pessoa->delete();
         Session::put('mensagem', $nome.' deletado(a) com sucesso!');
