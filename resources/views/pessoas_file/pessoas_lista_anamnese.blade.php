@@ -45,7 +45,7 @@
                             @if($anamnese->ano == $ano)
                                 <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
                             @else
-                                <td><p>Está anamnese não <br> pode ser mais editada</p></td>
+                                <td><p>Esta anamnese não <br> pode ser mais editada</p></td>
                             @endif
                         @endif
                     </tr>

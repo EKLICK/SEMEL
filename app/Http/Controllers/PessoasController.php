@@ -10,6 +10,7 @@ use Illuminate\Support\MessageBag;
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Http\Requests\Pessoa\PessoaEditFormRequest;
 use App\Pessoa;
+use App\Nucleo;
 use App\Doenca;
 use App\Turma;
 use App\Anamnese;
@@ -374,13 +375,15 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas($id){
-        $turmas = Turma::all();
+        $turmaslist = Turma::all();
         $pessoa = Pessoa::find($id);
         foreach($pessoa->turmas as $p){
             $pessoasTurmas[] = $p->id;
         }
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $nucleoslist = Nucleo::all();
 
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmas', 'pessoasTurmas'));
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
 
     public function pessoas_turmas_vincular($idpessoa, $idturma){

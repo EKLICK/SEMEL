@@ -14,9 +14,9 @@ class NucleosTableSeeder extends Seeder
     {
         
 
-        \DB::table('nucleos')->delete();
+        \DB::table('Nucleos')->delete();
         
-        \DB::table('nucleos')->insert(array (
+        \DB::table('Nucleos')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -26,10 +26,10 @@ class NucleosTableSeeder extends Seeder
                 'rua' => 'Rua dos Elefantes',
                 'numero_endereco' => '250',
                 'cep' => '15.615-089',
-                'inativo' => 1,
+                'inativo' => 2,
                 'descricao' => 'Bairro ao leste da cidade',
                 'created_at' => '2018-12-26 15:25:52',
-                'updated_at' => '2018-12-26 15:25:52',
+                'updated_at' => '2018-12-27 13:43:59',
             ),
             1 => 
             array (

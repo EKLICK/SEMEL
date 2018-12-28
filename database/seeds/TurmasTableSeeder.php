@@ -14,9 +14,9 @@ class TurmasTableSeeder extends Seeder
     {
         
 
-        \DB::table('turmas')->delete();
+        \DB::table('Turmas')->delete();
         
-        \DB::table('turmas')->insert(array (
+        \DB::table('Turmas')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -26,10 +26,10 @@ class TurmasTableSeeder extends Seeder
                 'horario_inicial' => '12:00:00',
                 'horario_final' => '14:00:00',
                 'inativo' => 1,
-                'descricao' => 'Turma de Basquete do norte',
-                'nucleo_id' => 2,
+                'descricao' => NULL,
+                'nucleo_id' => 1,
                 'created_at' => '2018-12-26 15:31:20',
-                'updated_at' => '2018-12-26 15:31:20',
+                'updated_at' => '2018-12-27 13:48:02',
             ),
             1 => 
             array (
@@ -55,9 +55,9 @@ class TurmasTableSeeder extends Seeder
                 'horario_final' => '14:00:00',
                 'inativo' => 1,
                 'descricao' => NULL,
-                'nucleo_id' => 3,
+                'nucleo_id' => 4,
                 'created_at' => '2018-12-26 15:33:24',
-                'updated_at' => '2018-12-26 15:33:24',
+                'updated_at' => '2018-12-27 13:49:29',
             ),
             3 => 
             array (
@@ -69,9 +69,9 @@ class TurmasTableSeeder extends Seeder
                 'horario_final' => '18:00:00',
                 'inativo' => 1,
                 'descricao' => NULL,
-                'nucleo_id' => 4,
+                'nucleo_id' => 2,
                 'created_at' => '2018-12-26 15:35:39',
-                'updated_at' => '2018-12-26 15:35:39',
+                'updated_at' => '2018-12-27 13:48:46',
             ),
             4 => 
             array (
@@ -83,9 +83,9 @@ class TurmasTableSeeder extends Seeder
                 'horario_final' => '18:00:00',
                 'inativo' => 1,
                 'descricao' => NULL,
-                'nucleo_id' => 1,
+                'nucleo_id' => 2,
                 'created_at' => '2018-12-26 15:36:31',
-                'updated_at' => '2018-12-26 15:36:31',
+                'updated_at' => '2018-12-27 13:49:52',
             ),
             5 => 
             array (

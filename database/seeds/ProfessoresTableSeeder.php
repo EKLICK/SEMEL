@@ -14,9 +14,9 @@ class ProfessoresTableSeeder extends Seeder
     {
         
 
-        \DB::table('professores')->delete();
+        \DB::table('Professores')->delete();
         
-        \DB::table('professores')->insert(array (
+        \DB::table('Professores')->insert(array (
             0 => 
             array (
                 'id' => 1,
