@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Professor\ProfessorCreateFormRequest;
 use App\Http\Requests\Professor\ProfessorEditFormRequest;
+use App\Http\Requests\Professor\ProfessorProcurarFromRequest;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -266,7 +267,7 @@ class professorController extends Controller
         return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
     }
 
-    public function professor_procurar(Request $request){
+    public function professor_procurar(ProfessorProcurarFromRequest $request){
         $dataForm = array_filter($request->all());
         $professoreslist = Professor::where(function($query) use($dataForm){
             if(array_key_exists('nome', $dataForm)){

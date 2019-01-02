@@ -25,6 +25,16 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
+            @if(isset($errors) && count($errors) > 0)
+                @foreach($errors->all() as $error)
+                    <div style="margin-left: 37%; margin-top: 1%;">
+                        <div class="chip red lighten-2">
+                            {{$error}}
+                            <i class="close material-icons">close</i>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
