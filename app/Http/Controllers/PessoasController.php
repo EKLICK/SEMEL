@@ -7,8 +7,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\MessageBag;
-use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
-use App\Http\Requests\Pessoa\PessoaEditFormRequest;
+use App\Http\Requests\Pessoa\PessoaCreateFromRequest;
+use App\Http\Requests\Pessoa\PessoaEditFromRequest;
+use App\Http\Requests\Pessoa\PessoaProcurarFromRequest;
 use App\Pessoa;
 use App\Nucleo;
 use App\Doenca;
@@ -152,7 +153,7 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(PessoaCreateFormRequest $request)
+    public function store(PessoaCreateFromRequest $request)
     {
         $dataForm = $request->all();
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -258,7 +259,7 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PessoaEditFormRequest $request, $id)
+    public function update(PessoaEditFromRequest $request, $id)
     {
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
@@ -419,7 +420,7 @@ class PessoasController extends Controller
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 
-    public function pessoas_procurar(Request $request){
+    public function pessoas_procurar(PessoaProcurarFromRequest $request){
         $dataForm = $request->all();
         
         $pessoaslist = Pessoa::where(function($query) use($dataForm){

@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="input-field col s4">
                                     <i class="material-icons prefix">phone</i>
-                                    <input name="telefone" id="icon_telephone" type="tel" class="validate">
+                                    <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate">
                                     <label for="icon_telephone">Telephone:</label>
                                 </div>
                             </div>

@@ -287,7 +287,7 @@ class professorController extends Controller
             }
             if(array_key_exists('email', $dataForm)){
                 $filtro = $dataForm['email'];
-                $useremails= User::onlyTrashed()->where('email', 'like', $filtro)."%"->where('admin_professor', '=', 0);
+                $useremails = User::all()->where('email', 'like', $filtro)->where('admin_professor', '=', 0)->last();
                 $query->where('user_id', '=', $useremails->id);
             }
             if(array_key_exists('matricula', $dataForm)){

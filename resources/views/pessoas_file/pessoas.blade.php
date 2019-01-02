@@ -24,6 +24,16 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
+            @if(isset($errors) && count($errors) > 0)
+                @foreach($errors->all() as $error)
+                    <div style="margin-left: 37%; margin-top: 1%;">
+                        <div class="chip red lighten-2">
+                            {{$error}}
+                            <i class="close material-icons">close</i>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
@@ -31,7 +41,7 @@
                         <form action="{{route('pessoas_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s5">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input placeholder="Nome da pessoa" id="nome_search" type="text" class="validate" name="nome">
                                 </div>
@@ -52,11 +62,11 @@
                                 </div>
                                 <div class="input-field col s3">
                                     <i class="material-icons prefix">credit_card</i>
-                                    <input placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
+                                    <input onkeydown="javascript: fMasc(this, mCPF)" placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s4">
                                     <i class="material-icons prefix">phone</i>
-                                    <input placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
+                                    <input onkeydown="javascript: fMasc(this, mTel)" placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
                                     <label for="telefone_search">Telefone</label>
                                 </div>
                             </div>

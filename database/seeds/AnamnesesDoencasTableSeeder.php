@@ -20,7 +20,7 @@ class AnamnesesDoencasTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'anamnese_id' => NULL,
+                'anamnese_id' => 1,
                 'doenca_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
@@ -212,7 +212,7 @@ class AnamnesesDoencasTableSeeder extends Seeder
             24 => 
             array (
                 'id' => 25,
-                'anamnese_id' => NULL,
+                'anamnese_id' => 55,
                 'doenca_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
