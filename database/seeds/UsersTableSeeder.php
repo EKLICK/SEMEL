@@ -14,9 +14,9 @@ class UsersTableSeeder extends Seeder
     {
         
 
-        \DB::table('Users')->delete();
+        \DB::table('users')->delete();
         
-        \DB::table('Users')->insert(array (
+        \DB::table('users')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'admin@admin.com',
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$WxCuRbyZGTC93/DyxcE3kuGRIpT2HVJfPQX07IufhKOH7acwL.jNG',
-                'remember_token' => 'cntJ96qsZtfNlYaO674X4yfDyjIvp197IfEQupdMSjyzSqREwhjyIOHyX1sE',
+                'remember_token' => '5MHmFU0d5fNOtNKXGB8HZGUJBE5qAsCaQoDOcXvpPvXVUhWvOeYxtQT75C5j',
                 'created_at' => '2018-11-27 15:58:41',
                 'updated_at' => '2018-11-27 15:58:41',
                 'deleted_at' => NULL,
@@ -77,7 +77,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'mario@mario.com',
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$Jtas9u7Oh1fHZbCmIRxD3u5aj.wv6vlmnAn1jY3B8RUEEAQIJ4EJu',
-                'remember_token' => NULL,
+                'remember_token' => 'qeTs0z5ViYthhN8ZJ1IcWyEuGYHoDyqDU8vAKm916G0Oc2sRcf9DjBk94tB7',
                 'created_at' => '2018-12-26 15:54:40',
                 'updated_at' => '2018-12-26 15:54:40',
                 'deleted_at' => NULL,

@@ -14,9 +14,9 @@ class NucleosTableSeeder extends Seeder
     {
         
 
-        \DB::table('Nucleos')->delete();
+        \DB::table('nucleos')->delete();
         
-        \DB::table('Nucleos')->insert(array (
+        \DB::table('nucleos')->insert(array (
             0 => 
             array (
                 'id' => 1,

@@ -14,9 +14,9 @@ class TurmasTableSeeder extends Seeder
     {
         
 
-        \DB::table('Turmas')->delete();
+        \DB::table('turmas')->delete();
         
-        \DB::table('Turmas')->insert(array (
+        \DB::table('turmas')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -29,7 +29,7 @@ class TurmasTableSeeder extends Seeder
                 'descricao' => NULL,
                 'nucleo_id' => 1,
                 'created_at' => '2018-12-26 15:31:20',
-                'updated_at' => '2018-12-27 13:48:02',
+                'updated_at' => '2018-12-28 15:28:38',
             ),
             1 => 
             array (
@@ -49,7 +49,7 @@ class TurmasTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'nome' => 'Turma de Ginastica A1',
-                'limite' => '15',
+                'limite' => '10',
                 'data_semanal' => 'Domingo,Sabado,',
                 'horario_inicial' => '12:00:00',
                 'horario_final' => '14:00:00',
@@ -57,7 +57,7 @@ class TurmasTableSeeder extends Seeder
                 'descricao' => NULL,
                 'nucleo_id' => 4,
                 'created_at' => '2018-12-26 15:33:24',
-                'updated_at' => '2018-12-27 13:49:29',
+                'updated_at' => '2018-12-28 15:47:47',
             ),
             3 => 
             array (
@@ -91,7 +91,7 @@ class TurmasTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'nome' => 'Turma de Ginastica A2',
-                'limite' => '15',
+                'limite' => '10',
                 'data_semanal' => 'Segunda,Sexta,',
                 'horario_inicial' => '15:00:00',
                 'horario_final' => '18:00:00',
@@ -99,7 +99,7 @@ class TurmasTableSeeder extends Seeder
                 'descricao' => NULL,
                 'nucleo_id' => 4,
                 'created_at' => '2018-12-26 15:37:13',
-                'updated_at' => '2018-12-26 15:37:13',
+                'updated_at' => '2018-12-28 15:47:53',
             ),
         ));
         

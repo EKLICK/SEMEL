@@ -14,9 +14,9 @@ class ProfessoresTableSeeder extends Seeder
     {
         
 
-        \DB::table('Professores')->delete();
+        \DB::table('professores')->delete();
         
-        \DB::table('Professores')->insert(array (
+        \DB::table('professores')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -36,7 +36,6 @@ class ProfessoresTableSeeder extends Seeder
                 'user_id' => 2,
                 'created_at' => '2018-12-26 15:45:38',
                 'updated_at' => '2018-12-26 15:45:38',
-                'deleted_at' => NULL,
             ),
             1 => 
             array (
@@ -57,7 +56,6 @@ class ProfessoresTableSeeder extends Seeder
                 'user_id' => 3,
                 'created_at' => '2018-12-26 15:47:39',
                 'updated_at' => '2018-12-26 15:47:39',
-                'deleted_at' => NULL,
             ),
             2 => 
             array (
@@ -78,7 +76,6 @@ class ProfessoresTableSeeder extends Seeder
                 'user_id' => 4,
                 'created_at' => '2018-12-26 15:50:06',
                 'updated_at' => '2018-12-26 15:50:06',
-                'deleted_at' => NULL,
             ),
             3 => 
             array (
@@ -99,7 +96,6 @@ class ProfessoresTableSeeder extends Seeder
                 'user_id' => 5,
                 'created_at' => '2018-12-26 15:54:40',
                 'updated_at' => '2018-12-26 15:54:40',
-                'deleted_at' => NULL,
             ),
         ));
         
