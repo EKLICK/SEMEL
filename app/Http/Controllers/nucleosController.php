@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
+use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Nucleo;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
@@ -130,7 +131,7 @@ class nucleosController extends Controller
         return view ('nucleos_file.nucleos_info', compact('nucleo'));
     }
 
-    public function nucleos_procurar(Request $request){
+    public function nucleos_procurar(NucleoProcurarFormRequest $request){
         $dataForm = $request->all();
         $nucleoslist = Nucleo::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
