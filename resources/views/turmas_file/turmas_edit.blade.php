@@ -53,7 +53,7 @@
                             <input name="limite" id="icon_prefix" type="number" class="validate" @if(is_null(old('limite'))) value="{{$turma->limite}}" @else value="{{old('limite')}}" @endif>
                             <label for="icon_prefix">Limite:</label>
                         </div>
-                        <div class="input-field col 3">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">hourglass_full</i>
                             <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="@if(is_null(old('horario_inicial'))) {{$turma->horario_inicial}} @else {{old('horario_inicial')}} @endif">
                             <label for="icon_horario_inicial">Horário Inicial:</label>

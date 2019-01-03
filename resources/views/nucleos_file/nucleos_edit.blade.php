@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="row">
-                            <div class="input-field col s7">
+                            <div class="input-field col s6">
                                 <i class="material-icons prefix">description</i>
                                 <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">@if(is_null(old('descricao'))) {{$nucleo->descricao}} @else {{old('descricao')}} @endif</textarea>
                                 <label for="icon_descricao">Descrição do núcleo:</label>

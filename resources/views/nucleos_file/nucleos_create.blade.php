@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s7">
+                        <div class="input-field col s6">
                             <i class="material-icons prefix">description</i>
                             <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
                             <label for="icon_descricao">Descrição do núcleo:</label>

@@ -91,7 +91,7 @@
                             <input name="curso" id="icon_curso" type="text" class="validate" value="{{old('curso')}}">
                             <label for="icon_curso">Curso:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s6">
                             <i class="material-icons prefix">school</i>
                             <input name="formacao" id="icon_formacao" type="text" class="validate" value="{{old('formacao')}}">
                             <label for="icon_formacao">Formação:</label>
