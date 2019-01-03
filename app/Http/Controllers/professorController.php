@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Professor\ProfessorCreateFormRequest;
-use App\Http\Requests\Professor\ProfessorEditFormRequest;
+use App\Http\Requests\Professor\ProfessorCreateFromRequest;
+use App\Http\Requests\Professor\ProfessorEditFromRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFromRequest;
+use App\Http\Requests\Professor\AlunoProcurarFromRequest;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -109,7 +110,7 @@ class professorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProfessorCreateFormRequest $request)
+    public function store(ProfessorCreateFromRequest $request)
     {
         $dataForm = $request->all();
         $user = User::create([
@@ -161,7 +162,7 @@ class professorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfessorEditFormRequest $request, $id)
+    public function update(ProfessorEditFromRequest $request, $id)
     {
         $professor = Professor::find($id);
         $user = User::find($professor->user_id);
@@ -259,6 +260,9 @@ class professorController extends Controller
     public function professor_meus_alunos($idprofessor, $idturma){
         $turma = Turma::find($idturma);
         $pessoaslist = $turma->pessoas->sortBy('nome');
+        foreach ($pessoaslist as $pessoa){
+            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+        }
         $pessoaslist = $this->gerar_paginate($pessoaslist);
         Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
         $professor = Professor::find($idprofessor);
@@ -388,7 +392,7 @@ class professorController extends Controller
         }
     }
 
-    public function professor_procurar_aluno(Request $request){
+    public function professor_procurar_aluno(AlunoProcurarFromRequest $request){
         $dataForm = array_filter($request->all());
         $turma = Turma::find($dataForm['idturma']);
         $pessoas_turmas = $turma->pessoas;

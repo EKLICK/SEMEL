@@ -7,7 +7,26 @@
 @section('title') <h4>Alunos de: {{$turma->nome}}</h4> @endsection
 @section('content')
     <div class="container z-depth-4">
-        <div class="card-panel">
+        <div class="card-panel">¨
+            @if(Session::get('quant'))
+                <div class="center-align quantmens">
+                    <div class="chip light-blue accent-2 lighten-2">
+                        {{Session::get('quant')}}
+                        <i class="close material-icons">close</i>
+                    </div>
+                </div>
+                {{Session::forget('quant')}}
+            @endif
+            @if(isset($errors) && count($errors) > 0)
+                @foreach($errors->all() as $error)
+                    <div class="center-align quantmens">
+                        <div class="chip red lighten-2">
+                            {{$error}}
+                            <i class="close material-icons">close</i>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>

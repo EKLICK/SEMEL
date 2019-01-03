@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use App\Professor;
+use App\Http\Requests\Pessoa\PessoaProcurarFromRequest;
 use App\Pessoa;
 
 
@@ -28,7 +28,7 @@ class DeleteController extends Controller
         return redirect()->route('pessoas.index');
     }
 
-    public function pessoas_procurar_softdelete(Request $request){
+    public function pessoas_procurar_softdelete(PessoaProcurarFromRequest $request){
         $dataForm = $request->all();
         $pessoaslist = Pessoa::onlyTrashed()->where(function($query) use($dataForm){;
             if(!empty($dataForm['nome'])){

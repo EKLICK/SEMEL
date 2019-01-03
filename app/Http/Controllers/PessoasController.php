@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\MessageBag;
 use App\Http\Requests\Pessoa\PessoaCreateFromRequest;
 use App\Http\Requests\Pessoa\PessoaEditFromRequest;
-use App\Http\Requests\Pessoa\PessoaProcurarFromRequest;
 use App\Pessoa;
 use App\Nucleo;
 use App\Doenca;
