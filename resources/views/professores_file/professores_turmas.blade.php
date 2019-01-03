@@ -28,6 +28,16 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
+            @if(isset($errors) && count($errors) > 0)
+                @foreach($errors->all() as $error)
+                    <div class="center-align quantmens">
+                        <div class="chip red lighten-2">
+                            {{$error}}
+                            <i class="close material-icons">close</i>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>

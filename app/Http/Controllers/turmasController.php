@@ -7,6 +7,7 @@ use App\Http\Requests\regrasTurma;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Turma\TurmaCreateEditFormRequest;
+use App\Http\Requests\Turma\TurmaProcurarFormRequest;
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
@@ -211,7 +212,7 @@ class turmasController extends Controller
         return view('turmas_file.turmas_info', compact('turma', 'dias'));
     }
 
-    public function turmas_procurar(Request $request){
+    public function turmas_procurar(TurmaProcurarFormRequest $request){
         $dataForm = array_filter($request->all());
         
         $turmaslist = Turma::where(function($query) use($dataForm){

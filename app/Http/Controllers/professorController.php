@@ -8,6 +8,7 @@ use App\Http\Requests\Professor\ProfessorCreateFormRequest;
 use App\Http\Requests\Professor\ProfessorEditFormRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
 use App\Http\Requests\Professor\AlunoProcurarFormRequest;
+use App\Http\Requests\Turma\TurmaProcurarFormRequest;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -317,7 +318,7 @@ class professorController extends Controller
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
-    public function filtros_professor_turmas(Request $request, $id){
+    public function filtros_professor_turmas(TurmaProcurarFormRequest $request, $id){
         $dataForm = array_filter($request->all());
         $professor = Professor::find($id);
         $turmas_professor = $professor->turmas->sortBy('nome');

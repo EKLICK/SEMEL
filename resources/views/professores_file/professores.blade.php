@@ -27,7 +27,7 @@
             @endif
             @if(isset($errors) && count($errors) > 0)
                 @foreach($errors->all() as $error)
-                    <div style="margin-left: 37%; margin-top: 1%;">
+                    <div class="center-align quantmens">
                         <div class="chip red lighten-2">
                             {{$error}}
                             <i class="close material-icons">close</i>
