@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Anamnese\AnamneseCreateEditFormRequest;
+use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
 use Illuminate\Pagination\Paginator;
 use App\Anamnese;
 use App\Pessoa;
@@ -255,7 +256,7 @@ class AnamneseController extends Controller
         return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese', 'nome'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 
-    public function anamnese_procurar(Request $request){
+    public function anamnese_procurar(AnamneseProcurarFormRequest $request){
         $dataForm = $request->all();
         $data = new \DateTime();
         $anamneseslist = Anamnese::where(function($query) use($dataForm){
