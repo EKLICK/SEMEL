@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col s6">
-                <table class="centered">
+                <table>
                     <tr>
                         <td><h6>Nome:</h6></td>
                         <td><h6>{{$professor->nome}}</h6></td>

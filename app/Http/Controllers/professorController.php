@@ -388,40 +388,39 @@ class professorController extends Controller
             Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
             $turmaslist = $this->gerar_paginate($turmaslist);
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-            dd($turmaslist);
             return view ('professores_file.professores_turmas', compact('professor', 'turmaslist', 'dias_semana', 'nucleoslist'));
         }
     }
 
     public function professor_procurar_aluno(AlunoProcurarFormRequest $request){
-        $dataForm = array_filter($request->all());
+        $dataForm = $request->all();
         $turma = Turma::find($dataForm['idturma']);
         $pessoas_turmas = $turma->pessoas;
         $professorid = $dataForm['professorid'];
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
-            if(array_key_exists('nome', $dataForm)){
+            if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
                 $query->where('nome', 'like', $filtro."%");
             }
-            if(array_key_exists('de', $dataForm)){
+            if(!empty($dataForm['de'])){
                 $filtro = explode(' ',$dataForm['de']);
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
                 $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
                 $query->where('nascimento',  '>=', $nascimento);
             }
-            if(array_key_exists('ate', $dataForm)){
+            if(!empty($dataForm['ate'])){
                 $filtro = explode(' ',$dataForm['ate']);
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
                 $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
                 $query->where('nascimento',  '<=', $nascimento);
             }
-            if(array_key_exists('telefone', $dataForm)){
+            if(!empty($dataForm['telefone'])){
                 $filtro = $dataForm['telefone'];
                 $query->where('telefone', 'like', $filtro."%");
             }
-            if(array_key_exists('sexo', $dataForm)){
+            if(!empty($dataForm['sexo'])){
                 $filtro = $dataForm['sexo'];
-                $query->where('sexo', '=', $filtro."%");
+                $query->where('sexo', '=', $filtro);
             }
         })->orderBy('nome')->get();
         $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoas_turmas);

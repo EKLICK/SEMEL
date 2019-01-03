@@ -80,7 +80,7 @@
                                 </ul>
                             @else
                                 <ul>
-                                    <li><a href="{{route('professor.edit', 1)}}">Mudar informações da conta</a></li>
+                                    <li><a href="#">Mudar Senha</a></li>
                                     <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
                                 </ul>
                             @endif

@@ -63,7 +63,7 @@
                                         </p>
                                         <p>
                                             <label>
-                                                <input value="0" name="inativo" type="radio"/>
+                                                <input value="2" name="inativo" type="radio"/>
                                                 <span>Inativo</span>
                                             </label>
                                         </p>
@@ -140,15 +140,15 @@
                             <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
                             <td> 
                                 <p>
-                                    @if($turma->inativo == 0)
-                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                    @if($turma->inativo == 2)
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
                                         @else Turma inativa @endif
                                     @else 
-                                        @if($turma->nucleo->inativo == 0) Núcleo inativo
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
                                         @else Turma ativa @endif @endif
                                 </p>
                                 <i class="small material-icons" 
-                                    @if($turma->inativo == 0 || $turma->nucleo->inativo == 0)  
+                                    @if($turma->inativo == 2 || $turma->nucleo->inativo == 2)  
                                         style="color: red;" 
                                     @else 
                                         style="color: green;" 

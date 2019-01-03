@@ -11,8 +11,8 @@
 @section('content')
     <div class="container" style="margin-top: 3%;">
         <div class="row">
-            <div class="col s12">
-                <table class="centered">
+            <div class="col s6">
+                <table>
                     <tr>
                         <td><h6>Nome:</h6></td>
                         <td><h6>{{$nucleo->nome}}</h6></td>
@@ -29,20 +29,24 @@
                         <td><h6>Numero de endereço:</h6></td>
                         <td><h6>{{$nucleo->numero_endereco}}</h6></td>
                     </tr>
-                    <tr>
-                        <td><h6>CEP:</h6></td>
-                        <td><h6>{{$nucleo->cep}}</h6></td>
-                    </tr>
-                    <tr>
-                        <td><h6>Descrição:</h6></td>
-                        <td><h6>{{$nucleo->descricao}}</h6></td>
-                    </tr>
-                    <tr>
-                        <td><h6>Está inativo:</h6></td>
-                        <td><h6>@if($nucleo->inativo == 1) Não @else Sim @endif</h6></td>
-                    </tr>
                 </table>
             </div>
+            <div class="col s6">
+                    <table>
+                        <tr>
+                            <td><h6>CEP:</h6></td>
+                            <td><h6>{{$nucleo->cep}}</h6></td>
+                        </tr>
+                        <tr>
+                            <td><h6>Descrição:</h6></td>
+                            <td><h6>{{$nucleo->descricao}}</h6></td>
+                        </tr>
+                        <tr>
+                            <td><h6>Está inativo:</h6></td>
+                            <td><h6>@if($nucleo->inativo == 1) Não @else Sim @endif</h6></td>
+                        </tr>
+                    </table>
+                </div>
         </div>
     </div>
 @endsection

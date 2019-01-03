@@ -8,7 +8,7 @@
     <div class="container" style="margin-top: 3%;">
         <div class="row">
             <div class="col s6">
-                <table class="centered">
+                <table>
                     <tr>
                         <td><h6>Nome:</h6></td>
                         <td><h6>{{$anamnese->pessoas->nome}}</h6></td>
@@ -66,10 +66,11 @@
                         <td><h6>{{$anamnese->observacao}}</h6></td>
                     </tr>
                 </table>
+                <br>
+                <div class="right" style="margin-right: 10%;">
+                    <a href="{{route('pdfanamnese', $anamnese->id)}}" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <a href="{{route('pdfanamnese', $anamnese->id)}}" class="waves-effect waves-light btn" style="margin-top: 3%;">PDF</a>
         </div>
     </div>
 @endsection
