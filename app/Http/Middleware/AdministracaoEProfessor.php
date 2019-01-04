@@ -16,7 +16,6 @@ class AdministracaoEProfessor
     public function handle($request, Closure $next)
     {
         $user = \Auth::user();
-
         if($user['admin_professor'] == 0){
             return redirect()->route('login');
         }
