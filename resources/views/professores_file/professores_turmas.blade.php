@@ -179,6 +179,11 @@
                     @endforeach
                 </tbody>
             </table>
+            @if(isset($dataForm))
+                {{$turmaslist->appends($dataForm)->links()}}
+            @else
+                {{$turmaslist->links()}}
+            @endif
         </div>
     </div>
 @endsection

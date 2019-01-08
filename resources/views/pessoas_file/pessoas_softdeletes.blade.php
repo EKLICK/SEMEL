@@ -139,7 +139,11 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$pessoaslist->links()}}
+            @if(isset($dataForm))
+                {{$pessoaslist->appends($dataForm)->links()}}
+            @else
+                {{$pessoaslist->links()}}
+            @endif
         </div>
     </div>
 @endsection

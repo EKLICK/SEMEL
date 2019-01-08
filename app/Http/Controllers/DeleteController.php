@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use App\Http\Requests\Pessoa\PessoaProcurarFromRequest;
+use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Pessoa;
 
 
@@ -28,8 +28,8 @@ class DeleteController extends Controller
         return redirect()->route('pessoas.index');
     }
 
-    public function pessoas_procurar_softdelete(PessoaProcurarFromRequest $request){
-        $dataForm = $request->all();
+    public function pessoas_procurar_softdelete(PessoaProcurarFormRequest $request){
+        $dataForm = $request->except('_token');
         $pessoaslist = Pessoa::onlyTrashed()->where(function($query) use($dataForm){;
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
@@ -75,10 +75,11 @@ class DeleteController extends Controller
                 $filtro = $dataForm['estado_civil'];
                 $query->where('estado_civil', 'like', $filtro."%");
             }
-        })->orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+        })->orderBy('nome');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
+        $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 
-        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano'));
+        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano', 'dataForm'));
     }
 }

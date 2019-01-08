@@ -69,7 +69,11 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$doencaslist->links()}}
+            @if(isset($dataForm))
+                {{$doencaslist->appends($dataForm)>links()}}
+            @else
+                {{$doencaslist->links()}}
+            @endif
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar doença" href="{{route('doencas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
@@ -95,14 +99,3 @@
         </form>
     </div>
 @endsection
-
-<!--
-    <div class="col s1"><label>Possui doenças?</label></div>
-                                <div class="input-field col s3">
-                                    <select multiple name="nucleos[]">
-                                         ($nucleolist as $nucleo)
-                                            <option value=""></option>
-                                        
-                                    </select>
-                                </div>
--->

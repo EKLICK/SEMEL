@@ -151,7 +151,11 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$pessoaslist->links()}}
+            @if(isset($dataForm))
+                {{$pessoaslist->appends($dataForm)->links()}}
+            @else
+                {{$pessoaslist->links()}}
+            @endif
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
@@ -173,7 +177,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn red delete" type="submit">Sim</button>
-            </div>
+         </div>
         </form>
     </div>
 @endsection

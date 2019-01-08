@@ -125,7 +125,11 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$nucleoslist->links()}}
+            @if(isset($dataForm))
+                {{$nucleoslist->appends($dataForm)>links()}}
+            @else
+                {{$nucleoslist->links()}}
+            @endif
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>

@@ -379,13 +379,15 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas($id){
-        $turmaslist = Turma::all();
         $pessoa = Pessoa::find($id);
+        $turmaslist = Turma::orderBy('nome')->paginate(10);
+        $turmasall = Turma::all();
         foreach($pessoa->turmas as $p){
             $pessoasTurmas[] = $p->id;
         }
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $nucleoslist = Nucleo::all();
+        Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco de dados.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
@@ -421,7 +423,7 @@ class PessoasController extends Controller
     }
 
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
-        $dataForm = $request->all();
+        $dataForm = $request->except('_token');
         
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
@@ -468,10 +470,11 @@ class PessoasController extends Controller
                 $filtro = $dataForm['estado_civil'];
                 $query->where('estado_civil', '=', $filtro);
             }
-        })->orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+        })->orderBy('nome');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
+        $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano', 'dataForm'));
     }
 }

@@ -75,7 +75,11 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$auditslist->links()}}
+            @if(isset($dataForm))
+                {{$auditslist->appends($dataForm)->links()}}
+            @else
+                {{$auditslist->links()}}
+            @endif
         </div>
     </div>
 @endsection

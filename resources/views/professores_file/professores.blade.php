@@ -120,7 +120,11 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$professoreslist->links()}}
+            @if(isset($dataForm))
+                {{$professoreslist->appends($dataForm)->links()}}
+            @else
+                {{$professoreslist->links()}}
+            @endif
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar professor" href="{{Route('professor.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>

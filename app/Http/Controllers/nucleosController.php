@@ -158,9 +158,9 @@ class nucleosController extends Controller
                 $filtro = $dataForm['cep'];
                 $query->where('cep', 'like', $filtro."%");
             }
-        })->orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($nucleoslist).' núcleos no banco de dados.');
-            
-        return view ('nucleos_file.nucleos', compact('nucleoslist'));
+        })->orderBy('nome');
+        Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco de dados.');
+        $nucleoslist = $nucleoslist->paginate(10);
+        return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm'));
     }
 }

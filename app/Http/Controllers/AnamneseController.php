@@ -257,7 +257,7 @@ class AnamneseController extends Controller
     }
 
     public function anamnese_procurar(AnamneseProcurarFormRequest $request){
-        $dataForm = $request->all();
+        $dataForm = $request->except('_token');
         $data = new \DateTime();
         $anamneseslist = Anamnese::where(function($query) use($dataForm){
             if($dataForm['escolha'] == 0){
@@ -295,34 +295,40 @@ class AnamneseController extends Controller
                 $filtro = $dataForm['fumante'];
                 $query->where('fumante', '=', $filtro);
             }
-        })->orderBy('ano', 'desc')->get();
-        if(isset($dataForm['doencas'])){
-            $anamnesesdoencas = [];
-            foreach($anamneseslist as $anamnese){
-                $quant = 0;
-                foreach($anamnese['doencas'] as $doenca){
-                    foreach($dataForm['doencas'] as $doencadalista){
-                        if($doenca['id'] == $doencadalista){
-                            $quant++;
+            if(isset($dataForm['doencas'])){
+                $anamnesesall = Anamnese::all();
+                $anamnesesfiltradas = [];
+                $anamnesesids = [];
+                $anamnesesdoencas = [];
+                foreach($anamnesesall as $anamnese){
+                    $quant = 0;
+                    foreach($anamnese['doencas'] as $doenca){
+                        foreach($dataForm['doencas'] as $doencadalista){
+                            if($doenca['id'] == $doencadalista){
+                                $quant++;
+                            }
                         }
                     }
+                    if($quant == count($dataForm['doencas'])){
+                        array_push($anamnesesdoencas, $anamnese);
+                    }
                 }
-                if($quant == count($dataForm['doencas'])){
-                    array_push($anamnesesdoencas, $anamnese);
+                $anamnesesfiltradas = $this->filtrar_dados($anamnesesall, $anamnesesdoencas);
+                foreach($anamnesesfiltradas as $anamnesefiltrada){
+                    array_Push($anamnesesids, $anamnesefiltrada->id);
                 }
+                $query->wherein('id', $anamnesesids);
             }
-            $anamneseslist = $this->filtrar_dados($anamneseslist, $anamnesesdoencas);
-        }
+        })->orderBy('ano', 'desc');
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($anamneseslist->get()).' anamneses de '.$ano.' no banco de dados.');
+        $anamneseslist = $anamneseslist->paginate(10);
         $doencaslist = Doenca::all();
         if($dataForm['escolha'] == 0){
-            $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
-            return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
+            return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
         }
         else{
-            $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
-            return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
+            return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
         }
     }
 }

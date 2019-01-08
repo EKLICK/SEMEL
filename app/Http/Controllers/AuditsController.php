@@ -27,7 +27,7 @@ class auditsController extends Controller
     }
 
     public function audits_procurar(Request $request){
-        $dataForm = $request->all();
+        $dataForm = $request->except('_token');
         $auditslist = Audit::where(function($query) use($dataForm){
             if(isset($dataForm['eventos'])){
                 $i = $dataForm['eventos'];
@@ -69,11 +69,12 @@ class auditsController extends Controller
                         break;
                 }
             }
-        })->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($auditslist).' Auditorias no banco de dados.');
+        });
+        Session::put('quant', 'Foram encontrados '.count($auditslist->get()).' Auditorias no banco de dados.');
+        $auditslist = $auditslist->paginate(10);
         $eventos = ['Criação','Edição','Exclusão'];
         $tabelas = ['Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
         
-        return view('audits_file.audits', compact('auditslist', 'eventos', 'tabelas'));
+        return view('audits_file.audits', compact('auditslist', 'eventos', 'tabelas', 'dataForm'));
     }
 }

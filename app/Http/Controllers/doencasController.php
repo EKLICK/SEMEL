@@ -112,10 +112,10 @@ class doencasController extends Controller
         $dataForm = $request->all();
         $doencaslist = Doenca::all();
         if($dataForm['nome'] != null){
-            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
+            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%');
         }
-        Session::put('quant', 'Foram encontrados '.count($doencaslist).' doenças no banco de dados.');
-
-        return view ('doencas_file.doencas', compact('doencaslist'));
+        Session::put('quant', 'Foram encontrados '.count($doencaslist->get()).' doenças no banco de dados.');
+        $doencaslist = $doencaslist->paginate(10);
+        return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
     }
 }

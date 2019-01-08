@@ -151,7 +151,11 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$anamneseslist->links()}}
+            @if(isset($dataForm))
+                {{$anamneseslist->appends($dataForm)->links()}}
+            @else
+                {{$anamneseslist->links()}}
+            @endif
         </div>
     </div>
 @endsection
