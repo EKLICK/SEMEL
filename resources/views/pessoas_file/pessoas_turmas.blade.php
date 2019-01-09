@@ -60,7 +60,7 @@
                                         </p>
                                         <p>
                                             <label>
-                                                <input value="0" name="inativo" type="radio"/>
+                                                <input value="2" name="inativo" type="radio"/>
                                                 <span>Inativo</span>
                                             </label>
                                         </p>

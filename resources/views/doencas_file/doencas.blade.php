@@ -70,7 +70,7 @@
                 </tbody>
             </table>
             @if(isset($dataForm))
-                {{$doencaslist->appends($dataForm)>links()}}
+                {{$doencaslist->appends($dataForm)->links()}}
             @else
                 {{$doencaslist->links()}}
             @endif

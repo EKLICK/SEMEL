@@ -92,25 +92,3 @@ document.getElementById('limpar_matricula').onclick = function (){
     document.getElementById('img_matricula').value = '';
     document.getElementById('matricula').value = '';
 }
-
-//EFEITOs DE MENU
-
-function botao_de_mostrar() {
-   if(document.getElementById('cssmenu').style.display != 'block'){
-        document.getElementById('cssmenu').style.display = 'block';
-   }
-   else{
-        document.getElementById('cssmenu').style.display = 'none';
-   }
-}
-
-function mostragem_menu() {
-    if($(window).width() > 1000){
-        document.getElementById('botao').style.display = 'none';
-        document.getElementById('cssmenu').style.display = 'block';
-    }
-    else{
-        document.getElementById('botao').style.display = 'block';
-        document.getElementById('cssmenu').style.display = 'none';
-    }
-}

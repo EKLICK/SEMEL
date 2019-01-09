@@ -40,46 +40,43 @@
                 </main>
             @else
                 <div class="row">
-                    <div class="col s2 white">
-                        <a class="btn-floating btn-large waves-effect waves-light" id="botao" onclick="botao_de_mostrar()"><i class="bigger material-icons">add</i></a>
-                        <div id='cssmenu'>
-                            @if(auth()->user()->admin_professor == 1)
-                                <ul>
-                                    <li class='active has-sub'><a href='#'>Ferramentas de administração</a>
-                                        <ul>
-                                            <li class='active has-sub'><a href='#'>Registrar usuário</a>
-                                                <ul>
-                                                    <li><a href="{{route('register')}}">Cadastrar administradores</a></li>
-                                                    <li><a href="{{route('professor.create')}}">Cadastrar professores</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="{{route('pessoas_softdeletes')}}">Pessoas deletadas</a></li>
-                                            <li><a href="{{route('audits.index')}}">Auditorias</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class='active has-sub'><a href='#'>Usuarios</a>
-                                        <ul>
-                                            <li><a href="{{route('professor.index')}}">Professores</a></li>
-                                            <li><a href="{{route('pessoas.index')}}">Cliente</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class='active has-sub'><a href='#'>anamneses</a>
-                                        <ul>
-                                            <li><a href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></li>
-                                            <li><a href="{{route('anamneses.index2')}}">Anamneses Históricas</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{route('doencas.index')}}">Doenças</a></li>
-                                    <li><a href="{{route('turmas.index')}}">Turmas</a></li>
-                                    <li><a href="{{route('nucleos.index')}}">Nucleos</a></li>
-                                </ul>
-                            @else
-                                <ul>
-                                    <li><a href="#">Mudar Senha</a></li>
-                                    <li><a href="{{route('professor_turmas', 1)}}">Minhas turmas</a></li>
-                                </ul>
-                            @endif
-                        </div>
+                    <div class="col s2.5">
+                        <ul class="collapsible" id="cssmenu">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">settings</i>Ferramentas de administração</div>
+                                <div class="collapsible-body">
+                                    <div class="collection">
+                                        <b><a class="collection-item" href="{{route('register')}}">Cadastrar administradores</a></b>
+                                        <b><a class="collection-item" href="{{route('professor.create')}}">Cadastrar professores</a></b>
+                                        <b><a class="collection-item" href="{{route('pessoas_softdeletes')}}">Pessoas deletadas</a></b>
+                                        <b><a class="collection-item" href="{{route('audits.index')}}">Auditorias</a></b>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">people</i>Usuarios</div>
+                                <div class="collapsible-body">
+                                        <div class="collection">
+                                            <b><a class="collection-item" href="{{route('professor.index')}}">Professores</a></b>
+                                            <b><a class="collection-item" href="{{route('pessoas.index')}}">Cliente</a></b>
+                                        </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">assignment</i>Anamneses</div>
+                                <div class="collapsible-body">
+                                        <div class="collection">
+                                            <b><a class="collection-item" href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></b>
+                                            <b><a class="collection-item" href="{{route('anamneses.index2')}}">Anamneses Históricas</a></b>
+                                        </div>
+                                </div>
+                            </li>
+                            <div class="collection">
+                                <b><a class="collection-item" href="{{route('doencas.index')}}">Doenças</a></b>
+                                <b><a class="collection-item" href="{{route('turmas.index')}}">Turmas</a></b>
+                                <b><a class="collection-item" href="{{route('nucleos.index')}}">Nucleos</a></b>
+                            </div>
+                        </ul>
                     </div>
                     <div class="col s9">
                         <main>
