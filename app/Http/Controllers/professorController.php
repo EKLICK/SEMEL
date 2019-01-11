@@ -393,9 +393,8 @@ class professorController extends Controller
 
     public function professor_procurar_aluno(AlunoProcurarFormRequest $request){
         $dataForm = $request->all();
-        $turma = Turma::find($dataForm['idturma']);
-        $pessoas_turmas = $turma->pessoas;
         $professorid = $dataForm['professorid'];
+        $turma = Turma::find($dataForm['idturma']);
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
@@ -421,9 +420,16 @@ class professorController extends Controller
                 $filtro = $dataForm['sexo'];
                 $query->where('sexo', '=', $filtro);
             }
+            $pessoasall = Pessoa::all();
+            $turma = Turma::find($dataForm['idturma']);
+            $pessoasids = [];
+            $pessoas_filtradas = $this->filtrar_dados($pessoasall, $turma->pessoas);
+            foreach($pessoas_filtradas as $pessoa_filtrada){
+                array_push($pessoasids, $pessoa_filtrada->id);
+            }
+            $query->wherein('id', $pessoasids);
         })->orderBy('nome');
         Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
-        $pessoaslist = $this->filtrar_dados($pessoaslist, $pessoas_turmas);
         $pessoaslist = $pessoaslist->paginate(10);
 
         return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professorid'));

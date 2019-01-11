@@ -53,11 +53,11 @@ Route::resource('doencas','doencasController')->middleware('AdministracaoEProfes
 
 //Rotas de turmas
 Route::resource('turmas','turmasController')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info')->middleware('Authenticate');
 
 //Rotas de núcleos
 Route::resource('nucleos','nucleosController')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de Audits

@@ -63,32 +63,54 @@ function mNum(num){
 
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
 
-document.getElementById("img_3x4").onchange = function (){
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        document.getElementById("3x4_image").src = e.target.result;
-    };
-
-    reader.readAsDataURL(this.files[0]);
-};
-
-document.getElementById("img_matricula").onchange = function (){
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        document.getElementById("matricula_image").src = e.target.result;
-    };
-    
-    reader.readAsDataURL(this.files[0]);
-};
-
-document.getElementById('limpar_3x4').onclick = function (){
+function apagar_3_4(){
     document.getElementById('3x4_image').src = '';
     document.getElementById('img_3x4').value = '';
     document.getElementById('3x4').value = '';
 }
 
-document.getElementById('limpar_matricula').onclick = function (){
+function apagar_matricula(){
     document.getElementById('matricula_image').src = '';
     document.getElementById('img_matricula').value = '';
     document.getElementById('matricula').value = '';
+}
+
+document.getElementById("img_3x4").onchange = function (){
+    string = document.getElementById("img_3x4").value.split('.');
+    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("3x4_image").src = e.target.result;
+        };
+
+        reader.readAsDataURL(this.files[0]);
+    }
+    else{
+        apagar_3_4();
+        alert('Ocorreu um erro ao fazer upload da imagem, por favor tente novamente!');
+    }
+};
+
+document.getElementById("img_matricula").onchange = function (){
+    string = document.getElementById("img_3x4").value.split('.');
+    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("matricula_image").src = e.target.result;
+        };
+        
+        reader.readAsDataURL(this.files[0]);
+    }
+    else{
+        apagar_matricula();
+        alert('Ocorreu um erro no upload da imagem, por favor tente novamente!')
+    }
+};
+
+document.getElementById('limpar_3x4').onclick = function (){
+    apagar_3_4();
+}
+
+document.getElementById('limpar_matricula').onclick = function (){
+    apagar_matricula();
 }
