@@ -79,7 +79,7 @@
                                 <div class="input-field col s4">
                                     <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                                     <select name="bairro_id">
-                                        <option value="" selected disabled>Selecione o núcleo</option>
+                                        <option value="{{null}}" selected disabled>Selecione o núcleo</option>
                                         @foreach ($bairroslist as $bairro)
                                             <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
                                         @endforeach

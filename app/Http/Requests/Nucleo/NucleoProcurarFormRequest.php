@@ -26,6 +26,7 @@ class NucleoProcurarFormRequest extends FormRequest
     {
         return [
             'inativo'               => ['sometimes', 'nullable', Rule::in(['1', '2']),],
+            'bairro_id'             => 'sometimes|nullable|exists:bairros,id',
         ];
     }
 }

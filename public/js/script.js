@@ -92,7 +92,7 @@ document.getElementById("img_3x4").onchange = function (){
 };
 
 document.getElementById("img_matricula").onchange = function (){
-    string = document.getElementById("img_3x4").value.split('.');
+    string = document.getElementById("img_matricula").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
         var reader = new FileReader();
         reader.onload = function (e) {

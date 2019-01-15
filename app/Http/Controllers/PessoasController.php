@@ -169,19 +169,22 @@ class PessoasController extends Controller
             $dataForm['cpf_responsavel'] = null;
         }
         else{
-            if(isset($dataForm['img_3x4'])){
-                $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
-            }
-            else{
-                $dataForm['img_matricula'] = null;
-            }
+            if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
+            else{$dataForm['img_matricula'] = null;}
         }
-        if(isset($dataForm['img_3x4'])){
-            $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
-        }
-        else{
-            $dataForm['img_3x4'] = null;
-        }
+        if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
+        else{$dataForm['img_3x4'] = null;}
+        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
+        if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
+        if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
+        if(!isset($dataForm['toma_medicacao'])){$dataForm['toma_medicacao'] = null;}
+        if(!isset($dataForm['alergia_medicacao'])){$dataForm['alergia_medicacao'] = null;}
+        if(!isset($dataForm['fumante'])){$dataForm['fumante'] = null;}
+        if(!isset($dataForm['cirurgia'])){$dataForm['cirurgia'] = null;}
+        if(!isset($dataForm['dor_muscular'])){$dataForm['dor_muscular'] = null;}
+        if(!isset($dataForm['dor_articular'])){$dataForm['dor_articular'] = null;}
+        if(!isset($dataForm['dor_ossea'])){$dataForm['dor_ossea'] = null;}
+        
         $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
@@ -324,7 +327,7 @@ class PessoasController extends Controller
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro' => $dataForm['bairro'],
+            'bairro_id' => $dataForm['bairro_id'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
