@@ -48,11 +48,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s3">
-                            <i class="material-icons prefix">location_city</i>
-                            <input name="bairro" id="icon_bairro" type="text" class="validate" value="@if(is_null(old('bairro'))) {{$nucleo->bairro}} @else {{old('bairro')}} @endif">
-                            <label for="icon_bairro">Bairro:</label>
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                            <select name="bairro_id">
+                                <option value="" selected disabled>Selecione o bairro</option>
+                                @foreach ($bairroslist as $bairro)
+                                    <option value="{{$bairro->id}}"  @if($bairro->id == $nucleo->bairro_id) selected @endif>{{$bairro->nome}}</option>
+                                @endforeach
+                            </select>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s3">
                             <i class="material-icons prefix">confirmation_number</i>
                             <input name="rua" id="icon_rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif">

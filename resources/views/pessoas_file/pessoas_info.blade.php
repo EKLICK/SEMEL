@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td><h6>Bairro:</h6></td>
-                        <td><h6>{{$pessoa->bairro}}</h6></td>
+                        <td><h6>{{$pessoa->bairro->nome}}</h6></td>
                     </tr>
                     <tr>
                         <td><h6>Rua:</h6></td>

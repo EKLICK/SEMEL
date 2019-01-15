@@ -12,7 +12,7 @@ class Pessoa extends model implements Auditable
     use softDeletes;
 
     protected $fillable = [
-        'foto', 'cidade', 'nome', 'nascimento', 'cpf', 'cpf_responsavel', 'rg', 'cidade', 'bairro', 'rua',
+        'foto', 'cidade', 'nome', 'nascimento', 'cpf', 'cpf_responsavel', 'rg', 'cidade', 'bairro_id', 'rua',
         'numero_endereco', 'cep', 'telefone', 'telefone_emergencia', 'nome_do_pai', 'nome_da_mae', 'pessoa_emergencia',
         'convenio_medico', 'filhos', 'irmaos', 'sexo', 'estado_civil', 'mora_com_os_pais', 'inativo', 'matricula', 'estado',
     ];
@@ -23,5 +23,9 @@ class Pessoa extends model implements Auditable
 
     public function turmas(){
         return $this->belongsToMany(Turma::class, 'turmas_pessoas');
+    }
+
+    public function bairro(){
+        return $this->BelongsTo(Bairro::class);
     }
 }

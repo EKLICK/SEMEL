@@ -27,7 +27,7 @@ class NucleoCreateEditFormRequest extends FormRequest
         return [
             'nome'                  => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'inativo'               => ['required', Rule::in(['1', '2']),],
-            'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'bairro_id'             => 'required',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'required|digits_between:0,5',
             'cep'                   => 'required|max:10|min:10',
@@ -43,9 +43,7 @@ class NucleoCreateEditFormRequest extends FormRequest
 
             'inativo.required' => 'O campo inativo é de preenchimento obrigatório!',
 
-            'bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
-            'bairro.max' => 'Insira um bairro válido!',
-            'bairro.regex' => 'Não insira caracteres especiais no bairro',
+            'bairro_id.required' => 'O campo bairro é de preenchimento obrigatório!',
 
             'rua.required' => 'O campo rua é de preenchimento obrigatório!',
             'rua.max' => 'Insira uma rua válida!',

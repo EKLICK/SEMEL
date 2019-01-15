@@ -22,7 +22,7 @@ class Pessoas extends Migration
             $table->string('cpf')->nullable();
             $table->string('cpf_responsavel')->nullable();
             $table->string('cidade')->nullable();
-            $table->string('bairro')->nullable();
+            $table->unsignedInteger('bairro_id')->nullable();
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();
@@ -38,7 +38,6 @@ class Pessoas extends Migration
             $table->string('estado_civil')->nullable();
             $table->string('matricula')->nullable();
             $table->boolean('mora_com_os_pais')->nullable();
-            $table->boolean('inativo')->nullable();
             $table->boolean('estado')->default(false);
             $table->timestamps();
             $table->softDeletes();

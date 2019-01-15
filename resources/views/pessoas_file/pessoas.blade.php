@@ -72,14 +72,18 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s4">
-                                    <i class="material-icons prefix">location_city</i>
-                                    <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
-                                    <label for="bairro_search">Bairro</label>
-                                </div>
-                                <div class="input-field col s4">
                                     <i class="material-icons prefix">confirmation_number</i>
                                     <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                                    <select name="bairro_id">
+                                        <option value="" selected disabled>Selecione o núcleo</option>
+                                        @foreach ($bairroslist as $bairro)
+                                            <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

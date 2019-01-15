@@ -257,7 +257,7 @@ class turmasController extends Controller
             }
             if(!empty($dataForm['nucleo_id'])){
                 $filtro = $dataForm['nucleo_id'];
-                $query->where('nucleo_id', '=', '$filtro');
+                $query->where('nucleo_id', '=', $filtro);
             }
         })->orderBy('nome');
         Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco de dados.');

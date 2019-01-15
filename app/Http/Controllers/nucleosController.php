@@ -7,6 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
 use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Nucleo;
+use App\Bairro;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
 
@@ -22,10 +23,11 @@ class nucleosController extends Controller
     public function index()
     {
         $nucleoall = Nucleo::all();
+        $bairroslist = Bairro::all();
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco de dados.');
 
-        return view ('nucleos_file.nucleos', compact('nucleoslist'));
+        return view ('nucleos_file.nucleos', compact('nucleoslist', 'bairroslist'));
     }
 
     /**
@@ -35,7 +37,8 @@ class nucleosController extends Controller
      */
     public function create()
     {
-        return view ('nucleos_file.nucleos_create');
+        $bairroslist = Bairro::all();
+        return view ('nucleos_file.nucleos_create', compact('bairroslist'));
     }
 
     /**
@@ -72,7 +75,8 @@ class nucleosController extends Controller
     public function edit($id)
     {
         $nucleo = Nucleo::find($id);
-        return view ('nucleos_file.nucleos_edit', compact('nucleo'));
+        $bairroslist = Bairro::all();
+        return view ('nucleos_file.nucleos_edit', compact('nucleo','bairroslist'));
     }
 
     /**
@@ -142,9 +146,9 @@ class nucleosController extends Controller
                 $filtro = $dataForm['inativo'];
                 $query->where('inativo', '=', $filtro);
             }
-            if(!empty($dataForm['bairro'])){
-                $filtro = $dataForm['bairro'];
-                $query->where('bairro', 'like', $filtro."%");
+            if(!empty($dataForm['bairro_id'])){
+                $filtro = $dataForm['bairro_id'];
+                $query->where('bairro_id', '=', $filtro);
             }
             if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
@@ -159,8 +163,9 @@ class nucleosController extends Controller
                 $query->where('cep', 'like', $filtro."%");
             }
         })->orderBy('nome');
+        $bairroslist = Bairro::all();
         Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco de dados.');
         $nucleoslist = $nucleoslist->paginate(10);
-        return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm'));
+        return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));
     }
 }

@@ -15,6 +15,7 @@ use App\Nucleo;
 use App\Doenca;
 use App\Turma;
 use App\Anamnese;
+use App\Bairro;
 
 class PessoasController extends Controller
 {
@@ -121,9 +122,10 @@ class PessoasController extends Controller
         }
         $ano = date('Y');
         $pessoall = Pessoa::all();
+        $bairroslist = Bairro::all();
         Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco de dados.');
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist','ano'));
     }
 
     /**
@@ -143,7 +145,8 @@ class PessoasController extends Controller
     public function create()
     {
         $doencaslist = Doenca::all();
-        return view ('pessoas_file.pessoas_create', compact('doencaslist'));
+        $bairroslist = Bairro::all();
+        return view ('pessoas_file.pessoas_create', compact('doencaslist','bairroslist'));
     }
 
     /**
@@ -166,9 +169,19 @@ class PessoasController extends Controller
             $dataForm['cpf_responsavel'] = null;
         }
         else{
-            $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
+            if(isset($dataForm['img_3x4'])){
+                $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
+            }
+            else{
+                $dataForm['img_matricula'] = null;
+            }
         }
-        $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+        if(isset($dataForm['img_3x4'])){
+            $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+        }
+        else{
+            $dataForm['img_3x4'] = null;
+        }
         $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
@@ -182,7 +195,7 @@ class PessoasController extends Controller
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro' => $dataForm['bairro'],
+            'bairro_id' => $dataForm['bairro_id'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
@@ -248,8 +261,9 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $doencaslist = Doenca::all();
+        $bairroslist = Bairro::all();
 
-        return view ('pessoas_file.pessoas_edit', compact('doencaslist', 'pessoa'));
+        return view ('pessoas_file.pessoas_edit', compact('doencaslist','bairroslist','pessoa'));
     }
 
     /**
