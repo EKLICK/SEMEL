@@ -317,13 +317,13 @@ class PessoasController extends Controller
                 $dataForm += ['img_matricula' => null];
             }
         }
-        dd($dataForm['marc']);
         if($dataForm['marc'] == 'N'){
             $dataForm['convenio_medico'] == -1;
         }
         $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
+        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         $pessoa->update([

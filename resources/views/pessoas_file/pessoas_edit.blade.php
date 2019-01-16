@@ -111,11 +111,6 @@
                             <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="@if(is_null(old('telefone_emergencia'))) {{$pessoa->telefone_emergencia}} @else {{old('telefone_emergencia')}} @endif">
                             <label for="icon_telephone">Telephone de emergência:</label>
                         </div>
-                        <div class="input-field col s3">
-                            <i class="material-icons prefix">add_box</i>
-                            <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="@if(is_null(old('convenio_medico'))) {{$pessoa->convenio_medico}} @else {{old('convenio_medico')}} @endif">
-                            <label for="convenio_medico">Convênio médico:</label>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
@@ -128,10 +123,10 @@
                             <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="@if(is_null(old('nome_da_mae'))) {{$pessoa->nome_da_mae}} @else {{old('nome_da_mae')}} @endif">
                             <label for="nome_da_mae">Nome da mãe:</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <i class="material-icons prefix">person_add</i>
-                            <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="@if(is_null(old('pessoa_emergencia'))) {{$pessoa->pessoa_emergencia}} @else {{old('pessoa_emergencia')}} @endif">
-                            <label for="pessoa_emergencia">Pessoa para emergência:</label>
+                            <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{old('pessoa_emergencia')}}">
+                            <label for="pessoa_emergencia">Pessoa emergência:</label>
                         </div>
                     </div>
                     <div class="row">
@@ -146,6 +141,33 @@
                             <label for="irmaos">Irmãos:</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            Possui convênio médico?
+                            <label>
+                                <p>
+                                    <label>
+                                        <input id="marc" value="S" name="marc" type="radio" @if(old('marc') == 'S') checked @else @if ($pessoa->convenio_medico != -1) checked @endif @endif/>
+                                        <span>Sim</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="marc" value="N" name="marc" type="radio" @if(old('marc') == 'N') checked @else @if ($pessoa->convenio_medico == -1) checked @endif @endif/>
+                                        <span>Não</span>
+                                    </label>
+                                </p>
+                            </label>
+                        </div>
+                        <div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">add_box</i>
+                                <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" @if ($pessoa->convenio_medico == -1) hidden @endif>
+                                <label id="convenio_label" for="convenio_medico" @if ($pessoa->convenio_medico == -1) hidden @endif>Convênio médico:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
                     <div class="row">
                         <div class="input-field col s4">
                             <div class="input-field col s2">
