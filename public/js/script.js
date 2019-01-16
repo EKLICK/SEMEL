@@ -115,14 +115,13 @@ document.getElementById('limpar_matricula').onclick = function (){
     apagar_matricula();
 }
 
-//Funções para expecificações
-function mudarHidden(x) {
-    if(x == 'S'){
-        document.getElementById('convenio_medico').hidden = false;
-        document.getElementById('convenio_label').hidden = false;
+$("[name='marc']").click(function(){
+    if(this.value == 'S'){
+        $('#convenio_medico').hide(400);
+        $('.convenio_label').hide(400);
     }
     else{
-        document.getElementById('convenio_medico').hidden = true;
-        document.getElementById('convenio_label').hidden = true;
+        $('#convenio_medico').show(400);
+        $('.convenio_label').show(400);
     }
-}
+});

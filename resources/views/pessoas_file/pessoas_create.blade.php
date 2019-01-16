@@ -151,13 +151,13 @@
                             <label>
                                 <p>
                                     <label>
-                                        <input id="marc" value="S" onchange="mudarHidden(this.value)" name="marc" type="radio" @if(old('convenio_marc') == 'S') checked @endif/>
+                                        <input id="marc" value="S" name="marc" type="radio" @if(old('convenio_marc') == 'S') checked @endif/>
                                         <span>Sim</span>
                                     </label>
                                 </p>
                                 <p>
                                     <label>
-                                        <input id="marc" value="N" onchange="mudarHidden(this.value)" name="marc" type="radio" @if(old('convenio_marc') == 'N') checked @endif/>
+                                        <input id="marc" value="N" name="marc" type="radio" @if(old('convenio_marc') == 'N') checked @endif/>
                                         <span>Não</span>
                                     </label>
                                 </p>
