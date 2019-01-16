@@ -114,3 +114,15 @@ document.getElementById('limpar_3x4').onclick = function (){
 document.getElementById('limpar_matricula').onclick = function (){
     apagar_matricula();
 }
+
+//Funções para expecificações
+function mudarHidden(x) {
+    if(x == 'S'){
+        document.getElementById('convenio_medico').hidden = false;
+        document.getElementById('convenio_label').hidden = false;
+    }
+    else{
+        document.getElementById('convenio_medico').hidden = true;
+        document.getElementById('convenio_label').hidden = true;
+    }
+}

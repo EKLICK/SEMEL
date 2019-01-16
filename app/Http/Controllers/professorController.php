@@ -15,6 +15,7 @@ use App\Professor;
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
+use App\Bairro;
 use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller
@@ -122,7 +123,6 @@ class professorController extends Controller
         ]);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
-        $dataForm += ['cidade' => 'São Leopoldo'];
         $dataForm += ['user_id' => $user->id];
         Professor::create($dataForm);
         Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');

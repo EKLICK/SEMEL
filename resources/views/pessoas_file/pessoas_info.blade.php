@@ -33,14 +33,14 @@
                     </tr>
                     <tr>
                         <td><h6>Bairro:</h6></td>
-                        <td><h6>{{$pessoa->bairro->nome}}</h6></td>
+                        <td><h6>@if(isset($pessoa->bairro)) {{$pessoa->bairro->nome}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>Rua:</h6></td>
                         <td><h6>{{$pessoa->rua}}</h6></td>
                     </tr>
                     <tr>
-                        <td><h6>Numero da casa:</h6></td>
+                        <td><h6>Numero:</h6></td>
                         <td><h6>{{$pessoa->numero_endereco}}</h6></td>
                     </tr>
                     <tr>
@@ -81,7 +81,7 @@
                     </tr>
                     <tr>
                         <td><h6>Convenio médico:</h6></td>
-                        <td><h6>@if($pessoa->convenio_medico == null) Não possui convenio médico @else {{$pessoa->convenio_medico}} @endif</h6></td>
+                        <td><h6>@if($pessoa->convenio_medico == -1) Não possui convenio médico. @else {{$pessoa->convenio_medico}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>Mora com os pais:</h6></td>

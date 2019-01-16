@@ -172,6 +172,9 @@ class PessoasController extends Controller
             if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
             else{$dataForm['img_matricula'] = null;}
         }
+        if($dataForm['marc'] == 'N'){
+            $dataForm['convenio_medico'] = -1;
+        }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
         if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
@@ -314,9 +317,15 @@ class PessoasController extends Controller
                 $dataForm += ['img_matricula' => null];
             }
         }
+        dd($dataForm['marc']);
+        if($dataForm['marc'] == 'N'){
+            $dataForm['convenio_medico'] == -1;
+        }
         $estado = $this->chegar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
+        if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
+        if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         $pessoa->update([
             'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],
@@ -467,9 +476,9 @@ class PessoasController extends Controller
                 $filtro = $dataForm['cpf'];
                 $query->where('cpf', 'like', $filtro."%");
             }
-            if(!empty($dataForm['bairro'])){
-                $filtro = $dataForm['bairro'];
-                $query->where('bairro', 'like', $filtro."%");
+            if(!empty($dataForm['bairro_id'])){
+                $filtro = $dataForm['bairro_id'];
+                $query->where('bairro_id', '=', $filtro);
             }
             if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
@@ -488,10 +497,11 @@ class PessoasController extends Controller
                 $query->where('estado_civil', '=', $filtro);
             }
         })->orderBy('nome');
+        $bairroslist = Bairro::all();
         Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
         $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist', 'ano', 'dataForm'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm'));
     }
 }

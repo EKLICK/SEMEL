@@ -40,7 +40,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s3">
+                        <div class="input-field col s4">
+                            <i class="material-icons prefix">business</i>
+                            <input name="cidade" id="icon_bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
+                            <label for="icon_bairro">Cidade:</label>
+                        </div>
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">location_city</i>
                             <input name="bairro" id="icon_bairro" type="text" class="validate" value="{{old('bairro')}}">
                             <label for="icon_bairro">Bairro:</label>
@@ -50,6 +55,8 @@
                             <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}">
                             <label for="icon_rua">Rua:</label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="input-field col s2">
                             <i class="material-icons prefix">location_on</i>
                             <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}">

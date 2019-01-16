@@ -22,7 +22,6 @@
             <div class="row">
                 <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                     <input type="text" name="atestado" value="2" hidden>
                     <h5>Registro da pessoa:</h5>
                     <div class="row">
@@ -74,6 +73,11 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
+                            <i class="material-icons prefix">business</i>
+                            <input name="cidade" id="icon_bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
+                            <label for="icon_bairro">Cidade:</label>
+                        </div>
+                        <div class="input-field col s4">
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                             <select name="bairro_id">
                                 <option value="" selected disabled>Selecione o bairro</option>
@@ -111,11 +115,6 @@
                             <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}">
                             <label for="icon_telephone_emergencia">Telephone emergência:</label>
                         </div>
-                        <div class="input-field col s3">
-                            <i class="material-icons prefix">add_box</i>
-                            <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}">
-                            <label for="convenio_medico">Convênio médico:</label>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
@@ -146,6 +145,33 @@
                             <label for="irmaos">Irmãos:</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            Possui convênio médico?
+                            <label>
+                                <p>
+                                    <label>
+                                        <input id="marc" value="S" onchange="mudarHidden(this.value)" name="marc" type="radio" @if(old('convenio_marc') == 'S') checked @endif/>
+                                        <span>Sim</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="marc" value="N" onchange="mudarHidden(this.value)" name="marc" type="radio" @if(old('convenio_marc') == 'N') checked @endif/>
+                                        <span>Não</span>
+                                    </label>
+                                </p>
+                            </label>
+                        </div>
+                        <div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">add_box</i>
+                                <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" hidden>
+                                <label id="convenio_label" for="convenio_medico" hidden>Convênio médico:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
                     <div class="row">
                         <div class="input-field col s4">
                             <div class="input-field col s2">

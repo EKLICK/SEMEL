@@ -50,7 +50,7 @@
                         <td><h6>{{$professor->rua}}</h6></td>
                     </tr>
                     <tr>
-                        <td><h6>Numero da casa:</h5></td>
+                        <td><h6>Numero:</h5></td>
                         <td><h6>{{$professor->numero_endereco}}</h6></td>
                     </tr>
                     <tr>
