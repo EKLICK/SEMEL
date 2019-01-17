@@ -134,38 +134,4 @@ class nucleosController extends Controller
         $nucleo = Nucleo::find($id);
         return view ('nucleos_file.nucleos_info', compact('nucleo'));
     }
-
-    public function nucleos_procurar(NucleoProcurarFormRequest $request){
-        $dataForm = $request->all();
-        $nucleoslist = Nucleo::where(function($query) use($dataForm){
-            if(!empty($dataForm['nome'])){
-                $filtro = $dataForm['nome'];
-                $query->where('nome', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['inativo'])){
-                $filtro = $dataForm['inativo'];
-                $query->where('inativo', '=', $filtro);
-            }
-            if(!empty($dataForm['bairro_id'])){
-                $filtro = $dataForm['bairro_id'];
-                $query->where('bairro_id', '=', $filtro);
-            }
-            if(!empty($dataForm['rua'])){
-                $filtro = $dataForm['rua'];
-                $query->where('rua', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['numero_endereco'])){
-                $filtro = $dataForm['numero_endereco'];
-                $query->where('numero_endereco', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['cep'])){
-                $filtro = $dataForm['cep'];
-                $query->where('cep', 'like', $filtro."%");
-            }
-        })->orderBy('nome');
-        $bairroslist = Bairro::all();
-        Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco de dados.');
-        $nucleoslist = $nucleoslist->paginate(10);
-        return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));
-    }
 }

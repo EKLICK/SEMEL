@@ -71,20 +71,20 @@ Route::get('/softdeletes/pessoas','deleteController@pessoas_softdeletes')->name(
 //Procurar
 
 //1-professor
-Route::any('/filtros_professor_turmas/{id}','professorController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
-Route::any('/professor_meus_alunos/procurar/', 'professorController@professor_procurar_aluno')->name('professor_procurar_aluno')->middleware('Authenticate');
-Route::any('/procurar/professor','professorController@professor_procurar')->name('professor_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/filtros_professor_turmas/{id}','Ferramentas\filtersController@filtros_professor_turmas')->name('filtros_professor_turmas')->middleware('Authenticate');
+Route::any('/professor_meus_alunos/procurar/', 'Ferramentas\filtersController@professor_procurar_aluno')->name('professor_procurar_aluno')->middleware('Authenticate');
+Route::any('/procurar/professor','Ferramentas\filtersController@professor_procurar')->name('professor_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //2-pessoas
-Route::any('/procurar/pessoas','pessoasController@pessoas_procurar')->name('pessoas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/pessoas','Ferramentas\filtersController@pessoas_procurar')->name('pessoas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //3-anamneses
-Route::any('/procurar/anamneses','anamneseController@anamnese_procurar')->name('anamnese_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/anamneses','Ferramentas\filtersController@anamnese_procurar')->name('anamnese_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //4-doencas
-Route::any('/procurar/doencas', 'doencasController@doencas_procurar')->name('doencas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/doencas', 'Ferramentas\filtersController@doencas_procurar')->name('doencas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //5-turmas
-Route::any('/procurar/turmas','turmasController@turmas_procurar')->name('turmas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/turmas','Ferramentas\filtersController@turmas_procurar')->name('turmas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //6-núcleos
-Route::any('/procurar/nucleos','nucleosController@nucleos_procurar')->name('nucleos_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/nucleos','Ferramentas\filtersController@nucleos_procurar')->name('nucleos_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //7-audits
-Route::any('/procurar/audits','AuditsController@audits_procurar')->name('audits_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/audits','Ferramentas\filtersController@audits_procurar')->name('audits_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //8-softdeletes
-Route::any('/softdeletes/procurar/pessoas', 'deleteController@pessoas_procurar_softdelete')->name('pessoas_procurar_softdelete')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/softdeletes/procurar/pessoas', 'Ferramentas\filtersController@pessoas_procurar_softdelete')->name('pessoas_procurar_softdelete')->middleware('AdministracaoEProfessor', 'Authenticate');

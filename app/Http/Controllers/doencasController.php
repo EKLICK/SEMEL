@@ -107,15 +107,4 @@ class doencasController extends Controller
         Session::put('mensagem', $nome.' deletada com sucesso!');
         return redirect()->Route('doencas.index');
     }
-
-    public function doencas_procurar(Request $request){
-        $dataForm = $request->all();
-        $doencaslist = Doenca::all();
-        if($dataForm['nome'] != null){
-            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%');
-        }
-        Session::put('quant', 'Foram encontrados '.count($doencaslist->get()).' doenças no banco de dados.');
-        $doencaslist = $doencaslist->paginate(10);
-        return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
-    }
 }

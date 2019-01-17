@@ -78,11 +78,13 @@ class PessoasController extends Controller
         return $data['img_matricula'];
     }
 
-    public function chegar_estado($listadados, $nascimento){
+    public function checar_estado($listadados, $nascimento){
         if($listadados['img_3x4'] == null){return 0;}
         if($listadados['rg'] == null){return 0;}
-        if($listadados['cpf'] == null){return 0;}
-        if($listadados['bairro'] == null){return 0;}
+        if($nascimento >= 18){
+            if($listadados['cpf'] == null){return 0;}
+        }
+        if($listadados['bairro_id'] == null){return 0;}
         if($listadados['rua'] == null){return 0;}
         if($listadados['numero_endereco'] == null){return 0;}
         if($listadados['cep'] == null){return 0;}
@@ -188,7 +190,7 @@ class PessoasController extends Controller
         if(!isset($dataForm['dor_articular'])){$dataForm['dor_articular'] = null;}
         if(!isset($dataForm['dor_ossea'])){$dataForm['dor_ossea'] = null;}
         
-        $estado = $this->chegar_estado($dataForm, $nascimento);
+        $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $pessoa = Pessoa::create([
@@ -318,9 +320,9 @@ class PessoasController extends Controller
             }
         }
         if($dataForm['marc'] == 'N'){
-            $dataForm['convenio_medico'] == -1;
+            $dataForm['convenio_medico'] = -1;
         }
-        $estado = $this->chegar_estado($dataForm, $nascimento);
+        $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
@@ -446,62 +448,5 @@ class PessoasController extends Controller
             $pessoa = $pessoaslist->find($id);
         }
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
-    }
-
-    public function pessoas_procurar(PessoaProcurarFormRequest $request){
-        $dataForm = $request->except('_token');
-        
-        $pessoaslist = Pessoa::where(function($query) use($dataForm){
-            if(!empty($dataForm['nome'])){
-                $filtro = $dataForm['nome'];
-                $query->where('nome', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['de'])){
-                $filtro = explode(' ',$dataForm['de']);
-                list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
-                $query->where('nascimento',  '>=', $nascimento);
-            }
-            if(!empty($dataForm['ate'])){
-                $filtro = explode(' ',$dataForm['ate']);
-                list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
-                $query->where('nascimento',  '<=', $nascimento);
-            }
-            if(!empty($dataForm['rg'])){
-                $filtro = $dataForm['rg'];
-                $query->where('rg', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['cpf'])){
-                $filtro = $dataForm['cpf'];
-                $query->where('cpf', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['bairro_id'])){
-                $filtro = $dataForm['bairro_id'];
-                $query->where('bairro_id', '=', $filtro);
-            }
-            if(!empty($dataForm['rua'])){
-                $filtro = $dataForm['rua'];
-                $query->where('rua', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['telefone'])){
-                $filtro = $dataForm['telefone'];
-                $query->where('telefone', 'like', $filtro."%");
-            }
-            if(!empty($dataForm['sexo'])){
-                $filtro = $dataForm['sexo'];
-                $query->where('sexo', '=', $filtro);
-            }
-            if(!empty($dataForm['estado_civil'])){
-                $filtro = $dataForm['estado_civil'];
-                $query->where('estado_civil', '=', $filtro);
-            }
-        })->orderBy('nome');
-        $bairroslist = Bairro::all();
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
-        $pessoaslist = $pessoaslist->paginate(10);
-        $ano = date('Y');
-
-        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm'));
     }
 }
