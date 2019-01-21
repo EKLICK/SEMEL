@@ -22,7 +22,7 @@ class Pessoas extends Migration
             $table->string('cpf')->nullable();
             $table->string('cpf_responsavel')->nullable();
             $table->string('cidade')->nullable();
-            $table->unsignedInteger('bairro_id')->nullable();
+            $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();

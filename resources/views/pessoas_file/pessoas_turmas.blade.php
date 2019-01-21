@@ -109,19 +109,19 @@
                                     <div style="margin-left: 30%;">
                                         <p>
                                             <label>
-                                                <input value="1" name="pagina" type="radio"/>
+                                                <input value="3" name="pagina" type="radio"/>
                                                 <span>Desvinculados</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input value="2" name="pagina" type="radio"/>
+                                                <input value="1" name="pagina" type="radio"/>
                                                 <span>Ativos</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input value="3" name="pagina" type="radio"/>
+                                                <input value="2" name="pagina" type="radio"/>
                                                 <span>Inativos</span>
                                             </label>
                                         </p>
@@ -174,25 +174,52 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
-                            @if ($op == 1)
+                            @if ($op == 3)
                                 <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                <td><a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
-                            @elseif ($op == 2)
+                                <td><a class="waves-effect waves-light btn green modal-trigger" id="btn-modal" style="width: 160px;" href="#modalidturmapessoa"
+                                    data-idpessoa="{{$pessoa->id}}" 
+                                    data-idturma="{{$turma->id}}" 
+                                    data-nomepessoa="{{$pessoa->nome}}" 
+                                    data-nometurma="{{$turma->nome}}">
+                                    <i class="material-icons right">send</i>Vincular
+                                    </a>
+                                </td>
+                            @elseif ($op == 1)
                                 <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                <td><a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Inativar</a></td>
+                                <td><a href="{{Route('pessoas_turmas_ativar_inativar', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Inativar</a></td>
                             @else
                                 <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                <td><a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Ativar</a></td>
+                                <td><a href="{{Route('pessoas_turmas_ativar_inativar', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Ativar</a></td>
                             @endif
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
             @if(isset($dataForm))
-                {{$turmaslist->appends($dataForm)->links()}}
+                
             @else
-                {{$turmaslist->links()}}
+                
             @endif
         </div>
+    </div>
+    <div id="modalidturmapessoa" class="modal">
+        <form action="{{route('pessoas_turmas_vincular')}}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <h4>Vincular</h4>
+                <div class="row">
+                    <label for="name_delete">Nome:</label>
+                    <div class="input-field col s12">
+                        <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal">
+                        <input disabled class="validate" type="text" name="nome_pessoa" id="nome_pessoa_modal">
+                        <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal">
+                        <input disabled class="validate" type="text" name="id_pessoa_modal" id="nome_turma_modal">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
     </div>
 @endsection

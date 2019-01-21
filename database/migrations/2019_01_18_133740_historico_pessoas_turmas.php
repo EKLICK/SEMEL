@@ -19,6 +19,8 @@ class HistoricoPessoasTurmas extends Migration
             $table->unsignedInteger('pessoa_id')->nullable();
             $table->Integer('inativo')->nullable();
             $table->string('comentario')->nullable();
+            $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('set null');
+            $table->foreign('pessoa_id')->references('id')->on('pessoas')->onDelete('set null');
             $table->timestamps();
         });
     }

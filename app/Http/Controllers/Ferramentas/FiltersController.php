@@ -21,6 +21,7 @@ use App\Nucleo;
 use App\Pessoa;
 use App\Bairro;
 use App\Audit;
+use App\HistoricoPT;
 use Illuminate\Support\Facades\Session;
 
 class FiltersController extends Controller
@@ -304,7 +305,9 @@ class FiltersController extends Controller
         })->orderBy('nome');
         Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco de dados.');
         $nucleoslist = Nucleo::all();
-        $op = $dataForm['pagina'];
+        if(!empty($dataForm['pagina'])){
+            $op = $dataForm['pagina'];
+        }
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] > 0){
             $turmaslist = $turmaslist->paginate(10);
@@ -317,8 +320,41 @@ class FiltersController extends Controller
             return redirect()->route('filtros_professor_turmas', $dataForm['id'], 'dataForm');
         }
         elseif ($dataForm['id'] < 0) {
-            $turmaslist = $turmaslist->paginate(10);
+            $turmaslist = $turmaslist->get();
             $pessoa = Pessoa::withTrashed()->find(-$dataForm['id']);
+            $turmaslistall = [];
+            foreach($turmaslist as $turma){
+                array_push($turmaslistall, $turma);
+            }
+            if($op == 3){
+                foreach($pessoa->turmas as $turmadapessoa){
+                    $aux = 0;
+                    foreach($turmaslistall as $turma){
+                        if($turmadapessoa->id == $turma->id){
+                            unset($turmaslist[$aux]);
+                        }
+                        $aux++;
+                    }
+                }
+            }
+            else{
+                $turmaslist = [];
+                foreach($pessoa->turmas as $turmadapessoa){
+                    foreach($turmaslistall as $turma){
+                        if($turmadapessoa->id == $turma->id){
+                            array_push($turmaslist, $turma);
+                        }
+                    }
+                }
+                $aux = 0;
+                foreach($turmaslist as $turma){
+                    $historico = HistoricoPT::where('pessoa_id', '=', $pessoa->id)->where('turma_id', '=', $turma->id)->get()->first();
+                    if($historico['inativo'] != $op){
+                        unset($turmaslist[$aux]);
+                    }
+                    $aux++;
+                }
+            }
 
             return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm', 'op'));
         }

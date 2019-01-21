@@ -17,7 +17,7 @@ class Nucleos extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('cidade')->nullable();
-            $table->unsignedInteger('bairro_id')->nullable();
+            $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
             $table->string('cep')->nullable();

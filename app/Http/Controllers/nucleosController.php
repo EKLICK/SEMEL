@@ -23,7 +23,10 @@ class nucleosController extends Controller
     public function index()
     {
         $nucleoall = Nucleo::all();
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
         Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco de dados.');
 
@@ -37,7 +40,10 @@ class nucleosController extends Controller
      */
     public function create()
     {
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         return view ('nucleos_file.nucleos_create', compact('bairroslist'));
     }
 
@@ -75,7 +81,10 @@ class nucleosController extends Controller
     public function edit($id)
     {
         $nucleo = Nucleo::find($id);
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         return view ('nucleos_file.nucleos_edit', compact('nucleo','bairroslist'));
     }
 

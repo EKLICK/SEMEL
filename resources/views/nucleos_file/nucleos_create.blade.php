@@ -51,10 +51,10 @@
                     <div class="row">
                         <div class="input-field col s4">
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                            <select name="bairro_id">
+                            <select name="bairro">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
+                                    <option value="{{$bairro}}">{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>

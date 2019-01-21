@@ -43,7 +43,7 @@ class TurmaCreateEditFormRequest extends FormRequest
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'limite.required' => 'O campo limite é de preenchimento obrigatório!',
-            'limite.max' => 'O campo limite tem possui limite de 200 pessoas!',
+            'limite.max' => 'O campo limite possui limite de 200 pessoas!',
 
             'inativo.required' => 'O campo inativo é de preenchimento obrigatório!',
 

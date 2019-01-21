@@ -36,7 +36,7 @@ class PessoaEditFormRequest extends FormRequest
             'cidade'                => 'regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'rua'                   => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'sometimes|nullable|digits_between:0,5',
-            'bairro_id'             => 'sometimes|nullable|numeric',
+            'bairro'                => 'sometimes|nullable|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'cep'                   => 'sometimes|nullable||max:10|min:10',
             'telefone'              => 'sometimes|nullable|max:16|min:8',
             'telefone_emergencia'   => 'sometimes|nullable|max:16|min:8',

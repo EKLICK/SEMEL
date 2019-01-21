@@ -76,12 +76,12 @@
                                     <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s5">
                                     <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                                    <select name="bairro_id">
+                                    <select name="bairro">
                                         <option value="{{null}}" selected disabled>Selecione o núcleo</option>
                                         @foreach ($bairroslist as $bairro)
-                                            <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
+                                            <option value="{{$bairro}}">{{$bairro}}</option>
                                         @endforeach
                                     </select>
                                 </div>

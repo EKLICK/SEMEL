@@ -17,6 +17,7 @@ use App\Doenca;
 use App\Turma;
 use App\Anamnese;
 use App\Bairro;
+use App\HistoricoPT;
 
 class PessoasController extends Controller
 {
@@ -125,7 +126,10 @@ class PessoasController extends Controller
         }
         $ano = date('Y');
         $pessoall = Pessoa::all();
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco de dados.');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist','ano'));
@@ -148,7 +152,10 @@ class PessoasController extends Controller
     public function create()
     {
         $doencaslist = Doenca::all();
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         return view ('pessoas_file.pessoas_create', compact('doencaslist','bairroslist'));
     }
 
@@ -182,7 +189,7 @@ class PessoasController extends Controller
         }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
-        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         if(!isset($dataForm['toma_medicacao'])){$dataForm['toma_medicacao'] = null;}
@@ -206,7 +213,7 @@ class PessoasController extends Controller
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro_id' => $dataForm['bairro_id'],
+            'bairro' => $dataForm['bairro'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
@@ -273,7 +280,10 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $doencaslist = Doenca::all();
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
 
         return view ('pessoas_file.pessoas_edit', compact('doencaslist','bairroslist','pessoa'));
     }
@@ -331,7 +341,7 @@ class PessoasController extends Controller
         $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
-        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         $pessoa->update([
@@ -344,7 +354,7 @@ class PessoasController extends Controller
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro_id' => $dataForm['bairro_id'],
+            'bairro' => $dataForm['bairro'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
@@ -412,30 +422,37 @@ class PessoasController extends Controller
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese'));
     }
 
-    //Pagina de pessoas e turmas
     public function pessoas_turmas($id){
         $pessoa = Pessoa::withTrashed($id)->get()->last();
-        $turmaslist = Turma::orderBy('nome')->paginate(10);
-        $turmasall = Turma::all();
+        $turmaslistall = Turma::all();
+        $turmaslist = Turma::all();
+        foreach($pessoa->turmas as $turmadapessoa){
+            $aux = 0;
+            foreach($turmaslistall as $turma){
+                if($turmadapessoa->id == $turma->id){
+                    unset($turmaslist[$aux]);
+                    break;
+                }
+                $aux++;
+            }
+        }
         $nucleoslist = Nucleo::all();
         $op = 1;
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($turmaslist).' turmas no banco de dados.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'dias_semana', 'nucleoslist', 'op'));
     }
 
     //Ações para vincular, ativar e inativar.
-    public function pessoas_turmas_vincular($idpessoa, $idturma){
-        $pessoa = Pessoa::find($idpessoa);
-        $turma = Turma::find($idturma);
-        $pessoa->turmas()->attach($idturma);
-        $historico = HistoricoPT::create([
-            'pessoa_id' => $pessoa_id,
-            'turma_id' => $turma_id,
-            'inativo' => 1,
-            
-        ]);
+    public function pessoas_turmas_vincular(Request $request){
+        $dataForm = $request->all();
+        $pessoa = Pessoa::withTrashed($dataForm['pessoa_id'])->get()->last();
+        $turma = Turma::find($dataForm['turma_id']);
+        $pessoa->turmas()->attach($turma->id);
+        $dataForm['inativo'] = 1;
+        $dataForm['comentario'] = 'ff';
+        $historico = HistoricoPT::create($dataForm);
         if(count($turma->pessoas) > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
         }
@@ -447,6 +464,7 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas_ativar_inativar($idpessoa, $idturma){
+        dd($idpessoa, $idturma);
         $historico = HistoricoPT::where('pessoa_id', '=', $idpessoa)->where('turma_id', '=', $idturma)->first();
         if($historico->inativo == 1){
             HistoricoPT::create([
