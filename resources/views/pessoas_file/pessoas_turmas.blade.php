@@ -104,6 +104,31 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">beenhere</i>&emsp;&emsp; Opção de Página:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="pagina" type="radio"/>
+                                                <span>Desvinculados</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="pagina" type="radio"/>
+                                                <span>Ativos</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="3" name="pagina" type="radio"/>
+                                                <span>Inativos</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
@@ -118,26 +143,47 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
+                        <th>Núcleo pertencente</th>
+                        <th>Estado</th>
                         <th>Limite de alunos</th>
                         <th>Vinculo</th>
+                        <th>Mudar vinculo</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
                             <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                            <td>
-                                @if (!isset($pessoasTurmas))
-                                    <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
-                                @else
-                                    @if(in_array($turma->id, $pessoasTurmas))
-                                        <a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a>
-                                    @else
-                                        <a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a>
+                            <td> 
+                                <p>
+                                    @if($turma->inativo == 2)
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
+                                        @else Turma inativa @endif
+                                    @else 
+                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
+                                        @else Turma ativa @endif 
                                     @endif
-                                @endif
+                                </p>
+                                <i class="small material-icons" 
+                                    @if($turma->inativo == 2 || $turma->nucleo->inativo == 2)  
+                                        style="color: red;" 
+                                    @else 
+                                        style="color: green;" 
+                                    @endif>sim_card_alert
+                                </i>
                             </td>
+                            @if ($op == 1)
+                                <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
+                                <td><a href="{{Route('pessoas_turmas_vincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
+                            @elseif ($op == 2)
+                                <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                <td><a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Inativar</a></td>
+                            @else
+                                <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                <td><a href="{{Route('pessoas_turmas_desvincular', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Ativar</a></td>
+                            @endif
                         </tr>
                     @endforeach 
                 </tbody>

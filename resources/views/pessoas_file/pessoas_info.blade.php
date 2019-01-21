@@ -2,7 +2,6 @@
 
 @section('breadcrumbs')
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
-    @if(isset($pessoa->deleted_at)) <a href="{{route('pessoas_softdeletes')}}" class="breadcrumb">Deletadas</a> @endif
     <a href="{{Route('pessoa_info', $pessoa->id)}}" class="breadcrumb">Informações</a>
 @endsection
 @section('title') Informações de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection

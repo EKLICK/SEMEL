@@ -45,7 +45,7 @@ class PessoaCreateFormRequest extends FormRequest
             'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|between:3,100',
             'filhos'                => 'digits_between:0,4',
             'irmaos'                => 'digits_between:0,4',
-            'marc'                  => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'marc'                  => ['sometimes','nullable', Rule::in(['S', 'N']),],
             'convenio_medico'       => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|',
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],

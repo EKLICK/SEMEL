@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ferramentas;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Professor\PessoaProcurarFormRequest;
+use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
-use App\Http\Requests\Professor\AnamneseProcurarFormRequest;
+use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
 use App\Http\Requests\Professor\AlunoProcurarFormRequest;
-use App\Http\Requests\Professor\NucleoProcurarFormRequest;
+use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
 use Illuminate\Validation\Rule;
 use App\User;
@@ -19,6 +20,7 @@ use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
 use App\Bairro;
+use App\Audit;
 use Illuminate\Support\Facades\Session;
 
 class FiltersController extends Controller
@@ -26,7 +28,7 @@ class FiltersController extends Controller
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
         
-        $pessoaslist = Pessoa::where(function($query) use($dataForm){
+        $pessoaslist = Pessoa::withTrashed()->where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
                 $query->where('nome', 'like', $filtro."%");
@@ -70,6 +72,15 @@ class FiltersController extends Controller
             if(!empty($dataForm['estado_civil'])){
                 $filtro = $dataForm['estado_civil'];
                 $query->where('estado_civil', '=', $filtro);
+            }
+            if(!empty($dataForm['inativo'])){
+                $filtro = $dataForm['inativo'];
+                if($filtro == 2){
+                    $query->where('deleted_at', '!=', null);
+                }
+                else{
+                    $query->where('deleted_at', '==', null);
+                }
             }
         })->orderBy('nome');
         $bairroslist = Bairro::all();
@@ -293,6 +304,7 @@ class FiltersController extends Controller
         })->orderBy('nome');
         Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco de dados.');
         $nucleoslist = Nucleo::all();
+        $op = $dataForm['pagina'];
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] > 0){
             $turmaslist = $turmaslist->paginate(10);
@@ -306,12 +318,9 @@ class FiltersController extends Controller
         }
         elseif ($dataForm['id'] < 0) {
             $turmaslist = $turmaslist->paginate(10);
-            $pessoa = Pessoa::find(-$dataForm['id']);
-            foreach($pessoa->turmas as $turma){
-                $pessoasTurmas[] = $turma->id;
-            }
+            $pessoa = Pessoa::withTrashed()->find(-$dataForm['id']);
 
-            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'nucleoslist', 'dias_semana', 'dataForm'));
+            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm', 'op'));
         }
         else{
             $turmaslist = $turmaslist->paginate(10);
@@ -545,6 +554,6 @@ class FiltersController extends Controller
         $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 
-        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist', 'ano', 'dataForm'));
+        return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist','bairroslist', 'ano', 'dataForm'));
     }
 }

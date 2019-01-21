@@ -119,6 +119,23 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s2"><label>Ativos/Inativos:</label></div>
+                                <div class="input-field col s3">
+                                    <p>
+                                        <label>
+                                            <input value="1" name="inativo" type="radio"/>
+                                            <span>Ativos</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input value="2" name="inativo" type="radio"/>
+                                            <span>Inativos</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
@@ -149,7 +166,6 @@
                                 <a class="tooltipped" data-position="top" data-tooltip="Lista de anamneses de {{$pessoa->nome}}" href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">description</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$pessoa->nome}}" href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$pessoa->nome}}" href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Inativar {{$pessoa->nome}}" id="btn-delete" data-id="{{$pessoa->id}}" data-nome="{{$pessoa->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">block</i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -162,26 +178,5 @@
             @endif
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
-    </div>
-
-    <div id="modaldelete" class="modal">
-        <form action="{{route('pessoas.destroy', 'delete')}}" method="POST">
-            @method('DELETE')
-            @csrf
-            <div class="modal-content">
-                <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar o professor abaixo?</p>
-                <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" type="text" id="name_delete">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
-         </div>
-        </form>
     </div>
 @endsection

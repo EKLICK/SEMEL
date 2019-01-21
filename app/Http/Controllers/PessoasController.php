@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Http\Requests\Pessoa\PessoaEditFormRequest;
@@ -118,7 +119,7 @@ class PessoasController extends Controller
     //Funções de Redirecionamento
     public function index()
     {
-        $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
+        $pessoaslist = Pessoa::withTrashed()->orderBy('nome')->paginate(10);
         foreach($pessoaslist as $pessoa){
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
@@ -174,8 +175,10 @@ class PessoasController extends Controller
             if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
             else{$dataForm['img_matricula'] = null;}
         }
-        if($dataForm['marc'] == 'N'){
-            $dataForm['convenio_medico'] = -1;
+        if(isset($dataForm['marc'])){
+            if($dataForm['marc'] == 'N'){
+                $dataForm['convenio_medico'] = -1;
+            }
         }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
@@ -219,6 +222,7 @@ class PessoasController extends Controller
             'matricula' => $dataForm['img_matricula'],
             'estado' =>$estado,
         ]);
+        $pessoa->delete();
         if(!empty($dataForm['doencas'])){
             $dataForm['possui_doenca'] = 1;
         }
@@ -244,7 +248,7 @@ class PessoasController extends Controller
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
 
-        return redirect()->Route('pessoas.index');
+        return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
     /**
@@ -319,8 +323,10 @@ class PessoasController extends Controller
                 $dataForm += ['img_matricula' => null];
             }
         }
-        if($dataForm['marc'] == 'N'){
-            $dataForm['convenio_medico'] = -1;
+        if(isset($dataForm['marc'])){
+            if($dataForm['marc'] == 'N'){
+                $dataForm['convenio_medico'] = -1;
+            }
         }
         $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
@@ -406,24 +412,30 @@ class PessoasController extends Controller
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese'));
     }
 
+    //Pagina de pessoas e turmas
     public function pessoas_turmas($id){
-        $pessoa = Pessoa::find($id);
+        $pessoa = Pessoa::withTrashed($id)->get()->last();
         $turmaslist = Turma::orderBy('nome')->paginate(10);
         $turmasall = Turma::all();
-        foreach($pessoa->turmas as $p){
-            $pessoasTurmas[] = $p->id;
-        }
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $nucleoslist = Nucleo::all();
+        $op = 1;
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco de dados.');
 
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'dias_semana', 'nucleoslist', 'op'));
     }
 
+    //Ações para vincular, ativar e inativar.
     public function pessoas_turmas_vincular($idpessoa, $idturma){
         $pessoa = Pessoa::find($idpessoa);
         $turma = Turma::find($idturma);
         $pessoa->turmas()->attach($idturma);
+        $historico = HistoricoPT::create([
+            'pessoa_id' => $pessoa_id,
+            'turma_id' => $turma_id,
+            'inativo' => 1,
+            
+        ]);
         if(count($turma->pessoas) > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
         }
@@ -434,9 +446,23 @@ class PessoasController extends Controller
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
-    public function pessoas_turmas_desvincular($idpessoa, $idturma){
-        $pessoa = Pessoa::find($idpessoa);
-        $pessoa->turmas()->detach($idturma);
+    public function pessoas_turmas_ativar_inativar($idpessoa, $idturma){
+        $historico = HistoricoPT::where('pessoa_id', '=', $idpessoa)->where('turma_id', '=', $idturma)->first();
+        if($historico->inativo == 1){
+            HistoricoPT::create([
+                'pessoa_id' => $pessoa_id,
+                'turma_id' => $turma_id,
+                'inativo' => 2,
+                
+            ]);
+        }
+        else{
+            HistoricoPT::create([
+                'pessoa_id' => $pessoa_id,
+                'turma_id' => $turma_id,
+                'inativo' => 1,
+            ]);
+        }
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
