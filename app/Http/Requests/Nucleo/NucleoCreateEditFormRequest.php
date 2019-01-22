@@ -43,7 +43,7 @@ class NucleoCreateEditFormRequest extends FormRequest
 
             'inativo.required' => 'O campo inativo é de preenchimento obrigatório!',
 
-            'bairro_id.required' => 'O campo bairro é de preenchimento obrigatório!',
+            'bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
 
             'rua.required' => 'O campo rua é de preenchimento obrigatório!',
             'rua.max' => 'Insira uma rua válida!',

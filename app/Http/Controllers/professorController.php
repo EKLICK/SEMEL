@@ -15,7 +15,6 @@ use App\Professor;
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
-use App\Bairro;
 use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller

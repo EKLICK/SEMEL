@@ -26,7 +26,6 @@ class NucleoProcurarFormRequest extends FormRequest
     {
         return [
             'inativo'               => ['sometimes', 'nullable', Rule::in(['1', '2']),],
-            'bairro'             => 'sometimes|nullable|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
         ];
     }
 }

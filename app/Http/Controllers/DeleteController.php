@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Pessoa;
-use App\Bairro;
 
 
 class DeleteController extends Controller

@@ -138,7 +138,7 @@
                 <div class="row">
                     <label for="name_delete">Nome:</label>
                     <div class="input-field col s12">
-                        <input hidden class="validate" name="id" type="number" id="id_delete">
+                        <input class="validate" hidden name="id" type="number" id="id_delete">
                         <input disabled class="validate" type="text" id="name_delete">
                     </div>
                 </div>

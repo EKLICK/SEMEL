@@ -7,7 +7,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
 use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Nucleo;
-use App\Bairro;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
 

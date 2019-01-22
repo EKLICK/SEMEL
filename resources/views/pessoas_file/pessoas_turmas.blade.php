@@ -174,7 +174,7 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
-                            @if ($op == 3)
+                            @if (1 == 1)
                                 <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
                                 <td><a class="waves-effect waves-light btn green modal-trigger" id="btn-modal" style="width: 160px;" href="#modalidturmapessoa"
                                     data-idpessoa="{{$pessoa->id}}" 
@@ -184,7 +184,7 @@
                                     <i class="material-icons right">send</i>Vincular
                                     </a>
                                 </td>
-                            @elseif ($op == 1)
+                            @elseif (1 == 1)
                                 <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
                                 <td><a href="{{Route('pessoas_turmas_ativar_inativar', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Inativar</a></td>
                             @else

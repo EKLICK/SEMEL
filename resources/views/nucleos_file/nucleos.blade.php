@@ -68,10 +68,10 @@
                                     <div class="row">
                                         <div class="input-field col s4">
                                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                                            <select name="bairro">
+                                            <select name="bairro_id">
                                                 <option value="" selected disabled>Selecione o núcleo</option>
                                                 @foreach ($bairroslist as $bairro)
-                                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                                    <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -117,7 +117,7 @@
                 <tbody>
                     @foreach ($nucleoslist as $nucleo)
                             <td><p>{{$nucleo->nome}}</p></td>
-                            <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
+                            <td><p>{{$nucleo->bairro->nome}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
