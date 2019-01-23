@@ -17,12 +17,12 @@ class Pessoa extends model implements Auditable
         'convenio_medico', 'filhos', 'irmaos', 'sexo', 'estado_civil', 'mora_com_os_pais', 'inativo', 'matricula', 'estado',
     ];
 
-    public function anamneses(){
-        return $this->hasMany(Anamnese::class, 'pessoas_id');
+    public function turmas(){
+        return $this->belongsToMany(Turma::class, 'turmas_pessoas')->withPivot('inativo')->withTimestamps();
     }
 
-    public function turmas(){
-        return $this->belongsToMany(Turma::class, 'turmas_pessoas');
+    public function anamneses(){
+        return $this->hasMany(Anamnese::class, 'pessoas_id');
     }
 
     public function bairro(){

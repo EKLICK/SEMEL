@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ferramentas;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Http\Requests\Professor\PessoaProcurarFormRequest;
+use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
-use App\Http\Requests\Professor\AnamneseProcurarFormRequest;
+use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
 use App\Http\Requests\Professor\AlunoProcurarFormRequest;
-use App\Http\Requests\Professor\NucleoProcurarFormRequest;
+use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -20,7 +22,7 @@ use App\Nucleo;
 use App\Pessoa;
 use Illuminate\Support\Facades\Session;
 
-class FiltersController extends Controller
+class filtersController extends Controller
 {
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
@@ -289,6 +291,29 @@ class FiltersController extends Controller
                 $filtro = $dataForm['nucleo_id'];
                 $query->where('nucleo_id', '=', $filtro);
             }
+            if(!empty($dataForm['pagina'])){
+                $string = '';
+                if($dataForm['id'] > 0){
+                    $string = 'select id from turmas where id in(select turma_id from turmas_professores where pessoa_id = :sujeito';
+                }
+                else{
+                    $string = 'select id from turmas where id in(select turma_id from turmas_pessoas where pessoa_id = :sujeito';
+                    $dataForm['id'] = -$dataForm['id'];
+                }
+                $ids = [];
+                if($dataForm['pagina'] == 3){
+                    $string = $string.')';
+                    $turmaslistA = DB::select(DB::raw($string), ['sujeito'=>$dataForm['id']]);
+                    foreach($turmaslistA as $id){array_push($ids, $id->id);}
+                    $query->whereNotIn('id', $ids);
+                }
+                else{
+                    $string = $string.' and inativo = '.$dataForm['pagina'].')';
+                    $turmaslistA = DB::select(DB::raw($string), ['sujeito'=>$dataForm['id']]);
+                    foreach($turmaslistA as $id){array_push($ids, $id->id);}
+                    $query->wherein('id', $ids);
+                }
+            }
         })->orderBy('nome');
         Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco de dados.');
         $nucleoslist = Nucleo::all();
@@ -309,11 +334,8 @@ class FiltersController extends Controller
         elseif ($dataForm['id'] < 0) {
             $turmaslist = $turmaslist->paginate(10);
             $pessoa = Pessoa::find(-$dataForm['id']);
-            foreach($pessoa->turmas as $turma){
-                $pessoasTurmas[] = $turma->id;
-            }
 
-            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'nucleoslist', 'dias_semana', 'dataForm'));
+            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm'));
         }
         else{
             $turmaslist = $turmaslist->paginate(10);
@@ -408,9 +430,9 @@ class FiltersController extends Controller
                 $filtro = $dataForm['inativo'];
                 $query->where('inativo', '=', $filtro);
             }
-            if(!empty($dataForm['bairro_id'])){
-                $filtro = $dataForm['bairro_id'];
-                $query->where('bairro_id', '=', $filtro);
+            if(!empty($dataForm['bairro'])){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', 'like', $filtro."%");
             }
             if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
@@ -425,7 +447,10 @@ class FiltersController extends Controller
                 $query->where('cep', 'like', $filtro."%");
             }
         })->orderBy('nome');
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco de dados.');
         $nucleoslist = $nucleoslist->paginate(10);
         return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));

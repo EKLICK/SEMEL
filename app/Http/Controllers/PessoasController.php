@@ -181,8 +181,10 @@ class PessoasController extends Controller
             if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
             else{$dataForm['img_matricula'] = null;}
         }
-        if($dataForm['marc'] == 'N'){
-            $dataForm['convenio_medico'] = -1;
+        if(isset($dataForm['marc'])){
+            if($dataForm['marc'] == 'N'){
+                $dataForm['convenio_medico'] = -1;
+            }
         }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
@@ -417,9 +419,6 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
         $turmaslist = Turma::orderBy('nome')->paginate(10);
         $turmasall = Turma::all();
-        foreach($turmaslist as $turma){
-            dd($turma->pessoas);
-        }
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $nucleoslist = Nucleo::all();
         Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco de dados.');
@@ -432,9 +431,10 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed($dataForm['pessoa_id'])->get()->last();
         $turma = Turma::find($dataForm['turma_id']);
-        $pessoa->turmas()->attach($turma->id);
-        $dataForm['inativo'] = 1;
-        $dataForm['comentario'] = 'ff';
+        if($dataForm['inativo'] == 1){
+            $turma['limite'] += 1;
+        }
+        $pessoa->turmas()->attach($turma->id, ['inativo'=>1]);
         $historico = HistoricoPT::create($dataForm);
         if(count($turma->pessoas) > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
@@ -447,23 +447,33 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas_ativar_inativar($idpessoa, $idturma){
-        dd($idpessoa, $idturma);
-        $historico = HistoricoPT::where('pessoa_id', '=', $idpessoa)->where('turma_id', '=', $idturma)->first();
-        if($historico->inativo == 1){
+        $turma = Turma::find($idturma);
+        $aux = -1;
+        for($i = 0; $i < count($turma->pessoas); $i++){
+            if($turma->pessoas[$i]->id == $idpessoa){
+                $aux = $i;
+            }
+        }
+        $string = '';
+        if($turma->pessoas[$aux]->pivot->inativo == 1){
+            $string = 'update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma';
             HistoricoPT::create([
-                'pessoa_id' => $pessoa_id,
-                'turma_id' => $turma_id,
+                'pessoa_id' => $idpessoa,
+                'turma_id' => $idturma,
                 'inativo' => 2,
                 
             ]);
         }
         else{
+            $string = 'update turmas_pessoas set inativo = 1 where pessoa_id = :sujeito and turma_id = :turma';
             HistoricoPT::create([
-                'pessoa_id' => $pessoa_id,
-                'turma_id' => $turma_id,
+                'pessoa_id' => $idpessoa,
+                'turma_id' => $idturma,
                 'inativo' => 1,
             ]);
         }
+        DB::update(DB::raw($string), ['sujeito'=>$idpessoa, 'turma'=>$idturma]);
+        $pessoa = Pessoa::find($idpessoa);
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }

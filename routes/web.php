@@ -86,5 +86,3 @@ Route::any('/procurar/turmas','Ferramentas\filtersController@turmas_procurar')->
 Route::any('/procurar/nucleos','Ferramentas\filtersController@nucleos_procurar')->name('nucleos_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //7-audits
 Route::any('/procurar/audits','Ferramentas\filtersController@audits_procurar')->name('audits_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
-//8-softdeletes
-Route::any('/softdeletes/procurar/pessoas', 'Ferramentas\filtersController@pessoas_procurar_softdelete')->name('pessoas_procurar_softdelete')->middleware('AdministracaoEProfessor', 'Authenticate');
