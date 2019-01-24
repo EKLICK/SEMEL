@@ -17,6 +17,7 @@ class Turmas extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('limite')->nullable();
+            $table->string('quant_atual')->default(0);
             $table->string('data_semanal')->nullable();
             $table->string('horario_inicial')->nullable();
             $table->string('horario_final')->nullable();

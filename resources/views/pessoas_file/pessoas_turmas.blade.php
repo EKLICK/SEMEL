@@ -155,9 +155,7 @@
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
                             <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
-                            @php $aux = 0 @endphp
-                            @foreach($turma->pessoas as $vinculo) @if($vinculo->pivot->inativo == 1) @php $aux++ @endphp @endif @endforeach
-                            <td><p>{{$aux}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                            <td><p>{{$turma->quant_atual}} / {{$turma->limite}}</p><i class="small material-icons" @if($turma->qwuant_atual >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             <td> 
                                 <p>
                                     @if($turma->inativo == 2)
@@ -207,9 +205,9 @@
                 </tbody>
             </table>
             @if(isset($dataForm))
-                
+                {{$turmaslist->appends($dataForm)->links()}}
             @else
-                
+                {{$turmaslist->links()}}
             @endif
         </div>
     </div>
@@ -217,19 +215,49 @@
         <form action="{{route('pessoas_turmas_vincular')}}" method="POST">
             @csrf
             <div class="modal-content">
+                <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal">
+                <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal">
                 <h4>Vincular</h4>
+                <h5 id="texto_id"></h5>
+                <hr>
+                <h5><b>Atenção:</b></h5>
                 <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal">
-                        <input disabled class="validate" type="text" name="nome_pessoa" id="nome_pessoa_modal">
-                        <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal">
-                        <input disabled class="validate" type="text" name="id_pessoa_modal" id="nome_turma_modal">
+                    <div class="input-field col s1">
+                        <i class="medium material-icons" style="color: red;" >sim_card_alert</i>
+                    </div>
+                    <div class="input-field col s11">
+                        <h6>Ao fazer o vinculo, a pessoa não poderá ser desvinculada, você terá opção somente de ativar e inativar a pessoa da turma!</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">fitness_center</i>&emsp;&emsp; A pessoa começará como:
+                        <div style="margin-left: 20%;">
+                            <p>
+                                <label>
+                                    <input value="1" name="inativo" type="radio" checked/>
+                                    <span>Ativado</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input value="2" name="inativo" type="radio"/>
+                                    <span>Inativado</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">description</i>&emsp;&emsp; Comentario do vinculo (opcional):
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         </form>
     </div>

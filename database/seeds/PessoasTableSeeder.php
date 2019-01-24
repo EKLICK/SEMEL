@@ -19,10 +19,10 @@ class PessoasTableSeeder extends Seeder
         \DB::table('pessoas')->insert(array (
             0 => 
             array (
-                'id' => 1,
+                'id' => 2,
                 'foto' => NULL,
-                'nome' => 'pessoa',
-                'nascimento' => '2019-01-01 00:00:00',
+                'nome' => 'Pessoa',
+                'nascimento' => '2013-03-14 00:00:00',
                 'rg' => NULL,
                 'cpf' => NULL,
                 'cpf_responsavel' => NULL,
@@ -44,8 +44,8 @@ class PessoasTableSeeder extends Seeder
                 'matricula' => NULL,
                 'mora_com_os_pais' => NULL,
                 'estado' => 0,
-                'created_at' => '2019-01-23 10:04:51',
-                'updated_at' => '2019-01-23 10:04:51',
+                'created_at' => '2019-01-24 10:46:26',
+                'updated_at' => '2019-01-24 10:46:26',
                 'deleted_at' => NULL,
             ),
         ));

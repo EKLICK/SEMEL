@@ -4,8 +4,7 @@ $(document).on('click', '#btn-delete', function(){
 });
 
 $(document).on('click', '#btn-modal', function(){
+    document.getElementById('texto_id').innerHTML = 'Você deseja vincular '+ $(this).data('nomepessoa').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
     $('#id_pessoa_modal').val($(this).data('idpessoa'));
     $('#id_turma_modal').val($(this).data('idturma'));
-    $('#nome_pessoa_modal').val($(this).data('nomepessoa'));
-    $('#nome_turma_modal').val($(this).data('nometurma'));
 });
