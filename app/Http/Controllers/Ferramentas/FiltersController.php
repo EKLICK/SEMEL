@@ -20,6 +20,7 @@ use App\Doenca;
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
+use App\Audit;
 use Illuminate\Support\Facades\Session;
 
 class filtersController extends Controller

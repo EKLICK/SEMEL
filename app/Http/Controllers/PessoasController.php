@@ -466,6 +466,7 @@ class PessoasController extends Controller
             HistoricoPT::create([
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
+                'comentario' => $dataForm['comentario'],
                 'inativo' => 2,
                 
             ]);
@@ -478,6 +479,7 @@ class PessoasController extends Controller
             HistoricoPT::create([
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
+                'comentario' => $dataForm['comentario'],
                 'inativo' => 1,
             ]);
         }

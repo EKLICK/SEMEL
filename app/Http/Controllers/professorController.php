@@ -244,8 +244,8 @@ class professorController extends Controller
     public function professores_turmas_vincular($idprofessor, $idturma){
         $professor = Professor::find($idprofessor);
         $turma = Turma::find($idturma);
-
         $professor->turmas()->attach($idturma);
+        HistoricoPrT::create($dataForm);
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 
         return redirect()->Route('professor_turmas', $professor->id);

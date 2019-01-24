@@ -11,6 +11,6 @@ class HistoricoPT extends Model implements Auditable
     protected $table = 'historico_pessoas_turmas';
 
     protected $fillable = [
-        'nome','pessoa_id','turma_id','inativo','comentario',
+        'pessoa_id','turma_id','inativo','comentario',
     ];
 }

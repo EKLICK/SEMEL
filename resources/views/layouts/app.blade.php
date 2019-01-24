@@ -49,7 +49,6 @@
                                         <div class="collection">
                                             <b><a class="collection-item" href="{{route('register')}}">Cadastrar administradores</a></b>
                                             <b><a class="collection-item" href="{{route('professor.create')}}">Cadastrar professores</a></b>
-                                            <b><a class="collection-item" href="{{route('pessoas_softdeletes')}}">Pessoas Inativas</a></b>
                                             <b><a class="collection-item" href="{{route('audits.index')}}">Auditorias</a></b>
                                         </div>
                                     </div>
@@ -106,7 +105,7 @@
             @endguest
         </header>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/delete.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
         @yield('js.personalizado')
     </body>
 </html>
