@@ -39,7 +39,7 @@ Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamn
 //Rotas de vinculos de pessoas e turmas
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::post('/pessoas_turmas/vincular','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/pessoas_turmas/ativa_inativar/{idpessoa}/{idturma}','pessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/pessoas_turmas/ativa_inativar','pessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de anamneses
 Route::resource('anamneses','anamneseController')->middleware('AdministracaoEProfessor', 'Authenticate');
@@ -63,10 +63,6 @@ Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name(
 //Rotas de Audits
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Softdeletes
-Route::get('/restore/pessoas/{id}','deleteController@pessoas_restore')->name('pessoas_restore')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/softdeletes/pessoas','deleteController@pessoas_softdeletes')->name('pessoas_softdeletes')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Procurar
 

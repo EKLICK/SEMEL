@@ -431,7 +431,9 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed($dataForm['pessoa_id'])->get()->last();
         $turma = Turma::find($dataForm['turma_id']);
-        DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
+        if($dataForm['inativo'] == 1){
+            DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
+        }
         $pessoa->turmas()->attach($turma->id, ['inativo'=>$dataForm['inativo']]);
         $historico = HistoricoPT::create($dataForm);
         if($turma->quant_atual+1 > $turma->limite){
@@ -444,11 +446,12 @@ class PessoasController extends Controller
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
-    public function pessoas_turmas_ativar_inativar($idpessoa, $idturma){
-        $turma = Turma::find($idturma);
+    public function pessoas_turmas_ativar_inativar(Request $request){
+        $dataForm = $request->all();
+        $turma = Turma::find($dataForm['turma_id']);
         $aux = -1;
         for($i = 0; $i < count($turma->pessoas); $i++){
-            if($turma->pessoas[$i]->id == $idpessoa){
+            if($turma->pessoas[$i]->id == $dataForm['pessoa_id']){
                 $aux = $i;
             }
         }
@@ -461,8 +464,8 @@ class PessoasController extends Controller
             $texto = ' foi adicionado a turma ';
             $conta = $turma->quant_autal-1;
             HistoricoPT::create([
-                'pessoa_id' => $idpessoa,
-                'turma_id' => $idturma,
+                'pessoa_id' => $dataForm['pessoa_id'],
+                'turma_id' => $dataForm['turma_id'],
                 'inativo' => 2,
                 
             ]);
@@ -473,13 +476,13 @@ class PessoasController extends Controller
             $texto = ' foi removido a turma ';
             $conta = $turma->quant_autal+1;
             HistoricoPT::create([
-                'pessoa_id' => $idpessoa,
-                'turma_id' => $idturma,
+                'pessoa_id' => $dataForm['pessoa_id'],
+                'turma_id' => $dataForm['turma_id'],
                 'inativo' => 1,
             ]);
         }
-        DB::update(DB::raw($string), ['sujeito'=>$idpessoa, 'turma'=>$idturma]);
-        $pessoa = Pessoa::find($idpessoa);
+        DB::update(DB::raw($string), ['sujeito'=>$dataForm['pessoa_id'], 'turma'=>$dataForm['turma_id']]);
+        $pessoa = Pessoa::find($dataForm['pessoa_id']);
 
         if($conta > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");

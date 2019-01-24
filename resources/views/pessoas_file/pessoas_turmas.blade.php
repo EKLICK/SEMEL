@@ -182,22 +182,37 @@
                             @endif
                             @if ($ids == -1)
                                 <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                <td><a class="waves-effect waves-light btn green modal-trigger" id="btn-modal" style="width: 160px;" href="#modalidturmapessoavincular"
-                                        data-mudanca='Vincular'
+                                <td><a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_vincular" style="width: 160px;" href="#modalidturmapessoavincular"
                                         data-idpessoa="{{$pessoa->id}}" 
                                         data-idturma="{{$turma->id}}" 
                                         data-nomepessoa="{{$pessoa->nome}}" 
                                         data-nometurma="{{$turma->nome}}">
-                                        <i class="material-icons right">send</i>Vincular
+                                        <i class="material-icons right">enhanced_encryption</i>Vincular
                                     </a>
                                 </td>
                             @else
                                 @if($turma->pessoas[$ids]->pivot->inativo == 1)
-                                    <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                    <td><a href="{{Route('pessoas_turmas_ativar_inativar', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Inativar</a></td>
+                                    <td><p>Ativado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" style="width: 160px;" href="#modalidturmapessoaativarinativar"
+                                            data-ativar_inativar="Inativar"
+                                            data-idpessoa="{{$pessoa->id}}" 
+                                            data-idturma="{{$turma->id}}" 
+                                            data-nomepessoa="{{$pessoa->nome}}" 
+                                            data-nometurma="{{$turma->nome}}">
+                                            <i class="material-icons right">speaker_notes_off</i>Inativar
+                                        </a>
+                                    </td>
                                 @else
-                                    <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                    <td><a href="{{Route('pessoas_turmas_ativar_inativar', [$pessoa->id, $turma->id])}}" class="waves-effect waves-light btn green"><i class="material-icons right">send</i>Ativar</a></td>
+                                    <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" style="width: 160px;" href="#modalidturmapessoaativarinativar"
+                                            data-ativar_inativar="Inativar"
+                                            data-idpessoa="{{$pessoa->id}}" 
+                                            data-idturma="{{$turma->id}}" 
+                                            data-nomepessoa="{{$pessoa->nome}}" 
+                                            data-nometurma="{{$turma->nome}}">
+                                        <i class="material-icons right">speaker_notes</i>Ativar
+                                        </a>
+                                    </td>
                                 @endif
                             @endif
                         </tr>
@@ -214,11 +229,11 @@
     <div id="modalidturmapessoavincular" class="modal">
         <form action="{{route('pessoas_turmas_vincular')}}" method="POST">
             @csrf
+            <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal_vincular">
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular">
             <div class="modal-content">
-                <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal">
-                <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal">
                 <h4>Vincular</h4>
-                <h5 id="texto_id"></h5>
+                <h5 id="texto_id_vincular"></h5>
                 <hr>
                 <h5><b>Atenção:</b></h5>
                 <div class="row">
@@ -248,25 +263,42 @@
                         </div>
                     </div>
                     <div class="input-field col s7">
-                        <i class="material-icons prefix">description</i>&emsp;&emsp; Comentario do vinculo (opcional):
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario do vinculo (opcional):
                         <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Vincular
                     <i class="material-icons right">send</i>
                 </button>
             </div>
         </form>
     </div>
-    <div id="modalidturmapessoaativar" class="modal">
-        <form action="" method="POST">
-
+    <div id="modalidturmapessoaativarinativar" class="modal">
+        <form action="{{route('pessoas_turmas_ativar_inativar')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
+            <div class="modal-content">
+                <h4 id="titulo_ativar_inativar"></h4>
+                <h5 id="texto_id_ativar_inativar"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
         </form>
-        <div class="modal-footer">
-            <button class="btn red delete" type="submit">Sim</button>
-        </div>
     </div>
 @endsection
