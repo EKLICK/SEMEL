@@ -9,7 +9,7 @@ $(document).on('click', '#btn-modal_vincular', function(){
     $('#id_turma_modal_vincular').val($(this).data('idturma'));
 });
 
-$(document).on('click', '.btn-modal_ativar_inativar', function(){
+$(document).on('click', '.btn-modal_ativar_inativar_pessoa', function(){
     $('#id_pessoa_modal_ativar_inativar').val($(this).data('idpessoa'));
     $('#id_turma_modal_ativar_inativar').val($(this).data('idturma'));
     document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
@@ -21,8 +21,6 @@ $(document).on('click', '.btn-modal_ativar_inativar', function(){
         document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
     }
     document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    $('#id_pessoa_modal').val($(this).data('idpessoa'));
-    $('#id_turma_modal').val($(this).data('idturma'));
 });
 
 $(document).on('click', '.btn-modal_vincular_desvincular', function(){
@@ -30,6 +28,7 @@ $(document).on('click', '.btn-modal_vincular_desvincular', function(){
     $('#id_turma_modal_vincular_desvincular').val($(this).data('idturma'));
     document.getElementById('titulo_vincular_desvincular').innerHTML = $(this).data('vincular_desvincular');
     document.getElementById('texto_id_vincular_desvincular').innerHTML = 'Você deseja '+ $(this).data('vincular_desvincular').toLowerCase() + ' ' + $(this).data('nomeprofessor').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
+    console.log($(this).data('vincular_desvincular'));
     if($(this).data('vincular_desvincular') == 'Desvincular'){
         document.getElementById('comentario_vincular_desvincular').innerHTML = 'Comentario para Desvinculação (obrigatório):';
     }
@@ -37,6 +36,17 @@ $(document).on('click', '.btn-modal_vincular_desvincular', function(){
         document.getElementById('comentario_vincular_desvincular').innerHTML = 'Comentario para Vinculação (opcional):';
     }
     document.getElementById('enviar_vincular_desvincular').innerHTML = $(this).data('vincular_desvincular');
-    $('#id_pessoa_modal').val($(this).data('idprofessor'));
-    $('#id_turma_modal').val($(this).data('idturma'));
+});
+
+$(document).on('click', '#btn-modal_ativar_inativar_nucleo', function(){
+    $('#id_nucleo_modal_ativar_inativar').val($(this).data('idnucleo'));
+    document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
+    document.getElementById('texto_id_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomenucleo').bold() + '?';
+    if($(this).data('ativar_inativar') == 'Inativar'){
+        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
+    }
+    else{
+        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
+    }
+    document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
 });

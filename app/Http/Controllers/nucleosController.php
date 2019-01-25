@@ -8,6 +8,7 @@ use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
 use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Nucleo;
 use App\Turma;
+use App\HistoricoN;
 use Illuminate\Support\Facades\Session;
 
 class nucleosController extends Controller
@@ -143,8 +144,21 @@ class nucleosController extends Controller
         return view ('nucleos_file.nucleos_info', compact('nucleo'));
     }
 
-    public function nucleo_inativar_desativar(Request $request){
+    public function nucleos_ativar_inativar(Request $request){
         $dataForm = $request->all();
-        dd($dataForm);
+        $nucleo = Nucleo::find($dataForm['nucleo_id']);
+        if($nucleo->inativo == 1){
+            $nucleo->update(['inativo'=>2]);
+            $dataForm += ['inativo' => 2];
+            Session::put('mensagem_green', $nucleo->nome . " foi inativado com sucesso!");
+        }
+        else{
+            $nucleo->update(['inativo'=>1]);
+            $dataForm += ['inativo' => 1];
+            Session::put('mensagem_green', $nucleo->nome . " foi ativado com sucesso!");
+        }
+        HistoricoN::create($dataForm);
+
+        return redirect()->Route('nucleos.index');
     }
 }

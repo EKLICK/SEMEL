@@ -158,14 +158,16 @@
                             @if(auth()->user()->admin_professor == 1)
                                 @if (!isset($professorTurmas) || !in_array($turma->id, $professorTurmas))
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
                                             data-vincular_desvincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
-                                            <i class="material-icons right">lock_outline</i>Vincular
+                                            <i class="material-icons right">lock_outline</i>Desvincular
                                         </a>
                                     </td>
                                 @else
                                     <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
                                             data-vincular_desvincular="Desvincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">lock_open</i>Vincular
                                         </a>

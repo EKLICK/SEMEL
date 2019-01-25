@@ -37,7 +37,8 @@ Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create')->middleware('AdministracaoEProfessor', 'Authenticate');
 //Rotas de vinculos de pessoas e turmas
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::post('/pessoas_turmas/vincular','pessoasController@pessoas_turmas_vincular_desvincular')->name('pessoas_turmas_vincular_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/pessoas_turmas/vincular','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/pessoas_turmas/ativar_inativar','pessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de anamneses
 Route::resource('anamneses','anamneseController')->middleware('AdministracaoEProfessor', 'Authenticate');
@@ -57,7 +58,7 @@ Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info'
 Route::resource('nucleos','nucleosController')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::post('/nucleos/ativar_inativar', 'nucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')>middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/nucleos/ativar_inativar', 'nucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de Audits
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('AdministracaoEProfessor', 'Authenticate');

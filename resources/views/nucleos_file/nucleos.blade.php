@@ -111,6 +111,7 @@
                         <th>Nome da turma</th>
                         <th>Endereço</th>
                         <th>Estado</th>
+                        <th>Mudar Vinculo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -119,6 +120,21 @@
                             <td><p>{{$nucleo->nome}}</p></td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                            @if ($nucleo->inativo == 2)
+                                <td>
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_nucleo" href="#modalnucleosativarinativar"
+                                        data-ativar_inativar="Ativar" data-idnucleo="{{$nucleo->id}}">
+                                        <i class="material-icons right">lock_open</i>Ativar
+                                    </a>
+                                </td>
+                            @else
+                                <td>
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_nucleo" href="#modalnucleosativarinativar"
+                                    data-ativar_inativar="Inativar" data-idnucleo="{{$nucleo->id}}" data-nomenucleo="{{$nucleo->nome}}">
+                                        <i class="material-icons right">lock_outline</i>Inativar
+                                    </a>
+                                </td>
+                            @endif
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
@@ -155,6 +171,30 @@
             </div>
             <div class="modal-footer">
                 <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+    <div id="modalnucleosativarinativar" class="modal">
+        <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="nucleo_id" id="id_nucleo_modal_ativar_inativar">
+            <div class="modal-content">
+                <h4 id="titulo_ativar_inativar"></h4>
+                <h5 id="texto_id_ativar_inativar"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         </form>
     </div>
