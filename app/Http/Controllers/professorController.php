@@ -242,6 +242,20 @@ class professorController extends Controller
         }
     }
 
+    public function professor_meus_alunos($idprofessor, $idturma){
+        $turma = Turma::find($idturma);
+        $pessoaslist = $turma->pessoas->sortBy('nome');
+        foreach ($pessoaslist as $pessoa){
+            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+        }
+        $pessoaslist = $this->gerar_paginate($pessoaslist);
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
+        $professor = Professor::find($idprofessor);
+        $professorid = $professor->id;
+
+        return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
+    }
+
     public function professores_turmas_vincular_desvincular(Request $request){
         $dataForm = $request->all();
         $professor = Professor::find($dataForm['professor_id']);
@@ -264,19 +278,5 @@ class professorController extends Controller
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 
         return redirect()->Route('professor_turmas', $professor->id);
-    }
-
-    public function professor_meus_alunos($idprofessor, $idturma){
-        $turma = Turma::find($idturma);
-        $pessoaslist = $turma->pessoas->sortBy('nome');
-        foreach ($pessoaslist as $pessoa){
-            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
-        }
-        $pessoaslist = $this->gerar_paginate($pessoaslist);
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco de dados.');
-        $professor = Professor::find($idprofessor);
-        $professorid = $professor->id;
-
-        return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
     }
 }

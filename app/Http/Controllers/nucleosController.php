@@ -142,4 +142,9 @@ class nucleosController extends Controller
         $nucleo = Nucleo::find($id);
         return view ('nucleos_file.nucleos_info', compact('nucleo'));
     }
+
+    public function nucleo_inativar_desativar(Request $request){
+        $dataForm = $request->all();
+        dd($dataForm);
+    }
 }

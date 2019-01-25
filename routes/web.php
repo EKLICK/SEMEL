@@ -57,6 +57,7 @@ Route::get('/turmas_info/{id}','turmasController@turma_info')->name('turma_info'
 Route::resource('nucleos','nucleosController')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/nucleos_info/{id}','nucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
 Route::get('/nucleos_turmas/{id}','nucleosController@turmas_cadastradas')->name('turmas_cadastradas')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/nucleos/ativar_inativar', 'nucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')>middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de Audits
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('AdministracaoEProfessor', 'Authenticate');

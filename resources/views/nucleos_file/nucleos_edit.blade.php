@@ -28,24 +28,6 @@
                             <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif">
                             <label for="icon_nome">Nome da turma:</label>
                         </div>
-                        <div class="input-field col s3"></div>
-                        <div class="input-field col s3">
-                            <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
-                            <div style="margin-left: 30%;">
-                            <p>
-                                <label>
-                                    <input value="1" name="inativo" type="radio" @if(old('inativo') == 1) checked @else @if($nucleo->inativo == 1) checked @endif @endif/>
-                                    <span>Ativo</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input value="2" name="inativo" type="radio" @if(old('inativo') == 2) checked @else @if($nucleo->inativo == 2) checked @endif @endif/>
-                                    <span>Inativo</span>
-                                </label>
-                            </p>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
@@ -53,7 +35,7 @@
                             <select name="bairro_id">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro->id}}"  @if($bairro->id == $nucleo->bairro_id) selected @endif>{{$bairro->nome}}</option>
+                                    <option value="{{$bairro}}"  @if($bairro == $nucleo->bairro) selected @endif>{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -426,7 +426,15 @@ class PessoasController extends Controller
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
 
-    //Ações para vincular, ativar e inativar.
+    public function pdfpessoas($id){
+        $pessoa = Pessoa::find($id);
+        if($pessoa == null){
+            $pessoaslist = Pessoa::onlyTrashed()->get();
+            $pessoa = $pessoaslist->find($id);
+        }
+        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
+    }
+
     public function pessoas_turmas_vincular(Request $request){
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed($dataForm['pessoa_id'])->get()->last();
@@ -494,14 +502,5 @@ class PessoasController extends Controller
         }
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
-    }
-
-    public function pdfpessoas($id){
-        $pessoa = Pessoa::find($id);
-        if($pessoa == null){
-            $pessoaslist = Pessoa::onlyTrashed()->get();
-            $pessoa = $pessoaslist->find($id);
-        }
-        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

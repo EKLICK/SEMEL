@@ -29,32 +29,14 @@
                             <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}">
                             <label for="icon_nome">Nome do núcleo:</label>
                         </div>
-                        <div class="input-field col s3"></div>
-                        <div class="input-field col s3">
-                            <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
-                            <div style="margin-left: 30%;">
-                            <p>
-                                <label>
-                                    <input value="1" name="inativo" type="radio" @if(old('nome') == 1) checked @endif/>
-                                    <span>Ativo</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input value="2" name="inativo" type="radio" @if(old('nome') == 2) checked @endif/>
-                                    <span>Inativo</span>
-                                </label>
-                            </p>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                            <select name="bairro_id">
+                            <select name="bairro">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro->id}}">{{$bairro->nome}}</option>
+                                    <option value="{{$bairro}}">{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>
