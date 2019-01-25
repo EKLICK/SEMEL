@@ -13,7 +13,7 @@ class HistoricoNucleos extends Migration
      */
     public function up()
     {
-        Schema::create('historico_pessoas_turmas', function (Blueprint $table) {
+        Schema::create('historico_nucleos', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('nucleo_id')->nullable();
             $table->Integer('inativo')->nullable();

@@ -156,17 +156,20 @@
                                 </i>
                             </td>
                             @if(auth()->user()->admin_professor == 1)
-                                @if (!isset($professorTurmas))
+                                @if (!isset($professorTurmas) || !in_array($turma->id, $professorTurmas))
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                    <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
+                                            data-vincular_desvincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                            <i class="material-icons right">lock_outline</i>Vincular
+                                        </a>
+                                    </td>
                                 @else
-                                    @if(in_array($turma->id, $professorTurmas))
-                                        <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                        <td><a href="{{Route('professores_turmas_desvincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn red"><i class="material-icons right">send</i>Desvincular</a></td>
-                                    @else
-                                        <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                        <td><a href="{{Route('professores_turmas_vincular', [$professor->id, $turma->id])}}" class="waves-effect waves-light btn green" style="width: 160px;"><i class="material-icons right">send</i>Vincular</a></td>
-                                    @endif
+                                    <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
+                                            data-vincular_desvincular="Desvincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                            <i class="material-icons right">lock_open</i>Vincular
+                                        </a>
+                                    </td>
                                 @endif
                             @else
                                 <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
@@ -185,5 +188,30 @@
                 {{$turmaslist->links()}}
             @endif
         </div>
+    </div>
+    <div id="modalidturmaprofessoresvinculardesvincular" class="modal">
+        <form action="{{Route('professores_turmas_vincular_desvincular')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_vincular_desvincular">
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular_desvincular">
+            <div class="modal-content">
+                <h4 id="titulo_vincular_desvincular"></h4>
+                <h5 id="texto_id_vincular_desvincular"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_vincular_desvincular"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_vincular_desvincular">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
     </div>
 @endsection

@@ -26,8 +26,7 @@ Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','professorController
 //Controle do administrador
 Route::resource('professor','professorController')->middleware('AdministracaoEProfessor');
 Route::get('/professors_info/{id}','professorController@professor_info')->name('professor_info')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/professor_turmas/vincular/{idprofessor}/{idturma}','professorController@professores_turmas_vincular')->name('professores_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/professor_turmas/desvincular/{idprofessor}/{idturma}','ProfessorController@professores_turmas_desvincular')->name('professores_turmas_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/professor_turmas/vincular_desvincular','professorController@professores_turmas_vincular_desvincular')->name('professores_turmas_vincular_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de pessoas
 Route::resource('pessoas','pessoasController')->middleware('AdministracaoEProfessor');
@@ -38,8 +37,7 @@ Route::get('/pessoas_lista_anamneses/{id}','pessoasController@lista_anamnese')->
 Route::get('/pessoas_lista_anamneses_create/{id}','pessoasController@lista_anamnese_create')->name('lista_anamnese_create')->middleware('AdministracaoEProfessor', 'Authenticate');
 //Rotas de vinculos de pessoas e turmas
 Route::get('/pessoas_turmas/{id}','pessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::post('/pessoas_turmas/vincular','pessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::post('/pessoas_turmas/ativa_inativar/','pessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/pessoas_turmas/vincular','pessoasController@pessoas_turmas_vincular_desvincular')->name('pessoas_turmas_vincular_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de anamneses
 Route::resource('anamneses','anamneseController')->middleware('AdministracaoEProfessor', 'Authenticate');

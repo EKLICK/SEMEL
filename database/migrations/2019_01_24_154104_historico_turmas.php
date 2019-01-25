@@ -13,7 +13,7 @@ class HistoricoTurmas extends Migration
      */
     public function up()
     {
-        Schema::create('historico_pessoas_turmas', function (Blueprint $table) {
+        Schema::create('historico_turmas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('turma_id')->nullable();
             $table->Integer('inativo')->nullable();

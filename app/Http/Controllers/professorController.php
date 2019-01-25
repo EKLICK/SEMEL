@@ -15,6 +15,7 @@ use App\Professor;
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
+use App\HistoricoPrT;
 use Illuminate\Support\Facades\Session;
 
 class professorController extends Controller
@@ -241,19 +242,27 @@ class professorController extends Controller
         }
     }
 
-    public function professores_turmas_vincular($idprofessor, $idturma){
-        $professor = Professor::find($idprofessor);
-        $turma = Turma::find($idturma);
-        $professor->turmas()->attach($idturma);
+    public function professores_turmas_vincular_desvincular(Request $request){
+        $dataForm = $request->all();
+        $professor = Professor::find($dataForm['professor_id']);
+        $turma = Turma::find($dataForm['turma_id']);
+        $aprovado = false;
+        foreach($professor->turmas as $turmadoprofessor){
+            if($turmadoprofessor->id == $turma->id){
+                $aprovado = true;
+            }
+        }
+        if($aprovado == true){
+            $dataForm += ['inativo' => 2];
+            $professor->turmas()->detach($dataForm['turma_id']);
+        }
+        else{
+            $dataForm += ['inativo' => 1];
+            $professor->turmas()->attach($dataForm['turma_id']);
+        }
         HistoricoPrT::create($dataForm);
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 
-        return redirect()->Route('professor_turmas', $professor->id);
-    }
-
-    public function professores_turmas_desvincular($idprofessor, $idturma){
-        $professor = Professor::find($idprofessor);
-        $professor->turmas()->detach($idturma);
         return redirect()->Route('professor_turmas', $professor->id);
     }
 

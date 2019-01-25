@@ -182,23 +182,23 @@
                             @endif
                             @if ($ids == -1)
                                 <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
-                                <td><a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_vincular" style="width: 160px;" href="#modalidturmapessoavincular"
+                                <td><a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_vincular" href="#modalidturmapessoavincular"
                                         data-idpessoa="{{$pessoa->id}}" data-idturma="{{$turma->id}}" data-nomepessoa="{{$pessoa->nome}}" data-nometurma="{{$turma->nome}}">
-                                        <i class="material-icons right">enhanced_encryption</i>Vincular
+                                        <i class="material-icons right">lock_outline</i>Vincular
                                     </a>
                                 </td>
                             @else
                                 @if($turma->pessoas[$ids]->pivot->inativo == 1)
                                     <td><p>Ativado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" style="width: 160px;" href="#modalidturmapessoaativarinativar"
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" href="#modalidturmapessoaativarinativar"
                                             data-ativar_inativar="Inativar"data-idpessoa="{{$pessoa->id}}" data-idturma="{{$turma->id}}" data-nomepessoa="{{$pessoa->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">speaker_notes_off</i>Inativar
                                         </a>
                                     </td>
                                 @else
                                     <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
-                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" style="width: 160px;" href="#modalidturmapessoaativarinativar"
-                                            data-ativar_inativar="Inativar"data-idpessoa="{{$pessoa->id}}" data-idturma="{{$turma->id}}" data-nomepessoa="{{$pessoa->nome}}" data-nometurma="{{$turma->nome}}">
+                                    <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" href="#modalidturmapessoaativarinativar"
+                                            data-ativar_inativar="Ativar"data-idpessoa="{{$pessoa->id}}" data-idturma="{{$turma->id}}" data-nomepessoa="{{$pessoa->nome}}" data-nometurma="{{$turma->nome}}">
                                         <i class="material-icons right">speaker_notes</i>Ativar
                                         </a>
                                     </td>
