@@ -100,6 +100,7 @@ class nucleosController extends Controller
         $dataForm = $request->all();
         $nucleo = Nucleo::find($id);
         $oldnucleo = (array)$nucleo;
+        $dataForm += ['inativo' => $nucleo->inativo];
         $nucleo->update($dataForm);
         $newnucleo = (array)$nucleo;
         if($newnucleo != $oldnucleo){
