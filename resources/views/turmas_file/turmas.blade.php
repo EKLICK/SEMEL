@@ -118,8 +118,8 @@
                     <tr>
                         <th>Nome da turma</th>
                         <th>Núcleo pertencente</th>
-                        <th>Limite de alunos</th>
                         <th>Estado</th>
+                        <th>Mudar estado</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -127,8 +127,7 @@
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
-                            <td><p>{{$turma->nucleo->nome}}</p></td>
-                            <td><p>{{$turma->quant_atual}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
                             <td> 
                                 <p>
                                     @if($turma->inativo == 2)
@@ -146,6 +145,21 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
+                            @if ($turma->inativo == 2)
+                                <td>
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_turma" href="#modalturmasativarinativar"
+                                        data-ativar_inativar="Ativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
+                                        <i class="material-icons right">lock_open</i>Ativar
+                                    </a>
+                                </td>
+                            @else
+                                <td>
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_turma" href="#modalturmasativarinativar"
+                                    data-ativar_inativar="Inativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
+                                        <i class="material-icons right">lock_outline</i>Inativar
+                                    </a>
+                                </td>
+                            @endif
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
@@ -177,6 +191,31 @@
             </div>
             <div class="modal-footer">
                 <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="modalturmasativarinativar" class="modal">
+        <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
+            <div class="modal-content">
+                <h4 id="titulo_ativar_inativar"></h4>
+                <h5 id="texto_ativar_inativar"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         </form>
     </div>

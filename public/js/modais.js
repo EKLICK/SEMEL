@@ -41,7 +41,20 @@ $(document).on('click', '.btn-modal_vincular_desvincular', function(){
 $(document).on('click', '#btn-modal_ativar_inativar_nucleo', function(){
     $('#id_nucleo_modal_ativar_inativar').val($(this).data('idnucleo'));
     document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    document.getElementById('texto_id_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomenucleo').bold() + '?';
+    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomenucleo').bold() + '?';
+    if($(this).data('ativar_inativar') == 'Inativar'){
+        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
+    }
+    else{
+        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
+    }
+    document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
+});
+
+$(document).on('click', '#btn-modal_ativar_inativar_turma', function(){
+    $('#id_turma_modal_ativar_inativar').val($(this).data('idturma'));
+    document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
+    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nometurma').bold() + '?';
     if($(this).data('ativar_inativar') == 'Inativar'){
         document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
     }

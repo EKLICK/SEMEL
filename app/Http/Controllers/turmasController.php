@@ -12,6 +12,7 @@ use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
 use App\Professor;
+use App\HistoricoT;
 
 class turmasController extends Controller
 {
@@ -158,6 +159,7 @@ class turmasController extends Controller
             $horario[0] = $separador[0].':'.$separador[1];
         }
         $dataForm['horario_final'] = $horario[0].':00';
+        $dataForm += ['inativo' => $turma->inativo];
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
@@ -210,5 +212,23 @@ class turmasController extends Controller
         unset($dias[count($dias) - 1]);
 
         return view('turmas_file.turmas_info', compact('turma', 'dias'));
+    }
+
+    public function turmas_ativar_inativar(Request $request){
+        $dataForm = $request->all();
+        $turma = Turma::find($dataForm['turma_id']);
+        if($turma->inativo == 1){
+            $turma->update(['inativo'=>2]);
+            $dataForm += ['inativo' => 2];
+            Session::put('mensagem_green', $turma->nome . " foi inativado com sucesso!");
+        }
+        else{
+            $turma->update(['inativo'=>1]);
+            $dataForm += ['inativo' => 1];
+            Session::put('mensagem_green', $turma->nome . " foi ativado com sucesso!");
+        }
+        HistoricoT::create($dataForm);
+
+        return redirect()->Route('turmas.index');
     }
 }
