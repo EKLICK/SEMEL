@@ -7,7 +7,8 @@
         <title>SEMEL</title>
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
         @yield('css.personalizado')
-        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
         {!! MaterializeCSS::include_full() !!}
     </head>
@@ -104,8 +105,10 @@
                 </div>
             @endguest
         </header>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
-        @yield('js.personalizado')
+        <script>$(function() {$(".tabs").tabs({swipeable: true});});</script>
     </body>
 </html>

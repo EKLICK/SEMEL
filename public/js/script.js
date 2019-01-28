@@ -126,8 +126,6 @@ function change(a,b,c){
     }
 };
 
-
-
 $("[name='marc']").click(function(){
     change(this.value, $('#convenio_medico'), $('.convenio_label'));
 });
