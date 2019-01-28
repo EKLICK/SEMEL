@@ -14,7 +14,7 @@ use App\Pessoa;
 use App\Professor;
 use App\HistoricoT;
 
-class turmasController extends Controller
+class TurmasController extends Controller
 {
     /**
      * Display a listing of the resource.

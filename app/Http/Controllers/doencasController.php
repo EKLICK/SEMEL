@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator; 
 use App\Http\Requests\Doenca\DoencaCreateEditFormRequest;
 
-class doencasController extends Controller
+class DoencasController extends Controller
 {
     /**
      * Display a listing of the resource.

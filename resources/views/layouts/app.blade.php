@@ -109,6 +109,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
-        <script>$(function() {$(".tabs").tabs({swipeable: true});});</script>
+        <script>
+            $(document).ready(function(){
+              $('ul.tabs').tabs({
+                swipeable : true,
+                responsiveThreshold : 1920,
+              });
+            });
+        </script>
     </body>
 </html>

@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Nucleo\NucleoCreateEditFormRequest;
 use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
+use Illuminate\Support\Facades\DB;
 use App\Nucleo;
 use App\Turma;
 use App\HistoricoN;
 use Illuminate\Support\Facades\Session;
 
-class nucleosController extends Controller
+class NucleosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -142,7 +143,18 @@ class nucleosController extends Controller
 
     public function nucleo_info($id){
         $nucleo = Nucleo::find($id);
-        return view ('nucleos_file.nucleos_info', compact('nucleo'));
+        $histnucleo = HistoricoN::where('nucleo_id', '=', $nucleo->id)->paginate(6);
+        $a = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
+                                                        id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
+                                                            Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 
+                                                                id = '.$id.')) GROUP BY id')));
+        $b = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
+                                                        id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
+                                                            Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 
+                                                                id = '.$id.') and inativo = 1) GROUP BY id')));
+        $c = $a - $b;
+        $dadosgerais = [$a,$b,$c];
+        return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais'));
     }
 
     public function nucleos_ativar_inativar(Request $request){

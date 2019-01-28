@@ -18,7 +18,7 @@ use App\Pessoa;
 use App\HistoricoPrT;
 use Illuminate\Support\Facades\Session;
 
-class professorController extends Controller
+class ProfessorController extends Controller
 {
     /**
      * Display a listing of the resource.

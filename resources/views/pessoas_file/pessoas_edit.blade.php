@@ -78,7 +78,7 @@
                             <select name="bairro_id">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro->id}}" @if($bairro->id == $pessoa->bairro_id) selected @endif>{{$bairro->nome}}</option>
+                                    <option value="{{$bairro}}" @if($bairro == $pessoa->bairro) selected @endif>{{$pessoa->bairro}}</option>
                                 @endforeach
                             </select>
                         </div>

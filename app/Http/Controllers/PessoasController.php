@@ -278,7 +278,10 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $doencaslist = Doenca::all();
-        $bairroslist = Bairro::all();
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
 
         return view ('pessoas_file.pessoas_edit', compact('doencaslist','bairroslist','pessoa'));
     }
@@ -437,7 +440,7 @@ class PessoasController extends Controller
 
     public function pessoas_turmas_vincular(Request $request){
         $dataForm = $request->all();
-        $pessoa = Pessoa::withTrashed($dataForm['pessoa_id'])->get()->last();
+        $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
         $turma = Turma::find($dataForm['turma_id']);
         if($dataForm['inativo'] == 1){
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);

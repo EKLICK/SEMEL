@@ -117,6 +117,7 @@
                 </thead>
                 <tbody>
                     @foreach ($nucleoslist as $nucleo)
+                        <tr>
                             <td><p>{{$nucleo->nome}}</p></td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
