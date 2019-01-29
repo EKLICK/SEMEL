@@ -95,7 +95,7 @@
                             <label for="numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
-                            <i class="material-icons prefix">markunread_mailbox</i>
+                            <i class="material-icons prefix">explore</i>
                             <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$pessoa->cep}} @else {{old('cep')}} @endif">
                             <label for="cep">CEP:</label>
                         </div>

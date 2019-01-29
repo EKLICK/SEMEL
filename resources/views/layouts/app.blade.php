@@ -6,10 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>SEMEL</title>
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
-        @yield('css.personalizado')
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
-
         {!! MaterializeCSS::include_full() !!}
     </head>
     <body>
@@ -21,7 +19,7 @@
                         <div class="col 12">
                             @guest
                                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                                    <li><a href="{{route('login')}}"><b>Login</b></a></li>
+                                    <li><a href="{{route('login')}}"><i class="material-icons"></i><b>Login</b></a></li>
                                 </ul>
                             @else
                                 <ul id="nav-mobile" class="right hide-on-med-and-down"> 
@@ -57,19 +55,19 @@
                                 <li>
                                     <div class="collapsible-header"><i class="material-icons">people</i>Usuarios</div>
                                     <div class="collapsible-body">
-                                            <div class="collection">
-                                                <b><a class="collection-item" href="{{route('professor.index')}}">Professores</a></b>
-                                                <b><a class="collection-item" href="{{route('pessoas.index')}}">Cliente</a></b>
-                                            </div>
+                                        <div class="collection">
+                                            <b><a class="collection-item" href="{{route('professor.index')}}">Professores</a></b>
+                                            <b><a class="collection-item" href="{{route('pessoas.index')}}">Cliente</a></b>
+                                        </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="collapsible-header"><i class="material-icons">assignment</i>Anamneses</div>
                                     <div class="collapsible-body">
-                                            <div class="collection">
-                                                <b><a class="collection-item" href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></b>
-                                                <b><a class="collection-item" href="{{route('anamneses.index2')}}">Anamneses Históricas</a></b>
-                                            </div>
+                                        <div class="collection">
+                                            <b><a class="collection-item" href="{{route('anamneses.index')}}">Anamneses de {{date('Y')}}</a></b>
+                                            <b><a class="collection-item" href="{{route('anamneses.index2')}}">Anamneses Históricas</a></b>
+                                        </div>
                                     </div>
                                 </li>
                                 <div class="collection">
@@ -87,7 +85,7 @@
                     <div class="col s9">
                         <main>
                             <div class="section">
-                                <div class="container">
+                                <div class="card-panel">
                                     <nav>
                                         <div class="nav-wrapper blue">
                                             <div class="col s12 ">
@@ -95,10 +93,11 @@
                                             </div>
                                         </div>
                                     </nav>
-                                    <h4>@yield('title')</h4>
-                                    <div class="divider"></div>
+                                    <div class="container">
+                                    <h2>@yield('title')</h2>
+                                    </div>
+                                    @yield('content')
                                 </div>
-                                @yield('content')
                             </div>
                         </main>
                     </div>
@@ -113,7 +112,7 @@
             $(document).ready(function(){
               $('ul.tabs').tabs({
                 swipeable : true,
-                responsiveThreshold : 1920,
+                responsiveThreshold : 1900,
               });
             });
         </script>

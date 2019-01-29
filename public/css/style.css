@@ -1,3 +1,7 @@
+body{
+  background-color: #eeeeee;
+}
+
 .sessao{
   position: absolute;
   margin-top: -3%;
@@ -14,9 +18,9 @@
 }
 
 #cssmenu{
-  margin-top: 15%;
-  margin-left: 10%;
+  margin-top: 8.5%;
+  margin-left: 8.5%;
 }
 
-.tabs-content.carousel { height:615px; overflow-y: visible; } 
+.tabs-content.carousel { height:757px; overflow-y: visible; } 
 .tabs-content.carousel .carousel-item { width: 200%; height: 100%; }

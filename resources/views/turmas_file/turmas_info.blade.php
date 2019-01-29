@@ -33,7 +33,12 @@
                                 <tr>
                                     <td>@if($historic->inativo == 1) Ativado @else Inativado @endif</td>
                                     <td>@if($historic->comentario == null) Sem comentarios @else {{$historic->comentario}} @endif</td>
-                                    <td><p>{{$historic->created_at}}</p></td>
+                                    @php
+                                        $horario = explode(" ",$historic->created_at);
+                                        $diamesano = explode("-", $horario[0]);
+                                        $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
+                                    @endphp
+                                    <td><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -88,12 +93,12 @@
                                 <tr>
                                     <td><h6><b>Quantidade de pessoas Ativa:</b></h6></td>
                                     <td><h6><b>{{$dadosgerais[1]}}</b></h6></td>
-                                    <td><i class="small material-icons" style="color: red;">assignment_late</i></td>
+                                    <td><i class="small material-icons" style="color: green;">assignment_turned_in</i></td>
                                 </tr>
                                 <tr>
                                     <td><h6><b>Quantidade de pessoas Inativa:</b></h6></td>
                                     <td><h6><b>{{$dadosgerais[2]}}</b></h6></td>
-                                    <td><i class="small material-icons" style="color: green;">assignment_turned_in</i></td>
+                                    <td><i class="small material-icons" style="color: red;">assignment_late</i></td>
                                 </tr>
                             </table>
                         </div>

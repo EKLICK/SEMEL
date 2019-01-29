@@ -63,7 +63,7 @@
                             <label for="icon_numero_endereco">Número:</label>
                         </div>
                         <div class="input-field col s3">
-                            <i class="material-icons prefix">location_city</i>
+                            <i class="material-icons prefix">explore</i>
                             <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{old('cep')}}">
                             <label for="icon_cep">CEP:</label>
                         </div>

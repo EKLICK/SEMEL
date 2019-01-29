@@ -408,14 +408,23 @@ class PessoasController extends Controller
 
     public function pessoas_info($id){
         $pessoa = Pessoa::find($id);
-        if($pessoa == null){
-            $pessoaslist = Pessoa::onlyTrashed()->get();
-            $pessoa = $pessoaslist->find($id);
-        }
         $anamnese = $pessoa->anamneses->last();
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+        $histpessoa = HistoricoPT::where('pessoa_id', '=', $pessoa->id)->paginate(5);
+        $a = 0;
+        $b = 0;
+        $idsturmas = [];
+        foreach($pessoa->turmas as $turma){
+            array_push($idsturmas, $turma->id);
+            if($turma->pivot->inativo == 1){$b++;}
+            $a++;
+        }
+        $c = $a - $b;
+        $dadosgerais = [$a,$b,$c];
+        $idsturmas = array_unique($idsturmas);
+        $listnucleopessoa = Nucleo::whereIn('id', $idsturmas);
 
-        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese'));
+        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa'));
     }
 
     public function pessoas_turmas($id){
