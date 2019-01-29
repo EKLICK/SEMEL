@@ -125,6 +125,7 @@ class TurmasController extends Controller
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $datas_escolhidas = explode(',', $turma['data_semanal']);
         unset($datas_escolhidas[count($datas_escolhidas) - 1]);
+
         return view ('turmas_file.turmas_edit', compact('turma', 'nucleoslist', 'dias_semana', 'datas_escolhidas'));
     }
 
@@ -210,8 +211,17 @@ class TurmasController extends Controller
         }
         $dias = explode(',', $turma['data_semanal']);
         unset($dias[count($dias) - 1]);
+        $histturma = HistoricoT::where('turma_id', '=', $turma->id)->paginate(6);
+        $a = 0;
+        $b = 0;
+        foreach($turma->pessoas as $pessoa){
+            if($pessoa->pivot->inativo == 1){$b++;}
+            $a++;
+        }
+        $c = $a - $b;
+        $dadosgerais = [$a,$b,$c];
 
-        return view('turmas_file.turmas_info', compact('turma', 'dias'));
+        return view('turmas_file.turmas_info', compact('turma','dias','histturma','dadosgerais'));
     }
 
     public function turmas_ativar_inativar(Request $request){

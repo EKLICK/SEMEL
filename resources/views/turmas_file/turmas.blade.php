@@ -155,7 +155,7 @@
                             @else
                                 <td>
                                     <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_turma" href="#modalturmasativarinativar"
-                                    data-ativar_inativar="Inativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
+                                        data-ativar_inativar="Inativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
                                         <i class="material-icons right">lock_outline</i>Inativar
                                     </a>
                                 </td>

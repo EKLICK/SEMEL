@@ -13,91 +13,90 @@
         <div class="row">
             <div class="col s12">
                 <ul class="tabs blue">
-                    <li class="tab col s4"><a href="#test1" style="color: white;"><b>Histórico do sistema</b></a></li>
-                    <li class="tab col s4"><a href="#test2" style="color: white;"><b>Dados registrados</b></a></li>
-                    <li class="tab col s4"><a href="#test3" style="color: white;"><b>Informações gerais</b></a></li>
+                    <li class="tab col s4"><a href="#coluna1" style="color: white;"><b>Histórico do sistema</b></a></li>
+                    <li class="tab col s4"><a href="#coluna2" style="color: white;"><b>Dados registrados</b></a></li>
+                    <li class="tab col s4"><a href="#coluna3" style="color: white;"><b>Informações gerais</b></a></li>
                 </ul>
             </div>
-            <div id="test1" class="col s12">
-                <table>
-                    <thead class="centered">
-                        <tr>
-                            <th>Estado</th>
-                            <th>Comentario</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($histnucleo as $historic)
+            <div id="coluna1" class="col s12">
+                <div class="col s10">
+                    <table>
+                        <thead class="centered">
                             <tr>
-                                <td>@if($historic->inativo == 1) Ativado @else Inativado @endif</td>
-                                <td>@if($historic->comentario == null) Sem comentarios @else {{$historic->comentario}} @endif</td>
-                                <td><p>{{$historic->created_at}}</p></td>
+                                <th>Estado</th>
+                                <th>Comentario</th>
+                                <th>Estado</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{$histnucleo->links()}}
+                        </thead>
+                        <tbody>
+                            @foreach ($histnucleo as $historic)
+                                <tr>
+                                    <td>@if($historic->inativo == 1) Ativado @else Inativado @endif</td>
+                                    <td>@if($historic->comentario == null) Sem comentarios @else {{$historic->comentario}} @endif</td>
+                                    <td><p>{{$historic->created_at}}</p></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{$histnucleo->links()}}
+                </div>
             </div>
-            <div id="test2" class="col s12">
-                <div class="col s6">
+            <div id="coluna2" class="col s12">
+                <div class="col s10">
                     <table>
                         <tr>
-                            <td><h6>Nome:</h6></td>
+                            <td><h6><b>Nome:</b></h6></td>
                             <td><h6>{{$nucleo->nome}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6>Bairro:</h6></td>
+                            <td><h6><b>Bairro:</b></h6></td>
                             <td><h6>{{$nucleo->bairro}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6>Rua:</h6></td>
+                            <td><h6><b>Rua:</b></h6></td>
                             <td><h6>{{$nucleo->rua}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6>Numero de endereço:</h6></td>
+                            <td><h6><b>Numero de endereço:</b></h6></td>
                             <td><h6>{{$nucleo->numero_endereco}}</h6></td>
                         </tr>
-                    </table>
-                </div>
-                <div class="col s6">
-                    <table>
                         <tr>
-                            <td><h6>CEP:</h6></td>
+                            <td><h6><b>CEP:</b></h6></td>
                             <td><h6>{{$nucleo->cep}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6>Descrição:</h6></td>
-                            <td><h6>{{$nucleo->descricao}}</h6></td>
+                            <td><h6><b>Descrição:</b></h6></td>
+                            <td><h6>@if($nucleo->descricao == null) Sem comentário @else {{$nucleo->descricao}}@endif</h6></td>
                         </tr>
                         <tr>
-                            <td><h6>Está inativo:</h6></td>
+                            <td><h6><b>Está inativo:</b></h6></td>
                             <td><h6>@if($nucleo->inativo == 1) Não @else Sim @endif</h6></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div id="test3" class="col s12">
+            <div id="coluna3" class="col s12">
                 <div class="row">
-                    <div class="col s10">
+                    <div class="col s8">
                         <table>
                             <tr>
-                                <td><h6>Quantidade total de pessoas:</h6></td>
-                                <td><h6>{{$dadosgerais[0]}}</h6></td>
+                                <td><h6><b>Quantidade total de pessoas:</b></h6></td>
+                                <td><h6><b>{{$dadosgerais[0]}}</b></h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Quantidade de pessoas Ativa:</h6></td>
-                                <td><h6>{{$dadosgerais[1]}}</h6></td>
+                                <td><h6><b>Quantidade de pessoas Ativa:</b></h6></td>
+                                <td><h6><b>{{$dadosgerais[1]}}</b></h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Quantidade de pessoas Inativa:</h6></td>
-                                <td><h6>{{$dadosgerais[2]}}</h6></td>
+                                <td><h6><b>Quantidade de pessoas Inativa:</b></h6></td>
+                                <td><h6><b>{{$dadosgerais[2]}}</b></h6></td>
                             </tr>
                         </table>
                     </div>
                 </div>
+                <br><br>
                 <div class="row">
-                    <div class="col s10">
+                    <div class="col s8">
                         <table class="centered">
                             <thead>
                                 <tr>
