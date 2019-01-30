@@ -22,6 +22,6 @@ class Turma extends model implements Auditable
     }
 
     public function professores(){
-        return $this->belongsToMany(Professor::class, 'turmas_professores');
+        return $this->belongsToMany(Professor::class, 'turmas_professores')->withPivot('inativo')->withTimestamps();
     } 
 }

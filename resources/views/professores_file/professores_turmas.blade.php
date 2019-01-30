@@ -42,7 +42,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
                     <div class="collapsible-body">
-                        <form action="{{route('filtros_professor_turmas', $professor->id)}}" method="GET">
+                        <form action="{{route('turmas_procurar', $professor->id)}}" method="GET">
                             @csrf
                             <input type="text" name="id" value="{{$professor->id}}" hidden>
                             <div class="row">
@@ -107,6 +107,31 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">beenhere</i>&emsp;&emsp; Opção de Página:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="3" name="pagina" type="radio"/>
+                                                <span>Desvinculados</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="1" name="pagina" type="radio"/>
+                                                <span>Ativos</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="pagina" type="radio"/>
+                                                <span>Inativos</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
@@ -156,22 +181,36 @@
                                 </i>
                             </td>
                             @if(auth()->user()->admin_professor == 1)
-                                @if (!isset($professorTurmas) || !in_array($turma->id, $professorTurmas))
+                                @php $ids = -1; @endphp
+                                @if(isset($turma->professores)) 
+                                    @for ($i = 0; $i < count($turma->professores); $i++) 
+                                        @if($turma->professores[$i]->id == $professor->id) @php $ids = $i; break; @endphp @endif
+                                    @endfor
+                                @endif
+                                @if ($ids == -1)
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
                                     <td>
-                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
-                                            data-vincular_desvincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
-                                            <i class="material-icons right">lock_open</i>Vincular
+                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular" href="#modalidturmaprofessorvincular"
+                                            data-vincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                            <i class="material-icons right">lock_outline</i>Vincular
                                         </a>
                                     </td>
                                 @else
-                                    <td><p>Vinculado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                    <td>
-                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
-                                            data-vincular_desvincular="Desvincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
-                                            <i class="material-icons right">lock_outline</i>Desvincular
-                                        </a>
-                                    </td>
+                                    @if($turma->professores[$ids]->pivot->inativo == 1)
+                                        <td><p>Ativado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
+                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar_professor" href="#modalidturmaprofessorativarinativar"
+                                                data-ativar_inativar="Inativar"data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                                <i class="material-icons right">speaker_notes_off</i>Inativar
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
+                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar_professor" href="#modalidturmaprofessorativarinativar"
+                                                data-ativar_inativar="Ativar"data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                            <i class="material-icons right">speaker_notes</i>Ativar
+                                            </a>
+                                        </td>
+                                    @endif
                                 @endif
                             @else
                                 <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
@@ -191,7 +230,7 @@
             @endif
         </div>
     </div>
-    <div id="modalidturmaprofessoresvincular" class="modal">
+    <div id="modalidturmaprofessorvincular" class="modal">
         <form action="{{Route('professores_turmas_vincular')}}" method="POST">
             @csrf
             <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_vincular">
@@ -211,6 +250,31 @@
             </div>
             <div class="modal-footer">
                 <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_vincular">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div id="modalidturmaprofessorativarinativar" class="modal">
+        <form action="{{route('professores_turmas_ativar_inativar')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
+            <div class="modal-content">
+                <h4 id="titulo_ativar_inativar"></h4>
+                <h5 id="texto_id_ativar_inativar"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
                     <i class="material-icons right">send</i>
                 </button>
             </div>

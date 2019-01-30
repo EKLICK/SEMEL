@@ -247,7 +247,6 @@ class filtersController extends Controller
 
     public function turmas_procurar(TurmaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
-        
         $turmaslist = Turma::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
@@ -295,7 +294,7 @@ class filtersController extends Controller
             if(!empty($dataForm['pagina'])){
                 $string = '';
                 if($dataForm['id'] > 0){
-                    $string = 'select id from turmas where id in(select turma_id from turmas_professores where pessoa_id = :sujeito';
+                    $string = 'select id from turmas where id in(select turma_id from turmas_professores where professor_id = :sujeito';
                 }
                 else{
                     $string = 'select id from turmas where id in(select turma_id from turmas_pessoas where pessoa_id = :sujeito';
@@ -325,12 +324,9 @@ class filtersController extends Controller
         if($dataForm['id'] > 0){
             $turmaslist = $turmaslist->paginate(10);
             $professor = Professor::find($dataForm['id']);
-            if($professor != null){
-                $turmasprofessor = $professor->turmas;
-            }
             Session::put('turmaslist', $turmaslist);
 
-            return redirect()->route('filtros_professor_turmas', $dataForm['id'], 'dataForm');
+            return view ('professores_file.professores_turmas', compact('professor','turmaslist','nucleoslist','dias_semana','dataForm'));
         }
         elseif ($dataForm['id'] < 0) {
             $turmaslist = $turmaslist->paginate(10);

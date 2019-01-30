@@ -242,10 +242,7 @@ class ProfessorController extends Controller
             $turmaslist = Turma::orderBy('nome')->paginate(10);
             Session::put('quant', 'Foram encontrados '.count($turmaslist->all()).' pessoas no banco de dados.');
             $professor = Professor::find($id);
-            foreach($professor->turmas as $turma){
-                $professorTurmas[] = $turma->id;
-            }
-            return view ('professores_file.professores_turmas', compact('professor','turmaslist','professorTurmas','dias_semana','nucleoslist'));
+            return view ('professores_file.professores_turmas', compact('professor','turmaslist','dias_semana','nucleoslist'));
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
@@ -276,23 +273,14 @@ class ProfessorController extends Controller
         $turma = Turma::find($dataForm['turma_id']);
         $dataForm += ['inativo' => 1];
         $professor->turmas()->attach($turma->id, ['inativo'=>$dataForm['inativo']]);
-        //$aprovado = false;
-        //foreach($professor->turmas as $turmadoprofessor){
-        //    if($turmadoprofessor->id == $turma->id){
-        //        $aprovado = true;
-        //    }
-        //}
-        //if($aprovado == true){
-        //    $dataForm += ['inativo' => 2];
-        //    $professor->turmas()->detach($dataForm['turma_id']);
-        //}
-        //else{
-        //    $dataForm += ['inativo' => 1];
-        //    $professor->turmas()->attach($dataForm['turma_id']);
-        //}
         HistoricoPrT::create($dataForm);
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 
         return redirect()->Route('professor_turmas', $professor->id);
+    }
+
+    public function professores_ativar_inativar(Request $request){
+        $dataForm = $request->all();
+        dd($dataForm);
     }
 }

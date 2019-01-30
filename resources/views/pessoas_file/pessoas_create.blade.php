@@ -266,7 +266,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s3">
+                    <div class="input-field col s4">
                         Toma algum medicamento?
                         <label>
                             <p>
@@ -283,7 +283,7 @@
                             </p>
                         </label>
                     </div>
-                    <div class="input-field col s3 ">
+                    <div class="input-field col s4">
                         Possui alergia médica?
                         <label>
                             <p>
@@ -300,7 +300,7 @@
                             </p>
                         </label>
                     </div>
-                    <div class="input-field col s2 left">
+                    <div class="input-field col s4">
                         O usuário fuma?
                         <label>
                             <p>
