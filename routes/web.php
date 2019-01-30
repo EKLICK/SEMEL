@@ -26,7 +26,7 @@ Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','ProfessorController
 //Controle do administrador
 Route::resource('professor','ProfessorController')->middleware('AdministracaoEProfessor');
 Route::get('/professors_info/{id}','ProfessorController@professor_info')->name('professor_info')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::post('/professor_turmas/vincular_desvincular','ProfessorController@professores_turmas_vincular_desvincular')->name('professores_turmas_vincular_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/professor_turmas/vincular','ProfessorController@professores_turmas_vincular')->name('professores_turmas_vincular_desvincular')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de pessoas
 Route::resource('pessoas','PessoasController')->middleware('AdministracaoEProfessor');

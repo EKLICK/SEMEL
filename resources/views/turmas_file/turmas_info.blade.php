@@ -25,7 +25,7 @@
                             <tr>
                                 <th>Estado</th>
                                 <th>Comentario</th>
-                                <th>Estado</th>
+                                <th>Horario</th>
                             </tr>
                         </thead>
                         <tbody>

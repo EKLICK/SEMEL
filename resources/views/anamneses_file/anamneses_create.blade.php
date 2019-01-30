@@ -18,7 +18,7 @@
             </div>
         @endforeach
     @endif
-    <div class="container">
+    <div class="container edicao-criacao">
         <div class="row">
             <form class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">
                 @csrf

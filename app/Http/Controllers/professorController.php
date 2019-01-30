@@ -9,6 +9,7 @@ use App\Http\Requests\Professor\ProfessorEditFormRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
 use App\Http\Requests\Professor\AlunoProcurarFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Professor;
@@ -210,15 +211,28 @@ class ProfessorController extends Controller
 
     public function professor_info($id){
         $professor = Professor::find($id);
-        if($professor == null){
-            $professoreslist = Professor::onlyTrashed()->get();
-            $professor = $professoreslist->find($id);
-        }
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
         $user = User::find($professor['user_id']);
-        $useremail = $user->email;
+        $useremail = $user['email'];
+        $histprofessor = HistoricoPrT::where('professor_id', '=', $id)->paginate(6);
+        $turmasinativas = DB::select(DB::raw('SELECT * FROM Turmas WHERE 
+                                id IN(SELECT turma_id FROM historico_professores_turmas WHERE 
+                                    professor_id = 1) and id NOT IN(SELECT turma_id FROM turmas_professores WHERE 
+                                        professor_id = 1)  GROUP BY id'));
+        $
+        $a = 0;
+        $b = 0;
+        $idsturmas = [];
+        foreach($professor->turmas as $turma){
+            array_push($idsturmas, $turma->nucleo_id);
+            $a++;
+        }
+        $c = $a - $b;
+        $dadosgerais = [$a,$b,$c];
+        $idsturmas = array_unique($idsturmas);
+        $listnucleoprofessor = Nucleo::whereIn('id', $idsturmas)->get();
 
-        return view ('professores_file.professor_info', compact('professor','useremail'));
+        return view ('professores_file.professor_info', compact('professor','useremail','histprofessor','dadosgerais','listnucleoprofessor','turmasinativas'));
     }
 
     public function professor_turmas($id){
@@ -256,24 +270,26 @@ class ProfessorController extends Controller
         return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
     }
 
-    public function professores_turmas_vincular_desvincular(Request $request){
+    public function professores_turmas_vincular(Request $request){
         $dataForm = $request->all();
         $professor = Professor::find($dataForm['professor_id']);
         $turma = Turma::find($dataForm['turma_id']);
-        $aprovado = false;
-        foreach($professor->turmas as $turmadoprofessor){
-            if($turmadoprofessor->id == $turma->id){
-                $aprovado = true;
-            }
-        }
-        if($aprovado == true){
-            $dataForm += ['inativo' => 2];
-            $professor->turmas()->detach($dataForm['turma_id']);
-        }
-        else{
-            $dataForm += ['inativo' => 1];
-            $professor->turmas()->attach($dataForm['turma_id']);
-        }
+        $dataForm += ['inativo' => 1];
+        $professor->turmas()->attach($turma->id, ['inativo'=>$dataForm['inativo']]);
+        //$aprovado = false;
+        //foreach($professor->turmas as $turmadoprofessor){
+        //    if($turmadoprofessor->id == $turma->id){
+        //        $aprovado = true;
+        //    }
+        //}
+        //if($aprovado == true){
+        //    $dataForm += ['inativo' => 2];
+        //    $professor->turmas()->detach($dataForm['turma_id']);
+        //}
+        //else{
+        //    $dataForm += ['inativo' => 1];
+        //    $professor->turmas()->attach($dataForm['turma_id']);
+        //}
         HistoricoPrT::create($dataForm);
         Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 

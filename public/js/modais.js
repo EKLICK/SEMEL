@@ -23,19 +23,19 @@ $(document).on('click', '.btn-modal_ativar_inativar_pessoa', function(){
     document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
 });
 
-$(document).on('click', '.btn-modal_vincular_desvincular', function(){
-    $('#id_professor_modal_vincular_desvincular').val($(this).data('idprofessor'));
-    $('#id_turma_modal_vincular_desvincular').val($(this).data('idturma'));
-    document.getElementById('titulo_vincular_desvincular').innerHTML = $(this).data('vincular_desvincular');
-    document.getElementById('texto_id_vincular_desvincular').innerHTML = 'Você deseja '+ $(this).data('vincular_desvincular').toLowerCase() + ' ' + $(this).data('nomeprofessor').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
-    console.log($(this).data('vincular_desvincular'));
-    if($(this).data('vincular_desvincular') == 'Desvincular'){
-        document.getElementById('comentario_vincular_desvincular').innerHTML = 'Comentario para Desvinculação (obrigatório):';
+$(document).on('click', '.btn-modal_vincular', function(){
+    $('#id_professor_modal_vincular').val($(this).data('idprofessor'));
+    $('#id_turma_modal_vincular').val($(this).data('idturma'));
+    document.getElementById('titulo_vincular').innerHTML = $(this).data('vincular');
+    document.getElementById('texto_id_vincular').innerHTML = 'Você deseja '+ $(this).data('vincular').toLowerCase() + ' ' + $(this).data('nomeprofessor').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
+    console.log($(this).data('vincular'));
+    if($(this).data('vincular') == 'Desvincular'){
+        document.getElementById('comentario_vincular').innerHTML = 'Comentario para Desvinculação (obrigatório):';
     }
     else{
-        document.getElementById('comentario_vincular_desvincular').innerHTML = 'Comentario para Vinculação (opcional):';
+        document.getElementById('comentario_vincular').innerHTML = 'Comentario para Vinculação (opcional):';
     }
-    document.getElementById('enviar_vincular_desvincular').innerHTML = $(this).data('vincular_desvincular');
+    document.getElementById('enviar_vincular').innerHTML = $(this).data('vincular');
 });
 
 $(document).on('click', '#btn-modal_ativar_inativar_nucleo', function(){

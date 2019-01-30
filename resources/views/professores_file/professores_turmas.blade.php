@@ -161,7 +161,7 @@
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
                                             data-vincular_desvincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
-                                            <i class="material-icons right">lock_outline</i>Desvincular
+                                            <i class="material-icons right">lock_open</i>Vincular
                                         </a>
                                     </td>
                                 @else
@@ -169,7 +169,7 @@
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular_desvincular" href="#modalidturmaprofessoresvinculardesvincular"
                                             data-vincular_desvincular="Desvincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
-                                            <i class="material-icons right">lock_open</i>Vincular
+                                            <i class="material-icons right">lock_outline</i>Desvincular
                                         </a>
                                     </td>
                                 @endif
@@ -191,26 +191,26 @@
             @endif
         </div>
     </div>
-    <div id="modalidturmaprofessoresvinculardesvincular" class="modal">
-        <form action="{{Route('professores_turmas_vincular_desvincular')}}" method="POST">
+    <div id="modalidturmaprofessoresvincular" class="modal">
+        <form action="{{Route('professores_turmas_vincular')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_vincular_desvincular">
-            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular_desvincular">
+            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_vincular">
+            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular">
             <div class="modal-content">
-                <h4 id="titulo_vincular_desvincular"></h4>
-                <h5 id="texto_id_vincular_desvincular"></h5>
+                <h4 id="titulo_vincular"></h4>
+                <h5 id="texto_id_vincular"></h5>
                 <hr>
                 <br>
                 <div class="row">
                     <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_vincular_desvincular"></span>
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_vincular"></span>
                         <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_vincular_desvincular">Enviar</span>
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_vincular">Enviar</span>
                     <i class="material-icons right">send</i>
                 </button>
             </div>

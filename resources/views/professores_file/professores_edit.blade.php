@@ -17,7 +17,7 @@
             </div>
         @endforeach
     @endif
-    <div class="container">
+    <div class="container edicao-criacao">
         <div class="row">
             <form class="col s12" action="{{route('professor.update', $professor->id)}}" method="post">
                 @csrf

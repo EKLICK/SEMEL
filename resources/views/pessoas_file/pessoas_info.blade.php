@@ -26,7 +26,7 @@
                                 <th>Estado</th>
                                 <th>Turma do registro</th>
                                 <th>Comentario</th>
-                                <th>Estado</th>
+                                <th>Horario</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,43 +58,43 @@
                     <div class="col s6">
                         <table>
                             <tr>
-                                <td><h6>Nome:</h6></td>
+                                <td><h6><b>Nome:</b></h6></td>
                                 <td><h6>{{$pessoa->nome}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Nascimento:</h6></td>
+                                <td><h6><b>Nascimento:</b></h6></td>
                                 <td><h6>{{$pessoa->nascimento}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>RG:</h6></td>
+                                <td><h6><b>RG:</b></h6></td>
                                 <td><h6>{{$pessoa->rg}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>CPF:</h6></td>
+                                <td><h6><b>CPF:</b></h6></td>
                                 <td><h6>{{$pessoa->cpf}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Cidade:</h6></td>
+                                <td><h6><b>Cidade:</b></h6></td>
                                 <td><h6>{{$pessoa->cidade}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Bairro:</h6></td>
+                                <td><h6><b>Bairro:</b></h6></td>
                                 <td><h6>@if(isset($pessoa->bairro)) {{$pessoa->bairro->nome}} @endif</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Rua:</h6></td>
+                                <td><h6><b>Rua:</b></h6></td>
                                 <td><h6>{{$pessoa->rua}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Numero:</h6></td>
+                                <td><h6><b>Numero:</b></h6></td>
                                 <td><h6>{{$pessoa->numero_endereco}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>CEP:</h6></td>
+                                <td><h6><b>CEP:</b></h6></td>
                                 <td><h6>{{$pessoa->cep}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Telefone:</h6></td>
+                                <td><h6><b>Telefone:</b></h6></td>
                                 <td><h6>{{$pessoa->telefone}}</h6></td>
                             </tr>
                         </table>
@@ -102,47 +102,47 @@
                     <div class="col s6">
                         <table>
                             <tr>
-                                <td><h6>Telefone de emergência:</h6></td>
+                                <td><h6><b>Telefone de emergência:</b></h6></td>
                                 <td><h6>{{$pessoa->telefone_emergencia}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Sexo:</h5></td>
+                                <td><h6><b>Sexo:</b></h5></td>
                                 <td><h6>@if ($pessoa->sexo == 'M') Masculino @else Feminino @endif</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Estado civil:</h6></td>
+                                <td><h6><b>Estado civil:</b></h6></td>
                                 <td><h6>{{$pessoa->estado_civil}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Nome do pai:</h6></td>
+                                <td><h6><b>Nome do pai:</b></h6></td>
                                 <td><h6>{{$pessoa->nome_do_pai}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Nome da mãe:</h6></td>
+                                <td><h6><b>Nome da mãe:</b></h6></td>
                                 <td><h6>{{$pessoa->nome_da_mae}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Pessoa para emergência:</h6></td>
+                                <td><h6><b>Pessoa para emergência:</b></h6></td>
                                 <td><h6>{{$pessoa->pessoa_emergencia}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Convenio médico:</h6></td>
+                                <td><h6><b>Convenio médico:</b></h6></td>
                                 <td><h6>@if($pessoa->convenio_medico == -1) Não possui convenio médico. @else {{$pessoa->convenio_medico}} @endif</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Mora com os pais:</h6></td>
+                                <td><h6><b>Mora com os pais:</b></h6></td>
                                 <td><h6> @if($pessoa->mora_com_os_pais == 1) Sim @else Não @endif</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Quantidade de filhos:</h6></td>
+                                <td><h6><b>Quantidade de filhos:</b></h6></td>
                                 <td><h6>{{$pessoa->filhos}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Quantidade de irmãos:</h6></td>
+                                <td><h6><b>Quantidade de irmãos:</b></h6></td>
                                 <td><h6>{{$pessoa->irmaos}}</h6></td>
                             </tr>
                             <tr>
-                                <td><h6>Está inativo:</h6></td>
+                                <td><h6><b>Está inativo:</b></h6></td>
                                 <td><h6>@if($pessoa->inativo == null) Sim @else Não @endif</h6></td>
                             </tr>
                         </table>
@@ -181,7 +181,7 @@
     <div id="modalregistroturmasnucleo" class="modal">
         <div class="container">
             <div class="row">
-                <h5>Núcleo no qual a pesssoa está Ativa</h5>
+                <h5>Núcleo no qual a pessoa está Ativa</h5>
                 <div class="col s10">
                     <table class="centered">
                         <thead>
@@ -201,23 +201,49 @@
                     </table>
                 </div>
             </div>
-            <br>
+            <br><br>
             <div class="row">
-                <h5>Turmas no qual a pessoa está ativa</h5>
+                <h5>Turmas no qual a pessoa está Ativa &nbsp <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
                 <div class="col s10">
                     <table class="centered">
                         <thead>
                             <th>Nome da turma</th>
-                            <th>Estado</th>
+                            <th>Estado da turma</th>
                             <th>Mais Informações</th>
                         </thead>
                         <tbody>
                             @foreach ($pessoa->turmas as $turma)
-                                <tr>
-                                    <td>{{$turma->nome}}</td>
-                                    <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
-                                    <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
-                                </tr>
+                                @if($turma->pivot->inativo == 1)
+                                    <tr>
+                                        <td>{{$turma->nome}}</td>
+                                        <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <h5>Turmas no qual a pessoa está Inativa &nbsp <i class="small material-icons" style="color: red;">assignment_late</i></h5>
+                <div class="col s10">
+                    <table class="centered">
+                        <thead>
+                            <th>Nome da turma</th>
+                            <th>Estado da turma</th>
+                            <th>Mais Informações</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($pessoa->turmas as $turma)
+                                @if($turma->pivot->inativo == 2)
+                                    <tr>
+                                        <td>{{$turma->nome}}</td>
+                                        <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
