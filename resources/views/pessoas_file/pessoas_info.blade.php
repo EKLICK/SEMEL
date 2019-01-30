@@ -173,26 +173,54 @@
                         </div>
                     </div>
                     <br><br>
-                    <h5>Núcleo no qual a pesssoa está vinculada</h5>
-                        <div class="col s8">
-                            <table class="centered">
-                                <thead>
-                                    <tr>
-                                        <th>Nome do núcleo</th>
-                                        <th>Estado</th>
-                                        <th>Mais Informações</th>
-                                    </tr>
-                                </thead>
-                                @foreach($listnucleopessoa as $nucleo)
-                                    <tr>
-                                        <td>{{$nucleo->nome}}</td>
-                                        <td><i class="small material-icons" style="color: @if($nucleo->inativo == 1) green @else red @endif;">@if($nucleo->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
-                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
+                    <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistroturmasnucleo">Lista de núcleos e turma da pessoa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalregistroturmasnucleo" class="modal">
+        <div class="container">
+            <div class="row">
+                <h5>Núcleo no qual a pesssoa está Ativa</h5>
+                <div class="col s10">
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th>Nome do núcleo</th>
+                                <th>Estado</th>
+                                <th>Mais Informações</th>
+                            </tr>
+                        </thead>
+                        @foreach($listnucleopessoa as $nucleo)
+                            <tr>
+                                <td>{{$nucleo->nome}}</td>
+                                <td><i class="small material-icons" style="color: @if($nucleo->inativo == 1) green @else red @endif;">@if($nucleo->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <h5>Turmas no qual a pessoa está ativa</h5>
+                <div class="col s10">
+                    <table class="centered">
+                        <thead>
+                            <th>Nome da turma</th>
+                            <th>Estado</th>
+                            <th>Mais Informações</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($pessoa->turmas as $turma)
+                                <tr>
+                                    <td>{{$turma->nome}}</td>
+                                    <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                    <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

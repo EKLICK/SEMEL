@@ -111,28 +111,28 @@
     </div>
     <div id="modalregistropessoas" class="modal">
         <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <table class="centered">
-                    <thead>
-                        <tr>
-                            <th>Nome da dpessoa</th>
-                            <th>Telefone</th>
-                            <th>Mais Informações</th>
-                        </tr>
-                    </thead>
-                    @foreach($turma->pessoas as $pessoa)
-                        @if($pessoa->pivot->inativo == 1)
+            <div class="row">
+                <div class="col s12">
+                    <table class="centered">
+                        <thead>
                             <tr>
-                                <td>{{$pessoa->nome}}</td>
-                                <td>{{$pessoa->telefone}}</td>
-                                <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                <th>Nome da dpessoa</th>
+                                <th>Telefone</th>
+                                <th>Mais Informações</th>
                             </tr>
-                        @endif
-                    @endforeach
-                </table>
+                        </thead>
+                        @foreach($turma->pessoas as $pessoa)
+                            @if($pessoa->pivot->inativo == 1)
+                                <tr>
+                                    <td>{{$pessoa->nome}}</td>
+                                    <td>{{$pessoa->telefone}}</td>
+                                    <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </table>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 @endsection

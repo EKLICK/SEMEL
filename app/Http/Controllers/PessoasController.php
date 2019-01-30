@@ -415,14 +415,14 @@ class PessoasController extends Controller
         $b = 0;
         $idsturmas = [];
         foreach($pessoa->turmas as $turma){
-            array_push($idsturmas, $turma->id);
+            array_push($idsturmas, $turma->nucleo_id);
             if($turma->pivot->inativo == 1){$b++;}
             $a++;
         }
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
         $idsturmas = array_unique($idsturmas);
-        $listnucleopessoa = Nucleo::whereIn('id', $idsturmas);
+        $listnucleopessoa = Nucleo::whereIn('id', $idsturmas)->get();
 
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa'));
     }
