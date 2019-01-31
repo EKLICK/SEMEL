@@ -279,8 +279,42 @@ class ProfessorController extends Controller
         return redirect()->Route('professor_turmas', $professor->id);
     }
 
-    public function professores_ativar_inativar(Request $request){
+    public function professores_turmas_ativar_inativar(Request $request){
         $dataForm = $request->all();
-        dd($dataForm);
+        $turma = Turma::find($dataForm['turma_id']);
+        $aux = -1;
+        for($i = 0; $i < count($turma->professores); $i++){
+            if($turma->professores[$i]->id == $dataForm['professor_id']){
+                $aux = $i;
+            }
+        }
+        $string = '';
+        $texto = '';
+        $conta = 0;
+        if($turma->professores[$aux]->pivot->inativo == 1){
+            $string = 'update turmas_professores set inativo = 2 where professor_id = :sujeito and turma_id = :turma';
+            $texto = ' foi adicionado a turma ';
+            HistoricoPrT::create([
+                'professor_id' => $dataForm['professor_id'],
+                'turma_id' => $dataForm['turma_id'],
+                'comentario' => $dataForm['comentario'],
+                'inativo' => 2,
+            ]);
+        }
+        else{
+            $string = 'update turmas_professores set inativo = 1 where professor_id = :sujeito and turma_id = :turma';
+            $texto = ' foi removido a turma ';
+            HistoricoPrT::create([
+                'professor_id' => $dataForm['professor_id'],
+                'turma_id' => $dataForm['turma_id'],
+                'comentario' => $dataForm['comentario'],
+                'inativo' => 1,
+            ]);
+        }
+        DB::update(DB::raw($string), ['sujeito'=>$dataForm['professor_id'], 'turma'=>$dataForm['turma_id']]);
+        $professor = Professor::find($dataForm['professor_id']);
+        Session::put('mensagem_green', $professor->nome . $texto . $turma->nome ." com sucesso!");
+
+        return redirect()->Route('professor_turmas', $professor->id);
     }
 }

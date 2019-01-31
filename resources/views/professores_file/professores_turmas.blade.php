@@ -8,14 +8,14 @@
 @endsection
 @section('title') @if(auth()->user()->admin_professor == 1) <h4>Turmas</h4> @else <h4>Suas turmas</h4> @endif @endsection
 @section('content')
-    @if(Session::get('mensagem'))
+    @if(Session::get('mensagem_green'))
         <div class="center-align sessao">
             <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
+                {{Session::get('mensagem_green')}}
                 <i class="close material-icons">close</i>
             </div>
         </div>
-        {{Session::forget('mensagem')}}
+        {{Session::forget('mensagem_green')}}
     @endif   
     <div class="container z-depth-4">
         <div class="card-panel">
@@ -190,23 +190,23 @@
                                 @if ($ids == -1)
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
                                     <td>
-                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular" href="#modalidturmaprofessorvincular"
-                                            data-vincular="Vincular" data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular" href="#modalidturmavincular"
+                                            data-vincular="Vincular" data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">lock_outline</i>Vincular
                                         </a>
                                     </td>
                                 @else
                                     @if($turma->professores[$ids]->pivot->inativo == 1)
                                         <td><p>Ativado</p><i class="small material-icons" style="color: green;" >sim_card_alert</i></td>
-                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar_professor" href="#modalidturmaprofessorativarinativar"
-                                                data-ativar_inativar="Inativar"data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" href="#modalidturmaativarinativar"
+                                                data-ativar_inativar="Inativar"data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                                 <i class="material-icons right">speaker_notes_off</i>Inativar
                                             </a>
                                         </td>
                                     @else
                                         <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
-                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar_professor" href="#modalidturmaprofessorativarinativar"
-                                                data-ativar_inativar="Ativar"data-idprofessor="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeprofessor="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                        <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar_inativar" href="#modalidturmaativarinativar"
+                                                data-ativar_inativar="Ativar"data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">speaker_notes</i>Ativar
                                             </a>
                                         </td>
@@ -230,10 +230,10 @@
             @endif
         </div>
     </div>
-    <div id="modalidturmaprofessorvincular" class="modal">
+    <div id="modalidturmavincular" class="modal">
         <form action="{{Route('professores_turmas_vincular')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_vincular">
+            <input hidden class="validate" type="text" name="professor_id" id="id_modal_vincular">
             <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular">
             <div class="modal-content">
                 <h4 id="titulo_vincular"></h4>
@@ -255,10 +255,10 @@
             </div>
         </form>
     </div>
-    <div id="modalidturmaprofessorativarinativar" class="modal">
+    <div id="modalidturmaativarinativar" class="modal">
         <form action="{{route('professores_turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="professor_id" id="id_professor_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="professor_id" id="id_modal_ativar_inativar">
             <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
             <div class="modal-content">
                 <h4 id="titulo_ativar_inativar"></h4>
