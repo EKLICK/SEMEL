@@ -27,7 +27,7 @@
                 </div>
                 {{Session::forget('quant')}}
             @endif
-            <table class="centered">
+            <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Ano</th>

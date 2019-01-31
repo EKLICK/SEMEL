@@ -33,25 +33,11 @@ $(document).on('click', '.btn-modal_ativar_inativar', function(){
     document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
 });
 
-//MODAL NUCLEO
-$(document).on('click', '#btn-modal_ativar_inativar_nucleo', function(){
-    $('#id_nucleo_modal_ativar_inativar').val($(this).data('idnucleo'));
-    document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomenucleo').bold() + '?';
-    if($(this).data('ativar_inativar') == 'Inativar'){
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
-    }
-    else{
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
-    }
-    document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-});
-
 //MODAL TURMA
-$(document).on('click', '#btn-modal_ativar_inativar_turma', function(){
-    $('#id_turma_modal_ativar_inativar').val($(this).data('idturma'));
+$(document).on('click', '#btn-modal_ativar_inativar_objeto', function(){
+    $('#id_modal_ativar_inativar').val($(this).data('idobjeto'));
     document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nometurma').bold() + '?';
+    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomeobjeto').bold() + '?';
     if($(this).data('ativar_inativar') == 'Inativar'){
         document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
     }

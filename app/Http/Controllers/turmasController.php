@@ -29,7 +29,7 @@ class TurmasController extends Controller
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $turmaall = Turma::all();
         $nucleoslist = Nucleo::all();
-        Session::put('quant', 'Foram encontrados '.count($turmaall).' turmas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($turmaall).' turmas no banco.');
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
     }
@@ -230,12 +230,12 @@ class TurmasController extends Controller
         if($turma->inativo == 1){
             $turma->update(['inativo'=>2]);
             $dataForm += ['inativo' => 2];
-            Session::put('mensagem_green', $turma->nome . " foi inativado com sucesso!");
+            Session::put('mensagem', $turma->nome . " foi inativado com sucesso!");
         }
         else{
             $turma->update(['inativo'=>1]);
             $dataForm += ['inativo' => 1];
-            Session::put('mensagem_green', $turma->nome . " foi ativado com sucesso!");
+            Session::put('mensagem', $turma->nome . " foi ativado com sucesso!");
         }
         HistoricoT::create($dataForm);
 

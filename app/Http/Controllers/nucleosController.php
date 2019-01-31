@@ -29,7 +29,7 @@ class NucleosController extends Controller
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco.');
 
         return view ('nucleos_file.nucleos', compact('nucleoslist', 'bairroslist'));
     }
@@ -163,12 +163,12 @@ class NucleosController extends Controller
         if($nucleo->inativo == 1){
             $nucleo->update(['inativo'=>2]);
             $dataForm += ['inativo' => 2];
-            Session::put('mensagem_green', $nucleo->nome . " foi inativado com sucesso!");
+            Session::put('mensagem', $nucleo->nome . " foi inativado com sucesso!");
         }
         else{
             $nucleo->update(['inativo'=>1]);
             $dataForm += ['inativo' => 1];
-            Session::put('mensagem_green', $nucleo->nome . " foi ativado com sucesso!");
+            Session::put('mensagem', $nucleo->nome . " foi ativado com sucesso!");
         }
         HistoricoN::create($dataForm);
 

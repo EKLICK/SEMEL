@@ -5,9 +5,7 @@ body{
 .sessao{
   position: absolute;
   margin-top: -3%;
-  margin-left: 45%;
-  left: 0;
-  right: 0;
+  margin-left: 10%;
 }
 
 .quantmens{
@@ -15,11 +13,6 @@ body{
   margin-right: 0%;
   left: 0;
   right: 0;
-}
-
-#cssmenu{
-  margin-top: 8.5%;
-  margin-left: 8.5%;
 }
 
 .tabs-content.carousel { height:800px; overflow-y: visible; } 

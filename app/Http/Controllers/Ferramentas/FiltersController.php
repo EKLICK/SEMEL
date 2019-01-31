@@ -75,7 +75,7 @@ class filtersController extends Controller
             }
         })->orderBy('nome');
         $bairroslist = Bairro::all();
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco.');
         $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 
@@ -125,7 +125,7 @@ class filtersController extends Controller
         })->orderBy('nome');
         $count = count($professoreslist->get());
         $professoreslist = $professoreslist->paginate(10);
-        Session::put('quant', 'Foram encontrados '.$count.' professores no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.$count.' professores no banco.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist', 'dataForm'));
     }
@@ -168,7 +168,7 @@ class filtersController extends Controller
             }
             $query->wherein('id', $pessoasids);
         })->orderBy('nome');
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco.');
         $pessoaslist = $pessoaslist->paginate(10);
 
         return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professorid'));
@@ -244,7 +244,7 @@ class filtersController extends Controller
                 }
             }
         })->orderBy('nome');
-        Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($turmaslist->get()).' turmas no banco.');
         $nucleoslist = Nucleo::all();
         if(!empty($dataForm['pagina'])){
             $op = $dataForm['pagina'];
@@ -334,7 +334,7 @@ class filtersController extends Controller
             }
         })->orderBy('ano', 'desc');
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist->get()).' anamneses de '.$ano.' no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($anamneseslist->get()).' anamneses de '.$ano.' no banco.');
         $anamneseslist = $anamneseslist->paginate(10);
         $doencaslist = Doenca::all();
         if($dataForm['escolha'] == 0){
@@ -377,7 +377,7 @@ class filtersController extends Controller
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
-        Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($nucleoslist->get()).' núcleos no banco.');
         $nucleoslist = $nucleoslist->paginate(10);
         return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));
     }
@@ -388,7 +388,7 @@ class filtersController extends Controller
         if($dataForm['nome'] != null){
             $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%');
         }
-        Session::put('quant', 'Foram encontrados '.count($doencaslist->get()).' doenças no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($doencaslist->get()).' doenças no banco.');
         $doencaslist = $doencaslist->paginate(10);
         return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
     }
@@ -437,7 +437,7 @@ class filtersController extends Controller
                 }
             }
         });
-        Session::put('quant', 'Foram encontrados '.count($auditslist->get()).' Auditorias no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($auditslist->get()).' Auditorias no banco.');
         $auditslist = $auditslist->paginate(10);
         $eventos = ['Criação','Edição','Exclusão'];
         $tabelas = ['Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
@@ -494,7 +494,7 @@ class filtersController extends Controller
             }
         })->orderBy('nome');
         $bairroslist = Bairro::all();
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist->get()).' pessoas no banco.');
         $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');
 

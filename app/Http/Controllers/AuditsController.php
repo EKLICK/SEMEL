@@ -13,7 +13,7 @@ class auditsController extends Controller
     public function index(){
         $auditslist = Audit::orderBy('created_at')->paginate(10);
         $auditall = Audit::all();
-        Session::put('quant', 'Foram encontrados '.count($auditall).' auditorias no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($auditall).' auditorias no banco.');
         $eventos = ['Criação','Edição','Exclusão'];
         $tabelas = ['Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
 

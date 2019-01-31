@@ -4,6 +4,7 @@
 @endsection
 @section('title') Turmas registradas @endsection
 @section('content')
+    <br><br>
     @if(Session::get('mensagem'))
         <div class="center-align sessao">
             <div class="chip green lighten-2">
@@ -113,7 +114,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered">
+            <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
@@ -147,15 +148,15 @@
                             </td>
                             @if ($turma->inativo == 2)
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_turma" href="#modalturmasativarinativar"
-                                        data-ativar_inativar="Ativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
+                                        data-ativar_inativar="Ativar" data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
                                         <i class="material-icons right">lock_open</i>Ativar
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_turma" href="#modalturmasativarinativar"
-                                        data-ativar_inativar="Inativar" data-idturma="{{$turma->id}}" data-nometurma="{{$turma->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
+                                        data-ativar_inativar="Inativar" data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
                                         <i class="material-icons right">lock_outline</i>Inativar
                                     </a>
                                 </td>
@@ -195,10 +196,10 @@
         </form>
     </div>
 
-    <div id="modalturmasativarinativar" class="modal">
+    <div id="modalobjetoativarinativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar_inativar">
             <div class="modal-content">
                 <h4 id="titulo_ativar_inativar"></h4>
                 <h5 id="texto_ativar_inativar"></h5>

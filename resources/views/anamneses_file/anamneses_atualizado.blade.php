@@ -129,7 +129,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered">
+            <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da pessoa</th>

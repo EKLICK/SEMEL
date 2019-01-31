@@ -7,7 +7,7 @@
 @section('content') 
     <div class="container z-depth-4">
         <div class="card-panel">
-            <table class="centered">
+            <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>

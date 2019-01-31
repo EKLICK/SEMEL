@@ -4,6 +4,7 @@
 @endsection
 @section('title') Núcleos registrados @endsection
 @section('content')
+    <br><br>
     @if(Session::get('mensagem_red'))
         <div class="center-align sessao">
             <div class="chip red lighten-2">
@@ -13,14 +14,14 @@
         </div>
         {{Session::forget('mensagem_red')}}
     @endif
-    @if(Session::get('mensagem_green'))
+    @if(Session::get('mensagem'))
         <div class="center-align sessao">
             <div class="chip green lighten-2">
-                {{Session::get('mensagem_green')}}
+                {{Session::get('mensagem')}}
                 <i class="close material-icons">close</i> 
             </div>
         </div>
-        {{Session::forget('mensagem_green')}}
+        {{Session::forget('mensagem')}}
     @endif
     <div class="container z-depth-4">
         <div class="card-panel">
@@ -105,7 +106,7 @@
                         </div>
                     </li>
                 </ul>
-            <table class="centered">
+            <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
@@ -118,20 +119,20 @@
                 <tbody>
                     @foreach ($nucleoslist as $nucleo)
                         <tr>
-                            <td><p>{{$nucleo->nome}}</p></td>
+                            <td>{{$nucleo->nome}}</td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             @if ($nucleo->inativo == 2)
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_nucleo" href="#modalnucleosativarinativar"
-                                        data-ativar_inativar="Ativar" data-idnucleo="{{$nucleo->id}}" data-nomenucleo="{{$nucleo->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
+                                        data-ativar_inativar="Ativar" data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
                                         <i class="material-icons right">lock_open</i>Ativar
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_nucleo" href="#modalnucleosativarinativar"
-                                    data-ativar_inativar="Inativar" data-idnucleo="{{$nucleo->id}}" data-nomenucleo="{{$nucleo->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
+                                    data-ativar_inativar="Inativar" data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
                                         <i class="material-icons right">lock_outline</i>Inativar
                                     </a>
                                 </td>
@@ -176,10 +177,10 @@
         </form>
     </div>
 
-    <div id="modalnucleosativarinativar" class="modal">
+    <div id="modalobjetoativarinativar" class="modal">
         <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="nucleo_id" id="id_nucleo_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="nucleo_id" id="id_modal_ativar_inativar">
             <div class="modal-content">
                 <h4 id="titulo_ativar_inativar"></h4>
                 <h5 id="texto_ativar_inativar"></h5>

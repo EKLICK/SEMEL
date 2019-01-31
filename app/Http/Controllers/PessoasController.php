@@ -129,7 +129,7 @@ class PessoasController extends Controller
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
-        Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($pessoall).' pessoas no banco.');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist','ano'));
     }
@@ -433,7 +433,7 @@ class PessoasController extends Controller
         $turmasall = Turma::all();
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $nucleoslist = Nucleo::all();
-        Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($turmasall).' turmas no banco.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
