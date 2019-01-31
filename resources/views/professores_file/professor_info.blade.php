@@ -165,6 +165,30 @@
             </div>
             <br><br>
             <div class="row">
+                <h5>Turmas no qual ao professor está Ativo &nbsp <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
+                <div class="col s10">
+                    <table class="centered">
+                        <thead>
+                            <th>Nome da turma</th>
+                            <th>Estado da turma</th>
+                            <th>Mais Informações</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($professor->turmas as $turma)
+                                @if($turma->pivot->inativo == 1)
+                                    <tr>
+                                        <td>{{$turma->nome}}</td>
+                                        <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
                 <h5>Turmas no qual ao professor está Inativo &nbsp <i class="small material-icons" style="color: red;">assignment_late</i></h5>
                 <div class="col s10">
                     <table class="centered">
@@ -175,33 +199,13 @@
                         </thead>
                         <tbody>
                             @foreach ($professor->turmas as $turma)
-                                <tr>
-                                    <td>{{$turma->nome}}</td>
-                                    <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
-                                    <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br><br>
-            <div class="row">
-                <h5>Turmas no qual ao professor está Inativo &nbsp <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
-                <div class="col s10">
-                    <table class="centered">
-                        <thead>
-                            <th>Nome da turma</th>
-                            <th>Estado da turma</th>
-                            <th>Mais Informações</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($turmasinativas as $turma)
-                                <tr>
-                                    <td>{{$turma->nome}}</td>
-                                    <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
-                                    <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
-                                </tr>
+                                @if($turma->pivot->inativo == 2)
+                                    <tr>
+                                        <td>{{$turma->nome}}</td>
+                                        <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -211,20 +211,16 @@ class ProfessorController extends Controller
 
     public function professor_info($id){
         $professor = Professor::find($id);
-        $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
         $user = User::find($professor['user_id']);
-        $useremail = $user['email'];
-        $histprofessor = HistoricoPrT::where('professor_id', '=', $id)->paginate(6);
-        $turmasinativas = DB::select(DB::raw('SELECT * FROM Turmas WHERE 
-                                id IN(SELECT turma_id FROM historico_professores_turmas WHERE 
-                                    professor_id = 1) and id NOT IN(SELECT turma_id FROM turmas_professores WHERE 
-                                        professor_id = 1)  GROUP BY id'));
-        $
+        $useremail = $user->email;
+        $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
+        $histprofessor = HistoricoPrT::where('professor_id', '=', $professor->id)->paginate(5);
         $a = 0;
         $b = 0;
         $idsturmas = [];
         foreach($professor->turmas as $turma){
             array_push($idsturmas, $turma->nucleo_id);
+            if($turma->pivot->inativo == 1){$b++;}
             $a++;
         }
         $c = $a - $b;
@@ -232,7 +228,8 @@ class ProfessorController extends Controller
         $idsturmas = array_unique($idsturmas);
         $listnucleoprofessor = Nucleo::whereIn('id', $idsturmas)->get();
 
-        return view ('professores_file.professor_info', compact('professor','useremail','histprofessor','dadosgerais','listnucleoprofessor','turmasinativas'));
+
+        return view ('professores_file.professor_info', compact('professor','useremail','histprofessor','dadosgerais','listnucleoprofessor'));
     }
 
     public function professor_turmas($id){
@@ -274,7 +271,7 @@ class ProfessorController extends Controller
         $dataForm += ['inativo' => 1];
         $professor->turmas()->attach($turma->id, ['inativo'=>$dataForm['inativo']]);
         HistoricoPrT::create($dataForm);
-        Session::put('mensagem', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
+        Session::put('mensagem_green', $professor->nome . " foi adicionado a turma" . $turma->nome ." com sucesso!");
 
         return redirect()->Route('professor_turmas', $professor->id);
     }
