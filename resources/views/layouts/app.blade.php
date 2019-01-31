@@ -49,7 +49,7 @@
                         <nav class="hide-on-small-only">
                             <div class="nav-wrapper blue">
                                 <div class="col s12">
-                                    @yield('breadcrumbs')
+                                    <b>@yield('breadcrumbs')</b>
                                 </div>
                             </div>
                         </nav>

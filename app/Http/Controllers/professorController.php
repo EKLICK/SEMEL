@@ -92,7 +92,7 @@ class ProfessorController extends Controller
         $professoreslist = Professor::orderBy('nome')->paginate(10);
         $turmaslist = Turma::all();
         $professorall = Professor::all();
-        Session::put('quant', 'Foram encontrados '.count($professorall).' professores no banco.');
+        Session::put('quant', count($professorall).' professores cadastrados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
@@ -237,14 +237,14 @@ class ProfessorController extends Controller
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if(auth()->user()->admin_professor == 1){
             $turmaslist = Turma::orderBy('nome')->paginate(10);
-            Session::put('quant', 'Foram encontrados '.count($turmaslist->all()).' pessoas no banco.');
+            Session::put('quant', count($turmaslist->all()).' pessoas cadastradas.');
             $professor = Professor::find($id);
             return view ('professores_file.professores_turmas', compact('professor','turmaslist','dias_semana','nucleoslist'));
         }
         else{
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
             $turmaslist = $professor->turmas->sortBy('nome');
-            Session::put('quant', 'Foram encontrados '.count($turmaslist).' pessoas no banco.');
+            Session::put('quant', count($turmaslist).' pessoas cadastradas.');
             $turmaslist = $this->gerar_paginate($turmaslist);
             return view ('professores_file.professores_turmas', compact('professor', 'turmaslist', 'dias_semana', 'nucleoslist'));
         }
@@ -257,7 +257,7 @@ class ProfessorController extends Controller
             $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         }
         $pessoaslist = $this->gerar_paginate($pessoaslist);
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas no banco.');
+        Session::put('quant', count($pessoaslist).' pessoas cadastradas.');
         $professor = Professor::find($idprofessor);
         $professorid = $professor->id;
 

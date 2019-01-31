@@ -15,7 +15,7 @@ class DeleteController extends Controller
         $pessoaslist = Pessoa::onlyTrashed()->paginate(10);
         $data = new \DateTime();
         $ano = date('Y');
-        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas deletadas no banco de dados.');
+        Session::put('quant', 'Foram encontrados '.count($pessoaslist).' pessoas cadastradas.');
         
         return view ('pessoas_file.pessoas_softdeletes', compact('pessoaslist','bairroslist', 'ano'));
     }

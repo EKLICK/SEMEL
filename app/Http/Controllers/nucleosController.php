@@ -29,7 +29,7 @@ class NucleosController extends Controller
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($nucleoall).' núcleos no banco.');
+        Session::put('quant', count($nucleoall).' núcleos cadastrados.');
 
         return view ('nucleos_file.nucleos', compact('nucleoslist', 'bairroslist'));
     }

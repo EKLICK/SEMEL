@@ -114,7 +114,7 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses de '.$ano.' no banco.');
+        Session::put('quant', count($anamneseslist).' anamneses de '.$ano.' cadastradas.');
 
         $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
@@ -125,7 +125,7 @@ class AnamneseController extends Controller
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
-        Session::put('quant', 'Foram encontrados '.count($anamneseslist).' anamneses históricas no banco.');
+        Session::put('quant', count($anamneseslist).' anamneses antigas cadastradas.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
 

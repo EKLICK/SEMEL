@@ -29,7 +29,7 @@ class TurmasController extends Controller
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         $turmaall = Turma::all();
         $nucleoslist = Nucleo::all();
-        Session::put('quant', 'Foram encontrados '.count($turmaall).' turmas no banco.');
+        Session::put('quant', count($turmaall).' turmas cadastradas.');
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
     }

@@ -21,7 +21,7 @@ class DoencasController extends Controller
     {
         $doencaall = Doenca::all();
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
-        Session::put('quant', 'Foram encontrados '.count($doencaall).' doenças no banco.');
+        Session::put('quant', count($doencaall).' doenças cadastradas.');
 
         return view ('doencas_file.doencas', compact('doencaslist'));
     }
