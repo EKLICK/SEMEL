@@ -124,15 +124,15 @@
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             @if ($nucleo->inativo == 2)
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
-                                        data-ativar_inativar="Ativar" data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
+                                        data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
                                         <i class="material-icons right">lock_open</i>Ativar
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
-                                    data-ativar_inativar="Inativar" data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
+                                        data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
                                         <i class="material-icons right">lock_outline</i>Inativar
                                     </a>
                                 </td>
@@ -177,28 +177,53 @@
         </form>
     </div>
 
-    <div id="modalobjetoativarinativar" class="modal">
-        <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
-            @csrf
-            <input hidden class="validate" type="text" name="nucleo_id" id="id_modal_ativar_inativar">
-            <div class="modal-content">
-                <h4 id="titulo_ativar_inativar"></h4>
-                <h5 id="texto_ativar_inativar"></h5>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
-                        <label for="textarea1"></label>
+    <div id="modalobjetoativar" class="modal">
+            <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
+                @csrf
+                <input class="validate" type="text" name="nucleo_id" id="id_modal_ativar" hidden>
+                <div class="modal-content">
+                    <h4>Ativar</h4>
+                    <h5 id="texto_ativar"></h5>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col s7">
+                            <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Ativação (opcional):
+                            <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                            <label for="textarea1"></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="modalobjetoinativar" class="modal">
+            <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
+                @csrf
+                <input class="validate" type="text" name="nucleo_id" id="id_modal_inativar" hidden>
+                <div class="modal-content">
+                    <h4>Inativar</h4>
+                    <h5 id="texto_inativar"></h5>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col s7">
+                            <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
+                            <textarea id="textarea1" class="materialize-textarea" name="comentario" required></textarea>
+                            <label for="textarea1"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
 @endsection

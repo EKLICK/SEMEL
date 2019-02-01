@@ -265,54 +265,6 @@
             </div>
         </form>
     </div>
-    <div id="modalidturmaativar" class="modal">
-        <form action="{{route('pessoas_turmas_ativar_inativar')}}" method="POST">
-            @csrf
-            <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal_ativar_inativar">
-            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_ativar_inativar">
-            <div class="modal-content">
-                <h4>Ativar</h4>
-                <h5 id="texto_id_ativar"></h5>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Ativação (opcional):
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
-                        <label for="textarea1"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
-    <div id="modalidturmainativar" class="modal">
-        <form action="{{route('pessoas_turmas_ativar_inativar')}}" method="POST">
-            @csrf
-            <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal_inativar">
-            <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_inativar">
-            <div class="modal-content">
-                <h4>Inativar</h4>
-                <h5 id="texto_id_inativar"></h5>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario" required></textarea>
-                        <label for="textarea1"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Inativar
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
+    @include('layouts.modais.modais_sujeitos')
+    @section('input_id') <input hidden class="validate" type="text" name="pessoa_id" id="id_pessoa_modal_inativar"> @endsection
 @endsection

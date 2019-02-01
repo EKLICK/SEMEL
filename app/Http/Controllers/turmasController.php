@@ -226,6 +226,7 @@ class TurmasController extends Controller
 
     public function turmas_ativar_inativar(Request $request){
         $dataForm = $request->all();
+        dd($dataForm);
         $turma = Turma::find($dataForm['turma_id']);
         if($turma->inativo == 1){
             $turma->update(['inativo'=>2]);

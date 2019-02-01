@@ -195,11 +195,10 @@
             </div>
         </form>
     </div>
-
     <div id="modalobjetoativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar">
+            <input class="validate" type="text" name="turma_id" id="id_modal_ativar" hidden>
             <div class="modal-content">
                 <h4>Ativar</h4>
                 <h5 id="texto_ativar"></h5>
@@ -224,7 +223,7 @@
     <div id="modalobjetoinativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="turma_id" id="id_modal_inativar">
+            <input class="validate" type="text" name="turma_id" id="id_modal_inativar" hidden>
             <div class="modal-content">
                 <h4>Inativar</h4>
                 <h5 id="texto_inativar"></h5>
@@ -233,7 +232,7 @@
                 <div class="row">
                     <div class="input-field col s7">
                         <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario" required></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
