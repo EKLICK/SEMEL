@@ -39,24 +39,32 @@
             </main>
         @else
             <div class="row">
-                <div class="col s2 hide-on-small-only">
-                    <ul class="collapsible">
-                        @include('layouts.menu')
-                    </ul>
-                </div>
-                <div class="col s12 m10">
-                    <div class="card-panel">
-                        <nav class="hide-on-small-only">
-                            <div class="nav-wrapper blue">
-                                <div class="col s12">
-                                    <b>@yield('breadcrumbs')</b>
+                <div class="section">
+                    <div class="col m2 hide-on-med-and-down">
+                        <ul class="collapsible">
+                            @if(auth()->user()->admin_professor == 1)
+                                @include('layouts.menu')
+                            @else
+                                <div class="collection">
+                                    <b><a class="collection-item" href="{{route('professor_turmas', auth()->user()->admin_professor)}}">Meus Alunos</a></b>
                                 </div>
+                            @endif
+                        </ul>
+                    </div>
+                    <div class="col m12 l10">
+                        <div class="card-panel">
+                            <nav class="hide-on-med-and-down">
+                                <div class="nav-wrapper blue">
+                                    <div class="col s12">
+                                        <b>@yield('breadcrumbs')</b>
+                                    </div>
+                                </div>
+                            </nav>
+                            <div class="container">
+                                <h2>@yield('title')</h2>
                             </div>
-                        </nav>
-                        <div class="container">
-                            <h2>@yield('title')</h2>
+                            @yield('content')
                         </div>
-                        @yield('content')
                     </div>
                 </div>
             </div>

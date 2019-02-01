@@ -162,25 +162,4 @@
             <a class="tooltipped" data-position="top" data-tooltip="Adicionar pessoa" href="{{route('pessoas.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
         </div>
     </div>
-
-    <div id="modaldelete" class="modal">
-        <form action="{{route('pessoas.destroy', 'delete')}}" method="POST">
-            @method('DELETE')
-            @csrf
-            <div class="modal-content">
-                <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar o professor abaixo?</p>
-                <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" type="text" id="name_delete">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
-         </div>
-        </form>
-    </div>
 @endsection

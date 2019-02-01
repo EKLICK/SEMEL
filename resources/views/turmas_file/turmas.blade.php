@@ -196,7 +196,32 @@
         </form>
     </div>
 
-    <div id="modalobjetoativarinativar" class="modal">
+    <div id="modalobjetoativar" class="modal">
+        <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
+            @csrf
+            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar_inativar">
+            <div class="modal-content">
+                <h4 id="titulo_ativar_inativar"></h4>
+                <h5 id="texto_ativar_inativar"></h5>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s7">
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="modalobjetoinativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
             <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar_inativar">
