@@ -26,8 +26,6 @@
                         <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}">
                         <label for="icon_nome">Turma da turma:</label>
                     </div>
-                </div>
-                <div class="row">
                     <div class="input-field col s12 m2">
                         <i class="material-icons prefix">assignment</i>
                         <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}">

@@ -32,14 +32,14 @@
                         <form action="{{route('doencas_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s12 m4">
                                     <i class="material-icons prefix">warning</i>
                                     <input name="nome" id="icon_nome" type="text" class="validate">
                                     <label for="icon_nome">Nome da doença:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s3">
+                                <div class="input-field col s12 m3">
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>

@@ -25,7 +25,7 @@
                     <input type="text" name="ano" id="ano" value="{{date('Y')}}" hidden>
                     <input type="number" name="{{$anamnese->pessoas->id}}" id="{{$anamnese->pessoas->id}}" value="{{$anamnese->pessoas->id}}" hidden>
                     <h4 class="center">Nome do Usuário: {{$anamnese->pessoas->nome}}</h4>
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">local_parking</i>
                         <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate" @if(is_null(old('peso'))) value="{{$anamnese->peso}}" @else value="{{old('peso')}}" @endif>
                         <label for="icon_prefix">Peso:</label>
