@@ -21,22 +21,23 @@
             <form class="col s12" action="{{route('doencas.store')}}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                         <i class="material-icons prefix">warning</i>
                         <input name="nome" id="icon_prefix" type="text" class="validate">
                         <label for="icon_prefix">Nome da doença:</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s8">
+                    <div class="input-field col s4">
                         <i class="material-icons prefix">description</i>
                         <textarea name="descricao" id="descricao" class="materialize-textarea"></textarea>
                         <label for="descricao">Observação</label>
                     </div>
                 </div>
-                <button style="margin-bottom: 2%;" class="btn waves-effect waves-light" type="submit" name="action">Enviar
-                    <i class="material-icons right">send</i>
-                </button>
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
+                            <i class="large material-icons left">add</i>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
