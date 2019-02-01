@@ -162,7 +162,7 @@
             @csrf
             <div class="modal-content">
                 <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar o professor abaixo?</p>
+                <p>Você tem certeza que deseja deletar o núcleo abaixo?</p>
                 <div class="row">
                     <label for="name_delete">Nome:</label>
                     <div class="input-field col s12">

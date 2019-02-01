@@ -33,28 +33,12 @@ $(document).on('click', '.btn-modal_inativar', function(){
 });
 
 //MODAL TURMA
-$(document).on('click', '#btn-modal_ativar_inativar_objeto', function(){
-    $('#id_modal_ativar_inativar').val($(this).data('idobjeto'));
-    document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomeobjeto').bold() + '?';
-    if($(this).data('ativar_inativar') == 'Inativar'){
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
-    }
-    else{
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
-    }
-    document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
+$(document).on('click', '#btn-modal_ativar_objeto', function(){
+    $('#id_modal_ativar').val($(this).data('idobjeto'));
+    document.getElementById('texto_ativar').innerHTML = 'Você deseja Ativar ' + $(this).data('nomeobjeto').bold() + '?';
 });
 
-$(document).on('click', '#btn-modal_ativar_inativar_objeto', function(){
-    $('#id_modal_ativar_inativar').val($(this).data('idobjeto'));
-    document.getElementById('titulo_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
-    document.getElementById('texto_ativar_inativar').innerHTML = 'Você deseja '+ $(this).data('ativar_inativar').toLowerCase() + ' ' + $(this).data('nomeobjeto').bold() + '?';
-    if($(this).data('ativar_inativar') == 'Inativar'){
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Inativação (obrigatório):';
-    }
-    else{
-        document.getElementById('comentario_ativar_inativar').innerHTML = 'Comentario para Ativação (opcional):';
-    }
-    document.getElementById('enviar_ativar_inativar').innerHTML = $(this).data('ativar_inativar');
+$(document).on('click', '#btn-modal_inativar_objeto', function(){
+    $('#id_modal_inativar').val($(this).data('idobjeto'));
+    document.getElementById('texto_inativar').innerHTML = 'Você deseja inativar ' + $(this).data('nomeobjeto').bold() + '?';
 });

@@ -148,15 +148,15 @@
                             </td>
                             @if ($turma->inativo == 2)
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
-                                        data-ativar_inativar="Ativar" data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
+                                        data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
                                         <i class="material-icons right">lock_open</i>Ativar
                                     </a>
                                 </td>
                             @else
                                 <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_inativar_objeto" href="#modalobjetoativarinativar"
-                                        data-ativar_inativar="Inativar" data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
+                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
+                                        data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
                                         <i class="material-icons right">lock_outline</i>Inativar
                                     </a>
                                 </td>
@@ -181,7 +181,7 @@
             @csrf
             <div class="modal-content">
                 <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar o professor abaixo?</p>
+                <p>Você tem certeza que deseja deletar a turma abaixo?</p>
                 <div class="row">
                     <label for="name_delete">Nome:</label>
                     <div class="input-field col s12">
@@ -199,22 +199,22 @@
     <div id="modalobjetoativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar">
             <div class="modal-content">
-                <h4 id="titulo_ativar_inativar"></h4>
-                <h5 id="texto_ativar_inativar"></h5>
+                <h4>Ativar</h4>
+                <h5 id="texto_ativar"></h5>
                 <hr>
                 <br>
                 <div class="row">
                     <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Ativação (opcional):
                         <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
                     <i class="material-icons right">send</i>
                 </button>
             </div>
@@ -224,22 +224,22 @@
     <div id="modalobjetoinativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf
-            <input hidden class="validate" type="text" name="turma_id" id="id_modal_ativar_inativar">
+            <input hidden class="validate" type="text" name="turma_id" id="id_modal_inativar">
             <div class="modal-content">
-                <h4 id="titulo_ativar_inativar"></h4>
-                <h5 id="texto_ativar_inativar"></h5>
+                <h4>Inativar</h4>
+                <h5 id="texto_inativar"></h5>
                 <hr>
                 <br>
                 <div class="row">
                     <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_ativar_inativar"></span>
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
                         <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_ativar_inativar">Enviar</span>
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
                     <i class="material-icons right">send</i>
                 </button>
             </div>
