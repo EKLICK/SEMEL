@@ -115,17 +115,19 @@ document.getElementById('limpar_matricula').onclick = function (){
     apagar_matricula();
 }
 
-function change(a,b,c){
+$("[name='marc']").click(function(){
+    change(this.value, $('#convenio_medico'), $('.convenio_label'), $('#convenio_icon'));
+});
+
+function change(a,b,c,d){
     if(a == 'N'){
         b.hide(400);
         c.hide(400);
+        d.hide(400);
     }
     else{
         b.show(400);
         c.show(400);
+        d.show(400);
     }
 };
-
-$("[name='marc']").click(function(){
-    change(this.value, $('#convenio_medico'), $('.convenio_label'));
-});

@@ -24,56 +24,58 @@
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <input type="text" id="id" name="id" value="{{$pessoa->id}}" hidden/>
-                <input type="text" id="cidade" name="cidade" value="São Leopoldo" hidden/>
                 <div class="row">
-                    <div class="input-field col s2">
-                        <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null($pessoa->foto)) {{asset($pessoa->foto)}} @endif">
-                    </div>
-                    <div class="input-field col s4">
-                        <div class="file-field input-field" style="margin-left: 10%;">
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span>Foto 3x4</span>
-                                    <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
-                                </div>
-                                <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
-                                <br><br><br>
-                                <div class="file-path-wrapper">
-                                    <input name="3x4" id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
-                                </div>
-                            </div>
+                    <div class="file-field input-field col s12 m5">
+                        <div class="btn">
+                            <span>Foto 3x4</span>
+                            <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
+                        </div>
+                        <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
+                        <br><br><br>
+                        <div class="file-path-wrapper container left">
+                            <input name="3x4" id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
                         </div>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 m7 right" style="margin-top: -2%;">
+                        <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null($pessoa->foto)) {{asset($pessoa->foto)}} @endif">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
                         <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif">
                         <label for="nome">Nome:</label>
                     </div>
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
                         <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif">
                         <label for="nascimento">Data de nascimento:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s3">
-                            <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg" id="rg" type="text" class="validate" value="@if(is_null(old('rg'))) {{$pessoa->rg}} @else {{old('rg')}} @endif">
-                        <label for="rg">RG:</label>
-                    </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="@if(is_null(old('cpf'))) {{$pessoa->cpf}} @else {{old('cpf')}} @endif">
                         <label for="cpf">CPF próprio:</label>
                     </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="@if(is_null(old('cpf_responsavel'))) {{$pessoa->cpf_responsavel}} @else {{old('cpf_responsavel')}} @endif">
                         <label for="cpf_responsavel">CPF opcional:</label>
                     </div>
+                    <div class="input-field col s12 m4">
+                            <i class="material-icons prefix">assignment_ind</i>
+                        <input name="rg" id="rg" type="text" class="validate" value="@if(is_null(old('rg'))) {{$pessoa->rg}} @else {{old('rg')}} @endif">
+                        <label for="rg">RG:</label>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s4">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">business</i>
+                        <input name="cidade" id="icon_bairro" type="text" class="validate" value="@if(is_null(old('cidade'))) {{$pessoa->cidade}} @else {{old('cidade')}}" @else {{old('cidade')}} @endif>
+                        <label for="icon_bairro">Cidade:</label>
+                    </div>
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                         <select name="bairro_id">
                             <option value="" selected disabled>Selecione o bairro</option>
@@ -84,24 +86,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m4">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="rua" type="text" class="validate"  value="@if(is_null(old('rua'))) {{$pessoa->rua}} @else {{old('rua')}} @endif">
                         <label for="rua">Rua:</label>
                     </div>
-                    <div class="input-field col s2">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$pessoa->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif>
                         <label for="numero_endereco">Número:</label>
                     </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">explore</i>
                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$pessoa->cep}} @else {{old('cep')}} @endif">
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="@if(is_null(old('telefone'))) {{$pessoa->telefone}} @else {{old('telefone')}} @endif">
                         <label for="icon_telephone">Telephone:</label>
