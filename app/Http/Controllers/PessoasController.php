@@ -88,6 +88,7 @@ class PessoasController extends Controller
         if($listadados['bairro_id'] == null){return 0;}
         if($listadados['rua'] == null){return 0;}
         if($listadados['numero_endereco'] == null){return 0;}
+        if($listadados['complemento'] == null){return 0;}
         if($listadados['cep'] == null){return 0;}
         if($listadados['telefone'] == null){return 0;}
         if($listadados['telefone_emergencia'] == null){return 0;}
@@ -214,6 +215,7 @@ class PessoasController extends Controller
             'rua' => $dataForm['rua'],
             'bairro_id' => $dataForm['bairro_id'],
             'numero_endereco' => $dataForm['numero_endereco'],
+            'complemento' => $dataForm['complemento'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
             'telefone_emergencia' => $dataForm['telefone_emergencia'],
@@ -352,6 +354,7 @@ class PessoasController extends Controller
             'rua' => $dataForm['rua'],
             'bairro_id' => $dataForm['bairro_id'],
             'numero_endereco' => $dataForm['numero_endereco'],
+            'complemento' => $dataForm['complemento'],
             'cep' => $dataForm['cep'],
             'telefone' => $dataForm['telefone'],
             'telefone_emergencia' => $dataForm['telefone_emergencia'],
@@ -451,6 +454,7 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
         $turma = Turma::find($dataForm['turma_id']);
+        dd($turma);
         if($dataForm['inativo'] == 1){
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
         }

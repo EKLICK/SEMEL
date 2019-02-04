@@ -92,14 +92,21 @@
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s12 m3">
+                        <i class="material-icons prefix">explore</i>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$pessoa->cep}} @else {{old('cep')}} @endif">
+                        <label for="cep">CEP:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m3">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$pessoa->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif>
                         <label for="numero_endereco">Número:</label>
                     </div>
-                    <div class="input-field col s12 m3">
-                        <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$pessoa->cep}} @else {{old('cep')}} @endif">
-                        <label for="cep">CEP:</label>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">bookmark</i>
+                        <input name="complemento" id="complemento" type="text" class="validate" @if(is_null(old('complemento'))) value="{{$pessoa->complemento}}" @else value="{{old('complemento')}}" @endif>
+                        <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">

@@ -4,8 +4,9 @@
     <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Turmas</a>
     <a href="{{Route('professor.edit', $professorid)}}" class="breadcrumb">Alunos</a>
 @endsection
-@section('title') <h4>Alunos de: {{$turma->nome}}</h4> @endsection
+@section('title') Alunos de: {{$turma->nome}} @endsection
 @section('content')
+    <br><br>
     <div class="container z-depth-4">
         <div class="card-panel">¨
             @if(Session::get('quant'))

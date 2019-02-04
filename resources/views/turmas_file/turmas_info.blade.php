@@ -7,8 +7,9 @@
     @endif
     <a href="{{route('turma_info', $turma->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') <h4>Informações da Turma</h4> @endsection
+@section('title') Informações da Turma @endsection
 @section('content')
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col s12">

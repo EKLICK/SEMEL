@@ -7,6 +7,7 @@
 @endsection
 @section('title') Informações de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col s12">

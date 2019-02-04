@@ -8,15 +8,7 @@ $(document).on('click', '#btn-delete', function(){
 $(document).on('click', '.btn-modal_vincular', function(){
     $('#id_modal_vincular').val($(this).data('idusuario'));
     $('#id_turma_modal_vincular').val($(this).data('idturma'));
-    document.getElementById('titulo_vincular').innerHTML = $(this).data('vincular');
-    document.getElementById('texto_id_vincular').innerHTML = 'Você deseja '+ $(this).data('vincular').toLowerCase() + ' ' + $(this).data('nomeusuario').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
-    if($(this).data('vincular') == 'Desvincular'){
-        document.getElementById('comentario_vincular').innerHTML = 'Comentario para Desvinculação (obrigatório):';
-    }
-    else{
-        document.getElementById('comentario_vincular').innerHTML = 'Comentario para Vinculação (opcional):';
-    }
-    document.getElementById('enviar_vincular').innerHTML = $(this).data('vincular');
+    document.getElementById('texto_id_vincular').innerHTML = 'Você deseja vincular ' + $(this).data('nomeusuario').bold() + ' em ' + $(this).data('nometurma').bold() + '?';
 });
 
 //ATIVAR E INATIVAR

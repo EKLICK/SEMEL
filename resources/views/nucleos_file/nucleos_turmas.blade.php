@@ -4,7 +4,8 @@
     <a href="{{route('turmas_cadastradas', $nucleo->id)}}" class="breadcrumb">Turmas cadastradas</a>
 @endsection
 @section('title') Turmas cadastradas em {{$nucleo->nome}} @endsection
-@section('content') 
+@section('content')
+    <br><br>
     <div class="container z-depth-4">
         <div class="card-panel">
             <table class="centered responsive-table highlight bordered">

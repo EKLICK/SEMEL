@@ -2,8 +2,9 @@
 @section('breadcrumbs')
     <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
 @endsection
-@section('title') <h4>Anamneses de {{$ano}}</h4> @endsection
+@section('title') Anamneses de {{$ano}} @endsection
 @section('content')
+    <br><br>
     @if(Session::get('mensagem'))   
         <div class="center-align sessao">
             <div class="chip green lighten-2">

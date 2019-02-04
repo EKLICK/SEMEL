@@ -7,6 +7,7 @@
 @endsection
 @section('title') Editar <?php $nomes = explode(' ',$professor->nome);?> {{$nomes[0]}} @endsection
 @section('content')
+    <br><br>
     @if(isset($errors) && count($errors) > 0)
         @foreach($errors->all() as $error)
             <div style="margin-left: 15%; margin-top: 1%;">

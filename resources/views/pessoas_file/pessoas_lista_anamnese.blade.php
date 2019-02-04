@@ -7,6 +7,7 @@
 @endsection
 @section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
+    <br><br>
     @if(Session::get('mensagem'))
         <div class="center-align sessao">
             <div class="chip green lighten-2">

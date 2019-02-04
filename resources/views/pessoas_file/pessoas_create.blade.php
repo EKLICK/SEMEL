@@ -86,20 +86,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}">
                         <label for="rua">Rua:</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">explore</i>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}">
+                        <label for="cep">CEP:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}">
                         <label for="numero_endereco">Número:</label>
                     </div>
-                    <div class="input-field col s12 m3">
-                        <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}">
-                        <label for="cep">CEP:</label>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">bookmark</i>
+                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}">
+                        <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -148,21 +155,21 @@
                         Possui convênio médico?
                         <p>
                             <label>
-                                <input value="S" name="marc" type="radio" @if(old('convenio_marc') == 'S') checked @endif/>
+                                <input value="S" name="marc" type="radio" @if(old('marc') == 'S') checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="marc" type="radio" @if(old('convenio_marc') == 'N') checked @endif/>
+                                <input value="N" name="marc" type="radio" @if(old('marc') == 'N') checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="convenio_icon" class="material-icons prefix" hidden>add_box</i>
-                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" hidden>
-                        <label id="convenio_label" for="convenio_medico" hidden>Convênio médico:</label>
+                        <i id="convenio_icon" class="material-icons prefix" @if(old('marc') == 'N') hidden @endif>add_box</i>
+                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" @if(old('marc') == 'N') hidden @endif>
+                        <label id="convenio_label" for="convenio_medico" @if(old('marc') == 'N') hidden @endif>Convênio médico:</label>
                     </div>
                 </div>
                 <div class="row">

@@ -4,6 +4,7 @@
 @endsection
 @section('title') Pessoas registradas @endsection
 @section('content')
+    <br><br>
     @if(Session::get('mensagem'))
         <div class="center-align sessao">
             <div class="chip green lighten-2">

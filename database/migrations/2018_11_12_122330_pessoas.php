@@ -25,6 +25,7 @@ class Pessoas extends Migration
             $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
+            $table->string('complemento')->nullable();
             $table->string('cep')->nullable();
             $table->string('telefone')->nullable();
             $table->string('telefone_emergencia')->nullable();

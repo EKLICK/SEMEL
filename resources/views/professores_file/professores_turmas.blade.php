@@ -6,7 +6,7 @@
     @endif
         <a href="{{route('professor_turmas', $professor->id)}}" class="breadcrumb">Turmas</a>
 @endsection
-@section('title') @if(auth()->user()->admin_professor == 1) <h4>Turmas</h4> @else <h4>Suas turmas</h4> @endif @endsection
+@section('title') @if(auth()->user()->admin_professor == 1) Turmas @else Suas turmas @endif @endsection
 @section('content')
     <br><br>
     @if(Session::get('mensagem_green'))
@@ -192,7 +192,7 @@
                                     <td><p>Desvinculado</p><i class="small material-icons" style="color: red;" >sim_card_alert</i></td>
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger btn-modal_vincular" href="#modalidturmavincular"
-                                            data-vincular="Vincular" data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
+                                            data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">lock_outline</i>Vincular
                                         </a>
                                     </td>
@@ -237,20 +237,20 @@
             <input hidden class="validate" type="text" name="professor_id" id="id_modal_vincular">
             <input hidden class="validate" type="text" name="turma_id" id="id_turma_modal_vincular">
             <div class="modal-content">
-                <h4 id="titulo_vincular"></h4>
+                <h4>Vincular</h4>
                 <h5 id="texto_id_vincular"></h5>
                 <hr>
                 <br>
                 <div class="row">
                     <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; <span id="comentario_vincular"></span>
+                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario do vinculo (opcional):
                         <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
                         <label for="textarea1"></label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action"><span id="enviar_vincular">Enviar</span>
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Vincular
                     <i class="material-icons right">send</i>
                 </button>
             </div>
