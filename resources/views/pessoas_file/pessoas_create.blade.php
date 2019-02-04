@@ -161,29 +161,27 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="convenio_icon" class="material-icons prefix" hidden>add_box</i>
-                        <input name="convenio_medico" id="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" hidden>
+                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" hidden>
                         <label id="convenio_label" for="convenio_medico" hidden>Convênio médico:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span>matricula escolar</span>
-                                    <input id="img_matricula" type="file" name="img_matricula">
-                                </div>
-                                <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_matricula">Limpar</a>
-                                <br><br><br>
-                                <div class="file-path-wrapper">
-                                    <input id="matricula" name="matricula" class="file-path validate" type="text">
-                                </div>
+                            <div class="btn">
+                                <span>matricula escolar</span>
+                                <input id="img_matricula" type="file" name="img_matricula">
+                            </div>
+                            <a id="limpar_matricula"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <br><br><br>
+                            <div class="file-path-wrapper">
+                                <input id="matricula" name="matricula" class="file-path validate" type="text">
                             </div>
                         </div>
-                        </div>
-                        <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                            <img id="matricula_image" class="materialboxed" width="250" src="">
-                        </div>
+                    </div>
+                    <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
+                        <img id="matricula_image" class="materialboxed" width="250" src="">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m3">

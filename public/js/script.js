@@ -116,7 +116,7 @@ document.getElementById('limpar_matricula').onclick = function (){
 }
 
 $("[name='marc']").click(function(){
-    change(this.value, $('#convenio_medico'), $('.convenio_label'), $('#convenio_icon'));
+    change(this.value, $('#convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
 });
 
 function change(a,b,c,d){
