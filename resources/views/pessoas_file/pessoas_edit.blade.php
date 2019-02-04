@@ -18,7 +18,7 @@
         @endforeach
     @endif
     <br>
-    <div class="container edicaocriacao">
+    <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('pessoas.update', $pessoa->id)}}" method="post" enctype="multipart/form-data">
                 @csrf

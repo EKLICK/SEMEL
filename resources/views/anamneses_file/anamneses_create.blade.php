@@ -18,7 +18,7 @@
             </div>
         @endforeach
     @endif
-    <div class="container edicao-criacao">
+    <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -145,8 +145,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m4">
-                        Possui doenças?
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">new_releases</i>Possui doenças?
                         <select multiple name="doencas[]">
                             @foreach ($doencaslist as $doenca)
                                 <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
@@ -156,11 +156,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">description</i>
                         <textarea name="observacao" id="observacao" class="materialize-textarea">{{old('observacao')}}</textarea>
                         <label for="observacao">Observação</label>
                     </div>
-                    <div class="input-field col s12 m4 right">
+                    <div class="input-field col s12 m5 right">
                         <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
                             <i class="large material-icons left">add</i>
                     </div>
