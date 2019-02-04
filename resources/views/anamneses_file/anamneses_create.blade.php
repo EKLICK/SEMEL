@@ -36,21 +36,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m4">
                         Toma algum medicamento?
                         <p>
                             <label>
-                                <input value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
+                                <input value="S" class="teste" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 'S') checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="2" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 2) checked @endif/>
+                                <input value="N" class="teste" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 'N') checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
+                    <div class="input-field col s12 m6">
+                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') == 'N' || empty(old('toma_medicacao'))) hidden @endif>description</i>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('toma_medicacao')}}" @if(old('toma_medicacao') == 'N' || empty(old('toma_medicacao'))) hidden @endif>
+                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') == 'N' || empty(old('toma_medicacao'))) hidden @endif>Qual medicamento?</label>
+                    </div>
+                </div>
                     <div class="input-field col s12 m3">
                         Possui alergia médica?
                         <p>

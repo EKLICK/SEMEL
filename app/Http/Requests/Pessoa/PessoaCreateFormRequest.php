@@ -50,15 +50,13 @@ class PessoaCreateFormRequest extends FormRequest
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
-            'peso'                  => 'sometimes|nullable|numeric|max:300|min:0',
-            'altura'                => 'sometimes|nullable|numeric|max:4|min:0',
-            'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'alergia_medicacao'     => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'cirurgia'              => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_ossea'             => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_muscular'          => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'dor_articular'         => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'toma_medicacao'        => ['required','nullable', Rule::in(['1', '2']),],
+            'alergia_medicacao'     => ['required','nullable', Rule::in(['1', '2']),],
+            'fumante'               => ['required','nullable', Rule::in(['1', '2']),],
+            'cirurgia'              => ['required','nullable', Rule::in(['1', '2']),],
+            'dor_ossea'             => ['required','nullable', Rule::in(['1', '2']),],
+            'dor_muscular'          => ['required','nullable', Rule::in(['1', '2']),],
+            'dor_articular'         => ['required','nullable', Rule::in(['1', '2']),],
             'doencas_id'            => 'sometimes|nullable|integer|exists:doencas,id',
         ];
     }
@@ -115,11 +113,13 @@ class PessoaCreateFormRequest extends FormRequest
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
 
-            'peso.max' => 'Limite de máximo peso: 300Kg',
-            'peso.min' => 'Limite de mínimo peso: 300Kg',
-
-            'altura.max' => 'Limite de máximo altura: 4 metros',
-            'altura.min' => 'Limite de mínimo altura: 4 metros',
+            'toma_medicacao.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'alergia_medicacao.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'fumante.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'cirurgia.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'dor_ossea.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'dor_muscular.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'dor_articular.required' => 'É necessário preencher todas as opções do registro de anamneses',
         ];
     }
 }

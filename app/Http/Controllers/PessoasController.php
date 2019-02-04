@@ -471,7 +471,6 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas_ativar_inativar(Request $request){
-        dd('ff');
         $dataForm = $request->all();
         $turma = Turma::find($dataForm['turma_id']);
         $aux = -1;

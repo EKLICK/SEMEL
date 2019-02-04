@@ -115,8 +115,37 @@ document.getElementById('limpar_matricula').onclick = function (){
     apagar_matricula();
 }
 
+function teste(){
+    console.log('dsfsafas');
+}
+
 $("[name='marc']").click(function(){
     change(this.value, $('#convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
+});
+
+$(document).on('click', '.teste', function(){
+    console.log('fff');
+    change(this.value, $('#string_toma_medicacao'), $('#toma_medicacao_label'), $('#toma_medicacao_icon'));
+});
+
+$("[name='alergia_medicacao']").click(function(){
+    change(this.value, $('#string_alergia_medicacao'), $('#alergia_medicacao_label'), $('#alergia_medicacao_icon'));
+});
+
+$("[name='cirurgia']").click(function(){
+    change(this.value, $('#string_cirurgia'), $('#cirurgia_label'), $('#cirurgia_icon'));
+});
+
+$("[name='dor_ossea']").click(function(){
+    change(this.value, $('#string_dor_ossea'), $('#dor_ossea_label'), $('#dor_ossea_icon'));
+});
+
+$("[name='dor_muscular']").click(function(){
+    change(this.value, $('#string_dor_muscular'), $('#dor_muscular_label'), $('#dor_muscular_icon'));
+});
+
+$("[name='dor_articular']").click(function(){
+    change(this.value, $('#string_dor_articular'), $('#dor_articular_label'), $('#dor_articular_icon'));
 });
 
 function change(a,b,c,d){
