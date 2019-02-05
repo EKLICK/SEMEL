@@ -165,13 +165,32 @@ class AnamneseController extends Controller
     {
         $dataForm = $request->all();
         $dataForm += ['ano' => date('Y')];
+        if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
+        if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] == null;}
+        if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] == null;}
+        if($dataForm['cirurgia'] == 2){$dataForm['string_cirurgia'] == null;}
+        if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] == null;}
+        if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] == null;}
+        if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] == null;}
+        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] == 'sim';}
+        $anamnese = Anamnese::create([
+            'possui_doenca' => $dataForm['possui_doenca'],
+            'toma_medicacao' => $dataForm['string_toma_medicacao'],
+            'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
+            'peso' => $dataForm['peso'],
+            'altura' => $dataForm['altura'],
+            'fumante' => $dataForm['fumante'],
+            'cirurgia' => $dataForm['string_cirurgia'],
+            'dor_muscular' => $dataForm['string_dor_muscular'],
+            'dor_articular' => $dataForm['string_dor_articular'],
+            'dor_ossea' => $dataForm['string_dor_ossea'],
+            'atestado' => $dataForm['atestado'],
+            'observacao' => $dataForm['observacao'],
+            'ano' => date('Y'),
+            'pessoas_id' => $pessoa->id,
+        ]);
         if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 1;
-            $anamnese = Anamnese::create($dataForm);
             $anamnese->doencas()->attach($dataForm['doencas']);
-        }
-        else{
-            Anamnese::create($dataForm);
         }
         Session::put('mensagem', 'Anamnese adicionada com sucesso!');
 
@@ -215,12 +234,31 @@ class AnamneseController extends Controller
     public function update(AnamneseCreateEditFormRequest $request, $id)
     {
         $dataForm = $request->all();
-        if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 1;
-        }
+        if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
+        if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
+        if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] = -1;}
+        if($dataForm['cirurgia'] == 2){$dataForm['string_cirurgia'] = -1;}
+        if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] = -1;}
+        if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
+        if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
+        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] = 'sim';}
         $anamnese = Anamnese::find($id);
         $oldanamnese = (array)$anamnese;
-        $anamnese->update($dataForm);
+        $anamnese->update([
+            'possui_doenca' => $dataForm['possui_doenca'],
+            'toma_medicacao' => $dataForm['string_toma_medicacao'],
+            'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
+            'peso' => $dataForm['peso'],
+            'altura' => $dataForm['altura'],
+            'fumante' => $dataForm['fumante'],
+            'cirurgia' => $dataForm['string_cirurgia'],
+            'dor_muscular' => $dataForm['string_dor_muscular'],
+            'dor_articular' => $dataForm['string_dor_articular'],
+            'dor_ossea' => $dataForm['string_dor_ossea'],
+            'observacao' => $dataForm['observacao'],
+            'ano' => date('Y'),
+            'pessoas_id' => $dataForm['pessoa_id'],
+        ]);
         if(isset($dataForm['doencas']))
             $anamnese->doencas()->sync($dataForm['doencas']);
         $newanamnese = (array)$anamnese;

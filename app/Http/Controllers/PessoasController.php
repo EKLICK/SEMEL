@@ -189,16 +189,9 @@ class PessoasController extends Controller
         }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
-        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
-        if(!isset($dataForm['toma_medicacao'])){$dataForm['toma_medicacao'] = null;}
-        if(!isset($dataForm['alergia_medicacao'])){$dataForm['alergia_medicacao'] = null;}
-        if(!isset($dataForm['fumante'])){$dataForm['fumante'] = null;}
-        if(!isset($dataForm['cirurgia'])){$dataForm['cirurgia'] = null;}
-        if(!isset($dataForm['dor_muscular'])){$dataForm['dor_muscular'] = null;}
-        if(!isset($dataForm['dor_articular'])){$dataForm['dor_articular'] = null;}
-        if(!isset($dataForm['dor_ossea'])){$dataForm['dor_ossea'] = null;}
         
         $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
@@ -213,7 +206,7 @@ class PessoasController extends Controller
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro_id' => $dataForm['bairro_id'],
+            'bairro' => $dataForm['bairro'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'complemento' => $dataForm['complemento'],
             'cep' => $dataForm['cep'],
@@ -230,20 +223,27 @@ class PessoasController extends Controller
             'matricula' => $dataForm['img_matricula'],
             'estado' =>$estado,
         ]);
-        if(!empty($dataForm['doencas'])){
-            $dataForm['possui_doenca'] = 1;
-        }
+
+        if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
+        if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
+        if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] = -1;}
+        if($dataForm['cirurgia'] == 2){$dataForm['string_cirurgia'] = -1;}
+        if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] = -1;}
+        if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
+        if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
+        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] = 'sim';}
+
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
-            'toma_medicacao' => $dataForm['toma_medicacao'],
-            'alergia_medicacao' => $dataForm['alergia_medicacao'],
+            'toma_medicacao' => $dataForm['string_toma_medicacao'],
+            'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
             'peso' => $dataForm['peso'],
             'altura' => $dataForm['altura'],
             'fumante' => $dataForm['fumante'],
-            'cirurgia' => $dataForm['cirurgia'],
-            'dor_muscular' => $dataForm['dor_muscular'],
-            'dor_articular' => $dataForm['dor_articular'],
-            'dor_ossea' => $dataForm['dor_ossea'],
+            'cirurgia' => $dataForm['string_cirurgia'],
+            'dor_muscular' => $dataForm['string_dor_muscular'],
+            'dor_articular' => $dataForm['string_dor_articular'],
+            'dor_ossea' => $dataForm['string_dor_ossea'],
             'atestado' => $dataForm['atestado'],
             'observacao' => $dataForm['observacao'],
             'ano' => date('Y'),
@@ -454,7 +454,6 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
         $turma = Turma::find($dataForm['turma_id']);
-        dd($turma);
         if($dataForm['inativo'] == 1){
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
         }

@@ -16,16 +16,16 @@ class Anamneses extends Migration
         Schema::create('anamneses', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('possui_doenca')->nullable();
-            $table->boolean('toma_medicacao')->nullable();
-            $table->boolean('alergia_medicacao')->nullable();
+            $table->string('toma_medicacao')->nullable();
+            $table->string('alergia_medicacao')->nullable();
             $table->float('peso')->nullable();
             $table->float('altura')->nullable();
-            $table->boolean('fumante')->nullable();
-            $table->boolean('cirurgia')->nullable();
-            $table->boolean('dor_muscular')->nullable();
-            $table->boolean('dor_ossea')->nullable();
-            $table->boolean('dor_articular')->nullable();
-            $table->boolean('atestado')->nullable();
+            $table->string('fumante')->nullable();
+            $table->string('cirurgia')->nullable();
+            $table->string('dor_muscular')->nullable();
+            $table->string('dor_ossea')->nullable();
+            $table->string('dor_articular')->nullable();
+            $table->string('atestado')->nullable();
             $table->string('observacao')->nullable();
             $table->integer('ano')->nullable();
             $table->unsignedInteger('pessoas_id')->nullable();

@@ -7,6 +7,7 @@
 @endsection
 @section('title') Criar pessoa @endsection
 @section('content')
+    <br><br>
     @if(isset($errors) && count($errors) > 0)
         @foreach($errors->all() as $error)
             <div style="margin-left: 15%; margin-top: 1%;">
@@ -113,12 +114,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="{{old('telefone')}}">
-                        <label for="icon_telephone">Telephone:</label>
+                        <label for="icon_telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">contact_phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}">
-                        <label for="icon_telephone_emergencia">Telephone emergência:</label>
+                        <label for="icon_telephone_emergencia">Telefone emergência:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -257,16 +258,21 @@
                         Toma algum medicamento?
                         <p>
                             <label>
-                                <input value="S" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 'S') checked @endif/>
+                                <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 'N') checked @endif/>
+                                <input onclick="toma_medicacao_click('N')" value="2" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') != 1) hidden @endif>description</i>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') != 1) hidden @endif>
+                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') != 1) hidden @endif>Qual medicamento?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -274,21 +280,21 @@
                         Possui alergia médica?
                         <p>
                             <label>
-                                <input value="S" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 'S') checked @endif/>
+                                <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 'N') checked @endif/>
+                                <input onclick="alergia_medicacao_click('N')" value="2" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="alergia_medicacao_icon" class="material-icons prefix" @if(old('alergia_medicacao') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>description</i>
-                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="{{old('alergia_medicacao')}}" @if(old('alergia_medicacao') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>
-                        <label id="alergia_medicacao_label" for="string_alergia_medicacao" @if(old('alergia_medicacao') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>Qual alergia médica?</label>
+                        <i id="alergia_medicacao_icon" class="material-icons prefix" @if(old('alergia_medicacao') != 1) hidden @endif>description</i>
+                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="{{old('string_alergia_medicacao')}}" @if(old('alergia_medicacao') != 1) hidden @endif>
+                        <label id="alergia_medicacao_label" for="string_alergia_medicacao" @if(old('alergia_medicacao') != 1) hidden @endif>Qual alergia médica?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -296,21 +302,21 @@
                         O usuário já fez cirurgia?
                         <p>
                             <label>
-                                <input value="S" name="cirurgia" type="radio" @if(old('cirurgia') == 'S') checked @endif/>
+                                <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(old('cirurgia') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="cirurgia" type="radio" @if(old('cirurgia') == 'N') checked @endif/>
+                                <input onclick="cirurgia_click('N')" value="2" name="cirurgia" type="radio" @if(old('cirurgia') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="cirurgia_icon" class="material-icons prefix" @if(old('cirurgia') == 'N' || empty(old('cirurgia'))) hidden @endif>description</i>
-                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="{{old('cirurgia')}}" @if(old('cirurgia') == 'N' || empty(old('cirurgia'))) hidden @endif>
-                        <label id="cirurgia_label" for="string_cirurgia" @if(old('cirurgia') == 'N' || empty(old('cirurgia'))) hidden @endif>Aonde foi a cirurgia?</label>
+                        <i id="cirurgia_icon" class="material-icons prefix" @if(old('cirurgia') != 1) hidden @endif>description</i>
+                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="{{old('string_cirurgia')}}" @if(old('cirurgia') != 1) hidden @endif>
+                        <label id="cirurgia_label" for="string_cirurgia" @if(old('cirurgia') != 1) hidden @endif>Aonde foi a cirurgia?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -318,21 +324,21 @@
                         Possui dores ósseas?
                         <p>
                             <label>
-                                <input value="S" name="dor_ossea" type="radio" @if(old('dor_ossea') == 'S') checked @endif/>
+                                <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio" @if(old('dor_ossea') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="dor_ossea" type="radio" @if(old('dor_ossea') == 'N') checked @endif/>
+                                <input onclick="dor_ossea_click('N')" value="2" name="dor_ossea" type="radio" @if(old('dor_ossea') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_ossea_icon" class="material-icons prefix" @if(old('dor_ossea') == 'N' || empty(old('dor_ossea'))) hidden @endif>description</i>
-                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="{{old('dor_ossea')}}" @if(old('dor_ossea') == 'N' || empty(old('dor_ossea'))) hidden @endif>
-                        <label id="dor_ossea_label" for="string_dor_ossea" @if(old('dor_ossea') == 'N' || empty(old('dor_ossea'))) hidden @endif>Aonde está a dor óssea?</label>
+                        <i id="dor_ossea_icon" class="material-icons prefix" @if(old('dor_ossea') != 1) hidden @endif>description</i>
+                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="{{old('string_dor_ossea')}}" @if(old('dor_ossea') != 1) hidden @endif>
+                        <label id="dor_ossea_label" for="string_dor_ossea" @if(old('dor_ossea') != 1) hidden @endif>Aonde está a dor óssea?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -340,21 +346,21 @@
                         Possui dores musculares?
                         <p>
                             <label>
-                                <input value="S" name="dor_muscular" type="radio" @if(old('dor_muscular') == 'S') checked @endif/>
+                                <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(old('dor_muscular') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="dor_muscular" type="radio" @if(old('dor_muscular') == 'N') checked @endif/>
+                                <input onclick="dor_muscular_click('N')" value="2" name="dor_muscular" type="radio" @if(old('dor_muscular') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_muscular_icon" class="material-icons prefix" @if(old('dor_muscular') == 'N' || empty(old('dor_muscular'))) hidden @endif>description</i>
-                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="{{old('dor_muscular')}}" @if(old('dor_muscular') == 'N' || empty(old('dor_muscular'))) hidden @endif>
-                        <label id="dor_muscular_label" for="string_dor_muscular" @if(old('dor_muscular') == 'N' || empty(old('dor_muscular'))) hidden @endif>Aonde está a dor muscular?</label>
+                        <i id="dor_muscular_icon" class="material-icons prefix" @if(old('dor_muscular') != 1) hidden @endif>description</i>
+                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="{{old('string_dor_muscular')}}" @if(old('dor_muscular') != 1) hidden @endif>
+                        <label id="dor_muscular_label" for="string_dor_muscular" @if(old('dor_muscular') != 1) hidden @endif>Aonde está a dor muscular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -362,21 +368,21 @@
                         Possui dores articulares?
                         <p>
                             <label>
-                                <input value="S" name="dor_articular" type="radio" @if(old('dor_articular') == 'S') checked @endif/>
+                                <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(old('dor_articular') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="dor_articular" type="radio" @if(old('dor_articular') == 'N') checked @endif/>
+                                <input onclick="dor_articular_click('N')" value="2" name="dor_articular" type="radio" @if(old('dor_articular') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_articular_icon" class="material-icons prefix" @if(old('dor_articular') == 'N' || empty(old('dor_articular'))) hidden @endif>description</i>
-                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="{{old('dor_articular')}}" @if(old('dor_articular') == 'N' || empty(old('dor_articular'))) hidden @endif>
-                        <label id="dor_articular_label" for="string_dor_articular" @if(old('dor_articular') == 'N' || empty(old('dor_articular'))) hidden @endif>Aonde está a dor articular?</label>
+                        <i id="dor_articular_icon" class="material-icons prefix" @if(old('dor_articular') != 1) hidden @endif>description</i>
+                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="{{old('string_dor_articular')}}" @if(old('dor_articular') != 1) hidden @endif>
+                        <label id="dor_articular_label" for="string_dor_articular" @if(old('dor_articular') != 1) hidden @endif>Aonde está a dor articular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -384,13 +390,13 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input value="S" name="fumante" type="radio" @if(old('fumante') == 'S') checked @endif/>
+                                <input value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="fumante" type="radio" @if(old('fumante') == 'N') checked @endif/>
+                                <input value="2" name="fumante" type="radio" @if(old('fumante') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
