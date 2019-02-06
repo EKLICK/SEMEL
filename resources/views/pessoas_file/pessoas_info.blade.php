@@ -68,35 +68,75 @@
                             </tr>
                             <tr>
                                 <td><h6><b>RG:</b></h6></td>
-                                <td><h6>{{$pessoa->rg}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->rg != null) {{$pessoa->rg}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>CPF:</b></h6></td>
-                                <td><h6>{{$pessoa->cpf}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->cpf != null) {{$pessoa->cpf}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Cidade:</b></h6></td>
-                                <td><h6>{{$pessoa->cidade}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->cidade != null) {{$pessoa->cidade}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Bairro:</b></h6></td>
-                                <td><h6>@if(isset($pessoa->bairro)) {{$pessoa->bairro->nome}} @endif</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->bairro != null) {{$pessoa->bairro}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Rua:</b></h6></td>
-                                <td><h6>{{$pessoa->rua}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->rua != null) {{$pessoa->rua}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Numero:</b></h6></td>
-                                <td><h6>{{$pessoa->numero_endereco}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->numero_endereco != null) {{$pessoa->numero_endereco}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>CEP:</b></h6></td>
-                                <td><h6>{{$pessoa->cep}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->cep != null) {{$pessoa->cep}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Telefone:</b></h6></td>
-                                <td><h6>{{$pessoa->telefone}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->telefone != null) {{$pessoa->telefone}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -104,7 +144,12 @@
                         <table>
                             <tr>
                                 <td><h6><b>Telefone de emergência:</b></h6></td>
-                                <td><h6>{{$pessoa->telefone_emergencia}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->telefone_emergencia != null) {{$pessoa->telefone_emergencia}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Sexo:</b></h5></td>
@@ -112,27 +157,60 @@
                             </tr>
                             <tr>
                                 <td><h6><b>Estado civil:</b></h6></td>
-                                <td><h6>{{$pessoa->estado_civil}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->estado_civil != null) {{$pessoa->estado_civil}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Nome do pai:</b></h6></td>
-                                <td><h6>{{$pessoa->nome_do_pai}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->nome_do_pai != null) {{$pessoa->nome_do_pai}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Nome da mãe:</b></h6></td>
-                                <td><h6>{{$pessoa->nome_da_mae}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->nome_da_mae != null) {{$pessoa->nome_da_mae}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Pessoa para emergência:</b></h6></td>
-                                <td><h6>{{$pessoa->pessoa_emergencia}}</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->pessoa_emergencia != null) {{$pessoa->pessoa_emergencia}} 
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Convenio médico:</b></h6></td>
-                                <td><h6>@if($pessoa->convenio_medico == -1) Não possui convenio médico. @else {{$pessoa->convenio_medico}} @endif</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->convenio_medico != null || $pessoa->convenio_medico == -1)
+                                            @if($pessoa->convenio_medico != null) {{$pessoa->convenio_medico}}
+                                            @else Não possui @endif
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Mora com os pais:</b></h6></td>
-                                <td><h6> @if($pessoa->mora_com_os_pais == 1) Sim @else Não @endif</h6></td>
+                                <td>
+                                    <h6>
+                                        @if($pessoa->mora_com_os_pais != null)
+                                            @if($pessoa->mora_com_os_pais == 1) Sim @else Não @endif
+                                        @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                    </h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td><h6><b>Quantidade de filhos:</b></h6></td>

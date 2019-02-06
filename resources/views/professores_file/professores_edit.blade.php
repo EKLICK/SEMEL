@@ -28,83 +28,95 @@
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="icon_prefix" type="text" class="validate" value="@if(is_null(old('nome'))) {{$professor->nome}} @else {{old('nome')}} @endif">
-                        <label for="icon_prefix">Nome:</label>
+                        <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$professor->nome}} @else {{old('nome')}} @endif">
+                        <label for="nome">Nome:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input name="nascimento" id="icon_nascimento" type="text" class="validate" value="@if(is_null(old('nascimento'))) {{$professor->nascimento}} @else {{old('nascimento')}} @endif">
-                        <label for="icon_nascimento">Nascimento:</label>
+                        <input name="nascimento" id="nascimento" type="text" class="datepicker validate" value="@if(is_null(old('nascimento'))) {{$professor->nascimento}} @else {{old('nascimento')}} @endif">
+                        <label for="nascimento">Nascimento:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">recent_actors</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" id="icon_matricula" name="matricula" type="text" class="validate" value="@if(is_null(old('matricula'))) {{$professor->matricula}} @else {{old('matricula')}} @endif">
-                        <label for="icon_matricula">Matricula:</label>
+                        <input onkeydown="javascript: fMasc(this, mNum)" id="matricula" name="matricula" type="text" class="validate" value="@if(is_null(old('matricula'))) {{$professor->matricula}} @else {{old('matricula')}} @endif">
+                        <label for="matricula">Matricula:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="icon_bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
-                        <label for="icon_bairro">Cidade:</label>
+                        <input name="cidade" id="bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
+                        <label for="bairro">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_city</i>
-                        <input name="bairro" id="icon_bairro" type="text" class="validate" value="@if(is_null(old('bairro'))) {{$professor->bairro}} @else {{old('bairro')}} @endif">
-                        <label for="icon_bairro">Bairro:</label>
+                        <input name="bairro" id="bairro" type="text" class="validate" value="@if(is_null(old('bairro'))) {{$professor->bairro}} @else {{old('bairro')}} @endif">
+                        <label for="bairro">Bairro:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="icon_rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$professor->rua}} @else {{old('rua')}} @endif">
-                        <label for="icon_rua">Rua:</label>
+                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$professor->rua}} @else {{old('rua')}} @endif">
+                        <label for="rua">Rua:</label>
                     </div>
-                    <div class="input-field col s12 m3">
-                        <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$professor->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif>
-                        <label for="icon_numero_endereco">Número:</label>
-                    </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$professor->cep}} @else {{old('cep')}} @endif">
-                        <label for="icon_cep">CEP:</label>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$professor->cep}} @else {{old('cep')}} @endif">
+                        <label for="cep">CEP:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">location_on</i>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="@if(is_null(old('numero_endereco'))) {{$professor->numero_endereco}} @else {{old('numero_endereco')}} @endif">
+                        <label for="numero_endereco">Número:</label>
+                    </div>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">location_on</i>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="complemento" id="complemento" type="number" class="validate" value="@if(is_null(old('complemento'))) {{$professor->numero_endereco}} @else {{old('complemento')}} @endif">
+                        <label for="complemento">Complemento:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="@if(is_null(old('telefone'))) {{$professor->telefone}} @else {{old('telefone')}} @endif">
-                        <label for="icon_telephone">Telephone:</label>
+                        <label for="telephone">Telephone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="icon_email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$user->email}} @else {{old('email')}} @endif">
-                        <label for="icon_email">E-mail:</label>
+                        <input name="email" id="email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$user->email}} @else {{old('email')}} @endif">
+                        <label for="email">E-mail:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="icon_cpf" type="text" class="validate" value="@if(is_null(old('cpf'))) {{$professor->cpf}} @else {{old('cpf')}} @endif">
-                        <label for="icon_cpf">CPF:</label>
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="@if(is_null(old('cpf'))) {{$professor->cpf}} @else {{old('cpf')}} @endif">
+                        <label for="cpf">CPF:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg" id="icon_RG" type="text" class="validate" value="@if(is_null(old('rg'))) {{$professor->rg}} @else {{old('rg')}} @endif">
-                        <label for="icon_RG">RG:</label>
+                        <input name="rg" id="rg" type="text" class="validate" value="@if(is_null(old('rg'))) {{$professor->rg}} @else {{old('rg')}} @endif">
+                        <label for="rg">RG:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">book</i>
-                        <input name="curso" id="icon_curso" type="text" class="validate" value="@if(is_null(old('curso'))) {{$professor->curso}} @else {{old('curso')}} @endif">
-                        <label for="icon_curso">Curso:</label>
-                    </div>
-                    <div class="input-field col s12 m5">
+                    <div class="input-field col s12 m4">
                         <i class="material-icons prefix">school</i>
-                        <input name="formacao" id="icon_formacao" type="text" class="validate" value="@if(is_null(old('formacao'))) {{$professor->formacao}} @else {{old('formacao')}} @endif">
-                        <label for="icon_formacao">Formação:</label>
+                        <input name="formacao" id="formacao" type="text" class="validate" value="@if(is_null(old('formacao'))) {{$professor->formacao}} @else {{old('formacao')}} @endif">
+                        <label for="formacao">Formação:</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <i class="material-icons prefix">book</i>
+                        <input name="curso" id="curso" type="text" class="validate" value="@if(is_null(old('curso'))) {{$professor->curso}} @else {{old('curso')}} @endif">
+                        <label for="curso">Curso:</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <i class="material-icons prefix">directions_bike</i>
+                        <input name="cref" id="cref" type="text" class="validate" value="@if(is_null(old('curso'))) {{$professor->cref}} @else {{old('cref')}} @endif">
+                        <label for="cref">CREF:</label>
                     </div>
                 </div>
                 <div class="container">
