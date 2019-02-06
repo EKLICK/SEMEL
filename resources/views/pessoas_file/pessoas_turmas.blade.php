@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas_turmas', $pessoa->id)}}" class="breadcrumb">turmas</a>
 @endsection
-@section('title') Turmas @endsection
+@section('title') Turmas <a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite <i class="material-icons right">https</i></a>@endsection
 @section('content')
     <br><br>
     @if(Session::get('mensagem_green'))
@@ -24,6 +24,15 @@
             </div>
         </div>
         {{Session::forget('mensagem_yellow')}}
+    @endif
+    @if(Session::get('mensagem_red'))
+        <div class="center-align sessao">
+            <div class="chip red lighten-2">
+                {{Session::get('mensagem_red')}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+        {{Session::forget('mensagem_red')}}
     @endif
     <div class="container z-depth-4">
         <div class="card-panel">
@@ -321,5 +330,32 @@
                 </button>
             </div>
         </form>
+    </div>
+
+    <div id="modalquantbloqueio" class="modal" style="width: 38%; height: 40%;">
+        <div class="container">
+            <div class="row">
+                <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
+                <hr>
+                <h5><b>Quantidade possivel atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
+            </div>
+            <br>
+            <div class="row">
+                <form action="{{route('define_quantidade')}}" action="GET">
+                    @csrf
+                    <input type="text" name="pessoa_id" value="{{$pessoa->id}}" hidden>
+                    <div class="input-field col s6">
+                            <i class="material-icons prefix">enhanced_encryption</i>
+                            <input name="quantidade" id="quantidade" type="number" class="validate">
+                            <label for="quantidade">Quantidade [bloqueio]: </label>
+                    </div>
+                    <div class="input-field col s4 right">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Definir
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

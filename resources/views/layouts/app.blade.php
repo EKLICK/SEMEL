@@ -7,6 +7,10 @@
         <title>SEMEL</title>
         {!! MaterializeCSS::include_full() !!}
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
     </head>
     <body>
         <header>
@@ -76,19 +80,16 @@
                 </ul>
             </div>
         </ul>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-        <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
+        <script>M.AutoInit();</script>
         <script>
             $(document).ready(function(){
-              $('ul.tabs').tabs({
-                swipeable : true,
-                responsiveThreshold : 1900,
-              });
+                $('ul.tabs').tabs({
+                    swipeable : true,
+                    responsiveThreshold : 1900,
+                });
             });
             $(document).ready(function(){
-              $('.sidenav').sidenav();
+                $('.sidenav').sidenav();
             });
         </script>
     </body>

@@ -16,7 +16,7 @@ class HistoricoTurmas extends Migration
         Schema::create('historico_turmas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('turma_id')->nullable();
-            $table->Integer('inativo')->nullable();
+            $table->integer('inativo')->nullable();
             $table->string('comentario')->nullable();
             $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
             $table->timestamps();

@@ -84,3 +84,6 @@ Route::any('/procurar/turmas','Ferramentas\FiltersController@turmas_procurar')->
 Route::any('/procurar/nucleos','Ferramentas\FiltersController@nucleos_procurar')->name('nucleos_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
 //7-audits
 Route::any('/procurar/audits','Ferramentas\FiltersController@audits_procurar')->name('audits_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Quantidade de bloqueio
+Route::get('/pessoa/quantidade','PessoasController@define_quantidade')->name('define_quantidade')->middleware('AdministracaoEProfessor', 'Authenticate');

@@ -1,5 +1,3 @@
-M.AutoInit();
-
 const Calendario_de = document.querySelector('#de_search');
 M.Datepicker.init(Calendario_de,{
     format:'dd/mm/yyyy'

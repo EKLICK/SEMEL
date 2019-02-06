@@ -26,7 +26,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>
                         <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif">
-                        <label for="icon_nome">Nome da turma:</label>
+                        <label for="icon_nome">Nome do núcleo:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros

@@ -55,10 +55,7 @@
                 </tbody>
             </table>
             {{$anamneses->links()}}
-            <br><br>
-            @if($pessoa->deleted_at == null)
-                <a href="{{Route('lista_anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
-            @endif
+            <a href="{{Route('anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
         </div>
     </div>
 @endsection

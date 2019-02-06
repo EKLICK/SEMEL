@@ -12,6 +12,7 @@ use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Http\Requests\Pessoa\PessoaEditFormRequest;
 use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Pessoa;
+use App\Quant;
 use App\Nucleo;
 use App\Doenca;
 use App\Turma;
@@ -405,10 +406,6 @@ class PessoasController extends Controller
         return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneses', 'pessoa', 'ano'));
     }
 
-    public function lista_anamnese_create($id){
-        return redirect()->Route('anamnese_create', $id);
-    }
-
     public function pessoas_info($id){
         $pessoa = Pessoa::find($id);
         $anamnese = $pessoa->anamneses->last();
@@ -430,17 +427,6 @@ class PessoasController extends Controller
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa'));
     }
 
-    public function pessoas_turmas($id){
-        $pessoa = Pessoa::find($id);
-        $turmaslist = Turma::orderBy('nome')->paginate(10);
-        $turmasall = Turma::all();
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        $nucleoslist = Nucleo::all();
-        Session::put('quant', count($turmasall).' turmas cadastradas.');
-
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
-    }
-
     public function pdfpessoas($id){
         $pessoa = Pessoa::find($id);
         if($pessoa == null){
@@ -450,9 +436,36 @@ class PessoasController extends Controller
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 
+    public function pessoas_turmas($id){
+        $pessoa = Pessoa::find($id);
+        $turmaslist = Turma::orderBy('nome')->paginate(10);
+        $turmasall = Turma::all();
+        $nucleoslist = Nucleo::all();
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $quantidade = Quant::find(1);
+        Session::put('quant', count($turmasall).' turmas cadastradas.');
+
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist','quantidade'));
+    }
+
+    public function define_quantidade(Request $request){
+        $dataForm = $request->all();
+        $quant = Quant::find(1);
+        $quant->update($dataForm);
+
+        return redirect()->route('pessoas_turmas', $dataForm['pessoa_id']);
+    }
+
     public function pessoas_turmas_vincular(Request $request){
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
+        $limite = Quant::find(1);
+        if(count($pessoa->turmas) >= $limite->quantidade){
+            Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
+
+            return redirect()->Route('pessoas_turmas', $pessoa->id);
+        }
+
         $turma = Turma::find($dataForm['turma_id']);
         if($dataForm['inativo'] == 1){
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
@@ -495,6 +508,12 @@ class PessoasController extends Controller
             ]);
         }
         else{
+            if(count($pessoa->turmas) >= $limite->quantidade){
+                Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
+    
+                return redirect()->Route('pessoas_turmas', $pessoa->id);
+            }
+            
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$turma->id]);
             $string = 'update turmas_pessoas set inativo = 1 where pessoa_id = :sujeito and turma_id = :turma';
             $texto = ' foi removido a turma ';
