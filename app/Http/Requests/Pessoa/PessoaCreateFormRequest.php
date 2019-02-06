@@ -113,13 +113,13 @@ class PessoaCreateFormRequest extends FormRequest
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
 
-            'toma_medicacao.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'alergia_medicacao.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'fumante.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'cirurgia.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'dor_ossea.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'dor_muscular.required' => 'É necessário preencher todas as opções do registro de anamneses',
-            'dor_articular.required' => 'É necessário preencher todas as opções do registro de anamneses',
+            'toma_medicacao.required' => 'É necessário responder se a pessoa toma algum medicamento',
+            'alergia_medicacao.required' => 'É necessário responder se a pessoa tem alergia á algum medicamento',
+            'fumante.required' => 'É necessário responder a pessoa fuma',
+            'cirurgia.required' => 'É necessário responder se a pessoa já fez cirurgia',
+            'dor_ossea.required' => 'É necessário responder se a pessoa possui dor óssea',
+            'dor_muscular.required' => 'É necessário responder se a pessoa possui dor muscular',
+            'dor_articular.required' => 'É necessário responder se a pessoa possui dor articular',
         ];
     }
 }
