@@ -107,4 +107,10 @@ class DoencasController extends Controller
         Session::put('mensagem', $nome.' deletada com sucesso!');
         return redirect()->Route('doencas.index');
     }
+
+    public function criar_doenca_ajax(Request $request){
+        $nome = $request->nome;
+        $descricao = $request->descricao;
+        
+    }
 }

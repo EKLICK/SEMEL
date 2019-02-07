@@ -84,7 +84,7 @@
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
-                        <a class="btn-floating right" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
+                        <a class="btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                             <select name="bairro">
@@ -427,6 +427,9 @@
                         </select>
                         <input type="text" value="2" name="possui_doenca" hidden>
                     </div>
+                    <div class="input-field col s12 m5">
+                            <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar" style="background-color: #039be5;"><i class="material-icons">note_add</i></a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
@@ -439,6 +442,35 @@
                                 <i class="large material-icons left">add</i>
                         </div>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="adicionardoenca" class="modal" style="width: 50%; height: 55%;">
+        <div class="container">
+            <br>
+            <h5>Criar Doença</h5>
+            <form id="ajax_doenca">
+                {{@csrf}}
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="input-field col s12 m10">
+                            <i class="material-icons prefix">new_releases</i>
+                            <input name ="nome_doenca" id="nome_doenca" type="text" class="validate">
+                            <label for="nome_doenca">Nome da doença:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m10">
+                            <i class="material-icons prefix">description</i>
+                            <textarea name="descricao_doenca" id="descricao_doenca" class="materialize-textarea"></textarea>
+                            <label for="descricao_doenca">Observação</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn-floating btn-large waves-effect waves-light" id="botao"><i class="material-icons">add</i></a>
                 </div>
             </form>
         </div>
