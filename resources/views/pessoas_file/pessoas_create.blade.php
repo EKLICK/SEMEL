@@ -80,17 +80,25 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="icon_bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
-                        <label for="icon_bairro">Cidade:</label>
+                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
+                        <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                        <select name="bairro_id">
-                            <option value="" selected disabled>Selecione o bairro</option>
-                            @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}">{{$bairro}}</option>
-                            @endforeach
-                        </select>
+                        <a class="btn-floating right" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
+                        <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
+                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                            <select name="bairro">
+                                <option value="" selected disabled>Selecione o bairro</option>
+                                @foreach ($bairroslist as $bairro)
+                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="div_bairro_string" @if(is_null(old('string_bairro'))) hidden @endif>
+                            <i class="material-icons prefix">location_city</i>
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}">
+                            <label for="string_bairro">Bairro:</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -120,13 +128,13 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="{{old('telefone')}}">
-                        <label for="icon_telephone">Telefone:</label>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}">
+                        <label for="telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">contact_phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}">
-                        <label for="icon_telephone_emergencia">Telefone emergência:</label>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}">
+                        <label for="telephone_emergencia">Telefone emergência:</label>
                     </div>
                 </div>
                 <div class="row">

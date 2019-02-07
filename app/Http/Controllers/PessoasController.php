@@ -193,6 +193,7 @@ class PessoasController extends Controller
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         
@@ -345,6 +346,7 @@ class PessoasController extends Controller
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         $pessoa->update([

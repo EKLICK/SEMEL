@@ -105,6 +105,7 @@ document.getElementById("img_matricula").onchange = function (){
     }
 };
 
+//EDIÇÃO E CRIAÇÃO DE ANAMNESES
 document.getElementById('limpar_3x4').onclick = function (){
     apagar_3_4();
 }
@@ -153,3 +154,16 @@ function change(a,b,c,d){
         d.show(400);
     }
 };
+
+//CHANGE BAIRRO
+function change_bairro(){
+    if($('#div_bairro_list').is(':hidden')){
+        $('#div_bairro_list').show(400);
+        $('#div_bairro_string').hide(400);
+        $('#string_bairro').val('');
+    }
+    else{
+        $('#div_bairro_list').hide(400);
+        $('#div_bairro_string').show(400);
+    }
+}

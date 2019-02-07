@@ -83,13 +83,21 @@
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                        <select name="bairro">
-                            <option value="" selected disabled>Selecione o bairro</option>
-                            @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}" @if($bairro == $pessoa->bairro) selected @endif>{{$bairro}}</option>
-                            @endforeach
-                        </select>
+                        <a class="btn-floating right" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
+                        <div id="div_bairro_list" @if($pessoa->bairro != null || !is_null(old('string_bairro'))) hidden @endif>
+                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                            <select name="bairro">
+                                <option value="" selected disabled>Selecione o bairro</option>
+                                @foreach ($bairroslist as $bairro)
+                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="div_bairro_string" @if(is_null(old('string_bairro')) && $pessoa->bairro == null) hidden @endif>
+                            <i class="material-icons prefix">location_city</i>
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="@if(is_null(old('string_bairro'))) {{$pessoa->bairro}} @else {{old('string_bairro')}} @endif">
+                            <label for="string_bairro">Bairro:</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
