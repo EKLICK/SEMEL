@@ -104,7 +104,12 @@ class ProfessorController extends Controller
      */
     public function create()
     {
-        return view ('professores_file.professores_create');
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+
+        return view ('professores_file.professores_create', compact('bairroslist'));
     }
 
     /**
@@ -153,8 +158,12 @@ class ProfessorController extends Controller
         $professor = Professor::find($id);
         $user = User::find($professor->user_id);
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
+        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
 
-        return view ('professores_file.professores_edit', compact('professor', 'user'));
+        return view ('professores_file.professores_edit', compact('professor', 'user','bairroslist'));
     }
 
     /**
