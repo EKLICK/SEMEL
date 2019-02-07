@@ -12,9 +12,10 @@ class Pessoa extends model implements Auditable
     use softDeletes;
 
     protected $fillable = [
-        'foto', 'cidade', 'nome', 'nascimento', 'cpf', 'cpf_responsavel', 'rg', 'cidade', 'bairro', 'rua','numero_endereco',
-        'complemento', 'cep', 'telefone', 'telefone_emergencia', 'nome_do_pai', 'nome_da_mae', 'pessoa_emergencia',
-        'convenio_medico', 'filhos', 'irmaos', 'sexo', 'estado_civil', 'mora_com_os_pais', 'inativo', 'matricula', 'estado',
+        'foto', 'cidade', 'nome', 'nascimento', 'cpf', 'cpf_responsavel', 'rg','rg__responsavel', 'cidade', 'bairro',
+        'rua','numero_endereco','complemento', 'cep', 'telefone', 'telefone_emergencia', 'nome_do_pai', 'nome_da_mae',
+        'pessoa_emergencia','convenio_medico', 'filhos', 'irmaos', 'sexo', 'estado_civil', 'mora_com_os_pais', 'inativo',
+        'matricula', 'estado',
     ];
 
     public function turmas(){

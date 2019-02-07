@@ -54,20 +54,27 @@
                 </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}">
                         <label for="cpf">CPF próprio:</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="{{old('cpf_responsavel')}}">
                         <label for="cpf_responsavel">CPF opcional:</label>
                     </div>
-                    <div class="input-field col s12 m4">
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
                         <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}">
                         <label for="rg">RG:</label>
+                    </div>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">assignment_ind</i>
+                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg')}}">
+                        <label for="rg_responsavel">RG opcional:</label>
                     </div>
                 </div>
                 <div class="row">

@@ -100,6 +100,7 @@ class PessoasController extends Controller
         if($nascimento < 18){
             if($listadados['img_matricula'] == null){return 0;}
             if($listadados['cpf_responsavel'] == null){return 0;}
+            if($listadados['rg_responsavel'] == null){return 0;}
         }
         return 1;
     }
@@ -178,6 +179,7 @@ class PessoasController extends Controller
         if($nascimento > 18){
             $dataForm['img_matricula'] = null;
             $dataForm['cpf_responsavel'] = null;
+            $dataForm['rg_responsavel'] = null;
         }
         else{
             if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
@@ -203,6 +205,7 @@ class PessoasController extends Controller
             'nascimento' => $dataForm['nascimento'],
             'sexo' => $dataForm['sexo'],
             'rg' => $dataForm['rg'],
+            'rg_responsavel' => $dataForm['rg_responsavel'],
             'cpf' => $dataForm['cpf'],
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
@@ -285,7 +288,7 @@ class PessoasController extends Controller
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
-
+        
         return view ('pessoas_file.pessoas_edit', compact('doencaslist','bairroslist','pessoa'));
     }
 
@@ -319,6 +322,7 @@ class PessoasController extends Controller
         if($nascimento > 18){
             $dataForm['img_matricula'] = null;
             $dataForm['cpf_responsavel'] = null;
+            $dataForm['rg_responsavel'] = null;
         }
         else{
             if(isset($dataForm['img_matricula'])){
@@ -340,7 +344,7 @@ class PessoasController extends Controller
         $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
-        if(!isset($dataForm['bairro_id'])){$dataForm['bairro_id'] = null;}
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
         $pessoa->update([
@@ -349,11 +353,12 @@ class PessoasController extends Controller
             'nascimento' => $dataForm['nascimento'],
             'sexo' => $dataForm['sexo'],
             'rg' => $dataForm['rg'],
+            'rg_responsavel' => $dataForm['rg_responsavel'],
             'cpf' => $dataForm['cpf'],
             'cpf_responsavel' => $dataForm['cpf_responsavel'],
             'cidade' => $dataForm['cidade'],
             'rua' => $dataForm['rua'],
-            'bairro_id' => $dataForm['bairro_id'],
+            'bairro' => $dataForm['bairro'],
             'numero_endereco' => $dataForm['numero_endereco'],
             'complemento' => $dataForm['complemento'],
             'cep' => $dataForm['cep'],

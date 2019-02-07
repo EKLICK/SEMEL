@@ -71,15 +71,15 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="complemento" id="complemento" type="number" class="validate" value="{{old('complemento')}}">
-                        <label for="complemento">Complemento:</label>
+                        <input name="complemento" id="complemento" type="number" class="validate" value="{{old('complemento')}}">
+                        <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}">
-                        <label for="telephone">Telephone:</label>
+                        <label for="telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>

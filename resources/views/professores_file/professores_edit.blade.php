@@ -75,7 +75,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="complemento" id="complemento" type="number" class="validate" value="@if(is_null(old('complemento'))) {{$professor->numero_endereco}} @else {{old('complemento')}} @endif">
-                        <label for="complemento">Complemento:</label>
+                        <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">

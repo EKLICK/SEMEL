@@ -53,52 +53,59 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="@if(is_null(old('cpf'))) {{$pessoa->cpf}} @else {{old('cpf')}} @endif">
                         <label for="cpf">CPF próprio:</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="@if(is_null(old('cpf_responsavel'))) {{$pessoa->cpf_responsavel}} @else {{old('cpf_responsavel')}} @endif">
                         <label for="cpf_responsavel">CPF opcional:</label>
                     </div>
-                    <div class="input-field col s12 m4">
-                            <i class="material-icons prefix">assignment_ind</i>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">assignment_ind</i>
                         <input name="rg" id="rg" type="text" class="validate" value="@if(is_null(old('rg'))) {{$pessoa->rg}} @else {{old('rg')}} @endif">
                         <label for="rg">RG:</label>
+                    </div>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">assignment_ind</i>
+                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="@if(is_null(old('rg_responsavel'))) {{$pessoa->rg_responsavel}} @else {{old('rg_responsavel')}} @endif">
+                        <label for="rg_responsavel">RG opcional:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="icon_bairro" type="text" class="validate" value="@if(is_null(old('cidade'))) {{$pessoa->cidade}} @else {{old('cidade')}} @endif">
-                        <label for="icon_bairro">Cidade:</label>
+                        <input name="cidade" id="cidade" type="text" class="validate" value="@if(is_null(old('cidade'))) {{$pessoa->cidade}} @else {{old('cidade')}} @endif">
+                        <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                         <select name="bairro">
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}" @if($bairro == $pessoa->bairro) selected @endif>{{$pessoa->bairro}}</option>
+                                <option value="{{$bairro}}" @if($bairro == $pessoa->bairro) selected @endif>{{$bairro}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="rua" type="text" class="validate"  value="@if(is_null(old('rua'))) {{$pessoa->rua}} @else {{old('rua')}} @endif">
                         <label for="rua">Rua:</label>
                     </div>
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$pessoa->cep}} @else {{old('cep')}} @endif">
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m3">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$pessoa->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif>
                         <label for="numero_endereco">Número:</label>
@@ -113,12 +120,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate" value="@if(is_null(old('telefone'))) {{$pessoa->telefone}} @else {{old('telefone')}} @endif">
-                        <label for="icon_telephone">Telephone:</label>
+                        <label for="icon_telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">contact_phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="icon_telephone" type="tel" class="validate" value="@if(is_null(old('telefone_emergencia'))) {{$pessoa->telefone_emergencia}} @else {{old('telefone_emergencia')}} @endif">
-                        <label for="icon_telephone">Telephone de emergência:</label>
+                        <label for="icon_telephone">Telefone de emergência:</label>
                     </div>
                 </div>
                 <div class="row">

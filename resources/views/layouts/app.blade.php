@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-        <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
     </head>
     <body>
         <header>
@@ -81,6 +79,8 @@
             </div>
         </ul>
         <script>M.AutoInit();</script>
+        <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script>
             $(document).ready(function(){
                 $('ul.tabs').tabs({

@@ -48,14 +48,16 @@ class filtersController extends Controller
             if(!empty($dataForm['rg'])){
                 $filtro = $dataForm['rg'];
                 $query->where('rg', 'like', $filtro."%");
+                $query->where('rg_responsavel', 'like', $filtro.'%');
             }
             if(!empty($dataForm['cpf'])){
                 $filtro = $dataForm['cpf'];
                 $query->where('cpf', 'like', $filtro."%");
+                $query->where('cpf_responsavel', 'like', $filtro.'%');
             }
-            if(!empty($dataForm['bairro_id'])){
-                $filtro = $dataForm['bairro_id'];
-                $query->where('bairro_id', '=', $filtro);
+            if(!empty($dataForm['bairro'])){
+                $filtro = $dataForm['bairro'];
+                $query->where('bairro', '=', $filtro);
             }
             if(!empty($dataForm['rua'])){
                 $filtro = $dataForm['rua'];
