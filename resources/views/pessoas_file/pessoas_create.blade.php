@@ -420,7 +420,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         Possui doenças?
-                        <select multiple name="doencas[]">
+                        <select multiple name="doencas[]" id="lista_de_pessoas">
                             @foreach ($doencaslist as $doenca)
                                 <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                             @endforeach
@@ -452,25 +452,25 @@
             <br>
             <h5>Criar Doença</h5>
             <form id="ajax_doenca">
-                {{@csrf}}
+                @csrf
                 <div class="modal-content">
                     <div class="row">
                         <div class="input-field col s12 m10">
                             <i class="material-icons prefix">new_releases</i>
-                            <input name ="nome_doenca" id="nome_doenca" type="text" class="validate">
+                            <input id="nome_doenca" type="text" class="validate">
                             <label for="nome_doenca">Nome da doença:</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m10">
                             <i class="material-icons prefix">description</i>
-                            <textarea name="descricao_doenca" id="descricao_doenca" class="materialize-textarea"></textarea>
+                            <textarea id="descricao_doenca" class="materialize-textarea"></textarea>
                             <label for="descricao_doenca">Observação</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn-floating btn-large waves-effect waves-light" id="botao"><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn-large" id="botao"><i class="material-icons">add</i></a>
                 </div>
             </form>
         </div>

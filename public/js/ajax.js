@@ -2,16 +2,21 @@ $(document).ready(function(){
     $('#botao').click(function(){
         var nome = $('#nome_doenca').val();
         var descricao = $('#descricao_doenca').val();
-        var token = document.getElementsByName('_token');
-        console.log(token);
-
         $.ajax({
-            type: "post",
-            data: "&nome=" + nome + "&descricao=" + descricao + "$_token=" + token,
-            url: "/pessoas/ajax/doenca",
-            success: function(data) {
-                console.log(data);
+            type: "get",
+            data: "&nome=" + nome + "&descricao=" + descricao,
+            url: '/ajax/doenca',
+        }).done(function (data){
+            if(data == 1){
+                M.toast({html: 'É necessario preencher todos os campos para cadastrar uma pessoa'})
             }
-        });
+            else{
+                $('#nome_doenca').val("");
+                $('#descricao_doenca').val("");
+                $('#lista_de_pessoas').append('<option value="'+ data.id +'">'+ data.nome +'</option>');
+                $('select').formSelect();
+                M.toast({html: 'Doenca cadastrada com sucesso!'})
+            }
+        })
     });
 });

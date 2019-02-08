@@ -109,8 +109,13 @@ class DoencasController extends Controller
     }
 
     public function criar_doenca_ajax(Request $request){
-        $nome = $request->nome;
-        $descricao = $request->descricao;
-        
+        $dataForm = $request->all();
+        if(is_null($dataForm['nome']) || is_null($dataForm['descricao'])){
+            return response()->json(1);
+        }
+        else{
+            $listadoencas = Doenca::create($dataForm);
+            return response()->json($listadoencas);
+        }
     }
 }
