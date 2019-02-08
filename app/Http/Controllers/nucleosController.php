@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Nucleo;
 use App\Turma;
 use App\HistoricoN;
+use App\Professor;
 use Illuminate\Support\Facades\Session;
 
 class NucleosController extends Controller
@@ -154,6 +155,10 @@ class NucleosController extends Controller
                                                                 id = '.$id.') and inativo = 1) GROUP BY id')));
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
+        if(auth()->user()->admin_professor == 0){
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+            return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','professor'));
+        }
         return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais'));
     }
 

@@ -20,12 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Controle de Professores
+Route::get('/professors_info/{id}','ProfessorController@professor_info')->name('professor_info')->middleware('Authenticate');
 Route::get('/professor_turmas/{id}','ProfessorController@professor_turmas')->name('professor_turmas')->middleware('Authenticate');
 //Controle do professor
 Route::get('/professor_meus_alunos/{idprofessor}/{idturma}','ProfessorController@professor_meus_alunos')->name('professor_meus_alunos')->middleware('Authenticate');
 //Controle do administrador
 Route::resource('professor','ProfessorController')->middleware('AdministracaoEProfessor');
-Route::get('/professors_info/{id}','ProfessorController@professor_info')->name('professor_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::post('/professor_turmas/vincular','ProfessorController@professores_turmas_vincular')->name('professores_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::post('/professores_turmas/ativar_inativar','ProfessorController@professores_turmas_ativar_inativar')->name('professores_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 

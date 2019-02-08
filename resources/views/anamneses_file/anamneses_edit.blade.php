@@ -190,7 +190,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         Possui doenças?
-                        <select multiple name="doencas[]">
+                        <select multiple name="doencas[]" id="lista_de_pessoas">
                             @foreach ($doencaslist as $doenca)
                                 <option value="{{$doenca->id}}" @foreach ($anamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach>{{$doenca->nome}}</option>
                             @endforeach
@@ -208,6 +208,36 @@
                         <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
                             <i class="large material-icons left">add</i>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+            
+    <div id="adicionardoenca" class="modal" style="width: 50%; height: 55%;">
+        <div class="container">
+            <br>
+            <h5>Criar Doença</h5>
+            <form id="ajax_doenca">
+                @csrf
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="input-field col s12 m10">
+                            <i class="material-icons prefix">new_releases</i>
+                            <input id="nome_doenca" type="text" class="validate">
+                            <label for="nome_doenca">Nome da doença:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m10">
+                            <i class="material-icons prefix">description</i>
+                            <textarea id="descricao_doenca" class="materialize-textarea"></textarea>
+                            <label for="descricao_doenca">Observação</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn-floating btn-large" id="botao"><i class="material-icons">add</i></a>
                 </div>
             </form>
         </div>

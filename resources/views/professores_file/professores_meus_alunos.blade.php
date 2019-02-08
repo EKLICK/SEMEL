@@ -2,7 +2,7 @@
 
 @section('breadcrumbs')
     <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Turmas</a>
-    <a href="{{Route('professor.edit', $professorid)}}" class="breadcrumb">Alunos</a>
+    <a href="{{Route('professor.edit', $professor->id)}}" class="breadcrumb">Alunos</a>
 @endsection
 @section('title') Alunos de: {{$turma->nome}} @endsection
 @section('content')
@@ -34,7 +34,7 @@
                     <div class="collapsible-body">
                         <form action="{{route('professor_procurar_aluno')}}" method="GET">
                             @csrf
-                            <input type="text" name="professorid" value="{{$professorid}}" hidden>
+                            <input type="text" name="professorid" value="{{$professor->id}}" hidden>
                             <input type="text" name="idturma" value="{{$turma->id}}" hidden>
                             <div class="row">
                                 <div class="input-field col s5">
@@ -90,8 +90,9 @@
                 <thead>
                     <tr>
                         <th>Nome do Alunos</th>
-                        <th>Data de nascimento</th>
+                        <th>Nascimento</th>
                         <th>Telefone</th>
+                        <th>Telefone de emergência</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,6 +101,7 @@
                             <td>{{$aluno->nome}}</td>
                             <td>{{$aluno->nascimento}}</td>
                             <td>{{$aluno->telefone}}</td>
+                            <td>{{$aluno->telefone_emergencia}}</td>
                         </tr>
                     @endforeach 
                 </tbody>

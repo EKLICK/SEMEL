@@ -48,7 +48,8 @@
                                 @include('layouts.menu')
                             @else
                                 <div class="collection">
-                                    <b><a class="collection-item" href="{{route('professor_turmas', auth()->user()->admin_professor)}}">Meus Alunos</a></b>
+                                    <b><a class="collection-item" href="{{Route('professor_turmas', auth()->user()->admin_professor)}}">Minhas turmas</a></b>
+                                    <b><a class="collection-item" href="{{Route('professor_info', $professor->id)}}">Suas informações</a></b>
                                 </div>
                             @endif
                         </ul>

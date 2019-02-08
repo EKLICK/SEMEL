@@ -134,8 +134,6 @@ class filtersController extends Controller
 
     public function professor_procurar_aluno(AlunoProcurarFormRequest $request){
         $dataForm = $request->all();
-        $professorid = $dataForm['professorid'];
-        $turma = Turma::find($dataForm['idturma']);
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             if(!empty($dataForm['nome'])){
                 $filtro = $dataForm['nome'];
@@ -161,19 +159,19 @@ class filtersController extends Controller
                 $filtro = $dataForm['sexo'];
                 $query->where('sexo', '=', $filtro);
             }
-            $pessoasall = Pessoa::all();
-            $turma = Turma::find($dataForm['idturma']);
-            $pessoasids = [];
-            $pessoas_filtradas = $this->filtrar_dados($pessoasall, $turma->pessoas);
-            foreach($pessoas_filtradas as $pessoa_filtrada){
-                array_push($pessoasids, $pessoa_filtrada->id);
-            }
-            $query->wherein('id', $pessoasids);
+            $ids = [];
+            $pessoaslistA = DB::select(DB::raw('SELECT id FROM pessoas WHERE
+                                                id in(SELECT pessoa_id FROM turmas_pessoas WHERE
+                                                    turma_id = :turma)'), ['turma'=>$dataForm['idturma']]);
+            foreach($pessoaslistA as $id){array_push($ids, $id->id);}
+            $query->wherein('id', $ids);
         })->orderBy('nome');
+        $turma = Turma::find($dataForm['idturma']);
+        $professor = Professor::find($dataForm['professorid']);
         Session::put('quant', count($pessoaslist->get()).' pessoas cadastradas.');
         $pessoaslist = $pessoaslist->paginate(10);
 
-        return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professorid'));
+        return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professor'));
     }
 
     public function turmas_procurar(TurmaProcurarFormRequest $request){
@@ -225,10 +223,10 @@ class filtersController extends Controller
             if(!empty($dataForm['pagina'])){
                 $string = '';
                 if($dataForm['id'] > 0){
-                    $string = 'select id from turmas where id in(select turma_id from turmas_professores where professor_id = :sujeito';
+                    $string = 'SELECT id from turmas WHERE id in(SELECT turma_id FROM turmas_professores WHERE professor_id = :sujeito';
                 }
                 else{
-                    $string = 'select id from turmas where id in(select turma_id from turmas_pessoas where pessoa_id = :sujeito';
+                    $string = 'SELECT id from turmas WHERE id in(SELECT turma_id FROM turmas_pessoas WHERE pessoa_id = :sujeito';
                     $dataForm['id'] = -$dataForm['id'];
                 }
                 $ids = [];

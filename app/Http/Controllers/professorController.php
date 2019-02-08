@@ -268,9 +268,8 @@ class ProfessorController extends Controller
         $pessoaslist = $this->gerar_paginate($pessoaslist);
         Session::put('quant', count($pessoaslist).' pessoas cadastradas.');
         $professor = Professor::find($idprofessor);
-        $professorid = $professor->id;
 
-        return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professorid'));
+        return view ('professores_file.professores_meus_alunos', compact('pessoaslist', 'turma', 'professor'));
     }
 
     public function professores_turmas_vincular(Request $request){
