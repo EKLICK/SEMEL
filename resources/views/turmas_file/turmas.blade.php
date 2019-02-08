@@ -43,13 +43,12 @@
                             @csrf
                             <input type="text" name="id" value="x" hidden>
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">group</i>
                                     <input name="nome" id="icon_nome" type="text" class="validate">
                                     <label for="icon_nome">Nome da turma:</label>
                                 </div>
-                                <div class="input-field col s3"></div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s10 xl5 right">
                                     <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
                                     <div style="margin-left: 30%;">
                                         <p>
@@ -68,24 +67,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s2">
+                                <div class="input-field col s10 xl2">
                                     <i class="material-icons prefix">assignment</i>
                                     <input id="limite_search" type="number" class="validate" name="limite">
                                     <label for="limite_search">Limite:</label>
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s10 xl3">
                                     <i class="material-icons prefix">hourglass_full</i>
                                     <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
                                     <label for="icon_horario_inicial">Horário Inicial:</label>
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s10 xl3">
                                     <i class="material-icons prefix">hourglass_empty</i>
                                     <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
                                     <label for="icon_horario_final">Horário Final:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s10 xl4">
                                     <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
                                     <select name="data_semanal[]" multiple>
                                         @foreach ($dias_semana as $dia)
@@ -93,7 +92,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s10 xl4">
                                     <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
                                     <select name="nucleo_id">
                                         <option value="" selected disabled>Selecione o núcleo</option>

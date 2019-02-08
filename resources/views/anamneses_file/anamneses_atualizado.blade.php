@@ -43,28 +43,28 @@
                             @csrf
                             <input type="number" name="escolha" value="1" hidden>
                             <div class="row">
-                                <div class="input-field col s1"><i class="material-icons prefix">local_parking</i></div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s3 xl1"><i class="material-icons prefix">local_parking</i></div>
+                                <div class="input-field col s4 xl2">
                                     <input id="de_peso_search" type="number" step="0.01" class="validate" name="de_peso">
                                     <label for="de_peso_search">De:</label>
                                 </div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s4 xl2">
                                     <input id="ate_peso_search" type="number" step="0.01" class="validate" name="ate_peso">
                                     <label for="ate_peso_search">Até:</label>
                                 </div>
-                                <div class="input-field col s1"><i class="material-icons prefix">format_color_text</i></div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s3 xl1"><i class="material-icons prefix">format_color_text</i></div>
+                                <div class="input-field col s4 xl2">
                                     <input id="de_altura_search" type="number" step="0.01" class="validate" name="de_altura">
                                     <label for="de_altura_search">De:</label>
                                 </div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s4 xl2">
                                     <input id="ate_altura_search" type="number" step="0.01" class="validate" name="ate_altura">
                                     <label for="ate_altura_search">Até:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s2"><label>Toma medicamento:</label></div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s4 xl2"><label>Toma medicamento:</label></div>
+                                <div class="input-field col s6 xl2">
                                     <p>
                                         <label>
                                             <input value="1" name="toma_medicacao" type="radio"/>
@@ -78,8 +78,8 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s2"><label>Já fez cirurgia:</label></div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s4 xl2"><label>Já fez cirurgia:</label></div>
+                                <div class="input-field col s6 xl2">
                                     <p>
                                         <label>
                                             <input value="1" name="cirurgia" type="radio"/>
@@ -93,8 +93,8 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s2"><label>Fumante:</label></div>
-                                <div class="input-field col s1">
+                                <div class="input-field col s4 xl2"><label>Fumante:</label></div>
+                                <div class="input-field col s6 xl1">
                                     <p>
                                         <label>
                                             <input value="1" name="fumante" type="radio"/>
@@ -109,7 +109,7 @@
                                     </p>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col s3">
+                                    <div class="input-field col s10 m8 l5 l3">
                                         Possui doenças?
                                         <select multiple name="doencas[]">
                                             @foreach ($doencaslist as $doenca)

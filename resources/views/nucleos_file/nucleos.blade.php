@@ -41,13 +41,12 @@
                             <form action="{{route('nucleos_procurar')}}" method="GET">
                                 @csrf
                                 <div class="row">
-                                    <div class="input-field col s4">
+                                    <div class="input-field col s10 xl5">
                                         <i class="material-icons prefix">filter_tilt_shift</i>
                                         <input name="nome" id="icon_nome" type="text" class="validate">
                                         <label for="icon_nome">Nome da turma:</label>
                                     </div>
-                                    <div class="input-field col s3"></div>
-                                    <div class="input-field col s4">
+                                    <div class="input-field col s10 xl5 right">
                                         <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
                                         <div style="margin-left: 30%;">
                                             <p>
@@ -66,30 +65,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="row">
-                                        <div class="input-field col s4">
-                                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                                            <select name="bairro_id">
-                                                <option value="" selected disabled>Selecione o núcleo</option>
-                                                @foreach ($bairroslist as $bairro)
-                                                    <option value="{{$bairro}}">{{$bairro}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="input-field col s3">
-                                            <i class="material-icons prefix">confirmation_number</i>
-                                            <input name="rua" id="icon_rua" type="text" class="validate">
-                                            <label for="icon_rua">Rua:</label>
-                                        </div>
+                                    <div class="input-field col s10 xl4">
+                                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                                        <select name="bairro_id">
+                                            <option value="" selected disabled>Selecione o núcleo</option>
+                                            @foreach ($bairroslist as $bairro)
+                                                <option value="{{$bairro}}">{{$bairro}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s10 xl3">
+                                        <i class="material-icons prefix">confirmation_number</i>
+                                        <input name="rua" id="icon_rua" type="text" class="validate">
+                                        <label for="icon_rua">Rua:</label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col s4">
+                                    <div class="input-field col s10 xl4">
                                         <i class="material-icons prefix">location_on</i>
                                         <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
                                         <label for="icon_numero_endereco">Numero de endereço:</label>
                                     </div>
-                                    <div class="input-field col s3">
+                                    <div class="input-field col s10 xl3">
                                         <i class="material-icons prefix">location_city</i>
                                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
                                         <label for="icon_cep">CEP:</label>
