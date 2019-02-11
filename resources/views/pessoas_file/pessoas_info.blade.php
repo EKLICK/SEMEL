@@ -252,11 +252,16 @@
                         </div>
                     </div>
                     <br><br>
+                    <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistroanamneses">Lista de anamneses para a pessoa</a>
+                    &emsp;&emsp;&emsp;&emsp;
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Crinar nova anamnese para {{$pessoa->nome}}" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add</i></a>
+                    <br><br>
                     <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistroturmasnucleo">Lista de núcleos e turma da pessoa</a>
                 </div>
             </div>
         </div>
     </div>
+
     <div id="modalregistroturmasnucleo" class="modal">
         <div class="container">
             <div class="row">
@@ -329,5 +334,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="modalregistroanamneses" class="modal">
+
     </div>
 @endsection

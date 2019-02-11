@@ -86,7 +86,7 @@ class PessoasController extends Controller
         if($nascimento >= 18){
             if($listadados['cpf'] == null){return 2;}
         }
-        if($listadados['bairro_id'] == null){return 2;}
+        if($listadados['bairro'] == null){return 2;}
         if($listadados['rua'] == null){return 2;}
         if($listadados['numero_endereco'] == null){return 2;}
         if($listadados['complemento'] == null){return 2;}
@@ -256,7 +256,7 @@ class PessoasController extends Controller
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
 
-        return redirect()->Route('pessoas.index');
+        return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
     /**
@@ -338,13 +338,13 @@ class PessoasController extends Controller
         if($dataForm['marc'] == 'N'){
             $dataForm['convenio_medico'] = -1;
         }
-        $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
         if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
+        $estado = $this->checar_estado($dataForm, $nascimento);
         $pessoa->update([
             'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],

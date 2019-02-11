@@ -59,7 +59,7 @@ class NucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo =  Nucleo::create($dataForm);
-        Session::put('mensagem_green', $nucleo->nome.' adicionado com sucesso!');
+        Session::put('mensagem', $nucleo->nome.' adicionado com sucesso!');
         return redirect()->Route('nucleos.index');
     }
 
@@ -106,7 +106,10 @@ class NucleosController extends Controller
         $nucleo->update($dataForm);
         $newnucleo = (array)$nucleo;
         if($newnucleo != $oldnucleo){
-            Session::put('mensagem_green', $nucleo->nome.' editado com sucesso!');
+            Session::put('mensagem', $nucleo->nome.' editado com sucesso!');
+        }
+        else{
+            dd($newnucleo, $oldnucleo);
         }
         
         return redirect()->Route('nucleos.index'); 

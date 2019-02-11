@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São leopoldo" @endif>
+                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif>
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -183,9 +183,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="convenio_icon" class="material-icons prefix" @if(old('marc') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>add_box</i>
-                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" @if(old('marc') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>
-                        <label id="convenio_label" for="convenio_medico" @if(old('marc') == 'N' || empty(old('alergia_medicacao'))) hidden @endif>Convênio médico:</label>
+                        <i id="convenio_icon" class="material-icons prefix" @if(old('marc') != 'S' || empty(old('alergia_medicacao'))) hidden @endif>add_box</i>
+                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" @if(old('marc') != 'S') hidden @endif>
+                        <label id="convenio_label" for="convenio_medico" @if(old('marc') != 'S' || empty(old('alergia_medicacao'))) hidden @endif>Convênio médico:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -285,9 +285,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') != 1) hidden @endif>description</i>
-                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') != 1) hidden @endif>
-                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') != 1) hidden @endif>Qual medicamento?</label>
+                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') == 1) hidden @endif>description</i>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') == 1) hidden @endif>
+                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') == 1) hidden @endif>Qual medicamento?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -331,7 +331,7 @@
                     <div class="input-field col s12 m6">
                         <i id="cirurgia_icon" class="material-icons prefix" @if(old('cirurgia') != 1) hidden @endif>description</i>
                         <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="{{old('string_cirurgia')}}" @if(old('cirurgia') != 1) hidden @endif>
-                        <label id="cirurgia_label" for="string_cirurgia" @if(old('cirurgia') != 1) hidden @endif>Aonde foi a cirurgia?</label>
+                        <label id="cirurgia_label" for="string_cirurgia" @if(old('cirurgia') != 1) hidden @endif>Em que região foi a cirurgia?</label>
                     </div>
                 </div>
                 <div class="row">
