@@ -136,7 +136,6 @@
                             @endif
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Turmas de {{$nucleo->nome}}" href="{{route('turmas_cadastradas', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">people</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
                                 <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
                             </td>
@@ -149,7 +148,10 @@
             @else
                 {{$nucleoslist->links()}}
             @endif
-            <a class="tooltipped" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            <br>
+            <div class="container">
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add</i></a>
+            </div>
         </div>
     </div>
 

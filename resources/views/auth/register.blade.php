@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 m3">
-                        <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
+                    <div class="container">
+                        <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
                             <i class="large material-icons left">add</i>
                     </div>
                 </div>

@@ -125,7 +125,10 @@
             @else
                 {{$professoreslist->links()}}
             @endif
-            <a class="tooltipped" data-position="top" data-tooltip="Adicionar professor" href="{{Route('professor.create')}}"><i class="medium material-icons" style="color: #039be5;">add_circle_outline</i></a>
+            <br>
+            <div class="container">
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{Route('professor.create')}}"><i class="material-icons">add</i></a>
+            </div>
         </div>
     </div>
 @endsection

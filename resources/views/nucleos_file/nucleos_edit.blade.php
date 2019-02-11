@@ -63,7 +63,7 @@
                     </div>
                     <div class="container">
                         <div class="input-field col s12 m3 right">
-                            <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
+                            <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
                                 <i class="large material-icons left">add</i>
                         </div>
                     </div>
