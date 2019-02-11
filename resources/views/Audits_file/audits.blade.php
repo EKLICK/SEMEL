@@ -22,7 +22,7 @@
                         <form action="{{route('audits_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s11 m5">
                                     Evento
                                     <select name="eventos[]">
                                         <option value="" selected disabled>Selecione o evento</option>
@@ -31,8 +31,7 @@
                                         @endfor
                                     </select>
                                 </div>
-                                <div class="input-field col s2"></div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s11 m5">
                                     Tabela
                                     <select name="tabelas[]">
                                         <option value="" selected disabled>Selecione a tabela</option>

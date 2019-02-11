@@ -43,45 +43,45 @@
                         <form action="{{route('professor_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field col s11 xl6">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input id="nome_search" type="text" class="validate" name="nome">
                                     <label for="nome_search">Nome:</label>
                                 </div>
-                                <div class="input-field col s1"><i class="material-icons prefix">date_range</i></div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s3 xl1"><i class="material-icons prefix">date_range</i></div>
+                                <div class="input-field col s4 xl2">
                                     <input id="de_search" type="text" class="datepicker validate" name="de">
                                     <label for="de_search">De:</label>
                                 </div>
-                                <div class="input-field col s2">
+                                <div class="input-field col s4 xl2">
                                     <input id="ate_search" type="text" class="datepicker validate" name="ate">
                                     <label for="ate_search">Até:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s3">
-                                    <i class="material-icons prefix">email</i>
-                                    <input id="email_search" type="text" class="validate" name="email">
-                                    <label for="email_search">E-mail:</label>
-                                </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s11 xl3">
                                     <i class="material-icons prefix">recent_actors</i>
                                     <input id="matricula_search" type="text" class="validate" name="matricula">
                                     <label for="matricula_search">matricula:</label>
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s11 xl4">
                                     <i class="material-icons prefix">phone</i>
                                     <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate">
                                     <label for="icon_telephone">Telephone:</label>
                                 </div>
+                                <div class="input-field col s11 xl4">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="email_search" type="text" class="validate" name="email">
+                                    <label for="email_search">E-mail:</label>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s11 xl6">
                                     <i class="material-icons prefix">location_city</i>
                                     <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
                                     <label for="bairro_search">Bairro</label>
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">confirmation_number</i>
                                     <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>

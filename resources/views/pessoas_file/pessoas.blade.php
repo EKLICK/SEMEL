@@ -42,53 +42,49 @@
                         <form action="{{route('pessoas_procurar')}}" method="GET">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s11 m5">
+                                <div class="input-field col s11 m11 xl6">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input placeholder="Nome da pessoa" id="nome_search" type="text" class="validate" name="nome">
                                 </div>
-                                <div class="input-field col s2 m2"><i class="material-icons prefix">date_range</i></div>
-                                <div class="input-field col s5 m4">
+                                <div class="input-field col s3 m3 xl1"><i class="material-icons prefix">date_range</i></div>
+                                <div class="input-field col s4 m4 xl2">
                                     <input id="de_search" type="text" class="datepicker validate" name="de">
                                     <label for="de_search">De:</label>
                                 </div>
-                                <div class="input-field col s5 m4">
+                                <div class="input-field col s4 m4 xl2">
                                     <input id="ate_search" type="text" class="datepicker validate" name="ate">
                                     <label for="ate_search">Até:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s11 m3">
+                                <div class="input-field col s11 m11 xl3">
                                     <i class="material-icons prefix">assignment_ind</i>
                                     <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
                                 </div>
-                                <div class="input-field col s11 m3">
+                                <div class="input-field col s11 m11 xl4">
                                     <i class="material-icons prefix">credit_card</i>
                                     <input onkeydown="javascript: fMasc(this, mCPF)" placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
                                 </div>
-                                <div class="input-field col s11 m4">
+                                <div class="input-field col s11 m11 xl4">
                                     <i class="material-icons prefix">phone</i>
                                     <input onkeydown="javascript: fMasc(this, mTel)" placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
                                     <label for="telefone_search">Telefone</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s11 m4">
+                                <div class="input-field col s11 m11 xl5">
                                     <i class="material-icons prefix">confirmation_number</i>
                                     <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>
                                 </div>
-                                <div class="input-field col s11 m4">
-                                    <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                                    <select name="bairro_id">
-                                        <option value="{{null}}" selected disabled>Selecione o núcleo</option>
-                                        @foreach ($bairroslist as $bairro)
-                                            <option value="{{$bairro}}">{{$bairro}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="input-field col s11 xl4">
+                                    <i class="material-icons prefix">location_city</i>
+                                    <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
+                                    <label for="bairro_search">Bairro</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s2 m1"><label>Sexo:</label></div>
+                                <div class="input-field col s2 m2 l1"><label>Sexo:</label></div>
                                 <div class="input-field col s10 l3">
                                     <p>
                                         <label>
@@ -103,7 +99,7 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s2 l1"><label>Estado civil:</label></div>
+                                <div class="input-field col s2 m2 l1"><label>Estado civil:</label></div>
                                 <div class="input-field col s10 l3">
                                     <p>
                                         <label>
