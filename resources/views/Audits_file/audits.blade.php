@@ -69,7 +69,7 @@
                             <td><p>{{$audit->auditable_type}}</p></td>
                             <td><p>{{$audit->event}}</p></td>
                             <td><p>{{$audit->created_at}}</p></td>
-                            <td><a class="tooltipped" data-position="top" data-tooltip="Informações da auditoria" href="{{route('audits_info', $audit->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a></td>
+                            <td><a class="tooltipped" data-position="top" data-tooltip="Informações da auditoria" href="{{route('audits_info', $audit->id)}}"><i class="small material-icons">info</i></a></td>
                         </tr>
                     @endforeach 
                 </tbody>

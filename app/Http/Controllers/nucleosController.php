@@ -144,7 +144,7 @@ class NucleosController extends Controller
 
     public function nucleo_info($id){
         $nucleo = Nucleo::find($id);
-        $histnucleo = HistoricoN::where('nucleo_id', '=', $nucleo->id)->paginate(6);
+        $histnucleo = HistoricoN::orderBy('created_at', 'desc')->where('nucleo_id', '=', $nucleo->id)->paginate(6);
         $a = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
                                                         id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
                                                             Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 

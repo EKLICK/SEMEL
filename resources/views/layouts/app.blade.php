@@ -48,8 +48,8 @@
                                 @include('layouts.menu')
                             @else
                                 <div class="collection">
-                                    <b><a class="collection-item" href="{{Route('professor_turmas', auth()->user()->admin_professor)}}">Minhas turmas</a></b>
-                                    <b><a class="collection-item" href="{{Route('professor_info', $professor->id)}}">Suas informações</a></b>
+                                    <b><a class="collection-item" href="{{Route('professor_turmas', auth()->user()->admin_professor)}}" style="color: #039be5;">Minhas turmas</a></b>
+                                    <b><a class="collection-item" href="{{Route('professor_info', $professor->id)}}" style="color: #039be5;">Suas informações</a></b>
                                 </div>
                             @endif
                         </ul>
@@ -72,7 +72,7 @@
                 </div>
             </div>
         @endguest
-        <ul class="sidenav" id="mobile-demo" style="background-color: #039be5;">
+        <ul class="sidenav light-blue darken-1" id="mobile-demo">
             <div class="card">
                 <ul class="collapsible">
                     @include('layouts.menu')

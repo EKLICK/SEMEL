@@ -77,14 +77,14 @@
                                     <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>
                                 </div>
-                                <div class="input-field col s11 xl4">
+                                <div class="input-field col s11 xl6">
                                     <i class="material-icons prefix">location_city</i>
                                     <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
                                     <label for="bairro_search">Bairro</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s2 m2 l1"><label>Sexo:</label></div>
+                                <div class="input-field col s3 l2"><label>Sexo:</label></div>
                                 <div class="input-field col s10 l3">
                                     <p>
                                         <label>
@@ -99,7 +99,7 @@
                                         </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s2 m2 l1"><label>Estado civil:</label></div>
+                                <div class="input-field col s3 l2"><label>Estado civil:</label></div>
                                 <div class="input-field col s10 l3">
                                     <p>
                                         <label>
@@ -116,8 +116,40 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s3 l2"><label>Completo:</label></div>
+                                <div class="input-field col s10 l3">
+                                    <p>
+                                        <label>
+                                            <input value="1" name="estado" type="radio"/>
+                                            <span>Sim</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input value="2" name="estado" type="radio"/>
+                                            <span>Não</span>
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="input-field col s3 l2"><label>Atualizado:</label></div>
+                                <div class="input-field col s10 l3">
+                                    <p>
+                                        <label>
+                                            <input value="S" name="atualizado" type="radio"/>
+                                            <span>Sim</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input value="N" name="atualizado" type="radio"/>
+                                            <span>Não</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -140,12 +172,12 @@
                         <tr>
                             <td><p>{{$pessoa->nome}}</p></td>
                             <td><p>{{$pessoa->anamneses->last()->ano}}</p><i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
-                            <td><p>@if($pessoa->estado == 0) Incompleto @else Completo @endif</p><i class="small material-icons" @if($pessoa->estado == 0) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
+                            <td><p>@if($pessoa->estado == 2) Incompleto @else Completo @endif</p><i class="small material-icons" @if($pessoa->estado == 2) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Lista de anamneses de {{$pessoa->nome}}" href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">description</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$pessoa->nome}}" href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">group</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$pessoa->nome}}" href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons">info</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Lista de anamneses de {{$pessoa->nome}}" href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="small material-icons">description</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$pessoa->nome}}" href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons">group</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$pessoa->nome}}" href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="small material-icons">edit</i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -158,7 +190,7 @@
             @endif
             <br>
             <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('pessoas.create')}}"><i class="material-icons">add</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar cliente" href="{{route('pessoas.create')}}"><i class="material-icons">add</i></a>
             </div>
         </div>
     </div>

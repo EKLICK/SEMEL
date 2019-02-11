@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s3">
-                                        <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                             <i class="material-icons right">search</i>
                                         </button>
                                     </div>
@@ -135,9 +135,9 @@
                                 </td>
                             @endif
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons">info</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>
+                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Inativar
                         <i class="material-icons right">send</i>
                     </button>
                 </div>

@@ -7,7 +7,7 @@
                 <form action="{{route('login')}}" method="post">
                     @csrf
                     <div class="card">
-                        <div class="card-action" style="background-color: #039be5;">
+                        <div class="card-action light-blue darken-1">
                             <h3 style="color: white;">Fazer Login</h3>
                         </div>
                         <div class="card-content">
@@ -22,7 +22,7 @@
                             </div>
                             <br>
                             <div class="form-field center-align">
-                                <button class="btn-large">Login</button>
+                                <button class="btn-large light-blue darken-1">Login</button>
                             </div>
                         </div>
                     </div>

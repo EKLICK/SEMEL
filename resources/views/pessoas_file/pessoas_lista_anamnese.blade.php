@@ -45,7 +45,7 @@
                         <td><p>{{count($anamnese->doencas)}}</p></td>
                         @if($pessoa->deleted_at == null)
                             @if($anamnese->ano == $ano)
-                                <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a></td>
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a></td>
                             @else
                                 <td><p>Esta anamnese não <br> pode ser mais editada</p></td>
                             @endif
@@ -55,7 +55,11 @@
                 </tbody>
             </table>
             {{$anamneses->links()}}
-            <a href="{{Route('anamnese_create', $pessoa->id)}}" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
+            <br>
+            <div class="container">
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add</i></a>
+            </div>
+            <a href="" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Nova anamnese de {{$pessoa->nome}}</a>
         </div>
     </div>
 @endsection

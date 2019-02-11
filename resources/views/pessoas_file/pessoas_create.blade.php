@@ -428,7 +428,7 @@
                         <input type="text" value="2" name="possui_doenca" hidden>
                     </div>
                     <div class="input-field col s12 m5">
-                            <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar" style="background-color: #039be5;"><i class="material-icons">note_add</i></a>
+                            <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar light-blue darken-1"><i class="material-icons">note_add</i></a>
                     </div>
                 </div>
                 <div class="row">

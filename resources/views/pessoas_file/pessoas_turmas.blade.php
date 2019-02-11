@@ -53,49 +53,31 @@
                             @csrf
                             <input type="text" name="id" value="{{-$pessoa->id}}" hidden>
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">group</i>
                                     <input name="nome" id="icon_nome" type="text" class="validate">
                                     <label for="icon_nome">Nome da turma:</label>
                                 </div>
-                                <div class="input-field col s3"></div>
-                                <div class="input-field col s4">
-                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
-                                    <div style="margin-left: 30%;">
-                                        <p>
-                                            <label>
-                                                <input value="1" name="inativo" type="radio"/>
-                                                <span>Ativo</span>
-                                            </label>
-                                        </p>
-                                        <p>
-                                            <label>
-                                                <input value="2" name="inativo" type="radio"/>
-                                                <span>Inativo</span>
-                                            </label>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s2">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">assignment</i>
                                     <input id="limite_search" type="number" class="validate" name="limite">
                                     <label for="limite_search">Limite:</label>
                                 </div>
-                                <div class="input-field col s3">
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">hourglass_full</i>
                                     <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
                                     <label for="icon_horario_inicial">Horário Inicial:</label>
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">hourglass_empty</i>
                                     <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
                                     <label for="icon_horario_final">Horário Final:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
                                     <select name="data_semanal[]" multiple>
                                         @foreach ($dias_semana as $dia)
@@ -103,7 +85,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
                                     <select name="nucleo_id">
                                         <option value="" selected disabled>Selecione o núcleo</option>
@@ -114,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">beenhere</i>&emsp;&emsp; Opção de Página:
                                     <div style="margin-left: 30%;">
                                         <p>
@@ -137,10 +119,27 @@
                                         </p>
                                     </div>
                                 </div>
+                                <div class="input-field col s12 m5 l5">
+                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="inativo" type="radio"/>
+                                                <span>Ativo</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="inativo" type="radio"/>
+                                                <span>Inativo</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -164,7 +163,7 @@
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
-                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             <td><p>{{$turma->quant_atual}} / {{$turma->limite}}</p><i class="small material-icons" @if($turma->qwuant_atual >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             <td> 
                                 <p>
@@ -350,7 +349,7 @@
                             <label for="quantidade">Quantidade [bloqueio]: </label>
                     </div>
                     <div class="input-field col s4 right">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Definir
+                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Definir
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

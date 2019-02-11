@@ -113,7 +113,7 @@ class AnamneseController extends Controller
     {
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', date('Y'))->get();
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', $ano)->get();
         Session::put('quant', count($anamneseslist).' anamneses de '.$ano.' cadastradas.');
 
         $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
@@ -124,7 +124,7 @@ class AnamneseController extends Controller
     public function index2(){
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', date('Y'))->get();
+        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', $ano)->get();
         Session::put('quant', count($anamneseslist).' anamneses antigas cadastradas.');
         $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 0);

@@ -223,7 +223,7 @@ class ProfessorController extends Controller
         $user = User::find($professor['user_id']);
         $useremail = $user->email;
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
-        $histprofessor = HistoricoPrT::where('professor_id', '=', $professor->id)->paginate(5);
+        $histprofessor = HistoricoPrT::orderBy('created_at', 'desc')->where('professor_id', '=', $professor->id)->paginate(5);
         $a = 0;
         $b = 0;
         $idsturmas = [];

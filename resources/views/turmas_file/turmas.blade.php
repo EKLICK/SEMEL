@@ -104,7 +104,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -127,7 +127,7 @@
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
-                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons" style="color: #039be5;">info_outline</i></a></td>
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             <td> 
                                 <p>
                                     @if($turma->inativo == 2)
@@ -161,9 +161,9 @@
                                 </td>
                             @endif
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$turma->nome}}" id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>
+                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$turma->nome}}" id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach 
@@ -172,7 +172,7 @@
             {{$turmaslist->links()}}
             <br>
             <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
             </div>
         </div>
     </div>

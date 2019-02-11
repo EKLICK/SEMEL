@@ -23,12 +23,12 @@
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <div class="row">
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">new_releases</i>
                         <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$doenca->nome}}">
                         <label for="icon_prefix">Nome:</label>
                     </div>
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">description</i>
                         <textarea name="descricao" id="descricao" class="materialize-textarea">{{$doenca->descricao}}</textarea>
                         <label for="descricao">Observação</label>

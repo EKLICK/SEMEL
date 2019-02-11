@@ -211,7 +211,7 @@ class TurmasController extends Controller
         }
         $dias = explode(',', $turma['data_semanal']);
         unset($dias[count($dias) - 1]);
-        $histturma = HistoricoT::where('turma_id', '=', $turma->id)->paginate(6);
+        $histturma = HistoricoT::orderBy('created_at', 'desc')->where('turma_id', '=', $turma->id)->paginate(6);
         $a = 0;
         $b = 0;
         foreach($turma->pessoas as $pessoa){

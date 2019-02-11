@@ -46,7 +46,7 @@
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
-                        <a class="btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
+                        <a class="btn-floating right light-blue darken-1" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                             <select name="bairro">

@@ -29,7 +29,8 @@ class PessoaProcurarFormRequest extends FormRequest
             'ate'                   => 'sometimes|nullable|date-format:d/m/Y',
             'sexo'                  => ['sometimes','nullable', Rule::in(['M','F'])],
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
-
+            'estado'                => ['sometimes','nullable', Rule::in(['1', '2'])],
+            'completo'              => ['sometimes','nullable', Rule::in(['S', 'N'])],
         ];
     }
 

@@ -75,8 +75,27 @@ class filtersController extends Controller
                 $filtro = $dataForm['estado_civil'];
                 $query->where('estado_civil', '=', $filtro);
             }
+            if(!empty($dataForm['estado'])){
+                $filtro = $dataForm['estado'];
+                $query->where('estado', '=', $filtro);
+            }
+            if(!empty($dataForm['atualizado'])){
+                $ids = [];
+                $ano = date('Y');
+                if($dataForm['atualizado'] == 'S'){
+                    $pessoaslistA = DB::select(DB::raw('SELECT id FROM pessoas WHERE
+                                                        id IN(SELECT pessoas_id FROM anamneses WHERE
+                                                            ano = '.$ano.')'));
+                }
+                else{
+                    $pessoaslistA = DB::select(DB::raw('SELECT id FROM pessoas WHERE
+                                                        id NOT IN(SELECT pessoas_id FROM anamneses WHERE
+                                                            ano = '.$ano.')'));
+                }
+                foreach($pessoaslistA as $id){array_push($ids, $id->id);}
+                $query->wherein('id', $ids);
+            }
         })->orderBy('nome');
-        $bairroslist = Bairro::all();
         Session::put('quant', count($pessoaslist->get()).' pessoas cadastradas.');
         $pessoaslist = $pessoaslist->paginate(10);
         $ano = date('Y');

@@ -40,7 +40,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 xl3">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -63,8 +63,8 @@
                             <td><p>{{$doenca->nome}}</p></td>
                             <td><p>{{$doenca->descricao}}</p></td>
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar doença" id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete"><i class="small material-icons" style="color: #039be5;">delete</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons">edit</i></a>
+                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar doença" id="btn-delete" data-id="{{$doenca->id}}" data-nome="{{$doenca->nome}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach 
@@ -77,7 +77,7 @@
             @endif
             <br>
             <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('doencas.create')}}"><i class="material-icons">add</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar doenças" href="{{route('doencas.create')}}"><i class="material-icons">add</i></a>
             </div>
         </div>
     </div>

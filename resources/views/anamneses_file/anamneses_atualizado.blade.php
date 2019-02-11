@@ -121,7 +121,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Procurar
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
                                         <i class="material-icons right">search</i>
                                     </button>
                                 </div>
@@ -146,8 +146,8 @@
                             <td><p>{{$anamnese->ano}}</p></td>
                             <td><p>{{count($anamnese->doencas)}}</p></td>
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons" style="color: #039be5;">edit</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a>
                             </td>
                         </tr>
                     @endforeach 

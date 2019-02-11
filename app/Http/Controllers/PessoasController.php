@@ -81,26 +81,26 @@ class PessoasController extends Controller
     }
 
     public function checar_estado($listadados, $nascimento){
-        if($listadados['img_3x4'] == null){return 0;}
-        if($listadados['rg'] == null){return 0;}
+        if($listadados['img_3x4'] == null){return 2;}
+        if($listadados['rg'] == null){return 2;}
         if($nascimento >= 18){
-            if($listadados['cpf'] == null){return 0;}
+            if($listadados['cpf'] == null){return 2;}
         }
-        if($listadados['bairro_id'] == null){return 0;}
-        if($listadados['rua'] == null){return 0;}
-        if($listadados['numero_endereco'] == null){return 0;}
-        if($listadados['complemento'] == null){return 0;}
-        if($listadados['cep'] == null){return 0;}
-        if($listadados['telefone'] == null){return 0;}
-        if($listadados['telefone_emergencia'] == null){return 0;}
-        if($listadados['convenio_medico'] == null){return 0;}
-        if($listadados['pessoa_emergencia'] == null){return 0;}
-        if($listadados['estado_civil'] == null){return 0;}
-        if($listadados['mora_com_os_pais'] == null){return 0;}
+        if($listadados['bairro_id'] == null){return 2;}
+        if($listadados['rua'] == null){return 2;}
+        if($listadados['numero_endereco'] == null){return 2;}
+        if($listadados['complemento'] == null){return 2;}
+        if($listadados['cep'] == null){return 2;}
+        if($listadados['telefone'] == null){return 2;}
+        if($listadados['telefone_emergencia'] == null){return 2;}
+        if($listadados['convenio_medico'] == null){return 2;}
+        if($listadados['pessoa_emergencia'] == null){return 2;}
+        if($listadados['estado_civil'] == null){return 2;}
+        if($listadados['mora_com_os_pais'] == null){return 2;}
         if($nascimento < 18){
-            if($listadados['img_matricula'] == null){return 0;}
-            if($listadados['cpf_responsavel'] == null){return 0;}
-            if($listadados['rg_responsavel'] == null){return 0;}
+            if($listadados['img_matricula'] == null){return 2;}
+            if($listadados['cpf_responsavel'] == null){return 2;}
+            if($listadados['rg_responsavel'] == null){return 2;}
         }
         return 1;
     }
@@ -128,13 +128,9 @@ class PessoasController extends Controller
         }
         $ano = date('Y');
         $pessoall = Pessoa::all();
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
         Session::put('quant', count($pessoall).' pessoas cadastradas.');
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist','ano'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','ano'));
     }
 
     /**
@@ -417,7 +413,7 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
         $anamnese = $pessoa->anamneses->last();
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
-        $histpessoa = HistoricoPT::where('pessoa_id', '=', $pessoa->id)->paginate(5);
+        $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->paginate(5);
         $a = 0;
         $b = 0;
         $idsturmas = [];
