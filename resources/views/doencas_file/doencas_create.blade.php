@@ -24,12 +24,12 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">new_releases</i>
-                        <input name="nome" id="icon_prefix" type="text" class="validate">
-                        <label for="icon_prefix">Nome da doença:</label>
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" required>
+                        <label for="nome">Nome da doença:</label>
                     </div>
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" class="materialize-textarea"></textarea>
+                        <textarea name="descricao" id="descricao" class="materialize-textarea" required>{{old('descricao')}}</textarea>
                         <label for="descricao">Observação</label>
                     </div>
                 </div>

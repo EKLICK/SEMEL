@@ -25,23 +25,24 @@ class ProfessorCreateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'matricula'             => 'sometimes|nullable|integer|unique:professores|',
-            'nascimento'            => 'required|date-format:d/m/Y',
-            'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
-            'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'numero_endereco'       => 'required|digits_between:0,5',
-            'cep'                   => 'required|max:10|min:10',
-            'telefone'              => 'required|max:16|min:8',
-            'email'                 => 'required|string|email|max:255|unique:users',
-            'cpf'                   => 'required|max:14|min:14|unique:pessoas|unique:professores|',
-            'rg'                    => 'required|max:13|min:6',
-            'curso'                 => 'required|between:3,100',
-            'formacao'              => 'required|between:3,100',
+            'nome'                     => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'matricula'                => 'sometimes|nullable|integer|unique:professores|',
+            'nascimento'               => 'required|date-format:d/m/Y',
+            'bairro'                   => 'required_without:string_bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'string_bairro'            => 'required_without:bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'rua'                      => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'numero_endereco'          => 'required|digits_between:0,5',
+            'cep'                      => 'required|max:10|min:10',
+            'telefone'                 => 'required|max:16|min:8',
+            'email'                    => 'required|string|email|max:255|unique:users',
+            'cpf'                      => 'required|max:14|min:14|unique:pessoas|unique:professores|',
+            'rg'                       => 'required|max:13|min:6',
+            'curso'                    => 'required|between:3,100',
+            'formacao'                 => 'required|between:3,100',
 
-            'usuario'               => 'required|string|max:255',
-            'password'              => 'required|string|min:5',
-            'confirm_password'      => 'required_with:password|same:password',
+            'usuario'                  => 'required|string|max:255',
+            'password'                 => 'required|string|min:5',
+            'confirm_password'         => 'required_with:password|same:password',
         ];
     }
 

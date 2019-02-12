@@ -24,31 +24,31 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}">
+                        <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" required>
                         <label for="icon_nome">Turma da turma:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment</i>
-                        <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}">
+                        <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}" required>
                         <label for="icon_limite">Limite:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
-                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}">
+                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}" required>
                         <label for="icon_horario_inicial">Horário Inicial:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
-                        <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}">
+                        <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}" required>
                         <label for="icon_horario_final">Horário Final:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
-                        <select name="data_semanal[]" multiple>
+                        <select name="data_semanal[]" multiple required>
                             @foreach ($dias_semana as $dia)
                                 <option value="{{$dia}}">{{$dia}}</option>
                             @endforeach
@@ -56,7 +56,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
-                        <select name="nucleo_id">
+                        <select name="nucleo_id" required>
                             <option value="" selected disabled>Selecione o núcleo</option>
                             @foreach ($nucleoslist as $nucleo)
                                 <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
+                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" required>{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição da turma:</label>
                     </div>
                 </div>

@@ -25,12 +25,12 @@
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">filter_tilt_shift</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif">
+                        <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif" required>
                         <label for="icon_nome">Nome do núcleo:</label>
                     </div>
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                        <select name="bairro">
+                        <select name="bairro" required>
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
                                 <option value="{{$bairro}}"  @if($bairro == $nucleo->bairro) selected @endif>{{$bairro}}</option>
@@ -41,17 +41,17 @@
                 <div class="row">
                     <div class="input-field col s12 l5 xl6">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif">
+                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif" required>
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s12 l3 xl2">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else {{old('numero_endereco')}} @endif>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else {{old('numero_endereco')}} @endif required>
                         <label for="numero_endereco">Número:</label>
                     </div>
                     <div class="input-field col s12 l4 xl4">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif" required>
                         <label for="cep">CEP:</label>
                     </div>
                 </div>

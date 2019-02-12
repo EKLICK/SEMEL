@@ -25,24 +25,24 @@
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}">
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" required>
                         <label for="nome">Nome:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input name="nascimento" id="nascimento" type="text" class="datepicker validate" value="{{old('nascimento')}}">
+                        <input name="nascimento" id="nascimento" type="text" class="datepicker validate" value="{{old('nascimento')}}" required>
                         <label for="nascimento">Nascimento:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">recent_actors</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="matricula" type="text" class="validate" value="{{old('matricula')}}">
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="matricula" type="text" class="validate" value="{{old('matricula')}}" required>
                         <label for="matricula">Matricula:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif>
+                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif required>
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -66,65 +66,65 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}">
+                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" required>
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}" required>
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}">
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" required>
                         <label for="numero_endereco">Número:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input name="complemento" id="complemento" type="number" class="validate" value="{{old('complemento')}}">
+                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}">
                         <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}">
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}" required>
                         <label for="telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" id="email" type="tel" class="validate" value="{{old('email')}}">
+                        <input name="email" id="email" id="email" type="tel" class="validate" value="{{old('email')}}" required>
                         <label for="email">E-mail:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}">
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}" required>
                         <label for="cpf">CPF:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}">
+                        <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}" required>
                         <label for="rg">RG:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">school</i>
-                        <input name="formacao" id="formacao" type="text" class="validate" value="{{old('formacao')}}">
+                        <input name="formacao" id="formacao" type="text" class="validate" value="{{old('formacao')}}" required>
                         <label for="formacao">Formação:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">book</i>
-                        <input name="curso" id="curso" type="text" class="validate" value="{{old('curso')}}">
+                        <input name="curso" id="curso" type="text" class="validate" value="{{old('curso')}}" required>
                         <label for="curso">Curso:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">directions_bike</i>
-                        <input name="cref" id="cref" type="text" class="validate" value="{{old('cref')}}">
+                        <input name="cref" id="cref" type="text" class="validate" value="{{old('cref')}}" required>
                         <label for="cref">CREF:</label>
                     </div>
                 </div>
@@ -133,19 +133,19 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario" id="usuario" type="text" class="validate">
+                        <input name="usuario" id="usuario" type="text" class="validate" required>
                         <label for="usuario">Usuário:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="lockout" type="password" class="validate">
+                        <input name="password" id="lockout" type="password" class="validate" required>
                         <label for="lockout">Senha:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="lock" type="password" class="validate" >
+                        <input name="confirm_password" id="lock" type="password" class="validate" required>
                         <label for="lock">Confirmar senha:</label>
                     </div>
                 </div>

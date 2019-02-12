@@ -43,12 +43,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif">
+                        <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif" required>
                         <label for="nome">Nome:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif">
+                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif" required>
                         <label for="nascimento">Data de nascimento:</label>
                     </div>
                 </div>

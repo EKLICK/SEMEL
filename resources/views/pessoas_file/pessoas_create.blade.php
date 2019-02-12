@@ -43,12 +43,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}">
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" required>
                         <label for="nome">Nome:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}">
+                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}" required>
                         <label for="nascimento">Data de nascimento:</label>
                     </div>
                 </div>
