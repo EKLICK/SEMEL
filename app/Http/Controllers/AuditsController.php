@@ -22,6 +22,9 @@ class auditsController extends Controller
 
     public function info($id){
         $audit = Audit::find($id);
+        $old = substr($audit->old_values, 0, 40);
+        $audit += ['old_values1' => $old];
+        $old = substr($audit->old_values, 41, 60);
 
         return view ('audits_file.audits_info', compact('audit'));
     }

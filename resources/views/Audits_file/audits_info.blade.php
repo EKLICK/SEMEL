@@ -45,15 +45,15 @@
                 <table>
                     <tr>
                         <td><h6>Tags:</h6></td>
-                        <td style="width: 5%;"><h6>@if($audit->tags == null) Nenhuma tag comentada @else {{$audit->tags}} @endif</h6></td>
+                        <td><h6>@if($audit->tags == null) Nenhuma tag comentada @else {{$audit->tags}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>Old value:</h6></td>
-                        <td style="width: 5%;"><h6>@if($audit->old_values == '[]') nenhum valor substituido @else {{$audit->old_values}} @endif</h6></td>
+                        <td ><h6>@if($audit->old_values == '[]') nenhum valor substituido @else {{$audit->old_values}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>New value:</h6></td>
-                        <td style="width: 5%;"><h6>@if($audit->new_values == '[]') nenhum valor criado @else {{$audit->new_values}} @endif</h6></td>
+                        <td><h6>@if($audit->new_values == '[]') nenhum valor criado @else {{$audit->new_values}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>User agent:</h6></td>
