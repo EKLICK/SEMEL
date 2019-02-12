@@ -9,7 +9,6 @@
 @endsection
 @section('title') Informações do Núcleo @endsection
 @section('content')
-    <br><br>
     <div class="container">
         <div class="row">
             @if(auth()->user()->admin_professor == 1)

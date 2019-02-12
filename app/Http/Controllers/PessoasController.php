@@ -254,7 +254,7 @@ class PessoasController extends Controller
             $anamnese->doencas()->attach($dataForm['doencas']);
         }
         Session::put('pessoa', $pessoa->id);
-        Session::put('mensagem', $pessoa->nome.' criado(a) com sucesso!');
+        Session::put('mensagem_green', $pessoa->nome.' criado(a) com sucesso!');
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
@@ -385,15 +385,7 @@ class PessoasController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $pessoa = Pessoa::find($request['id']);
-        foreach($pessoa->turmas as $turma){
-            $pessoa->turmas()->detach($turma->id);
-        }
-        $nome = $pessoa->nome;
-        $pessoa->delete();
-        Session::put('mensagem', $nome.' deletado(a) com sucesso!');
-
-        return redirect()->Route('pessoas.index');
+        //
     }
 
     public function lista_anamnese($id){

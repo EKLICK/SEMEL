@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Session::put('mensagem', 'Administrador '.$data['name'].' adicionado com sucesso!');
+        Session::put('mensagem_green', 'Administrador '.$data['name'].' adicionado com sucesso!');
         return User::create([
             'name' => $data['name'],
             'admin_professor' => $data['admin_professor'],

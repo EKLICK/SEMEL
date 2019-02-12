@@ -5,7 +5,6 @@
 @endsection
 @section('title') <h4>Informações da anamnese</h4> @endsection
 @section('content')
-    <br><br>
     <div class="container">
         <div class="row">
             <div class="col s12 m6">

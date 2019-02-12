@@ -131,7 +131,7 @@ class ProfessorController extends Controller
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
         $dataForm += ['user_id' => $user->id];
         Professor::create($dataForm);
-        Session::put('mensagem', $dataForm['nome'].' adicionado(a) com sucesso!');
+        Session::put('mensagem_green', $dataForm['nome'].' adicionado(a) com sucesso!');
 
         return redirect()->Route('professor.index');
     }
@@ -187,10 +187,10 @@ class ProfessorController extends Controller
         $professor->update($dataForm);
         $newprofessor = (array)$professor;
         if($newprofessor != $oldprofessor){
-            Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
+            Session::put('mensagem_green', $professor->nome.' editado(a) com sucesso!');
         }
         else if($newuser != $olduser){
-            Session::put('mensagem', $professor->nome.' editado(a) com sucesso!');
+            Session::put('mensagem_green', $professor->nome.' editado(a) com sucesso!');
         }
         
         return redirect()->Route('professor.index');
@@ -204,18 +204,7 @@ class ProfessorController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $professor = Professor::find($request['id']);
-        foreach($professor->turmas as $turma){
-            $professor->turmas()->detach($turma->id);
-        }
-        $nome = $professor->nome;
-        $userslist = User::all();
-        $user = $userslist->where('id', '=', $professor->user_id)->last();
-        $user->delete();
-        $professor->delete();
-        Session::put('mensagem', $nome.' deletado(a) com sucesso!');
-
-        return redirect()->Route('professor.index');
+        //
     }
 
     public function professor_info($id){

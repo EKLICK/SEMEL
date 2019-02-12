@@ -46,7 +46,7 @@ class DoencasController extends Controller
     {
         $dataForm = $request->all();
         Doenca::create($dataForm);
-        Session::put('mensagem', $dataForm['nome'].' adicionada com sucesso!');
+        Session::put('mensagem_green', $dataForm['nome'].' adicionada com sucesso!');
         return redirect()->Route('doencas.index');
     }
 
@@ -88,7 +88,7 @@ class DoencasController extends Controller
         $doenca->update($dataForm);
         $newdoenca = (array)$doenca;
         if($olddoenca != $newdoenca){
-            Session::put('mensagem', $doenca->nome.' editada com sucesso!');
+            Session::put('mensagem_green', $doenca->nome.' editada com sucesso!');
         }
         return redirect()->Route('doencas.index');
     }
@@ -104,7 +104,7 @@ class DoencasController extends Controller
         $doenca = Doenca::find($request['id']);
         $nome = $doenca->nome;
         $doenca->delete();
-        Session::put('mensagem', $nome.' deletada com sucesso!');
+        Session::put('mensagem_green', $nome.' deletada com sucesso!');
         return redirect()->Route('doencas.index');
     }
 

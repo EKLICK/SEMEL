@@ -7,7 +7,7 @@
 @endsection
 @section('title') Informações de auditoria @endsection
 @section('content')
-    <div class="container" style="margin-top: 3%;">
+    <div class="container">
         <div class="row">
             <div class="col s5">
                 <table>

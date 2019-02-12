@@ -75,7 +75,7 @@ class TurmasController extends Controller
         }
         $dataForm['horario_final'] = $horario[0].':00';
         $turma = Turma::create($dataForm);
-        Session::put('mensagem', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
+        Session::put('mensagem_green', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
         return redirect()->Route('turmas.index');
     }
 
@@ -164,7 +164,7 @@ class TurmasController extends Controller
         $turma->update($dataForm);
         $newturma = (array)$turma;
         if($newturma != $oldturma){
-            Session::put('mensagem', $turma->nome.' adicionada com sucesso!');
+            Session::put('mensagem_green', $turma->nome.' adicionada com sucesso!');
         }
         return redirect()->Route('turmas.index');
     }
@@ -177,12 +177,7 @@ class TurmasController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $turma = Turma::find($request['id']);
-        $nome = $turma->nome;
-        $turma->delete();
-        Session::put('mensagem', $nome.' editado com sucesso!');
-
-        return redirect()->Route('turmas.index');
+        //
     }
 
     public function turma_info($id){
@@ -233,12 +228,12 @@ class TurmasController extends Controller
         if($turma->inativo == 1){
             $turma->update(['inativo'=>2]);
             $dataForm += ['inativo' => 2];
-            Session::put('mensagem', $turma->nome . " foi inativado com sucesso!");
+            Session::put('mensagem_green', $turma->nome . " foi inativado com sucesso!");
         }
         else{
             $turma->update(['inativo'=>1]);
             $dataForm += ['inativo' => 1];
-            Session::put('mensagem', $turma->nome . " foi ativado com sucesso!");
+            Session::put('mensagem_green', $turma->nome . " foi ativado com sucesso!");
         }
         HistoricoT::create($dataForm);
 

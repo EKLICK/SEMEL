@@ -6,45 +6,12 @@
 @endsection
 @section('title') Turmas <a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite <i class="material-icons right">https</i></a>@endsection
 @section('content')
-    <br><br>
-    @if(Session::get('mensagem_green'))
-        <div class="center-align sessao">
-            <div class="chip green lighten-2">
-                {{Session::get('mensagem_green')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem_green')}}
-    @endif
-    @if(Session::get('mensagem_yellow'))
-        <div class="center-align sessao">
-            <div class="chip yellow darken-2">
-                {{Session::get('mensagem_yellow')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem_yellow')}}
-    @endif
-    @if(Session::get('mensagem_red'))
-        <div class="center-align sessao">
-            <div class="chip red lighten-2">
-                {{Session::get('mensagem_red')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem_red')}}
-    @endif
+    @include('layouts.Sessoes.mensagem_green')
+    @include('layouts.Sessoes.mensagem_yellow')
+    @include('layouts.Sessoes.mensagem_red')
     <div class="container z-depth-4">
         <div class="card-panel">
-            @if(Session::get('quant'))
-                <div class="center-align quantmens">
-                    <div class="chip light-blue accent-2 lighten-2">
-                        {{Session::get('quant')}}
-                        <i class="close material-icons">close</i>
-                    </div>
-                </div>
-                {{Session::forget('quant')}}
-            @endif
+            @include('layouts.Sessoes.quant')
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>

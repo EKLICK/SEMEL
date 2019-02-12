@@ -7,17 +7,7 @@
 @endsection
 @section('title') Editar <?php $nomes = explode(' ',$professor->nome);?> {{$nomes[0]}} @endsection
 @section('content')
-    <br><br>
-    @if(isset($errors) && count($errors) > 0)
-        @foreach($errors->all() as $error)
-            <div style="margin-left: 15%; margin-top: 1%;">
-                <div class="chip red lighten-2">
-                    {{$error}}
-                    <i class="close material-icons">close</i>
-                </div>
-            </div>
-        @endforeach
-    @endif
+    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('professor.update', $professor->id)}}" method="post">
@@ -81,7 +71,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="@if(is_null(old('numero_endereco'))) {{$professor->numero_endereco}} @else {{old('numero_endereco')}} @endif" required>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$professor->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif required>
                         <label for="numero_endereco">Número:</label>
                     </div>
                     <div class="input-field col s12 m5">

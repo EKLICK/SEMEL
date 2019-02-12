@@ -4,27 +4,10 @@
 @endsection
 @section('title') Doenças registradas @endsection
 @section('content')
-    <br><br>
-    @if(Session::get('mensagem'))
-        <div class="center-align sessao">
-            <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem')}}
-    @endif
+    @include('layouts.Sessoes.mensagem_green')
     <div class="container z-depth-4">
         <div class="card-panel">
-            @if(Session::get('quant'))
-                <div class="center-align quantmens">
-                    <div class="chip light-blue accent-2 lighten-2">
-                        {{Session::get('quant')}}
-                        <i class="close material-icons">close</i>
-                    </div>
-                </div>
-                {{Session::forget('quant')}}
-            @endif
+            @include('layouts.Sessoes.quant')
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>

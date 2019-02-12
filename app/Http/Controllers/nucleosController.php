@@ -59,7 +59,7 @@ class NucleosController extends Controller
     {
         $dataForm = $request->all();
         $nucleo =  Nucleo::create($dataForm);
-        Session::put('mensagem', $nucleo->nome.' adicionado com sucesso!');
+        Session::put('mensagem_green', $nucleo->nome.' adicionado com sucesso!');
         return redirect()->Route('nucleos.index');
     }
 
@@ -106,7 +106,7 @@ class NucleosController extends Controller
         $nucleo->update($dataForm);
         $newnucleo = (array)$nucleo;
         if($newnucleo != $oldnucleo){
-            Session::put('mensagem', $nucleo->nome.' editado com sucesso!');
+            Session::put('mensagem_green', $nucleo->nome.' editado com sucesso!');
         }
         else{
             dd($newnucleo, $oldnucleo);
@@ -171,12 +171,12 @@ class NucleosController extends Controller
         if($nucleo->inativo == 1){
             $nucleo->update(['inativo'=>2]);
             $dataForm += ['inativo' => 2];
-            Session::put('mensagem', $nucleo->nome . " foi inativado com sucesso!");
+            Session::put('mensagem_green', $nucleo->nome . " foi inativado com sucesso!");
         }
         else{
             $nucleo->update(['inativo'=>1]);
             $dataForm += ['inativo' => 1];
-            Session::put('mensagem', $nucleo->nome . " foi ativado com sucesso!");
+            Session::put('mensagem_green', $nucleo->nome . " foi ativado com sucesso!");
         }
         HistoricoN::create($dataForm);
 

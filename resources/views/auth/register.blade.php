@@ -4,7 +4,6 @@
 @endsection
 @section('title') Cadastrar administrador @endsection
 @section('content')
-    <br><br>
     <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('professor.store')}}" method="post">

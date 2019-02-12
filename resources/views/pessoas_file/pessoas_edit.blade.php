@@ -183,7 +183,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="convenio_icon" class="material-icons prefix" @if ($pessoa->convenio_medico == -1) hidden @endif>add_box</i>
-                        <input name="convenio_medico" id="convenio_medico" type="text" class="validate" @if(is_null(old('convenio_medico')) && $pessoa->convenio_medico == -1) value="{{$pessoa->convenio_medico}}" @else value="{{old('convenio_medico')}}" @endif @if ($pessoa->convenio_medico == -1) hidden @endif>
+                        <input name="convenio_medico" id="convenio_medico" type="text" class="validate" @if(is_null(old('convenio_medico')) && $pessoa->convenio_medico != -1) value="{{$pessoa->convenio_medico}}" @else value="{{old('convenio_medico')}}" @endif @if ($pessoa->convenio_medico == -1) hidden @endif>
                         <label id="convenio_label" for="convenio_medico" @if ($pessoa->convenio_medico == -1) hidden @endif>Convênio médico:</label>
                     </div>
                 </div>

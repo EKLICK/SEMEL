@@ -192,7 +192,7 @@ class AnamneseController extends Controller
         if(!empty($dataForm['doencas'])){
             $anamnese->doencas()->attach($dataForm['doencas']);
         }
-        Session::put('mensagem', 'Anamnese adicionada com sucesso!');
+        Session::put('mensagem_green', 'Anamnese adicionada com sucesso!');
 
         return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);
     }
@@ -263,7 +263,7 @@ class AnamneseController extends Controller
             $anamnese->doencas()->sync($dataForm['doencas']);
         $newanamnese = (array)$anamnese;
         if($newanamnese != $oldanamnese){
-            Session::put('mensagem', "Anamnese editada com sucesso!");
+            Session::put('mensagem_green', "Anamnese editada com sucesso!");
         } 
         return redirect()->route('anamneses.index');
     }

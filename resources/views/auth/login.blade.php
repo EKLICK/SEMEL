@@ -30,13 +30,5 @@
             </div>
         </div>
     </div>
-    @if(Session::get('mensagem'))
-        <div class="center-align quantmens" style="margin-top: 3%;">
-            <div class="chip red lighten-2">
-                {{Session::get('mensagem')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem')}}
-    @endif
+    @include('layouts.Sessoes.mensagem_red')
 @endsection

@@ -66,6 +66,7 @@
                             <div class="container">
                                 <h2><b>@yield('title')</b></h2>
                             </div>
+                            <br><br>
                             @yield('content')
                         </div>
                     </div>

@@ -4,105 +4,80 @@
 @endsection
 @section('title') Núcleos registrados @endsection
 @section('content')
-    <br><br>
-    @if(Session::get('mensagem_red'))
-        <div class="center-align sessao">
-            <div class="chip red lighten-2">
-                {{Session::get('mensagem_red')}}
-                <i class="close material-icons">close</i>
-            </div>
-        </div>
-        {{Session::forget('mensagem_red')}}
-    @endif
-    @if(Session::get('mensagem'))
-        <div class="center-align sessao">
-            <div class="chip green lighten-2">
-                {{Session::get('mensagem')}}
-                <i class="close material-icons">close</i> 
-            </div>
-        </div>
-        {{Session::forget('mensagem')}}
-    @endif
+    @include('layouts.Sessoes.mensagem_red')
+    @include('layouts.Sessoes.mensagem_green')
     <div class="container z-depth-4">
         <div class="card-panel">
-            @if(Session::get('quant'))
-                <div class="center-align quantmens">
-                    <div class="chip light-blue accent-2 lighten-2">
-                        {{Session::get('quant')}}
-                        <i class="close material-icons">close</i>
+            @include('layouts.Sessoes.quant')
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
+                    <div class="collapsible-body">
+                        <form action="{{route('nucleos_procurar')}}" method="GET">
+                            @csrf
+                            <div class="row">
+                                <div class="input-field col s10 xl5">
+                                    <i class="material-icons prefix">filter_tilt_shift</i>
+                                    <input name="nome" id="icon_nome" type="text" class="validate">
+                                    <label for="icon_nome">Nome da turma:</label>
+                                </div>
+                                <div class="input-field col s10 xl5 right">
+                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="inativo" type="radio"/>
+                                                <span>Ativo</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="inativo" type="radio"/>
+                                                <span>Inativo</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s10 xl4">
+                                    <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                                    <select name="bairro">
+                                        <option value="" selected disabled>Selecione o núcleo</option>
+                                        @foreach ($bairroslist as $bairro)
+                                            <option value="{{$bairro}}">{{$bairro}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-field col s10 xl3">
+                                    <i class="material-icons prefix">confirmation_number</i>
+                                    <input name="rua" id="icon_rua" type="text" class="validate">
+                                    <label for="icon_rua">Rua:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s10 xl4">
+                                    <i class="material-icons prefix">location_on</i>
+                                    <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
+                                    <label for="icon_numero_endereco">Numero de endereço:</label>
+                                </div>
+                                <div class="input-field col s10 xl3">
+                                    <i class="material-icons prefix">location_city</i>
+                                    <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
+                                    <label for="icon_cep">CEP:</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
+                                        <i class="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                {{Session::forget('quant')}}
-            @endif
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">filter_list</i>Filtros</div>
-                        <div class="collapsible-body">
-                            <form action="{{route('nucleos_procurar')}}" method="GET">
-                                @csrf
-                                <div class="row">
-                                    <div class="input-field col s10 xl5">
-                                        <i class="material-icons prefix">filter_tilt_shift</i>
-                                        <input name="nome" id="icon_nome" type="text" class="validate">
-                                        <label for="icon_nome">Nome da turma:</label>
-                                    </div>
-                                    <div class="input-field col s10 xl5 right">
-                                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
-                                        <div style="margin-left: 30%;">
-                                            <p>
-                                                <label>
-                                                    <input value="1" name="inativo" type="radio"/>
-                                                    <span>Ativo</span>
-                                                </label>
-                                            </p>
-                                            <p>
-                                                <label>
-                                                    <input value="2" name="inativo" type="radio"/>
-                                                    <span>Inativo</span>
-                                                </label>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s10 xl4">
-                                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                                        <select name="bairro_id">
-                                            <option value="" selected disabled>Selecione o núcleo</option>
-                                            @foreach ($bairroslist as $bairro)
-                                                <option value="{{$bairro}}">{{$bairro}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="input-field col s10 xl3">
-                                        <i class="material-icons prefix">confirmation_number</i>
-                                        <input name="rua" id="icon_rua" type="text" class="validate">
-                                        <label for="icon_rua">Rua:</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s10 xl4">
-                                        <i class="material-icons prefix">location_on</i>
-                                        <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
-                                        <label for="icon_numero_endereco">Numero de endereço:</label>
-                                    </div>
-                                    <div class="input-field col s10 xl3">
-                                        <i class="material-icons prefix">location_city</i>
-                                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
-                                        <label for="icon_cep">CEP:</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s3">
-                                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Procurar
-                                            <i class="material-icons right">search</i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
+                </li>
+            </ul>
             <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>

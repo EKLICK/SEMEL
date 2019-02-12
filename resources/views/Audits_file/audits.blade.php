@@ -6,15 +6,7 @@
 @section('content')
     <div class="container z-depth-4">
         <div class="card-panel">
-            @if(Session::get('quant'))
-                <div class="center-align quantmens">
-                    <div class="chip light-blue accent-2 lighten-2">
-                        {{Session::get('quant')}}
-                        <i class="close material-icons">close</i>
-                    </div>
-                </div>
-                {{Session::forget('quant')}}
-            @endif
+            @include('layouts.Sessoes.quant')
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header"><i class="material-icons">location_searching</i>Filtros</div>
