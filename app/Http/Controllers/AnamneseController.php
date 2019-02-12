@@ -143,9 +143,8 @@ class AnamneseController extends Controller
     }
 
     public function anamnese_create($id){
-        $pessoa_id = $id;
-        $pessoa = Pessoa::find($pessoa_id);
-        $ultimaanamnese = Anamnese::where('pessoas_id', '=', $pessoa->id)->last();
+        $pessoa = Pessoa::find($id);
+        $ultimaanamnese = Anamnese::where('pessoas_id', '=', $id)->get()->last();
         $hoje = date('Y');
         $data = explode(' ', $pessoa['nascimento']);
         list($dia, $mes, $ano) = explode('-', $data[0]);
@@ -282,6 +281,7 @@ class AnamneseController extends Controller
 
     public function anamnese_info($id){
         $anamnese = Anamnese::find($id);
+
         $pessoa = Pessoa::find($anamnese->pessoas);
 
         return view ('anamneses_file.anamneses_info', compact('anamnese', 'pessoa'));

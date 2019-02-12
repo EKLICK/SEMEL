@@ -252,11 +252,17 @@
                         </div>
                     </div>
                     <br><br>
-                    <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistroanamneses">Lista de anamneses para a pessoa</a>
-                    &emsp;&emsp;&emsp;&emsp;
-                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Crinar nova anamnese para {{$pessoa->nome}}" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add</i></a>
-                    <br><br>
-                    <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistroturmasnucleo">Lista de núcleos e turma da pessoa</a>
+                    <div class="row">
+                        <div class="col s12">
+                            <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroturmasnucleo">Lista de núcleos e turma da pessoa</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroanamneses">Lista de anamneses&emsp;&nbsp; <i class="material-icons">insert_drive_file</i></a>
+                            <a class="tooltipped waves-effect waves-light btn-large light-blue darken-1" data-position="top" data-tooltip="Criar nova anamnese para {{$nomes[0]}}" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -267,7 +273,7 @@
             <div class="row">
                 <h5>Núcleo no qual a pessoa está Ativa</h5>
                 <div class="col s10">
-                    <table class="centered">
+                    <table class="centered responsive-table highlight bordered">
                         <thead>
                             <tr>
                                 <th>Nome do núcleo</th>
@@ -289,7 +295,7 @@
             <div class="row">
                 <h5>Turmas no qual a pessoa está Ativa &nbsp <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
                 <div class="col s10">
-                    <table class="centered">
+                    <table class="centered responsive-table highlight bordered">
                         <thead>
                             <th>Nome da turma</th>
                             <th>Estado da turma</th>
@@ -337,6 +343,33 @@
     </div>
 
     <div id="modalregistroanamneses" class="modal">
-
+        <div class="container">
+            <div class="col s12">
+                <table class="centered responsive-table highlight bordered">
+                    <thead>
+                        <th>Estado</th>
+                        <th>Ano do registro</th>
+                        <th>Mais informações</th>
+                        <th>Edição</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($anamneses as $anamnese)
+                            <tr>
+                                <td><i class="small material-icons" @if($anamnese->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
+                                <td><p>{{$anamnese->ano}}</p></td>
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a></td>
+                                @if($pessoa->deleted_at == null)
+                                    @if($anamnese->ano == $ano)
+                                        <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a></td>
+                                    @else
+                                        <td><p>Esta anamnese não <br> pode ser mais editada</p></td>
+                                    @endif
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection

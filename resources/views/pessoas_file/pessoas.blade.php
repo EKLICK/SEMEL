@@ -175,7 +175,6 @@
                             <td><p>@if($pessoa->estado == 2) Incompleto @else Completo @endif</p><i class="small material-icons" @if($pessoa->estado == 2) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Lista de anamneses de {{$pessoa->nome}}" href="{{Route('lista_anamnese', $pessoa->id)}}"><i class="small material-icons">description</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$pessoa->nome}}" href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons">group</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$pessoa->nome}}" href="{{Route('pessoas.edit', $pessoa->id)}}"><i class="small material-icons">edit</i></a>
                             </td>

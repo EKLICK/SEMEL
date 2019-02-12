@@ -2,9 +2,9 @@
 
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
-    <a href="{{route('lista_anamnese', $pessoa->id)}}" class="breadcrumb">Anamneses</a>
-    <a href="{{route('pessoas.create')}}" class="breadcrumb">Criar Anamneses</a>
+    <a href="{{Route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{Route('pessoa_info', $pessoa->id)}}" class="breadcrumb">Informações</a>
+    <a href="{{Route('pessoas.create')}}" class="breadcrumb">Criar Anamneses</a>
 @endsection
 @section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
@@ -27,13 +27,13 @@
                 <div class="row">
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">local_parking</i>
-                        <input name="peso" id="icon_prefix" type="number" step="0.01" class="validate" value="@if(is_null(old('peso'))) {{$ultimaanamnese->peso}} @else {{old('peso')}} @endif">
-                        <label for="icon_prefix">Peso:</label>
+                        <input name="peso" id="peso" type="number" step="0.01" class="validate" @if(is_null(old('peso'))) value="{{$ultimaanamnese->peso}}" @else value="{{old('peso')}}" @endif>
+                        <label for="peso">Peso:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">format_color_text</i>
-                        <input name="altura" id="icon_altura" type="number" step="0.01" class="validate" value="@if(is_null(old('altura'))) {{$ultimaanamnese->altura}} @else {{old('altura')}} @endif">
-                        <label for="icon_altura">Altura:</label>
+                        <input name="altura" id="altura" type="number" step="0.01" class="validate" @if(is_null(old('altura'))) value="{{$ultimaanamnese->altura}}" @else value="{{old('altura')}}" @endif>
+                        <label for="altura">Altura:</label>
                     </div>
                 </div>
                 <div class="row">

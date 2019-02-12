@@ -399,10 +399,6 @@ class PessoasController extends Controller
     public function lista_anamnese($id){
         $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->paginate(10);
         $pessoa = Pessoa::find($id);
-        if($pessoa == null){
-            $pessoaslist = Pessoa::onlyTrashed()->get();
-            $pessoa = $pessoaslist->find($id);
-        }
         $ano = date('Y');
         Session::put('quant', 'Foram encontradas '. count($pessoa->anamneses).' anamneses de '. $pessoa->nome);
 
@@ -426,8 +422,10 @@ class PessoasController extends Controller
         $dadosgerais = [$a,$b,$c];
         $idsturmas = array_unique($idsturmas);
         $listnucleopessoa = Nucleo::whereIn('id', $idsturmas)->get();
+        $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->get();
+        $ano = date('Y');
 
-        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa'));
+        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano'));
     }
 
     public function pdfpessoas($id){
@@ -440,13 +438,12 @@ class PessoasController extends Controller
     }
 
     public function pessoas_turmas($id){
-        $pessoa = Pessoa::find($id);
-        $turmaslist = Turma::orderBy('nome')->paginate(10);
-        $turmasall = Turma::all();
         $nucleoslist = Nucleo::all();
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $pessoa = Pessoa::find($id);
         $quantidade = Quant::find(1);
-        Session::put('quant', count($turmasall).' turmas cadastradas.');
+        $turmaslist = Turma::orderBy('nome');
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        Session::put('quant', count($turmaslist).' turmas cadastradas.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist','quantidade'));
     }

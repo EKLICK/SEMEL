@@ -25,7 +25,16 @@
                         </tr>
                         <tr>
                             <td><h6>Possui doença:</h6></td>
-                            <td><h6>@if($anamnese->possui_doenca == 1) Não @else Sim @endif</h6></td>
+                            <td>
+                                <h6>
+                                    @if($anamnese->possui_doenca == 2)
+                                        Não 
+                                    @else 
+                                        Sim&emsp;
+                                        <a class="waves-effect waves-light btn blue modal-trigger btn-modal_inativar" href="#listadoencas">Doenças</a>
+                                    @endif
+                                </h6>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -141,8 +150,24 @@
                 </table>
             </div>
         </div>
-        <div class="row right">
-            <a href="{{route('pdfanamnese', $anamnese->id)}}" class="waves-effect waves-light btn">PDF</a>
+    </div>
+
+    <div class="modal" id="listadoencas">
+        <div class="container">
+            <table class="centered responsive-table highlight bordered">
+                <thead>
+                    <th>Nome da Doença</th>
+                    <th>Descrição</th>
+                </thead>
+                <tbody>
+                    @foreach ($anamnese->doencas as $doenca)
+                        <tr>
+                            <td>{{$doenca->nome}}</td>
+                            <td>{{$doenca->descricao}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

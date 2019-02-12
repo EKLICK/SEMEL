@@ -175,13 +175,13 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante == 'sim') checked @endif @endif/>
+                                <input value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante == 1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($anamnese->fumante == 'não') checked @endif @endif/>
+                                <input value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($anamnese->fumante == 2) checked @endif @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
