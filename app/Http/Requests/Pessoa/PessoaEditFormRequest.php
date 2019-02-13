@@ -25,8 +25,8 @@ class PessoaEditFormRequest extends FormRequest
     public function rules()
     {
         return [
-            '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpg)|(img))+$/'],
-            'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpg)|(img))+$/'],
+            '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
+            'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],

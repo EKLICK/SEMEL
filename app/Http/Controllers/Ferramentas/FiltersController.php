@@ -433,24 +433,27 @@ class filtersController extends Controller
                 $i = $dataForm['tabelas'];
                 switch ($i[0]) {
                     case 0:
-                        $query->where('auditable_type', '=', 'App\user')->get();
+                        $query->where('auditable_type', '=', 'App\quant')->get();
                         break;
                     case 1:
-                        $query->where('auditable_type', '=', 'App\Professor')->get();
+                        $query->where('auditable_type', '=', 'App\user')->get();
                         break;
                     case 2:
-                        $query->where('auditable_type', '=', 'App\Pessoa')->get();
+                        $query->where('auditable_type', '=', 'App\Professor')->get();
                         break;
                     case 3:
-                        $query->where('auditable_type', '=', 'App\Anamnese')->get();
+                        $query->where('auditable_type', '=', 'App\Pessoa')->get();
                         break;
                     case 4:
-                        $query->where('auditable_type', '=', 'App\Doenca')->get();
+                        $query->where('auditable_type', '=', 'App\Anamnese')->get();
                         break;
                     case 5:
-                        $query->where('auditable_type', '=', 'App\Turma')->get();
+                        $query->where('auditable_type', '=', 'App\Doenca')->get();
                         break;
                     case 6:
+                        $query->where('auditable_type', '=', 'App\Turma')->get();
+                        break;
+                    case 7:
                         $query->where('auditable_type', '=', 'App\Nucleo')->get();
                         break;
                 }

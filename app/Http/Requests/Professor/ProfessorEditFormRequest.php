@@ -28,7 +28,8 @@ class ProfessorEditFormRequest extends FormRequest
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'matricula'             => 'required|integer|unique:professores,matricula,'.$this->id.'|',
             'nascimento'            => 'required|date-format:d/m/Y',
-            'bairro'                => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'bairro'                => 'required_without:string_bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
+            'string_bairro'         => 'required_without:bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'required|digits_between:0,5',
             'cep'                   => 'required|max:10|min:10',
@@ -56,6 +57,10 @@ class ProfessorEditFormRequest extends FormRequest
             'bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
             'bairro.max' => 'Insira um bairro válido!',
             'bairro.regex' => 'Não insira caracteres especiais no bairro',
+
+            'string_bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
+            'string_bairro.max' => 'Insira um bairro válido!',
+            'string_bairro.regex' => 'Não insira caracteres especiais no bairro',
 
             'rua.required' => 'O campo rua é de preenchimento obrigatório!',
             'rua.max' => 'Insira uma rua válida!',

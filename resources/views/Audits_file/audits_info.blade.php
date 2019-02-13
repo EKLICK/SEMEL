@@ -49,11 +49,29 @@
                     </tr>
                     <tr>
                         <td><h6>Old value:</h6></td>
-                        <td ><h6>@if($audit->old_values == '[]') nenhum valor substituido @else {{$audit->old_values}} @endif</h6></td>
+                        <td >
+                            <h6>
+                                @if($audit->old_values == '[]') 
+                                    nenhum valor substituido 
+                                @else
+                                    {{substr($audit->old_values, 0, 40)}}
+                                    {{substr($audit->old_values, 40, 53)}} 
+                                @endif
+                            </h6>
+                        </td>
                     </tr>
                     <tr>
                         <td><h6>New value:</h6></td>
-                        <td><h6>@if($audit->new_values == '[]') nenhum valor criado @else {{$audit->new_values}} @endif</h6></td>
+                        <td>
+                            <h6>
+                                @if($audit->new_values == '[]') 
+                                    nenhum valor criado 
+                                @else
+                                    {{substr($audit->new_values, 0, 40)}}
+                                    {{substr($audit->new_values, 40, 53)}} 
+                                @endif
+                            </h6>
+                        </td>
                     </tr>
                     <tr>
                         <td><h6>User agent:</h6></td>

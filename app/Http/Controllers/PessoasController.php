@@ -82,14 +82,13 @@ class PessoasController extends Controller
 
     public function checar_estado($listadados, $nascimento){
         if($listadados['img_3x4'] == null){return 2;}
-        if($listadados['rg'] == null){return 2;}
         if($nascimento >= 18){
             if($listadados['cpf'] == null){return 2;}
+            if($listadados['rg'] == null){return 2;}
         }
         if($listadados['bairro'] == null){return 2;}
         if($listadados['rua'] == null){return 2;}
         if($listadados['numero_endereco'] == null){return 2;}
-        if($listadados['complemento'] == null){return 2;}
         if($listadados['cep'] == null){return 2;}
         if($listadados['telefone'] == null){return 2;}
         if($listadados['telefone_emergencia'] == null){return 2;}
@@ -188,11 +187,13 @@ class PessoasController extends Controller
         }
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
-        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+        if(!isset($dataForm['bairro'])){
+            dd($dataForm['bairro']);
+            $dataForm['bairro'] = null;
+        }
         if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
-        
         $estado = $this->checar_estado($dataForm, $nascimento);
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
@@ -340,7 +341,9 @@ class PessoasController extends Controller
         }
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
-        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+        if(!isset($dataForm['bairro'])){
+            $dataForm['bairro'] = null;
+        }
         if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
@@ -433,9 +436,10 @@ class PessoasController extends Controller
         $nucleoslist = Nucleo::all();
         $pessoa = Pessoa::find($id);
         $quantidade = Quant::find(1);
-        $turmaslist = Turma::orderBy('nome');
+        $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->paginate(10);
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        Session::put('quant', count($turmaslist).' turmas cadastradas.');
+        $count = Turma::all();
+        Session::put('quant', count($count).' turmas cadastradas.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist','quantidade'));
     }
@@ -452,7 +456,13 @@ class PessoasController extends Controller
         $dataForm = $request->all();
         $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
         $limite = Quant::find(1);
-        if(count($pessoa->turmas) >= $limite->quantidade){
+        $quant = 0;
+        foreach($pessoa->turmas as $turma){
+            if($turma->pivot->inativo == 1){
+                $quant++;
+            }
+        }
+        if($quant >= $limite->quantidade){
             Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
 
             return redirect()->Route('pessoas_turmas', $pessoa->id);
@@ -500,7 +510,13 @@ class PessoasController extends Controller
             ]);
         }
         else{
-            if(count($pessoa->turmas) >= $limite->quantidade){
+            $quant = 0;
+            foreach($pessoa->turmas as $turma){
+                if($turma->pivot->inativo == 1){
+                    $quant++;
+                }
+            }
+            if($quant >= $limite->quantidade){
                 Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
     
                 return redirect()->Route('pessoas_turmas', $pessoa->id);

@@ -161,9 +161,30 @@ function change_bairro(){
         $('#div_bairro_list').show(400);
         $('#div_bairro_string').hide(400);
         $('#string_bairro').val('');
+        $('#bairro_select').empty();
+        $('#bairro_select').append('<option value="" selected disabled>Selecione o bairro</option>');
+        var array_bairro = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
+                            'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
+                            'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
+                            'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        for(var i = 0; i < array_bairro.length; i++){
+            $('#bairro_select').append('<option value="'+array_bairro[i]+'">'+array_bairro[i]+'</option>');
+        }
+        $('select').formSelect();
     }
     else{
+        $('#string_bairro').val('');
         $('#div_bairro_list').hide(400);
         $('#div_bairro_string').show(400);
     }
+}
+
+function change_bairro_select(){
+    var bairro = document.getElementById('bairro_select');
+    $('#string_bairro').val(bairro.options[bairro.selectedIndex].value);
+}
+
+
+function old_doencas_function(){
+    $('#old_doencas').val($('#lista_de_pessoas').val());
 }

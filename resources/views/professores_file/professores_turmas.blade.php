@@ -159,7 +159,6 @@
                                         </td>
                                     @endif
                                 @endif
-                                <td><p>{{count($turma->pessoas)}} / {{$turma->limite}}</p><i class="small material-icons" @if(count($turma->pessoas) >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             @else
                                 <td>
                                     <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a>

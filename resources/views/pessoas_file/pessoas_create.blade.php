@@ -63,7 +63,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg')}}">
+                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg_responsavel')}}">
                         <label for="rg_responsavel">RG opcional:</label>
                     </div>
                 </div>
@@ -77,10 +77,10 @@
                         <a class="btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                            <select name="bairro">
+                            <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                    <option value="{{$bairro}}" @if(old('string_bairro') == $bairro) selected @endif>{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -408,17 +408,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <input type="text" name="old_doencas" id="old_doencas" hidden>
+                    @php $old_ids_doencas = explode(',', old('old_doencas')) @endphp
                     <div class="input-field col s12 m5">
                         Possui doenças?
-                        <select multiple name="doencas[]" id="lista_de_pessoas">
+                        <select multiple name="doencas[]" id="lista_de_pessoas" onchange="old_doencas_function()">
                             @foreach ($doencaslist as $doenca)
-                                <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
+                                <option value="{{$doenca->id}}" @foreach ($old_ids_doencas as $old_doenca) @if($doenca->id == $old_doenca) selected @endif @endforeach>{{$doenca->nome}}</option>
                             @endforeach
                         </select>
                         <input type="text" value="2" name="possui_doenca" hidden>
                     </div>
                     <div class="input-field col s12 m5">
-                            <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar light-blue darken-1"><i class="material-icons">note_add</i></a>
+                        <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar light-blue darken-1"><i class="material-icons">note_add</i></a>
                     </div>
                 </div>
                 <div class="row">

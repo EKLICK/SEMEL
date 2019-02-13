@@ -62,6 +62,10 @@ class ProfessorCreateFormRequest extends FormRequest
             'bairro.max' => 'Insira um bairro válido!',
             'bairro.regex' => 'Não insira caracteres especiais no bairro',
 
+            'string_bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
+            'string_bairro.max' => 'Insira um bairro válido!',
+            'string_bairro.regex' => 'Não insira caracteres especiais no bairro',
+
             'rua.required' => 'O campo rua é de preenchimento obrigatório!',
             'rua.max' => 'Insira uma rua válida!',
             'rua.regex' => 'Não insira caracteres especiais na rua',

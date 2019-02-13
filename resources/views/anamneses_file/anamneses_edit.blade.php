@@ -178,15 +178,17 @@
                     </div>
                 </div>
                 <div class="row">
+                    <input type="text" name="old_doencas" id="old_doencas">
+                    @php $old_ids_doencas = explode(',', old('old_doencas'));@endphp
                     <div class="input-field col s12 m5">
                         Possui doenças?
-                        <select multiple name="doencas[]" id="lista_de_pessoas">
+                        <select multiple name="doencas[]" id="lista_de_pessoas" onchange="old_doencas_function()">
                             @foreach ($doencaslist as $doenca)
-                                <option value="{{$doenca->id}}" @foreach ($anamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach>{{$doenca->nome}}</option>
+                                <option value="{{$doenca->id}}" @if(is_null($old_ids_doencas)) @foreach ($anamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach @else @foreach ($old_ids_doencas as $old_doenca) @if($doenca->id == $old_doenca) selected @endif @endforeach @endif>{{$doenca->nome}}</option>
                             @endforeach
                         </select>
+                        <input type="text" value="2" name="possui_doenca" hidden>
                     </div>
-                    <input type="text" value="2" name="possui_doenca" hidden>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
