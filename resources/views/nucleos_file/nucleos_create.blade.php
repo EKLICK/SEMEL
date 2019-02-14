@@ -20,11 +20,12 @@
                         <label for="icon_nome">Nome do núcleo:</label>
                     </div>
                     <div class="input-field col s12 m6">
+                        <input type="text" name="string_bairro" id="string_bairro" value="{{old('string_bairro')}}" hidden>
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                        <select name="bairro" required>
+                        <select name="bairro" onchange="change_bairro_select()" id="bairro_select" required>
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}">{{$bairro}}</option>
+                                <option value="{{$bairro}}" @if(old('string_bairro') == $bairro) selected @endif>{{$bairro}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,7 +50,7 @@
                 <div class="row">
                     <div class="input-field col s12 l6 xl6">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" required>{{old('descricao')}}</textarea>
+                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição do núcleo:</label>
                     </div>
                 </div>

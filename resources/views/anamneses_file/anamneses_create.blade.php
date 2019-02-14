@@ -163,26 +163,25 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($ultimaanamnese->fumante == 'sim') checked @endif @endif/>
+                                <input value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($ultimaanamnese->fumante == 1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($ultimaanamnese->fumante == 'não') checked @endif @endif/>
+                                <input value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($ultimaanamnese->fumante == 2) checked @endif @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                 </div>
                 <div class="row">
-                    <input type="text" name="old_doencas" id="old_doencas">
+                    <input type="text" name="old_doencas" id="old_doencas" value="{{old('old_doencas')}}" hidden>
                     @php $old_ids_doencas = explode(',', old('old_doencas')) @endphp
                     <div class="input-field col s12 m5">
                         Possui doenças?
                         <select multiple name="doencas[]" id="lista_de_pessoas" onchange="old_doencas_function()">
                             @foreach ($doencaslist as $doenca)
-                            {{dd($old_ids_doencas)}};
                                 <option value="{{$doenca->id}}" @if(!is_null($old_ids_doencas)) @foreach ($ultimaanamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach @else @foreach ($old_ids_doencas as $old_doenca) @if($doenca->id == $old_doenca) selected @endif @endforeach @endif>{{$doenca->nome}}</option>
                             @endforeach
                         </select>

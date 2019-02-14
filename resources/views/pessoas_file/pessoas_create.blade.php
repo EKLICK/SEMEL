@@ -275,9 +275,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') == 1) hidden @endif>description</i>
-                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') == 1) hidden @endif>
-                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') == 1) hidden @endif>Qual medicamento?</label>
+                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') != 1) hidden @endif>description</i>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') != 1) hidden @endif>
+                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') != 1) hidden @endif>Qual medicamento?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -408,7 +408,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="text" name="old_doencas" id="old_doencas" hidden>
+                    <input type="text" name="old_doencas" id="old_doencas" value="{{old('old_doencas')}}" hidden>
                     @php $old_ids_doencas = explode(',', old('old_doencas')) @endphp
                     <div class="input-field col s12 m5">
                         Possui doenças?

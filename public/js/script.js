@@ -188,3 +188,11 @@ function change_bairro_select(){
 function old_doencas_function(){
     $('#old_doencas').val($('#lista_de_pessoas').val());
 }
+
+function old_dias_function(){
+    $('#old_dias').val($('#lista_de_dias').val());
+}
+
+function old_nucleo_function(){
+    $('#old_nucleo').val($('#lista_de_nucleos').val());
+}

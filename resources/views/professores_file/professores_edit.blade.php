@@ -42,10 +42,10 @@
                         <a class="btn-floating right light-blue darken-1" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if($professor->bairro != null || !is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                            <select name="bairro">
+                            <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                    <option value="{{$bairro}}" @if(old('string_bairro') == $bairro) selected @endif>{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>

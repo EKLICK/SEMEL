@@ -42,7 +42,7 @@
                             <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro}}">{{$bairro}}</option>
+                                    <option value="{{$bairro}}" @if(old('string_bairro') == $bairro) selected @endif>{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>

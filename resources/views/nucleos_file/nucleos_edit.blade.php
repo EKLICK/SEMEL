@@ -19,11 +19,12 @@
                         <label for="icon_nome">Nome do núcleo:</label>
                     </div>
                     <div class="input-field col s12 m6">
+                        <input type="text" name="string_bairro" id="string_bairro" value="{{old('string_bairro')}}" hidden>
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
-                        <select name="bairro" required>
+                        <select name="bairro" onchange="change_bairro_select()" id="bairro_select" required>
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}"  @if($bairro == $nucleo->bairro) selected @endif>{{$bairro}}</option>
+                                <option value="{{$bairro}}" @if(is_null(old('string_bairro'))) @if($bairro == $nucleo->bairro) selected @endif @else @if(old('string_bairro') == $bairro) selected @endif @endif>{{$bairro}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -32,6 +32,7 @@ class TurmaCreateEditFormRequest extends FormRequest
             'data_semanal'          => 'required|array|',
             'nucleo_id'             => 'required|exists:nucleos,id',
             'descricao'             => 'sometimes|nullable|between:5,100',
+            'inativo'               => ['required', Rule::in(['1', '2']),],
         ];
     }
 
@@ -53,6 +54,8 @@ class TurmaCreateEditFormRequest extends FormRequest
             'data_semanal.required' => 'O campo dias da semana é de preenchimento obrigatório!',
 
             'nucleo_id.required' => 'O campo núcleo é de preenchimento obrigatório!',
+
+            'inativo.required' => 'O campo de inatividade é de prenchimento obrigatório',
 
             'descricao.between' => 'O campo descrição deve estar entre 5 e 100 caracteres!',
         ];

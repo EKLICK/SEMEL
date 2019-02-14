@@ -37,19 +37,22 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
+                        <input type="text" name="old_dias" id="old_dias" value="{{old('old_dias')}}" hidden>
+                        @php $old_ids_dias = explode(',', old('old_dias')) @endphp
                         <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
-                        <select name="data_semanal[]" multiple required>
+                        <select multiple name="data_semanal[]" id="lista_de_dias" onchange="old_dias_function()" required>
                             @foreach ($dias_semana as $dia)
-                                <option value="{{$dia}}">{{$dia}}</option>
+                                <option value="{{$dia}}" @foreach ($old_ids_dias as $old_dia) @if($dia == $old_dia) selected @endif @endforeach>{{$dia}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="input-field col s12 m5">
+                        <input type="text" name="old_nucleo" id="old_nucleo" value="{{old('old_nucleo')}}"  hidden>
                         <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
-                        <select name="nucleo_id" required>
+                        <select name="nucleo_id" id="lista_de_nucleos" onchange="old_nucleo_function()" required>
                             <option value="" selected disabled>Selecione o núcleo</option>
                             @foreach ($nucleoslist as $nucleo)
-                                <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
+                                <option value="{{$nucleo->id}}" @if($nucleo->id == old('old_nucleo')) selected @endif>{{$nucleo->nome}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -57,7 +60,7 @@
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" required>{{old('descricao')}}</textarea>
+                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição da turma:</label>
                     </div>
                 </div>
