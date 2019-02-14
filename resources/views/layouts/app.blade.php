@@ -73,7 +73,7 @@
                 </div>
             </div>
         @endguest
-        <ul class="sidenav light-blue darken-1" id="mobile-demo">
+        <ul class="sidenav grey lighten-2" id="mobile-demo">
             <div class="card">
                 <ul class="collapsible">
                     @include('layouts.menu')

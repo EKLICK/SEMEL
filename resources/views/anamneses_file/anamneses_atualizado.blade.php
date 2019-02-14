@@ -136,15 +136,7 @@
 
     <div class="modal" id="listadoencas">
         <div class="container">
-            <table class="centered responsive-table highlight bordered" id="lista_de_doencas">
-                <thead>
-                    <tr>
-                        <th>Nome da Doença</th>
-                        <th>Descrição</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <table class="centered responsive-table highlight bordered" id="lista_de_doencas"></table>
         </div>
     </div>
 @endsection

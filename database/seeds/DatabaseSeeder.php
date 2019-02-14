@@ -22,5 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AnamnesesDoencasTableSeeder::class);
         $this->call(TurmasPessoasTableSeeder::class);
         $this->call(TurmasProfessoresTableSeeder::class);
+        $this->call(HistoricoPessoasTurmasTableSeeder::class);
+        $this->call(HistoricoProfessoresTurmasTableSeeder::class);
+        $this->call(HistoricoTurmasTableSeeder::class);
+        $this->call(HistoricoNucleosTableSeeder::class);
+        $this->call(QuantPessoaTurmasTableSeeder::class);
     }
 }
