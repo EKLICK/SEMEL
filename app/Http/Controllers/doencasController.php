@@ -114,8 +114,14 @@ class DoencasController extends Controller
             return response()->json(1);
         }
         else{
-            $listadoencas = Doenca::create($dataForm);
-            return response()->json($listadoencas);
+            $doenca = Doenca::create($dataForm);
+            return response()->json($doenca);
         }
+    }
+
+    public function modal_doencas(Request $request){
+        $dataForm = $request->all();
+        $anamnese = Anamnese::find($dataForm['id']);
+        return response()->json($anamnese->doencas);
     }
 }

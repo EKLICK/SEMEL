@@ -49,7 +49,8 @@ Route::get('/anamneses_info/{id}','AnamneseController@anamnese_info')->name('ana
 
 //Rotas de doenças
 Route::resource('doencas','DoencasController')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/ajax/doenca','DoencasController@criar_doenca_ajax')->name('ajax_doenca')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/ajax/doenca','DoencasController@criar_doenca_ajax')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/ajax/modal','DoencasController@modal_doencas')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de turmas
 Route::resource('turmas','TurmasController')->middleware('AdministracaoEProfessor', 'Authenticate');

@@ -108,16 +108,16 @@
                     <tr>
                         <th>Nome da pessoa</th>
                         <th>Ano</th>
-                        <th>Quant Doenças</th>
+                        <th>Doenças</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody>
                     @foreach ($anamneseslist as $anamnese)
                         <tr>
                             <td><p>@if(isset($anamnese->pessoas->nome)) {{$anamnese->pessoas->nome}} @else Usuário não cadastrado @endif</p></td>
                             <td><p>{{$anamnese->ano}}</p></td>
-                            <td><p>{{count($anamnese->doencas)}}</p></td>
+                            <td>@if(count($anamnese->doencas) == 0) Não possui @else <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Doenças da anamnese" href="#listadoencas" onclick="modal_doencas({{$anamnese->doencas}})"><i class="small material-icons">info_outline</i></a> @endif</td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a>
@@ -131,6 +131,20 @@
             @else
                 {{$anamneseslist->links()}}
             @endif
+        </div>
+    </div>
+
+    <div class="modal" id="listadoencas">
+        <div class="container">
+            <table class="centered responsive-table highlight bordered" id="lista_de_doencas">
+                <thead>
+                    <tr>
+                        <th>Nome da Doença</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 @endsection
