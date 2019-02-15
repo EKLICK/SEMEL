@@ -120,8 +120,8 @@
                     <tr>
                         <th>Nome da turma</th>
                         <th>Núcleo pertencente</th>
-                        <th>Estado</th>
                         <th>Limite de alunos</th>
+                        <th>Situação</th>
                         <th>Vinculo</th>
                         <th>Mudar vinculo</th>
                     </tr>

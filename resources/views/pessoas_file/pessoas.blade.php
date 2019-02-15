@@ -136,7 +136,7 @@
                     <tr>
                         <th>Nome da pessoa</th>
                         <th>Atualizações</th>
-                        <th>Estatos</th>
+                        <th>Situação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>

@@ -83,7 +83,7 @@
                     <tr>
                         <th>Nome da turma</th>
                         <th>Endereço</th>
-                        <th>Estado</th>
+                        <th>Situação</th>
                         <th>Mudar estado</th>
                         <th>Ações</th>
                     </tr>

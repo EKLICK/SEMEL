@@ -18,7 +18,8 @@ use App\Doenca;
 use App\Turma;
 use App\Anamnese;
 use App\HistoricoPT;
-
+//CONTROLE DE PESSOAS
+//Comentarios em cima, código comentado em baixo.
 class PessoasController extends Controller
 {
     /**
@@ -27,35 +28,8 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //Funções ferramentas
-    public function filtrar_ano($pessoasnalista, $anofiltro, $option){
-        $pessoasfiltradas = [];
-        foreach($pessoasnalista as $pessoanalista){
-            list($dia, $mes, $ano) = explode('/', $pessoanalista['nascimento']);
-            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-            $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-            $idade = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-            if($option == 1){
-                if($idade >= $anofiltro){
-                    array_push($pessoasfiltradas, $pessoanalista);
-                }
-                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
-                    array_pust($pessoasfiltradas, $pessoanalista);
-                }
-            }
-            else{
-                if($idade <= $anofiltro){
-                    array_push($pessoasfiltradas, $pessoanalista);
-                }
-                if($dia.'/'.$mes == '29/02' && (date('Y')/4 == 0 && date('Y')/100 != 0)){
-                    array_pust($pessoasfiltradas, $pessoanalista);
-                }
-            }
-        }
-
-        return $pessoasfiltradas;
-    }
-
+    //FUNÇÃO DE FERRAMENTAS:
+    //Ferramenta saveDbImage3x4: Salva a imagem 3 por 4 vindo das requisições do formulario.
     public function saveDbImage3x4($req){
         $data = $req->all();
         $imagem = $req->file('img_3x4');
@@ -68,6 +42,7 @@ class PessoasController extends Controller
         return $data['img_3x4'];
     }
 
+    //Ferramenta saveDbImageMatricula: Salva a imagem de matricula vindo das requisições do formulario.
     public function saveDbImageMatricula($req){
         $data = $req->all();
         $imagem = $req->file('img_matricula');
@@ -80,12 +55,9 @@ class PessoasController extends Controller
         return $data['img_matricula'];
     }
 
+    //Ferramenta checar_estado: Verifica de todos os parametros necessarios para completar um perfil estão preenchidos.
     public function checar_estado($listadados, $nascimento){
         if($listadados['img_3x4'] == null){return 2;}
-        if($nascimento >= 18){
-            if($listadados['cpf'] == null){return 2;}
-            if($listadados['rg'] == null){return 2;}
-        }
         if($listadados['bairro'] == null){return 2;}
         if($listadados['rua'] == null){return 2;}
         if($listadados['numero_endereco'] == null){return 2;}
@@ -96,18 +68,29 @@ class PessoasController extends Controller
         if($listadados['pessoa_emergencia'] == null){return 2;}
         if($listadados['estado_civil'] == null){return 2;}
         if($listadados['mora_com_os_pais'] == null){return 2;}
+        //Verifica de o usuário é menor de idade.
         if($nascimento < 18){
+            //Se sim, matricula, cpf_responsavel e rg_responsavel serão contados.
             if($listadados['img_matricula'] == null){return 2;}
             if($listadados['cpf_responsavel'] == null){return 2;}
             if($listadados['rg_responsavel'] == null){return 2;}
         }
+        else{
+            //Se não, cpf e rg serão contados.
+            if($listadados['cpf'] == null){return 2;}
+            if($listadados['rg'] == null){return 2;}
+        }
         return 1;
     }
 
+    //Ferramenta mostrar_nascimento: retornar a data de nascimento (YYYY-mm-dd) convertida em idade e (dd/mm/YYYY).
     public function mostrar_nascimento($data, $opcao){
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         $dia_hora = explode(' ', $data);
         list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+
+        //Caso 1: Converte de YYYY-mm-dd para idade.
+        //Caso 2: Converte de idade para dd/mm/YYYY.
         if($opcao == 1){
             $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
             $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
@@ -118,11 +101,13 @@ class PessoasController extends Controller
         return $data;
     }
     
-    //Funções de Redirecionamento
+    //FUNÇÕES DE REDIRECIONAMENTO:
+    //Função index, retorna a página de registros de pessoas.
     public function index()
     {
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         foreach($pessoaslist as $pessoa){
+            //Converter YYYY-mm-dd para idade.
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
         $ano = date('Y');
@@ -138,14 +123,7 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function deletarPessoaCriada($id){
-        Session::forget('mensagem');
-        $pessoa = Pessoa::find($id);
-        $pessoa->remove();
-
-        return redirect()->route('pessoa.create');
-    }
-
+    //Função create, retorna a página de criação de registros de pessoas.
     public function create()
     {
         $doencaslist = Doenca::all();
@@ -163,40 +141,57 @@ class PessoasController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de pessoas e turmas.
     public function store(PessoaCreateFormRequest $request)
     {
         $dataForm = $request->all();
+        //Adiciona a variavel nascimento a idade da pessoa.
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
         $errors = [];
+        //Checar se a pessoa é maior de 18 anos.
         if($nascimento > 18){
+            //Se sim, anular valores de matricula, cpf_responsavel e rg_responsavel.
             $dataForm['img_matricula'] = null;
             $dataForm['cpf_responsavel'] = null;
             $dataForm['rg_responsavel'] = null;
         }
         else{
+            //Se sim, salvar imagem de matricula no bando de dados.
             if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
             else{$dataForm['img_matricula'] = null;}
         }
-        if(isset($dataForm['marc'])){
-            if($dataForm['marc'] == 'N'){
-                $dataForm['convenio_medico'] = -1;
-            }
-        }
+        //checar se convenio médico foi marcado
+        if(isset($dataForm['marc'])){if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}}
+
+        //Se imagem foi passada, salva imagem 3 por 4 no banco de dados.
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
         else{$dataForm['img_3x4'] = null;}
-        if(!isset($dataForm['bairro'])){
-            dd($dataForm['bairro']);
-            $dataForm['bairro'] = null;
-        }
+
+        //Verifica se foi informado bairro, se não, seta como nulo.
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+
+        //Verifica de o bairro como input (type=text) foi informado, se sim, substitui variavel bairro pela strin_bairro.
         if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
+
+        //Verifica se foi informado estado_civil, se não, seta como nulo.
         if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
+
+        //Verifica se foi informado mora_com_os_pais, se não, seta como nulo.
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
-        $estado = $this->checar_estado($dataForm, $nascimento);
+
+        //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
+
+        //Verifica se os todos os campos obrigatórios estão preenchidos:
+        //se sim, seta estado como 1 (completo)
+        //se não, seta estado como 2 (incompleto)
+        $estado = $this->checar_estado($dataForm, $nascimento);
+
+        //Cria pessoa no banco de dados com todos os atributos abaixo:
         $pessoa = Pessoa::create([
             'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],
@@ -226,6 +221,9 @@ class PessoasController extends Controller
             'estado' =>$estado,
         ]);
 
+        //Verifica atributos de anamnese, 
+        //se foi selecionado sim, adiciona ao campo de input (type=text).
+        //Se foi selecionado não, adiciona -1 para o banco de dados.
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
         if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] = -1;}
@@ -234,7 +232,7 @@ class PessoasController extends Controller
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
         if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] = 'sim';}
-
+        //Cria anamnese no banco de dados com todos os atributos abaixo:
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
@@ -251,12 +249,12 @@ class PessoasController extends Controller
             'ano' => date('Y'),
             'pessoas_id' => $pessoa->id,
         ]);
-        if(isset($dataForm['doencas'])){
-            $anamnese->doencas()->attach($dataForm['doencas']);
-        }
+        //Vincula doenças na anamnese se elas foram informadas no formulario.
+        if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
+        //Adiciona sessões de informação para apresentação na página.
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem_green', $pessoa->nome.' criado(a) com sucesso!');
-
+        
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
@@ -277,11 +275,14 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função edit, retorna a página de edição de registros de pessoas.
     public function edit($id)
     {
-        $pessoa = Pessoa::find($id);
-        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $doencaslist = Doenca::all();
+        $pessoa = Pessoa::find($id);
+        ////Converter YYYY-mm-dd para idade.
+        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
@@ -297,57 +298,75 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(PessoaEditFormRequest $request, $id)
     {
+        //Encontra a pessoa no bando de dados.
         $pessoa = Pessoa::find($id);
         $dataForm = $request->all();
+        //Verifica se a imagem 3 por 4 foi passada pelo formulario
+        //Se imagem foi passada, remove imagem antiga e salva imagem nova no banco de dados.
         if(isset($dataForm['img_3x4'])){
-            if(!empty($pessoa['foto'])){
-                unlink($pessoa['foto']);
-            }
+            if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
             $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         }
-        elseif(!empty($pessoa['foto'])){
-            $dataForm += ['img_3x4' => $pessoa['foto']];
-        }
-        else{
-            $dataForm += ['img_3x4' => null];
-        }
+
+        //Se a imagem 3 por 4 existir no banco de dados e não foi passada pelo formulario,
+        //atribuir ela a variavel de imagem 3 por 4, se não, atribuir nulo.
+        elseif(!empty($pessoa['foto'])){$dataForm += ['img_3x4' => $pessoa['foto']];}
+        else{$dataForm += ['img_3x4' => null];}
+
+        //Adiciona a variavel nascimento a idade da pessoa.
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+
+        //Checar se a pessoa é maior de 18 anos.
         if($nascimento > 18){
+            //Se sim, anular valores de matricula, cpf_responsavel e rg_responsavel.
             $dataForm['img_matricula'] = null;
             $dataForm['cpf_responsavel'] = null;
             $dataForm['rg_responsavel'] = null;
         }
         else{
+            //Verifica se a imagem de matricula foi passada pelo formulario
+            //Se imagem foi passada, remove imagem antiga e salva imagem nova no banco de dados.
             if(isset($dataForm['img_matricula'])){
-                if(!empty($pessoa['matricula'])){
-                    unlink($pessoa['matricula']);
-                }
+                if(!empty($pessoa['matricula'])){unlink($pessoa['matricula']);}
                 $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
             }
-            elseif(!empty($pessoa['matricula'])){
-                $dataForm += ['img_matricula' => $pessoa['matricula']];
-            }
-            else{
-                $dataForm += ['img_matricula' => null];
-            }
+            //Se a imagem de matricula existir no banco de dados e não foi passada pelo formulario,
+            //atribuir ela a variavel de imagem de matricula, se não, atribuir nulo.
+            elseif(!empty($pessoa['matricula'])){$dataForm += ['img_matricula' => $pessoa['matricula']];}
+            else{$dataForm += ['img_matricula' => null];}
         }
-        if($dataForm['marc'] == 'N'){
-            $dataForm['convenio_medico'] = -1;
-        }
+        //checar se convenio médico foi marcado
+        if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}
+
+        //Verifica se foi informado bairro, se não, seta como nulo.
+        if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
+
+        //Verifica de o bairro como input (type=text) foi informado, se sim, substitui variavel bairro pela strin_bairro.
+        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
+
+        //Verifica se foi informado estado_civil, se não, seta como nulo.
+        if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
+ 
+        //Verifica se foi informado mora_com_os_pais, se não, seta como nulo.
+        if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
+
+        //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
-        if(!isset($dataForm['bairro'])){
-            $dataForm['bairro'] = null;
-        }
-        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
-        if(!isset($dataForm['estado_civil'])){$dataForm['estado_civil'] = null;}
-        if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
+
+        //Verifica se os todos os campos obrigatórios estão preenchidos:
+        //se sim, seta estado como 1 (completo)
+        //se não, seta estado como 2 (incompleto)
         $estado = $this->checar_estado($dataForm, $nascimento);
+
+        //Edita pessoa no banco de dados com todos os atributos abaixo:
         $pessoa->update([
             'foto' => $dataForm['img_3x4'],
             'nome' => $dataForm['nome'],
@@ -388,62 +407,72 @@ class PessoasController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        //
+        //Função de deletar não ultilizada para pessoas.
     }
 
-    public function lista_anamnese($id){
-        $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->paginate(10);
-        $pessoa = Pessoa::find($id);
-        $ano = date('Y');
-        Session::put('quant', 'Foram encontradas '. count($pessoa->anamneses).' anamneses de '. $pessoa->nome);
-
-        return view ('Pessoas_file.pessoas_lista_anamnese', compact('anamneses', 'pessoa', 'ano'));
-    }
-
+    //Função pessoas_info: seleciona informações necessarias para vizualização e retorna a página de informações da pessoa.
     public function pessoas_info($id){
+        //Encontra a pessoa no bando de dados.
         $pessoa = Pessoa::find($id);
+        //Encontra a ultima anamnese da pessoa no bando de dados.
         $anamnese = $pessoa->anamneses->last();
+
+        //Converter YYYY-mm-dd para dd/mm/YYYY.
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+
+        //Seleciona todos o histórico da pessoa encontrada.
         $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->paginate(5);
-        $a = 0;
-        $b = 0;
-        $idsturmas = [];
+
+        //Contagem de pessoas:
+        //A = Todas as pessoas (Contar ao A).
+        //B = Todas as pessoas ativas (Se o pivot inativo é 1, contar para B).
+        //C = Todas as pessoas inativas (Subtrai A pelo B e adiciona o número ao C).
+        //Adiciona id de núcleos ao array de idsnucleos e depois excluir números repetidos.
+        $a = 0; $b = 0; $idsnucleos = [];
         foreach($pessoa->turmas as $turma){
-            array_push($idsturmas, $turma->nucleo_id);
+            array_push($idsnucleos, $turma->nucleo_id);
             if($turma->pivot->inativo == 1){$b++;}
             $a++;
         }
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
-        $idsturmas = array_unique($idsturmas);
-        $listnucleopessoa = Nucleo::whereIn('id', $idsturmas)->get();
+        $idsturmas = array_unique($idsnucleos);
+
+        //Encontra todos os núcleos que estão no array de idsnucleos.
+        $listnucleopessoa = Nucleo::whereIn('id', $idsnucleos)->get();
+        
+        //Encontra todas as anamneses da pessoa para vizualização.
         $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->get();
         $ano = date('Y');
 
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano'));
     }
 
-    public function pdfpessoas($id){
-        $pessoa = Pessoa::find($id);
-        if($pessoa == null){
-            $pessoaslist = Pessoa::onlyTrashed()->get();
-            $pessoa = $pessoaslist->find($id);
-        }
-        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
-    }
-
+    //Função pessoas_turmas: seleciona informações necessarias para vizualização e retorna a página de turmas e pessoas.
     public function pessoas_turmas($id){
-        $nucleoslist = Nucleo::all();
+        //Encontra todos os núcleos registrados.
+        $nucleoslist = Nucleo::orderBy('nome')->get();
+
+        //Encontra a pessoa no bando de dados.
         $pessoa = Pessoa::find($id);
+
+        //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
+
+        //Encontra todas as turmas registradas.
         $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->paginate(10);
+
+        //Criar array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+
+        //Atribui cout para definir sessão de informação.
         $count = Turma::all();
         Session::put('quant', count($count).' turmas cadastradas.');
 
         return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist','quantidade'));
     }
 
+    //Função define_quantidade: Define quantidade limite de turmas que uma pessoa pode ter no sistema.
     public function define_quantidade(Request $request){
         $dataForm = $request->all();
         $quant = Quant::find(1);
@@ -452,28 +481,40 @@ class PessoasController extends Controller
         return redirect()->route('pessoas_turmas', $dataForm['pessoa_id']);
     }
 
+    //Função pessoas_turmas_vincular: Vincula uma pessoa em uma turma e retorna a página de pessoas e turmas.
     public function pessoas_turmas_vincular(Request $request){
+        //Encontra pessoa no banco de dados.
         $dataForm = $request->all();
-        $pessoa = Pessoa::withTrashed()->where('id', '=', $dataForm['pessoa_id'])->get()->last();
+        $pessoa = Pessoa::find($dataForm['pessoa_id']);
+
+        //Checa se a quantidade de turmas que a pessoa possui ativadas é igual ou mais a quantidade limite registrada.
+        //Calcula quantas turmas a pessoa possui ativa
         $limite = Quant::find(1);
         $quant = 0;
-        foreach($pessoa->turmas as $turma){
-            if($turma->pivot->inativo == 1){
-                $quant++;
-            }
-        }
+        foreach($pessoa->turmas as $turma){if($turma->pivot->inativo == 1){$quant++;}}
+        
+        //Se a pessoa possui um numero igual ou maior de turma do que a quantidade limite registrada, retorna a página de pessoas e turmas
         if($quant >= $limite->quantidade){
+            //Define uma sessão para informar que a pessoa não foi vinculada pelo fato de estar no limite ou além da quantidade de turmas
             Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
 
             return redirect()->Route('pessoas_turmas', $pessoa->id);
         }
 
+        //Encontra turma do banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
-        if($dataForm['inativo'] == 1){
-            DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
-        }
+
+        //Soma +1 no campo de quantidade atual de pessoas na turma.
+        DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
+
+        //Vincula a pessoa a turma.
         $pessoa->turmas()->attach($turma->id, ['inativo'=>$dataForm['inativo']]);
+
+        //Adiciona registro no histórico de pessoas e turmas.
         $historico = HistoricoPT::create($dataForm);
+
+        //Define a sessão a ser apresentada:
+        //Se a quantidade atual da turma for maior que o limite possivel dela, devolve sessão amarela, caso contrario, devolve sessão verde
         if($turma->quant_atual+1 > $turma->limite){
             Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
         }
@@ -484,23 +525,34 @@ class PessoasController extends Controller
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
+    //Função pessoas_turmas_ativar_inativar: Ativa ou inativa uma pessoa em uma turma e retorna a página de pessoas e turmas.
     public function pessoas_turmas_ativar_inativar(Request $request){
         $dataForm = $request->all();
+        //Encontra a turma no banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
+
+        //Encontra a pessoa percorrendo todas as pessoas da turma para saber qual sua inatividade na turma
         $aux = -1;
         for($i = 0; $i < count($turma->pessoas); $i++){
-            if($turma->pessoas[$i]->id == $dataForm['pessoa_id']){
-                $aux = $i;
-            }
+            if($turma->pessoas[$i]->id == $dataForm['pessoa_id']){$aux = $i;}
         }
+        //Define variaveis construtivas:
+        //STRING = Query para mandar para o banco de dados.
+        //TEXTO = Texto para mandar para sessão de informação.
+        //CONTA = Para checagem final para envio de 
         $string = '';
         $texto = '';
         $conta = 0;
+
+        //Checa se a inatividade da pessoa é ativa ou inativa:
         if($turma->pessoas[$aux]->pivot->inativo == 1){
+            //Se sim, diminui 1 na quantidade atual de pessoas na turma.
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual-1, 'turma'=>$turma->id]);
             $string = 'update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma';
             $texto = ' foi adicionado a turma ';
             $conta = $turma->quant_autal-1;
+
+            //Adiciona registro da alteração histórico.
             HistoricoPT::create([
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
@@ -510,22 +562,26 @@ class PessoasController extends Controller
             ]);
         }
         else{
+            //Calcula quantas pessoas ativar existem na turma e atribui a variavel quant.
             $quant = 0;
             foreach($pessoa->turmas as $turma){
-                if($turma->pivot->inativo == 1){
-                    $quant++;
-                }
+                if($turma->pivot->inativo == 1){$quant++;}
             }
+
+            //Se a variavel quant é maior que o limite da quantidade, cria-se uma sessão alerta e retorna para página de pessoas e turmas
             if($quant >= $limite->quantidade){
                 Session::put('mensagem_red', $pessoa->nome . " não pode ser vinculada a turma, limite de turmas atingido");
-    
+            
                 return redirect()->Route('pessoas_turmas', $pessoa->id);
             }
             
+            //Se o código continuar, aumenta 1 na quantidade atual de pessoas na turma
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$turma->id]);
             $string = 'update turmas_pessoas set inativo = 1 where pessoa_id = :sujeito and turma_id = :turma';
             $texto = ' foi removido a turma ';
             $conta = $turma->quant_autal+1;
+
+            //Adiciona registro da alteração histórico.
             HistoricoPT::create([
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
@@ -533,16 +589,27 @@ class PessoasController extends Controller
                 'inativo' => 1,
             ]);
         }
+
+        //Roda o a variavel string no banco de dados que construida nos passos anteriores.
         DB::update(DB::raw($string), ['sujeito'=>$dataForm['pessoa_id'], 'turma'=>$dataForm['turma_id']]);
+
+        //Encontra pessoa no banco de dados.
         $pessoa = Pessoa::find($dataForm['pessoa_id']);
 
-        if($conta > $turma->limite){
-            Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");
-        }
-        else{
-            Session::put('mensagem_green', $pessoa->nome . $texto . $turma->nome ." com sucesso!");
-        }
+        //Verifica se a variavel conta é maior que o limite de pessoas que podem estar na turma:
+        //Se sim, cria-se uma sessão amarela para alertar o usuário.
+        //Se não, cria-se uma sessão verde para alertar o usuário. 
+        if($conta > $turma->limite){Session::put('mensagem_yellow', "A turma " . $turma->nome . " está além de seu limite máximo!");}
+        else{Session::put('mensagem_green', $pessoa->nome . $texto . $turma->nome ." com sucesso!");}
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
+    }
+
+    //Função pdfpessoas: Retorna o pdf das informações da pessoa.
+    public function pdfpessoas($id){
+        //Encontra a pessoa no banco de dados
+        $pessoa = Pessoa::find($id);
+
+        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

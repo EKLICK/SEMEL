@@ -34,7 +34,6 @@ Route::resource('pessoas','PessoasController')->middleware('AdministracaoEProfes
 Route::get('/pessoas/pdf/{id}','PessoasController@pdfpessoas')->name('pdfpessoas')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/pessoas_info/{id}','PessoasController@pessoas_info')->name('pessoa_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/select/pessoas', 'PessoasController@pessoas_select')->name('pessoas_select')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/pessoas_lista_anamneses/{id}','PessoasController@lista_anamnese')->name('lista_anamnese')->middleware('AdministracaoEProfessor', 'Authenticate');
 //Rotas de vinculos de pessoas e turmas
 Route::get('/pessoas_turmas/{id}','PessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::post('/pessoas_turmas/vincular','PessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');

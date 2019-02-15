@@ -21,6 +21,7 @@ use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
 use App\Audit;
+use App\Quant;
 use Illuminate\Support\Facades\Session;
 
 class filtersController extends Controller
@@ -47,13 +48,11 @@ class filtersController extends Controller
             }
             if(!empty($dataForm['rg'])){
                 $filtro = $dataForm['rg'];
-                $query->where('rg', 'like', $filtro."%");
-                $query->where('rg_responsavel', 'like', $filtro.'%');
+                $query->where('rg', 'like', $filtro."%")->orWhere('rg_responsavel', 'like', $filtro.'%');
             }
             if(!empty($dataForm['cpf'])){
                 $filtro = $dataForm['cpf'];
-                $query->where('cpf', 'like', $filtro."%");
-                $query->where('cpf_responsavel', 'like', $filtro.'%');
+                $query->where('cpf', 'like', $filtro."%")->orWhere('cpf_responsavel', 'like', $filtro.'%');
             }
             if(!empty($dataForm['bairro'])){
                 $filtro = $dataForm['bairro'];
@@ -279,8 +278,10 @@ class filtersController extends Controller
         elseif ($dataForm['id'] < 0) {
             $turmaslist = $turmaslist->paginate(10);
             $pessoa = Pessoa::find(-$dataForm['id']);
+            //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
+            $quantidade = Quant::find(1);
 
-            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm'));
+            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm','quantidade'));
         }
         else{
             $turmaslist = $turmaslist->paginate(10);

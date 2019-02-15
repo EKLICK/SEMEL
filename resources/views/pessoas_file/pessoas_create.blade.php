@@ -257,7 +257,6 @@
                         <label for="icon_altura">Altura:</label>
                     </div>
                 </div>
-                <br><br>
                 <div class="row">
                     <div class="input-field col s12 m4">
                         Toma algum medicamento?
