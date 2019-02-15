@@ -25,23 +25,6 @@
                                     <input name="nome" id="icon_nome" type="text" class="validate">
                                     <label for="icon_nome">Nome da turma:</label>
                                 </div>
-                                <div class="input-field col s12 xl5 right">
-                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
-                                    <div style="margin-left: 30%;">
-                                        <p>
-                                            <label>
-                                                <input value="1" name="inativo" type="radio"/>
-                                                <span>Ativo</span>
-                                            </label>
-                                        </p>
-                                        <p>
-                                            <label>
-                                                <input value="2" name="inativo" type="radio"/>
-                                                <span>Inativo</span>
-                                            </label>
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s10 xl2">
@@ -77,6 +60,48 @@
                                             <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 m5 l5">
+                                    <i class="material-icons prefix">beenhere</i>&emsp;&emsp; Opção de Página:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="3" name="pagina" type="radio"/>
+                                                <span>Desvinculados</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="1" name="pagina" type="radio"/>
+                                                <span>Ativos</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="pagina" type="radio"/>
+                                                <span>Inativos</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="input-field col s12 m5 l5">
+                                    <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="inativo" type="radio"/>
+                                                <span>Ativo</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="inativo" type="radio"/>
+                                                <span>Inativo</span>
+                                            </label>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -169,10 +194,12 @@
                     @endforeach
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$turmaslist->appends($dataForm)->links()}}
-            @else
-                {{$turmaslist->links()}}
+            @if(auth()->user()->admin_professor == 1)
+                @if(isset($dataForm))
+                    {{$turmaslist->appends($dataForm)->links()}}
+                @else
+                    {{$turmaslist->links()}}
+                @endif
             @endif
         </div>
     </div>

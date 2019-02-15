@@ -262,7 +262,7 @@ class filtersController extends Controller
                 }
             }
         })->orderBy('nome');
-        Session::put('quant', count($turmaslist->get()).'turmas cadastradas.');
+        Session::put('quant', count($turmaslist->get()).' turmas cadastradas.');
         $nucleoslist = Nucleo::all();
         if(!empty($dataForm['pagina'])){
             $op = $dataForm['pagina'];
