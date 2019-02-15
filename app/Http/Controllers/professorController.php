@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
-//REQUEST PARA CONTROLE
+//REQUEST PARA CONTROLE:
 use App\Http\Requests\Professor\ProfessorCreateFormRequest;
 use App\Http\Requests\Professor\ProfessorEditFormRequest;
 use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
 use App\Http\Requests\Professor\AlunoProcurarFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
 
-//MODELOS PARA CONTROLE
+//MODELOS PARA CONTROLE:
 use App\User;
 use App\Professor;
 use App\Turma;
@@ -23,7 +23,7 @@ use App\Nucleo;
 use App\Pessoa;
 use App\HistoricoPrT;
 
-//CONTROLE DE PROFESSORES
+//CONTROLE DE PROFESSORES:
 //Comentarios em cima, código comentado em baixo.
 class ProfessorController extends Controller{
     /**
@@ -64,7 +64,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    ////Função create, retorna a página de criação de registros de professores.
+    //Função create, retorna a página de criação de registros de professores.
     public function create(){
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -181,11 +181,11 @@ class ProfessorController extends Controller{
 
         //Verifica se os valores velhos são iguais aos valores novos de professor e usuário.
         if($newprofessor != $oldprofessor){
-            //Se os valores de professor são diferentes, define uma nova sessão verde de informação.
+            //Se os valores de professor são diferentes, define uma sessão verde de informação.
             Session::put('mensagem_green', $professor->nome.' editado(a) com sucesso!');
         }
         elseif($newuser != $olduser){
-            //Se os valores de usuario são diferentes, define uma nova sessão verde de informação.
+            //Se os valores de usuario são diferentes, define uma sessão verde de informação.
             Session::put('mensagem_green', $professor->nome.' editado(a) com sucesso!');
         }
         
@@ -198,6 +198,8 @@ class ProfessorController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função destroy, deletar o professor.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para professores.
     }
@@ -214,11 +216,11 @@ class ProfessorController extends Controller{
         //Converter YYYY-mm-dd para dd/mm/YYYY.
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
 
-        //Seleciona todos o histórico do professor encontrado.
+        //Encontra todos o histórico do professor encontrado.
         $histprofessor = HistoricoPrT::orderBy('created_at', 'desc')->where('professor_id', '=', $professor->id)->paginate(5);
 
         //Contagem de turmas:
-        //A = Todas as turmas (Contar ao A).
+        //A = Todas as turmas (Atribuir ao A).
         //B = Todas as turmas ativas (Se o pivot inativo é 1, contar para B).
         //C = Todas as turmas inativas (Subtrai A pelo B e adiciona o número ao C).
         //Adiciona id de núcleos ao array de idsnucleos e depois excluir números repetidos.

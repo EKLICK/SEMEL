@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Rule;
 
-//REQUEST PARA CONTROLE
+//REQUEST PARA CONTROLE:
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
 use App\Http\Requests\Pessoa\PessoaEditFormRequest;
 use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 
-//MODELOS PARA CONTROLE
+//MODELOS PARA CONTROLE:
 use App\Pessoa;
 use App\Quant;
 use App\Nucleo;
@@ -23,7 +23,7 @@ use App\Turma;
 use App\Anamnese;
 use App\HistoricoPT;
 
-//CONTROLE DE PESSOAS
+//CONTROLE DE PESSOAS:
 //Comentarios em cima, código comentado em baixo.
 class PessoasController extends Controller{
     /**
@@ -412,6 +412,8 @@ class PessoasController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função destroy, deletar a pessoa.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para pessoas.
     }
@@ -431,7 +433,7 @@ class PessoasController extends Controller{
         $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->paginate(5);
 
         //Contagem de turmas:
-        //A = Todas as turmas (Contar ao A).
+        //A = Todas as turmas (Atribuir ao A).
         //B = Todas as turmas ativas (Se o pivot inativo é 1, contar para B).
         //C = Todas as turmas inativas (Subtrai A pelo B e adiciona o número ao C).
         //Adiciona id de núcleos ao array de idsnucleos e depois excluir números repetidos.
