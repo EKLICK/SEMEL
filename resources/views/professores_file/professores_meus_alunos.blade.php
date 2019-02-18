@@ -88,7 +88,6 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$pessoaslist->links()}}
         </div>
     </div>
 @endsection

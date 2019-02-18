@@ -13,7 +13,10 @@ $(document).ready(function(){
             else{
                 $('#nome_doenca').val("");
                 $('#descricao_doenca').val("");
-                $('#lista_de_pessoas').append('<option value="'+ data.id +'">'+ data.nome +'</option>');
+                $('#lista_de_pessoas').empty();
+                for(var i = 0; i < data.length; i++){
+                    $('#lista_de_pessoas').append('<option value="'+ data[i].id +'">'+ data[i].nome +'</option>');
+                }
                 $('select').formSelect();
                 M.toast({html: 'Doenca cadastrada com sucesso!'})
             }

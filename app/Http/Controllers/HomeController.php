@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
-{
+//CONTROLE DE HOME:
+//Comentarios em cima, código comentado em baixo.
+class HomeController extends Controller{
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+
+    //FUNÇÕES DE REDIRECIONAMENTO:
+    //Função _construct: Ao iniciar o controller, obrigatóriamente este é a primeira função a ser executada.
+    public function __construct(){
+        //Middleware de auth, verifica se o usuário é autenticado como um cadastrado (administrador ou professor).
         $this->middleware('auth');
     }
 
@@ -21,16 +25,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+
+    //Função index: Redireciona o usuário de acordo com suas expecificações de permissão.
+    public function index(){
+        //Verifica se o usuário é autenticado:
         if(is_null(auth()->user()->admin_professor)){
+            //Caso não seja, é retornado para página de login.
             return view ('auth.login');
         }
         else {
+            //Caso seja, verifica-se se o usuário é administrador:
             if(auth()->user()->admin_professor == 1){
+                //Se sim, é redirecionado para a rota de pessoas.index (registro de pessoas).
                 return redirect()->route('pessoas.index');
             }
             else{
+                //Se não, é redirecionado para a rota de professor_turmas (registro de turmas do professor).
                 return redirect()->route('professor_turmas', 1);
             }   
         }

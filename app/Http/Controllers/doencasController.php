@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator; 
 use App\Http\Requests\Doenca\DoencaCreateEditFormRequest;
 
-class DoencasController extends Controller
-{
+class DoencasController extends Controller{
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +16,7 @@ class DoencasController extends Controller
      */
     
     //Funções de Redirecionamento
-    public function index()
-    {
+    public function index(){
         $doencaall = Doenca::all();
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
         Session::put('quant', count($doencaall).' doenças cadastradas.');
@@ -31,8 +29,8 @@ class DoencasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
+        
         return view ('doencas_file.doencas_create');
     }
 
@@ -42,11 +40,11 @@ class DoencasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DoencaCreateEditFormRequest $request)
-    {
+    public function store(DoencaCreateEditFormRequest $request){
         $dataForm = $request->all();
         Doenca::create($dataForm);
         Session::put('mensagem_green', $dataForm['nome'].' adicionada com sucesso!');
+
         return redirect()->Route('doencas.index');
     }
 
@@ -56,8 +54,7 @@ class DoencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -67,9 +64,9 @@ class DoencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $doenca = Doenca::find($id);
+
         return view ('doencas_file.doencas_edit', compact('doenca'));
     }
 
@@ -80,8 +77,7 @@ class DoencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DoencaCreateEditFormRequest $request, $id)
-    {
+    public function update(DoencaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
         $doenca = Doenca::find($id);
         $olddoenca = (array)$doenca;
@@ -90,6 +86,7 @@ class DoencasController extends Controller
         if($olddoenca != $newdoenca){
             Session::put('mensagem_green', $doenca->nome.' editada com sucesso!');
         }
+
         return redirect()->Route('doencas.index');
     }
 
@@ -99,29 +96,34 @@ class DoencasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
-    {
+    public function destroy(Request $request, $id){
         $doenca = Doenca::find($request['id']);
         $nome = $doenca->nome;
         $doenca->delete();
         Session::put('mensagem_green', $nome.' deletada com sucesso!');
+
         return redirect()->Route('doencas.index');
     }
 
     public function criar_doenca_ajax(Request $request){
         $dataForm = $request->all();
         if(is_null($dataForm['nome']) || is_null($dataForm['descricao'])){
+
             return response()->json(1);
         }
         else{
-            $doenca = Doenca::create($dataForm);
-            return response()->json($doenca);
+            Doenca::create($dataForm);
+
+            $doencas = Doenca::orderBy('nome')->get();
+
+            return response()->json($doencas);
         }
     }
 
     public function modal_doencas(Request $request){
         $dataForm = $request->all();
         $anamnese = Anamnese::find($dataForm['id']);
+
         return response()->json($anamnese->doencas);
     }
 }

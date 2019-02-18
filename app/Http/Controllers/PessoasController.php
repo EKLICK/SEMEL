@@ -116,7 +116,7 @@ class PessoasController extends Controller{
         }
         $ano = date('Y');
 
-        //Criar sessão para informação de quantidade de registros.
+        //Define sessão para informação de quantidade de registros.
         $pessoall = Pessoa::all();
         Session::put('quant', count($pessoall).' pessoas cadastradas.');
 
@@ -131,7 +131,10 @@ class PessoasController extends Controller{
 
     //Função create, retorna a página de criação de registros de pessoas.
     public function create(){
-        $doencaslist = Doenca::all();
+        //Encontra todos os registros de doenças.
+        $doencaslist = Doenca::orderBy('nome')->get();
+
+        //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
@@ -255,7 +258,8 @@ class PessoasController extends Controller{
         ]);
         //Vincula doenças na anamnese se elas foram informadas no formulario.
         if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
-        //Adiciona sessões de informação para apresentação na página.
+
+        //Define sessões de informação para apresentação na página.
         Session::put('pessoa', $pessoa->id);
         Session::put('mensagem_green', $pessoa->nome.' criado(a) com sucesso!');
         
@@ -288,7 +292,7 @@ class PessoasController extends Controller{
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
 
         //Encontra todos os registros de doenças.
-        $doencaslist = Doenca::all();
+        $doencaslist = Doenca::orderBy('nome')->get();
 
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -309,9 +313,11 @@ class PessoasController extends Controller{
 
     //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(PessoaEditFormRequest $request, $id){
+        $dataForm = $request->all();
+
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
-        $dataForm = $request->all();
+
         //Verifica se a imagem 3 por 4 foi passada pelo formulario
         //Se imagem foi passada, remove imagem antiga e salva imagem nova no banco de dados.
         if(isset($dataForm['img_3x4'])){
@@ -462,7 +468,7 @@ class PessoasController extends Controller{
         //Encontra todos os núcleos registrados.
         $nucleoslist = Nucleo::orderBy('nome')->get();
 
-        //Criar array de dias da semana.
+        //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
         //Encontra a pessoa no banco de dados.
@@ -540,6 +546,9 @@ class PessoasController extends Controller{
         //Encontra a turma no banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
 
+        //Calcula quantas turmas a pessoa possui ativa
+        $limite = Quant::find(1);
+        
         //Encontra a pessoa percorrendo todas as pessoas da turma para saber qual sua inatividade na turma
         $aux = -1;
         for($i = 0; $i < count($turma->pessoas); $i++){
@@ -561,7 +570,7 @@ class PessoasController extends Controller{
             //3 - Adiciona linhas no texto.
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual-1, 'turma'=>$turma->id]);
             $string = 'update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma';
-            $texto = ' foi adicionado a turma ';
+            $texto = ' foi removido a turma ';
             $conta = $turma->quant_autal-1;
 
             //Adiciona registro da alteração no histórico de pessoas e turmas.
@@ -574,6 +583,7 @@ class PessoasController extends Controller{
             ]);
         }
         else{
+            $pessoa = Pessoa::find($dataForm['pessoa_id']);
             //Se não:
 
             //Calcula quantas pessoas ativar existem na turma e atribui a variavel quant.
@@ -595,7 +605,7 @@ class PessoasController extends Controller{
             //3 - Adiciona linhas no texto. 
             DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$turma->id]);
             $string = 'update turmas_pessoas set inativo = 1 where pessoa_id = :sujeito and turma_id = :turma';
-            $texto = ' foi removido a turma ';
+            $texto = ' foi adicionado a turma ';
             $conta = $turma->quant_autal+1;
 
             //Adiciona registro da alteração histórico.

@@ -292,7 +292,7 @@
             </div>
             <br><br>
             <div class="row">
-                <h5>Turmas no qual a pessoa está Ativa &nbsp <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
+                <h5>Turmas no qual a pessoa está Ativa &nbsp; <i class="small material-icons" style="color: green;">assignment_turned_in</i></h5>
                 <div class="col s10">
                     <table class="centered responsive-table highlight bordered">
                         <thead>
@@ -316,7 +316,7 @@
             </div>
             <br><br>
             <div class="row">
-                <h5>Turmas no qual a pessoa está Inativa &nbsp <i class="small material-icons" style="color: red;">assignment_late</i></h5>
+                <h5>Turmas no qual a pessoa está Inativa &nbsp; <i class="small material-icons" style="color: red;">assignment_late</i></h5>
                 <div class="col s10">
                     <table class="centered">
                         <thead>
@@ -357,12 +357,10 @@
                                 <td><i class="small material-icons" @if($anamnese->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                                 <td><p>{{$anamnese->ano}}</p></td>
                                 <td><a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a></td>
-                                @if($pessoa->deleted_at == null)
-                                    @if($anamnese->ano == $ano)
-                                        <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a></td>
-                                    @else
-                                        <td><p>Esta anamnese não <br> pode ser mais editada</p></td>
-                                    @endif
+                                @if($anamnese->ano == $ano)
+                                    <td><a class="tooltipped" data-position="top" data-tooltip="Editar anamneses de {{$anamnese->ano}}" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a></td>
+                                @else
+                                    <td><p>Esta anamnese não <br> pode ser mais editada</p></td>
                                 @endif
                             </tr>
                         @endforeach

@@ -14,8 +14,10 @@ use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 //MODELOS PARA CONTROLE
 use App\Nucleo;
 use App\Turma;
-use App\HistoricoN;
 use App\Professor;
+use App\HistoricoN;
+use App\HistoricoPT;
+use App\HistoricoT;
 
 //CONTROLE DE NúCLEOS:
 //Comentarios em cima, código comentado em baixo.
@@ -225,6 +227,34 @@ class NucleosController extends Controller{
 
             //Adiciona campos para criação de histórico.
             $dataForm += ['inativo' => 2];
+
+            //Inativa todas as pessoas e todas as turmas que estão no núcleo devido a inativação do núcleo.
+            foreach($nucleo->turmas as $turma){
+                //Update no banco de dados para inativar todas as turmas do núcleo
+                DB::update(DB::raw('update turmas set quant_atual = 0 where id = :turma'), ['turma'=>$turma->id]);
+                DB::update(DB::raw('update turmas set inativo = 2 where id = :turma'), ['turma'=>$turma->id]);
+
+                //Criar histórico da turma banco de dados.
+                HistoricoT::create([
+                    'turma_id' => $turma->id,
+                    'comentario' => 'Turma inativada devido a inativação do núcleo.',
+                    'inativo' => 2,
+                ]);
+
+                //Percorre todas as pessoas da turma.
+                foreach($turma->pessoas as $pessoa){
+                    //Update no banco de dados para inativar todas as pessoas.
+                    DB::update(DB::raw('update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma'), ['sujeito'=>$pessoa->id, 'turma'=>$turma->id]);
+
+                    //Criar histórico da pessoa banco de dados.
+                    HistoricoPT::create([
+                        'pessoa_id' => $pessoa->id,
+                        'turma_id' => $turma->id,
+                        'comentario' => 'Pessoa inativada devido a inativação do núcleo da turma.',
+                        'inativo' => 2,
+                    ]);
+                }
+            }
 
             //Define sessão verde para informação.
             Session::put('mensagem_green', $nucleo->nome . " foi inativado com sucesso!");

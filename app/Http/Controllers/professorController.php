@@ -98,6 +98,9 @@ class ProfessorController extends Controller{
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
 
+        //Verifica de o bairro como input (type=text) foi informado, se sim, substitui variavel bairro pela strin_bairro.
+        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
+
         //Adiciona variavel de id do usuário para a criação de professor.
         $dataForm += ['user_id' => $user->id];
 
@@ -168,6 +171,9 @@ class ProfessorController extends Controller{
         //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
+
+        //Verifica de o bairro como input (type=text) foi informado, se sim, substitui variavel bairro pela strin_bairro.
+        if($dataForm['string_bairro'] != null){$dataForm['bairro'] = $dataForm['string_bairro'];}
 
         //Busca os valores antigos do usuário, edita e depois busca os valores novos do usuário.
         $olduser = (array)$user;

@@ -3,33 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\regrasTurma;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+
+//REQUESTS PARA CONTROLE:
 use App\Http\Requests\Turma\TurmaCreateEditFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
+use App\Http\Requests\regrasTurma;
+
+//MODELOS PARA CONTROLE:
 use App\Turma;
 use App\Nucleo;
 use App\Pessoa;
 use App\Professor;
 use App\HistoricoT;
+use App\HistoricoPT;
 
-class TurmasController extends Controller
-{
+//CONTROLE DE TURMAS:
+//Comentarios em cima, código comentado em baixo.
+class TurmasController extends Controller{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    //Funções de Redirecionamento
-    public function index()
-    {
+    //FUNÇÕES DE FERRAMENTAS:
+    //Ferramenta convertHorario: Converte o horário de MM:HH [PM|AM] para HH:MM:SS.
+    public function convertHorario($hora, $op){
+        if($op == 1){
+            $horario = explode(' ', $hora);
+
+            //Se foi definido 'PM', adicionar 12 horas para a criação.
+            if($horario[1] == 'PM'){
+                $separador = explode(':', $horario[0]);
+                $separador[0] = 12 + (int)$separador[0];
+                $horario[0] = $separador[0].':'.$separador[1];
+            }
+
+            return $horario[0].':00';
+        }
+        else{
+            $horario = explode(':', $hora);
+
+            if($horario[0] > 12){
+                $horario[0] = (int)$horario[0] - 12;
+                if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
+                $horario[2] = 'PM';
+                
+                return $horario[0].':'.$horario[1].' '.$horario[2];
+            }
+            $horario[2] = 'AM';
+
+            return $horario[0].':'.$horario[1].' '.$horario[2];
+        }
+    }
+
+    //FUNÇÕES DE REDIRECIONAMENTO:
+    //Função index, retorna a página de registros de turmas.
+    public function index(){
+        //Encontra todos os registros de turmas.
         $turmaslist = Turma::orderBy('nome')->paginate(10);
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-        $turmaall = Turma::all();
+
+        //Encontra todos os registros de núcleos.
         $nucleoslist = Nucleo::all();
-        Session::put('quant', count($turmaall).' turmas cadastradas.');
+
+        //Criando array de dias da semana.
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+
+        //Atribui count para definir sessão de informação.
+        $count = Turma::all();
+        Session::put('quant', count($count).' turmas cadastradas.');
 
         return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
     }
@@ -39,10 +84,15 @@ class TurmasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+
+    //Função create, retorna a página de criação de registros de turmas.
+    public function create(){
+        //Encontra todos os registros de nucleos.
         $nucleoslist = Nucleo::orderBy('nome')->get();
+
+        //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+
         return view ('turmas_file.turmas_create', compact('nucleoslist', 'dias_semana'));
     }
 
@@ -52,30 +102,44 @@ class TurmasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TurmaCreateEditFormRequest $request)
-    {
+
+    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
+    public function store(TurmaCreateEditFormRequest $request){
         $dataForm = $request->all();
+
+        //Define a variavel dias_da_semana para compactar todos os dias da semana escolhidas e depois define para a criação.
         $dias_da_semana = '';
-        foreach($dataForm['data_semanal'] as $data){
-            $dias_da_semana = $dias_da_semana.$data.',';
-        }
+        foreach($dataForm['data_semanal'] as $data){$dias_da_semana = $dias_da_semana.$data.',';}
         $dataForm['data_semanal'] = $dias_da_semana;
+
+        //Converte o horário de MM:HH [PM|AM] para HH:MM:SS para a criação (HORARIO INICIAL):
         $horario = explode(' ', $dataForm['horario_inicial']);
+
+        //Se foi definido 'PM', adicionar 12 horas para a criação.
         if($horario[1] == 'PM'){
             $separador = explode(':', $horario[0]);
             $separador[0] = 12 + (int)$separador[0];
             $horario[0] = $separador[0].':'.$separador[1];
         }
         $dataForm['horario_inicial'] = $horario[0].':00';
+
+        //Converte o horário de MM:HH [PM|AM] para HH:MM:SS para a criação (HORARIO FINAL):
         $horario = explode(' ', $dataForm['horario_final']);
+
+        //Se foi definido 'PM', adicionar 12 horas para a criação.
         if($horario[1] == 'PM'){
             $separador = explode(':', $horario[0]);
             $separador[0] = 12 + (int)$separador[0];
             $horario[0] = $separador[0].':'.$separador[1];
         }
         $dataForm['horario_final'] = $horario[0].':00';
+
+        //Encontra todos os registros de turmas.
         $turma = Turma::create($dataForm);
+
+        //Define sessõa de informação para apresentação na página.
         Session::put('mensagem_green', "A turma " . $turma->nome . " foi cadastrada com sucesso!");
+
         return redirect()->Route('turmas.index');
     }
 
@@ -85,8 +149,7 @@ class TurmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -96,8 +159,7 @@ class TurmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $turma = Turma::find($id);
         $nucleoslist = Nucleo::all();
         $horario = explode(':', $turma['horario_inicial']);
@@ -136,8 +198,7 @@ class TurmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TurmaCreateEditFormRequest $request, $id)
-    {
+    public function update(TurmaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
         $turma = Turma::find($id);
         $oldturma = (array)$turma;
@@ -175,8 +236,7 @@ class TurmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
-    {
+    public function destroy(Request $request, $id){
         //
     }
 
@@ -228,6 +288,21 @@ class TurmasController extends Controller
         if($turma->inativo == 1){
             $turma->update(['inativo'=>2]);
             $dataForm += ['inativo' => 2];
+
+            //Inativa todas as pessoas da turma.
+            foreach($turma->pessoas as $pessoa){
+                //Update no banco de dados para inativar todas as pessoas.
+                DB::update(DB::raw('update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma'), ['sujeito'=>$pessoa->id, 'turma'=>$turma->id]);
+
+                //Criar histórico no banco de dados.
+                HistoricoPT::create([
+                    'pessoa_id' => $pessoa->id,
+                    'turma_id' => $turma->id,
+                    'comentario' => 'Pessoa inativada devido a inativação da turma.',
+                    'inativo' => 2,
+                ]);
+            }
+
             Session::put('mensagem_green', $turma->nome . " foi inativado com sucesso!");
         }
         else{
