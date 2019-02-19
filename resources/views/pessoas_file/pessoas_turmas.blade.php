@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas_turmas', $pessoa->id)}}" class="breadcrumb">turmas</a>
 @endsection
-@section('title') Turmas <a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite <i class="material-icons right">https</i></a>@endsection
+@section('title') Turmas <a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i></a>@endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     @include('layouts.Sessoes.mensagem_yellow')

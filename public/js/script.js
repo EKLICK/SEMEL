@@ -142,6 +142,10 @@ function dor_articular_click(valor){
     change(valor, $('#string_dor_articular'), $('#dor_articular_label'), $('#dor_articular_icon'));
 }
 
+function fumante_click(valor){
+    change(valor, $('#string_fumante'), $('#fumante_label'), $('#fumante_icon'));
+}
+
 function change(a,b,c,d){
     if(a == 'N'){
         b.hide(400);
@@ -194,7 +198,6 @@ function change_bairro_select(){
     $('#string_bairro').val(bairro.options[bairro.selectedIndex].value);
 }
 
-
 function old_doencas_function(){
     $('#old_doencas').val($('#lista_de_pessoas').val());
 }
@@ -206,3 +209,9 @@ function old_dias_function(){
 function old_nucleo_function(){
     $('#old_nucleo').val($('#lista_de_nucleos').val());
 }
+
+$(document).keydown(function (event) {
+    if (event.keyCode == 13) {
+        $('#enter').click();
+    }
+});

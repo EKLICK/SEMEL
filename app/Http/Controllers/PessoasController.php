@@ -238,7 +238,7 @@ class PessoasController extends Controller{
         if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] = -1;}
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
-        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] = 'sim';}
+        if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
         //Cria anamnese no banco de dados com todos os atributos abaixo:
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
@@ -246,7 +246,7 @@ class PessoasController extends Controller{
             'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
             'peso' => $dataForm['peso'],
             'altura' => $dataForm['altura'],
-            'fumante' => $dataForm['fumante'],
+            'fumante' => $dataForm['string_fumante'],
             'cirurgia' => $dataForm['string_cirurgia'],
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
@@ -319,16 +319,20 @@ class PessoasController extends Controller{
         $pessoa = Pessoa::find($id);
 
         //Verifica se a imagem 3 por 4 foi passada pelo formulario
-        //Se imagem foi passada, remove imagem antiga e salva imagem nova no banco de dados.
         if(isset($dataForm['img_3x4'])){
+            //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
             $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
         }
-
-        //Se a imagem 3 por 4 existir no banco de dados e não foi passada pelo formulario,
-        //atribuir ela a variavel de imagem 3 por 4, se não, atribuir nulo.
-        elseif(!empty($pessoa['foto'])){$dataForm += ['img_3x4' => $pessoa['foto']];}
-        else{$dataForm += ['img_3x4' => null];}
+        elseif(isset($dataForm['3x4'])){
+            //Se a imagem não foi passada, porém permanece com o link antigo, apenas repeto o valor que está no banco de dados para criação
+            $dataForm += ['img_3x4' => $pessoa['foto']];
+        }
+        else{
+            //Se não, atribuir nulo e deleta a imagem.
+            unlink($pessoa['foto']);
+            $dataForm += ['img_3x4' => null];
+        }
 
         //Adiciona a variavel nascimento a idade da pessoa.
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -345,15 +349,20 @@ class PessoasController extends Controller{
         }
         else{
             //Verifica se a imagem de matricula foi passada pelo formulario
-            //Se imagem foi passada, remove imagem antiga e salva imagem nova no banco de dados.
             if(isset($dataForm['img_matricula'])){
+                //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
                 if(!empty($pessoa['matricula'])){unlink($pessoa['matricula']);}
                 $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
             }
-            //Se a imagem de matricula existir no banco de dados e não foi passada pelo formulario,
-            //atribuir ela a variavel de imagem de matricula, se não, atribuir nulo.
-            elseif(!empty($pessoa['matricula'])){$dataForm += ['img_matricula' => $pessoa['matricula']];}
-            else{$dataForm += ['img_matricula' => null];}
+            elseif(isset($pessoa['matricula'])){
+                //Se a imagem não foi passada, porém permanece com o link antigo, apenas repeto o valor que está no banco de dados para criação
+                $dataForm += ['img_matricula' => $pessoa['matricula']];
+            }
+            else{
+                //Se não, atribuir nulo e deleta a imagem.
+                unlink($pessoa['matricula']);
+                $dataForm += ['img_matricula' => null];
+            }
         }
         //checar se convenio médico foi marcado
         if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}
@@ -429,6 +438,8 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
+        $idade = $this->mostrar_nascimento($pessoa->nascimento, 1);
+
         //Encontra a ultima anamnese da pessoa no banco de dados.
         $anamnese = $pessoa->anamneses->last();
 
@@ -460,7 +471,7 @@ class PessoasController extends Controller{
         $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->get();
         $ano = date('Y');
 
-        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano'));
+        return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano','idade'));
     }
 
     //Função pessoas_turmas: seleciona informações necessarias para vizualização e retorna a página de turmas e pessoas.

@@ -109,8 +109,7 @@ class AnamneseController extends Controller
     }
     
     //Funções de Redirecionamento
-    public function index()
-    {
+    public function index(){
         $doencaslist = Doenca::all();
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', $ano)->get();
@@ -118,7 +117,7 @@ class AnamneseController extends Controller
 
         $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
-        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist'));
+        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist','ano','doencaslist'));
     }
 
     public function index2(){
@@ -129,7 +128,7 @@ class AnamneseController extends Controller
         $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
 
-        return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist'));
+        return view ('anamneses_file.anamneses_antigas', compact('anamneseslist','ano','doencaslist'));
     }
 
     /**
@@ -137,8 +136,7 @@ class AnamneseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -161,8 +159,7 @@ class AnamneseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AnamneseCreateEditFormRequest $request)
-    {
+    public function store(AnamneseCreateEditFormRequest $request){
         $dataForm = $request->all();
         $dataForm += ['ano' => date('Y')];
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
@@ -172,14 +169,14 @@ class AnamneseController extends Controller
         if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] == null;}
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] == null;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] == null;}
-        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] == 'sim';}
+        if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
             'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
             'peso' => $dataForm['peso'],
             'altura' => $dataForm['altura'],
-            'fumante' => $dataForm['fumante'],
+            'fumante' => $dataForm['string_fumante'],
             'cirurgia' => $dataForm['string_cirurgia'],
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
@@ -192,7 +189,7 @@ class AnamneseController extends Controller
         if(!empty($dataForm['doencas'])){
             $anamnese->doencas()->attach($dataForm['doencas']);
         }
-        Session::put('mensagem_green', 'Anamnese adicionada com sucesso!');
+        Session::put('mensagem_green','Anamnese adicionada com sucesso!');
 
         return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);
     }
@@ -203,8 +200,7 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -214,14 +210,13 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $doencaslist = Doenca::all();
         $anamnese = Anamnese::find($id);
         if($anamnese->ano != date('Y')){
             return redirect()->route('anamneses.index2');
         }
-        return view ('anamneses_file.anamneses_edit', compact ('anamnese', 'doencaslist'));
+        return view ('anamneses_file.anamneses_edit', compact ('anamnese','doencaslist'));
     }
 
     /**
@@ -231,8 +226,7 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AnamneseCreateEditFormRequest $request, $id)
-    {
+    public function update(AnamneseCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
@@ -241,7 +235,7 @@ class AnamneseController extends Controller
         if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] = -1;}
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
-        if($dataForm['fumante'] == 2){$dataForm['fumante'] == 'não';}else{$dataForm['fumante'] = 'sim';}
+        if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
         $anamnese = Anamnese::find($id);
         $oldanamnese = (array)$anamnese;
         $anamnese->update([
@@ -250,7 +244,7 @@ class AnamneseController extends Controller
             'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
             'peso' => $dataForm['peso'],
             'altura' => $dataForm['altura'],
-            'fumante' => $dataForm['fumante'],
+            'fumante' => $dataForm['string_fumante'],
             'cirurgia' => $dataForm['string_cirurgia'],
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
@@ -274,16 +268,16 @@ class AnamneseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 
     public function anamnese_info($id){
         $anamnese = Anamnese::find($id);
         $pessoa = Pessoa::find($anamnese->pessoas);
+        $ano = date('Y');
 
-        return view ('anamneses_file.anamneses_info', compact('anamnese', 'pessoa'));
+        return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano'));
     }
 
     public function pdfanamnese($id){
@@ -291,6 +285,6 @@ class AnamneseController extends Controller
         $pessoa = Pessoa::find($anamnese->pessoas->id);
         $nome = $pessoa->nome;
 
-        return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese', 'nome'))->stream('PDF_registro_pessoa'.'.pdf');
+        return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese','nome'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

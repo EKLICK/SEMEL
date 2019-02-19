@@ -84,6 +84,7 @@
             </div>
             @if(auth()->user()->admin_professor == 1)
                 <div id="coluna3" class="col s12">
+                    <br><br>
                     <div class="row">
                         <div class="col s8">
                             <table>
@@ -106,29 +107,60 @@
                         </div>
                     </div>
                     <br><br>
-                    <h5>Turmas pertencentes ao núcleo</h5>
                     <div class="row">
                         <div class="col s8">
-                            <table class="centered">
-                                <thead>
-                                    <tr>
-                                        <th>Nome da turma</th>
-                                        <th>Estado</th>
-                                        <th>Mais Informações</th>
-                                    </tr>
-                                </thead>
-                                @foreach($nucleo->turmas as $turma)
-                                    <tr>
-                                        <td>{{$turma->nome}}</td>
-                                        <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
-                                        <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info_outline</i></a></td>
-                                    </tr>
-                                @endforeach
+                            <table>
+                                <tr>
+                                    <td><h6><b>Quantidade total de turmas:</b></h6></td>
+                                    <td><h6><b>{{$dadosgerais2[0]}}</b></h6></td>
+                                    <td><i class="small material-icons" style="color: black;">assignment</i></td>
+                                </tr>
+                                <tr>
+                                    <td><h6><b>Quantidade de turmas Ativa:</b></h6></td>
+                                    <td><h6><b>{{$dadosgerais2[1]}}</b></h6></td>
+                                    <td><i class="small material-icons" style="color: green;">assignment_turned_in</i></td>
+                                </tr>
+                                <tr>
+                                    <td><h6><b>Quantidade de turmas Inativa:</b></h6></td>
+                                    <td><h6><b>{{$dadosgerais2[2]}}</b></h6></td>
+                                    <td><i class="small material-icons" style="color: red;">assignment_late</i></td>
+                                </tr>
                             </table>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroturmas">Lista de turmas e turma do núcleo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endif
+        </div>
+    </div>
+
+     <div id="modalregistroturmas" class="modal">
+        <div class="container">
+            <div class="col s12">
+                <table class="centered responsive-table highlight bordered">
+                    <thead>
+                        <th>Nome da turma</th>
+                        <th>Estado</th>
+                        <th>Mais Informações</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($nucleo->turmas as $turma)
+                            <tr>
+                                <td>{{$turma->nome}}</td>
+                                <td><i class="small material-icons" style="color: @if($turma->inativo == 1) green @else red @endif;">@if($turma->inativo == 1) assignment_turned_in @else assignment_late  @endif</i></td>
+                                <td><a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info_outline</i></a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

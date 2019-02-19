@@ -3,7 +3,7 @@
     <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
     <a href="{{route('anamnese_info', $anamnese->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') <h4>Informações da anamnese</h4> @endsection
+@section('title') <h4>Informações da anamnese &emsp; @if($ano == $anamnese->ano) <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="medium material-icons">edit</i></a> @endif</h4> @endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -12,7 +12,11 @@
                     <tbody>
                         <tr>
                             <td><h6>Nome:</h6></td>
-                            <td><h6>{{$anamnese->pessoas->nome}}</h6></td>
+                            <td><h6><a class="waves-effect waves-light btn blue modal-trigger btn-modal_inativar" href="{{route('pessoa_info', $anamnese->pessoas->id)}}">{{$anamnese->pessoas->nome}}</a></h6></td>
+                        </tr>
+                        <tr>
+                            <td><h6>Ano documentada:</h6></td>
+                            <td><h6>{{$anamnese->ano}}</h6></td>
                         </tr>
                         <tr>
                             <td><h6>Peso:</h6></td>
@@ -22,6 +26,12 @@
                             <td><h6>Altura:</h6></td>
                             <td><h6>{{$anamnese->altura}}</h6></td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col s12 m6">
+                <table class="responsive-table highlight bordered">
+                    <tbody>
                         <tr>
                             <td><h6>Possui doença:</h6></td>
                             <td>
@@ -29,18 +39,12 @@
                                     @if($anamnese->possui_doenca == 2)
                                         Não 
                                     @else 
-                                        Sim&emsp;
+                                        Sim &emsp;
                                         <a class="waves-effect waves-light btn blue modal-trigger btn-modal_inativar" href="#listadoencas">Doenças</a>
                                     @endif
                                 </h6>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col s12 m6">
-                <table class="responsive-table highlight bordered">
-                    <tbody>
                         <tr>
                             <td><h6>É fumante:</h6></td>
                             <td><h6>{{$anamnese->fumante}}</h6></td>

@@ -20,7 +20,9 @@ class Nucleos extends Migration
             $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
             $table->string('numero_endereco')->nullable();
+            $table->string('complemento')->nullable();
             $table->string('cep')->nullable();
+            $table->string('telefone')->nullable();
             $table->integer('inativo')->nullable();
             $table->string('descricao')->nullable();
             $table->timestamps();

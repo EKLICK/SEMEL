@@ -52,7 +52,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="{{old('cpf_responsavel')}}">
-                        <label for="cpf_responsavel">CPF opcional:</label>
+                        <label for="cpf_responsavel">CPF do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -64,7 +64,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
                         <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg_responsavel')}}">
-                        <label for="rg_responsavel">RG opcional:</label>
+                        <label for="rg_responsavel">RG do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -342,7 +342,7 @@
                     <div class="input-field col s12 m6">
                         <i id="dor_ossea_icon" class="material-icons prefix" @if(old('dor_ossea') != 1) hidden @endif>description</i>
                         <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="{{old('string_dor_ossea')}}" @if(old('dor_ossea') != 1) hidden @endif>
-                        <label id="dor_ossea_label" for="string_dor_ossea" @if(old('dor_ossea') != 1) hidden @endif>Aonde está a dor óssea?</label>
+                        <label id="dor_ossea_label" for="string_dor_ossea" @if(old('dor_ossea') != 1) hidden @endif>Onde está a dor óssea?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -364,7 +364,7 @@
                     <div class="input-field col s12 m6">
                         <i id="dor_muscular_icon" class="material-icons prefix" @if(old('dor_muscular') != 1) hidden @endif>description</i>
                         <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="{{old('string_dor_muscular')}}" @if(old('dor_muscular') != 1) hidden @endif>
-                        <label id="dor_muscular_label" for="string_dor_muscular" @if(old('dor_muscular') != 1) hidden @endif>Aonde está a dor muscular?</label>
+                        <label id="dor_muscular_label" for="string_dor_muscular" @if(old('dor_muscular') != 1) hidden @endif>Onde está a dor muscular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -386,7 +386,7 @@
                     <div class="input-field col s12 m6">
                         <i id="dor_articular_icon" class="material-icons prefix" @if(old('dor_articular') != 1) hidden @endif>description</i>
                         <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="{{old('string_dor_articular')}}" @if(old('dor_articular') != 1) hidden @endif>
-                        <label id="dor_articular_label" for="string_dor_articular" @if(old('dor_articular') != 1) hidden @endif>Aonde está a dor articular?</label>
+                        <label id="dor_articular_label" for="string_dor_articular" @if(old('dor_articular') != 1) hidden @endif>Onde está a dor articular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -394,16 +394,21 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
+                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="2" name="fumante" type="radio" @if(old('fumante') == 2) checked @endif/>
+                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(old('fumante') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i id="fumante_icon" class="material-icons prefix" @if(old('fumante') != 1) hidden @endif>description</i>
+                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="{{old('string_fumante')}}" @if(old('fumante') != 1) hidden @endif>
+                        <label id="fumante_label" for="string_fumante" @if(old('fumante') != 1) hidden @endif>Quanto tempo?</label>
                     </div>
                 </div>
                 <div class="row">

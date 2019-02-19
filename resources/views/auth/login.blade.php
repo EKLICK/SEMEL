@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="width: 35%; height: 25%; margin-top: 5%;">
-        <div class="row">
-            <div class="col s12 14 offset-14">
-                <form action="{{route('login')}}" method="post">
-                    @csrf
-                    <div class="card">
-                        <div class="card-action light-blue darken-1">
+    <div class="container">
+        <div class="container">
+            <br><br>
+            <form action="{{route('login')}}" method="post">
+                @csrf
+                <div class="card">
+                    <div class="row card-action light-blue darken-1">
+                        <div class="col s5">
                             <h3 style="color: white;">Fazer Login</h3>
                         </div>
+                        <div class="col s5 right" style="margin-top: 8%; margin-right: 10%;">
+                            @include('layouts.Sessoes.mensagem_red')
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="card-content">
                             <div class="form-field">
                                 <label for="identity"><h6>Usuario</h6></label>
@@ -22,13 +28,12 @@
                             </div>
                             <br>
                             <div class="form-field center-align">
-                                <button class="btn-large light-blue darken-1">Login</button>
+                                <button id="enter" class="btn-large light-blue darken-1">Login</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-    @include('layouts.Sessoes.mensagem_red')
 @endsection

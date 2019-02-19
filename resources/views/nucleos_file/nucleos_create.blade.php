@@ -14,7 +14,7 @@
                 <input type="text" name="cidade" value="São Leopoldo" hidden>
                 <input type="number" name="inativo" value="1" hidden>
                 <div class="row">
-                    <div class="input-field col s11 m6">
+                    <div class="input-field col s11 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>
                         <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" required>
                         <label for="icon_nome">Nome do núcleo:</label>
@@ -36,15 +36,29 @@
                         <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}" required>
                         <label for="icon_rua">Rua:</label>
                     </div>
-                    <div class="input-field col s11 m5 xl2">
+                    <div class="input-field col s11 m6 xl5">
+                        <i class="material-icons prefix">explore</i>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{old('cep')}}" required>
+                        <label for="icon_cep">CEP:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" required>
                         <label for="icon_numero_endereco">Número:</label>
                     </div>
-                    <div class="input-field col s11 m6 xl4">
-                        <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{old('cep')}}" required>
-                        <label for="icon_cep">CEP:</label>
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">bookmark</i>
+                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}">
+                        <label for="complemento">Complemento de endereço:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s11 m6 xl5">
+                        <i class="material-icons prefix">phone</i>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="{{old('telefone')}}" required>
+                        <label for="icon_telefone">Telefone:</label>
                     </div>
                 </div>
                 <div class="row">

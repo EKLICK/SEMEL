@@ -134,8 +134,15 @@ class TurmasController extends Controller{
         }
         $dataForm['horario_final'] = $horario[0].':00';
 
-        //Encontra todos os registros de turmas.
+        //Cria turma no banco de dados.
         $turma = Turma::create($dataForm);
+
+        //Adiciona registro da alteração no histórico de turmas.
+        HistoricoT::create([
+            'turma_id' => $turma->id,
+            'inativo' => $turma->inativo,
+            'comentario' => 'Criação da turma "'.$turma->nome.'"',
+        ]);
 
         //Define sessõa de informação para apresentação na página.
         Session::put('mensagem_green', "A turma " . $turma->nome . " foi cadastrada com sucesso!");

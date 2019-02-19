@@ -163,16 +163,21 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($ultimaanamnese->fumante == 1) checked @endif @endif/>
+                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($ultimaanamnese->fumante == 1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($ultimaanamnese->fumante == 2) checked @endif @endif/>
+                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($ultimaanamnese->fumante == 2) checked @endif @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i id="fumante_icon" class="material-icons prefix" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) hidden @endif @else @if ($ultimaanamnese->fumante == -1) hidden @endif @endif>description</i>
+                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="@if(is_null(old('fumante'))) @if($ultimaanamnese->fumante != -1) {{$ultimaanamnese->fumante}} @endif @else {{old('string_fumante')}} @endif" @if(!is_null(old('fumante'))) @if(old('fumante') == -1) hidden @endif @else @if ($ultimaanamnese->fumante == -1) hidden @endif @endif>
+                        <label id="fumante_label" for="string_fumante" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) hidden @endif @else @if ($ultimaanamnese->fumante == -1) hidden @endif @endif>Quanto tempo?</label>
                     </div>
                 </div>
                 <div class="row">

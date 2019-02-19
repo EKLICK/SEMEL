@@ -79,6 +79,13 @@ class NucleosController extends Controller{
         //Cria núcleo no banco de dados:
         $nucleo =  Nucleo::create($dataForm);
 
+        //Adiciona registro da alteração no histórico de núcleos.
+        HistoricoN::create([
+            'nucleo_id' => $nucleo->id,
+            'inativo' => $nucleo->inativo,
+            'comentario' => 'Criação do núcleo "'.$nucleo->nome.'"',
+        ]);
+
         //Define uma sessão de alerta verde.
         Session::put('mensagem_green', $nucleo->nome.' adicionado com sucesso!');
 
@@ -155,30 +162,9 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função destroy, deletar o núcleo e retornar a página de index.
+    //Função destroy, deletar o núcleo.
     public function destroy(Request $request, $id){
-        $dataForm = $request->all();
-
-        //Encontra o professor no banco de dados.
-        $nucleo = Nucleo::find($dataForm['id']);
-
-        //Se o núcleo tiver pelo menos uma turma vinculada, então ele não pode ser excluido
-        if(count($nucleo->turmas) != 0){
-            //Define uma sessão de alerta vermelho explocando os motivos da falha.
-            Session::put('mensagem_red', 'É necessario excluir todas as turmas vinculadas neste núcleo antes de exclui-lo');
-        }
-        else{
-            //Salva nome de núcleo antes de deleta-lo
-            $nome = $nucleo->nome;
-
-            //Deleta núcleo
-            $nucleo->delete();
-
-            //Define uma sessão de alerta verde.
-            Session::put('mensagem_green', $nome.' editado com sucesso!');
-        }
-
-        return redirect()->Route('nucleos.index');
+        //Função de deletar não ultilizada para núcleo.
     }
 
     //Função nucleo_info: seleciona informações necessarias para vizualização e retorna a página de informações do núcleo.
@@ -189,10 +175,10 @@ class NucleosController extends Controller{
         //Encontra todos o histórico do nucleo encontrado.
         $histnucleo = HistoricoN::orderBy('created_at', 'desc')->where('nucleo_id', '=', $nucleo->id)->paginate(6);
 
-        //Contagem de turmas:
-        //A = Todas as turmas (Atribuir ao A).
-        //B = Todas as turmas ativas (Se o pivot inativo é 1, contar para B).
-        //C = Todas as turmas inativas (Subtrai A pelo B e adiciona o número ao C).
+        //Contagem de pessoas:
+        //A = Todas as pessoas (Atribuir ao A).
+        //B = Todas as pessoas ativas (Se o pivot inativo é 1, contar para B).
+        //C = Todas as pessoas inativas (Subtrai A pelo B e adiciona o número ao C).
         $a = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
                                                         id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
                                                             Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 
@@ -204,6 +190,18 @@ class NucleosController extends Controller{
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
 
+        //Contagem de turmas:
+        //A = Todas as turmas (Atribuir ao A).
+        //B = Todas as turmas ativas (Se o pivot inativo é 1, contar para B).
+        //C = Todas as turmas inativas (Subtrai A pelo B e adiciona o número ao C).
+        $a = 0; $b = 0; $c = 0;
+        foreach($nucleo->turmas as $turma){
+            if($turma->inativo == 1){$a++;}
+            $b++;
+        }
+        $c = $a - $b;
+        $dadosgerais2 = [$a,$b,$c];
+
         //Se o usuário for professor, adicionar a variavel professor procurando o professor com o id do usuário e retornando para informações de núcleos
         if(auth()->user()->admin_professor == 0){
             //Enconta o professor no banco de dados.
@@ -211,7 +209,7 @@ class NucleosController extends Controller{
 
             return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','professor'));
         }
-        return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais'));
+        return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','dadosgerais2'));
     }
 
     //Função nucleos_ativar_inativar: Ativa ou inativa um nucleor e retorna a página de index.

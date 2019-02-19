@@ -58,6 +58,29 @@
                     <div class="col s6">
                         <table>
                             <tr>
+                                <h6><b>Foto registrada:</b></h6>
+                                @if(!is_null($pessoa->foto))
+                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset($pessoa->foto)}}"></td>
+                                @else
+                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image.png')}}"></td>
+                                @endif
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col s6">
+                        <table>
+                            <tr>
+                                @if($idade < 18)
+                                    @if(!is_null($pessoa->matricula))<td><img id="3x4_image" class="materialboxed" width="140" src="{{asset($pessoa->matricula)}}"></td>@endif
+                                @endif
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <table>
+                            <tr>
                                 <td><h6><b>Nome:</b></h6></td>
                                 <td><h6>{{$pessoa->nome}}</h6></td>
                             </tr>
@@ -74,6 +97,17 @@
                                     </h6>
                                 </td>
                             </tr>
+                            @if($idade < 18)
+                                <tr>
+                                    <td><h6><b>RG do responsavel:</b></h6></td>
+                                    <td>
+                                        <h6>
+                                            @if($pessoa->rg_responsavel != null) {{$pessoa->rg_responsavel}} 
+                                            @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                        </h6>
+                                    </td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td><h6><b>CPF:</b></h6></td>
                                 <td>
@@ -83,6 +117,17 @@
                                     </h6>
                                 </td>
                             </tr>
+                            @if($idade < 18)
+                                <tr>
+                                    <td><h6><b>CPF do responsavel:</b></h6></td>
+                                    <td>
+                                        <h6>
+                                            @if($pessoa->cpf_responsavel != null) {{$pessoa->cpf_responsavel}} 
+                                            @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
+                                        </h6>
+                                    </td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td><h6><b>Cidade:</b></h6></td>
                                 <td>

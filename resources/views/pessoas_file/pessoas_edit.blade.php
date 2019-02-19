@@ -61,7 +61,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="@if(is_null(old('cpf_responsavel'))) {{$pessoa->cpf_responsavel}} @else {{old('cpf_responsavel')}} @endif">
-                        <label for="cpf_responsavel">CPF opcional:</label>
+                        <label for="cpf_responsavel">CPF do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -73,7 +73,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
                         <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="@if(is_null(old('rg_responsavel'))) {{$pessoa->rg_responsavel}} @else {{old('rg_responsavel')}} @endif">
-                        <label for="rg_responsavel">RG opcional:</label>
+                        <label for="rg_responsavel">RG do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
