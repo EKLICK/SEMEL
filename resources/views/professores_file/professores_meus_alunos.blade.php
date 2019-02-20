@@ -75,6 +75,7 @@
                         <th>Nascimento</th>
                         <th>Telefone</th>
                         <th>Telefone de emergência</th>
+                        <th>Doenças</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,10 +85,17 @@
                             <td>{{$aluno->nascimento}}</td>
                             <td>{{$aluno->telefone}}</td>
                             <td>{{$aluno->telefone_emergencia}}</td>
+                            <td>@if(count($aluno->anamneses[count($aluno->anamneses)-1]->doencas) == 0) Não possui @else <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Doenças da anamnese" href="#listadoencas" onclick="modal_doencas({{$aluno->anamnese[count($aluno->anamneses)-1]->doencas}})"><i class="small material-icons">info_outline</i></a> @endif</td>
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
+        </div>
+    </div>
+    
+    <div class="modal" id="listadoencas">
+        <div class="container">
+            <table class="centered responsive-table highlight bordered" id="lista_de_doencas"></table>
         </div>
     </div>
 @endsection

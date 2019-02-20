@@ -30,7 +30,7 @@ Route::post('/professor_turmas/vincular','ProfessorController@professores_turmas
 Route::post('/professores_turmas/ativar_inativar','ProfessorController@professores_turmas_ativar_inativar')->name('professores_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de pessoas
-Route::resource('pessoas','PessoasController')->middleware('AdministracaoEProfessor');
+Route::resource('pessoas','PessoasController')->middleware('Authenticate');
 Route::get('/pessoas/pdf/{id}','PessoasController@pdfpessoas')->name('pdfpessoas')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/pessoas_info/{id}','PessoasController@pessoas_info')->name('pessoa_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/select/pessoas', 'PessoasController@pessoas_select')->name('pessoas_select')->middleware('AdministracaoEProfessor', 'Authenticate');
