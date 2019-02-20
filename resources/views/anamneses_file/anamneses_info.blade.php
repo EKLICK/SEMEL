@@ -7,6 +7,16 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col s6">
+                <table>
+                    <tr>
+                        <h6><b>Atestado médico:</b></h6>
+                        <td><img id="atestado_image" class="materialboxed" width="150" src="{{asset($anamnese->atestado)}}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
             <div class="col s12 m6">
                 <table class="responsive-table highlight bordered">
                     <tbody>

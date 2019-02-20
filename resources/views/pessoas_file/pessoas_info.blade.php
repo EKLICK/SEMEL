@@ -62,7 +62,7 @@
                                 @if(!is_null($pessoa->foto))
                                     <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset($pessoa->foto)}}"></td>
                                 @else
-                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image.png')}}"></td>
+                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image_3x4.png')}}"></td>
                                 @endif
                             </tr>
                         </table>
@@ -70,8 +70,9 @@
                     <div class="col s6">
                         <table>
                             <tr>
+                                <h6><b>Matricula:</b></h6>
                                 @if($idade < 18)
-                                    @if(!is_null($pessoa->matricula))<td><img id="3x4_image" class="materialboxed" width="140" src="{{asset($pessoa->matricula)}}"></td>@endif
+                                    @if(!is_null($pessoa->matricula))<td><img id="matricula_image" class="materialboxed" width="140" src="{{asset($pessoa->matricula)}}"></td>@endif
                                 @endif
                             </tr>
                         </table>
