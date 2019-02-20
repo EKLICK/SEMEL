@@ -59,6 +59,19 @@ class PessoasController extends Controller{
         return $data['img_matricula'];
     }
 
+    //Ferramenta saveDbImageMatricula: Salva a imagem de atestado vindo das requisições do formulario.
+    public function saveDbImageAtestado($req){
+        $data = $req->all();
+        $imagem = $req->file('img_atestado');
+        $num = rand(1111, 9999);
+        $dir = "img/img_atestado";
+        $ex = $imagem->guessClientExtension();
+        $nomeImagem = "imagem_".$num.".".$ex;
+        $imagem->move($dir, $nomeImagem);
+        $data['img_estado'] = $dir."/".$nomeImagem;
+        return $data['img_estado'];
+    }
+
     //Ferramenta checar_estado: Verifica se todos os parametros necessarios para completar um perfil estão preenchidos.
     public function checar_estado($listadados, $nascimento){
         if($listadados['img_3x4'] == null){return 2;}
@@ -152,12 +165,14 @@ class PessoasController extends Controller{
     //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de pessoas e turmas.
     public function store(PessoaCreateFormRequest $request){
         $dataForm = $request->all();
+
         //Adiciona a variavel nascimento a idade da pessoa.
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
         list($dia, $mes, $ano) = explode('/', $dataForm['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
         $nascimento = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
         $errors = [];
+
         //Checar se a pessoa é maior de 18 anos.
         if($nascimento > 18){
             //Se sim, anular valores de matricula, cpf_responsavel e rg_responsavel.
@@ -167,9 +182,10 @@ class PessoasController extends Controller{
         }
         else{
             //Se sim, salvar imagem de matricula no banco de dados.
-            if(isset($dataForm['img_3x4'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
+            if(isset($dataForm['img_matricula'])){$dataForm['img_matricula'] = $this->saveDbImageMatricula($request);}
             else{$dataForm['img_matricula'] = null;}
         }
+
         //checar se convenio médico foi marcado
         if(isset($dataForm['marc'])){if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}}
 
@@ -239,6 +255,11 @@ class PessoasController extends Controller{
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
+
+        //Se imagem foi passada, salva imagem atestado no banco de dados.
+        if(isset($dataForm['img_atestado'])){$dataForm['img_atestado'] = $this->saveDbImageAtestado($request);}
+        else{$dataForm['img_atestado'] = null;}
+
         //Cria anamnese no banco de dados com todos os atributos abaixo:
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
@@ -251,7 +272,7 @@ class PessoasController extends Controller{
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
             'dor_ossea' => $dataForm['string_dor_ossea'],
-            'atestado' => $dataForm['atestado'],
+            'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
             'ano' => date('Y'),
             'pessoas_id' => $pessoa->id,

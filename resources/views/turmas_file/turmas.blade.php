@@ -2,7 +2,7 @@
 @section('breadcrumbs')
     <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
 @endsection
-@section('title') Turmas registradas <a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Resetar turmas<i class="material-icons right">autorenew</i></a> @endsection
+@section('title') Turmas registradas @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     <div class="container z-depth-4">
@@ -219,44 +219,4 @@
             </div>
         </form>
     </div>
-    
-    <div id="modalreset" class="modal">
-            <div class="container">
-                <div class="row">
-                    <h5><b>Atenção:</b></h5>
-                    <div class="row">
-                        <div class="input-field col s1">
-                            <i class="medium material-icons" style="color: red;" >sim_card_alert</i>
-                        </div>
-                        <div class="input-field col s11">
-                            <h6><p class="center"><b>Resetar as turmas irá tirar todas as pessoas de todas as turmas e deixar histórico do acontecimento: </b></p></h6>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <br>
-                <h6><b><p>É necessario entrar com usuário e senha do administrador:</p></b></h6>
-                <form action="{{route('define_quantidade')}}" action="GET">
-                    @csrf
-                    <div class="row">
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">perm_contact_calendar</i>
-                            <input name="usuario" id="icon_usuario" type="password" class="validate">
-                            <label for="icon_usuario">Usuário:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">lock_outline</i>
-                            <input name="password" id="icon_lockout" type="password" class="validate">
-                            <label for="icon_lockout">Senha:</label>
-                        </div>
-                        <div class="input-field col s12 m5 right">
-                            <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
-                                <i class="large material-icons left">av_timer</i>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
 @endsection

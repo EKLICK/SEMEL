@@ -12,13 +12,12 @@
         <div class="row">
             <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="text" name="atestado" value="2" hidden>
                 <h5>Registro da pessoa:</h5>
                 <div class="row">
                     <div class="file-field input-field col s12 m5">
                         <div class="btn">
                             <span>Foto 3x4</span>
-                            <input id="img_3x4" type="file" name="img_3x4">
+                            <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
                         </div>
                         <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
                         <br><br><br>
@@ -408,7 +407,7 @@
                     <div class="input-field col s12 m6">
                         <i id="fumante_icon" class="material-icons prefix" @if(old('fumante') != 1) hidden @endif>description</i>
                         <input id="string_fumante" name="string_fumante" type="text" class="validate" value="{{old('string_fumante')}}" @if(old('fumante') != 1) hidden @endif>
-                        <label id="fumante_label" for="string_fumante" @if(old('fumante') != 1) hidden @endif>Quanto tempo?</label>
+                        <label id="fumante_label" for="string_fumante" @if(old('fumante') != 1) hidden @endif>Fuma há quanto tempo?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -425,6 +424,24 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <a href="#adicionardoenca" class="btn-floating modal-trigger btn-modal_inativar light-blue darken-1"><i class="material-icons">note_add</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Atestado médico</span>
+                                <input id="img_atestado" type="file" name="img_atestado">
+                            </div>
+                            <a id="limpar_atestado"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <br><br><br>
+                            <div class="file-path-wrapper">
+                                <input id="atestado" name="atestado" class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
+                        <img id="atestado_image" class="materialboxed" width="250" src="">
                     </div>
                 </div>
                 <div class="row">

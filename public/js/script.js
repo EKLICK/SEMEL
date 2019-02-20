@@ -73,6 +73,12 @@ function apagar_matricula(){
     document.getElementById('matricula').value = '';
 }
 
+function apagar_atestado(){
+    document.getElementById('atestado_image').src = '';
+    document.getElementById('img_atestado').value = '';
+    document.getElementById('atestado').value = '';
+}
+
 document.getElementById("img_3x4").onchange = function (){
     string = document.getElementById("img_3x4").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
@@ -105,7 +111,22 @@ document.getElementById("img_matricula").onchange = function (){
     }
 };
 
-//EDIÇÃO E CRIAÇÃO DE ANAMNESES
+document.getElementById("img_atestado").onchange = function (){
+    string = document.getElementById("img_atestado").value.split('.');
+    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("atestado_image").src = e.target.result;
+        };
+        
+        reader.readAsDataURL(this.files[0]);
+    }
+    else{
+        apagar_atestado();
+        alert('Ocorreu um erro no upload da imagem, por favor tente novamente!')
+    }
+};
+
 document.getElementById('limpar_3x4').onclick = function (){
     apagar_3_4();
 }
@@ -113,6 +134,12 @@ document.getElementById('limpar_3x4').onclick = function (){
 document.getElementById('limpar_matricula').onclick = function (){
     apagar_matricula();
 }
+
+document.getElementById('limpar_atestado').onclick = function (){
+    apagar_atestado();
+}
+
+//EDIÇÃO E CRIAÇÃO DE ANAMNESES
 
 $("[name='marc']").click(function(){
     change(this.value, $('#convenio_medico'), $('#convenio_label'), $('#convenio_icon'));

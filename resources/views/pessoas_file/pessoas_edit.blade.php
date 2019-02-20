@@ -7,17 +7,7 @@
 @endsection
 @section('title') Editar <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
-    @if(isset($errors) && count($errors) > 0)
-        @foreach($errors->all() as $error)
-            <div style="margin-left: 15%; margin-top: 1%;">
-                <div class="chip red lighten-2">
-                    {{$error}}
-                    <i class="close material-icons">close</i>
-                </div>
-            </div>
-        @endforeach
-    @endif
-    <br>
+    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('pessoas.update', $pessoa->id)}}" method="post" enctype="multipart/form-data">
@@ -28,9 +18,9 @@
                     <div class="file-field input-field col s12 m5">
                         <div class="btn">
                             <span>Foto 3x4</span>
-                            <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
+                            <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{$pessoa->foto}} @else {{old('img_3x4')}} @endif">
                         </div>
-                        <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
+                        <a id="limpar_3x4" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
                             <input name="3x4" id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
@@ -192,7 +182,7 @@
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>matricula escolar</span>
-                                <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('matricula'))) {{$pessoa->matricula}} @else {{old('matricula')}} @endif">
+                                <input id="img_matricula" type="file" name="img_matricula" value="@if(is_null(old('img_matricula'))) {{$pessoa->matricula}} @else {{old('img_matricula')}} @endif">
                             </div>
                             <a id="limpar_matricula" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>

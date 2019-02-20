@@ -10,7 +10,7 @@
     @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('anamneses.update', $anamnese->id)}}" method="post">
+            <form class="col s12" action="{{route('anamneses.update', $anamnese->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="ano" id="ano" value="{{date('Y')}}" hidden>
                 <input type="number" name="pessoa_id" value="{{$anamnese->pessoas->id}}" hidden>
@@ -45,9 +45,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 2) hidden @endif @else @if ($anamnese->toma_medicacao == -1) hidden @endif @endif>description</i>
-                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="@if(is_null(old('toma_medicacao'))) @if($anamnese->toma_medicacao != -1) {{$anamnese->toma_medicacao}} @endif @else {{old('string_toma_medicacao')}} @endif" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == -1) hidden @endif @else @if($anamnese->toma_medicacao == -1) hidden @endif @endif>
-                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 2) hidden @endif @else @if($anamnese->toma_medicacao == -1) hidden @endif @endif>Qual medicamento?</label>
+                        <i id="toma_medicacao_icon" class="material-icons prefix" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') != 1) hidden @endif @else @if ($anamnese->toma_medicacao == -1) hidden @endif @endif>description</i>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="@if(is_null(old('toma_medicacao'))) @if($anamnese->toma_medicacao != -1) {{$anamnese->toma_medicacao}} @endif @else {{old('string_toma_medicacao')}} @endif" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 2) hidden @endif @else @if($anamnese->toma_medicacao == -1) hidden @endif @endif>
+                        <label id="toma_medicacao_label" for="string_toma_medicacao" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') != 1) hidden @endif @else @if($anamnese->toma_medicacao == -1) hidden @endif @endif>Qual medicamento?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -67,9 +67,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="alergia_medicacao_icon" class="material-icons prefix" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 2) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>description</i>
-                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="@if(is_null(old('alergia_medicacao'))) @if($anamnese->alergia_medicacao != -1) {{$anamnese->alergia_medicacao}} @endif @else {{old('string_alergia_medicacao')}} @endif" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == -1) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>
-                        <label id="alergia_medicacao_label" for="string_alergia_medicacao" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 2) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>Qual alergia médica?</label>
+                        <i id="alergia_medicacao_icon" class="material-icons prefix" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') != 1) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>description</i>
+                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="@if(is_null(old('alergia_medicacao'))) @if($anamnese->alergia_medicacao != -1) {{$anamnese->alergia_medicacao}} @endif @else {{old('string_alergia_medicacao')}} @endif" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 2) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>
+                        <label id="alergia_medicacao_label" for="string_alergia_medicacao" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') != 1) hidden @endif @else @if ($anamnese->alergia_medicacao == -1) hidden @endif @endif>Qual alergia médica?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -89,9 +89,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="cirurgia_icon" class="material-icons prefix" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 2) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>description</i>
-                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="@if(is_null(old('cirurgia'))) @if($anamnese->cirurgia != -1) {{$anamnese->cirurgia}} @endif @else {{old('string_cirurgia')}} @endif" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == -1) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>
-                        <label id="cirurgia_label" for="string_cirurgia" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 2) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>Aonde foi a cirurgia?</label>
+                        <i id="cirurgia_icon" class="material-icons prefix" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') != 1) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>description</i>
+                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="@if(is_null(old('cirurgia'))) @if($anamnese->cirurgia != -1) {{$anamnese->cirurgia}} @endif @else {{old('string_cirurgia')}} @endif" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 2) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>
+                        <label id="cirurgia_label" for="string_cirurgia" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') != 1) hidden @endif @else @if ($anamnese->cirurgia == -1) hidden @endif @endif>Aonde foi a cirurgia?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -111,9 +111,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_ossea_icon" class="material-icons prefix" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 2) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>description</i>
-                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="@if(is_null(old('dor_ossea'))) @if($anamnese->dor_ossea != -1) {{$anamnese->dor_ossea}} @endif @else {{old('string_dor_ossea')}} @endif" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == -1) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>
-                        <label id="dor_ossea_label" for="string_dor_ossea" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 2) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>Aonde está a dor óssea?</label>
+                        <i id="dor_ossea_icon" class="material-icons prefix" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') != 1) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>description</i>
+                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="@if(is_null(old('dor_ossea'))) @if($anamnese->dor_ossea != -1) {{$anamnese->dor_ossea}} @endif @else {{old('string_dor_ossea')}} @endif" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 2) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>
+                        <label id="dor_ossea_label" for="string_dor_ossea" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') != 1) hidden @endif @else @if ($anamnese->dor_ossea == -1) hidden @endif @endif>Aonde está a dor óssea?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -133,9 +133,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_muscular_icon" class="material-icons prefix" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 2) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>description</i>
-                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="@if(is_null(old('dor_muscular'))) @if($anamnese->dor_muscular != -1) {{$anamnese->dor_muscular}} @endif @else {{old('string_dor_muscular')}} @endif" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == -1) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>
-                        <label id="dor_muscular_label" for="string_dor_muscular" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 2) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>Aonde está a dor muscular?</label>
+                        <i id="dor_muscular_icon" class="material-icons prefix" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') != 1) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>description</i>
+                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="@if(is_null(old('dor_muscular'))) @if($anamnese->dor_muscular != -1) {{$anamnese->dor_muscular}} @endif @else {{old('string_dor_muscular')}} @endif" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 2) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>
+                        <label id="dor_muscular_label" for="string_dor_muscular" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') != 1) hidden @endif @else @if ($anamnese->dor_muscular == -1) hidden @endif @endif>Aonde está a dor muscular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -155,9 +155,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="dor_articular_icon" class="material-icons prefix" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>description</i>
-                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="@if(is_null(old('dor_articular'))) @if($anamnese->dor_articular != -1) {{$anamnese->dor_articular}} @endif @else {{old('string_dor_articular')}} @endif" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == -1) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>
-                        <label id="dor_articular_label" for="string_dor_articular" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>Aonde está a dor articular?</label>
+                        <i id="dor_articular_icon" class="material-icons prefix" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') != 1) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>description</i>
+                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="@if(is_null(old('dor_articular'))) @if($anamnese->dor_articular != -1) {{$anamnese->dor_articular}} @endif @else {{old('string_dor_articular')}} @endif" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>
+                        <label id="dor_articular_label" for="string_dor_articular" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') != 1) hidden @endif @else @if ($anamnese->dor_articular == -1) hidden @endif @endif>Aonde está a dor articular?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -165,21 +165,21 @@
                         O usuário fuma?
                         <p>
                             <label>
-                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante == 1) checked @endif @endif/>
+                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($anamnese->fumante == 2) checked @endif @endif/>
+                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($anamnese->fumante == -1) checked @endif @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="fumante_icon" class="material-icons prefix" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>description</i>
-                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="@if(is_null(old('fumante'))) @if($anamnese->fumante != -1) {{$anamnese->fumante}} @endif @else {{old('string_fumante')}} @endif" @if(!is_null(old('fumante'))) @if(old('fumante') == -1) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>
-                        <label id="fumante_label" for="string_fumante" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>Quanto tempo?</label>
+                        <i id="fumante_icon" class="material-icons prefix" @if(!is_null(old('fumante'))) @if(old('fumante') != 1) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>description</i>
+                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="@if(is_null(old('fumante'))) @if($anamnese->fumante != -1) {{$anamnese->fumante}} @endif @else {{old('string_fumante')}} @endif" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>
+                        <label id="fumante_label" for="string_fumante" @if(!is_null(old('fumante'))) @if(old('fumante') != 1) hidden @endif @else @if ($anamnese->fumante == -1) hidden @endif @endif>Fuma há quanto tempo?</label>
                     </div>
                 </div>
                 <div class="row">
@@ -191,6 +191,24 @@
                             @endforeach
                         </select>
                         <input type="text" value="2" name="possui_doenca" hidden>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Atestado médico</span>
+                                <input id="img_atestado" type="file" name="img_atestado" value="@if(is_null(old('img_atestado'))) {{$anamnese->atestado}} @else {{old('img_atestado')}} @endif">
+                            </div>
+                            <a id="limpar_atestado"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <br><br><br>
+                            <div class="file-path-wrapper">
+                                <input id="atestado" name="atestado" class="file-path validate" type="text" value="{{$anamnese->atestado}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
+                        <img id="atestado_image" class="materialboxed" width="250" src="@if(!is_null($anamnese->atestado)) {{asset($anamnese->atestado)}} @endif">
                     </div>
                 </div>
                 <div class="row">

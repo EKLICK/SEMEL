@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Pagination\Paginator;
+
 use App\Http\Requests\Anamnese\AnamneseCreateEditFormRequest;
 use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
-use Illuminate\Pagination\Paginator;
+
 use App\Anamnese;
 use App\Pessoa;
 use App\Doenca;
-use Illuminate\Support\Facades\Session;
 
-class AnamneseController extends Controller
-{
+class AnamneseController extends Controller{
     /**
      * Display a listing of the resource.
      *
@@ -21,17 +22,17 @@ class AnamneseController extends Controller
      */
 
     //Funções ferramentas
-    public function filtrar_dados($arraylists, $arrayfiltros){
-        $arraylistfiltradas = [];
-        foreach($arrayfiltros as $arrayfiltro){
-            foreach($arraylists as $arraylist){
-                if($arraylist == $arrayfiltro){
-                    array_push($arraylistfiltradas, $arraylist);
-                }
-            }
-        }
-
-        return $arraylistfiltradas;
+    //Ferramenta saveDbImageMatricula: Salva a imagem de atestado vindo das requisições do formulario.
+    public function saveDbImageAtestado($req){
+        $data = $req->all();
+        $imagem = $req->file('img_atestado');
+        $num = rand(1111, 9999);
+        $dir = "img/img_atestado";
+        $ex = $imagem->guessClientExtension();
+        $nomeImagem = "imagem_".$num.".".$ex;
+        $imagem->move($dir, $nomeImagem);
+        $data['img_estado'] = $dir."/".$nomeImagem;
+        return $data['img_estado'];
     }
 
     public function ordenar_alfabeto($lista){
@@ -65,35 +66,6 @@ class AnamneseController extends Controller
         return $listaordenadanome;
     }
 
-    public function ordenar_ano($lista, $option){
-        $listaordenada = [];
-        if($option == 0){
-            $ano = (int)date('Y') - 1;
-        }
-        else{
-            $ano = (int)date('Y');
-        }
-        for($i = $ano; $i > 1900; $i--){
-            $listafiltradaano = [];
-            foreach($lista as $arquivo){
-                if($arquivo['ano'] == $i){
-                    array_push($listafiltradaano, $arquivo);
-                }
-            }
-
-            $listaordenadanome = $this->ordenar_alfabeto($listafiltradaano);
-
-            foreach($listaordenadanome as $arquivo){
-                array_push($listaordenada, $arquivo);
-            }
-            
-            if($option == 1){
-                break;
-            }
-        }
-        return $listaordenada;
-    }
-
     public function gerar_paginate($array, $option){
         $itemCollection = collect($array);
         $currentpage = LengthAwarePaginator::resolveCurrentPage();
@@ -112,7 +84,7 @@ class AnamneseController extends Controller
     public function index(){
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '=', $ano)->get();
+        $anamneseslist = Anamnese::where('ano', '=', $ano)->orderBy('ano','desc')->get();
         Session::put('quant', count($anamneseslist).' anamneses de '.$ano.' cadastradas.');
 
         $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
@@ -125,7 +97,7 @@ class AnamneseController extends Controller
         $ano = date('Y');
         $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', $ano)->get();
         Session::put('quant', count($anamneseslist).' anamneses antigas cadastradas.');
-        $anamneseslist = $this->ordenar_ano($anamneseslist, 0);
+        $anamneseslist = $this->ordenar_alfabeto($anamneseslist, 0);
         $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
 
         return view ('anamneses_file.anamneses_antigas', compact('anamneseslist','ano','doencaslist'));
@@ -170,6 +142,11 @@ class AnamneseController extends Controller
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] == null;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] == null;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
+
+        //Se imagem foi passada, salva imagem atestado no banco de dados.
+        if(isset($dataForm['img_atestado'])){$dataForm['img_atestado'] = $this->saveDbImageAtestado($request);}
+        else{$dataForm['img_atestado'] = null;}
+
         $anamnese = Anamnese::create([
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
@@ -181,7 +158,7 @@ class AnamneseController extends Controller
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
             'dor_ossea' => $dataForm['string_dor_ossea'],
-            'atestado' => $dataForm['atestado'],
+            'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
             'ano' => date('Y'),
             'pessoas_id' => $pessoa->id,
@@ -228,6 +205,9 @@ class AnamneseController extends Controller
      */
     public function update(AnamneseCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
+        $anamnese = Anamnese::find($id);
+        $oldanamnese = (array)$anamnese;
+
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
         if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] = -1;}
@@ -236,8 +216,23 @@ class AnamneseController extends Controller
         if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] = -1;}
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
-        $anamnese = Anamnese::find($id);
-        $oldanamnese = (array)$anamnese;
+
+        //Verifica se a imagem de atestado foi passada pelo formulario
+        if(isset($dataForm['img_atestado'])){
+            //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
+            if(!empty($anamnese['atestado'])){unlink($anamnese['atestado']);}
+            $dataForm['img_atestado'] = $this->saveDbImageAtestado($request);
+        }
+        elseif(isset($anamnese['atestado'])){
+            //Se a imagem não foi passada, porém permanece com o link antigo, apenas repeto o valor que está no banco de dados para criação
+            $dataForm += ['img_atestado' => $anamnese['atestado']];
+        }
+        else{
+            //Se não, atribuir nulo e deleta a imagem.
+            unlink($anamnese['atestado']);
+            $dataForm += ['img_atestado' => null];
+        }
+
         $anamnese->update([
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
@@ -249,6 +244,7 @@ class AnamneseController extends Controller
             'dor_muscular' => $dataForm['string_dor_muscular'],
             'dor_articular' => $dataForm['string_dor_articular'],
             'dor_ossea' => $dataForm['string_dor_ossea'],
+            'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
             'ano' => date('Y'),
             'pessoas_id' => $dataForm['pessoa_id'],
