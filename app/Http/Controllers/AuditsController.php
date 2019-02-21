@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Audit;
 
-class auditsController extends Controller
-{
+class auditsController extends Controller{
     //Funções de Redirecionamento
     public function index(){
         $auditslist = Audit::orderBy('created_at','desc')->paginate(10);

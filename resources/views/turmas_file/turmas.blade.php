@@ -136,7 +136,6 @@
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$turma->nome}}" id="btn-delete" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach 
@@ -150,26 +149,6 @@
         </div>
     </div>
 
-    <div id="modaldelete" class="modal">
-        <form action="{{Route('turmas.destroy', 'delete')}}" method="POST">
-            @method('DELETE')
-            @csrf
-            <div class="modal-content">
-                <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar a turma abaixo?</p>
-                <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" type="text" id="name_delete">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
-            </div>
-        </form>
-    </div>
     <div id="modalobjetoativar" class="modal">
         <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
             @csrf

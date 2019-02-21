@@ -112,7 +112,6 @@
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>
-                                <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$nucleo->nome}}" id="btn-delete" data-id="{{$nucleo->id}}" data-nome="{{$nucleo->nome}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -128,27 +127,6 @@
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add</i></a>
             </div>
         </div>
-    </div>
-
-    <div id="modaldelete" class="modal">
-        <form action="{{route('nucleos.destroy', 'delete')}}" method="POST">
-            @method('DELETE')
-            @csrf
-            <div class="modal-content">
-                <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar o núcleo abaixo?</p>
-                <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" type="text" id="name_delete">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
-            </div>
-        </form>
     </div>
 
     <div id="modalobjetoativar" class="modal">
