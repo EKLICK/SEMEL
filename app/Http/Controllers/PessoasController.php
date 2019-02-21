@@ -459,6 +459,7 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
+        //Atribui idade da pessoa a variavel $idade utilizando função de conversão.
         $idade = $this->mostrar_nascimento($pessoa->nascimento, 1);
 
         //Encontra a ultima anamnese da pessoa no banco de dados.
@@ -467,7 +468,7 @@ class PessoasController extends Controller{
         //Converter YYYY-mm-dd para dd/mm/YYYY.
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
 
-        //Seleciona todos o histórico da pessoa encontrada.
+        //Seleciona todo o histórico da pessoa encontrada.
         $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->paginate(5);
 
         //Contagem de turmas:
@@ -615,8 +616,10 @@ class PessoasController extends Controller{
             ]);
         }
         else{
-            $pessoa = Pessoa::find($dataForm['pessoa_id']);
             //Se não:
+
+            //Encontra a pessoa no banco de dados.
+            $pessoa = Pessoa::find($dataForm['pessoa_id']);
 
             //Calcula quantas pessoas ativar existem na turma e atribui a variavel quant.
             $quant = 0;

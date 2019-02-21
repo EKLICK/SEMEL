@@ -185,7 +185,7 @@ class ProfessorController extends Controller{
         $professor->update($dataForm);
         $newprofessor = (array)$professor;
 
-        //Verifica se os valores velhos são iguais aos valores novos de professor e usuário.
+        //Verifica se os valores velhos são iguais aos valores novos de professor.
         if($newprofessor != $oldprofessor){
             //Se os valores de professor são diferentes, define uma sessão verde de informação.
             Session::put('mensagem_green', $professor->nome.' editado(a) com sucesso!');
@@ -222,7 +222,7 @@ class ProfessorController extends Controller{
         //Converter YYYY-mm-dd para dd/mm/YYYY.
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
 
-        //Encontra todos o histórico do professor encontrado.
+        //Seleciona todo o histórico do professor encontrado.
         $histprofessor = HistoricoPrT::orderBy('created_at', 'desc')->where('professor_id', '=', $professor->id)->paginate(5);
 
         //Contagem de turmas:
@@ -308,6 +308,7 @@ class ProfessorController extends Controller{
     //Função professores_turmas_vincular: Vincula um professor em uma turma e retorna a página de professores e turmas.
     public function professores_turmas_vincular(Request $request){
         $dataForm = $request->all();
+        
         //Encontra o professor no banco de dados.
         $professor = Professor::find($dataForm['professor_id']);
 

@@ -135,12 +135,12 @@ class AnamneseController extends Controller{
         $dataForm = $request->all();
         $dataForm += ['ano' => date('Y')];
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
-        if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] == null;}
-        if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] == null;}
-        if($dataForm['cirurgia'] == 2){$dataForm['string_cirurgia'] == null;}
-        if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] == null;}
-        if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] == null;}
-        if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] == null;}
+        if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] == -1;}
+        if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] == -1;}
+        if($dataForm['cirurgia'] == 2){$dataForm['string_cirurgia'] == -1;}
+        if($dataForm['dor_ossea'] == 2){$dataForm['string_dor_ossea'] == -1;}
+        if($dataForm['dor_muscular'] == 2){$dataForm['string_dor_muscular'] == -1;}
+        if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] == -1;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
 
         //Se imagem foi passada, salva imagem atestado no banco de dados.
@@ -161,14 +161,14 @@ class AnamneseController extends Controller{
             'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
             'ano' => date('Y'),
-            'pessoas_id' => $pessoa->id,
+            'pessoas_id' => $dataForm['pessoas_id'],
         ]);
         if(!empty($dataForm['doencas'])){
             $anamnese->doencas()->attach($dataForm['doencas']);
         }
         Session::put('mensagem_green','Anamnese adicionada com sucesso!');
 
-        return redirect()->route('lista_anamnese', $dataForm['pessoas_id']);
+        return redirect()->route('pessoas.index');
     }
 
     /**

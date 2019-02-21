@@ -32,6 +32,7 @@ class TurmasController extends Controller{
     //FUNÇÕES DE FERRAMENTAS:
     //Ferramenta convertHorario: Converte o horário de MM:HH [PM|AM] para HH:MM:SS.
     public function convertHorario($hora, $op){
+        //Verifica se a variavel $op é 1 (de MM:HH [PM|AM] para HH:MM:SS) ou 2 (de HH:MM:SS para MM:HH [PM|AM]).
         if($op == 1){
             $horario = explode(' ', $hora);
 
@@ -47,6 +48,7 @@ class TurmasController extends Controller{
         else{
             $horario = explode(':', $hora);
 
+            //Se o horario estiver acima de 12 horas, diminui 12 horas do horario e adiciona PM, se não, apenas adiciona AM
             if($horario[0] > 12){
                 $horario[0] = (int)$horario[0] - 12;
                 if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
@@ -112,27 +114,11 @@ class TurmasController extends Controller{
         foreach($dataForm['data_semanal'] as $data){$dias_da_semana = $dias_da_semana.$data.',';}
         $dataForm['data_semanal'] = $dias_da_semana;
 
-        //Converte o horário de MM:HH [PM|AM] para HH:MM:SS para a criação (HORARIO INICIAL):
-        $horario = explode(' ', $dataForm['horario_inicial']);
+        //Converte horario inicial de HH:MM [AM|PM] para HH:MM:SS.
+        $dataForm['horario_inicial'] = $this->convertHorario($dataForm['horario_inicial'], 1);
 
-        //Se foi definido 'PM', adicionar 12 horas para a criação.
-        if($horario[1] == 'PM'){
-            $separador = explode(':', $horario[0]);
-            $separador[0] = 12 + (int)$separador[0];
-            $horario[0] = $separador[0].':'.$separador[1];
-        }
-        $dataForm['horario_inicial'] = $horario[0].':00';
-
-        //Converte o horário de MM:HH [PM|AM] para HH:MM:SS para a criação (HORARIO FINAL):
-        $horario = explode(' ', $dataForm['horario_final']);
-
-        //Se foi definido 'PM', adicionar 12 horas para a criação.
-        if($horario[1] == 'PM'){
-            $separador = explode(':', $horario[0]);
-            $separador[0] = 12 + (int)$separador[0];
-            $horario[0] = $separador[0].':'.$separador[1];
-        }
-        $dataForm['horario_final'] = $horario[0].':00';
+        //Converte horario final de HH:MM [AM|PM] para HH:MM:SS.
+        $dataForm['horario_final'] = $this->convertHorario($dataForm['horario_final'], 1);
 
         //Cria turma no banco de dados.
         $turma = Turma::create($dataForm);
@@ -166,32 +152,25 @@ class TurmasController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função edit, retorna a página de edição de registros de turmas.
     public function edit($id){
+        //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);
+
+        //Encontra o núcleo no banco de dados.
         $nucleoslist = Nucleo::all();
-        $horario = explode(':', $turma['horario_inicial']);
-        if($horario[0] > 12){
-            $horario[0] = (int)$horario[0] - 12;
-            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
-            $horario[2] = 'PM';
-            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        else{
-            $horario[2] = 'AM';
-            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        $horario = explode(':', $turma['horario_final']);
-        if($horario[0] > 12){
-            $horario[0] = (int)$horario[0] - 12;
-            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
-            $horario[2] = 'PM';
-            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        else{
-            $horario[2] = 'AM';
-            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
+
+        //Converte horario inicial de HH:MM:SS para HH:MM [AM|PM].
+        $turma['horario_inicial'] = $this->convertHorario($turma['horario_inicial'], 2);
+
+        //Converte horario final de HH:MM:SS para HH:MM [AM|PM].
+        $turma['horario_final'] = $this->convertHorario($turma['horario_final'], 2);
+
+        //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+
+        //Separa dias da semana da turma e atribui na variavel $datas_escolhidas e retida o ultima array em branco.
         $datas_escolhidas = explode(',', $turma['data_semanal']);
         unset($datas_escolhidas[count($datas_escolhidas) - 1]);
 
@@ -205,35 +184,40 @@ class TurmasController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(TurmaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
+
+        //Encontra a turma no banco de dados.
         $turma = Turma::find($id);
+
+        //Busca os valores antigos da turma.
         $oldturma = (array)$turma;
+
+        //Junta os dias da semana escolhidos na variavel $dias_da_semana para editar no banco de dados.
         $dias_da_semana = '';
-        foreach($dataForm['data_semanal'] as $data){
-            $dias_da_semana = $dias_da_semana.$data.',';
-        }
+        foreach($dataForm['data_semanal'] as $data){$dias_da_semana = $dias_da_semana.$data.',';}
         $dataForm['data_semanal'] = $dias_da_semana;
-        $horario = explode(' ', $dataForm['horario_inicial']);
-        if($horario[1] == 'PM'){
-            $separador = explode(':', $horario[0]);
-            $separador[0] = 12 + (int)$separador[0];
-            $horario[0] = $separador[0].':'.$separador[1];
-        }
-        $dataForm['horario_inicial'] = $horario[0].':00';
-        $horario = explode(' ', $dataForm['horario_final']);
-        if($horario[1] == 'PM'){
-            $separador = explode(':', $horario[0]);
-            $separador[0] = 12 + (int)$separador[0];
-            $horario[0] = $separador[0].':'.$separador[1];
-        }
-        $dataForm['horario_final'] = $horario[0].':00';
-        $dataForm += ['inativo' => $turma->inativo];
+
+        //Converte horario inicial de HH:MM [AM|PM] para HH:MM:SS.
+        $dataForm['horario_inicial'] = $this->convertHorario($dataForm['horario_inicial'], 1);
+
+        //Converte horario final de HH:MM [AM|PM] para HH:MM:SS.
+        $dataForm['horario_final'] = $this->convertHorario($dataForm['horario_final'], 1);
+
+        //Edita turma no banco de dados.
         $turma->update($dataForm);
+
+        //busca os valores novos da turma.
         $newturma = (array)$turma;
+
+        //Verifica se os valores velhos são iguais aos valores novos da turma.
         if($newturma != $oldturma){
+            //Se os valores da turma são diferentes, define uma sessão verde de informação.
             Session::put('mensagem_green', $turma->nome.' adicionada com sucesso!');
         }
+
         return redirect()->Route('turmas.index');
     }
 
@@ -243,57 +227,66 @@ class TurmasController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função destroy, deletar a turma.
     public function destroy(Request $request, $id){
-        //
+        //Função de deletar não ultilizada para turmas.
     }
 
+    //Função turma_info: seleciona informações necessarias para vizualização e retorna a página de informações da turma.
     public function turma_info($id){
+        //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);
-        $horario = explode(':', $turma['horario_inicial']);
-        if($horario[0] > 12){
-            $horario[0] = (int)$horario[0] - 12;
-            if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
-            $horario[2] = 'PM';
-            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        else{
-            $horario[2] = 'AM';
-            $turma['horario_inicial'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        $horario = explode(':', $turma['horario_final']);
-        if($horario[0] > 12){
-            $horario[0] = (int)$horario[0] - 12;
-            if($horario[0] < 10){$horario[0] = '0'.$horario[0];} 
-            $horario[2] = 'PM';
-            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-        else{
-            $horario[2] = 'AM';
-            $turma['horario_final'] = $horario[0].':'.$horario[1].' '.$horario[2];
-        }
+        
+        //Converte horario inicial de HH:MM:SS para HH:MM [AM|PM].
+        $turma['horario_inicial'] = $this->convertHorario($turma['horario_inicial'], 2);
+
+        //Converte horario final de HH:MM:SS para HH:MM [AM|PM].
+        $turma['horario_final'] = $this->convertHorario($turma['horario_final'], 2);
+
+        //Separa dias da semana da turma e atribui na variavel $datas_escolhidas e retida o ultima array em branco.
         $dias = explode(',', $turma['data_semanal']);
         unset($dias[count($dias) - 1]);
+
+        //Seleciona todos o histórico da turma encontrada.
         $histturma = HistoricoT::orderBy('created_at', 'desc')->where('turma_id', '=', $turma->id)->paginate(6);
-        $a = 0;
-        $b = 0;
+
+        //Contagem de pessoas:
+        //A = Todas as pessoas (Atribuir ao A).
+        //B = Todas as pessoas ativas (Se o pivot inativo é 1, contar para B).
+        //C = Todas as pessoas inativas (Subtrai A pelo B e adiciona o número ao C).
+        $a = 0; $b = 0;
         foreach($turma->pessoas as $pessoa){
             if($pessoa->pivot->inativo == 1){$b++;}
             $a++;
         }
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
+
+        //Verifica se o usuário for um professor.
         if(auth()->user()->admin_professor == 0){
+            //Se sim, adiciona o professor na variavel $professor e retorna com este atributo.
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
             return view ('turmas_file.turmas_info', compact('turma','dias','histturma','dadosgerais','professor'));
         }
+
         return view('turmas_file.turmas_info', compact('turma','dias','histturma','dadosgerais'));
     }
 
+    //Função turmas_ativar_inativar: Ativa ou inativa uma turma e retorna a página de index.
     public function turmas_ativar_inativar(Request $request){
         $dataForm = $request->all();
+
+        //Encontra a turma no banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
+
+        //Verifica se a turma está ativa ou não.
         if($turma->inativo == 1){
-            $turma->update(['inativo'=>2]);
+            //Se sim, inativa a turma modificando o campo inativo para 2;
+            $turma->update(['inativo' => 2]);
+
+            //Adiciona campos para criação de histórico.
             $dataForm += ['inativo' => 2];
 
             //Inativa todas as pessoas da turma.
@@ -310,13 +303,21 @@ class TurmasController extends Controller{
                 ]);
             }
 
+            //Define sessão verde para informação.
             Session::put('mensagem_green', $turma->nome . " foi inativado com sucesso!");
         }
         else{
+            //Se não, ativa a turma modificando o campo inativo para 1;
             $turma->update(['inativo'=>1]);
+
+            //Adiciona campos para criação de histórico.
             $dataForm += ['inativo' => 1];
+
+            //Define sessão verde para informação.
             Session::put('mensagem_green', $turma->nome . " foi ativado com sucesso!");
         }
+
+        //Adiciona registro da alteração no histórico de núcleos.
         HistoricoT::create($dataForm);
 
         return redirect()->Route('turmas.index');

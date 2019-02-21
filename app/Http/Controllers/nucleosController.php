@@ -212,7 +212,7 @@ class NucleosController extends Controller{
         return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','dadosgerais2'));
     }
 
-    //Função nucleos_ativar_inativar: Ativa ou inativa um nucleor e retorna a página de index.
+    //Função nucleos_ativar_inativar: Ativa ou inativa um nucleo e retorna a página de index.
     public function nucleos_ativar_inativar(Request $request){
         $dataForm = $request->all();
         //Enconta o professor no banco de dados.
@@ -221,7 +221,7 @@ class NucleosController extends Controller{
         //Verifica se o núcleo está ativo ou não.
         if($nucleo->inativo == 1){
             //Se sim, inativa o núcleo modificando o campo inativo para 2;
-            $nucleo->update(['inativo'=>2]);
+            $nucleo->update(['inativo' => 2]);
 
             //Adiciona campos para criação de histórico.
             $dataForm += ['inativo' => 2];
@@ -258,7 +258,7 @@ class NucleosController extends Controller{
             Session::put('mensagem_green', $nucleo->nome . " foi inativado com sucesso!");
         }
         else{
-            //Se não, inativa o núcleo modificando o campo inativo para 1;
+            //Se não, ativa o núcleo modificando o campo inativo para 1;
             $nucleo->update(['inativo'=>1]);
 
             //Adiciona campos para criação de histórico.

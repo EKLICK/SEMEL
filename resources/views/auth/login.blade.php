@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="row card-action light-blue darken-1">
                         <div class="col s5">
-                            <h3 style="color: white;">Fazer Login</h3>
+                            <h3 style="color: white;"><b>Fazer Login</b></h3>
                         </div>
                         <div class="col s5 right" style="margin-top: 8%; margin-right: 10%;">
                             @include('layouts.Sessoes.mensagem_red')
@@ -19,12 +19,12 @@
                         <div class="card-content">
                             <div class="form-field">
                                 <label for="identity"><h6>Usuario</h6></label>
-                                <input type="text" id="identity" name="identity">
+                                <input type="text" id="identity" name="identity" required>
                             </div>
                             <br>
                             <div class="form-field">
                                 <label for="password"><h6>Senha</h6></label>
-                                <input type="password" id="password" name="password">
+                                <input type="password" id="password" name="password" required>
                             </div>
                             <br>
                             <div class="form-field center-align">
