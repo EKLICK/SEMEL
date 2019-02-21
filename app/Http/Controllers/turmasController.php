@@ -65,7 +65,7 @@ class TurmasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de turmas.
     public function index(){
-        //Encontra todos os registros de turmas.
+        //Encontra todos os registros de turmas e ordena por nome.
         $turmaslist = Turma::orderBy('nome')->paginate(10);
 
         //Encontra todos os registros de núcleos.
@@ -74,7 +74,7 @@ class TurmasController extends Controller{
         //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
-        //Atribui count para definir sessão de informação.
+        //Define sessão count para definir sessão de informação.
         $count = Turma::all();
         Session::put('quant', count($count).' turmas cadastradas.');
 
@@ -233,7 +233,7 @@ class TurmasController extends Controller{
         //Função de deletar não ultilizada para turmas.
     }
 
-    //Função turma_info: seleciona informações necessarias para vizualização e retorna a página de informações da turma.
+    //Função turma_info: Seleciona informações necessarias para vizualização e retorna a página de informações da turma.
     public function turma_info($id){
         //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);

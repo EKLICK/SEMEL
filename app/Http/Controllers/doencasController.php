@@ -24,12 +24,12 @@ class DoencasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de doenças.
     public function index(){
-        //Encontra todos os registros de doenças.
+        //Encontra todos os registros de doenças e ordena por nome.
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
 
-        //Define sessão para informação de quantidade de registros.
-        $doencaall = Doenca::all();
-        Session::put('quant', count($doencaall).' doenças cadastradas.');
+        //Define sessão count para informação de quantidade de registros.
+        $count = Doenca::all();
+        Session::put('quant', count($count).' doenças cadastradas.');
 
         return view ('doencas_file.doencas', compact('doencaslist'));
     }

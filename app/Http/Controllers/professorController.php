@@ -45,15 +45,15 @@ class ProfessorController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de professores.
     public function index(){
-        //Encontra todos os registros de professores.
+        //Encontra todos os registros de professores e ordena por nome.
         $professoreslist = Professor::orderBy('nome')->paginate(10);
 
         //Encontra todos os registros de turmas.
         $turmaslist = Turma::all();
 
-        //Criar sessão para informação de quantidade de registros.
-        $professorall = Professor::all();
-        Session::put('quant', count($professorall).' professores cadastrados.');
+        //Define sessão count para informação de quantidade de registros.
+        $count = Professor::all();
+        Session::put('quant', count($count).' professores cadastrados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
@@ -210,7 +210,7 @@ class ProfessorController extends Controller{
         //Função de deletar não ultilizada para professores.
     }
 
-    //Função professor_info: seleciona informações necessarias para vizualização e retorna a página de informações do professor.
+    //Função professor_info: Seleciona informações necessarias para vizualização e retorna a página de informações do professor.
     public function professor_info($id){
         //Encontra o professor no banco de dados.
         $professor = Professor::find($id);

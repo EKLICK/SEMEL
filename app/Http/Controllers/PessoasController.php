@@ -121,7 +121,7 @@ class PessoasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de pessoas.
     public function index(){
-        //Encontra todos os registros de pessoas.
+        //Encontra todos os registros de pessoas e ordena por nome.
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         foreach($pessoaslist as $pessoa){
             //Converter YYYY-mm-dd para idade.
@@ -129,7 +129,7 @@ class PessoasController extends Controller{
         }
         $ano = date('Y');
 
-        //Define sessão para informação de quantidade de registros.
+        //Define sessão count para informação de quantidade de registros.
         $pessoall = Pessoa::all();
         Session::put('quant', count($pessoall).' pessoas cadastradas.');
 
@@ -454,7 +454,7 @@ class PessoasController extends Controller{
         //Função de deletar não ultilizada para pessoas.
     }
 
-    //Função pessoas_info: seleciona informações necessarias para vizualização e retorna a página de informações da pessoa.
+    //Função pessoas_info: Seleciona informações necessarias para vizualização e retorna a página de informações da pessoa.
     public function pessoas_info($id){
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);

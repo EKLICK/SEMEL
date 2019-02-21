@@ -31,7 +31,7 @@ class NucleosController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de núcleos.
     public function index(){
-        //Encontra todos os registros de núcleos.
+        //Encontra todos os registros de núcleos e ordena por nome.
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
 
         //Criando array de bairros de São Leopoldo.
@@ -40,9 +40,9 @@ class NucleosController extends Controller{
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
 
-        //Criar sessão para informação de quantidade de registros.
-        $nucleoall = Nucleo::all();
-        Session::put('quant', count($nucleoall).' núcleos cadastrados.');
+        //Define sessão count para informação de quantidade de registros.
+        $count = Nucleo::all();
+        Session::put('quant', count($count).' núcleos cadastrados.');
 
         return view ('nucleos_file.nucleos', compact('nucleoslist', 'bairroslist'));
     }
@@ -167,7 +167,7 @@ class NucleosController extends Controller{
         //Função de deletar não ultilizada para núcleo.
     }
 
-    //Função nucleo_info: seleciona informações necessarias para vizualização e retorna a página de informações do núcleo.
+    //Função nucleo_info: Seleciona informações necessarias para vizualização e retorna a página de informações do núcleo.
     public function nucleo_info($id){
         //Encontra o professor no banco de dados.
         $nucleo = Nucleo::find($id);
