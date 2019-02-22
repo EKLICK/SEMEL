@@ -121,17 +121,18 @@ class PessoasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index, retorna a página de registros de pessoas.
     public function index(){
+        $ano = date('Y');
+
         //Encontra todos os registros de pessoas e ordena por nome.
         $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
         foreach($pessoaslist as $pessoa){
             //Converter YYYY-mm-dd para idade.
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
-        $ano = date('Y');
 
         //Define sessão count para informação de quantidade de registros.
-        $pessoall = Pessoa::all();
-        Session::put('quant', count($pessoall).' pessoas cadastradas.');
+        $count = Pessoa::all();
+        Session::put('quant', count($count).' pessoas cadastradas.');
 
         return view ('pessoas_file.pessoas', compact('pessoaslist','ano'));
     }
@@ -263,6 +264,7 @@ class PessoasController extends Controller{
 
         //Cria anamnese no banco de dados com todos os atributos abaixo:
         $anamnese = Anamnese::create([
+            'ano' => date('Y'),
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
             'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
@@ -275,9 +277,9 @@ class PessoasController extends Controller{
             'dor_ossea' => $dataForm['string_dor_ossea'],
             'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
-            'ano' => date('Y'),
             'pessoas_id' => $pessoa->id,
         ]);
+        
         //Vincula doenças na anamnese se elas foram informadas no formulario.
         if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
 
@@ -457,6 +459,8 @@ class PessoasController extends Controller{
 
     //Função pessoas_info: Seleciona informações necessarias para vizualização e retorna a página de informações da pessoa.
     public function pessoas_info($id){
+        $ano = date('Y');
+        
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
@@ -492,7 +496,6 @@ class PessoasController extends Controller{
         
         //Encontra todas as anamneses da pessoa para vizualização.
         $anamneses = Anamnese::where('pessoas_id', '=', $id)->orderBy('ano', 'desc')->get();
-        $ano = date('Y');
 
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano','idade'));
     }

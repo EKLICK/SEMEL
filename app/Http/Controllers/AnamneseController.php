@@ -25,8 +25,8 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Funções ferramentas
-    //Ferramenta saveDbImageMatricula: Salva a imagem de atestado vindo das requisições do formulario.
+    //FUNÇÃO DE FERRAMENTAS:
+    //Ferramenta saveDbImageAtestado: Salva a imagem de atestado vindo das requisições do formulario.
     public function saveDbImageAtestado($req){
         $data = $req->all();
         $imagem = $req->file('img_atestado');
@@ -39,12 +39,18 @@ class AnamneseController extends Controller{
         return $data['img_estado'];
     }
     
-    //Funções de Redirecionamento
+    //FUNÇÕES DE REDIRECIONAMENTO:
+    //Função index, retorna a página de registros de anamneses.
     public function index(){
-        $doencaslist = Doenca::all();
         $ano = date('Y');
+
+        //Encontra todos os registros de pessoas e ordena por ano decrescente.
         $anamneseslist = Anamnese::orderBy('ano','desc')->paginate();
 
+        //Encontra todos os registros de doenças.
+        $doencaslist = Doenca::all();
+
+        //Define sessão count para informação de quantidade de registros.
         $count = Anamnese::all();
         Session::put('quant', count($count).' anamneses cadastradas.');
 
@@ -56,19 +62,28 @@ class AnamneseController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Função create: Não utilizada devido ao fato de não poder receber parametros.
     public function create(){
-        //
+        //Função de create não ultilizada para anamneses.
     }
 
+    //Função anamnese_create: Função substituta da função create, retorna a página de criação de registros de anamneses.
     public function anamnese_create($id){
+        //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
+
+        //Encontra todos os registros de doenças.
+        $doencaslist = Doenca::all();
+
+        //Encontra a ultima anamnese da pessoa no banco de dados.
         $ultimaanamnese = Anamnese::where('pessoas_id', '=', $id)->get()->last();
-        $hoje = date('Y');
+
+        //Calcula nascimento de dd:mm:YYYY 00:00:00 para idade.
         $data = explode(' ', $pessoa['nascimento']);
         list($dia, $mes, $ano) = explode('-', $data[0]);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-        $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
-        $doencaslist = Doenca::all();
+        $pessoa['nascimento'] = (int)floor((((($ano - $nascimento) / 60) / 60) / 24) / 365.25);;
 
         return view ('anamneses_file.anamneses_create', compact('pessoa','doencaslist','ultimaanamnese'));
     }
@@ -79,9 +94,17 @@ class AnamneseController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de pessoas.
     public function store(AnamneseCreateEditFormRequest $request){
         $dataForm = $request->all();
+
+        //Adiciona a variavel de ano para a criação.
         $dataForm += ['ano' => date('Y')];
+
+        //Verifica atributos de anamnese, 
+        //se foi selecionado sim, adiciona ao campo de input (type=text).
+        //Se foi selecionado não, adiciona -1 para o banco de dados.
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] == -1;}
         if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] == -1;}
@@ -95,7 +118,9 @@ class AnamneseController extends Controller{
         if(isset($dataForm['img_atestado'])){$dataForm['img_atestado'] = $this->saveDbImageAtestado($request);}
         else{$dataForm['img_atestado'] = null;}
 
+        //Cria anamnese no banco de dados com todos os atributos abaixo:
         $anamnese = Anamnese::create([
+            'ano' => date('Y'),
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
             'alergia_medicacao' => $dataForm['string_alergia_medicacao'],
@@ -108,12 +133,13 @@ class AnamneseController extends Controller{
             'dor_ossea' => $dataForm['string_dor_ossea'],
             'atestado' => $dataForm['img_atestado'],
             'observacao' => $dataForm['observacao'],
-            'ano' => date('Y'),
             'pessoas_id' => $dataForm['pessoas_id'],
         ]);
-        if(!empty($dataForm['doencas'])){
-            $anamnese->doencas()->attach($dataForm['doencas']);
-        }
+
+        //Vincula doenças na anamnese se elas foram informadas no formulario.
+        if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
+
+        //Define sessões de informação para apresentação na página.
         Session::put('mensagem_green','Anamnese adicionada com sucesso!');
 
         return redirect()->route('pessoas.index');
@@ -125,6 +151,7 @@ class AnamneseController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id){
         //
     }
@@ -135,12 +162,15 @@ class AnamneseController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Função edit, retorna a página de edição de registros de anamneses.
     public function edit($id){
-        $doencaslist = Doenca::all();
+        //Encontra a anamnese no banco de dados.
         $anamnese = Anamnese::find($id);
-        if($anamnese->ano != date('Y')){
-            return redirect()->route('anamneses.index2');
-        }
+
+        //Encontra todos os registros de doenças. 
+        $doencaslist = Doenca::all();
+
         return view ('anamneses_file.anamneses_edit', compact ('anamnese','doencaslist'));
     }
 
@@ -151,11 +181,21 @@ class AnamneseController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    
     public function update(AnamneseCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
+
+        //Encontra a anamnese no banco de dados.
         $anamnese = Anamnese::find($id);
+
+        //Busca os valores antigos da anamnese.
         $oldanamnese = (array)$anamnese;
 
+        
+        //Verifica atributos de anamnese, 
+        //se foi selecionado sim, adiciona ao campo de input (type=text).
+        //Se foi selecionado não, adiciona -1 para o banco de dados.
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
         if($dataForm['alergia_medicacao'] == 2){$dataForm['string_alergia_medicacao'] = -1;}
@@ -165,7 +205,7 @@ class AnamneseController extends Controller{
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
 
-        //Verifica se a imagem de atestado foi passada pelo formulario
+        //Verifica se a imagem de atestado foi passada pelo formulario.
         if(isset($dataForm['img_atestado'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($anamnese['atestado'])){unlink($anamnese['atestado']);}
@@ -181,6 +221,7 @@ class AnamneseController extends Controller{
             $dataForm += ['img_atestado' => null];
         }
 
+        //Edita anamnese no banco de dados com todos os atributos abaixo:
         $anamnese->update([
             'possui_doenca' => $dataForm['possui_doenca'],
             'toma_medicacao' => $dataForm['string_toma_medicacao'],
@@ -197,12 +238,19 @@ class AnamneseController extends Controller{
             'ano' => date('Y'),
             'pessoas_id' => $dataForm['pessoa_id'],
         ]);
-        if(isset($dataForm['doencas']))
-            $anamnese->doencas()->sync($dataForm['doencas']);
+
+        //Edita a vinculação doenças na anamnese se elas foram informadas no formulario.
+        $anamnese->doencas()->sync($dataForm['doencas']);
+
+        //busca os valores novos da turma.
         $newanamnese = (array)$anamnese;
+
+        //Verifica se os valores velhos são iguais aos valores novos da turma.
         if($newanamnese != $oldanamnese){
+            //Se os valores da anamnese são diferentes, define uma sessão verde de informação.
             Session::put('mensagem_green', "Anamnese editada com sucesso!");
         } 
+
         return redirect()->route('anamneses.index');
     }
 
@@ -212,21 +260,34 @@ class AnamneseController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+    //Função destroy, deletar a anamnese.
     public function destroy($id){
-        //
+        //Função de deletar não ultilizada para anamneses.
     }
 
+    //Função anamnese_info: Seleciona informações necessarias para vizualização e retorna a página de informações da anamnese.
     public function anamnese_info($id){
-        $anamnese = Anamnese::find($id);
-        $pessoa = Pessoa::find($anamnese->pessoas);
         $ano = date('Y');
+
+        //Encontra a anamnese no banco de dados.
+        $anamnese = Anamnese::find($id);
+
+        //Encontra a pessoa da anamnese no banco de dados.
+        $pessoa = Pessoa::find($anamnese->pessoas);
 
         return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano'));
     }
 
+    //Função pdfanamnese: Retorna o pdf das informações da anamnese.
     public function pdfanamnese($id){
+        //Encontra a pessoa no banco de dados.
         $anamnese = Anamnese::find($id);
+
+        //Encontra a pessoa da anamnese no banco de dados.
         $pessoa = Pessoa::find($anamnese->pessoas->id);
+
+        //Define nome da pessoa da anamnese na variavel $nome.
         $nome = $pessoa->nome;
 
         return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese','nome'))->stream('PDF_registro_pessoa'.'.pdf');

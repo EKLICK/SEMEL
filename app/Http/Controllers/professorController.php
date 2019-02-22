@@ -82,7 +82,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de professores.
     public function store(ProfessorCreateFormRequest $request){
         $dataForm = $request->all();
 

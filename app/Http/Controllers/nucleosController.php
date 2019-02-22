@@ -72,7 +72,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de núcleos.
     public function store(NucleoCreateEditFormRequest $request){
         $dataForm = $request->all();
 
