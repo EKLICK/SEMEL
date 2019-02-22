@@ -5,15 +5,13 @@ namespace App\Http\Requests\Anamnese;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AnamneseCreateEditFormRequest extends FormRequest
-{
+class AnamneseCreateEditFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class AnamneseCreateEditFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'toma_medicacao'        => ['required', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['required', Rule::in(['1', '2']),],

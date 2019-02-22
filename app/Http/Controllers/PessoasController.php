@@ -152,6 +152,7 @@ class PessoasController extends Controller{
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+                        
         return view ('pessoas_file.pessoas_create', compact('doencaslist','bairroslist'));
     }
 

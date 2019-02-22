@@ -5,15 +5,13 @@ namespace App\Http\Requests\Pessoa;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PessoaCreateFormRequest extends FormRequest
-{
+class PessoaCreateFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class PessoaCreateFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
             'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],

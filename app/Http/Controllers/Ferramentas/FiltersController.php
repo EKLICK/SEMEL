@@ -24,8 +24,7 @@ use App\Audit;
 use App\Quant;
 use Illuminate\Support\Facades\Session;
 
-class filtersController extends Controller
-{
+class filtersController extends Controller{
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
         
@@ -293,11 +292,11 @@ class filtersController extends Controller
         $dataForm = $request->except('_token');
         $data = new \DateTime();
         $anamneseslist = Anamnese::where(function($query) use($dataForm){
-            if($dataForm['escolha'] == 0){
-                $query->where('ano', '<', date('Y'))->get();
-            }
-            else{
+            if($dataForm['historico'] == 1){
                 $query->where('ano', '=', date('Y'))->get();
+            }
+            elseif($dataForm['historico'] == 2){
+                $query->where('ano', '<', date('Y'))->get();
             }
             if(!empty($dataForm['de_peso'])){
                 $filtro = $dataForm['de_peso'];
@@ -357,12 +356,8 @@ class filtersController extends Controller
         Session::put('quant', count($anamneseslist->get()).' anamneses de '.$ano.' cadastradas.');
         $anamneseslist = $anamneseslist->paginate(10);
         $doencaslist = Doenca::all();
-        if($dataForm['escolha'] == 0){
-            return view ('anamneses_file.anamneses_antigas', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
-        }
-        else{
-            return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
-        }
+
+        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
     }
 
     public function nucleos_procurar(NucleoProcurarFormRequest $request){

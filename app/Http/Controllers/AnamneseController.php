@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
+//REQUEST PARA CONTROLE:
 use App\Http\Requests\Anamnese\AnamneseCreateEditFormRequest;
 use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
 
+//MODELOS PARA CONTROLE:
 use App\Anamnese;
 use App\Pessoa;
 use App\Doenca;
 
+//CONTROLE DE ANAMNESES:
+//Comentarios em cima, código comentado em baixo.
 class AnamneseController extends Controller{
     /**
      * Display a listing of the resource.
@@ -34,73 +38,17 @@ class AnamneseController extends Controller{
         $data['img_estado'] = $dir."/".$nomeImagem;
         return $data['img_estado'];
     }
-
-    public function ordenar_alfabeto($lista){
-        $listapessoas = Pessoa::all();
-        $listanomes = [];
-        foreach($listapessoas as $pessoa){
-            foreach($lista as $arquivo){
-                if($pessoa['id'] == $arquivo['pessoas_id']){
-                    array_push($listanomes, $pessoa['nome']);
-                }
-            }
-        }
-        sort($listanomes);
-        $listaordenadapessoas = [];
-        foreach($listanomes as $nome){
-            foreach($listapessoas as $pessoa){
-                if($pessoa['nome'] == $nome){
-                    array_push($listaordenadapessoas, $pessoa);
-                }
-            }
-        }
-        $listaordenadanome = [];
-        foreach($listaordenadapessoas as $pessoa){
-            foreach($lista as $arquivo){
-                if($pessoa['id'] == $arquivo['pessoas_id']){
-                    array_push($listaordenadanome, $arquivo);
-                }
-            }
-        }
-
-        return $listaordenadanome;
-    }
-
-    public function gerar_paginate($array, $option){
-        $itemCollection = collect($array);
-        $currentpage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $itemCollection->slice(($currentpage * 10) - 10, 10)->all();
-        $itemCollection = new LengthAwarePaginator($currentPageItems, count($itemCollection), 10);
-        if($option == 1){
-            $itemCollection->setPath('/anamneses');
-        }
-        else{
-            $itemCollection->setPath('/anamneses_antigas');
-        }
-        return $itemCollection;
-    }
     
     //Funções de Redirecionamento
     public function index(){
         $doencaslist = Doenca::all();
         $ano = date('Y');
-        $anamneseslist = Anamnese::where('ano', '=', $ano)->orderBy('ano','desc')->get();
-        Session::put('quant', count($anamneseslist).' anamneses de '.$ano.' cadastradas.');
+        $anamneseslist = Anamnese::orderBy('ano','desc')->paginate();
 
-        $anamneseslist = $this->ordenar_alfabeto($anamneseslist);
-        $anamneseslist = $this->gerar_paginate($anamneseslist, 1);
-        return view ('anamneses_file.anamneses_atualizado', compact('anamneseslist','ano','doencaslist'));
-    }
+        $count = Anamnese::all();
+        Session::put('quant', count($count).' anamneses cadastradas.');
 
-    public function index2(){
-        $doencaslist = Doenca::all();
-        $ano = date('Y');
-        $anamneseslist = Anamnese::orderBy('ano','desc')->where('ano', '!=', $ano)->get();
-        Session::put('quant', count($anamneseslist).' anamneses antigas cadastradas.');
-        $anamneseslist = $this->ordenar_alfabeto($anamneseslist, 0);
-        $anamneseslist = $this->gerar_paginate($anamneseslist, 0);
-
-        return view ('anamneses_file.anamneses_antigas', compact('anamneseslist','ano','doencaslist'));
+        return view ('anamneses_file.anamneses', compact('anamneseslist','ano','doencaslist'));
     }
 
     /**

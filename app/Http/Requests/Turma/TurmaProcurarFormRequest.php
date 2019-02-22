@@ -5,15 +5,13 @@ namespace App\Http\Requests\Turma;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class TurmaProcurarFormRequest extends FormRequest
-{
+class TurmaProcurarFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class TurmaProcurarFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'inativo'               => ['sometimes', 'nullable', Rule::in(['1', '2']),],
             'horario_inicial'       => ['sometimes', 'nullable','regex:/^[0-2][0-9]:[0-5][0-9]+ (A|P)+M$/'],

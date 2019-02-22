@@ -12,8 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements Auditable
-{
+class User extends Authenticatable implements Auditable{
     use \OwenIt\Auditing\Auditable;
     use softDeletes;
     use Notifiable;

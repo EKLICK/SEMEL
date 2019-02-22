@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdministracaoEProfessor
-{
+class AdministracaoEProfessor{
     /**
      * Handle an incoming request.
      *
@@ -13,8 +12,7 @@ class AdministracaoEProfessor
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next){
         $user = \Auth::user();
         if($user['admin_professor'] == 0){
             return redirect()->route('login');

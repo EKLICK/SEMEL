@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    <a href="{{route('anamneses.index2')}}" class="breadcrumb">Anamneses</a>
+    <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
 @endsection
-@section('title') Anamneses históricas @endsection
+@section('title') Anamneses registradas @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     <div class="container z-depth-4">
@@ -14,7 +14,6 @@
                     <div class="collapsible-body">
                         <form action="{{route('anamnese_procurar')}}" method="GET">
                             @csrf
-                            <input type="number" name="escolha" value="0" hidden>
                             <div class="row">
                                 <div class="input-field col s3 xl1"><i class="material-icons prefix">local_parking</i></div>
                                 <div class="input-field col s4 xl2">
@@ -91,6 +90,31 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="input-field col s10 xl5">
+                                        <i class="material-icons prefix">event_note</i>&emsp;&emsp; Antigas | Novas:
+                                        <div style="margin-left: 30%;">
+                                            <p>
+                                                <label>
+                                                    <input value="1" name="historico" type="radio"/>
+                                                    <span>Novas</span>
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input value="2" name="historico" type="radio"/>
+                                                    <span>Antigas</span>
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input value="3" name="historico" type="radio"/>
+                                                    <span>Todas</span>
+                                                </label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s3">
@@ -112,13 +136,16 @@
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody>
                     @foreach ($anamneseslist as $anamnese)
                         <tr>
                             <td><p>@if(isset($anamnese->pessoas->nome)) {{$anamnese->pessoas->nome}} @else Usuário não cadastrado @endif</p></td>
                             <td><p>{{$anamnese->ano}}</p></td>
                             <td>@if(count($anamnese->doencas) == 0) Não possui @else <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Doenças da anamnese" href="#listadoencas" onclick="modal_doencas({{$anamnese->doencas}})"><i class="small material-icons">info_outline</i></a> @endif</td>
-                            <td><a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a></td>
+                            <td>
+                                <a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $anamnese->id)}}"><i class="small material-icons">info</i></a>
+                                @if($anamnese->ano == $ano)<a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="small material-icons">edit</i></a>@endif
+                            </td>
                         </tr>
                     @endforeach 
                 </tbody>

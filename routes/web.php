@@ -43,7 +43,6 @@ Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_
 Route::resource('anamneses','AnamneseController')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/anamnese_create/{id}','AnamneseController@anamnese_create')->name('anamnese_create')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/anamnese/pdf/{id}','AnamneseController@pdfanamnese')->name('pdfanamnese')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/anamneses_antigas','AnamneseController@index2')->name('anamneses.index2')->middleware('AdministracaoEProfessor', 'Authenticate');
 Route::get('/anamneses_info/{id}','AnamneseController@anamnese_info')->name('anamnese_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas de doenças

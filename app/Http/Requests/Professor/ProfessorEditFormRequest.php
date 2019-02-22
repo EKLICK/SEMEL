@@ -5,15 +5,13 @@ namespace App\Http\Requests\Professor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProfessorEditFormRequest extends FormRequest
-{
+class ProfessorEditFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class ProfessorEditFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'matricula'             => 'required|integer|unique:professores,matricula,'.$this->id.'|',

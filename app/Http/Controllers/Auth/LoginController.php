@@ -12,8 +12,7 @@ use Illuminate\Validation\ValidationException;
  * @package App\Http\Controllers\Auth
  */
 
-class LoginController extends Controller
-{
+class LoginController extends Controller{
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -39,8 +38,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('guest')->except('logout');
     }
 
@@ -48,8 +46,7 @@ class LoginController extends Controller
      * Check either username or email.
      * @return string
      */
-    public function username()
-    {
+    public function username(){
         $identity  = request()->get('identity');
         $fieldName = filter_var($identity, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         request()->merge([$fieldName => $identity]);
@@ -60,8 +57,7 @@ class LoginController extends Controller
      * Validate the user login.
      * @param Request $request
      */
-    protected function validateLogin(Request $request)
-    {
+    protected function validateLogin(Request $request){
         $this->validate(
             $request,
             [
@@ -79,8 +75,7 @@ class LoginController extends Controller
      * @param Request $request
      * @throws ValidationException
      */
-    protected function sendFailedLoginResponse(Request $request)
-    {
+    protected function sendFailedLoginResponse(Request $request){
         $request->session()->put('mensagem_red', trans('Username ou senha incorreto!'));
         throw ValidationException::withMessages(
             [

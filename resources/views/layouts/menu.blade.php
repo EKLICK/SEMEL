@@ -17,16 +17,8 @@
         </div>
     </div>
 </li>
-<li>
-    <div class="collapsible-header"><i class="material-icons">assignment</i>Anamneses</div>
-    <div class="collapsible-body">
-        <div class="collection">
-            <b><a class="collection-item" href="{{route('anamneses.index')}}" style="color: #039be5;">Anamneses de {{date('Y')}}</a></b>
-            <b><a class="collection-item" href="{{route('anamneses.index2')}}" style="color: #039be5;">Anamneses Históricas</a></b>
-        </div>
-    </div>
-</li>
 <div class="collection">
+    <b><a class="collection-item" href="{{route('anamneses.index')}}" style="color: #039be5;">Anamneses</a></b>
     <b><a class="collection-item" href="{{route('doencas.index')}}" style="color: #039be5;">Doenças</a></b>
     <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;">Turmas</a></b>
     <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;">Nucleos</a></b>

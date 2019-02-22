@@ -5,15 +5,13 @@ namespace App\Http\Requests\Professor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProfessorProcurarFormRequest extends FormRequest
-{
+class ProfessorProcurarFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class ProfessorProcurarFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'de'                    => 'sometimes|nullable|date-format:d/m/Y',
             'ate'                   => 'sometimes|nullable|date-format:d/m/Y',

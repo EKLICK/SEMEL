@@ -5,15 +5,13 @@ namespace App\Http\Requests\Anamnese;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AnamneseProcurarFormRequest extends FormRequest
-{
+class AnamneseProcurarFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,8 +20,7 @@ class AnamneseProcurarFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
