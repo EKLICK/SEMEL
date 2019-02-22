@@ -74,7 +74,7 @@ class TurmasController extends Controller{
         //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
-        //Define sessão count para definir sessão de informação.
+        //Define variavel $count para definir sessão de informação.
         $count = Turma::all();
         Session::put('quant', count($count).' turmas cadastradas.');
 
@@ -185,7 +185,7 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
     public function update(TurmaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 

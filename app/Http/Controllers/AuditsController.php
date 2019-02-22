@@ -23,7 +23,7 @@ class auditsController extends Controller{
         //Criando array de de tabelas para filtro.
         $tabelas = ['Quantidade limite','Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Audit::all();
         Session::put('quant', count($count).' auditorias cadastradas.');
 

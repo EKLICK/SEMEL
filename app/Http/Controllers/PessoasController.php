@@ -130,7 +130,7 @@ class PessoasController extends Controller{
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Pessoa::all();
         Session::put('quant', count($count).' pessoas cadastradas.');
 

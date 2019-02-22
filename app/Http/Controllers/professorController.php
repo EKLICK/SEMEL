@@ -51,7 +51,7 @@ class ProfessorController extends Controller{
         //Encontra todos os registros de turmas.
         $turmaslist = Turma::all();
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Professor::all();
         Session::put('quant', count($count).' professores cadastrados.');
 

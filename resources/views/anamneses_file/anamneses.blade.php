@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="input-field col s10 m8 l5 l3">
                                         Possui doenças?
-                                        <select multiple name="doencas[]">
+                                        <select name="doencas[]">
                                             @foreach ($doencaslist as $doenca)
                                                 <option value="{{$doenca->id}}">{{$doenca->nome}}</option>
                                             @endforeach

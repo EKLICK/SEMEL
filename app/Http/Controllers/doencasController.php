@@ -27,7 +27,7 @@ class DoencasController extends Controller{
         //Encontra todos os registros de doenças e ordena por nome.
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Doenca::all();
         Session::put('quant', count($count).' doenças cadastradas.');
 

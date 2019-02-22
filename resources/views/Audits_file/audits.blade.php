@@ -23,14 +23,22 @@
                                         @endfor
                                     </select>
                                 </div>
-                                <div class="input-field col s11 m5">
-                                    Evento
-                                    <select name="eventos[]">
-                                        <option value="" selected disabled>Selecione o evento</option>
-                                        @for($i = 0; $i < count($eventos); $i++)
-                                            <option value="{{$i}}">{{$eventos[$i]}}</option>
-                                        @endfor
-                                    </select>
+                                <div class="input-field col s11 m6 right">
+                                    <i class="material-icons prefix">event_note</i>&emsp;&emsp; Evento:
+                                    <div style="margin-left: 30%;">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="eventos" type="radio"/>
+                                                <span>Criação</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="eventos" type="radio"/>
+                                                <span>Edição</span>
+                                            </label>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

@@ -50,7 +50,7 @@ class AnamneseController extends Controller{
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::all();
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Anamnese::all();
         Session::put('quant', count($count).' anamneses cadastradas.');
 
@@ -182,7 +182,7 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    
+    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de anamneses.
     public function update(AnamneseCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -266,7 +266,7 @@ class AnamneseController extends Controller{
         //Função de deletar não ultilizada para anamneses.
     }
 
-    //Função anamnese_info: Seleciona informações necessarias para vizualização e retorna a página de informações da anamnese.
+    //Função anamnese_info, seleciona informações necessarias para vizualização e retorna a página de informações da anamnese.
     public function anamnese_info($id){
         $ano = date('Y');
 
@@ -279,7 +279,7 @@ class AnamneseController extends Controller{
         return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano'));
     }
 
-    //Função pdfanamnese: Retorna o pdf das informações da anamnese.
+    //Função pdfanamnese, retorna o pdf das informações da anamnese.
     public function pdfanamnese($id){
         //Encontra a pessoa no banco de dados.
         $anamnese = Anamnese::find($id);

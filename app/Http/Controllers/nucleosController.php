@@ -40,7 +40,7 @@ class NucleosController extends Controller{
                         'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
                         'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
 
-        //Define sessão count para informação de quantidade de registros.
+        //Define variavel $count para informação de quantidade de registros.
         $count = Nucleo::all();
         Session::put('quant', count($count).' núcleos cadastrados.');
 
