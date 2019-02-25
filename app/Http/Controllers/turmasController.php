@@ -263,14 +263,6 @@ class TurmasController extends Controller{
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
 
-        //Verifica se o usuário for um professor.
-        if(auth()->user()->admin_professor == 0){
-            //Se sim, adiciona o professor na variavel $professor e retorna com este atributo.
-            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-
-            return view ('turmas_file.turmas_info', compact('turma','dias','histturma','dadosgerais','professor'));
-        }
-
         return view('turmas_file.turmas_info', compact('turma','dias','histturma','dadosgerais'));
     }
 

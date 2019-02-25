@@ -1,9 +1,14 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
+    @if(auth()->user()->admin_professor == 1)
+        <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
+    @else
+        <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Turmas</a>
+        <a href="{{Route('professor.edit', $professor->id)}}" class="breadcrumb">Alunos</a>
+    @endif
     <a href="{{route('anamnese_info', $anamnese->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') <h4>Informações da anamnese &emsp; @if($ano == $anamnese->ano) <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="medium material-icons">edit</i></a> @endif</h4> @endsection
+@section('title') <h4>Informações da anamnese &emsp; @if(auth()->user()->admin_professor == 1) @if($ano == $anamnese->ano) <a class="tooltipped" data-position="top" data-tooltip="Editar anamnese" href="{{Route('anamneses.edit', $anamnese->id)}}"><i class="medium material-icons">edit</i></a> @endif</h4>  @endif @endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -22,7 +27,13 @@
                     <tbody>
                         <tr>
                             <td><h6>Nome:</h6></td>
-                            <td><h6><a class="waves-effect waves-light btn blue modal-trigger btn-modal_inativar" href="{{route('pessoa_info', $anamnese->pessoas->id)}}">{{$anamnese->pessoas->nome}}</a></h6></td>
+                            <td>
+                                @if(auth()->user()->admin_professor == 1)
+                                    <h6><a class="waves-effect waves-light btn blue modal-trigger btn-modal_inativar" href="{{route('pessoa_info', $anamnese->pessoas->id)}}">{{$anamnese->pessoas->nome}}</a></h6>
+                                @else
+                                    {{$anamnese->pessoas->nome}}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td><h6>Ano documentada:</h6></td>

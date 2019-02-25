@@ -71,9 +71,7 @@
                 <thead>
                     <tr>
                         <th>Nome do Alunos</th>
-                        <th>Nascimento</th>
-                        <th>Telefone</th>
-                        <th>Telefone de emergência</th>
+                        <th>Ultima anamnese</th>
                         <th>Doenças</th>
                     </tr>
                 </thead>
@@ -81,9 +79,7 @@
                     @foreach ($pessoaslist as $aluno)
                         <tr>
                             <td>{{$aluno->nome}}</td>
-                            <td>{{$aluno->nascimento}}</td>
-                            <td>{{$aluno->telefone}}</td>
-                            <td>{{$aluno->telefone_emergencia}}</td>
+                            <td><a class="tooltipped" data-position="top" data-tooltip="Informações da anamnese" href="{{Route('anamnese_info', $aluno->anamneses[count($aluno->anamneses)-1])}}"><i class="small material-icons">info</i></a></td>
                             @if(isset($aluno->anamneses[count($aluno->anamneses)-1]->doencas))
                                 <td>@if(count($aluno->anamneses[count($aluno->anamneses)-1]->doencas) == 0) Não possui @else <a class="tooltipped modal-trigger" data-position="top" data-tooltip="Doenças da anamnese" href="#listadoencas" onclick="modal_doencas({{$aluno->anamneses[count($aluno->anamneses)-1]->doencas}})"><i class="small material-icons">info_outline</i></a> @endif</td>
                             @else

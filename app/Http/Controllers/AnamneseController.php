@@ -15,6 +15,7 @@ use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
 use App\Anamnese;
 use App\Pessoa;
 use App\Doenca;
+use App\Professor;
 
 //CONTROLE DE ANAMNESES:
 //Comentarios em cima, código comentado em baixo.
@@ -275,6 +276,14 @@ class AnamneseController extends Controller{
 
         //Encontra a pessoa da anamnese no banco de dados.
         $pessoa = Pessoa::find($anamnese->pessoas);
+
+        //Se o usuário for professor, adicionar a variavel professor procurando o professor com o id do usuário e retornando para informações de anamneses
+        if(auth()->user()->admin_professor == 0){
+            //Enconta o professor no banco de dados.
+            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
+
+            return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano','professor'));
+        }
 
         return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano'));
     }

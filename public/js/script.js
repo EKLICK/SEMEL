@@ -147,6 +147,11 @@ $("[name='marc']").click(function(){
     change(this.value, $('#convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
 });
 
+$("[name='morte_check']").click(function(){
+    console.log('fsafs');
+    change(this.value, $('#morte'), $('#morte_label'), $('#morte_icon'));
+});
+
 function toma_medicacao_click(valor){
     change(valor, $('#string_toma_medicacao'), $('#toma_medicacao_label'), $('#toma_medicacao_icon'));
 }

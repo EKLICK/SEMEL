@@ -78,7 +78,7 @@ Route::resource('anamneses','AnamneseController')->middleware('AdministracaoEPro
 Route::get('/anamnese_create/{id}','AnamneseController@anamnese_create')->name('anamnese_create')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rota anamnese_info: Utilizado para entrar na página de informações da anamnese.
-Route::get('/anamneses_info/{id}','AnamneseController@anamnese_info')->name('anamnese_info')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/anamneses_info/{id}','AnamneseController@anamnese_info')->name('anamnese_info')->middleware('Authenticate');
 
 //Rota pdfanamnese: Utilizado para entrar na página de PDF da anamnese.
 Route::get('/anamnese/pdf/{id}','AnamneseController@pdfanamnese')->name('pdfanamnese')->middleware('AdministracaoEProfessor', 'Authenticate');
@@ -97,7 +97,7 @@ Route::get('/ajax/doenca','DoencasController@criar_doenca_ajax')->name('criacao_
 Route::resource('turmas','TurmasController')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rota turma_info: Utilizado para entrar na página de informações da turma.
-Route::get('/turmas_info/{id}','TurmasController@turma_info')->name('turma_info')->middleware('Authenticate');
+Route::get('/turmas_info/{id}','TurmasController@turma_info')->name('turma_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas turmas_ativar_inativar: Utilizado para ativar ou inativar uma turma.
 Route::post('/turmas/ativar_inativar', 'TurmasController@turmas_ativar_inativar')->name('turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
@@ -108,7 +108,7 @@ Route::post('/turmas/ativar_inativar', 'TurmasController@turmas_ativar_inativar'
 Route::resource('nucleos','NucleosController')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rota nucleo_info: Utilizado para entrar na página de informações de núcleo.
-Route::get('/nucleos_info/{id}','NucleosController@nucleo_info')->name('nucleo_info')->middleware('Authenticate');
+Route::get('/nucleos_info/{id}','NucleosController@nucleo_info')->name('nucleo_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas nucleos_ativar_inativar: Utilizado para ativar ou inativar um núcleo.
 Route::post('/nucleos/ativar_inativar', 'NucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');

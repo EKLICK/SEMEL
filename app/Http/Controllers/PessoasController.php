@@ -243,7 +243,7 @@ class PessoasController extends Controller{
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
-            'estado' =>$estado,
+            'estado' => $estado,
         ]);
 
         //Verifica atributos de anamnese, 

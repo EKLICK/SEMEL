@@ -119,9 +119,9 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
-                        <th>Núcleo pertencente</th>
                         @if(auth()->user()->admin_professor == 1)
                             <th>Estado</th>
+                            <th>Núcleo pertencente</th>
                             <th>Vinculo</th>
                             <th>Mudar vinculo</th>
                         @else
@@ -134,7 +134,6 @@
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
-                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             <td> 
                                 <p>
                                     @if($turma->inativo == 2)
@@ -153,6 +152,7 @@
                                 </i>
                             </td>
                             @if(auth()->user()->admin_professor == 1)
+                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                                 @php $ids = -1; @endphp
                                 @if(isset($turma->professores)) 
                                     @for ($i = 0; $i < count($turma->professores); $i++) 
@@ -182,13 +182,15 @@
                                             <i class="material-icons right">speaker_notes</i>Ativar
                                             </a>
                                         </td>
+                                        <td>
+                                            <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a>
+                                            <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
+                                        </td>
                                     @endif
                                 @endif
                             @else
-                                <td>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a>
-                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
-                                </td>
+                            <td>
+                                <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a></td>
                             @endif
                         </tr>
                     @endforeach

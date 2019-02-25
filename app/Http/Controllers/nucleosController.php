@@ -201,14 +201,7 @@ class NucleosController extends Controller{
         }
         $c = $a - $b;
         $dadosgerais2 = [$a,$b,$c];
-
-        //Se o usuário for professor, adicionar a variavel professor procurando o professor com o id do usuário e retornando para informações de núcleos
-        if(auth()->user()->admin_professor == 0){
-            //Enconta o professor no banco de dados.
-            $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
-
-            return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','professor'));
-        }
+        
         return view ('nucleos_file.nucleos_info', compact('nucleo','histnucleo','dadosgerais','dadosgerais2'));
     }
 

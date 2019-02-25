@@ -41,6 +41,7 @@ class Pessoas extends Migration
             $table->string('matricula')->nullable();
             $table->boolean('mora_com_os_pais')->nullable();
             $table->boolean('estado')->default(false);
+            $table->string('morte')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
