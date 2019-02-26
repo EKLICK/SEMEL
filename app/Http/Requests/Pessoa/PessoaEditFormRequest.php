@@ -44,6 +44,7 @@ class PessoaEditFormRequest extends FormRequest{
             'irmaos'                => 'digits_between:0,4',
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'morte'                 => 'sometimes|nullable|date-format:d/m/Y',
         ];
     }
 
@@ -56,7 +57,7 @@ class PessoaEditFormRequest extends FormRequest{
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'nascimento.required' => 'O campo nascimento é de preenchimento obrigatório',
-            'nascimento.date_format' => 'Insira uma data sem letras',
+            'nascimento.date_format' => 'É necessario inserir uma data de nascimento valida',
 
             'sexo.required' => 'O campo sexo é de preencimento obrigatório',
 
@@ -97,6 +98,8 @@ class PessoaEditFormRequest extends FormRequest{
             'filhos.digits_between' => 'É permitido somente 4 digitos para quantidade de filhos',
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
+
+            'morte.date_format' => 'É necessario inserir uma data de falecimento valida',
         ];
     }
 }

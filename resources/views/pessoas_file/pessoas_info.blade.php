@@ -72,7 +72,7 @@
                             <tr>
                                 <h6><b>Matricula:</b></h6>
                                 @if($idade < 18)
-                                    @if(!is_null($pessoa->matricula))<td><img id="matricula_image" class="materialboxed" width="140" src="{{asset($pessoa->matricula)}}"></td>@endif
+                                    @if(!is_null($pessoa->matricula))<td><img id="matricula_image" class="materialboxed" width="111" src="{{asset($pessoa->matricula)}}"></td>@endif
                                 @endif
                             </tr>
                         </table>
@@ -269,6 +269,12 @@
                                 <td><h6><b>Está inativo:</b></h6></td>
                                 <td><h6>@if($pessoa->inativo == null) Sim @else Não @endif</h6></td>
                             </tr>
+                            @if($pessoa->morte != -1)
+                                <tr>
+                                    <td><h6><b>Data de falecimento:</b></h6></td>
+                                    <td><h6>{{$pessoa->morte}}</h6></td>
+                                </tr>
+                            @endif
                         </table>
                     </div>
                 </div>

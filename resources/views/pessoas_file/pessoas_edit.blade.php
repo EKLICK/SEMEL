@@ -243,6 +243,28 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12 m4">
+                        A pessoa faleceu?
+                        <p>
+                            <label>
+                                <input onclick="morte_click('S')" value="1" name="morte" type="radio" @if(!is_null(old('morte'))) @if(old('morte') == 1) checked @endif @else @if ($pessoa->morte != -1) checked @endif @endif/>
+                                <span>Sim</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input onclick="morte_click('N')" value="2" name="morte" type="radio" @if(!is_null(old('morte'))) @if(old('morte') == 2) checked @endif @else @if ($pessoa->morte == -1) checked @endif @endif/>
+                                <span>Não</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <i id="morte_icon" class="material-icons prefix" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if ($pessoa->morte == -1) hidden @endif @endif>add_box</i>
+                        <input id="string_morte" name="string_morte" type="text" class="datepicker validate" value="@if(is_null(old('morte'))) @if($pessoa->morte != -1) {{$pessoa->morte}} @endif @else {{old('string_morte')}} @endif" @if(!is_null(old('morte'))) @if(old('morte') == 2) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>
+                        <label id="morte_label" for="string_morte" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>Convênio médico:</label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="container">
                         <div class="input-field col s12 m3 right">
                             <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">

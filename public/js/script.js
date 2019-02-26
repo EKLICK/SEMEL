@@ -143,8 +143,13 @@ document.getElementById('limpar_atestado').onclick = function (){
 
 //EDIÇÃO E CRIAÇÃO DE ANAMNESES
 
+
 function convenio_medico_click(valor){
     change(valor, $('#string_convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
+}
+
+function morte_click(valor){
+    change(valor, $('#string_morte'), $('#morte_label'), $('#morte_icon'));
 }
 
 function toma_medicacao_click(valor){

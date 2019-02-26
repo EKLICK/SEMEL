@@ -244,6 +244,7 @@ class PessoasController extends Controller{
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
             'estado' => $estado,
+            'morte' => -1,
         ]);
 
         //Verifica atributos de anamnese, 
@@ -342,7 +343,7 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
-        //Verifica se a imagem 3 por 4 foi passada pelo formulario
+        //Verifica se a imagem 3 por 4 foi passada pelo formulario.
         if(isset($dataForm['img_3x4'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
@@ -372,7 +373,7 @@ class PessoasController extends Controller{
             $dataForm['rg_responsavel'] = null;
         }
         else{
-            //Verifica se a imagem de matricula foi passada pelo formulario
+            //Verifica se a imagem de matricula foi passada pelo formulario.
             if(isset($dataForm['img_matricula'])){
                 //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
                 if(!empty($pessoa['matricula'])){unlink($pessoa['matricula']);}
@@ -388,8 +389,11 @@ class PessoasController extends Controller{
                 $dataForm += ['img_matricula' => null];
             }
         }
-        //checar se convenio médico foi marcado
+        //checar se convenio médico foi marcado.
         if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = -1;}
+
+        //checar se falecimento da pessoa foi marcada.
+        if($dataForm['morte'] == 2){$dataForm['string_morte'] = -1;}
 
         //Verifica se foi informado bairro, se não, seta como nulo.
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
