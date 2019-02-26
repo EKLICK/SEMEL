@@ -14,6 +14,10 @@
 //Rota welcome: Utilizado para Logar no sistema com uma conta.
 Route::get('/', function(){return redirect()->route('login');})->name('welcome');
 
+Route::get('/usuarios', 'Auth\RegisterController@index')->name('users.index')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuarios/edit/{id}', 'Auth\RegisterController@edit')->name('users.edit')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('users.update')->middleware('AdministracaoEProfessor', 'Authenticate');
+
 //Rota de Logs: Utilizado para entrar na página de login.
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 

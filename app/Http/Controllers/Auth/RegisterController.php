@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use App\User;
+
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Session;
+
+use App\User;
 
 class RegisterController extends Controller{
     /*
@@ -35,7 +38,9 @@ class RegisterController extends Controller{
      * @return void
      */
     public function __construct(){
-
+        if(isset(auth()->user()->id)){
+            if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        }
     }
 
     /**
@@ -46,11 +51,18 @@ class RegisterController extends Controller{
      */
     protected function validator(array $data){
         return Validator::make($data, [
+            'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:3,50'],
             'name' => ['required', 'string', 'max:255'],
             'admin_professor' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]);
+    }
+
+    protected function index(){
+        $userslist = User::orderBy('nick')->get();
+
+        return view ('auth.users', compact('userslist'));
     }
 
     /**
@@ -67,5 +79,44 @@ class RegisterController extends Controller{
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function edit($id){
+        $user = User::find($id);
+
+        return view('auth.users_edit', compact('user'));
+    }
+
+    protected function update(Request $request, $id){
+        $dataForm = $request->all();
+        $user = User::find($id);
+
+        if($dataForm['password_antiga'] != null && $dataForm['usuario_antigo'] != null){
+            if((Hash::check($dataForm['password'], $user->password)) || ($user->name != $dataForm['usuario'])){
+                Session::put('mensagem_red', "Usuário ou senha incorreta para troca de senha!");
+
+                return redirect()->Route('users.edit', $id);
+            }
+            else{
+                $user->update([
+                    'nick' => $dataForm['nick'],
+                    'email' => $dataForm['email'],
+                    'name' => $dataForm['usuario'],
+                    'password' => bcrypt($dataForm['password']),
+                ]);
+            }
+        }
+        else{
+            $user->update([
+                'nick' => $dataForm['nick'],
+                'email' => $dataForm['email'],
+            ]);
+        }
+        
+        return redirect()->Route('users.index');
+    }
+
+    protected function destroy($id){
+
     }
 }

@@ -212,6 +212,21 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m3">
+                        Mora com os pais?
+                        <p>
+                            <label>
+                                <input value="1" name="mora_com_os_pais" type="radio" @if(old('mora_com_os_pais') == '1') checked @endif/>
+                                <span>Sim</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input value="2" name="mora_com_os_pais" type="radio" @if(old('mora_com_os_pais') == '2') checked @endif/>
+                                <span>Não</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field col s12 m3">
                         Estado Civil:
                         <p>
                             <label>
@@ -225,19 +240,10 @@
                                 <span>Casado</span>
                             </label>
                         </p>
-                    </div>
-                    <div class="input-field col s12 m3">
-                        Mora com os pais?
                         <p>
                             <label>
-                                <input value="1" name="mora_com_os_pais" type="radio" @if(old('mora_com_os_pais') == '1') checked @endif/>
-                                <span>Sim</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input value="2" name="mora_com_os_pais" type="radio" @if(old('mora_com_os_pais') == '2') checked @endif/>
-                                <span>Não</span>
+                                <input value="Viuva(o)" name="estado_civil" type="radio" @if(old('estado_civil') == 'Viuva(o)') checked @endif/>
+                                <span>Viuva(o)</span>
                             </label>
                         </p>
                     </div>

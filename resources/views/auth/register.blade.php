@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    <a href="{{route('register')}}" class="breadcrumb">Cadastrar</a>
+    <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
+    <a class="breadcrumb" href="{{route('register')}}">Cadastrar</a>
 @endsection
 @section('title') Cadastrar administrador @endsection
 @section('content')
@@ -10,25 +11,32 @@
                 @csrf
                 <div class="row">
                     <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">person_pin</i>
+                        <input name="nick" id="icon_nick" type="text" class="validate">
+                        <label for="icon_nick">Nome do administrador:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario" id="icon_usuario" type="password" class="validate">
+                        <input name="usuario" id="icon_usuario" type="password" class="validate" required>
                         <label for="icon_usuario">Usuário:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}">
+                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}" required>
                         <label for="icon_email">E-mail:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="icon_lockout" type="password" class="validate">
+                        <input name="password" id="icon_lockout" type="password" class="validate" required>
                         <label for="icon_lockout">Senha:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="icon_lock" type="password" class="validate">
+                        <input name="confirm_password" id="icon_lock" type="password" class="validate" required>
                         <label for="icon_lock">Confirmar senha:</label>
                     </div>
                 </div>

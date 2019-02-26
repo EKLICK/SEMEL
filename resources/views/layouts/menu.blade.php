@@ -2,7 +2,11 @@
     <div class="collapsible-header"><i class="material-icons">settings</i>Ferramentas de administração</div>
     <div class="collapsible-body">
         <div class="collection">
-            <b><a class="collection-item" href="{{route('register')}}" style="color: #039be5;">Cadastrar administrador</a></b>
+            @if(isset(auth()->user()->id))
+                @if(auth()->user()->id == 1)
+                    <b><a class="collection-item" href="{{route('users.index')}}" style="color: #039be5;">Administradores</a></b>
+                @endif
+            @endif
             <b><a class="collection-item" href="{{route('professor.create')}}" style="color: #039be5;">Cadastrar professor</a></b>
             <b><a class="collection-item" href="{{route('audits.index')}}" style="color: #039be5;">Auditorias</a></b>
         </div>

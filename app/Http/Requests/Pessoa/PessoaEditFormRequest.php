@@ -42,9 +42,12 @@ class PessoaEditFormRequest extends FormRequest{
             'pessoa_emergencia'     => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|between:3,100',
             'filhos'                => 'digits_between:0,4',
             'irmaos'                => 'digits_between:0,4',
-            'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro'])],
+            'convenio_medico'       => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'string_convenio_medico'=> 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|',
+            'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro', 'Viuva(o)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'morte'                 => 'sometimes|nullable|date-format:d/m/Y',
+            'morte'                 => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'string_morte'          => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|',
         ];
     }
 
