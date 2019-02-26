@@ -160,21 +160,21 @@
                         Possui convênio médico?
                         <p>
                             <label>
-                                <input id="marc" value="S" name="marc" type="radio" @if(old('marc') == 'S') checked @else @if ($pessoa->convenio_medico != -1) checked @endif @endif/>
+                                <input onclick="convenio_medico_click('S')" value="1" name="convenio_medico" type="radio" @if(!is_null(old('convenio_medico'))) @if(old('convenio_medico') == 1) checked @endif @else @if ($pessoa->convenio_medico != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input id="marc" value="N" name="marc" type="radio" @if(old('marc') == 'N') checked @else @if ($pessoa->convenio_medico == -1) checked @endif @endif/>
+                                <input onclick="convenio_medico_click('N')" value="2" name="convenio_medico" type="radio" @if(!is_null(old('convenio_medico'))) @if(old('convenio_medico') == 2) checked @endif @else @if ($pessoa->convenio_medico == -1) checked @endif @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="convenio_icon" class="material-icons prefix" @if ($pessoa->convenio_medico == -1) hidden @endif>add_box</i>
-                        <input name="convenio_medico" id="convenio_medico" type="text" class="validate" @if(is_null(old('convenio_medico')) && $pessoa->convenio_medico != -1) value="{{$pessoa->convenio_medico}}" @else value="{{old('convenio_medico')}}" @endif @if ($pessoa->convenio_medico == -1) hidden @endif>
-                        <label id="convenio_label" for="convenio_medico" @if ($pessoa->convenio_medico == -1) hidden @endif>Convênio médico:</label>
+                        <i id="convenio_icon" class="material-icons prefix" @if(!is_null(old('convenio_medico'))) @if(old('convenio_medico') != 1) hidden @endif @else @if ($pessoa->convenio_medico == -1) hidden @endif @endif>add_box</i>
+                        <input id="string_convenio_medico" name="string_convenio_medico" type="text" class="validate" value="@if(is_null(old('convenio_medico'))) @if($pessoa->convenio_medico != -1) {{$pessoa->convenio_medico}} @endif @else {{old('string_convenio_medico')}} @endif" @if(!is_null(old('convenio_medico'))) @if(old('toma_medicacao') == 2) hidden @endif @else @if($pessoa->convenio_medico == -1) hidden @endif @endif>
+                        <label id="convenio_label" for="string_convenio_medico" @if(!is_null(old('convenio_medico'))) @if(old('convenio_medico') != 1) hidden @endif @else @if($pessoa->convenio_medico == -1) hidden @endif @endif>Convênio médico:</label>
                     </div>
                 </div>
                 <div class="row">

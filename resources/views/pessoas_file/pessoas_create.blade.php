@@ -160,21 +160,21 @@
                         Possui convênio médico?
                         <p>
                             <label>
-                                <input value="S" name="marc" type="radio" @if(old('marc') == 'S') checked @endif/>
+                                <input onclick="convenio_medico_click('S')" value="1" name="convenio_medico" type="radio" @if(old('convenio_medico') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="N" name="marc" type="radio" @if(old('marc') == 'N') checked @endif/>
+                                <input onclick="convenio_medico_click('N')" value="2" name="convenio_medico" type="radio" @if(old('convenio_medico') == 2) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="convenio_icon" class="material-icons prefix" @if(old('marc') != 'S' || empty(old('alergia_medicacao'))) hidden @endif>add_box</i>
-                        <input id="convenio_medico" name="convenio_medico" type="text" class="validate" value="{{old('convenio_medico')}}" @if(old('marc') != 'S') hidden @endif>
-                        <label id="convenio_label" for="convenio_medico" @if(old('marc') != 'S' || empty(old('alergia_medicacao'))) hidden @endif>Convênio médico:</label>
+                        <i id="convenio_icon" class="material-icons prefix" @if(old('convenio_medico') != 1) hidden @endif>add_box</i>
+                        <input id="string_convenio_medico" name="string_convenio_medico" type="text" class="validate" value="{{old('string_convenio_medico')}}" @if(old('convenio_medico') != 1) hidden @endif>
+                        <label id="convenio_label" for="string_convenio_medico" @if(old('convenio_medico') != 1) hidden @endif>Convênio médico:</label>
                     </div>
                 </div>
                 <div class="row">

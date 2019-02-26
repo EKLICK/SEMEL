@@ -189,7 +189,7 @@ class PessoasController extends Controller{
         }
 
         //checar se convenio médico foi marcado
-        if(isset($dataForm['marc'])){if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}}
+        if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = -1;}
 
         //Se imagem foi passada, salva imagem 3 por 4 no banco de dados.
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
@@ -389,7 +389,7 @@ class PessoasController extends Controller{
             }
         }
         //checar se convenio médico foi marcado
-        if($dataForm['marc'] == 'N'){$dataForm['convenio_medico'] = -1;}
+        if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = -1;}
 
         //Verifica se foi informado bairro, se não, seta como nulo.
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
@@ -435,7 +435,7 @@ class PessoasController extends Controller{
             'nome_da_mae' => $dataForm['nome_da_mae'],
             'pessoa_emergencia' => $dataForm['pessoa_emergencia'],
             'filhos' => $dataForm['filhos'],
-            'convenio_medico' => $dataForm['convenio_medico'],
+            'convenio_medico' => $dataForm['string_convenio_medico'],
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
