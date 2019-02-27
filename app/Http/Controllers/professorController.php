@@ -217,7 +217,6 @@ class ProfessorController extends Controller{
 
         //Encontra o usuário no banco de dados e atribui a variavel email o email do usuário.
         $user = User::find($professor['user_id']);
-        $useremail = $user->email;
 
         //Converter YYYY-mm-dd para dd/mm/YYYY.
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
@@ -243,7 +242,7 @@ class ProfessorController extends Controller{
         //Encontra todos os núcleos que estão no array de idsnucleos.
         $listnucleoprofessor = Nucleo::whereIn('id', $idsnucleos)->get();
 
-        return view ('professores_file.professor_info', compact('professor','useremail','histprofessor','dadosgerais','listnucleoprofessor'));
+        return view ('professores_file.professor_info', compact('professor','histprofessor','dadosgerais','listnucleoprofessor'));
     }
 
     //Função professores_turmas: seleciona informações necessarias para vizualização e retorna a página de turmas e professores.

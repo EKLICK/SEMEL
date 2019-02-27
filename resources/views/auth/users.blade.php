@@ -22,10 +22,11 @@
                         <tr>
                             <td><p>{{$user->nick}}</p></td>
                             <td><p>{{$user->email}}</p></td>
-                            <td><p>@if($user->admin_professor == 0) Administrador @else Professor @endif</p></td>
+                            <td><p>@if($user->admin_professor == 1) Administrador @else Professor @endif</p></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->nick}}" href="{{Route('users.edit', $user->id)}}"><i class="small material-icons">edit</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->nick}}" href="{{Route('doencas.edit', $user->id)}}"><i class="small material-icons">delete</i></a>
+                                <a id="btn_delete" class="tooltipped modal-trigger" data-position="top" data-tooltip="Delete {{$user->nick}}" 
+                                   data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach 
@@ -38,23 +39,37 @@
         </div>
     </div>
 
-    <div id="modal1" class="modal">
-        <form action="{{route('musicas.destroy', 'delete')}}" method="POST">
+    <div id="modaldelete" class="modal">
+        <form action="{{route('users.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
+            <input class="validate" name="id" type="number" id="id_delete" hidden>
             <div class="modal-content">
-                <h4>Deletar</h4>
-                <p>Você tem certeza que deseja deletar a musica abaixo?</p>
                 <div class="row">
-                    <label for="name_delete">Nome:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" type="text" id="name_delete">
+                    <h4>Deletar</h4>
+                    <h6>Você tem certeza que deseja deletar o usuário abaixo?</h6>
+                </div>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <table>
+                            <tr>
+                                <td><b>Nome:</b></td>
+                                <td><p><span id="name_delete"></span></p></td>
+                            </tr>
+                            <tr>
+                                <td><b>Tipo de usuário:</b></td>
+                                <td><p><span id="tipo_delete"></span></p></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn red delete" type="submit">Sim</button>
+                <button class="btn waves-effect waves-light blue" type="submit" name="action">Deletar
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         </form>
     </div>

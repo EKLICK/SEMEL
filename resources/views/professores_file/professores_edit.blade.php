@@ -88,7 +88,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$user->email}} @else {{old('email')}} @endif" required>
+                        <input name="email" id="email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$professor->email}} @else {{old('email')}} @endif" required>
                         <label for="email">E-mail:</label>
                     </div>
                 </div>

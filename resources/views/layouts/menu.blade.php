@@ -1,14 +1,23 @@
 <li>
-    <div class="collapsible-header"><i class="material-icons">settings</i>Ferramentas de administração</div>
+    @if(isset(auth()->user()->id))
+        @if(auth()->user()->id == 1)
+            <div class="collapsible-header"><i class="material-icons">settings</i>Opções de Administração</div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <b><a class="collection-item" href="{{route('users.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+                    <b><a class="collection-item" href="{{route('register')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('audits.index')}}" style="color: #039be5;"><i class="material-icons">access_time</i> Auditorias</a></b>
+                </div>
+            </div>
+        @endif
+    @endif
+</li>
+<li>
+    <div class="collapsible-header"><i class="material-icons">local_library</i>Professores</div>
     <div class="collapsible-body">
         <div class="collection">
-            @if(isset(auth()->user()->id))
-                @if(auth()->user()->id == 1)
-                    <b><a class="collection-item" href="{{route('users.index')}}" style="color: #039be5;">Administradores</a></b>
-                @endif
-            @endif
-            <b><a class="collection-item" href="{{route('professor.create')}}" style="color: #039be5;">Cadastrar professor</a></b>
-            <b><a class="collection-item" href="{{route('audits.index')}}" style="color: #039be5;">Auditorias</a></b>
+            <b><a class="collection-item" href="{{route('professor.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+            <b><a class="collection-item" href="{{route('professor.create')}}"style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
         </div>
     </div>
 </li>
@@ -16,14 +25,43 @@
     <div class="collapsible-header"><i class="material-icons">people</i>Usuarios</div>
     <div class="collapsible-body">
         <div class="collection">
-            <b><a class="collection-item" href="{{route('professor.index')}}" style="color: #039be5;">Professores</a></b>
-            <b><a class="collection-item" href="{{route('pessoas.index')}}"style="color: #039be5;">Cliente</a></b>
+            <b><a class="collection-item" href="{{route('pessoas.index')}}"style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+            <b><a class="collection-item" href="{{route('pessoas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
         </div>
     </div>
 </li>
-<div class="collection">
-    <b><a class="collection-item" href="{{route('anamneses.index')}}" style="color: #039be5;">Anamneses</a></b>
-    <b><a class="collection-item" href="{{route('doencas.index')}}" style="color: #039be5;">Doenças</a></b>
-    <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;">Turmas</a></b>
-    <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;">Nucleos</a></b>
-</div>
+<li>
+    <div class="collapsible-header"><i class="material-icons">add_box</i>Anamneses</div>
+    <div class="collapsible-body">
+        <div class="collection">
+            <b><a class="collection-item" href="{{route('anamneses.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="collapsible-header"><i class="material-icons">warning</i>Doenças</div>
+    <div class="collapsible-body">
+        <div class="collection">
+            <b><a class="collection-item" href="{{route('doencas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="collapsible-header"><i class="material-icons">art_track</i>Turmas</div>
+    <div class="collapsible-body">
+        <div class="collection">
+            <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="collapsible-header"><i class="material-icons">filter_tilt_shift</i>Núcleos</div>
+    <div class="collapsible-body">
+        <div class="collection">
+            <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+        </div>
+    </div>
+</li>

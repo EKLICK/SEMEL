@@ -60,7 +60,7 @@ class RegisterController extends Controller{
     }
 
     protected function index(){
-        $userslist = User::orderBy('nick')->get();
+        $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
 
         return view ('auth.users', compact('userslist'));
     }
@@ -116,7 +116,13 @@ class RegisterController extends Controller{
         return redirect()->Route('users.index');
     }
 
-    protected function destroy($id){
-
+    protected function destroy(Request $request){
+        $dataForm = $request->all();
+        if($dataForm['id'] == 1){
+            return redirect()->Route('users.index');
+        }
+        else{
+            dd('entrou');
+        }
     }
 }

@@ -34,3 +34,14 @@ $(document).on('click', '#btn-modal_inativar_objeto', function(){
     $('#id_modal_inativar').val($(this).data('idobjeto'));
     document.getElementById('texto_inativar').innerHTML = 'Você deseja inativar ' + $(this).data('nomeobjeto').bold() + '?';
 });
+
+$(document).on('click', '#btn_delete', function(){
+    if($(this).data('tipo') == 1){
+        $('#tipo_delete').text('Administrador');
+    }
+    else{
+        $('#tipo_delete').text('Professor')
+    }
+    $('#id_delete').val($(this).data('id'));
+    $('#name_delete').text($(this).data('name'));
+});

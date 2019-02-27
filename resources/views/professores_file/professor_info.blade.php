@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <td><h6><b>E-mail:</b></h5></td>
-                            <td><h6>{{$useremail}}</h6></td>
+                            <td><h6>{{$professor->email}}</h6></td>
                         </tr>
                         <tr>
                             <td><h6><b>CPF:</b></h5></td>

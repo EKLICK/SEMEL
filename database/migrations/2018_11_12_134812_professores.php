@@ -19,6 +19,7 @@ class Professores extends Migration
             $table->timestamp('nascimento')->nullable();
             $table->string('matricula')->nullable();
             $table->string('telefone')->nullable();
+            $table->string('email')->nullable();
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
             $table->string('cidade')->nullable();
