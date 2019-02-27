@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('breadcrumbs')
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
 @endsection
@@ -25,8 +26,9 @@
                             <td><p>@if($user->admin_professor == 1) Administrador @else Professor @endif</p></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->nick}}" href="{{Route('users.edit', $user->id)}}"><i class="small material-icons">edit</i></a>
-                                <a id="btn_delete" class="tooltipped modal-trigger" data-position="top" data-tooltip="Delete {{$user->nick}}" 
-                                   data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}" href="#modaldelete"><i class="small material-icons">delete</i></a>
+                                <a id="btn_delete" class="tooltipped modal-trigger" data-position="top" data-tooltip="Delete {{$user->nick}}" href="#modaldelete"
+                                   data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}">
+                                   <i class="small material-icons">delete</i></a>
                             </td>
                         </tr>
                     @endforeach 
@@ -39,7 +41,7 @@
         </div>
     </div>
 
-    <div id="modaldelete" class="modal">
+    <div id="modaldelete" class="modal"  style="width: 30%;">
         <form action="{{route('users.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
@@ -52,7 +54,7 @@
                 <hr>
                 <br>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         <table>
                             <tr>
                                 <td><b>Nome:</b></td>

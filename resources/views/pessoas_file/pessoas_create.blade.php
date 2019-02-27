@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('css.personalizado')@endsection
 @section('breadcrumbs')
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas.create')}}" class="breadcrumb">Criar</a>

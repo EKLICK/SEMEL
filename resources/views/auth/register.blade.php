@@ -1,10 +1,12 @@
 @extends('layouts.app')
+
 @section('breadcrumbs')
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
     <a class="breadcrumb" href="{{route('register')}}">Cadastrar</a>
 @endsection
 @section('title') Cadastrar administrador @endsection
 @section('content')
+    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
             <form class="col s12" action="{{route('professor.store')}}" method="post">

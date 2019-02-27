@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Requests\User\UserEditFormRequest;
+
 use App\User;
+use App\Professor;
 
 class RegisterController extends Controller{
     /*
@@ -51,7 +54,7 @@ class RegisterController extends Controller{
      */
     protected function validator(array $data){
         return Validator::make($data, [
-            'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:3,50'],
+            'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:5,50'],
             'name' => ['required', 'string', 'max:255'],
             'admin_professor' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -87,7 +90,7 @@ class RegisterController extends Controller{
         return view('auth.users_edit', compact('user'));
     }
 
-    protected function update(Request $request, $id){
+    protected function update(UserEditFormRequest $request, $id){
         $dataForm = $request->all();
         $user = User::find($id);
 
@@ -112,6 +115,9 @@ class RegisterController extends Controller{
                 'email' => $dataForm['email'],
             ]);
         }
+
+        $professor = Professor::where('user_id', '=', $id)->get()->last();
+        $professor->update(['email' => $dataForm['email']]);
         
         return redirect()->Route('users.index');
     }

@@ -1,7 +1,7 @@
 <li>
     @if(isset(auth()->user()->id))
         @if(auth()->user()->id == 1)
-            <div class="collapsible-header"><i class="material-icons">settings</i>Opções de Administração</div>
+            <div class="collapsible-header"><i class="material-icons">settings</i>Administração</div>
             <div class="collapsible-body">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('users.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
