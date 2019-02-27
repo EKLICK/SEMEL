@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas_turmas', $pessoa->id)}}" class="breadcrumb">turmas</a>
 @endsection
-@section('title') Turmas <a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i></a>@endsection
+@section('title') Turmas @if(auth()->user()->id == 1)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endif</a>@endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     @include('layouts.Sessoes.mensagem_yellow')
@@ -298,30 +298,32 @@
         </form>
     </div>
 
-    <div id="modalquantbloqueio" class="modal" style="width: 38%; height: 40%;">
-        <div class="container">
-            <div class="row">
-                <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
-                <hr>
-                <h5><b>Quantidade possivel atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
-            </div>
-            <br>
-            <div class="row">
-                <form action="{{route('define_quantidade')}}" action="GET">
-                    @csrf
-                    <input type="text" name="pessoa_id" value="{{$pessoa->id}}" hidden>
-                    <div class="input-field col s6">
-                            <i class="material-icons prefix">enhanced_encryption</i>
-                            <input name="quantidade" id="quantidade" type="number" class="validate">
-                            <label for="quantidade">Quantidade [bloqueio]: </label>
-                    </div>
-                    <div class="input-field col s4 right">
-                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Definir
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </form>
+    @if(auth()->user()->id == 1)
+        <div id="modalquantbloqueio" class="modal" style="width: 38%; height: 40%;">
+            <div class="container">
+                <div class="row">
+                    <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
+                    <hr>
+                    <h5><b>Quantidade possivel atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
+                </div>
+                <br>
+                <div class="row">
+                    <form action="{{route('define_quantidade')}}" action="GET">
+                        @csrf
+                        <input type="text" name="pessoa_id" value="{{$pessoa->id}}" hidden>
+                        <div class="input-field col s6">
+                                <i class="material-icons prefix">enhanced_encryption</i>
+                                <input name="quantidade" id="quantidade" type="number" class="validate">
+                                <label for="quantidade">Quantidade [bloqueio]: </label>
+                        </div>
+                        <div class="input-field col s4 right">
+                            <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Definir
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection

@@ -14,16 +14,19 @@
 //Rota welcome: Utilizado para Logar no sistema com uma conta.
 Route::get('/', function(){return redirect()->route('login');})->name('welcome');
 
-Route::get('/usuarios', 'Auth\RegisterController@index')->name('users.index')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/usuarios/edit/{id}', 'Auth\RegisterController@edit')->name('users.edit')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('users.update')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::delete('/usuarios/destroy/{id}', 'Auth\RegisterController@destroy')->name('users.destroy')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuarios', 'Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuarios/edit/{id}', 'Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::delete('/usuarios/destroy/{id}', 'Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
+Route::get('/pessoa/quantidade','PessoasController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota Decompose: Utilizado para abrir registro de todas as bibliotecas instaladas.
+Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index')->middleware('Secretario', 'Authenticate');
 
 //Rota de Logs: Utilizado para entrar na página de login.
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-
-//Rota Decompose: Utilizado para abrir registro de todas as bibliotecas instaladas.
-Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index');
 
 //Rotas de Auditorias: Utilizado para acessar controle de auditorias.
 Auth::routes();
@@ -31,8 +34,13 @@ Auth::routes();
 //Rota Home: Utilizado para acessar a página home padrão.
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
-Route::get('/pessoa/quantidade','PessoasController@define_quantidade')->name('define_quantidade')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//CONTROLE DE AUDITORIAS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+//Rotas de audits.index: Utilizado para acessar controle expecifico de apresentação de auditorias..
+Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota audits_info: Utilizado para entrar na página de informações da auditoria.
+Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE PROFESSORES: |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -105,7 +113,7 @@ Route::resource('turmas','TurmasController')->middleware('AdministracaoEProfesso
 Route::get('/turmas_info/{id}','TurmasController@turma_info')->name('turma_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas turmas_ativar_inativar: Utilizado para ativar ou inativar uma turma.
-Route::post('/turmas/ativar_inativar', 'TurmasController@turmas_ativar_inativar')->name('turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/turmas/ativar_inativar', 'TurmasController@turmas_ativar_inativar')->name('turmas_ativar_inativar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE NÚCLEOS: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -116,15 +124,8 @@ Route::resource('nucleos','NucleosController')->middleware('AdministracaoEProfes
 Route::get('/nucleos_info/{id}','NucleosController@nucleo_info')->name('nucleo_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas nucleos_ativar_inativar: Utilizado para ativar ou inativar um núcleo.
-Route::post('/nucleos/ativar_inativar', 'NucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::post('/nucleos/ativar_inativar', 'NucleosController@nucleos_ativar_inativar')->name('nucleos_ativar_inativar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-
-//CONTROLE DE AUDITORIAS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//Rotas de audits.index: Utilizado para acessar controle expecifico de apresentação de auditorias..
-Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Rota audits_info: Utilizado para entrar na página de informações da auditoria.
-Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //CONTROLE DE FILTROS: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
@@ -160,4 +161,4 @@ Route::any('/procurar/nucleos','Ferramentas\FiltersController@nucleos_procurar')
 
 //FILTRO DE AUDITORIAS
 //Rota audits_procurar: Utilizado para filtrar registro de pessoas na página de registros de auditorias.
-Route::any('/procurar/audits','Ferramentas\FiltersController@audits_procurar')->name('audits_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/audits','Ferramentas\FiltersController@audits_procurar')->name('audits_procurar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');

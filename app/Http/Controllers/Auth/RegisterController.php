@@ -40,11 +40,7 @@ class RegisterController extends Controller{
      *
      * @return void
      */
-    public function __construct(){
-        if(isset(auth()->user()->id)){
-            if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
-        }
-    }
+    public function __construct(){}
 
     /**
      * Get a validator for an incoming registration request.
@@ -56,7 +52,6 @@ class RegisterController extends Controller{
         return Validator::make($data, [
             'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:5,50'],
             'name' => ['required', 'string', 'max:255'],
-            'admin_professor' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]);
@@ -78,7 +73,7 @@ class RegisterController extends Controller{
         Session::put('mensagem_green', 'Administrador '.$data['name'].' adicionado com sucesso!');
         return User::create([
             'name' => $data['name'],
-            'admin_professor' => $data['admin_professor'],
+            'admin_professor' => 1,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

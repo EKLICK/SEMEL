@@ -9,25 +9,26 @@
     @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('professor.store')}}" method="post">
+            <form class="col s12" action="{{route('register')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
-                        <input name="nick" id="icon_nick" type="text" class="validate">
+                        <input name="nick" id="icon_nick" type="text" class="validate" value="{{old('nick')}}" required>
                         <label for="icon_nick">Nome do administrador:</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario" id="icon_usuario" type="password" class="validate" required>
-                        <label for="icon_usuario">Usuário:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
                         <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}" required>
                         <label for="icon_email">E-mail:</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">perm_contact_calendar</i>
+                        <input name="name" id="icon_name" type="password" class="validate" required>
+                        <label for="icon_name">Usuário:</label>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +39,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="icon_lock" type="password" class="validate" required>
+                        <input name="password_confirmation" id="icon_lock" type="password" class="validate" required>
                         <label for="icon_lock">Confirmar senha:</label>
                     </div>
                 </div>

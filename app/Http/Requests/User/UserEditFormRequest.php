@@ -32,11 +32,6 @@ class UserEditFormRequest extends FormRequest{
     }
 
     public function messages(){
-        return[
-            'nick.required' => 'fsfs',
-            'email.required' => 'fsafsa',
-            'email.unique' => 'sf',
-            'confirm_password.required_with' => 'fsafs',
-        ];
+        return[];
     }
 }

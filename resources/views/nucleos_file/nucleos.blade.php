@@ -84,8 +84,8 @@
                         <th>Nome da turma</th>
                         <th>Endereço</th>
                         <th>Situação</th>
-                        <th>Mudar estado</th>
-                        <th>Ações</th>
+                        @if(auth()->user()->id == 1)<th>Mudar estado</th>@endif
+                        @if(auth()->user()->id == 1)<th>Ações</th>@else<th>Informações</th>@endif
                     </tr>
                 </thead>
                 <tbody>
@@ -94,24 +94,26 @@
                             <td>{{$nucleo->nome}}</td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}} {{$nucleo->complemento}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                            @if ($nucleo->inativo == 2)
-                                <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
-                                        data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
-                                        <i class="material-icons right">lock_open</i>Ativar
-                                    </a>
-                                </td>
-                            @else
-                                <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
-                                        data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
-                                        <i class="material-icons right">lock_outline</i>Inativar
-                                    </a>
-                                </td>
+                            @if(auth()->user()->id == 1)
+                                @if ($nucleo->inativo == 2)
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
+                                            data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
+                                            <i class="material-icons right">lock_open</i>Ativar
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
+                                            data-idobjeto="{{$nucleo->id}}" data-nomeobjeto="{{$nucleo->nome}}">
+                                            <i class="material-icons right">lock_outline</i>Inativar
+                                        </a>
+                                    </td>
+                                @endif
                             @endif
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>
+                                @if(auth()->user()->id == 1)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>@endif
                             </td>
                         </tr>
                     @endforeach
@@ -122,14 +124,17 @@
             @else
                 {{$nucleoslist->links()}}
             @endif
-            <br>
-            <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add</i></a>
-            </div>
+            @if(auth()->user()->id == 1)
+                <br>
+                <div class="container">
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add</i></a>
+                </div>
+            @endif
         </div>
     </div>
 
-    <div id="modalobjetoativar" class="modal">
+    @if(auth()->user()->id == 1)
+        <div id="modalobjetoativar" class="modal">
             <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
                 @csrf
                 <input class="validate" type="text" name="nucleo_id" id="id_modal_ativar" hidden>
@@ -178,4 +183,5 @@
                 </div>
             </form>
         </div>
+    @endif
 @endsection

@@ -92,8 +92,8 @@
                         <th>Nome da turma</th>
                         <th>Núcleo pertencente</th>
                         <th>Estado</th>
-                        <th>Mudar estado</th>
-                        <th>Ações</th>
+                        @if(auth()->user()->id == 1)<th>Mudar estado</th>@endif
+                        @if(auth()->user()->id == 1)<th>Ações</th>@else<th>Informações</th>@endif
                     </tr>
                 </thead>
                 <tbody>
@@ -118,84 +118,89 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
-                            @if ($turma->inativo == 2)
-                                <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
-                                        data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
-                                        <i class="material-icons right">lock_open</i>Ativar
-                                    </a>
-                                </td>
-                            @else
-                                <td>
-                                    <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
-                                        data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
-                                        <i class="material-icons right">lock_outline</i>Inativar
-                                    </a>
-                                </td>
+                            @if(auth()->user()->id == 1)
+                                @if ($turma->inativo == 2)
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
+                                            data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
+                                            <i class="material-icons right">lock_open</i>Ativar
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_inativar_objeto" href="#modalobjetoinativar"
+                                            data-idobjeto="{{$turma->id}}" data-nomeobjeto="{{$turma->nome}}">
+                                            <i class="material-icons right">lock_outline</i>Inativar
+                                        </a>
+                                    </td>
+                                @endif
                             @endif
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
-                                <a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>
+                                @if(auth()->user()->id == 1)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>@endif
                             </td>
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
             {{$turmaslist->links()}}
-            <br>
-            <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
-            </div>
+            @if(auth()->user()->id == 1)
+                <br>
+                <div class="container">
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
+                </div>
+            @endif
         </div>
     </div>
-
-    <div id="modalobjetoativar" class="modal">
-        <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
-            @csrf
-            <input class="validate" type="text" name="turma_id" id="id_modal_ativar" hidden>
-            <div class="modal-content">
-                <h4>Ativar</h4>
-                <h5 id="texto_ativar"></h5>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Ativação (opcional):
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
-                        <label for="textarea1"></label>
+    @if(auth()->user()->id == 1)
+        <div id="modalobjetoativar" class="modal">
+            <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
+                @csrf
+                <input class="validate" type="text" name="turma_id" id="id_modal_ativar" hidden>
+                <div class="modal-content">
+                    <h4>Ativar</h4>
+                    <h5 id="texto_ativar"></h5>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col s7">
+                            <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Ativação (opcional):
+                            <textarea id="textarea1" class="materialize-textarea" name="comentario"></textarea>
+                            <label for="textarea1"></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
-    
-    <div id="modalobjetoinativar" class="modal">
-        <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
-            @csrf
-            <input class="validate" type="text" name="turma_id" id="id_modal_inativar" hidden>
-            <div class="modal-content">
-                <h4>Inativar</h4>
-                <h5 id="texto_inativar"></h5>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="input-field col s7">
-                        <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
-                        <textarea id="textarea1" class="materialize-textarea" name="comentario" required></textarea>
-                        <label for="textarea1"></label>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="modalobjetoinativar" class="modal">
+            <form action="{{Route('turmas_ativar_inativar')}}" method="POST">
+                @csrf
+                <input class="validate" type="text" name="turma_id" id="id_modal_inativar" hidden>
+                <div class="modal-content">
+                    <h4>Inativar</h4>
+                    <h5 id="texto_inativar"></h5>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="input-field col s7">
+                            <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario para Inativação (obrigatório):
+                            <textarea id="textarea1" class="materialize-textarea" name="comentario" required></textarea>
+                            <label for="textarea1"></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
-    </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Ativar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    @endif
 @endsection

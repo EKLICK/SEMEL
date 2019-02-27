@@ -55,6 +55,9 @@ class NucleosController extends Controller{
 
     //Função create, retorna a página de criação de registros de núcleos.
     public function create(){
+        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
@@ -75,6 +78,9 @@ class NucleosController extends Controller{
     //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de núcleos.
     public function store(NucleoCreateEditFormRequest $request){
         $dataForm = $request->all();
+
+        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
 
         //Cria núcleo no banco de dados:
         $nucleo =  Nucleo::create($dataForm);
@@ -114,6 +120,9 @@ class NucleosController extends Controller{
         //Encontra o núcleo no banco de dados.
         $nucleo = Nucleo::find($id);
 
+        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
@@ -135,6 +144,9 @@ class NucleosController extends Controller{
     //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(NucleoCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
+
+        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
 
         //Encontra o professor no banco de dados.
         $nucleo = Nucleo::find($id);
@@ -208,6 +220,10 @@ class NucleosController extends Controller{
     //Função nucleos_ativar_inativar: Ativa ou inativa um nucleo e retorna a página de index.
     public function nucleos_ativar_inativar(Request $request){
         $dataForm = $request->all();
+
+        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+
         //Enconta o professor no banco de dados.
         $nucleo = Nucleo::find($dataForm['nucleo_id']);
 

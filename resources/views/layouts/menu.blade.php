@@ -1,6 +1,6 @@
-<li>
-    @if(isset(auth()->user()->id))
-        @if(auth()->user()->id == 1)
+@if(isset(auth()->user()->id))
+    @if(auth()->user()->id == 1)
+        <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Administração</div>
             <div class="collapsible-body">
                 <div class="collection">
@@ -9,9 +9,9 @@
                     <b><a class="collection-item" href="{{route('audits.index')}}" style="color: #039be5;"><i class="material-icons">access_time</i> Auditorias</a></b>
                 </div>
             </div>
-        @endif
+        </li>
     @endif
-</li>
+@endif
 <li>
     <div class="collapsible-header"><i class="material-icons">local_library</i>Professores</div>
     <div class="collapsible-body">
@@ -47,21 +47,30 @@
         </div>
     </div>
 </li>
-<li>
-    <div class="collapsible-header"><i class="material-icons">art_track</i>Turmas</div>
-    <div class="collapsible-body">
+@if(isset(auth()->user()->id))
+    @if(auth()->user()->id == 1)
+        <li>
+            <div class="collapsible-header"><i class="material-icons">art_track</i>Turmas</div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+                    <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">filter_tilt_shift</i>Núcleos</div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
+                    <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                </div>
+            </div>
+        </li>
+    @else
         <div class="collection">
-            <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+            <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;">Turmas</a></b>
+            <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;">Nucleos</a></b>
         </div>
-    </div>
-</li>
-<li>
-    <div class="collapsible-header"><i class="material-icons">filter_tilt_shift</i>Núcleos</div>
-    <div class="collapsible-body">
-        <div class="collection">
-            <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
-        </div>
-    </div>
-</li>
+    @endif
+@endif
