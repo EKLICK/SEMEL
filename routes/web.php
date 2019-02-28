@@ -82,8 +82,11 @@ Route::post('/pessoas_turmas/vincular','PessoasController@pessoas_turmas_vincula
 //Rotas pessoas_turmas_ativar_inativar: Utilizado para ativar ou inativar pessoas em turmas.
 Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
+//Rotas pdfpessoas: Utilizado para entrar na página de menu de gerenciamento do PDF da pessoa.
+Route::get('/menu_pdf/pessoas','PessoasController@menu_pessoas_pdf')->name('menu_pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
 //Rotas pdfpessoas: Utilizado para entrar na página de PDF da pessoa.
-Route::get('/pessoas/pdf/{id}','PessoasController@pdfpessoas')->name('pdfpessoas')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/pdf/pessoas','PessoasController@pessoas_pdf')->name('pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE ANAMNESES: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -95,9 +98,6 @@ Route::get('/anamnese_create/{id}','AnamneseController@anamnese_create')->name('
 
 //Rota anamnese_info: Utilizado para entrar na página de informações da anamnese.
 Route::get('/anamneses_info/{id}','AnamneseController@anamnese_info')->name('anamnese_info')->middleware('Authenticate');
-
-//Rota pdfanamnese: Utilizado para entrar na página de PDF da anamnese.
-Route::get('/anamnese/pdf/{id}','AnamneseController@pdfanamnese')->name('pdfanamnese')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE DOENÇAS: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

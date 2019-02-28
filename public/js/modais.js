@@ -45,3 +45,12 @@ $(document).on('click', '#btn_delete', function(){
     $('#id_delete').val($(this).data('id'));
     $('#name_delete').text($(this).data('name'));
 });
+
+//MODAL DOENÇAS-ANAMNESES
+function modal_doencas(doencas){
+    $('#lista_de_doencas').empty();
+    $('#lista_de_doencas').append('<thead><th>Nome da Doença</th><th>Descrição</th></thead>');
+    for(var i = 0; i < doencas.length; i++){
+        $('#lista_de_doencas').append('<tbody><tr><td>'+doencas[i].nome+'</td><td>'+doencas[i].descricao+'</td></tr></tbody>');
+    }
+}

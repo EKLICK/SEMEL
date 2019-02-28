@@ -193,15 +193,6 @@ function change(a,b,c,d){
     }
 };
 
-//MODAL DOENÇAS-ANAMNESES
-function modal_doencas(doencas){
-    $('#lista_de_doencas').empty();
-    $('#lista_de_doencas').append('<thead><th>Nome da Doença</th><th>Descrição</th></thead>');
-    for(var i = 0; i < doencas.length; i++){
-        $('#lista_de_doencas').append('<tbody><tr><td>'+doencas[i].nome+'</td><td>'+doencas[i].descricao+'</td></tr></tbody>');
-    }
-}
-
 //CHANGE BAIRRO
 function change_bairro(){
     if($('#div_bairro_list').is(':hidden')){

@@ -67,16 +67,20 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col s6">
-                        <table>
-                            <tr>
-                                <h6><b>Matricula:</b></h6>
-                                @if($idade < 18)
-                                    @if(!is_null($pessoa->matricula))<td><img id="matricula_image" class="materialboxed" width="111" src="{{asset($pessoa->matricula)}}"></td>@endif
-                                @endif
-                            </tr>
-                        </table>
-                    </div>
+                    @if($idade < 18)
+                        <div class="col s6">
+                            <table>
+                                <tr>
+                                    <h6><b>Matricula:</b></h6>
+                                        @if(!is_null($pessoa->matricula))
+                                            <td><img id="matricula_image" class="materialboxed" width="111" src="{{asset($pessoa->matricula)}}"></td>
+                                        @else
+                                        <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image_matricula.png')}}"></td>
+                                        @endif
+                                </tr>
+                            </table>
+                        </div>
+                    @endif
                 </div>
                 <div class="row">
                     <div class="col s6">

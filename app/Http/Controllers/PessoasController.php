@@ -486,8 +486,10 @@ class PessoasController extends Controller{
         //Adiciona id de núcleos ao array de idsnucleos e depois excluir números repetidos.
         $a = 0; $b = 0; $idsnucleos = [];
         foreach($pessoa->turmas as $turma){
-            array_push($idsnucleos, $turma->nucleo_id);
-            if($turma->pivot->inativo == 1){$b++;}
+            if($turma->pivot->inativo == 1)
+                array_push($idsnucleos, $turma->nucleo_id);{
+                $b++;
+            }
             $a++;
         }
         $c = $a - $b;
@@ -662,11 +664,20 @@ class PessoasController extends Controller{
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
 
-    //Função pdfpessoas: Retorna o pdf das informações da pessoa.
-    public function pdfpessoas($id){
-        //Encontra a pessoa no banco de dados
-        $pessoa = Pessoa::find($id);
+    public function menu_pessoas_pdf(){
+        return view ('pdf_file.pdf_pessoas.menu_pdf_pessoas');
+    }
 
+    //Função pdfpessoas: Retorna o pdf das informações da pessoa.
+    public function pessoas_pdf(Request $request){
+        $dataForm = $request->all();
+        $string = "SELECT ";
+        if($dataForm['nome'] == 'on'){
+            $string += "nome, ";
+        }
+        if($dataForm['nome'] == 'on')
+
+        $pessoaslist = DB::select(DB::raw($string));
         return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
     }
 }

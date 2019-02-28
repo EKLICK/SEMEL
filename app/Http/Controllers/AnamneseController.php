@@ -287,18 +287,4 @@ class AnamneseController extends Controller{
 
         return view ('anamneses_file.anamneses_info', compact('anamnese','pessoa','ano'));
     }
-
-    //Função pdfanamnese, retorna o pdf das informações da anamnese.
-    public function pdfanamnese($id){
-        //Encontra a pessoa no banco de dados.
-        $anamnese = Anamnese::find($id);
-
-        //Encontra a pessoa da anamnese no banco de dados.
-        $pessoa = Pessoa::find($anamnese->pessoas->id);
-
-        //Define nome da pessoa da anamnese na variavel $nome.
-        $nome = $pessoa->nome;
-
-        return \PDF::loadview('pdf_file.anamneses_pdf', compact('anamnese','nome'))->stream('PDF_registro_pessoa'.'.pdf');
-    }
 }

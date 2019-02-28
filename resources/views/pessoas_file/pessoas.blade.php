@@ -163,6 +163,8 @@
             <br>
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar cliente" href="{{route('pessoas.create')}}"><i class="material-icons">add</i></a>
+                &emsp;&emsp;
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas" href="{{route('menu_pessoas_pdf')}}"><i class="material-icons">assessment</i></a>
             </div>
         </div>
     </div>

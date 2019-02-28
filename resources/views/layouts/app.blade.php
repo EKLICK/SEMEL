@@ -88,7 +88,7 @@
             $(document).ready(function(){
                 $('ul.tabs').tabs({
                     swipeable : true,
-                    responsiveThreshold : 1900,
+                    responsiveThreshold : 2500,
                 });
             });
             $(document).ready(function(){
