@@ -129,12 +129,15 @@ class RegisterController extends Controller{
 
     protected function destroy(Request $request){
         $dataForm = $request->all();
-        if($dataForm['id'] == 1){
-            return redirect()->Route('users.index');
+        if($dataForm['id'] != 1){
+            $user = User::find($dataForm['id']);
+
+            $user->delete();
+
+            Session::put('mensagem_green', "Usuário deletado com sucesso!");
         }
-        else{
-            dd('entrou');
-        }
+
+        return redirect()->Route('users.index');
     }
 
     protected function reset(Request $request){
