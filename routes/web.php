@@ -20,7 +20,10 @@ Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('use
 Route::delete('/usuarios/destroy/{id}', 'Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
-Route::get('/pessoa/quantidade','PessoasController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::post('/pessoa/quantidade','Auth\RegisterController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota reset_sistema: Utilizado para retirar todas as pessoas de todas as turmas do sistema (resetar o sistema).
+Route::post('/resetar','Auth\RegisterController@reset')->name('reset_sistema')->middleware('Secretario','AdministracaoEProfessor','Authenticate');
 
 //Rota Decompose: Utilizado para abrir registro de todas as bibliotecas instaladas.
 Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index')->middleware('Secretario', 'Authenticate');

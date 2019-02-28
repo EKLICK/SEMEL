@@ -3,7 +3,10 @@
 @section('breadcrumbs')
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
 @endsection
-@section('title') Usuários registrados @endsection
+@section('title') Usuários registrados 
+    @if(auth()->user()->id == 1)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Resetar Sistema<i class="material-icons right">access_time</i>@endif</a>
+    @if(auth()->user()->id == 1)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endif</a>
+@endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     <div class="container z-depth-4">
@@ -74,5 +77,63 @@
                 </button>
             </div>
         </form>
+    </div>
+
+    <div id="modalreset" class="modal" style="width: 55%; height: 45%;">
+        <div class="container">
+            <div class="row">
+                <p class="center"><b>Ferramenta utilizada para retirar todas as pessoas de todas as turmas do sistema, confirmando esta requisição, não terá como voltar atrás: </b></p>
+                <hr>
+                <h5><b>Confirme o usuário e senha do administrador raiz:</b></h5>
+            </div>
+            <br>
+            <div class="row">
+                <form action="{{route('reset_sistema')}}" method="POST">
+                    @csrf
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">perm_contact_calendar</i>
+                        <input name="name" id="icon_name" type="password" class="validate" required>
+                        <label for="icon_name">Usuário:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input name="password" id="icon_lockout" type="password" class="validate" required>
+                        <label for="icon_lockout">Senha:</label>
+                    </div>
+                    <br>
+                    <div class="input-field col s12 center">
+                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Resetar sistema
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalquantbloqueio" class="modal" style="width: 38%; height: 40%;">
+        <div class="container">
+            <div class="row">
+                <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
+                <hr>
+                <h5><b>Quantidade possivel atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
+            </div>
+            <br>
+            <div class="row">
+                <form action="{{route('define_quantidade')}}" method="POST">
+                    @csrf
+                    <div class="input-field col s6">
+                            <i class="material-icons prefix">enhanced_encryption</i>
+                            <input name="quantidade" id="quantidade" type="number" class="validate">
+                            <label for="quantidade">Quantidade [bloqueio]: </label>
+                    </div>
+                    <div class="input-field col s4 right">
+                        <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Definir
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

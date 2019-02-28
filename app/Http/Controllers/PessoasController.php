@@ -16,7 +16,6 @@ use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 
 //MODELOS PARA CONTROLE:
 use App\Pessoa;
-use App\Quant;
 use App\Nucleo;
 use App\Doenca;
 use App\Turma;
@@ -515,9 +514,6 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
-        //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
-        $quantidade = Quant::find(1);
-
         //Encontra todas as turmas registradas.
         $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->paginate(10);
 
@@ -525,23 +521,7 @@ class PessoasController extends Controller{
         $count = Turma::all();
         Session::put('quant', count($count).' turmas cadastradas.');
 
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist','quantidade'));
-    }
-
-    //Função define_quantidade: Define quantidade limite de turmas que uma pessoa pode ter no sistema.
-    public function define_quantidade(Request $request){
-        $dataForm = $request->all();
-
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
-
-        //Busca a quantidade atual de limite de turmas que um pessoa pode ter no sistema.
-        $quant = Quant::find(1);
-
-        //Edita quantidade no banco de dados:
-        $quant->update($dataForm);
-
-        return redirect()->route('pessoas_turmas', $dataForm['pessoa_id']);
+        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
 
     //Função pessoas_turmas_vincular: Vincula uma pessoa em uma turma e retorna a página de pessoas e turmas.
