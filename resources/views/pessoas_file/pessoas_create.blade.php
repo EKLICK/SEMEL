@@ -473,7 +473,7 @@
                     <h5>Criar Doença</h5>
                 </div>
                 <div class="input-field col s12 m5 right">
-                    <a class="btn-floating btn-large" id="botao"><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn-large" id="botao_doenca"><i class="material-icons">add</i></a>
                 </div>
             </div>
             <form id="ajax_doenca">

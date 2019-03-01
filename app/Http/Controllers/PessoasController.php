@@ -663,21 +663,4 @@ class PessoasController extends Controller{
 
         return redirect()->Route('pessoas_turmas', $pessoa->id);
     }
-
-    public function menu_pessoas_pdf(){
-        return view ('pdf_file.pdf_pessoas.menu_pdf_pessoas');
-    }
-
-    //Função pdfpessoas: Retorna o pdf das informações da pessoa.
-    public function pessoas_pdf(Request $request){
-        $dataForm = $request->all();
-        $string = "SELECT ";
-        if($dataForm['nome'] == 'on'){
-            $string += "nome, ";
-        }
-        if($dataForm['nome'] == 'on')
-
-        $pessoaslist = DB::select(DB::raw($string));
-        return \PDF::loadview('pdf_file.pessoas_pdf', compact('pessoa'))->stream('PDF_registro_pessoa'.'.pdf');
-    }
 }

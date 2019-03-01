@@ -141,7 +141,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php $arraypessoas = []; @endphp
                     @foreach ($pessoaslist as $pessoa)
+                        @php array_push($arraypessoas, $pessoa->id); @endphp
                         <tr>
                             <td><p>{{$pessoa->nome}}</p></td>
                             <td><p>{{$pessoa->anamneses->last()->ano}}</p><i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
@@ -164,7 +166,7 @@
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar cliente" href="{{route('pessoas.create')}}"><i class="material-icons">add</i></a>
                 &emsp;&emsp;
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas" href="{{route('menu_pessoas_pdf')}}"><i class="material-icons">assessment</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas" href="{{route('menu_pessoas_pdf', json_encode($arraypessoas))}}"><i class="material-icons">assessment</i></a>
             </div>
         </div>
     </div>

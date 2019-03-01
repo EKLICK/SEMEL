@@ -1,11 +1,11 @@
 $(document).ready(function(){
-    $('#botao').click(function(){
+    $('#botao_doenca').click(function(){
         var nome = $('#nome_doenca').val();
         var descricao = $('#descricao_doenca').val();
         $.ajax({
             type: "get",
             data: "&nome=" + nome + "&descricao=" + descricao,
-            url: '/ajax/doenca',
+            url: "/ajax/doenca",
         }).done(function (data){
             if(data == 1){
                 M.toast({html: 'É necessario preencher todos os campos para cadastrar uma pessoa'})

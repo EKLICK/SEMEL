@@ -240,3 +240,12 @@ $(document).keydown(function (event) {
         $('#enter').click();
     }
 });
+
+function mudaCheck(op){
+    if(op == 1){
+        document.getElementById('check2').checked = false;
+    }
+    else{
+        document.getElementById('check1').checked = false;
+    }
+}

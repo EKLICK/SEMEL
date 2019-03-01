@@ -82,12 +82,6 @@ Route::post('/pessoas_turmas/vincular','PessoasController@pessoas_turmas_vincula
 //Rotas pessoas_turmas_ativar_inativar: Utilizado para ativar ou inativar pessoas em turmas.
 Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
-//Rotas pdfpessoas: Utilizado para entrar na página de menu de gerenciamento do PDF da pessoa.
-Route::get('/menu_pdf/pessoas','PessoasController@menu_pessoas_pdf')->name('menu_pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Rotas pdfpessoas: Utilizado para entrar na página de PDF da pessoa.
-Route::get('/pdf/pessoas','PessoasController@pessoas_pdf')->name('pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
-
 
 //CONTROLE DE ANAMNESES: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //Rotas de anamneses: Utilizado para acessar controle padrão de anamneses.
@@ -165,3 +159,19 @@ Route::any('/procurar/nucleos','Ferramentas\FiltersController@nucleos_procurar')
 //FILTRO DE AUDITORIAS
 //Rota audits_procurar: Utilizado para filtrar registro de pessoas na página de registros de auditorias.
 Route::any('/procurar/audits','Ferramentas\FiltersController@audits_procurar')->name('audits_procurar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+
+//
+
+//PDF DE PESSOAS
+//Rotas menu_pessoas_pdf: Utilizado para entrar na página de menu de gerenciamento do PDF de pessoas.
+Route::get('/menu_pdf/pessoas/{array}','Ferramentas\PDFController@menu_pessoas_pdf')->name('menu_pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rotas pessoas_pdf: Utilizado para entrar na página de PDF da pessoa.
+Route::get('/pdf/pessoas/{array}','Ferramentas\PDFController@pessoas_pdf')->name('pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rotas menu_turmas_pdf: Utilizado para entrar na página de menu de gerenciamento do PDF de turmas.
+Route::get('/menu_pdf/turmas/{array}','Ferramentas\PDFController@menu_turmas_pdf')->name('menu_turmas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rotas turmas_pdf: Utilizado para entrar na página de PDF de turmas.
+Route::get('/pdf/turmas/{array}','Ferramentas\PDFController@turmas_pdf')->name('turmas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');

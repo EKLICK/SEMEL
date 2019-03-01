@@ -97,7 +97,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php $arrayturmas = []; @endphp
                     @foreach ($turmaslist as $turma)
+                        @php array_push($arrayturmas, $turma->id); @endphp
                         <tr>
                             <td><p>{{$turma->nome}}</p></td>
                             <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
@@ -148,6 +150,8 @@
                 <br>
                 <div class="container">
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
+                    &emsp;&emsp;
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_turmas_pdf', json_encode($arrayturmas))}}"><i class="material-icons">assessment</i></a>
                 </div>
             @endif
         </div>
