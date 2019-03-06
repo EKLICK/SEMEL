@@ -1,18 +1,16 @@
 @extends('layouts.app')
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('doencas.index')}}" class="breadcrumb">Doenças</a>
-    <a href="{{route('doencas.create')}}" class="breadcrumb">Criar</a>
+    <a href="{{route('nucleos.index')}}" class="breadcrumb">Núcleos</a>
+    @php $arraynucleos = []; @endphp
+    @foreach ($nucleoslist as $nucleo)@php array_push($arraynucleos, $nucleo->id); @endphp @endforeach
+    <a href="{{route('menu_nucleos_pdf', json_encode($arraynucleos))}}" class="breadcrumb">PDF</a>
 @endsection
-@section('title') Administração para PDF (pessoas) @endsection
+@section('title') Administração para PDF (núcleos) @endsection
 @section('content')
     <div class="container">
         <div class="row">
-            @php 
-                $arraypessoas = []; 
-                foreach($pessoaslist as $pessoa){array_push($arraypessoas, $pessoa->id);} 
-            @endphp
-            <form action="{{route('pessoas_pdf', json_encode($arraypessoas))}}" method="GET">
+            <form action="{{route('nucleos_pdf', json_encode($arraynucleos))}}" method="GET">
                 @csrf
                 <div class="row">
                     <div class="input-field col s6">
@@ -30,7 +28,7 @@
                         <p>
                             <label>
                                 <input id="check2" onclick="mudaCheck(2)" name="option_order" value='data' type="checkbox" />
-                                <span>Ordenar por data de nascimento</span>
+                                <span>Ordenar por data de criação</span>
                             </label>
                         </p>
                     </div>
@@ -38,7 +36,7 @@
                 <br>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Endereço</b></h5></td>
+                        <h5><b>Cidade</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -47,7 +45,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="endereco" type="checkbox" checked>
+                                <input name="cidade" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>
@@ -60,7 +58,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Telefone</b></h5></td>
+                        <h5><b>Bairro</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -69,7 +67,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="telefone" type="checkbox" checked>
+                                <input name="bairro" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>
@@ -82,7 +80,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Telefone de emergencia</b></h5></td>
+                        <h5><b>Rua</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -91,7 +89,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="telefone_emergencia" type="checkbox" checked>
+                                <input name="rua" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>
@@ -104,7 +102,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Data de nascimento</b></h5></td>
+                        <h5><b>Número de endereço</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -113,7 +111,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="data_nascimento" type="checkbox" checked>
+                                <input name="numero_endereco" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>
@@ -126,7 +124,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>RG</b></h5></td>
+                        <h5><b>CEP</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -135,7 +133,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="rg" type="checkbox" checked>
+                                <input name="cep" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>
@@ -148,7 +146,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Usuário morto</b></h5></td>
+                        <h5><b>Ativo | Inativo</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>
@@ -157,7 +155,7 @@
                         <div class="switch">
                             <label>
                                 Não
-                                <input name="morto" type="checkbox" checked>
+                                <input name="inativo" type="checkbox" checked>
                                 <span class="lever"></span>
                                 Sim
                             </label>

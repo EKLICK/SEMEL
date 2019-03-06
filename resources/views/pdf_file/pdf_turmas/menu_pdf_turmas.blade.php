@@ -1,17 +1,15 @@
 @extends('layouts.app')
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('doencas.index')}}" class="breadcrumb">Doenças</a>
-    <a href="{{route('doencas.create')}}" class="breadcrumb">PDF</a>
+    <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
+    @php $arrayturmas = []; @endphp
+    @foreach ($turmaslist as $turma)@php array_push($arrayturmas, $turma->id); @endphp @endforeach
+    <a href="{{route('menu_turmas_pdf', json_encode($arrayturmas))}}" class="breadcrumb">PDF</a>
 @endsection
 @section('title') Administração para PDF (turmas) @endsection
 @section('content')
     <div class="container">
         <div class="row">
-            @php 
-                $arrayturmas = []; 
-                foreach($turmaslist as $turma){array_push($arrayturmas, $turma->id);} 
-            @endphp
             <form action="{{route('turmas_pdf', json_encode($arrayturmas))}}" method="GET">
                 @csrf
                 <div class="row">
@@ -126,7 +124,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Atividade | Inatividade</b></h5></td>
+                        <h5><b>ss</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>

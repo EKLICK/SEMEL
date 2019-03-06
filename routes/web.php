@@ -170,8 +170,16 @@ Route::get('/menu_pdf/pessoas/{array}','Ferramentas\PDFController@menu_pessoas_p
 //Rotas pessoas_pdf: Utilizado para entrar na página de PDF da pessoa.
 Route::get('/pdf/pessoas/{array}','Ferramentas\PDFController@pessoas_pdf')->name('pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
 
+//PDF DE TURMAS
 //Rotas menu_turmas_pdf: Utilizado para entrar na página de menu de gerenciamento do PDF de turmas.
 Route::get('/menu_pdf/turmas/{array}','Ferramentas\PDFController@menu_turmas_pdf')->name('menu_turmas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas turmas_pdf: Utilizado para entrar na página de PDF de turmas.
 Route::get('/pdf/turmas/{array}','Ferramentas\PDFController@turmas_pdf')->name('turmas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//PDF DE NUCLEOS
+//Rotas menu_nucleos_pdf: Utilizado para entrar na página de menu de gerenciamento do PDF de núcleos.
+Route::get('/menu_pdf/nucleos/{array}','Ferramentas\PDFController@menu_nucleos_pdf')->name('menu_nucleos_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rotas nucleos_pdf: Utilizado para entrar na página de PDF de núcleos.
+Route::get('/pdf/nucleos/{array}','Ferramentas\PDFController@nucleos_pdf')->name('nucleos_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');

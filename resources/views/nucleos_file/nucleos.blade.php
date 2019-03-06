@@ -89,7 +89,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php $arraynucleos = []; @endphp
                     @foreach ($nucleoslist as $nucleo)
+                        @php array_push($arraynucleos, $nucleo->id); @endphp
                         <tr>
                             <td>{{$nucleo->nome}}</td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}} {{$nucleo->complemento}}</p></td>
@@ -128,6 +130,8 @@
                 <br>
                 <div class="container">
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add</i></a>
+                    &emsp;&emsp;
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_nucleos_pdf', json_encode($arraynucleos))}}"><i class="material-icons">assessment</i></a>
                 </div>
             @endif
         </div>

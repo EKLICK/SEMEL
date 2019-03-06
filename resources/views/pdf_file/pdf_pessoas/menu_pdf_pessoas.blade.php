@@ -10,10 +10,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @php 
-                $arraypessoas = []; 
-                foreach($pessoaslist as $pessoa){array_push($arraypessoas, $pessoa->id);} 
-            @endphp
             <form action="{{route('pessoas_pdf', json_encode($arraypessoas))}}" method="GET">
                 @csrf
                 <div class="row">
