@@ -550,6 +550,9 @@ class PessoasController extends Controller{
         //Encontra turma do banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
 
+        //Adiciona o campo 'operario' para informações.
+        $dataForm += ['operario' => auth()->user()->name];
+
         //Soma +1 no campo de quantidade atual de pessoas na turma.
         DB::update(DB::raw('update turmas set quant_atual = :quant where id = :turma'), ['quant'=>$turma->quant_atual+1, 'turma'=>$dataForm['turma_id']]);
 
@@ -609,6 +612,7 @@ class PessoasController extends Controller{
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
                 'comentario' => $dataForm['comentario'],
+                'operario' => auth()->user()->name,
                 'inativo' => 2,
                 
             ]);
@@ -646,6 +650,7 @@ class PessoasController extends Controller{
                 'pessoa_id' => $dataForm['pessoa_id'],
                 'turma_id' => $dataForm['turma_id'],
                 'comentario' => $dataForm['comentario'],
+                'operario' => auth()->user()->name,
                 'inativo' => 1,
             ]);
         }

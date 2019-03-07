@@ -311,6 +311,9 @@ class ProfessorController extends Controller{
         //Encontra o professor no banco de dados.
         $professor = Professor::find($dataForm['professor_id']);
 
+        //Adiciona o campo 'operario' para informações.
+        $dataForm += ['operario' => auth()->user()->name];
+
         //Encontra a turma no banco de dados. 
         $turma = Turma::find($dataForm['turma_id']);
 
@@ -361,6 +364,7 @@ class ProfessorController extends Controller{
                 'professor_id' => $dataForm['professor_id'],
                 'turma_id' => $dataForm['turma_id'],
                 'comentario' => $dataForm['comentario'],
+                'operario' => auth()->user()->name,
                 'inativo' => 2,
             ]);
         }
@@ -376,6 +380,7 @@ class ProfessorController extends Controller{
                 'professor_id' => $dataForm['professor_id'],
                 'turma_id' => $dataForm['turma_id'],
                 'comentario' => $dataForm['comentario'],
+                'operario' => auth()->user()->name,
                 'inativo' => 1,
             ]);
         }

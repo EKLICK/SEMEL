@@ -152,7 +152,7 @@
                                 </i>
                             </td>
                             @if(auth()->user()->admin_professor == 1)
-                            <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
+                                <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                                 @php $ids = -1; @endphp
                                 @if(isset($turma->professores)) 
                                     @for ($i = 0; $i < count($turma->professores); $i++) 
@@ -189,7 +189,7 @@
                                     @endif
                                 @endif
                             @else
-                            <td>
+                                <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a></td>
                             @endif
                         </tr>

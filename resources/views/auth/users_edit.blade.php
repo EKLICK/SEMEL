@@ -43,13 +43,6 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario" id="icon_usuario" type="password" class="validate">
-                        <label for="icon_usuario">Novo usuário:</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
                         <input name="password" id="icon_lockout" type="password" class="validate">
                         <label for="icon_lockout">Nova Senha:</label>

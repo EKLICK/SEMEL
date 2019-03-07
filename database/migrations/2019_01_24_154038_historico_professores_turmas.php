@@ -19,6 +19,7 @@ class HistoricoProfessoresTurmas extends Migration
             $table->unsignedInteger('professor_id')->nullable();
             $table->Integer('inativo')->nullable();
             $table->string('comentario')->nullable();
+            $table->string('operario')->nullable();
             $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
             $table->foreign('professor_id')->references('id')->on('professores')->onDelete('cascade');
             $table->timestamps();

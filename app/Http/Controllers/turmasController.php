@@ -291,6 +291,9 @@ class TurmasController extends Controller{
         //Encontra a turma no banco de dados.
         $turma = Turma::find($dataForm['turma_id']);
 
+        //Adiciona o campo 'operario' para informações.
+        $dataForm += ['operario' => auth()->user()->name];
+
         //Verifica se a turma está ativa ou não.
         if($turma->inativo == 1){
             //Se sim, inativa a turma modificando o campo inativo para 2;
@@ -309,6 +312,7 @@ class TurmasController extends Controller{
                     'pessoa_id' => $pessoa->id,
                     'turma_id' => $turma->id,
                     'comentario' => 'Pessoa inativada devido a inativação da turma.',
+                    'operario' => auth()->user()->name,
                     'inativo' => 2,
                 ]);
             }

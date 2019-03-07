@@ -124,7 +124,6 @@ class RegisterController extends Controller{
                 $user->update([
                     'nick' => $dataForm['nick'],
                     'email' => $dataForm['email'],
-                    'name' => $dataForm['usuario'],
                     'password' => bcrypt($dataForm['password']),
                 ]);
             }

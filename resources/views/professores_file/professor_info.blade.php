@@ -17,14 +17,15 @@
                 </ul>
             </div>
             <div id="coluna1" class="col s12">
-                <div class="col s10">
+                <div class="col s12">
                     <table>
                         <thead class="centered">
                             <tr>
-                                <th>Estado</th>
-                                <th>Turma do registro</th>
-                                <th>Comentario</th>
-                                <th>Horario de mudança</th>
+                                <th style='width: 90px;'>Estado</th>
+                                <th style='width: 210px;'>Turma do registro</th>
+                                <th style='width: 150px;'>Comentario</th>
+                                <th style='width: 150px;'>Horario de mudança</th>
+                                <th style='width: 100px;'>Administrador responsável</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,7 @@
                                         $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
                                     @endphp
                                     <td><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
+                                    <td>{{$historic->operario}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

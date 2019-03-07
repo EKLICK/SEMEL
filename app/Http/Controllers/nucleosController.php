@@ -227,6 +227,9 @@ class NucleosController extends Controller{
         //Enconta o professor no banco de dados.
         $nucleo = Nucleo::find($dataForm['nucleo_id']);
 
+        //Adiciona o campo 'operario' para informações.
+        $dataForm += ['operario' => auth()->user()->name];
+
         //Verifica se o núcleo está ativo ou não.
         if($nucleo->inativo == 1){
             //Se sim, inativa o núcleo modificando o campo inativo para 2;
@@ -245,6 +248,7 @@ class NucleosController extends Controller{
                 HistoricoT::create([
                     'turma_id' => $turma->id,
                     'comentario' => 'Turma inativada devido a inativação do núcleo.',
+                    'operario' => auth()->user()->name,
                     'inativo' => 2,
                 ]);
 
@@ -258,6 +262,7 @@ class NucleosController extends Controller{
                         'pessoa_id' => $pessoa->id,
                         'turma_id' => $turma->id,
                         'comentario' => 'Pessoa inativada devido a inativação do núcleo da turma.',
+                        'operario' => auth()->user()->name,
                         'inativo' => 2,
                     ]);
                 }

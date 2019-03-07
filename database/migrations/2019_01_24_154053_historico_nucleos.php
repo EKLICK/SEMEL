@@ -18,6 +18,7 @@ class HistoricoNucleos extends Migration
             $table->unsignedInteger('nucleo_id')->nullable();
             $table->Integer('inativo')->nullable();
             $table->string('comentario')->nullable();
+            $table->string('operario')->nullable();
             $table->foreign('nucleo_id')->references('id')->on('nucleos')->onDelete('cascade');
             $table->timestamps();
         });
