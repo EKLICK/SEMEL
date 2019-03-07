@@ -32,7 +32,7 @@ use App\User;
 //Comentarios em cima, código comentado em baixo.
 class filtersController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função pessoas_procurar, filtra conteudo de todos os registros de pessoas e retorna para a página de registro de pessoas.
+    //Função pessoas_procurar: Filtra conteudo de todos os registros de pessoas e retorna para a página de registro de pessoas.
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
         $ano = date('Y');
@@ -206,7 +206,7 @@ class filtersController extends Controller{
         return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm'));
     }
 
-    //Função professor_procurar, filtra conteudo de todos os registros de professor e retorna para a página de registro de professor.
+    //Função professor_procurar: Filtra conteudo de todos os registros de professor e retorna para a página de registro de professor.
     public function professor_procurar(ProfessorProcurarFormRequest $request){
         $dataForm = $request->except('_token');
 
@@ -321,7 +321,7 @@ class filtersController extends Controller{
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist', 'dataForm'));
     }
 
-    //Função pessoas_procurar_aluno, filtra conteudo de todos os registros de pessoas e retorna para a página de professores e alunos.
+    //Função pessoas_procurar_aluno: Filtra conteudo de todos os registros de pessoas e retorna para a página de professores e alunos.
     public function professor_procurar_aluno(AlunoProcurarFormRequest $request){
         $dataForm = $request->except('_token');
 
@@ -420,7 +420,7 @@ class filtersController extends Controller{
         return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professor'));
     }
 
-    //Função turmas_procurar, filtra conteudo de todos os registros de turmas e retorna para diferentes páginas com base na opção passada.
+    //Função turmas_procurar: Filtra conteudo de todos os registros de turmas e retorna para diferentes páginas com base na opção passada.
     //Se o parametro "id" for maior que 0, retorna para página de professores e turmas.
     //Se o parametro "id" for menor que 0, retorna para página de pessoas e turmas.
     //Se o parametro "id" for igual que 0, retorna para página de registros de turmas.
@@ -609,7 +609,7 @@ class filtersController extends Controller{
         }
     }
 
-    //Função anamnese_procurar, filtra conteudo de todos os registros de anamneses e retorna para a página de registro de anamneses.
+    //Função anamnese_procurar: Filtra conteudo de todos os registros de anamneses e retorna para a página de registro de anamneses.
     public function anamnese_procurar(AnamneseProcurarFormRequest $request){
         $ano = date('Y');
         $dataForm = $request->except('_token');
@@ -741,7 +741,7 @@ class filtersController extends Controller{
         return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
     }
 
-    //Função núcleos_procurar, filtra conteudo de todos os registros de núcleos e retorna para a página de registro de núcleos.
+    //Função núcleos_procurar: Filtra conteudo de todos os registros de núcleos e retorna para a página de registro de núcleos.
     public function nucleos_procurar(NucleoProcurarFormRequest $request){
         $dataForm = $request->except('_token');
 
@@ -829,7 +829,7 @@ class filtersController extends Controller{
         return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));
     }
 
-    //Função doenças_procurar, filtra conteudo de todos os registros de doenças e retorna para a página de registro de doenças.
+    //Função doenças_procurar: Filtra conteudo de todos os registros de doenças e retorna para a página de registro de doenças.
     public function doencas_procurar(Request $request){
         $dataForm = $request->all();
 
@@ -853,7 +853,7 @@ class filtersController extends Controller{
         return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
     }
 
-    //Função audits_procurar, filtra conteudo de todos os registros de auditorias e retorna para a página de registro de auditorias.
+    //Função audits_procurar: Filtra conteudo de todos os registros de auditorias e retorna para a página de registro de auditorias.
     public function audits_procurar(Request $request){
         $dataForm = $request->except('_token');
 

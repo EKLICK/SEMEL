@@ -63,7 +63,7 @@ class TurmasController extends Controller{
     }
 
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de turmas.
+    //Função index: Retorna a página de registros de turmas.
     public function index(){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
@@ -90,7 +90,7 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função create, retorna a página de criação de registros de turmas.
+    //Função create: Retorna a página de criação de registros de turmas.
     public function create(){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
@@ -111,7 +111,7 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
     public function store(TurmaCreateEditFormRequest $request){
         $dataForm = $request->all();
 
@@ -162,7 +162,7 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de turmas.
+    //Função edit: Retorna a página de edição de registros de turmas.
     public function edit($id){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
@@ -197,7 +197,7 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
     public function update(TurmaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 

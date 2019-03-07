@@ -41,7 +41,7 @@ class AnamneseController extends Controller{
     }
     
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de anamneses.
+    //Função index: Retorna a página de registros de anamneses.
     public function index(){
         $ano = date('Y');
 
@@ -96,7 +96,7 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de pessoas.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de pessoas.
     public function store(AnamneseCreateEditFormRequest $request){
         $dataForm = $request->all();
 
@@ -164,7 +164,7 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de anamneses.
+    //Função edit: Retorna a página de edição de registros de anamneses.
     public function edit($id){
         //Encontra a anamnese no banco de dados.
         $anamnese = Anamnese::find($id);
@@ -183,7 +183,7 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de anamneses.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de anamneses.
     public function update(AnamneseCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -262,12 +262,12 @@ class AnamneseController extends Controller{
      * @return \Illuminate\Http\Response
      */
     
-    //Função destroy, deletar a anamnese.
+    //Função destroy: Deletar a anamnese.
     public function destroy($id){
         //Função de deletar não ultilizada para anamneses.
     }
 
-    //Função anamnese_info, seleciona informações necessarias para vizualização e retorna a página de informações da anamnese.
+    //Função anamnese_info: Deleciona informações necessarias para vizualização e retorna a página de informações da anamnese.
     public function anamnese_info($id){
         $ano = date('Y');
 

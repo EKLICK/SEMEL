@@ -22,7 +22,7 @@ class DoencasController extends Controller{
      */
     
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de doenças.
+    //Função index: Retorna a página de registros de doenças.
     public function index(){
         //Encontra todos os registros de doenças e ordena por nome.
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
@@ -40,7 +40,7 @@ class DoencasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função create, retorna a página de criação de registros de doenças.
+    //Função create: Retorna a página de criação de registros de doenças.
     public function create(){
         return view ('doencas_file.doencas_create');
     }
@@ -52,7 +52,7 @@ class DoencasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function store(DoencaCreateEditFormRequest $request){
         $dataForm = $request->all();
 
@@ -82,7 +82,7 @@ class DoencasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de doenças.
+    //Função edit: Retorna a página de edição de registros de doenças.
     public function edit($id){
         //Encontra a doença no banco de dados.
         $doenca = Doenca::find($id);
@@ -98,7 +98,7 @@ class DoencasController extends Controller{
      * @return \Illuminate\Http\Response
      */
     
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(DoencaCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -130,7 +130,7 @@ class DoencasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função destroy, deletar a doença.
+    //Função destroy: Deletar a doença.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para doenças.
     }

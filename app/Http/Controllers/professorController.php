@@ -33,7 +33,7 @@ class ProfessorController extends Controller{
      */
     
     //FUNÇÃO DE FERRAMENTAS:
-    //Ferramenta mostrar_nascimento: retornar a data de nascimento (YYYY-mm-dd) convertida em (dd/mm/YYYY).
+    //Ferramenta mostrar_nascimento: Retornar a data de nascimento (YYYY-mm-dd) convertida em (dd/mm/YYYY).
     public function mostrar_nascimento($data){
         $dia_hora = explode(' ', $data);
         list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
@@ -43,7 +43,7 @@ class ProfessorController extends Controller{
     }
 
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de professores.
+    //Função index: Retorna a página de registros de professores.
     public function index(){
         //Encontra todos os registros de professores e ordena por nome.
         $professoreslist = Professor::orderBy('nome')->paginate(10);
@@ -64,7 +64,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função create, retorna a página de criação de registros de professores.
+    //Função create: Retorna a página de criação de registros de professores.
     public function create(){
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -82,7 +82,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de professores.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de professores.
     public function store(ProfessorCreateFormRequest $request){
         $dataForm = $request->all();
 
@@ -130,7 +130,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de professores.
+    //Função edit: Retorna a página de edição de registros de professores.
     public function edit($id){
         //Encontra o professor no banco de dados.
         $professor = Professor::find($id);
@@ -158,7 +158,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(ProfessorEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -205,7 +205,7 @@ class ProfessorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função destroy, deletar o professor.
+    //Função destroy: Deletar o professor.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para professores.
     }
@@ -245,7 +245,7 @@ class ProfessorController extends Controller{
         return view ('professores_file.professor_info', compact('professor','histprofessor','dadosgerais','listnucleoprofessor'));
     }
 
-    //Função professores_turmas: seleciona informações necessarias para vizualização e retorna a página de turmas e professores.
+    //Função professores_turmas: Seleciona informações necessarias para vizualização e retorna a página de turmas e professores.
     public function professor_turmas($id){
         //Encontra todos os núcleos registrados.
         $nucleoslist = Nucleo::orderBy('nome')->get();
@@ -283,7 +283,7 @@ class ProfessorController extends Controller{
         return view ('professores_file.professores_turmas', compact('professor','turmaslist','dias_semana','nucleoslist'));
     }
 
-    //Função professores_meus_alunos: seleciona informações necessarias para vizualização e retorna a página de professores e alunos.
+    //Função professores_meus_alunos: Seleciona informações necessarias para vizualização e retorna a página de professores e alunos.
     //Somente Professores podem acessar está página.
     public function professor_meus_alunos($idprofessor, $idturma){
         //Encontra o professor no banco de dados.

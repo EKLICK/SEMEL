@@ -161,11 +161,11 @@ Route::any('/procurar/nucleos','Ferramentas\FiltersController@nucleos_procurar')
 Route::any('/procurar/audits','Ferramentas\FiltersController@audits_procurar')->name('audits_procurar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 
-//
+//CONTROLE DE RELATÓRIOS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 //PDF DE PESSOAS
 //Rotas menu_pessoas_pdf: Utilizado para entrar na página de menu de gerenciamento do PDF de pessoas.
-Route::get('/menu_pdf/pessoas/{array}','Ferramentas\PDFController@menu_pessoas_pdf')->name('menu_pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/menu_pdf/pessoas/{op}/{array}','Ferramentas\PDFController@menu_pessoas_pdf')->name('menu_pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rotas pessoas_pdf: Utilizado para entrar na página de PDF da pessoa.
 Route::get('/pdf/pessoas/{array}','Ferramentas\PDFController@pessoas_pdf')->name('pessoas_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');

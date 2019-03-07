@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
     @php $arraypessoas = []; @endphp
     @foreach ($pessoaslist as $pessoa)@php array_push($arraypessoas, $pessoa->id); @endphp @endforeach
-    <a href="{{route('menu_pessoas_pdf', json_encode($arraypessoas))}}" class="breadcrumb">PDF</a>
+    <a href="{{route('menu_pessoas_pdf', [$op, json_encode($arraypessoas)])}}" class="breadcrumb">PDF</a>
 @endsection
 @section('title') Administração para PDF (pessoas) @endsection
 @section('content')
@@ -166,6 +166,26 @@
                     </div>
                 </div>
                 <hr>
+                @foreach ($pessoaslist as $pessoa)
+                    @if ($op == 2)
+                        <br>
+                        <div class='row'>
+                            <div class="input-field col s6">
+                                <h6>{{$pessoa->nome}}</h6>
+                            </div>
+                            <div class="input-field col s6">
+                                <p>
+                                    <label>
+                                        <input name='{{$pessoa->id}}' type="checkbox" checked/>
+                                        <span>Adicionar ao relatório</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    @else
+                        <input name='{{$pessoa->id}}' type="checkbox" checked hidden/>
+                    @endif
+                @endforeach
             </form>
         </div>
     </div>

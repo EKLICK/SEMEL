@@ -166,7 +166,7 @@
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar cliente" href="{{route('pessoas.create')}}"><i class="material-icons">add</i></a>
                 &emsp;&emsp;
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas" href="{{route('menu_pessoas_pdf', json_encode($arraypessoas))}}"><i class="material-icons">assessment</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas" href="{{route('menu_pessoas_pdf', [1, json_encode($arraypessoas)])}}"><i class="material-icons">assessment</i></a>
             </div>
         </div>
     </div>

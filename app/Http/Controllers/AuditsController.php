@@ -12,7 +12,7 @@ use App\Audit;
 //Comentarios em cima, código comentado em baixo.
 class auditsController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de auditorias.
+    //Função index: Retorna a página de registros de auditorias.
     public function index(){
         //Encontra todos os registros de auditorias e ordena por nome.
         $auditslist = Audit::orderBy('created_at','desc')->paginate(10);

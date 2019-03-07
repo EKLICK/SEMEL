@@ -29,7 +29,7 @@ class NucleosController extends Controller{
      */
 
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de núcleos.
+    //Função index: Retorna a página de registros de núcleos.
     public function index(){
         //Encontra todos os registros de núcleos e ordena por nome.
         $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
@@ -53,7 +53,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função create, retorna a página de criação de registros de núcleos.
+    //Função create: Retorna a página de criação de registros de núcleos.
     public function create(){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
@@ -75,7 +75,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de núcleos.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de núcleos.
     public function store(NucleoCreateEditFormRequest $request){
         $dataForm = $request->all();
 
@@ -115,7 +115,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de núcleos.
+    //Função edit: Retorna a página de edição de registros de núcleos.
     public function edit($id){
         //Encontra o núcleo no banco de dados.
         $nucleo = Nucleo::find($id);
@@ -141,7 +141,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(NucleoCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -174,7 +174,7 @@ class NucleosController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função destroy, deletar o núcleo.
+    //Função destroy: Deletar o núcleo.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para núcleo.
     }

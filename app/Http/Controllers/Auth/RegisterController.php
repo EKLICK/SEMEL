@@ -7,19 +7,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
+//REQUEST PARA CONTROLE:
 use App\Http\Requests\User\UserEditFormRequest;
 
+//MODELOS PARA CONTROLE:
 use App\User;
 use App\Professor;
 use App\Nucleo;
 use App\Turma;
 use App\Pessoa;
-use App\HistoricoPT;
 use App\Quant;
+use App\HistoricoPT;
 
+//CONTROLE DE REGISTROS:
+//Comentarios em cima, código comentado em baixo.
 class RegisterController extends Controller{
     /*
     |--------------------------------------------------------------------------
@@ -54,6 +58,9 @@ class RegisterController extends Controller{
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    //FUNÇÃO DE FERRAMENTAS:
+    //Ferramenta validator: Valida usuário registrado para a criação.
     protected function validator(array $data){
         return Validator::make($data, [
             'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:5,50'],
@@ -63,6 +70,7 @@ class RegisterController extends Controller{
         ]);
     }
 
+    //Função index: Retorna a página de registros de usuários.
     protected function index(){
         $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
 
@@ -78,7 +86,10 @@ class RegisterController extends Controller{
      * @param  array  $data
      * @return \App\User
      */
+
+    //Função create: Retorna a página de criação de registros de usuários.
     protected function create(array $data){
+        //Define sessão de informação para apresentação na página.
         Session::put('mensagem_green', 'Administrador '.$data['name'].' adicionado com sucesso!');
         return User::create([
             'nick' => $data['nick'],
@@ -89,23 +100,27 @@ class RegisterController extends Controller{
         ]);
     }
 
+    //Função edit: Retorna a página de edição de registros de usuários.
     protected function edit($id){
+        //Encontra a usuário no banco de dados.
         $user = User::find($id);
 
         return view('auth.users_edit', compact('user'));
     }
 
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     protected function update(UserEditFormRequest $request, $id){
         $dataForm = $request->all();
+
+        //Encontra a usuário no banco de dados.
         $user = User::find($id);
 
+        //Para editar a senha do usuário, é necessario confirma o usuário e senha antiga.
+        //Verifica se os parametros para redefinição de senha foram passados.
         if($dataForm['password_antiga'] != null && $dataForm['usuario_antigo'] != null){
-            if((!Hash::check($dataForm['password'], $user->password)) || ($user->name != $dataForm['usuario'])){
-                Session::put('mensagem_red', "Usuário ou senha incorreta para troca de senha!");
-
-                return redirect()->Route('users.edit', $id);
-            }
-            else{
+            //Se sim, verifica se os parametros correspondem ao login do usuário.
+            if((Hash::check($dataForm['password'], $user->password)) && ($user->name == $dataForm['usuario'])){
+                //Se sim, atualiza o usuário no banco de dados utilizando parametros de mudança de senha.
                 $user->update([
                     'nick' => $dataForm['nick'],
                     'email' => $dataForm['email'],
@@ -113,51 +128,76 @@ class RegisterController extends Controller{
                     'password' => bcrypt($dataForm['password']),
                 ]);
             }
+            else{
+                //Se não, define uma sessão em vermelho para aviso de senha ou usuário incorreto.
+                Session::put('mensagem_red', "Usuário ou senha incorreta para troca de senha!");
+
+                return redirect()->Route('users.edit', $id);
+            }
         }
         else{
+            //Se não, atualiza o usuário no banco de dados sem mudar senha.
             $user->update([
                 'nick' => $dataForm['nick'],
                 'email' => $dataForm['email'],
             ]);
         }
 
-        $professor = Professor::where('user_id', '=', $id)->get()->last();
-        $professor->update(['email' => $dataForm['email']]);
+        //Verifica se o usuário editado é professor.
+        if($user->admin_professor == 0){
+            //Se sim, muda o parametro de email no professor para o informado.
+            $professor = Professor::where('user_id', '=', $id)->get()->last();
+            $professor->update(['email' => $dataForm['email']]);
+        }
         
         return redirect()->Route('users.index');
     }
 
+    //Função destroy: Deleta o usuário.
     protected function destroy(Request $request){
         $dataForm = $request->all();
+
+        //Verifica se o usuário a ser deletado possui o id diferente de 1
         if($dataForm['id'] != 1){
+            //Se sim, encontra o usuário no banco de dados.
             $user = User::find($dataForm['id']);
 
+            //Deleta o usuário
             $user->delete();
 
+            //Define um sessão em verde para informar a exclusão do usuário.
             Session::put('mensagem_green', "Usuário deletado com sucesso!");
         }
 
         return redirect()->Route('users.index');
     }
 
+    //Função reset: Inativa todas as pessoas de todas as turmas do sistema.
     protected function reset(Request $request){
         $dataForm = $request->all();
         
+        //Encontra o usuário 1 no banco de dados.
         $user = User::find(1);
 
-        if((!Hash::check($dataForm['password'], $user['password'])) || ($user->name != $dataForm['name'])){
-            Session::put('mensagem_red', "Usuário ou senha incorreta para resetar!");
-        }
-        else{
+        //Verifica se o usuário possui os parametros corretos para a utilização da ferramenta.
+        if((Hash::check($dataForm['password'], $user['password'])) && ($user->name == $dataForm['name'])){
+            //Encontra todos os núcleos que estão ativos.
             $nucleolist = Nucleo::where('inativo', '=', 1)->get();
 
+            //Percorre todos os núcleos que foram encontrados.
             foreach($nucleolist as $nucleo){
+                //Percorre todas as turmas dos núcleos que foram encontrados.
                 foreach($nucleo->turmas as $turma){
+                    //Verifica se a turma está ativa.
                     if($turma['inativo'] == 1){
+                        //Se sim, percorre todas as pessoas que estão na turma
                         foreach($turma->pessoas as $pessoa){
+                            //Verifica se a pessoa está ativa na turma.
                             if($pessoa->pivot->inativo == 1){
+                                //Se sim, edita o campo 'inativo' da tabela de turmas_pessoas para 2 , informando que está inativo.
                                 DB::update(DB::raw('UPDATE turmas_pessoas SET inativo = 2 WHERE pessoa_id ='.$pessoa->id.' AND turma_id = '.$turma->id));
 
+                                //Adiciona registro de alteração no histórico de pessoas e turmas.
                                 HistoricoPT::create([
                                     'pessoa_id' => $pessoa->id,
                                     'turma_id' => $turma->id,
@@ -170,7 +210,12 @@ class RegisterController extends Controller{
                 }
             }
 
+            //Define uma sessão em verde para informar a conclusão da função.
             Session::put('mensagem_green', "Todas as pessoas resetadas com sucesso!");
+        }
+        else{
+            //Se não, define uma sessão em vermelho para aviso de senha ou usuário incorreto.
+            Session::put('mensagem_red', "Usuário ou senha incorreta para resetar!");
         }
 
         return redirect()->Route('users.index');

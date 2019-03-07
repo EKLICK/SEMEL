@@ -105,8 +105,16 @@
                     </div>
                     <br><br>
                     <div class="row">
-                        <div class="col s8">
+                        <div class="col s10">
                             <a class="waves-effect waves-light btn-large modal-trigger blue"href="#modalregistropessoasativas">Lista de pessoas ativas na turma &nbsp;&nbsp;&nbsp;<i class="small material-icons right" style="color: green;">assignment_turned_in</i></a>
+                            &emsp;&emsp;
+                            @php $arraypessoas = []; @endphp
+                            @foreach($turma->pessoas as $pessoa)
+                                @if($pessoa->pivot->inativo == 1)
+                                    @php array_push($arraypessoas, $pessoa->id); @endphp
+                                @endif
+                            @endforeach
+                            <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de pessoas Ativas" href="{{route('menu_pessoas_pdf', [2, json_encode($arraypessoas)])}}"><i class="material-icons">assessment</i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -132,6 +140,7 @@
                         </thead>
                         @foreach($turma->pessoas as $pessoa)
                             @if($pessoa->pivot->inativo == 1)
+                                @php array_push($arraypessoas, $pessoa->id); @endphp
                                 <tr>
                                     <td>{{$pessoa->nome}}</td>
                                     <td>{{$pessoa->telefone}}</td>

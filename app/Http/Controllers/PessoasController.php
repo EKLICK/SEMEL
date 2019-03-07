@@ -21,6 +21,7 @@ use App\Doenca;
 use App\Turma;
 use App\Anamnese;
 use App\HistoricoPT;
+use App\Quant;
 
 //CONTROLE DE PESSOAS:
 //Comentarios em cima, código comentado em baixo.
@@ -118,7 +119,7 @@ class PessoasController extends Controller{
     }
     
     //FUNÇÕES DE REDIRECIONAMENTO:
-    //Função index, retorna a página de registros de pessoas.
+    //Função index: Retorna a página de registros de pessoas.
     public function index(){
         $ano = date('Y');
 
@@ -142,7 +143,7 @@ class PessoasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função create, retorna a página de criação de registros de pessoas.
+    //Função create: Retorna a página de criação de registros de pessoas.
     public function create(){
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::orderBy('nome')->get();
@@ -163,7 +164,7 @@ class PessoasController extends Controller{
      * @return \Illuminate\Http\Response
      */
     
-    //Função store, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de pessoas e turmas.
+    //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de pessoas e turmas.
     public function store(PessoaCreateFormRequest $request){
         $dataForm = $request->all();
 
@@ -307,7 +308,7 @@ class PessoasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função edit, retorna a página de edição de registros de pessoas.
+    //Função edit: Retorna a página de edição de registros de pessoas.
     public function edit($id){
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
@@ -335,7 +336,7 @@ class PessoasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função update, faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
+    //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
     public function update(PessoaEditFormRequest $request, $id){
         $dataForm = $request->all();
 
@@ -455,7 +456,7 @@ class PessoasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //Função destroy, deletar a pessoa.
+    //Função destroy: Deletar a pessoa.
     public function destroy(Request $request, $id){
         //Função de deletar não ultilizada para pessoas.
     }
@@ -505,7 +506,7 @@ class PessoasController extends Controller{
         return view ('pessoas_file.pessoas_info', compact('pessoa', 'anamnese','histpessoa','dadosgerais','listnucleopessoa','anamneses','ano','idade'));
     }
 
-    //Função pessoas_turmas: seleciona informações necessarias para vizualização e retorna a página de turmas e pessoas.
+    //Função pessoas_turmas: Seleciona informações necessarias para vizualização e retorna a página de turmas e pessoas.
     public function pessoas_turmas($id){
         //Encontra todos os núcleos registrados.
         $nucleoslist = Nucleo::orderBy('nome')->get();
