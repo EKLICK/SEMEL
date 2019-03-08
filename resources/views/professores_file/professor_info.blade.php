@@ -44,7 +44,7 @@
                                         $diamesano = explode("-", $horario[0]);
                                         $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
                                     @endphp
-                                    <td><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
+                                    <td style='text-align: center;'><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
                                     <td>{{$historic->operario}}</td>
                                 </tr>
                             @endforeach

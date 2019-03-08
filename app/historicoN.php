@@ -10,6 +10,6 @@ class HistoricoN extends Model implements Auditable{
     protected $table = 'historico_nucleos';
 
     protected $fillable = [
-        'nucleo_id','inativo','comentario',
+        'nucleo_id','inativo','comentario','operario',
     ];
 }

@@ -47,6 +47,7 @@ class PessoaCreateFormRequest extends FormRequest{
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro', 'Viuva(o)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
+            'atestado'              => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
             'toma_medicacao'        => ['required','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['required','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['required','nullable', Rule::in(['1', '2']),],

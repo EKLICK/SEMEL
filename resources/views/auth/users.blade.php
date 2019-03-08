@@ -5,6 +5,7 @@
 @endsection
 @section('title') Usuários registrados 
     @if(auth()->user()->id == 1)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Resetar Sistema<i class="material-icons right">access_time</i>@endif</a>
+    <br>
     @if(auth()->user()->id == 1)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endif</a>
 @endsection
 @section('content')
@@ -17,7 +18,7 @@
                     <tr>
                         <th>Nome do Usuário</th>
                         <th>Email</th>
-                        <th>Estado</th>
+                        <th>Tipo de usuário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>

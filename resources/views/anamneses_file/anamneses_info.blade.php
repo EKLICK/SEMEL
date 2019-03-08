@@ -67,10 +67,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><h6>É fumante:</h6></td>
-                            <td><h6>{{$anamnese->fumante}}</h6></td>
-                        </tr>
-                        <tr>
                             <td><h6>Possui atestado:</h6></td>
                             <td><h6>@if($anamnese->atestado == 1) Sim @else Não @endif</h6></td>
                         </tr>
@@ -132,8 +128,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <td><h6>É fumante:</h6></td>
+                            <td>@if($anamnese->fumante == -1) <h6>Não</h6> @else <h6>Sim</h6> @endif </td>
+                            <td>
+                                <h6>
+                                    @if($anamnese->fumante == null || $anamnese->fumante == -1)
+                                        Sem descrição
+                                    @else
+                                        @if($anamnese->fumante != -1) {{$anamnese->fumante}} @endif
+                                    @endif
+                                </h6>
+                            </td>
+                        </tr>
+                        <tr>
                             <td><h6>Possui dor óssea:</h6></td>
-                            <td>@if($anamnese->dor_ossea == -1) <h6>Sim</h6> @else <h6>Não</h6> @endif </td>
+                            <td>@if($anamnese->dor_ossea == -1) <h6>Não</h6> @else <h6>Sim</h6> @endif </td>
                             <td>
                                 <h6>
                                     @if($anamnese->dor_ossea == null || $anamnese->dor_ossea == -1)

@@ -89,6 +89,7 @@ class NucleosController extends Controller{
         HistoricoN::create([
             'nucleo_id' => $nucleo->id,
             'inativo' => $nucleo->inativo,
+            'operario' => auth()->user()->name,
             'comentario' => 'Criação do núcleo "'.$nucleo->nome.'"',
         ]);
 

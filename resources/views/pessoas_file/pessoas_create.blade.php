@@ -18,7 +18,7 @@
                             <span>Foto 3x4</span>
                             <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
                         </div>
-                        <a class="waves-effect waves-light btn" style="margin-left: 5%;" id="limpar_3x4">Limpar</a>
+                        <a id="limpar_3x4" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
                             <input id="3x4" class="file-path validate" type="text">

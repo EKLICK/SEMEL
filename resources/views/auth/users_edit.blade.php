@@ -33,7 +33,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
                         <input name="usuario_antigo" id="icon_usuario_antigo" type="password" class="validate">
-                        <label for="icon_usuario_antigo">Usuário antigo:</label>
+                        <label for="icon_usuario_antigo">Usuário:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>

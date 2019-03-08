@@ -189,7 +189,12 @@ class PessoasController extends Controller{
         }
 
         //checar se convenio médico foi marcado
-        if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = -1;}
+        if(isset($dataForm['convenio_medico'])){
+            if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = null;}
+        }
+        else{
+            $dataForm['string_convenio_medico'] = -1;
+        }
 
         //Se imagem foi passada, salva imagem 3 por 4 no banco de dados.
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
@@ -239,7 +244,7 @@ class PessoasController extends Controller{
             'nome_da_mae' => $dataForm['nome_da_mae'],
             'pessoa_emergencia' => $dataForm['pessoa_emergencia'],
             'filhos' => $dataForm['filhos'],
-            'convenio_medico' => $dataForm['convenio_medico'],
+            'convenio_medico' => $dataForm['string_convenio_medico'],
             'irmao' => $dataForm['irmaos'],
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
@@ -355,7 +360,6 @@ class PessoasController extends Controller{
         }
         else{
             //Se não, atribuir nulo e deleta a imagem.
-            unlink($pessoa['foto']);
             $dataForm += ['img_3x4' => null];
         }
 
@@ -385,7 +389,6 @@ class PessoasController extends Controller{
             }
             else{
                 //Se não, atribuir nulo e deleta a imagem.
-                unlink($pessoa['matricula']);
                 $dataForm += ['img_matricula' => null];
             }
         }

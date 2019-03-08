@@ -26,8 +26,8 @@
                                 <th style='width: 90px;'>Estado</th>
                                 <th style='width: 210px;'>Turma do registro</th>
                                 <th style='width: 150px;'>Comentario</th>
-                                <th style='width: 150px;'>Horario de mudança</th>
-                                <th style='width: 100px;'>Administrador responsável</th>
+                                <th style='width: 100px;' class='center'>Horario de mudança</th>
+                                <th style='width: 100px;' class='center'>Administrador responsável</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,8 +46,8 @@
                                         $diamesano = explode("-", $horario[0]);
                                         $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
                                     @endphp
-                                    <td><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
-                                    <td>{{$historic->operario}}</td>
+                                    <td class='center'><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
+                                    <td class='center'>{{$historic->operario}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

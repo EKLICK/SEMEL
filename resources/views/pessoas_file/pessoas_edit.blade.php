@@ -23,7 +23,7 @@
                         <a id="limpar_3x4" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
-                            <input name="3x4" id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
+                            <input id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
                         </div>
                     </div>
                     <div class="input-field col s12 m7 right" style="margin-top: -2%;">

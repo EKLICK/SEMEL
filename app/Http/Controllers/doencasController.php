@@ -24,7 +24,7 @@ class DoencasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index: Retorna a página de registros de doenças.
     public function index(){
-        //Encontra todos os registros de doenças e ordena por nome.
+        //Encontra todos os registros de doenças no banco de dados e ordena por nome.
         $doencaslist = Doenca::orderBy('nome')->paginate(10);
 
         //Define variavel $count para informação de quantidade de registros.

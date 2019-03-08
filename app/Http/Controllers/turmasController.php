@@ -65,9 +65,6 @@ class TurmasController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index: Retorna a página de registros de turmas.
     public function index(){
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
-
         //Encontra todos os registros de turmas e ordena por nome.
         $turmaslist = Turma::orderBy('nome')->paginate(10);
 
@@ -136,6 +133,7 @@ class TurmasController extends Controller{
         HistoricoT::create([
             'turma_id' => $turma->id,
             'inativo' => $turma->inativo,
+            'operario' => auth()->user()->name,
             'comentario' => 'Criação da turma "'.$turma->nome.'"',
         ]);
 

@@ -88,6 +88,7 @@ class ProfessorController extends Controller{
 
         //Cria usuário no banco de dados com todos os atributos abaixo:
         $user = User::create([
+            'nick' => $dataForm['nome'],
             'name' => $dataForm['usuario'],
             'email' => strtolower($dataForm['email']),
             'password' => bcrypt($dataForm['password']),

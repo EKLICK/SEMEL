@@ -831,24 +831,22 @@ class filtersController extends Controller{
 
     //Função doenças_procurar: Filtra conteudo de todos os registros de doenças e retorna para a página de registro de doenças.
     public function doencas_procurar(Request $request){
-        $dataForm = $request->all();
-
-        //Encontra todos os registros de doenças no banco de dados.
-        $doencaslist = Doenca::all();
+        $dataForm = $request->except('_token');
+	    dd('asfsf');
+        //Encontra todos os registros de doenças no banco de dados e ordena por nome.
+        $doencaslist = Doenca::orderBy('nome')->paginate(10);
 
         //Verifica se o parametro "nome" foi passado.
         if($dataForm['nome'] != null){
             //Se sim:
 
             //Substitui o registro de doenças filtrando apenas o nome com o parametro passado pelo filtro.
-            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%');
+            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
         }
 
-        //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($doencaslist->get()).' doenças cadastradas.');
-
-        //Cria paginate para os registros encontrados.
-        $doencaslist = $doencaslist->paginate(10);
+        //Define variavel $count para informação de quantidade de registros.
+        $count = Doenca::all();
+        Session::put('quant', count($count).' doenças cadastradas.');
 
         return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
     }
