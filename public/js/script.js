@@ -17,7 +17,6 @@ $('.datepicker').datepicker({
 
 
 //FORMATAÇÃO DE INPUTS:
-
 function fMasc(objeto,mascara) {
     obj=objeto
     masc=mascara
@@ -62,7 +61,6 @@ function mNum(num){
 }
 
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
-
 function apagar_3_4(){
     document.getElementById('3x4_image').src = '';
     document.getElementById('img_3x4').value = '';
@@ -142,8 +140,6 @@ document.getElementById('limpar_atestado').onclick = function (){
 }
 
 //EDIÇÃO E CRIAÇÃO DE ANAMNESES
-
-
 function convenio_medico_click(valor){
     change(valor, $('#string_convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
 }

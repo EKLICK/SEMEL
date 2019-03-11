@@ -37,7 +37,7 @@ class HomeController extends Controller{
             //Caso seja, verifica-se se o usuário é administrador:
             if(auth()->user()->admin_professor == 1){
                 //Se sim, é redirecionado para a rota de pessoas.index (registro de pessoas).
-                return redirect()->route('pessoas.index');
+                return view ('home');
             }
             else{
                 //Se não, é redirecionado para a rota de professor_turmas (registro de turmas do professor).

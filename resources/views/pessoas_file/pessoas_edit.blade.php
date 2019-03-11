@@ -2,7 +2,8 @@
 
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
+    <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
     <a href="{{Route('pessoas.edit', $pessoa->id)}}" class="breadcrumb">Editar</a>
 @endsection
 @section('title') Editar <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection

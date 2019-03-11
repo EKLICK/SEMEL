@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('breadcrumbs')
-    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
+    <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas_turmas', $pessoa->id)}}" class="breadcrumb">turmas</a>
 @endsection
 @section('title') Turmas @endsection

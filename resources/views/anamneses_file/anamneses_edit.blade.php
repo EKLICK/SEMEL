@@ -2,6 +2,7 @@
 
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('anamneses.index')}}" class="breadcrumb">Anamneses</a>
     <a href="{{route('anamneses.edit', $anamnese->id)}}" class="breadcrumb">Editar</a>
 @endsection

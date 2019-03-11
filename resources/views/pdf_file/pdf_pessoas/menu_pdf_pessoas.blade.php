@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
-    <a href="{{route('home')}}" class="breadcrumb">Pessoas</a>
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
+    <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
     @php $arraypessoas = []; @endphp
     @foreach ($pessoaslist as $pessoa)@php array_push($arraypessoas, $pessoa->id); @endphp @endforeach
     <a href="{{route('menu_pessoas_pdf', [$op, json_encode($arraypessoas)])}}" class="breadcrumb">PDF</a>

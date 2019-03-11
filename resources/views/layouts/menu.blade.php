@@ -54,7 +54,7 @@
             <div class="collapsible-body">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-                    <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('turmas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
                 </div>
             </div>
         </li>
@@ -63,7 +63,7 @@
             <div class="collapsible-body">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-                    <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('nucleos.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
                 </div>
             </div>
         </li>

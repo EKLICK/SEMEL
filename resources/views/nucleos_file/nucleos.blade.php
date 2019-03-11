@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('nucleos.index')}}" class="breadcrumb">Nucleos</a>
 @endsection
 @section('title') Núcleos registrados @endsection

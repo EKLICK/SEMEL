@@ -2,6 +2,7 @@
 
 @section('css.personalizado')<link rel="stylesheet" href="{{asset('css/table_audits.css')}}">@endsection
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('audits.index')}}" class="breadcrumb">Auditorias</a>
     <a href="{{route('audits_info', $audit->id)}}" class="breadcrumb">Informações</a>
 @endsection

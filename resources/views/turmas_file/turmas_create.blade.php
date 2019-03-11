@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
     <a href="{{route('turmas.create')}}" class="breadcrumb">Criar</a>
 @endsection

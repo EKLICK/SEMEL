@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
 @endsection
 @section('title') Usuários registrados 

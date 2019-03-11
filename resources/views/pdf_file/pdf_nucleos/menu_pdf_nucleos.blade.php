@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css.personalizado')@endsection
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('nucleos.index')}}" class="breadcrumb">Núcleos</a>
     @php $arraynucleos = []; @endphp
     @foreach ($nucleoslist as $nucleo)@php array_push($arraynucleos, $nucleo->id); @endphp @endforeach

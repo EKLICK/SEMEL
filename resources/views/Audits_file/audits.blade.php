@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('breadcrumbs')
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('audits.index')}}" class="breadcrumb">Auditorias</a>
 @endsection
 @section('title') Auditorias registradas @endsection
