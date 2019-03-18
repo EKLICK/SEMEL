@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Rule;
+use Intervention\Image\ImageManagerStatic as Image;
 
 //REQUEST PARA CONTROLE:
 use App\Http\Requests\Pessoa\PessoaCreateFormRequest;
@@ -34,16 +35,26 @@ class PessoasController extends Controller{
 
     //FUNÇÃO DE FERRAMENTAS:
     //Ferramenta saveDbImage3x4: Salva a imagem 3 por 4 vindo das requisições do formulario.
-    public function saveDbImage3x4($req){
+    public function saveDbImage3x4($req, $op){
         $data = $req->all();
-        $imagem = $req->file('img_3x4');
         $num = rand(1111, 9999);
         $dir = "img/img_3x4";
-        $ex = $imagem->guessClientExtension();
-        $nomeImagem = "imagem_".$num.".".$ex;
-        $imagem->move($dir, $nomeImagem);
-        $data['img_3x4'] = $dir."/".$nomeImagem;
-        return $data['img_3x4'];
+        $ex = '.png';
+        if($op == 1){
+            $imagem = $req->file('img_3x4');
+            $ex = $imagem->guessClientExtension();
+            $nomeImagem = "imagem_".$num.".".$ex;
+            $imagem->move($dir, $nomeImagem);
+            $data['img_3x4'] = $dir."/".$nomeImagem;
+
+            return $data['img_3x4'];
+        }
+        else{
+            $data['img_3x4'] = $dir.'/imagem_'.$num.$ex;
+            Image::make($data['foto_web'])->save($data['img_3x4']);
+            
+            return $data['img_3x4'];
+        }
     }
 
     //Ferramenta saveDbImageMatricula: Salva a imagem de matricula vindo das requisições do formulario.
@@ -74,7 +85,7 @@ class PessoasController extends Controller{
 
     //Ferramenta checar_estado: Verifica se todos os parametros necessarios para completar um perfil estão preenchidos.
     public function checar_estado($listadados, $nascimento){
-        if($listadados['img_3x4'] == null){return 2;}
+        if($listadados['img_3x4'] == null && $listadados['foto_web'] == null){return 2;}
         if($listadados['bairro'] == null){return 2;}
         if($listadados['rua'] == null){return 2;}
         if($listadados['numero_endereco'] == null){return 2;}
@@ -197,8 +208,10 @@ class PessoasController extends Controller{
         }
 
         //Se imagem foi passada, salva imagem 3 por 4 no banco de dados.
-        if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request);}
+        if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request, 1);}
         else{$dataForm['img_3x4'] = null;}
+
+        if(isset($dataForm['foto_web'])){$dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);}
 
         //Verifica se foi informado bairro, se não, seta como nulo.
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
@@ -362,6 +375,9 @@ class PessoasController extends Controller{
             //Se não, atribuir nulo e deleta a imagem.
             $dataForm += ['img_3x4' => null];
         }
+
+        if(isset($dataForm['foto_web'])){$dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);}
+        
 
         //Adiciona a variavel nascimento a idade da pessoa.
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -527,7 +543,7 @@ class PessoasController extends Controller{
         $count = Turma::all();
         Session::put('quant', count($count).' turmas cadastradas.');
 
-        return view ('Pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
+        return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'pessoasTurmas', 'dias_semana', 'nucleoslist'));
     }
 
     //Função pessoas_turmas_vincular: Vincula uma pessoa em uma turma e retorna a página de pessoas e turmas.

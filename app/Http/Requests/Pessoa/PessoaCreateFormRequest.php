@@ -47,7 +47,7 @@ class PessoaCreateFormRequest extends FormRequest{
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro', 'Viuva(o)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
-            'atestado'              => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
+            'atestado'              => ['required','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
             'toma_medicacao'        => ['required','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['required','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['required','nullable', Rule::in(['1', '2']),],
@@ -111,6 +111,7 @@ class PessoaCreateFormRequest extends FormRequest{
             
             'irmaos.digits_between' => 'É permitido somente 4 digitos para quantidade de irmãos',
 
+            'atestado.required' => 'É necessario atestado para completar a anamnese',
             'toma_medicacao.required' => 'É necessário responder se a pessoa toma algum medicamento',
             'alergia_medicacao.required' => 'É necessário responder se a pessoa tem alergia á algum medicamento',
             'fumante.required' => 'É necessário responder a pessoa fuma',

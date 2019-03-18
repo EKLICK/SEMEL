@@ -304,3 +304,82 @@
 2019-03-11T10:49:33.022275Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
 2019-03-11T10:49:33.037909Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
 2019-03-11T10:49:33.037909Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 5732 ...
+2019-03-12T10:45:40.463002Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-12T10:45:40.463002Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-12T10:45:40.463002Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 3120 ...
+2019-03-13T10:56:56.914696Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-13T10:56:56.915696Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-13T10:56:56.915696Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 2964 ...
+2019-03-13T10:57:05.555734Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-13T10:57:05.555734Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-13T10:57:05.555734Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 6100 ...
+2019-03-13T10:57:05.582772Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2019-03-13T10:57:05.582772Z 0 [Note] InnoDB: Uses event mutexes
+2019-03-13T10:57:05.582772Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2019-03-13T10:57:05.584223Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2019-03-13T10:57:05.585229Z 0 [Note] InnoDB: Number of pools: 1
+2019-03-13T10:57:05.585729Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2019-03-13T10:57:05.589235Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2019-03-13T10:57:05.598126Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-03-13T10:57:05.798902Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2019-03-13T10:57:11.699432Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-03-13T10:57:11.702935Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-03-13T10:57:12.287784Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2019-03-13T10:57:12.293289Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2019-03-13T10:57:12.294791Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2019-03-13T10:57:12.295792Z 0 [Note] InnoDB: Waiting for purge to start
+2019-03-13T10:57:12.346856Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 6745ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2019-03-13T10:57:12.360873Z 0 [Note] InnoDB: 5.7.19 started; log sequence number 75594766
+2019-03-13T10:57:12.361874Z 0 [Note] InnoDB: Loading buffer pool(s) from C:\Users\viniciusH.dgi\Documents\GitHub\SEMEL\public\mysql\ib_buffer_pool
+2019-03-13T10:57:12.361874Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2019-03-13T10:57:12.561606Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2019-03-13T10:57:12.562607Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2019-03-13T10:57:12.563606Z 0 [Note] IPv6 is available.
+2019-03-13T10:57:12.564108Z 0 [Note]   - '::' resolves to '::';
+2019-03-13T10:57:12.564609Z 0 [Note] Server socket created on IP: '::'.
+2019-03-13T10:57:12.726341Z 0 [Note] Event Scheduler: Loaded 0 events
+2019-03-13T10:57:12.727342Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld: ready for connections.
+Version: '5.7.19'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2019-03-13T10:57:12.728343Z 0 [Note] Executing 'SELECT * FROM INFORMATION_SCHEMA.TABLES;' to get a list of tables using the deprecated partition engine. You may use the startup option '--disable-partition-engine-check' to skip this check. 
+2019-03-13T10:57:12.729844Z 0 [Note] Beginning of list of non-natively partitioned tables
+2019-03-13T10:57:12.774909Z 0 [Note] InnoDB: Buffer pool(s) load completed at 190313  7:57:12
+2019-03-13T10:57:12.798433Z 0 [Note] End of list of non-natively partitioned tables
+2019-03-13T10:58:59.212700Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-13T10:58:59.214201Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-13T10:58:59.214201Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 9936 ...
+2019-03-13T12:41:56.940554Z 66 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-13T12:41:56.949578Z 67 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-13T12:42:15.817753Z 68 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-13T12:42:15.824770Z 69 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-13T12:42:38.901172Z 70 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-13T12:42:38.908691Z 71 [Note] Access denied for user 'viverbemUser'@'localhost' (using password: YES)
+2019-03-14T10:45:29.988190Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-14T10:45:30.285075Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-14T10:45:30.285075Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 6020 ...
+2019-03-15T10:57:23.880037Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:23.973700Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:23.973700Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 4572 ...
+2019-03-15T10:57:24.020532Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.067363Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.067363Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 10772 ...
+2019-03-15T10:57:24.176638Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.192247Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.192247Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 856 ...
+2019-03-15T10:57:24.176638Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.363962Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.363962Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 3468 ...
+2019-03-15T10:57:24.332742Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.332742Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.332742Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 10972 ...
+2019-03-15T10:57:24.285913Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.457625Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.457625Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 2288 ...
+2019-03-15T10:57:24.473236Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.582509Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.582509Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 8748 ...
+2019-03-15T10:57:24.551288Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-15T10:57:24.707393Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-15T10:57:24.707393Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 6124 ...
+2019-03-18T11:04:58.241907Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-18T11:05:00.241998Z 0 [ERROR] Cannot open Windows EventLog; check privileges, or start server with --log_syslog=0
+2019-03-18T11:05:00.241998Z 0 [Note] C:\laragon\bin\mysql\mysql-5.7.19-winx64\bin\mysqld (mysqld 5.7.19) starting as process 8292 ...

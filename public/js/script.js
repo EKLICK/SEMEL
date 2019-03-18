@@ -79,6 +79,10 @@ function apagar_atestado(){
     document.getElementById('atestado').value = '';
 }
 
+function apagar_web(){
+    document.getElementById('img_web').src = '';
+}
+
 document.getElementById("img_3x4").onchange = function (){
     string = document.getElementById("img_3x4").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
@@ -243,5 +247,62 @@ function mudaCheck(op){
     }
     else{
         document.getElementById('check1').checked = false;
+    }
+}
+
+//WEBCAM IMAGE:
+$('#fotomodal').modal({
+    dismissible: true,
+    onCloseEnd: function(){
+        stop(); 
+    }
+});
+
+function stop(){
+    var video = document.getElementById('video');
+    video.srcObject.getTracks()[0].stop();
+}
+
+function foto() {
+    var video = document.getElementById('video');
+    navigator.getMedia = navigator.getUserMedia || 
+                         navigator.webkitGetUserMedia || 
+                         navigator.mozGetUserMedia || 
+                         navigator.msGetUserMedia;
+
+    navigator.getMedia({
+        video:true,
+        audio: false
+    }, function(stream) {
+        video.srcObject = stream;
+        video.play();
+    }, function(error) {
+        //Um erro
+    });
+};
+
+document.getElementById('capture').addEventListener('click', function(){
+    var video = document.getElementById('video');
+    context = document.getElementById('canvas_foto');
+    context.getContext('2d').drawImage(video, 0, 0, 400, 300);
+    document.getElementById("img_web").src = context.toDataURL('img/img_3x4');
+    var codigo = context.toDataURL();
+    document.getElementById('base64').value = codigo;
+    
+    stop();
+})
+
+document.getElementById('muda_foto').onclick = function(){
+    var diva = document.getElementById('image_file');
+    var divb = document.getElementById('image_web');
+    if (diva.style.display == "none"){
+        diva.style.display = "block";
+        divb.style.display = "none";
+        document.getElementById('muda_foto').innerHTML = 'Trocar para Webcam&emsp;&nbsp; <i class="material-icons">satellite</i>';
+    }
+    else{
+        diva.style.display = "none";
+        divb.style.display = "block";
+        document.getElementById('muda_foto').innerHTML = 'Trocar para Pastas&emsp;&nbsp; <i class="material-icons">satellite</i>';
     }
 }

@@ -13,34 +13,49 @@
             <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h5>Registro da pessoa:</h5>
-                <div class="row">
+                <a id="muda_foto" class="waves-effect waves-light btn-large blue" href="#!">Trocar para pastas&emsp;&nbsp; <i class="material-icons">satellite</i></a>
+                <div id="image_file" class="row" style="display: none">
                     <div class="file-field input-field col s12 m5">
-                        <div class="btn">
-                            <span>Foto 3x4</span>
+                        <br><br>
+                        <p>Foto 3 por 4 (.img | .png | .jpg):</p>
+                        <div class="btn blue">
+                            <span>Abrir arquivo</span>
                             <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
                         </div>
-                        <a id="limpar_3x4" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                        <a id="limpar_3x4" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
                             <input id="3x4" class="file-path validate" type="text">
                         </div>
                     </div>
-                    <div class="input-field col s12 m7 right" style="margin-top: -2%;">
-                        <img id="3x4_image" class="materialboxed" width="150" src="">
+                    <div class="input-field col s12 m7 right">
+                        <img id="3x4_image" class="materialboxed" width="400" src="">
+                    </div>
+                </div>
+                <div id="image_web" class='row'>
+                    <div class="file-field input-field col s12 m5">
+                        <br><br>
+                        <p>Foto 3 por 4:</p>
+                        <a href="#fotomodal" onclick="foto()" class="modal-trigger btn-large light-blue darken-1">Abrir webcam</a>
+                        <a onclick="apagar_web()" class="btn-large light-blue darken-1" style="margin-left: 5%;">limpar</a>
+                    </div>
+                    <div class="file-field input-field col s12 m5">
+                        <img id="img_web" class="materialboxed" width="400" src="">
+                        <input type="text" name="foto_web" id="base64" hidden>
+                        <canvas id="canvas_foto" width="400" height="300" style="border: solid 10px black;" hidden></canvas>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
                         <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" required>
-                        <label for="nome">Nome:</label>
+                        <label for="nome">Nome (obrigatório):</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
                         <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}" required>
-                        <label for="nascimento">Data de nascimento:</label>
+                        <label for="nascimento">Data de nascimento (obrigatório):</label>
                     </div>
-                </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
@@ -73,7 +88,7 @@
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
-                        <a class="btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
+                        <a class="waves-effect waves-light btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
                             <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
@@ -180,11 +195,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
-                            <div class="btn">
-                                <span>matricula escolar</span>
+                            <p>matricula escolar (.img | .png | .jpg):</p>
+                            <div class="btn blue">
+                                <span>Abrir arquivo</span>
                                 <input id="img_matricula" type="file" name="img_matricula">
                             </div>
-                            <a id="limpar_matricula"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <a id="limpar_matricula"  class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
                                 <input id="matricula" name="matricula" class="file-path validate" type="text">
@@ -197,7 +213,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m3">
-                        Sexo:
+                        Sexo (obrigatório):
                         <p>
                             <label>
                                 <input value="M" name="sexo" type="radio" @if(old('sexo') == 'M') checked @endif/>
@@ -264,7 +280,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Toma algum medicamento?
+                        Toma algum medicamento? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
@@ -286,7 +302,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui alergia médica?
+                        Possui alergia médica? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>
@@ -308,7 +324,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário já fez cirurgia?
+                        O usuário já fez cirurgia? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(old('cirurgia') == 1) checked @endif/>
@@ -330,7 +346,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores ósseas?
+                        Possui dores ósseas? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio" @if(old('dor_ossea') == 1) checked @endif/>
@@ -352,7 +368,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores musculares?
+                        Possui dores musculares? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(old('dor_muscular') == 1) checked @endif/>
@@ -374,7 +390,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores articulares?
+                        Possui dores articulares? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(old('dor_articular') == 1) checked @endif/>
@@ -396,7 +412,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário fuma?
+                        O usuário fuma? (obrigatório)
                         <p>
                             <label>
                                 <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
@@ -435,11 +451,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Atestado médico</span>
+                            <p>Atestado médico (.img | .png | .jpg) (obrigatório):</p>
+                            <div class="btn blue">
+                                <span>Abrir arquivo</span>
                                 <input id="img_atestado" type="file" name="img_atestado">
                             </div>
-                            <a id="limpar_atestado"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <a id="limpar_atestado"  class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
                                 <input id="atestado" name="atestado" class="file-path validate" type="text">
@@ -457,7 +474,7 @@
                     </div>
                     <div class="container">
                         <div class="input-field col s12 m3 right">
-                            <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
+                            <button id="criar_pessoa" class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
                                 <i class="large material-icons left">add</i>
                         </div>
                     </div>
@@ -497,5 +514,18 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <div id="fotomodal" class="modal">
+        <div class="center">
+            <br>
+            <video id='video' style='border: solid 10px; black; width: 393px; height:300px;'></video>
+            <div class='container'>
+                <hr>
+            </div>
+            <br>
+            <a id="capture" class="modal-close waves-effect waves-light btn-large modal-trigger blue" href="#!">Tirar foto&emsp;&nbsp; <i class="material-icons">contacts</i></a>
+        </div>
+        <br>
     </div>
 @endsection

@@ -4,6 +4,7 @@
 @endsection
 @section('title') Página principal @endsection
 @section('content')
+    <div class='container'>
         <div class='card-panel'>
             <div class='row'>
                 <a href="{{route('professor.index')}}">
@@ -80,4 +81,5 @@
                 </a>
             </div>
         </div>
+    </div>
 @endsection
