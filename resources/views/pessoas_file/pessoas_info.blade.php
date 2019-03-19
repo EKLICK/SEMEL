@@ -63,9 +63,9 @@
                             <tr>
                                 <h6><b>Foto registrada:</b></h6>
                                 @if(!is_null($pessoa->foto))
-                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset($pessoa->foto)}}"></td>
+                                    <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset($pessoa->foto)}}"></td>
                                 @else
-                                    <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image_3x4.png')}}"></td>
+                                    <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_3x4.png')}}"></td>
                                 @endif
                             </tr>
                         </table>
@@ -76,9 +76,9 @@
                                 <tr>
                                     <h6><b>Matricula:</b></h6>
                                         @if(!is_null($pessoa->matricula))
-                                            <td><img id="matricula_image" class="materialboxed" width="111" src="{{asset($pessoa->matricula)}}"></td>
+                                            <td><img id="matricula_image" class="materialboxed imagensparafoto" src="{{asset($pessoa->matricula)}}"></td>
                                         @else
-                                        <td><img id="3x4_image" class="materialboxed" width="150" src="{{asset('/img/unset_image_matricula.png')}}"></td>
+                                        <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_matricula.png')}}"></td>
                                         @endif
                                 </tr>
                             </table>

@@ -17,7 +17,7 @@
                 <table>
                     <tr>
                         <h6><b>Atestado médico:</b></h6>
-                        <td><img id="atestado_image" class="materialboxed" width="150" src="{{asset($anamnese->atestado)}}"></td>
+                        <td><img id="atestado_image" class="materialboxed imagensparafoto" src="{{asset($anamnese->atestado)}}"></td>
                     </tr>
                 </table>
             </div>

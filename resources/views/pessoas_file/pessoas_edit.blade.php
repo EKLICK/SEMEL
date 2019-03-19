@@ -15,20 +15,37 @@
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <input type="text" id="id" name="id" value="{{$pessoa->id}}" hidden/>
-                <div class="row">
+                <h5>Registro da pessoa:</h5>
+                <a id="muda_foto" onclick="muda_foto('{{asset('/img/unset_image_3x4.png')}}')" class="waves-effect waves-light btn-large blue" href="#!">Trocar para pastas&emsp;&nbsp; <i class="material-icons">satellite</i></a>
+                <div id="image_file" class="row" style="display: none">
                     <div class="file-field input-field col s12 m5">
-                        <div class="btn">
-                            <span>Foto 3x4</span>
-                            <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{$pessoa->foto}} @else {{old('img_3x4')}} @endif">
+                        <br><br>
+                        <p>Foto 3 por 4 (.img | .png | .jpg):</p>
+                        <div class="btn blue">
+                            <span>Abrir arquivo</span>
+                            <input id="img_3x4" type="file" name="img_3x4" value="@if(is_null(old('img_3x4'))) {{$pessoa->foto}} @else {{old('img_3x4')}} @else {{asset('/img/unset_image_3x4.png')}} @endif">
                         </div>
-                        <a id="limpar_3x4" class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                        <a id="limpar_3x4" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
                             <input id="3x4" class="file-path validate" type="text" value="{{$pessoa->foto}}">
                         </div>
                     </div>
                     <div class="input-field col s12 m7 right" style="margin-top: -2%;">
-                        <img id="3x4_image" class="materialboxed" width="150" src="@if(!is_null($pessoa->foto)) {{asset($pessoa->foto)}} @endif">
+                        <img id="3x4_image" class="materialboxed imagensparafoto" src="@if(!is_null($pessoa->foto)) {{asset($pessoa->foto)}} @endif">
+                    </div>
+                </div>
+                <div id="image_web" class='row'>
+                    <div class="file-field input-field col s12 m5">
+                        <br><br>
+                        <p>Foto 3 por 4:</p>
+                        <a href="#fotomodal" onclick="foto()" class="modal-trigger btn-large light-blue darken-1">Abrir webcam</a>
+                        <a onclick="apagar_web()" class="btn-large waves-effect waves-light blue" style="margin-left: 5%;">limpar</a>
+                    </div>
+                    <div class="file-field input-field col s12 m5">
+                        <img id="img_web" class="materialboxed imagensparafoto" src="@if(is_null(old('img_3x4'))) {{$pessoa->foto}} @else {{old('img_3x4')}} @else {{asset('/img/unset_image_3x4.png')}} @endif">
+                        <input id="web_image" type="text" name="foto_web" id="base64" hidden>
+                        <canvas id="canvas_foto" width="400" height="300" hidden></canvas>
                     </div>
                 </div>
                 <div class="row">
@@ -193,7 +210,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="matricula_image" class="materialboxed" width="250" src="@if(!is_null($pessoa->matricula)) {{asset($pessoa->matricula)}} @endif">
+                        <img id="matricula_image" class="materialboxed imagensparafoto" src="@if(!is_null($pessoa->matricula)) {{asset($pessoa->matricula)}} @else {{asset('/img/unset_image_matricula.png')}} @endif">
                     </div>
                 </div>             
                 <div class="row">

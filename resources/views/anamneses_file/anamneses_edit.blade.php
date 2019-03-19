@@ -209,7 +209,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed" width="250" src="@if(!is_null($anamnese->atestado)) {{asset($anamnese->atestado)}} @endif">
+                        <img id="atestado_image" class="materialboxed imagensparafoto" src="@if(!is_null($anamnese->atestado)) {{asset($anamnese->atestado)}} @else {{asset('/img/unset_image_atestado.png')}} @endif">
                     </div>
                 </div>
                 <div class="row">

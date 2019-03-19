@@ -2,6 +2,12 @@ body{
   background-color: #eeeeee;
 }
 
+.imagensparafoto{
+  width: 400px; 
+  height: 300px; 
+  border: solid 10px black;
+}
+
 .sessao{
   position: absolute;
   margin-top: -3%;

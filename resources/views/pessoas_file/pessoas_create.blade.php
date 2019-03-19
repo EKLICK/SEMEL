@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m7 right">
-                        <img id="3x4_image" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_3x4.png')}}">
+                        <img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_3x4.png')}}">
                     </div>
                 </div>
                 <div id="image_web" class='row'>
@@ -40,9 +40,9 @@
                         <a onclick="apagar_web()" class="btn-large waves-effect waves-light blue" style="margin-left: 5%;">limpar</a>
                     </div>
                     <div class="file-field input-field col s12 m5">
-                        <img id="img_web" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_3x4.png')}}">
+                        <img id="img_web" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_3x4.png')}}">
                         <input id="web_image" type="text" name="foto_web" id="base64" hidden>
-                        <canvas id="canvas_foto" width="400" height="300" style="border: solid 10px black;" hidden></canvas>
+                        <canvas id="canvas_foto" width="400" height="300" hidden></canvas>
                     </div>
                 </div>
                 <div class="row">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="matricula_image" class="materialboxed" style="border: solid 10px black;" src="{{asset('/img/unset_image_matricula.png')}}">
+                        <img id="matricula_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_matricula.png')}}">
                     </div>
                 </div>
                 <div class="row">
@@ -464,7 +464,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_atestado.png')}}">
+                        <img id="atestado_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_atestado.png')}}">
                     </div>
                 </div>
                 <div class="row">
