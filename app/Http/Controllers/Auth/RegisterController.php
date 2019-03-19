@@ -88,16 +88,21 @@ class RegisterController extends Controller{
      */
 
     //Função create: Retorna a página de criação de registros de usuários.
-    protected function create(array $data){
+    protected function create(Request $request){
+        $dataForm = $request->all();
+        
         //Define sessão de informação para apresentação na página.
-        Session::put('mensagem_green', 'Administrador '.$data['name'].' adicionado com sucesso!');
-        return User::create([
-            'nick' => $data['nick'],
-            'name' => $data['name'],
+        Session::put('mensagem_green', 'Administrador '.$dataForm['name'].' adicionado com sucesso!');
+        User::create([
+            'nick' => $dataForm['nick'],
+            'name' => $dataForm['name'],
             'admin_professor' => 1,
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'email' => $dataForm['email'],
+            'password' => Hash::make($dataForm['password']),
         ]);
+        $userslist = User::all();
+        $quantidade = Quant::find(1);
+        return view ('auth.users', compact('userslist','quantidade'));
     }
 
     //Função edit: Retorna a página de edição de registros de usuários.

@@ -52,7 +52,7 @@ class PessoasController extends Controller{
         else{
             $data['img_3x4'] = $dir.'/imagem_'.$num.$ex;
             Image::make($data['foto_web'])->save($data['img_3x4']);
-            
+
             return $data['img_3x4'];
         }
     }
@@ -206,12 +206,12 @@ class PessoasController extends Controller{
         else{
             $dataForm['string_convenio_medico'] = -1;
         }
-
+        
         //Se imagem foi passada, salva imagem 3 por 4 no banco de dados.
         if(isset($dataForm['img_3x4'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request, 1);}
         else{$dataForm['img_3x4'] = null;}
-
-        if(isset($dataForm['foto_web'])){$dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);}
+        
+        if(isset($dataForm['foto_web'])){$dataForm['img_3x4'] = $this->saveDbImage3x4($request, 2);}
 
         //Verifica se foi informado bairro, se não, seta como nulo.
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}

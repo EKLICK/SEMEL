@@ -16,6 +16,7 @@ Route::get('/', function(){return redirect()->route('login');})->name('welcome')
 
 Route::get('/usuarios', 'Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 Route::get('/usuarios/edit/{id}', 'Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::post('/usuarios/create', 'Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 Route::delete('/usuarios/destroy/{id}', 'Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 

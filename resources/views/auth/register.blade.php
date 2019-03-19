@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('breadcrumbs')
-    <a href="{{route('home')}}" class="breadcrumb">Home</a>
+    <a href="{{route
+    
+    
+    
+    
+    
+    
+    ('home')}}" class="breadcrumb">Home</a>
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
     <a class="breadcrumb" href="{{route('register')}}">Cadastrar</a>
 @endsection
@@ -10,7 +17,7 @@
     @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('register')}}" method="post">
+            <form class="col s12" action="{{route('users.create')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="input-field col s12 m5">

@@ -60,27 +60,29 @@ function mNum(num){
     return num
 }
 
+
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
 function apagar_3_4(){
-    document.getElementById('3x4_image').src = '';
+    document.getElementById('3x4_image').src = 'http://localhost/img/unset_image_3x4.png';
     document.getElementById('img_3x4').value = '';
     document.getElementById('3x4').value = '';
 }
 
 function apagar_matricula(){
-    document.getElementById('matricula_image').src = '';
+    document.getElementById('matricula_image').src = 'http://localhost/img/unset_image_matricula.png';
     document.getElementById('img_matricula').value = '';
     document.getElementById('matricula').value = '';
 }
 
 function apagar_atestado(){
-    document.getElementById('atestado_image').src = '';
+    document.getElementById('atestado_image').src = 'http://localhost/img/unset_image_atestado.png';
     document.getElementById('img_atestado').value = '';
     document.getElementById('atestado').value = '';
 }
 
 function apagar_web(){
-    document.getElementById('img_web').src = '';
+    document.getElementById('img_web').src = 'http://localhost/img/unset_image_3x4.png';
+    document.getElementById('web_image').value = '';
 }
 
 document.getElementById("img_3x4").onchange = function (){
@@ -292,9 +294,11 @@ document.getElementById('capture').addEventListener('click', function(){
     stop();
 })
 
-document.getElementById('muda_foto').onclick = function(){
+function muda_foto(link){
     var diva = document.getElementById('image_file');
     var divb = document.getElementById('image_web');
+    apagar_3_4()
+    apagar_web()
     if (diva.style.display == "none"){
         diva.style.display = "block";
         divb.style.display = "none";

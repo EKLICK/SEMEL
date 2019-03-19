@@ -13,7 +13,7 @@
             <form class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h5>Registro da pessoa:</h5>
-                <a id="muda_foto" class="waves-effect waves-light btn-large blue" href="#!">Trocar para pastas&emsp;&nbsp; <i class="material-icons">satellite</i></a>
+                <a id="muda_foto" onclick="muda_foto('{{asset('/img/unset_image_3x4.png')}}')" class="waves-effect waves-light btn-large blue" href="#!">Trocar para pastas&emsp;&nbsp; <i class="material-icons">satellite</i></a>
                 <div id="image_file" class="row" style="display: none">
                     <div class="file-field input-field col s12 m5">
                         <br><br>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m7 right">
-                        <img id="3x4_image" class="materialboxed" width="400" src="">
+                        <img id="3x4_image" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_3x4.png')}}">
                     </div>
                 </div>
                 <div id="image_web" class='row'>
@@ -37,11 +37,11 @@
                         <br><br>
                         <p>Foto 3 por 4:</p>
                         <a href="#fotomodal" onclick="foto()" class="modal-trigger btn-large light-blue darken-1">Abrir webcam</a>
-                        <a onclick="apagar_web()" class="btn-large light-blue darken-1" style="margin-left: 5%;">limpar</a>
+                        <a onclick="apagar_web()" class="btn-large waves-effect waves-light blue" style="margin-left: 5%;">limpar</a>
                     </div>
                     <div class="file-field input-field col s12 m5">
-                        <img id="img_web" class="materialboxed" width="400" src="">
-                        <input type="text" name="foto_web" id="base64" hidden>
+                        <img id="img_web" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_3x4.png')}}">
+                        <input id="web_image" type="text" name="foto_web" id="base64" hidden>
                         <canvas id="canvas_foto" width="400" height="300" style="border: solid 10px black;" hidden></canvas>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="matricula_image" class="materialboxed" width="250" src="">
+                        <img id="matricula_image" class="materialboxed" style="border: solid 10px black;" src="{{asset('/img/unset_image_matricula.png')}}">
                     </div>
                 </div>
                 <div class="row">
@@ -464,7 +464,7 @@
                         </div>
                     </div>
                     <div class="input-field col s12 m6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed" width="250" src="">
+                        <img id="atestado_image" class="materialboxed" style="width: 400px; height: 300px; border: solid 10px black;" src="{{asset('/img/unset_image_atestado.png')}}">
                     </div>
                 </div>
                 <div class="row">
