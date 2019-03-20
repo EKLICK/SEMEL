@@ -22,16 +22,26 @@ class UserEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nick'                  => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:5,100',
-            'email'                 => 'required|string|email|max:255|unique:users,email,'.$this->id.'|',
-
-            'usuario'                  => 'sometimes|nullable|string|max:255',
-            'password'                 => 'sometimes|nullable|string|min:5',
-            'confirm_password'         => 'sometimes|nullable|required_with:password|same:password',
+            'nick'                    => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:5,30',
+            'email'                   => 'required|string|email|max:30|unique:users,email,'.$this->id.'|',
+            'name'                    => 'sometimes|nullable|string|between:5,30',
+            'password'                => 'sometimes|nullable|string|between:5,30',
+            'confirm_password'        => 'sometimes|nullable|required_with:password|same:password',
         ];
     }
 
     public function messages(){
-        return[];
+        return[
+            'nick.required' => 'O campo usuário é de preenchimento obrigatório!',
+            'nick.regex' => 'Insira um usuário sem caractéres especiais!',
+            'nick.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de usuário!',
+
+            'name.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de nome de administrador!',
+
+            'password.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de senha!',
+
+            'confirm_password.required_with' => 'É necessario confirmar a senha de cadastro para o registro!',
+            'confirm_password.same' => 'Confirmação de senha inválida, por favor digitar novamente!',
+        ];
     }
 }

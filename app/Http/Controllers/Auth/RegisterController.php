@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 //REQUEST PARA CONTROLE:
+use App\Http\Requests\User\UserCreateFormRequest;
 use App\Http\Requests\User\UserEditFormRequest;
 
 //MODELOS PARA CONTROLE:
@@ -88,7 +89,7 @@ class RegisterController extends Controller{
      */
 
     //Função create: Retorna a página de criação de registros de usuários.
-    protected function create(Request $request){
+    protected function create(UserCreateFormRequest $request){
         $dataForm = $request->all();
         
         //Define sessão de informação para apresentação na página.
@@ -102,6 +103,7 @@ class RegisterController extends Controller{
         ]);
         $userslist = User::all();
         $quantidade = Quant::find(1);
+        
         return view ('auth.users', compact('userslist','quantidade'));
     }
 
@@ -122,9 +124,9 @@ class RegisterController extends Controller{
 
         //Para editar a senha do usuário, é necessario confirma o usuário e senha antiga.
         //Verifica se os parametros para redefinição de senha foram passados.
-        if($dataForm['password_antiga'] != null && $dataForm['usuario_antigo'] != null){
+        if($dataForm['password_antiga'] != null && $dataForm['name'] != null){
             //Se sim, verifica se os parametros correspondem ao login do usuário.
-            if((Hash::check($dataForm['password'], $user->password)) && ($user->name == $dataForm['usuario'])){
+            if((Hash::check($dataForm['password'], $user->password)) && ($user->name == $dataForm['name'])){
                 //Se sim, atualiza o usuário no banco de dados utilizando parametros de mudança de senha.
                 $user->update([
                     'nick' => $dataForm['nick'],

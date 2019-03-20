@@ -100,7 +100,7 @@
                     @csrf
                     <div class="input-field col s6">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="password" class="validate"  required>
+                        <input name="name" id="icon_name" type="text" class="validate"  required>
                         <label for="icon_name">Usuário:</label>
                     </div>
                     <div class="input-field col s6">

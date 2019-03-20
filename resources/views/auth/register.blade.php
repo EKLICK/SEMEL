@@ -27,7 +27,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}" maxlength="30" required>
+                        <input name="email" id="icon_email" type="email" class="validate" value="{{old('email')}}" maxlength="30" required>
                         <label for="icon_email">E-mail:</label>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="password" class="validate" maxlength="30" required>
+                        <input name="name" id="icon_name" type="text" class="validate" maxlength="30" required>
                         <label for="icon_name">Usuário:</label>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="password_confirmation" id="icon_lock" type="password" class="validate" maxlength="30" required>
+                        <input name="confirm_password" id="icon_lock" type="password" class="validate" maxlength="30" required>
                         <label for="icon_lock">Confirmar senha:</label>
                     </div>
                 </div>
