@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="card-content">
                             <div class="form-field">
-                                <label for="identity"><h6>Usuario</h6></label>
+                                <label for="identity"><h6>Usuário</h6></label>
                                 <input type="text" id="identity" name="identity" required>
                             </div>
                             <br>

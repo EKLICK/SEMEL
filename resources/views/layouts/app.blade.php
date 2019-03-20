@@ -14,7 +14,7 @@
             <div class="navbar-fixed">
                 <nav class="#039be5 light-blue darken-1">
                     <div class="container nav-wrapper">
-                        <a href="{{route('home')}}" class="brand-logo center"><b>SEMEL</b></a>
+                        <a href="{{route('home')}}" class="brand-logo center"><b>ViverBem</b></a>
                         <div class="col 12">
                             @guest
                                 <ul id="nav-mobile" class="right hide-on-med-and-down">

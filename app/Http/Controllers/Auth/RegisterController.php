@@ -228,9 +228,9 @@ class RegisterController extends Controller{
     //Função define_quantidade: Define quantidade limite de turmas que uma pessoa pode ter no sistema.
     protected function define_quantidade(Request $request){
         $dataForm = $request->all();
-
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id == 1){
+            if($dataForm['quantidade'] < 1){ $dataForm['quantidade'] = 1;}
             //Busca a quantidade atual de limite de turmas que um pessoa pode ter no sistema.
             $quant = Quant::find(1);
 

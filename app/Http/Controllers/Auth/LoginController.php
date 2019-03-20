@@ -76,7 +76,7 @@ class LoginController extends Controller{
      * @throws ValidationException
      */
     protected function sendFailedLoginResponse(Request $request){
-        $request->session()->put('mensagem_red', trans('Username ou senha incorreto!'));
+        $request->session()->put('mensagem_red', trans('O usuário e/ou a senha estão incorretos!'));
         throw ValidationException::withMessages(['error' => [trans('auth.failed')],]);
     }
 }

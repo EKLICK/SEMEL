@@ -207,6 +207,9 @@
         </div>
     </div>
     <div id="modalidturmavincular" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <form action="{{Route('professores_turmas_vincular')}}" method="POST">
             @csrf
             <input hidden class="validate" type="text" name="professor_id" id="id_modal_vincular">
@@ -233,6 +236,9 @@
     </div>
 
     <div id="modalidturmaativar" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <form action="{{route('professores_turmas_ativar_inativar')}}" method="POST">
             @csrf
             <input hidden class="validate" type="text" name="professor_id" id="id_modal_ativar">
@@ -259,6 +265,9 @@
     </div>
 
     <div id="modalidturmainativar" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <form action="{{route('professores_turmas_ativar_inativar')}}" method="POST">
             @csrf
             <input hidden class="validate" type="text" name="professor_id" id="id_modal_inativar">

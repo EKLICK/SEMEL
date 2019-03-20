@@ -140,6 +140,9 @@
 
     @if(auth()->user()->id == 1)
         <div id="modalobjetoativar" class="modal">
+            <div class="col s1.5 right">
+                <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+            </div>
             <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
                 @csrf
                 <input class="validate" type="text" name="nucleo_id" id="id_modal_ativar" hidden>
@@ -165,6 +168,9 @@
         </div>
         
         <div id="modalobjetoinativar" class="modal">
+            <div class="col s1.5 right">
+                <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+            </div>
             <form action="{{Route('nucleos_ativar_inativar')}}" method="POST">
                 @csrf
                 <input class="validate" type="text" name="nucleo_id" id="id_modal_inativar" hidden>

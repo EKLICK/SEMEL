@@ -146,6 +146,9 @@
         </div>
     </div>
     <div id="modalregistroturmasnucleo" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="row">
                 <h5>Núcleo no qual o professor está Ativo</h5>

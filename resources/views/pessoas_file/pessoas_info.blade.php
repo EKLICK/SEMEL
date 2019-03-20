@@ -63,9 +63,9 @@
                             <tr>
                                 <h6><b>Foto registrada:</b></h6>
                                 @if(!is_null($pessoa->foto))
-                                    <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset($pessoa->foto)}}"></td>
+                                    <td><img id="3x4_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset($pessoa->foto)}}"></td>
                                 @else
-                                    <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_3x4.png')}}"></td>
+                                    <td><img id="3x4_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset('/img/unset_image_3x4.png')}}"></td>
                                 @endif
                             </tr>
                         </table>
@@ -75,11 +75,11 @@
                             <table>
                                 <tr>
                                     <h6><b>Matricula:</b></h6>
-                                        @if(!is_null($pessoa->matricula))
-                                            <td><img id="matricula_image" class="materialboxed imagensparafoto" src="{{asset($pessoa->matricula)}}"></td>
-                                        @else
-                                        <td><img id="3x4_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_matricula.png')}}"></td>
-                                        @endif
+                                    @if(!is_null($pessoa->matricula))
+                                        <td><img id="matricula_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset($pessoa->matricula)}}"></td>
+                                    @else
+                                        <td><img id="matricula_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset('/img/unset_image_matricula.png')}}"></td>
+                                    @endif
                                 </tr>
                             </table>
                         </div>
@@ -327,6 +327,9 @@
     </div>
 
     <div id="modalregistroturmasnucleo" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="row">
                 <h5>Núcleo no qual a pessoa está Ativa</h5>
@@ -401,6 +404,9 @@
     </div>
 
     <div id="modalregistroanamneses" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="col s12">
                 <table class="centered responsive-table highlight bordered">

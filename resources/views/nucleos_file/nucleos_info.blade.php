@@ -141,6 +141,9 @@
     </div>
 
      <div id="modalregistroturmas" class="modal">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="col s12">
                 <table class="centered responsive-table highlight bordered">

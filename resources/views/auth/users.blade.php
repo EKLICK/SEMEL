@@ -47,6 +47,9 @@
     </div>
 
     <div id="modaldelete" class="modal"  style="width: 30%;">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <form action="{{route('users.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
@@ -82,6 +85,9 @@
     </div>
 
     <div id="modalreset" class="modal" style="width: 55%; height: 45%;">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="row">
                 <p class="center"><b>Ferramenta utilizada para retirar todas as pessoas de todas as turmas do sistema, confirmando esta requisição, não terá como voltar atrás: </b></p>
@@ -114,11 +120,14 @@
     </div>
 
     <div id="modalquantbloqueio" class="modal" style="width: 38%; height: 40%;">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <div class="container">
             <div class="row">
                 <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
                 <hr>
-                <h5><b>Quantidade possivel atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
+                <h5><b>Quantidade possível atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
             </div>
             <br>
             <div class="row">

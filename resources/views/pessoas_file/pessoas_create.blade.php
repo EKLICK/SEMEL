@@ -484,14 +484,14 @@
     </div>
 
     <div id="adicionardoenca" class="modal" style="width: 33%; height: 52%;">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
         <br><br>
         <div class="container">
             <div class="row">
                 <div class="input-field col s12 m5">
                     <h5>Criar Doença</h5>
-                </div>
-                <div class="input-field col s12 m5 right">
-                    <a class="btn-floating btn-large" id="botao_doenca"><i class="material-icons">add</i></a>
                 </div>
             </div>
             <form id="ajax_doenca">
@@ -505,10 +505,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12 m12">
+                        <div class="input-field col s10 m10">
                             <i class="material-icons prefix">description</i>
                             <textarea id="descricao_doenca" class="materialize-textarea"></textarea>
                             <label for="descricao_doenca">Observação</label>
+                        </div>
+                        <div class="input-field col s2 m2 right">
+                            <a class="btn-floating btn-large" id="botao_doenca"><i class="material-icons">add</i></a>
                         </div>
                     </div>
                 </div>
