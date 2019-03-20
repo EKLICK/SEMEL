@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
-                        <input name="nick" id="icon_nick" type="text" class="validate" value="@if(is_null(old('nick'))) {{$user->nick}} @else {{old('nick')}} @endif" required>
+                        <input name="nick" id="icon_nick" type="text" class="validate" value="@if(is_null(old('nick'))) {{$user->nick}} @else {{old('nick')}} @endif" maxlength="30" required>
                         <label for="icon_nick">Nome do administrador:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="icon_email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$user->email}} @else {{old('email')}} @endif" required>
+                        <input name="email" id="icon_email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$user->email}} @else {{old('email')}} @endif" maxlength="30" required>
                         <label for="icon_email">E-mail:</label>
                     </div>
                 </div>
@@ -33,24 +33,24 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario_antigo" id="icon_usuario_antigo" type="password" class="validate">
+                        <input name="usuario_antigo" id="icon_usuario_antigo" type="password" class="validate" maxlength="30">
                         <label for="icon_usuario_antigo">Usuário:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password_antiga" id="icon_lockout_antiga" type="password" class="validate">
+                        <input name="password_antiga" id="icon_lockout_antiga" type="password" class="validate" maxlength="30">
                         <label for="icon_lockout_antiga">Senha antiga:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="icon_lockout" type="password" class="validate">
+                        <input name="password" id="icon_lockout" type="password" class="validate" maxlength="30">
                         <label for="icon_lockout">Nova Senha:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="icon_lock" type="password" class="validate">
+                        <input name="confirm_password" id="icon_lock" type="password" class="validate" maxlength="30">
                         <label for="icon_lock">Confirmar senha:</label>
                     </div>
                 </div>

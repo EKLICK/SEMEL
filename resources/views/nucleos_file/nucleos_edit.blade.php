@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="input-field col s11 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif" required>
+                        <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
                         <label for="icon_nome">Nome do núcleo:</label>
                     </div>
                     <div class="input-field col s11 m5">
@@ -33,38 +33,38 @@
                 <div class="row">
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif" required>
+                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif" maxlength="15" required>
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif" required>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif" maxlength="10" required>
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif required>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif maxlength="5" required>
                         <label for="numero_endereco">Número:</label>
                     </div>
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">bookmark</i>
-                        <input name="complemento" id="icon_complemento" type="text" class="validate" value="@if(is_null(old('complemento'))) {{$nucleo->complemento}} @else {{old('complemento')}} @endif">
+                        <input name="complemento" id="icon_complemento" type="text" class="validate" value="@if(is_null(old('complemento'))) {{$nucleo->complemento}} @else {{old('complemento')}} @endif" maxlength="10">
                         <label for="icon_complemento">Complemento:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="@if(is_null(old('telefone'))) {{$nucleo->telefone}} @else {{old('telefone')}} @endif" required>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="@if(is_null(old('telefone'))) {{$nucleo->telefone}} @else {{old('telefone')}} @endif" maxlength="16" required>
                         <label for="icon_telefone">Telefone:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea">@if(is_null(old('descricao'))) {{$nucleo->descricao}} @else {{old('descricao')}} @endif</textarea>
+                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea" maxlength="100">@if(is_null(old('descricao'))) {{$nucleo->descricao}} @else {{old('descricao')}} @endif</textarea>
                         <label for="descricao">Descrição do núcleo:</label>
                     </div>
                     <div class="container">

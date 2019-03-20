@@ -100,7 +100,7 @@
                     @csrf
                     <div class="input-field col s6">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="password" class="validate" required>
+                        <input name="name" id="icon_name" type="password" class="validate"  required>
                         <label for="icon_name">Usuário:</label>
                     </div>
                     <div class="input-field col s6">
@@ -125,7 +125,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <p class="center"><b>Configuração de quantidade limite de permissão para adicionar um pessoa em turmas: </b></p>
+                <p class="center"><b>Configuração de quantidade limite de permissão para adicionar pessoas em turmas: </b></p>
                 <hr>
                 <h5><b>Quantidade possível atual:&emsp;&emsp; {{$quantidade->quantidade}}</b></h5>
             </div>

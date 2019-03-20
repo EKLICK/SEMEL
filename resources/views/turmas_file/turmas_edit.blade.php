@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
-                        <input name="nome" id="prefix" type="text" class="validate" value="@if(is_null(old('nome'))) {{$turma->nome}} @else {{old('nome')}} @endif" required>
+                        <input name="nome" id="prefix" type="text" class="validate" value="@if(is_null(old('nome'))) {{$turma->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
                         <label for="_prefix">Nome da turma:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -28,12 +28,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
-                        <input name="horario_inicial" id="horario_inicial" type="text" class="validate timepicker" value="@if(is_null(old('horario_inicial'))) {{$turma->horario_inicial}} @else {{old('horario_inicial')}} @endif" required>
+                        <input name="horario_inicial" id="horario_inicial" type="text" class="validate timepicker" value="@if(is_null(old('horario_inicial'))) {{$turma->horario_inicial}} @else {{old('horario_inicial')}} @endif" maxlength="8" required>
                         <label for="horario_inicial">Horário Inicial:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
-                        <input name="horario_final" id="horario_final" type="text" class="validate timepicker" value="@if(is_null(old('horario_final'))) {{$turma->horario_final}} @else {{old('horario_final')}} @endif" required>
+                        <input name="horario_final" id="horario_final" type="text" class="validate timepicker" value="@if(is_null(old('horario_final'))) {{$turma->horario_final}} @else {{old('horario_final')}} @endif" maxlength="8" required>
                         <label for="horario_final">Horário Final:</label>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea">@if(is_null(old('descricao'))) {{$turma->descricao}} @else {{old('descricao')}} @endif</textarea>
+                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea" maxlength="100">@if(is_null(old('descricao'))) {{$turma->descricao}} @else {{old('descricao')}} @endif</textarea>
                         <label for="descricao">Descrição da turma:</label>
                     </div>
                     <div class="container">

@@ -48,43 +48,43 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" required>
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
                         <label for="nome">Nome (obrigatório):</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}" required>
+                        <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}" maxlength="10" required>
                         <label for="nascimento">Data de nascimento (obrigatório):</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}">
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}" maxlength="14">
                         <label for="cpf">CPF próprio:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="{{old('cpf_responsavel')}}">
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" class="validate" value="{{old('cpf_responsavel')}}" maxlength="14">
                         <label for="cpf_responsavel">CPF do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}">
+                        <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}" maxlength="13">
                         <label for="rg">RG:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg_responsavel')}}">
+                        <input name="rg_responsavel" id="rg_responsavel" type="text" class="validate" value="{{old('rg_responsavel')}}" maxlength="13">
                         <label for="rg_responsavel">RG do responsavel:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif>
+                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif maxlength="30">
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -100,7 +100,7 @@
                         </div>
                         <div id="div_bairro_string" @if(is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>
-                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}">
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}" maxlength="15">
                             <label for="string_bairro">Bairro:</label>
                         </div>
                     </div>
@@ -108,53 +108,53 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}">
+                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" maxlength="15">
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}" maxlength="10">
                         <label for="cep">CEP:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}">
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" maxlength="5">
                         <label for="numero_endereco">Número:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">bookmark</i>
-                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}">
+                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}" maxlength="10">
                         <label for="complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}">
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}" maxlength="16">
                         <label for="telephone">Telefone:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">contact_phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}">
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone_emergencia" id="telephone_emergencia" type="tel" class="validate" value="{{old('telefone_emergencia')}}" maxlength="16">
                         <label for="telephone_emergencia">Telefone emergência:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person</i>
-                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="{{old('nome_do_pai')}}">
+                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="{{old('nome_do_pai')}}" maxlength="30">
                         <label for="nome_do_pai">Nome do pai:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person_outline</i>
-                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{old('nome_da_mae')}}">
+                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{old('nome_da_mae')}}" maxlength="30">
                         <label for="nome_da_mae">Nome do mãe:</label>
                     </div>
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">person_add</i>
-                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{old('pessoa_emergencia')}}">
+                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{old('pessoa_emergencia')}}" maxlength="30">
                         <label for="pessoa_emergencia">Pessoa emergência:</label>
                     </div>
                 </div>
@@ -296,7 +296,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="toma_medicacao_icon" class="material-icons prefix" @if(old('toma_medicacao') != 1) hidden @endif>description</i>
-                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') != 1) hidden @endif>
+                        <input id="string_toma_medicacao" name="string_toma_medicacao" type="text" class="validate" value="{{old('string_toma_medicacao')}}" @if(old('toma_medicacao') != 1) hidden @endif maxlength="50">
                         <label id="toma_medicacao_label" for="string_toma_medicacao" @if(old('toma_medicacao') != 1) hidden @endif>Qual medicamento?</label>
                     </div>
                 </div>
@@ -318,7 +318,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="alergia_medicacao_icon" class="material-icons prefix" @if(old('alergia_medicacao') != 1) hidden @endif>description</i>
-                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="{{old('string_alergia_medicacao')}}" @if(old('alergia_medicacao') != 1) hidden @endif>
+                        <input id="string_alergia_medicacao" name="string_alergia_medicacao" type="text" class="validate" value="{{old('string_alergia_medicacao')}}" @if(old('alergia_medicacao') != 1) hidden @endif maxlength="50">
                         <label id="alergia_medicacao_label" for="string_alergia_medicacao" @if(old('alergia_medicacao') != 1) hidden @endif>Qual alergia médica?</label>
                     </div>
                 </div>
@@ -340,7 +340,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="cirurgia_icon" class="material-icons prefix" @if(old('cirurgia') != 1) hidden @endif>description</i>
-                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="{{old('string_cirurgia')}}" @if(old('cirurgia') != 1) hidden @endif>
+                        <input id="string_cirurgia" name="string_cirurgia" type="text" class="validate" value="{{old('string_cirurgia')}}" @if(old('cirurgia') != 1) hidden @endif maxlength="50">
                         <label id="cirurgia_label" for="string_cirurgia" @if(old('cirurgia') != 1) hidden @endif>Em que região foi a cirurgia?</label>
                     </div>
                 </div>
@@ -362,7 +362,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="dor_ossea_icon" class="material-icons prefix" @if(old('dor_ossea') != 1) hidden @endif>description</i>
-                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="{{old('string_dor_ossea')}}" @if(old('dor_ossea') != 1) hidden @endif>
+                        <input id="string_dor_ossea" name="string_dor_ossea" type="text" class="validate" value="{{old('string_dor_ossea')}}" @if(old('dor_ossea') != 1) hidden @endif maxlength="50">
                         <label id="dor_ossea_label" for="string_dor_ossea" @if(old('dor_ossea') != 1) hidden @endif>Onde está a dor óssea?</label>
                     </div>
                 </div>
@@ -384,7 +384,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="dor_muscular_icon" class="material-icons prefix" @if(old('dor_muscular') != 1) hidden @endif>description</i>
-                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="{{old('string_dor_muscular')}}" @if(old('dor_muscular') != 1) hidden @endif>
+                        <input id="string_dor_muscular" name="string_dor_muscular" type="text" class="validate" value="{{old('string_dor_muscular')}}" @if(old('dor_muscular') != 1) hidden @endif maxlength="50">
                         <label id="dor_muscular_label" for="string_dor_muscular" @if(old('dor_muscular') != 1) hidden @endif>Onde está a dor muscular?</label>
                     </div>
                 </div>
@@ -406,7 +406,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="dor_articular_icon" class="material-icons prefix" @if(old('dor_articular') != 1) hidden @endif>description</i>
-                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="{{old('string_dor_articular')}}" @if(old('dor_articular') != 1) hidden @endif>
+                        <input id="string_dor_articular" name="string_dor_articular" type="text" class="validate" value="{{old('string_dor_articular')}}" @if(old('dor_articular') != 1) hidden @endif maxlength="50">
                         <label id="dor_articular_label" for="string_dor_articular" @if(old('dor_articular') != 1) hidden @endif>Onde está a dor articular?</label>
                     </div>
                 </div>
@@ -428,7 +428,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i id="fumante_icon" class="material-icons prefix" @if(old('fumante') != 1) hidden @endif>description</i>
-                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="{{old('string_fumante')}}" @if(old('fumante') != 1) hidden @endif>
+                        <input id="string_fumante" name="string_fumante" type="text" class="validate" value="{{old('string_fumante')}}" @if(old('fumante') != 1) hidden @endif maxlength="50">
                         <label id="fumante_label" for="string_fumante" @if(old('fumante') != 1) hidden @endif>Fuma há quanto tempo?</label>
                     </div>
                 </div>
@@ -454,7 +454,7 @@
                             <p>Atestado médico (.img | .png | .jpg) (obrigatório):</p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
-                                <input id="img_atestado" type="file" name="img_atestado">
+                                <input id="img_atestado" type="file" name="img_atestado" required>
                             </div>
                             <a id="limpar_atestado"  class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
@@ -469,7 +469,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
-                        <textarea name="observacao" id="observacao" class="materialize-textarea">{{old('observacao')}}</textarea>
+                        <textarea name="observacao" id="observacao" class="materialize-textarea" maxlength="100">{{old('observacao')}}</textarea>
                         <label for="observacao">Observação</label>
                     </div>
                     <div class="container">
@@ -507,7 +507,7 @@
                     <div class="row">
                         <div class="input-field col s10 m10">
                             <i class="material-icons prefix">description</i>
-                            <textarea id="descricao_doenca" class="materialize-textarea"></textarea>
+                            <textarea id="descricao_doenca" class="materialize-textarea" maxlength="100"></textarea>
                             <label for="descricao_doenca">Observação</label>
                         </div>
                         <div class="input-field col s2 m2 right">

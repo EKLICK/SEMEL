@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" required>
+                        <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
                         <label for="icon_nome">Turma da turma:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -27,12 +27,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
-                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}" required>
+                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}" maxlength="8" required>
                         <label for="icon_horario_inicial">Horário Inicial:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
-                        <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}" required>
+                        <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}" maxlength="8" required>
                         <label for="icon_horario_final">Horário Final:</label>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea">{{old('descricao')}}</textarea>
+                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100">{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição da turma:</label>
                     </div>
                 </div>

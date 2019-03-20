@@ -365,10 +365,10 @@ class PessoasController extends Controller{
         if(isset($dataForm['img_3x4'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
-            $dataForm['img_3x4'] = $this->saveDbImage3x4($request);
+            $dataForm['img_3x4'] = $this->saveDbImage3x4($request, 1);
         }
         elseif(isset($dataForm['3x4'])){
-            //Se a imagem não foi passada, porém permanece com o link antigo, apenas repeto o valor que está no banco de dados para criação
+            //Se a imagem não foi passada, porém permanece com o link antigo, apenas repete o valor que está no banco de dados para criação
             $dataForm += ['img_3x4' => $pessoa['foto']];
         }
         else{
@@ -376,7 +376,10 @@ class PessoasController extends Controller{
             $dataForm += ['img_3x4' => null];
         }
 
-        if(isset($dataForm['foto_web'])){$dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);}
+        if(isset($dataForm['foto_web'])){
+            if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
+            $dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);
+        }
         
 
         //Adiciona a variavel nascimento a idade da pessoa.

@@ -22,12 +22,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
-                        <input name="nick" id="icon_nick" type="text" class="validate" value="{{old('nick')}}" required>
+                        <input name="nick" id="icon_nick" type="text" class="validate" value="{{old('nick')}}" maxlength="30" required>
                         <label for="icon_nick">Nome do administrador:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}" required>
+                        <input name="email" id="icon_email" type="tel" class="validate" value="{{old('email')}}" maxlength="30" required>
                         <label for="icon_email">E-mail:</label>
                     </div>
                 </div>
@@ -35,19 +35,19 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="password" class="validate" required>
+                        <input name="name" id="icon_name" type="password" class="validate" maxlength="30" required>
                         <label for="icon_name">Usuário:</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="icon_lockout" type="password" class="validate" required>
+                        <input name="password" id="icon_lockout" type="password" class="validate" maxlength="30" required>
                         <label for="icon_lockout">Senha:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="password_confirmation" id="icon_lock" type="password" class="validate" required>
+                        <input name="password_confirmation" id="icon_lock" type="password" class="validate" maxlength="30" required>
                         <label for="icon_lock">Confirmar senha:</label>
                     </div>
                 </div>
