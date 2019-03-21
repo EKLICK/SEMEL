@@ -24,7 +24,7 @@
                                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                                 <ul class="left hide-on-med-and-down">
                                     <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
-                                    <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                                    <h6><b>Nível: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
                                 </ul>
                                 <ul id="nav-mobile" class="right">
                                     <li>
@@ -75,22 +75,22 @@
                     </div>
                 </div>
             </div>
-        @endguest
-        <ul class="sidenav grey lighten-2" id="mobile-demo">
-            <div class="row">
-                <div class="col s12 blue white-text">
-                <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
-                <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
-                </div>
-                <div class="col s12">
-                    <div class="card">
-                        <ul class="collapsible">
-                            @include('layouts.menu')
-                        </ul>
+            <ul class="sidenav grey lighten-2" id="mobile-demo">
+                <div class="row">
+                    <div class="col s12 blue white-text">
+                    <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
+                    <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                    </div>
+                    <div class="col s12">
+                        <div class="card">
+                            <ul class="collapsible">
+                                @include('layouts.menu')
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </ul>
+            </ul>
+        @endguest
         <script>M.AutoInit();</script>
         <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>

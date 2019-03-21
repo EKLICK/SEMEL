@@ -43,7 +43,7 @@
             </table>
             <br>
             <div class="container">
-                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar Usuário" href="{{route('register')}}"><i class="material-icons">add</i></a>
+                <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar Usuário" href="{{route('register')}}"><i class="material-icons">add_to_queue</i></a>
             </div>
         </div>
     </div>

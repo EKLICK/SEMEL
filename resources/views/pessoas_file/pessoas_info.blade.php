@@ -318,7 +318,7 @@
                     <div class="row">
                         <div class="col s12">
                             <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroanamneses">Lista de anamneses&emsp;&nbsp; <i class="material-icons">insert_drive_file</i></a>
-                            <a class="tooltipped waves-effect waves-light btn-large light-blue darken-1" data-position="top" data-tooltip="Criar nova anamnese para {{$nomes[0]}}" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add</i></a>
+                            <a class="tooltipped waves-effect waves-light btn-large light-blue darken-1" data-position="top" data-tooltip="Criar nova anamnese para {{$nomes[0]}}" href="{{Route('anamnese_create', $pessoa->id)}}"><i class="material-icons">add_to_queue</i></a>
                         </div>
                     </div>
                 </div>

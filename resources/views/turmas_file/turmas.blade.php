@@ -150,7 +150,7 @@
             @if(auth()->user()->id == 1)
                 <br>
                 <div class="container">
-                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add</i></a>
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add_to_queue</i></a>
                     &emsp;&emsp;
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_turmas_pdf', json_encode($arrayturmas))}}"><i class="material-icons">assessment</i></a>
                 </div>
