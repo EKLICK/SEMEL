@@ -62,6 +62,7 @@ class RegisterController extends Controller{
 
     //FUNÇÃO DE FERRAMENTAS:
     //Ferramenta validator: Valida usuário registrado para a criação.
+    //Não utilizado no sistema atualmente.
     protected function validator(array $data){
         return Validator::make($data, [
             'nick' => ['required','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/','between:5,50'],
@@ -73,6 +74,7 @@ class RegisterController extends Controller{
 
     //Função index: Retorna a página de registros de usuários.
     protected function index(){
+        //Encontra todos os registros de usuários e ordena por nick.
         $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
@@ -94,6 +96,8 @@ class RegisterController extends Controller{
         
         //Define sessão de informação para apresentação na página.
         Session::put('mensagem_green', 'Administrador '.$dataForm['name'].' adicionado com sucesso!');
+
+        //Cria histórico no banco de dados.
         User::create([
             'nick' => $dataForm['nick'],
             'name' => $dataForm['name'],
@@ -101,7 +105,11 @@ class RegisterController extends Controller{
             'email' => $dataForm['email'],
             'password' => Hash::make($dataForm['password']),
         ]);
-        $userslist = User::all();
+
+        //Encontra todos os registros de usuários e ordena por nick.
+        $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
+
+        //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
         
         return view ('auth.users', compact('userslist','quantidade'));
@@ -230,9 +238,12 @@ class RegisterController extends Controller{
     //Função define_quantidade: Define quantidade limite de turmas que uma pessoa pode ter no sistema.
     protected function define_quantidade(Request $request){
         $dataForm = $request->all();
+
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
         if(auth()->user()->id == 1){
+            //Se o número passado for menor que 1, define o número 1 na quantidade máxima.
             if($dataForm['quantidade'] < 1){ $dataForm['quantidade'] = 1;}
+
             //Busca a quantidade atual de limite de turmas que um pessoa pode ter no sistema.
             $quant = Quant::find(1);
 

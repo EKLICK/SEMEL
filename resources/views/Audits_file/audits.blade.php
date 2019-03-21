@@ -69,7 +69,12 @@
                             <td><p>{{$audit->user_id}}</p></td>
                             <td><p>{{$audit->auditable_type}}</p></td>
                             <td><p>{{$audit->event}}</p></td>
-                            <td><p>{{$audit->created_at}}</p></td>
+                            @php
+                                $horario = explode(" ",$audit->created_at);
+                                $diamesano = explode("-", $horario[0]);
+                                $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
+                            @endphp
+                            <td><p>{{$horario[0]}}<br>{{$horario[1]}}</p></td>
                             <td><a class="tooltipped" data-position="top" data-tooltip="Informações da auditoria" href="{{route('audits_info', $audit->id)}}"><i class="small material-icons">info</i></a></td>
                         </tr>
                     @endforeach 

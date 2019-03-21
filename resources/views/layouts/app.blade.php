@@ -15,13 +15,17 @@
                 <nav class="#039be5 light-blue darken-1">
                     <div class="container nav-wrapper">
                         <a href="{{route('home')}}" class="brand-logo center"><b>ViverBem</b></a>
-                        <div class="col 12">
+                        <div class="col s12">
                             @guest
-                                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <ul id="nav-mobile" class="right">
                                     <li><a href="{{route('login')}}"><b>Login</b></a></li>
                                 </ul>
                             @else
                                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                                <ul class="left hide-on-med-and-down">
+                                    <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
+                                    <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                                </ul>
                                 <ul id="nav-mobile" class="right">
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons left">exit_to_app</i><b>{{ __('Sair') }}</b></a>
@@ -73,10 +77,18 @@
             </div>
         @endguest
         <ul class="sidenav grey lighten-2" id="mobile-demo">
-            <div class="card">
-                <ul class="collapsible">
-                    @include('layouts.menu')
-                </ul>
+            <div class="row">
+                <div class="col s12 blue white-text">
+                <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
+                <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                </div>
+                <div class="col s12">
+                    <div class="card">
+                        <ul class="collapsible">
+                            @include('layouts.menu')
+                        </ul>
+                    </div>
+                </div>
             </div>
         </ul>
         <script>M.AutoInit();</script>

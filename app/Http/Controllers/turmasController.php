@@ -305,7 +305,7 @@ class TurmasController extends Controller{
                 //Update no banco de dados para inativar todas as pessoas.
                 DB::update(DB::raw('update turmas_pessoas set inativo = 2 where pessoa_id = :sujeito and turma_id = :turma'), ['sujeito'=>$pessoa->id, 'turma'=>$turma->id]);
 
-                //Criar histórico no banco de dados.
+                //Cria histórico no banco de dados.
                 HistoricoPT::create([
                     'pessoa_id' => $pessoa->id,
                     'turma_id' => $turma->id,

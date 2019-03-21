@@ -5,7 +5,7 @@
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
 @endsection
 @section('title') Usuários registrados 
-    @if(auth()->user()->id == 1)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Resetar Sistema<i class="material-icons right">access_time</i>@endif</a>
+    @if(auth()->user()->id == 1)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">&emsp;Inativar em lote <i class="material-icons right">access_time</i>@endif</a>
     <br>
     @if(auth()->user()->id == 1)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endif</a>
 @endsection
@@ -17,6 +17,7 @@
             <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome do Usuário</th>
                         <th>Email</th>
                         <th>Tipo de usuário</th>
@@ -26,6 +27,7 @@
                 <tbody>
                     @foreach ($userslist as $user)
                         <tr>
+                            <td><p>{{$user->id}}</p></td>
                             <td><p>{{$user->nick}}</p></td>
                             <td><p>{{$user->email}}</p></td>
                             <td><p>@if($user->admin_professor == 1) Administrador @else Professor @endif</p></td>
