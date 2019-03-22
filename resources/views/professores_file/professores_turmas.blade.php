@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('breadcrumbs')
     @if(auth()->user()->admin_professor == 1)
         <a href="{{route('home')}}" class="breadcrumb">Home</a>

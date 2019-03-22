@@ -23,8 +23,8 @@ class UserCreateFormRequest extends FormRequest{
     public function rules(){
         return [
             'nick'                    => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:5,30',
-            'email'                   => 'required|string|email|max:30|unique:users',
-            'name'                    => 'required|string|between:5,30',
+            'email'                   => 'required|email|max:30|unique:users',
+            'name'                    => 'required|string|between:5,30|unique:users',
             'password'                => 'required|string|between:5,30',
             'confirm_password'        => 'required|required_with:password|same:password',
         ];
@@ -36,11 +36,14 @@ class UserCreateFormRequest extends FormRequest{
             'nick.regex' => 'Insira um usuário sem caractéres especiais!',
             'nick.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de usuário!',
 
-            'email.required' =>'É necessario preencher o campo de email!',
+            'email.required' => 'É necessario preencher o campo de email!',
+            'email.email' => 'Email invalido!',
+            'email.max' => 'Email permitido apenas com 30 caracteres ou menos!',
             'email.unique' => 'Email já cadastrado no sistema!',
 
             'name.required' => 'O campo nome do administrador é de preenchimento obrigatório!',
             'name.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de nome de administrador!',
+            'name.unique' => 'Usuário já cadastrado, utilize outro!',
 
             'password.required' => 'É necessario uma senha de cadastro para o registro!',
             'password.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de senha!',

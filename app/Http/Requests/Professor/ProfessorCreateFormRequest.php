@@ -37,7 +37,7 @@ class ProfessorCreateFormRequest extends FormRequest{
             'curso'                    => 'required|between:3,100',
             'formacao'                 => 'required|between:3,100',
 
-            'usuario'                  => 'required|string|max:255',
+            'usuario'                  => 'required|string|max:255|unique:users',
             'password'                 => 'required|string|min:5',
             'confirm_password'         => 'required_with:password|same:password',
         ];

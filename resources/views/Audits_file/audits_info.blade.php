@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('css.personalizado')<link rel="stylesheet" href="{{asset('css/table_audits.css')}}">@endsection
 @section('breadcrumbs')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>

@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@section('css.personalizado')@endsection
 @section('breadcrumbs')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
-    <a href="{{route('nucleos.index')}}" class="breadcrumb">Nucleos</a>
+    <a href="{{route('nucleos.index')}}" class="breadcrumb">Núcleos</a>
     <a href="{{route('nucleos.edit', $nucleo->id)}}" class="breadcrumb">Editar</a>
 @endsection
 @section('title') Editar {{$nucleo->nome}} @endsection

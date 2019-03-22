@@ -263,17 +263,16 @@ $('#fotomodal').modal({
 });
 
 function stop(){
-    var video = document.getElementById('video');
-    video.srcObject.getTracks()[0].stop();
+    try{
+        var video = document.getElementById('video');
+        video.srcObject.getTracks()[0].stop();
+    }
+    catch(e){}
 }
 
 function foto() {
     var video = document.getElementById('video');
-    navigator.getMedia = navigator.getUserMedia || 
-                         navigator.webkitGetUserMedia || 
-                         navigator.mozGetUserMedia || 
-                         navigator.msGetUserMedia;
-
+    navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     navigator.getMedia({
         video:true,
         audio: false
@@ -281,7 +280,8 @@ function foto() {
         video.srcObject = stream;
         video.play();
     }, function(error) {
-        //Um erro
+        setTimeout(function(){alert('Wecam inativo: \n' + error);}, 350);
+        $('#fotomodal').modal('close');
     });
 };
 

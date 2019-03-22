@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('breadcrumbs')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
@@ -522,7 +521,7 @@
     <div id="fotomodal" class="modal">
         <div class="center">
             <br>
-            <video id='video' style='border: solid 10px; black; width: 393px; height:300px;'></video>
+            <video id='video' class="grey lighten-1 center" style='border: solid 10px; black; width: 393px; height:300px;'></video>
             <div class='container'>
                 <hr>
             </div>

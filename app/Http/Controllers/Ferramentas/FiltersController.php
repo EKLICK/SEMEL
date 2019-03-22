@@ -928,8 +928,8 @@ class filtersController extends Controller{
         //Cria paginate para os registros encontrados.
         $auditslist = $auditslist->paginate(10);
 
-        //Criando array de tabelas do banco de dados para filtros.
-        $tabelas = ['Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
+        //Criando array de de tabelas para filtro.
+        $tabelas = ['Quantidade limite','Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
         
         return view('audits_file.audits', compact('auditslist', 'tabelas', 'dataForm'));
     }

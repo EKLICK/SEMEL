@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('breadcrumbs')
     <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Turmas</a>
     <a href="{{Route('professor.edit', $professor->id)}}" class="breadcrumb">Alunos</a>

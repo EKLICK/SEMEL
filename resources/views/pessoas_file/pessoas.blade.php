@@ -135,6 +135,7 @@
             <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome da pessoa</th>
                         <th>Atualizações</th>
                         <th>Situação</th>
@@ -146,6 +147,7 @@
                     @foreach ($pessoaslist as $pessoa)
                         @php array_push($arraypessoas, $pessoa->id); @endphp
                         <tr>
+                            <td><p>{{$pessoa->id}}</p></td>
                             <td><p>{{$pessoa->nome}}</p></td>
                             <td><p>{{$pessoa->anamneses->last()->ano}}</p><i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
                             <td><p>@if($pessoa->estado == 2) Incompleto @else Completo @endif</p><i class="small material-icons" @if($pessoa->estado == 2) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>

@@ -15,7 +15,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
                         <input name="nick" id="icon_nick" type="text" class="validate" value="@if(is_null(old('nick'))) {{$user->nick}} @else {{old('nick')}} @endif" maxlength="30" required>
-                        <label for="icon_nick">Nome do administrador:</label>
+                        <label for="icon_nick">Nome do @if($user->admin_professor == 1) administrador @else professor @endif:</label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
@@ -26,22 +26,10 @@
                 <br><br><br>
                     <div class="card">
                         <div class="card-content ">
-                            <h6>Caso queira trocar a senha ou usuário é necessário confirmar o usuário e senha antigas.</h6>
+                            <h6>Redefinição de senha antiga.</h6>
                         </div>
                     </div>
                 <br>
-                <div class="row">
-                    <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="password" class="validate" maxlength="30">
-                        <label for="icon_name">Usuário:</label>
-                    </div>
-                    <div class="input-field col s12 m5">
-                        <i class="material-icons prefix">lock_outline</i>
-                        <input name="password_antiga" id="icon_lockout_antiga" type="password" class="validate" maxlength="30">
-                        <label for="icon_lockout_antiga">Senha antiga:</label>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>

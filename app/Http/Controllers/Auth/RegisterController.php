@@ -132,22 +132,12 @@ class RegisterController extends Controller{
 
         //Para editar a senha do usuário, é necessario confirma o usuário e senha antiga.
         //Verifica se os parametros para redefinição de senha foram passados.
-        if($dataForm['password_antiga'] != null && $dataForm['name'] != null){
-            //Se sim, verifica se os parametros correspondem ao login do usuário.
-            if((Hash::check($dataForm['password'], $user->password)) && ($user->name == $dataForm['name'])){
-                //Se sim, atualiza o usuário no banco de dados utilizando parametros de mudança de senha.
-                $user->update([
-                    'nick' => $dataForm['nick'],
-                    'email' => $dataForm['email'],
-                    'password' => bcrypt($dataForm['password']),
-                ]);
-            }
-            else{
-                //Se não, define uma sessão em vermelho para aviso de senha ou usuário incorreto.
-                Session::put('mensagem_red', "Usuário ou senha incorreta para troca de senha!");
-
-                return redirect()->Route('users.edit', $id);
-            }
+        if($dataForm['password']){
+            $user->update([
+                'nick' => $dataForm['nick'],
+                'email' => $dataForm['email'],
+                'password' => bcrypt($dataForm['password']),
+            ]);
         }
         else{
             //Se não, atualiza o usuário no banco de dados sem mudar senha.

@@ -1,14 +1,6 @@
 @extends('layouts.app')
-
 @section('breadcrumbs')
-    <a href="{{route
-    
-    
-    
-    
-    
-    
-    ('home')}}" class="breadcrumb">Home</a>
+    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
     <a class="breadcrumb" href="{{route('register')}}">Cadastrar</a>
 @endsection

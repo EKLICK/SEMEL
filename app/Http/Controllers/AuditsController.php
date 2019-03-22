@@ -17,17 +17,15 @@ class auditsController extends Controller{
         //Encontra todos os registros de auditorias e ordena por nome.
         $auditslist = Audit::orderBy('created_at','desc')->paginate(10);
 
-        //Criando array de eventos para filtro.
-        $eventos = ['Criação','Edição','Exclusão'];
 
         //Criando array de de tabelas para filtro.
         $tabelas = ['Quantidade limite','Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
-
+        
         //Define variavel $count para informação de quantidade de registros.
         $count = Audit::all();
         Session::put('quant', count($count).' auditorias cadastradas.');
 
-        return view ('audits_file.audits', compact('auditslist','eventos','tabelas'));
+        return view ('audits_file.audits', compact('auditslist','tabelas'));
     }
 
     //Função pessoas_info: Seleciona informações necessarias para vizualização e retorna a página de informações de auditorias.

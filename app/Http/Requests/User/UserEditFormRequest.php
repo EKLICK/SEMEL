@@ -24,7 +24,7 @@ class UserEditFormRequest extends FormRequest{
         return [
             'nick'                    => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:5,30',
             'email'                   => 'required|string|email|max:30|unique:users,email,'.$this->id.'|',
-            'name'                    => 'sometimes|nullable|string|between:5,30',
+            'name'                    => 'sometimes|nullable|string|between:5,30|unique:users,name,'.$this->id.'|',
             'password'                => 'sometimes|nullable|string|between:5,30',
             'confirm_password'        => 'sometimes|nullable|required_with:password|same:password',
         ];
