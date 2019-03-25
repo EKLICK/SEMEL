@@ -285,8 +285,7 @@
                                 <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="toma_medicacao_click('N')" value="2" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 2) checked @endif/>
                                 <span>Não</span>
@@ -307,8 +306,7 @@
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="alergia_medicacao_click('N')" value="2" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 2) checked @endif/>
                                 <span>Não</span>
@@ -329,8 +327,7 @@
                                 <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(old('cirurgia') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="cirurgia_click('N')" value="2" name="cirurgia" type="radio" @if(old('cirurgia') == 2) checked @endif/>
                                 <span>Não</span>
@@ -351,8 +348,7 @@
                                 <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio" @if(old('dor_ossea') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_ossea_click('N')" value="2" name="dor_ossea" type="radio" @if(old('dor_ossea') == 2) checked @endif/>
                                 <span>Não</span>
@@ -373,8 +369,7 @@
                                 <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(old('dor_muscular') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_muscular_click('N')" value="2" name="dor_muscular" type="radio" @if(old('dor_muscular') == 2) checked @endif/>
                                 <span>Não</span>
@@ -395,8 +390,7 @@
                                 <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(old('dor_articular') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_articular_click('N')" value="2" name="dor_articular" type="radio" @if(old('dor_articular') == 2) checked @endif/>
                                 <span>Não</span>
@@ -417,8 +411,7 @@
                                 <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(old('fumante') == 2) checked @endif/>
                                 <span>Não</span>

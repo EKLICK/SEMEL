@@ -17,6 +17,14 @@ $('.datepicker').datepicker({
     }
 });
 
+$('.timepicker').timepicker({
+    twelveHour: false,
+    i18n: {
+        cancel: 'Cancelar',
+        done: 'Ok',
+    }
+});
+
 
 //FORMATAÇÃO DE INPUTS:
 function fMasc(objeto,mascara) {
@@ -65,6 +73,10 @@ function mCEP(cep){
 function mNum(num){
     num=num.replace(/\D/g,"")
     return num
+}
+
+function validationCPF(){
+    
 }
 
 

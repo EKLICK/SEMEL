@@ -149,8 +149,8 @@
                         <tr>
                             <td><p>{{$pessoa->id}}</p></td>
                             <td><p>{{$pessoa->nome}}</p></td>
-                            <td><p>{{$pessoa->anamneses->last()->ano}}</p><i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
-                            <td><p>@if($pessoa->estado == 2) Incompleto @else Completo @endif</p><i class="small material-icons" @if($pessoa->estado == 2) style="color: red;" @else style="color: green;"  @endif>sim_card_alert</i></td>
+                            <td>{{$pessoa->anamneses->last()->ano}} <i class="small material-icons" @if($pessoa->anamneses->last()->ano != $ano) style="color: red; vertical-align: -5px;" @else style="color: green; vertical-align: -5px;"  @endif>sim_card_alert</i></td>
+                            <td>@if($pessoa->estado == 2) Incompleto @else Completo @endif <i class="small material-icons" @if($pessoa->estado == 2) style="color: red; vertical-align: -5px;" @else style="color: green; vertical-align: -5px;"  @endif>sim_card_alert</i></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$pessoa->nome}}" href="{{Route('pessoa_info', $pessoa->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Lista de turmas de {{$pessoa->nome}}" href="{{Route('pessoas_turmas', $pessoa->id)}}"><i class="small material-icons">group</i></a>

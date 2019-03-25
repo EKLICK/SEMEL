@@ -85,7 +85,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" id="email" type="tel" class="validate" value="{{old('email')}}" maxlength="30" required>
+                        <input name="email" id="email" id="email" type="email" class="validate" value="{{old('email')}}" maxlength="30" required>
                         <label for="email">E-mail:</label>
                     </div>
                 </div>

@@ -29,39 +29,6 @@ class TurmasController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    //FUNÇÕES DE FERRAMENTAS:
-    //Ferramenta convertHorario: Converte o horário de MM:HH [PM|AM] para HH:MM:SS.
-    public function convertHorario($hora, $op){
-        //Verifica se a variavel $op é 1 (de MM:HH [PM|AM] para HH:MM:SS) ou 2 (de HH:MM:SS para MM:HH [PM|AM]).
-        if($op == 1){
-            $horario = explode(' ', $hora);
-
-            //Se foi definido 'PM', adicionar 12 horas para a criação.
-            if($horario[1] == 'PM'){
-                $separador = explode(':', $horario[0]);
-                $separador[0] = 12 + (int)$separador[0];
-                $horario[0] = $separador[0].':'.$separador[1];
-            }
-
-            return $horario[0].':00';
-        }
-        else{
-            $horario = explode(':', $hora);
-
-            //Se o horario estiver acima de 12 horas, diminui 12 horas do horario e adiciona PM, se não, apenas adiciona AM
-            if($horario[0] > 12){
-                $horario[0] = (int)$horario[0] - 12;
-                if($horario[0] < 10){$horario[0] = '0'.$horario[0];}
-                $horario[2] = 'PM';
-                
-                return $horario[0].':'.$horario[1].' '.$horario[2];
-            }
-            $horario[2] = 'AM';
-
-            return $horario[0].':'.$horario[1].' '.$horario[2];
-        }
-    }
-
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index: Retorna a página de registros de turmas.
     public function index(){
@@ -72,7 +39,7 @@ class TurmasController extends Controller{
         $nucleoslist = Nucleo::all();
 
         //Criando array de dias da semana.
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
         //Define variavel $count para definir sessão de informação.
         $count = Turma::all();
@@ -96,7 +63,7 @@ class TurmasController extends Controller{
         $nucleoslist = Nucleo::orderBy('nome')->get();
 
         //Criando array de dias da semana.
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
         return view ('turmas_file.turmas_create', compact('nucleoslist', 'dias_semana'));
     }
@@ -119,12 +86,6 @@ class TurmasController extends Controller{
         $dias_da_semana = '';
         foreach($dataForm['data_semanal'] as $data){$dias_da_semana = $dias_da_semana.$data.',';}
         $dataForm['data_semanal'] = $dias_da_semana;
-
-        //Converte horario inicial de HH:MM [AM|PM] para HH:MM:SS.
-        $dataForm['horario_inicial'] = $this->convertHorario($dataForm['horario_inicial'], 1);
-
-        //Converte horario final de HH:MM [AM|PM] para HH:MM:SS.
-        $dataForm['horario_final'] = $this->convertHorario($dataForm['horario_final'], 1);
 
         //Cria turma no banco de dados.
         $turma = Turma::create($dataForm);
@@ -171,14 +132,8 @@ class TurmasController extends Controller{
         //Encontra o núcleo no banco de dados.
         $nucleoslist = Nucleo::all();
 
-        //Converte horario inicial de HH:MM:SS para HH:MM [AM|PM].
-        $turma['horario_inicial'] = $this->convertHorario($turma['horario_inicial'], 2);
-
-        //Converte horario final de HH:MM:SS para HH:MM [AM|PM].
-        $turma['horario_final'] = $this->convertHorario($turma['horario_final'], 2);
-
         //Criando array de dias da semana.
-        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
+        $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
         //Separa dias da semana da turma e atribui na variavel $datas_escolhidas e retida o ultima array em branco.
         $datas_escolhidas = explode(',', $turma['data_semanal']);
@@ -213,12 +168,6 @@ class TurmasController extends Controller{
         foreach($dataForm['data_semanal'] as $data){$dias_da_semana = $dias_da_semana.$data.',';}
         $dataForm['data_semanal'] = $dias_da_semana;
 
-        //Converte horario inicial de HH:MM [AM|PM] para HH:MM:SS.
-        $dataForm['horario_inicial'] = $this->convertHorario($dataForm['horario_inicial'], 1);
-
-        //Converte horario final de HH:MM [AM|PM] para HH:MM:SS.
-        $dataForm['horario_final'] = $this->convertHorario($dataForm['horario_final'], 1);
-
         //Edita turma no banco de dados.
         $turma->update($dataForm);
 
@@ -250,12 +199,6 @@ class TurmasController extends Controller{
     public function turma_info($id){
         //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);
-        
-        //Converte horario inicial de HH:MM:SS para HH:MM [AM|PM].
-        $turma['horario_inicial'] = $this->convertHorario($turma['horario_inicial'], 2);
-
-        //Converte horario final de HH:MM:SS para HH:MM [AM|PM].
-        $turma['horario_final'] = $this->convertHorario($turma['horario_final'], 2);
 
         //Separa dias da semana da turma e atribui na variavel $datas_escolhidas e retida o ultima array em branco.
         $dias = explode(',', $turma['data_semanal']);

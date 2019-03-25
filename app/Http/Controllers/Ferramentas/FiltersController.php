@@ -467,15 +467,7 @@ class filtersController extends Controller{
                 //Se sim:
 
                 //Adiciona o parametro nos horario.
-                $horario = explode(' ', $dataForm['horario_inicial']);
-
-                //Se foi definido 'PM', adicionar 12 horas para o filtro.
-                if($horario[1] == 'PM'){
-                    $separador = explode(':', $horario[0]);
-                    $separador[0] = 12 + (int)$separador[0];
-                    $horario[0] = $separador[0].':'.$separador[1];
-                }
-                $filtro = $horario[0].':00';
+                $filtro = explode(' ', $dataForm['horario_inicial']);
 
                 //Constroi a query baseado neste parametro.
                 $query->where('horario_inicial', '=', $filtro);
@@ -486,14 +478,8 @@ class filtersController extends Controller{
                 //Se sim:
 
                 //Adiciona o parametro nos horario.
-                $horario = explode(' ', $dataForm['horario_final']);
+                $filtro = explode(' ', $dataForm['horario_final']);
 
-                //Se foi definido 'PM', adicionar 12 horas para o filtro.
-                if($horario[1] == 'PM'){
-                    $separador = explode(':', $horario[0]);
-                    $separador[0] = 12 + (int)$separador[0];
-                    $horario[0] = $separador[0].':'.$separador[1];
-                }
                 $filtro = $horario[0].':00';
 
                 //Constroi a query baseado neste parametro.

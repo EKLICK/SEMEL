@@ -23,8 +23,8 @@ class TurmaProcurarFormRequest extends FormRequest{
     public function rules(){
         return [
             'inativo'               => ['sometimes', 'nullable', Rule::in(['1', '2']),],
-            'horario_inicial'       => ['sometimes', 'nullable','regex:/^[0-2][0-9]:[0-5][0-9]+ (A|P)+M$/'],
-            'horario_final'         => ['sometimes', 'nullable','regex:/^[0-2][0-9]:[0-5][0-9]+ (A|P)+M$/'],
+            'horario_inicial'       => ['sometimes', 'nullable','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
+            'horario_final'         => ['sometimes', 'nullable','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
             'data_semanal'          => 'sometimes|nullable|array|',
         ];
     }

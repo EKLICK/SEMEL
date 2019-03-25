@@ -35,8 +35,7 @@
                                 <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 1) checked @endif @else @if ($anamnese->toma_medicacao != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="toma_medicacao_click('N')" value="2" name="toma_medicacao" type="radio" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 2) checked @endif @else @if ($anamnese->toma_medicacao == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -57,8 +56,7 @@
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 1) checked @endif @else @if ($anamnese->alergia_medicacao != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="alergia_medicacao_click('N')" value="2" name="alergia_medicacao" type="radio"  @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 2) checked @endif @else @if ($anamnese->alergia_medicacao == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -79,8 +77,7 @@
                                 <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 1) checked @endif @else @if ($anamnese->cirurgia != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="cirurgia_click('N')" value="2" name="cirurgia" type="radio"  @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 2) checked @endif @else @if ($anamnese->cirurgia == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -101,8 +98,7 @@
                                 <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio"  @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 1) checked @endif @else @if ($anamnese->dor_ossea != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_ossea_click('N')" value="2" name="dor_ossea" type="radio" @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 2) checked @endif @else @if ($anamnese->dor_ossea == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -123,8 +119,7 @@
                                 <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 1) checked @endif @else @if ($anamnese->dor_muscular != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_muscular_click('N')" value="2" name="dor_muscular" type="radio" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 2) checked @endif @else @if ($anamnese->dor_muscular == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -145,8 +140,7 @@
                                 <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) checked @endif @else @if ($anamnese->dor_articular != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="dor_articular_click('N')" value="2" name="dor_articular" type="radio" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) checked @endif @else @if ($anamnese->dor_articular == -1) checked @endif @endif/>
                                 <span>Não</span>
@@ -167,8 +161,7 @@
                                 <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante != -1) checked @endif @endif/>
                                 <span>Sim</span>
                             </label>
-                        </p>
-                        <p>
+                            &emsp;&emsp;
                             <label>
                                 <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 2) checked @endif @else @if ($anamnese->fumante == -1) checked @endif @endif/>
                                 <span>Não</span>

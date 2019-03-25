@@ -24,8 +24,8 @@ class TurmaCreateEditFormRequest extends FormRequest{
         return [
             'nome'                  => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'limite'                => 'required|integer|max:200',
-            'horario_inicial'       => ['required','regex:/^[0-2][0-9]:[0-5][0-9]+ (A|P)+M$/'],
-            'horario_final'         => ['required','regex:/^[0-2][0-9]:[0-5][0-9]+ (A|P)+M$/'],
+            'horario_inicial'       => ['required','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
+            'horario_final'         => ['required','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
             'data_semanal'          => 'required|array|',
             'nucleo_id'             => 'required|exists:nucleos,id',
             'descricao'             => 'sometimes|nullable|between:5,100',
