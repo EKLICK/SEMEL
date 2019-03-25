@@ -28,7 +28,7 @@ class ProfessorEditFormRequest extends FormRequest{
             'bairro'                => 'required_without:string_bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'string_bairro'         => 'required_without:bairro','regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|max:100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'numero_endereco'       => 'required|digits_between:0,5',
+            'numero_endereco'       => 'required|digits_between:0,15',
             'cep'                   => 'required|max:10|min:10',
             'telefone'              => 'required|max:16|min:8',
             'email'                 => 'required|string|email|max:255|unique:users,email,'.$this->id_user.'|',

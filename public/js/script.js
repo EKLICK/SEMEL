@@ -24,9 +24,11 @@ function fMasc(objeto,mascara) {
     masc=mascara
     setTimeout("fMascEx()",1)
 }
+
 function fMascEx() {
     obj.value=masc(obj.value)
 }
+
 function mTel(tel) {
     tel=tel.replace(/\D/g,"")
     tel=tel.replace(/^(\d)/,"($1")
@@ -44,6 +46,7 @@ function mTel(tel) {
     }
     return tel;
 }
+
 function mCPF(cpf){
     cpf=cpf.replace(/\D/g,"")
     cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
@@ -51,12 +54,14 @@ function mCPF(cpf){
     cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
     return cpf
 }
+
 function mCEP(cep){
     cep=cep.replace(/\D/g,"")
     cep=cep.replace(/^(\d{2})(\d)/,"$1.$2")
     cep=cep.replace(/\.(\d{3})(\d)/,".$1-$2")
     return cep
 }
+
 function mNum(num){
     num=num.replace(/\D/g,"")
     return num

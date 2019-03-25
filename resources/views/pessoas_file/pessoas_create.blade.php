@@ -160,12 +160,12 @@
                 <div class="row">
                     <div class="input-field col s12 m2">
                         <i class="material-icons prefix">child_care</i>
-                        <input name="filhos" id="filhos" type="number" class="validate" @if(is_null(old('filhos'))) value="0" @else value="{{old('filhos')}}" @endif>
+                        <input name="filhos" id="filhos" type="number" min=0 class="validate" @if(is_null(old('filhos'))) value="0" @else value="{{old('filhos')}}" @endif>
                         <label for="filhos">Filhos:</label>
                     </div>
                     <div class="input-field col s12 m2">
                         <i class="material-icons prefix">people</i>
-                        <input name="irmaos" id="irmaos" type="number" class="validate" @if(is_null(old('irmaos'))) value="0" @else  value="{{old('irmaos')}}" @endif>
+                        <input name="irmaos" id="irmaos" type="number" min=0 class="validate" @if(is_null(old('irmaos'))) value="0" @else  value="{{old('irmaos')}}" @endif>
                         <label for="irmaos">Irmãos:</label>
                     </div>
                 </div>
