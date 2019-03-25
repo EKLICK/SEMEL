@@ -75,32 +75,28 @@ function mNum(num){
     return num
 }
 
-function validationCPF(){
-    
-}
-
 
 //UPLOAD DE IMAGE PÁGINA PESSOAS:
 function apagar_3_4(){
-    document.getElementById('3x4_image').src = 'http://localhost/img/unset_image_3x4.png';
+    document.getElementById('3x4_image').src = '../../../../img/unset_image_3x4.png';
     document.getElementById('img_3x4').value = '';
     document.getElementById('3x4').value = '';
 }
 
 function apagar_matricula(){
-    document.getElementById('matricula_image').src = 'http://localhost/img/unset_image_matricula.png';
+    document.getElementById('matricula_image').src = '../../../../img/unset_image_matricula.png';
     document.getElementById('img_matricula').value = '';
     document.getElementById('matricula').value = '';
 }
 
 function apagar_atestado(){
-    document.getElementById('atestado_image').src = 'http://localhost/img/unset_image_atestado.png';
+    document.getElementById('atestado_image').src = '../../../../img/unset_image_atestado.png';
     document.getElementById('img_atestado').value = '';
     document.getElementById('atestado').value = '';
 }
 
 function apagar_web(){
-    document.getElementById('img_web').src = 'http://localhost/img/unset_image_3x4.png';
+    document.getElementById('img_web').src = '../../../../img/unset_image_3x4.png';
     document.getElementById('web_image').value = '';
 }
 
@@ -308,7 +304,7 @@ document.getElementById('capture').addEventListener('click', function(){
     context.getContext('2d').drawImage(video, 0, 0, 400, 300);
     document.getElementById("img_web").src = context.toDataURL('img/img_3x4');
     var codigo = context.toDataURL();
-    document.getElementById('base64').value = codigo;
+    document.getElementById('web_image').value = codigo;
     
     stop();
 })

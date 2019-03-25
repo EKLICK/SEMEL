@@ -14,11 +14,12 @@
 //Rota welcome: Utilizado para Logar no sistema com uma conta.
 Route::get('/', function(){return redirect()->route('login');})->name('welcome');
 
-Route::get('/usuarios', 'Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::get('/usuarios/edit/{id}', 'Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::post('/usuarios/create', 'Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::put('/usuarios/update/{id}', 'Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::delete('/usuarios/destroy/{id}', 'Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuarios','Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuarios/edit/{id}','Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::post('/usuarios/create','Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::get('/usuario_info/{id}','Auth\RegisterController@user_info')->name('user_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::put('/usuarios/update/{id}','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::delete('/usuarios/destroy/{id}','Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
 Route::post('/pessoa/quantidade','Auth\RegisterController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');

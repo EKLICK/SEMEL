@@ -32,6 +32,7 @@
                             <td><p>{{$user->email}}</p></td>
                             <td><p>@if($user->admin_professor == 1) Administrador @else Professor @endif</p></td>
                             <td>
+                                    <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->name}}" href="{{Route('user_info', $user->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->nick}}" href="{{Route('users.edit', $user->id)}}"><i class="small material-icons">edit</i></a>
                                 <a id="btn_delete" class="tooltipped modal-trigger" data-position="top" data-tooltip="Delete {{$user->nick}}" href="#modaldelete"
                                    data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}">

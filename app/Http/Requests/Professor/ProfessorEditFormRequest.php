@@ -32,7 +32,7 @@ class ProfessorEditFormRequest extends FormRequest{
             'cep'                   => 'required|max:10|min:10',
             'telefone'              => 'required|max:16|min:8',
             'email'                 => 'required|string|email|max:255|unique:users,email,'.$this->id_user.'|',
-            'cpf'                   => 'required|max:14|min:14|unique:professores,cpf,'.$this->id.'|unique:pessoas|',
+            'cpf'                   => 'required|cpf|max:14|min:14|unique:professores,cpf,'.$this->id.'|unique:pessoas|',
             'rg'                    => 'required|max:13|min:6',
             'curso'                 => 'required|between:3,100',
             'formacao'              => 'required|between:3,100',

@@ -40,7 +40,7 @@
                     </div>
                     <div class="file-field input-field col s12 m5">
                         <img id="img_web" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_3x4.png')}}">
-                        <input id="web_image" type="text" name="foto_web" id="base64" hidden>
+                        <input id="web_image" type="text" name="foto_web" hidden>
                         <canvas id="canvas_foto" width="400" height="300" hidden></canvas>
                     </div>
                 </div>

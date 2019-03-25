@@ -176,6 +176,12 @@ class RegisterController extends Controller{
         return redirect()->Route('users.index');
     }
 
+    protected function user_info($id){
+        $user = User::find($id);
+
+        return view ('auth.users_info', compact('user'));
+    }
+
     //Função reset: Inativa todas as pessoas de todas as turmas do sistema.
     protected function reset(Request $request){
         $dataForm = $request->all();
