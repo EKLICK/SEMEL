@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Toma algum medicamento?
+                        Toma algum medicamento? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(!is_null(old('toma_medicacao'))) @if(old('toma_medicacao') == 1) checked @endif @else @if ($anamnese->toma_medicacao != -1) checked @endif @endif/>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui alergia médica?
+                        Possui alergia médica? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 1) checked @endif @else @if ($anamnese->alergia_medicacao != -1) checked @endif @endif/>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário já fez cirurgia?
+                        O usuário já fez cirurgia? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(!is_null(old('cirurgia'))) @if(old('cirurgia') == 1) checked @endif @else @if ($anamnese->cirurgia != -1) checked @endif @endif/>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores ósseas?
+                        Possui dores ósseas? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio"  @if(!is_null(old('dor_ossea'))) @if(old('dor_ossea') == 1) checked @endif @else @if ($anamnese->dor_ossea != -1) checked @endif @endif/>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores musculares?
+                        Possui dores musculares? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(!is_null(old('dor_muscular'))) @if(old('dor_muscular') == 1) checked @endif @else @if ($anamnese->dor_muscular != -1) checked @endif @endif/>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores articulares?
+                        Possui dores articulares? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(!is_null(old('dor_articular'))) @if(old('dor_articular') == 2) checked @endif @else @if ($anamnese->dor_articular != -1) checked @endif @endif/>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário fuma?
+                        O usuário fuma? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(!is_null(old('fumante'))) @if(old('fumante') == 1) checked @endif @else @if ($anamnese->fumante != -1) checked @endif @endif/>
@@ -189,7 +189,7 @@
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
                             <div class="btn">
-                                <span>Atestado médico</span>
+                                <span>Atestado médico <span style="color: red;">*</span></span>
                                 <input id="img_atestado" type="file" name="img_atestado" value="@if(is_null(old('img_atestado'))) {{$anamnese->atestado}} @else {{old('img_atestado')}} @endif">
                             </div>
                             <a id="limpar_atestado"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
@@ -230,14 +230,14 @@
                         <div class="input-field col s12 m10">
                             <i class="material-icons prefix">new_releases</i>
                             <input id="nome_doenca" type="text" class="validate">
-                            <label for="nome_doenca">Nome da doença:</label>
+                            <label for="nome_doenca">Nome da doença: <span style="color: red;">*</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 m10">
                             <i class="material-icons prefix">description</i>
                             <textarea id="descricao_doenca" class="materialize-textarea"></textarea>
-                            <label for="descricao_doenca">Observação</label>
+                            <label for="descricao_doenca">Observação: <span style="color: red;">*</span></label>
                         </div>
                     </div>
                 </div>

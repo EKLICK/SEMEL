@@ -48,12 +48,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
                         <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
-                        <label for="nome">Nome (obrigatório):</label>
+                        <label for="nome">Nome: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
                         <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="{{old('nascimento')}}" maxlength="10" required>
-                        <label for="nascimento">Data de nascimento (obrigatório):</label>
+                        <label for="nascimento">Data de nascimento:  <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
@@ -212,7 +212,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m3">
-                        Sexo (obrigatório):
+                        Sexo:  <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input value="M" name="sexo" type="radio" @if(old('sexo') == 'M') checked @endif/>
@@ -279,7 +279,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Toma algum medicamento? (obrigatório)
+                        Toma algum medicamento?  <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="toma_medicacao_click('S')" value="1" name="toma_medicacao" type="radio" @if(old('toma_medicacao') == 1) checked @endif/>
@@ -300,7 +300,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui alergia médica? (obrigatório)
+                        Possui alergia médica? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>
@@ -321,7 +321,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário já fez cirurgia? (obrigatório)
+                        O usuário já fez cirurgia? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="cirurgia_click('S')" value="1" name="cirurgia" type="radio" @if(old('cirurgia') == 1) checked @endif/>
@@ -342,7 +342,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores ósseas? (obrigatório)
+                        Possui dores ósseas? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_ossea_click('S')" value="1" name="dor_ossea" type="radio" @if(old('dor_ossea') == 1) checked @endif/>
@@ -363,7 +363,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores musculares? (obrigatório)
+                        Possui dores musculares? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_muscular_click('S')" value="1" name="dor_muscular" type="radio" @if(old('dor_muscular') == 1) checked @endif/>
@@ -384,7 +384,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui dores articulares? (obrigatório)
+                        Possui dores articulares? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="dor_articular_click('S')" value="1" name="dor_articular" type="radio" @if(old('dor_articular') == 1) checked @endif/>
@@ -405,7 +405,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        O usuário fuma? (obrigatório)
+                        O usuário fuma? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if(old('fumante') == 1) checked @endif/>
@@ -443,7 +443,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
-                            <p>Atestado médico (.img | .png | .jpg) (obrigatório):</p>
+                            <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
                                 <input id="img_atestado" type="file" name="img_atestado" required>
@@ -493,14 +493,14 @@
                         <div class="input-field col s12 m12">
                             <i class="material-icons prefix">new_releases</i>
                             <input id="nome_doenca" type="text" class="validate">
-                            <label for="nome_doenca">Nome da doença:</label>
+                            <label for="nome_doenca">Nome da doença: <span style="color: red;">*</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s10 m10">
                             <i class="material-icons prefix">description</i>
                             <textarea id="descricao_doenca" class="materialize-textarea" maxlength="100"></textarea>
-                            <label for="descricao_doenca">Observação</label>
+                            <label for="descricao_doenca">Observação: <span style="color: red;">*</span></label>
                         </div>
                         <div class="input-field col s2 m2 right">
                             <a class="btn-floating btn-large" id="botao_doenca"><i class="material-icons">add</i></a>

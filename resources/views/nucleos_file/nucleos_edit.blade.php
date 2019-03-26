@@ -16,11 +16,11 @@
                     <div class="input-field col s11 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>
                         <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
-                        <label for="icon_nome">Nome do núcleo:</label>
+                        <label for="icon_nome">Nome do núcleo: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s11 m5">
                         <input type="text" name="string_bairro" id="string_bairro" value="{{old('string_bairro')}}" hidden>
-                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                        <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
                         <select name="bairro" onchange="change_bairro_select()" id="bairro_select" required>
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
@@ -33,19 +33,19 @@
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif" maxlength="15" required>
-                        <label for="rua">Rua:</label>
+                        <label for="rua">Rua: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">explore</i>
                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif" maxlength="10" required>
-                        <label for="cep">CEP:</label>
+                        <label for="cep">CEP: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif maxlength="5" required>
-                        <label for="numero_endereco">Número:</label>
+                        <label for="numero_endereco">Número: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">bookmark</i>
@@ -57,7 +57,7 @@
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="@if(is_null(old('telefone'))) {{$nucleo->telefone}} @else {{old('telefone')}} @endif" maxlength="16" required>
-                        <label for="icon_telefone">Telefone:</label>
+                        <label for="icon_telefone">Telefone: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">

@@ -15,31 +15,31 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
                         <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
-                        <label for="icon_nome">Turma da turma:</label>
+                        <label for="icon_nome">Turma da turma: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment</i>
                         <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}" required>
-                        <label for="icon_limite">Limite:</label>
+                        <label for="icon_limite">Limite: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
                         <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}" maxlength="8" required>
-                        <label for="icon_horario_inicial">Horário Inicial:</label>
+                        <label for="icon_horario_inicial">Horário Inicial: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
                         <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}" maxlength="8" required>
-                        <label for="icon_horario_final">Horário Final:</label>
+                        <label for="icon_horario_final">Horário Final: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <input type="text" name="old_dias" id="old_dias" value="{{old('old_dias')}}" hidden>
                         @php $old_ids_dias = explode(',', old('old_dias')) @endphp
-                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
+                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana <span style="color: red;">*</span>
                         <select multiple name="data_semanal[]" id="lista_de_dias" onchange="old_dias_function()" required>
                             @foreach ($dias_semana as $dia)
                                 <option value="{{$dia}}" @foreach ($old_ids_dias as $old_dia) @if($dia == $old_dia) selected @endif @endforeach>{{$dia}}</option>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <input type="text" name="old_nucleo" id="old_nucleo" value="{{old('old_nucleo')}}"  hidden>
-                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
+                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos <span style="color: red;">*</span>
                         <select name="nucleo_id" id="lista_de_nucleos" onchange="old_nucleo_function()" required>
                             <option value="" selected disabled>Selecione o núcleo</option>
                             @foreach ($nucleoslist as $nucleo)
@@ -66,7 +66,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s8 m5 xl4">
-                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativo | inativo:
+                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativo | inativo: <span style="color: red;">*</span>
                         <div style="margin-left: 30%;">
                             <p>
                                 <label>

@@ -50,12 +50,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
                         <input name="nome" id="nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$pessoa->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
-                        <label for="nome">Nome:</label>
+                        <label for="nome">Nome:  <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">child_friendly</i>
                         <input id="nascimento" type="text" class="datepicker validate" name="nascimento" value="@if(is_null(old('nascimento'))) {{$pessoa->nascimento}} @else {{old('nascimento')}} @endif" maxlength="10" required>
-                        <label for="nascimento">Data de nascimento:</label>
+                        <label for="nascimento">Data de nascimento:  <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
@@ -213,7 +213,7 @@
                 </div>             
                 <div class="row">
                     <div class="input-field col s12 m3">
-                        Sexo:
+                        Sexo: <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input value="M" name="sexo" type="radio" @if(old('sexo') == 'M') checked @else @if ($pessoa->sexo == 'M') checked @endif @endif />

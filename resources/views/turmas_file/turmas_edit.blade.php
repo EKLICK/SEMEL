@@ -16,31 +16,31 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
                         <input name="nome" id="prefix" type="text" class="validate" value="@if(is_null(old('nome'))) {{$turma->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
-                        <label for="_prefix">Nome da turma:</label>
+                        <label for="_prefix">Nome da turma: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment</i>
                         <input name="limite" id="prefix" type="number" class="validate" @if(is_null(old('limite'))) value="{{$turma->limite}}" @else value="{{old('limite')}}" @endif required>
-                        <label for="prefix">Limite:</label>
+                        <label for="prefix">Limite: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
                         <input name="horario_inicial" id="horario_inicial" type="text" class="validate timepicker" value="@if(is_null(old('horario_inicial'))) {{$turma->horario_inicial}} @else {{old('horario_inicial')}} @endif" maxlength="8" required>
-                        <label for="horario_inicial">Horário Inicial:</label>
+                        <label for="horario_inicial">Horário Inicial: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
                         <input name="horario_final" id="horario_final" type="text" class="validate timepicker" value="@if(is_null(old('horario_final'))) {{$turma->horario_final}} @else {{old('horario_final')}} @endif" maxlength="8" required>
-                        <label for="horario_final">Horário Final:</label>
+                        <label for="horario_final">Horário Final: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <input type="text" name="old_dias" id="old_dias" value="{{old('old_dias')}}" hidden>
                         @php $old_ids_dias = explode(',', old('old_dias')) @endphp
-                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
+                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana <span style="color: red;">*</span>
                         <select multiple name="data_semanal[]" id="lista_de_dias" onchange="old_dias_function()" required>
                             @foreach ($dias_semana as $dia)
                                 <option value="{{$dia}}" @if(is_null(old('old_dias'))) @foreach ($datas_escolhidas as $escolhido) @if($dia == $escolhido) selected @endif @endforeach @else @foreach ($old_ids_dias as $old_dia) @if($dia == $old_dia) selected @endif @endforeach @endif>{{$dia}}</option>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <input type="text" name="old_nucleo" id="old_nucleo" value="{{old('old_nucleo')}}" hidden>
-                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
+                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos <span style="color: red;">*</span>
                         <select name="nucleo_id" id="lista_de_nucleos" onchange="old_nucleo_function()" required>
                             @foreach ($nucleoslist as $nucleo)
                                 <option value="{{$nucleo->id}}" @if(is_null(old('old_nucleo'))) @if($nucleo->id == $turma->nucleo_id) selected @endif @else @if($nucleo->id == old('old_nucleo')) selected @endif @endif>{{$nucleo->nome}}</option>
