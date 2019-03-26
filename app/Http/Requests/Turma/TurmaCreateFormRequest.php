@@ -5,7 +5,7 @@ namespace App\Http\Requests\Turma;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class TurmaCreateEditFormRequest extends FormRequest{
+class TurmaCreateFormRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *

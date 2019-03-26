@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui alergia médica? <span style="color: red;">*</span>
+                        Possui alergia a algum medicamento? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(!is_null(old('alergia_medicacao'))) @if(old('alergia_medicacao') == 1) checked @endif @else @if ($anamnese->alergia_medicacao != -1) checked @endif @endif/>

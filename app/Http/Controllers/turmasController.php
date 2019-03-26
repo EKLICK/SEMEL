@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 //REQUESTS PARA CONTROLE:
-use App\Http\Requests\Turma\TurmaCreateEditFormRequest;
+use App\Http\Requests\Turma\TurmaEditFormRequest;
+use App\Http\Requests\Turma\TurmaCreateFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
-use App\Http\Requests\regrasTurma;
 
 //MODELOS PARA CONTROLE:
 use App\Turma;
@@ -76,7 +76,7 @@ class TurmasController extends Controller{
      */
 
     //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
-    public function store(TurmaCreateEditFormRequest $request){
+    public function store(TurmaCreateFormRequest $request){
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
@@ -151,7 +151,7 @@ class TurmasController extends Controller{
      */
 
     //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de turmas.
-    public function update(TurmaCreateEditFormRequest $request, $id){
+    public function update(TurmaEditFormRequest $request, $id){
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.

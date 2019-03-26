@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="100" required>
                         <label for="nome">Nome: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -143,17 +143,17 @@
                 <div class="row">
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person</i>
-                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="{{old('nome_do_pai')}}" maxlength="30">
+                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="{{old('nome_do_pai')}}" maxlength="100">
                         <label for="nome_do_pai">Nome do pai:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person_outline</i>
-                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{old('nome_da_mae')}}" maxlength="30">
+                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="{{old('nome_da_mae')}}" maxlength="100">
                         <label for="nome_da_mae">Nome do mãe:</label>
                     </div>
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">person_add</i>
-                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{old('pessoa_emergencia')}}" maxlength="30">
+                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="{{old('pessoa_emergencia')}}" maxlength="100">
                         <label for="pessoa_emergencia">Pessoa emergência:</label>
                     </div>
                 </div>
@@ -300,7 +300,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        Possui alergia médica? <span style="color: red;">*</span>
+                        Possui alergia a algum medicamento? <span style="color: red;">*</span>
                         <p>
                             <label>
                                 <input onclick="alergia_medicacao_click('S')" value="1" name="alergia_medicacao" type="radio" @if(old('alergia_medicacao') == 1) checked @endif/>

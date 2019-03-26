@@ -1,7 +1,7 @@
 var data = new Date;
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
-    yearRange: [1940, data.getFullYear()],
+    yearRange: [1930, data.getFullYear()],
     i18n: {
         today: 'Hoje',
         clear: 'Limpar',

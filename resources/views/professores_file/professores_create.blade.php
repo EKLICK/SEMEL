@@ -15,30 +15,30 @@
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
-                        <label for="nome">Nome:</label>
+                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="100" required>
+                        <label for="nome">Nome: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">child_friendly</i>
                         <input name="nascimento" id="nascimento" type="text" class="datepicker validate" value="{{old('nascimento')}}" maxlength="10" required>
-                        <label for="nascimento">Nascimento:</label>
+                        <label for="nascimento">Nascimento: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">recent_actors</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="matricula" type="text" class="validate" value="{{old('matricula')}}" maxlength="30" required>
-                        <label for="matricula">Matricula:</label>
+                        <label for="matricula">Matricula: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
                         <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif maxlength="15" required>
-                        <label for="cidade">Cidade:</label>
+                        <label for="cidade">Cidade: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <a class="btn-floating right light-blue darken-1" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
-                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
                             <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
@@ -49,7 +49,7 @@
                         <div id="div_bairro_string" @if(is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>
                             <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}" maxlength="15">
-                            <label for="string_bairro">Bairro:</label>
+                            <label for="string_bairro">Bairro: <span style="color: red;">*</span></label>
                         </div>
                     </div>
                 </div>
@@ -57,19 +57,19 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" maxlength="15" required>
-                        <label for="rua">Rua:</label>
+                        <label for="rua">Rua: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}" maxlength="10" required>
-                        <label for="cep">CEP:</label>
+                        <label for="cep">CEP: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" maxlength="5" required>
-                        <label for="numero_endereco">Número:</label>
+                        <label for="numero_endereco">Número: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
@@ -81,41 +81,41 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}" maxlength="16" required>
-                        <label for="telephone">Telefone:</label>
+                        <label for="telephone">Telefone: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
                         <input name="email" id="email" id="email" type="email" class="validate" value="{{old('email')}}" maxlength="30" required>
-                        <label for="email">E-mail:</label>
+                        <label for="email">E-mail: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}" maxlength="14" required>
-                        <label for="cpf">CPF:</label>
+                        <label for="cpf">CPF: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
                         <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}" maxlength="13" required>
-                        <label for="rg">RG:</label>
+                        <label for="rg">RG: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">school</i>
                         <input name="formacao" id="formacao" type="text" class="validate" value="{{old('formacao')}}" maxlength="30" required>
-                        <label for="formacao">Formação:</label>
+                        <label for="formacao">Formação: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">book</i>
                         <input name="curso" id="curso" type="text" class="validate" value="{{old('curso')}}" maxlength="30" required>
-                        <label for="curso">Curso:</label>
+                        <label for="curso">Curso: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">directions_bike</i>
                         <input name="cref" id="cref" type="text" class="validate" value="{{old('cref')}}" maxlength="30" required>
-                        <label for="cref">CREF:</label>
+                        <label for="cref">CREF: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <br><br>
@@ -124,19 +124,19 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
                         <input name="usuario" id="usuario" type="text" class="validate" maxlength="30" required>
-                        <label for="usuario">Usuário:</label>
+                        <label for="usuario">Usuário: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
                         <input name="password" id="lockout" type="password" class="validate" maxlength="30" required>
-                        <label for="lockout">Senha:</label>
+                        <label for="lockout">Senha: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
                         <input name="confirm_password" id="lock" type="password" class="validate" maxlength="30" required>
-                        <label for="lock">Confirmar senha:</label>
+                        <label for="lock">Confirmar senha: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="container">

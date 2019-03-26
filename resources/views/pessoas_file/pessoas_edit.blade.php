@@ -145,17 +145,17 @@
                 <div class="row">
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person</i>
-                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="@if(is_null(old('nome_do_pai'))) {{$pessoa->nome_do_pai}} @else {{old('nome_do_pai')}} @endif" maxlength="30">
+                        <input name="nome_do_pai" id="nome_do_pai" type="text" class="validate" value="@if(is_null(old('nome_do_pai'))) {{$pessoa->nome_do_pai}} @else {{old('nome_do_pai')}} @endif" maxlength="100">
                         <label for="nome_do_pai">Nome do pai:</label>
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">person_outline</i>
-                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="@if(is_null(old('nome_da_mae'))) {{$pessoa->nome_da_mae}} @else {{old('nome_da_mae')}} @endif" maxlength="30">
+                        <input name="nome_da_mae" id="nome_da_mae" type="text" class="validate" value="@if(is_null(old('nome_da_mae'))) {{$pessoa->nome_da_mae}} @else {{old('nome_da_mae')}} @endif" maxlength="100">
                         <label for="nome_da_mae">Nome da mãe:</label>
                     </div>
                     <div class="input-field col s4">
                         <i class="material-icons prefix">person_add</i>
-                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="@if(is_null(old('nome_da_mae'))) {{$pessoa->pessoa_emergencia}} @else {{old('pessoa_emergencia')}} @endif" maxlength="30">
+                        <input name="pessoa_emergencia" id="pessoa_emergencia" type="text" class="validate" value="@if(is_null(old('nome_da_mae'))) {{$pessoa->pessoa_emergencia}} @else {{old('pessoa_emergencia')}} @endif" maxlength="100">
                         <label for="pessoa_emergencia">Pessoa emergência:</label>
                     </div>
                 </div>
