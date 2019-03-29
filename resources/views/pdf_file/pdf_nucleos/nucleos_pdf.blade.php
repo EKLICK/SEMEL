@@ -12,6 +12,8 @@
     </head>
     <body>
         <div class="header"><img src="{{asset('img/logo_prefeitura.jpg')}}" class="pmsl"></div>
+        <div class="container"><h3>Quantidade total de núcleos no relatório: {{count($nucleoslist)}}</h3></div>
+        <br>
         @foreach ($nucleoslist as $nucleo)
             <div style="border-style: solid; border-color: #999999; border-width: 2px;">
                 <h3 style="margin-left: 2%;">Nome: <b>{{$nucleo->nome}}</b></h3>

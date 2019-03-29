@@ -19,9 +19,9 @@
                         <p>Foto 3 por 4 (.img | .png | .jpg):</p>
                         <div class="btn blue">
                             <span>Abrir arquivo</span>
-                            <input id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
+                            <input onchange="change_img_3x4()" id="img_3x4" type="file" name="img_3x4" value="{{old('img_3x4')}}">
                         </div>
-                        <a id="limpar_3x4" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
+                        <a onclick="apagar_3_4()" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                         <br><br><br>
                         <div class="file-path-wrapper container left">
                             <input id="3x4" class="file-path validate" type="text">
@@ -197,9 +197,9 @@
                             <p>matricula escolar (.img | .png | .jpg):</p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
-                                <input id="img_matricula" type="file" name="img_matricula">
+                                <input onchange="change_img_matricula()" id="img_matricula" type="file" name="img_matricula">
                             </div>
-                            <a id="limpar_matricula"  class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
+                            <a onclick="apagar_matricula()" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
                                 <input id="matricula" name="matricula" class="file-path validate" type="text">
@@ -246,19 +246,19 @@
                         <p>
                             <label>
                                 <input value="Solteiro" name="estado_civil" type="radio" @if(old('estado_civil') == 'Solteiro') checked @endif/>
-                                <span>Solteiro</span>
+                                <span>Solteiro(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input value="Casado" name="estado_civil" type="radio" @if(old('estado_civil') == 'Casado') checked @endif/>
-                                <span>Casado</span>
+                                <span>Casado(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input value="Viuva(o)" name="estado_civil" type="radio" @if(old('estado_civil') == 'Viuva(o)') checked @endif/>
-                                <span>Viuva(o)</span>
+                                <span>Viuvo(a)</span>
                             </label>
                         </p>
                     </div>
@@ -446,12 +446,12 @@
                             <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
-                                <input id="img_atestado" type="file" name="img_atestado" required>
+                                <input onchange="change_img_atestado()" id="img_atestado" type="file" name="img_atestado" required>
                             </div>
-                            <a id="limpar_atestado"  class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
+                            <a onclick="apagar_atestado()" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
-                                <input id="atestado" name="atestado" class="file-path validate" type="text">
+                                <input id="atestado" name="atestado" class="file-path validate" type="text" required>
                             </div>
                         </div>
                     </div>
@@ -461,12 +461,13 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">description</i>
                         <textarea name="observacao" id="observacao" class="materialize-textarea" maxlength="100">{{old('observacao')}}</textarea>
                         <label for="observacao">Observação</label>
                     </div>
                     <div class="container">
                         <div class="input-field col s12 m3 right">
-                            <button id="criar_pessoa" class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
+                            <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
                                 <i class="large material-icons left">add</i>
                         </div>
                     </div>

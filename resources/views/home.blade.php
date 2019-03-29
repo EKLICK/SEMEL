@@ -45,7 +45,7 @@
                 </a>
                 <a href="{{route('doencas.index')}}">
                     <div class="col s12 m6 l4">
-                        <div class="card hoverable yellow darken-1">
+                        <div class="card hoverable yellow darken-3">
                             <div class="card-content black-text center-align">
                                 <i class='large material-icons'>warning</i>
                             </div>

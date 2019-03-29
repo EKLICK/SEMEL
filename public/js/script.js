@@ -100,7 +100,7 @@ function apagar_web(){
     document.getElementById('web_image').value = '';
 }
 
-document.getElementById("img_3x4").onchange = function (){
+function change_img_3x4(){
     string = document.getElementById("img_3x4").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
         var reader = new FileReader();
@@ -108,7 +108,7 @@ document.getElementById("img_3x4").onchange = function (){
             document.getElementById("3x4_image").src = e.target.result;
         };
 
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(document.getElementById("img_3x4").files[0]);
     }
     else{
         apagar_3_4();
@@ -116,7 +116,7 @@ document.getElementById("img_3x4").onchange = function (){
     }
 };
 
-document.getElementById("img_matricula").onchange = function (){
+function change_img_matricula(){
     string = document.getElementById("img_matricula").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
         var reader = new FileReader();
@@ -124,7 +124,7 @@ document.getElementById("img_matricula").onchange = function (){
             document.getElementById("matricula_image").src = e.target.result;
         };
         
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(document.getElementById("img_matricula").files[0]);
     }
     else{
         apagar_matricula();
@@ -132,7 +132,7 @@ document.getElementById("img_matricula").onchange = function (){
     }
 };
 
-document.getElementById("img_atestado").onchange = function (){
+function change_img_atestado(){
     string = document.getElementById("img_atestado").value.split('.');
     if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
         var reader = new FileReader();
@@ -140,25 +140,13 @@ document.getElementById("img_atestado").onchange = function (){
             document.getElementById("atestado_image").src = e.target.result;
         };
         
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(document.getElementById("img_atestado").files[0]);
     }
     else{
         apagar_atestado();
         alert('Ocorreu um erro no upload da imagem, por favor tente novamente!')
     }
 };
-
-document.getElementById('limpar_3x4').onclick = function (){
-    apagar_3_4();
-}
-
-document.getElementById('limpar_matricula').onclick = function (){
-    apagar_matricula();
-}
-
-document.getElementById('limpar_atestado').onclick = function (){
-    apagar_atestado();
-}
 
 //EDIÇÃO E CRIAÇÃO DE ANAMNESES
 function convenio_medico_click(valor){
@@ -298,18 +286,20 @@ function foto() {
     });
 };
 
-document.getElementById('capture').addEventListener('click', function(){
-    var video = document.getElementById('video');
-    context = document.getElementById('canvas_foto');
-    context.getContext('2d').drawImage(video, 0, 0, 400, 300);
-    document.getElementById("img_web").src = context.toDataURL('img/img_3x4');
-    var codigo = context.toDataURL();
-    document.getElementById('web_image').value = codigo;
-    
-    stop();
-})
+if(document.getElementById('capture') != null){
+    document.getElementById('capture').addEventListener('click', function(){
+        var video = document.getElementById('video');
+        context = document.getElementById('canvas_foto');
+        context.getContext('2d').drawImage(video, 0, 0, 400, 300);
+        document.getElementById("img_web").src = context.toDataURL('img/img_3x4');
+        var codigo = context.toDataURL();
+        document.getElementById('web_image').value = codigo;
 
-function muda_foto(link){
+        stop();
+    })
+}
+
+function muda_foto(){
     var diva = document.getElementById('image_file');
     var divb = document.getElementById('image_web');
     apagar_3_4()

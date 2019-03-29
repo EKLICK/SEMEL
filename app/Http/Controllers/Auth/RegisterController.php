@@ -211,7 +211,7 @@ class RegisterController extends Controller{
                                 HistoricoPT::create([
                                     'pessoa_id' => $pessoa->id,
                                     'turma_id' => $turma->id,
-                                    'comentario' => 'Pessoa inativada devido ao reset do sistema.',
+                                    'comentario' => 'Desativação por encerramento do ano, aguardando rematricula.',
                                     'inativo' => 2,
                                 ]);
                             }

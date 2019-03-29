@@ -3,7 +3,7 @@
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{Route('home')}}" class="breadcrumb">Pessoas</a>
     <a href="{{Route('pessoa_info', $pessoa->id)}}" class="breadcrumb">Informações</a>
-    <a href="{{Route('pessoas.create')}}" class="breadcrumb">Criar Anamneses</a>
+    <a href="{{Route('pessoas.create')}}" class="breadcrumb">Criar Anamnese</a>
 @endsection
 @section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
@@ -191,11 +191,12 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Atestado médico <span style="color: red;">*</span></span>
-                                <input id="img_atestado" type="file" name="img_atestado">
+                            <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
+                            <div class="btn blue">
+                                <span>Abrir arquivo</span>
+                                <input onchange="change_img_atestado()" id="img_atestado" type="file" name="img_atestado" value="@if(is_null(old('img_atestado'))) {{$ultimaanamnese->atestado}} @else {{old('img_atestado')}} @endif" required>
                             </div>
-                            <a id="limpar_atestado"  class="waves-effect waves-light btn" style="margin-left: 5%;">Limpar</a>
+                            <a onclick="apagar_atestado()" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
                                 <input id="atestado" name="atestado" class="file-path validate" type="text" required>
@@ -212,39 +213,48 @@
                         <textarea name="observacao" id="observacao" class="materialize-textarea" maxlength="100">@if(is_null('observacao')) {{old('observacao')}} @else {{$ultimaanamnese->observacao}} @endif</textarea>
                         <label for="observacao">Observação</label>
                     </div>
-                    <div class="input-field col s12 m5 right">
-                        <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="action">
-                            <i class="large material-icons left">add</i>
+                    <div class="container">
+                        <div class="input-field col s12 m5 right">
+                            <button class="btn-floating btn-large waves-effect waves-light light-blue darken-1" type="submit" name="action">
+                                <i class="large material-icons left">add</i>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
         
-    <div id="adicionardoenca" class="modal" style="width: 50%; height: 55%;">
+    <div id="adicionardoenca" class="modal" style="width: 33%; height: 52%;">
+        <div class="col s1.5 right">
+            <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
+        </div>
+        <br><br>
         <div class="container">
-            <br>
-            <h5>Criar Doença</h5>
+            <div class="row">
+                <div class="input-field col s12 m5">
+                    <h5>Criar Doença</h5>
+                </div>
+            </div>
             <form id="ajax_doenca">
                 @csrf
                 <div class="modal-content">
                     <div class="row">
-                        <div class="input-field col s12 m10">
+                        <div class="input-field col s12 m12">
                             <i class="material-icons prefix">new_releases</i>
-                            <input id="nome_doenca" type="text" class="validate" maxlength="30" required>
+                            <input id="nome_doenca" type="text" class="validate">
                             <label for="nome_doenca">Nome da doença: <span style="color: red;">*</span></label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12 m10">
+                        <div class="input-field col s10 m10">
                             <i class="material-icons prefix">description</i>
-                            <textarea id="descricao_doenca" class="materialize-textarea" maxlength="100" required></textarea>
+                            <textarea id="descricao_doenca" class="materialize-textarea" maxlength="100"></textarea>
                             <label for="descricao_doenca">Observação: <span style="color: red;">*</span></label>
                         </div>
+                        <div class="input-field col s2 m2 right">
+                            <a class="btn-floating btn-large" id="botao_doenca"><i class="material-icons">add</i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn-floating btn-large" id="botao"><i class="material-icons">add</i></a>
                 </div>
             </form>
         </div>

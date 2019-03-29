@@ -8,7 +8,7 @@ $(document).ready(function(){
             url: "/ajax/doenca",
         }).done(function (data){
             if(data == 1){
-                M.toast({html: 'É necessario preencher todos os campos para cadastrar uma pessoa'})
+                M.toast({html: 'É necessário preencher todos os campos para cadastrar uma pessoa!'})
             }
             else{
                 $('#nome_doenca').val("");
@@ -18,7 +18,7 @@ $(document).ready(function(){
                     $('#lista_de_pessoas').append('<option value="'+ data[i].id +'">'+ data[i].nome +'</option>');
                 }
                 $('select').formSelect();
-                M.toast({html: 'Doenca cadastrada com sucesso!'})
+                M.toast({html: 'Doença cadastrada com sucesso!'})
             }
         })
     });

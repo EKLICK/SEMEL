@@ -247,19 +247,19 @@
                         <p>
                             <label>
                                 <input value="Solteiro" name="estado_civil" type="radio" @if(old('estado_civil') == 'Solteiro') checked @else @if ($pessoa->estado_civil == 'Solteiro') checked @endif @endif/>
-                                <span>Solteiro</span>
+                                <span>Solteiro(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input value="Casado" name="estado_civil" type="radio" @if(old('estado_civil') == 'Casado') checked @else @if ($pessoa->estado_civil == 'Casado') checked @endif @endif/>
-                                <span>Casado</span>
+                                <span>Casado(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input value="Viuva(o)" name="estado_civil" type="radio" @if(old('estado_civil') == 'Viuva(o)') checked @else @if ($pessoa->estado_civil == 'Viuva(o)') checked @endif @endif/>
-                                <span>Viuva(o)</span>
+                                <span>Viuvo(a)</span>
                             </label>
                         </p>
                     </div>

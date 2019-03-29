@@ -98,8 +98,12 @@
                             <td><h6>{{$professor->rua}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6><b>Numero:</b></h5></td>
+                            <td><h6><b>Número:</b></h5></td>
                             <td><h6>{{$professor->numero_endereco}}</h6></td>
+                        </tr>
+                        <tr>
+                            <td><h6><b>Complemento:</b></h5></td>
+                            <td><h6>@if($professor->complemento != null) {{$professor->complemento}} @else Sem complemento @endif</h6></td>
                         </tr>
                         <tr>
                             <td><h6><b>CEP:</b></h5></td>
