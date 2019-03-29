@@ -98,7 +98,6 @@
         <script>
             $(document).ready(function(){
                 $('ul.tabs').tabs({
-                    swipeable : false,
                     responsiveThreshold : 2500,
                 });
             });

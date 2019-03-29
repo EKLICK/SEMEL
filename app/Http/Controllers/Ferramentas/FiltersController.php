@@ -59,7 +59,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '>=', $nascimento);
@@ -74,7 +74,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '<=', $nascimento);
@@ -102,15 +102,15 @@ class filtersController extends Controller{
                 $query->where('cpf', 'like', $filtro."%")->orWhere('cpf_responsavel', 'like', $filtro.'%');
             }
 
-            //Verifica se o parametro "bairro" foi passado.
-            if(!empty($dataForm['bairro'])){
+            //Verifica se o parametro "telefone" foi passado.
+            if(!empty($dataForm['telefone'])){
                 //Se sim:
 
                 //Adiciona o parametro nos filtros;
-                $filtro = $dataForm['bairro'];
+                $filtro = $dataForm['telefone'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('bairro', '=', $filtro);
+                $query->where('telefone', 'like', $filtro."%");
             }
 
             //Verifica se o parametro "rua" foi passado.
@@ -124,15 +124,47 @@ class filtersController extends Controller{
                 $query->where('rua', 'like', $filtro."%");
             }
 
-            //Verifica se o parametro "telefone" foi passado.
-            if(!empty($dataForm['telefone'])){
+            //Verifica se o parametro "bairro" foi passado.
+            if(!empty($dataForm['bairro'])){
                 //Se sim:
 
                 //Adiciona o parametro nos filtros;
-                $filtro = $dataForm['telefone'];
+                $filtro = $dataForm['bairro'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('telefone', 'like', $filtro."%");
+                $query->where('bairro', '=', $filtro);
+            }
+
+            //Verifica se o parametro "morto" foi passado.
+            if(!empty($dataForm['turmas'])){
+                //Define a variavel $ids para filtrar os ids que serão passados.
+                $filtro = '';
+
+                foreach($dataForm['turmas'] as $turma){$filtro = $filtro.$turma.',';}
+                $filtro = trim($filtro, ',');
+
+                //$atribui a variavel $anamneseslistA todos os ids que encontra todas as anamneses que possuem a doença do parametro.
+                $pessoasA = DB::select(DB::raw('SELECT * FROM turmas_pessoas WHERE
+                                                        turma_id IN ('.$filtro.')'));
+                
+                $ids= [];
+
+                //Atribui a variavel $ids todos os ids encontrados.
+                foreach($pessoasA as $pessoa){array_push($ids, $pessoa->pessoa_id);}
+                
+                //Constroi a query baseado neste parametro.
+                $query->wherein('id', $ids);
+            }
+
+            //Verifica se o parametro "morto" foi passado.
+            if(!empty($dataForm['morto'])){
+                //Se sim:
+                
+                //Adiciona o parametro nos filtros;
+                $filtro = $dataForm['morto'];
+
+                //Constroi a query baseado neste parametro.
+                $query->where('morte', '=', $filtro);
             }
 
             //Verifica se o parametro "sexo" foi passado.
@@ -200,10 +232,12 @@ class filtersController extends Controller{
         //Define sessão de informação com base na quantidade de registros achados.
         Session::put('quant', count($pessoaslist->get()).' pessoas cadastradas.');
 
+        $turmaslist = Turma::orderBy('nome')->get();
+
         //Cria paginate para os registros encontrados.
         $pessoaslist = $pessoaslist->paginate(10);
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm', 'turmaslist'));
     }
 
     //Função professor_procurar: Filtra conteudo de todos os registros de professor e retorna para a página de registro de professor.
@@ -232,7 +266,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '>=', $nascimento);
@@ -247,7 +281,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '<=', $nascimento);
@@ -347,7 +381,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '>=', $nascimento);
@@ -362,7 +396,7 @@ class filtersController extends Controller{
 
                 //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
                 list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia.' 00:00:00';
+                $nascimento = $ano.'-'.$mes.'-'.$dia;
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nascimento',  '<=', $nascimento);
@@ -479,8 +513,6 @@ class filtersController extends Controller{
 
                 //Adiciona o parametro nos horario.
                 $filtro = explode(' ', $dataForm['horario_final']);
-
-                $filtro = $horario[0].':00';
 
                 //Constroi a query baseado neste parametro.
                 $query->where('horario_final', '=', $filtro);

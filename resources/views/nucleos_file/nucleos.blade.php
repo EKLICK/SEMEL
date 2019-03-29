@@ -42,7 +42,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s10 xl4">
-                                    <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                                    <i class="material-icons prefix">location_city</i>&emsp;&emsp;&emsp;Bairros
                                     <select name="bairro">
                                         <option value="" selected disabled>Selecione o núcleo</option>
                                         @foreach ($bairroslist as $bairro)

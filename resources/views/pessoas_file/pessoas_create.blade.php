@@ -89,7 +89,7 @@
                     <div class="input-field col s12 m5">
                         <a class="waves-effect waves-light btn-floating right" style="margin-top: -10%; background-color: #039be5;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
-                            <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros
+                            <i class="material-icons prefix">location_city</i>&emsp;&emsp;&emsp;Bairros
                             <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)

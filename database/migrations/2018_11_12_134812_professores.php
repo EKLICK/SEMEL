@@ -16,7 +16,7 @@ class Professores extends Migration
         Schema::create('professores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->timestamp('nascimento')->nullable();
+            $table->date('nascimento')->nullable();
             $table->string('matricula')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();

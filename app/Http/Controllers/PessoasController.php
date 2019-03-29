@@ -141,11 +141,13 @@ class PessoasController extends Controller{
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
         }
 
+        $turmaslist = Turma::orderBy('nome')->get();
+
         //Define variavel $count para informação de quantidade de registros.
         $count = Pessoa::all();
         Session::put('quant', count($count).' pessoas cadastradas.');
 
-        return view ('pessoas_file.pessoas', compact('pessoaslist','ano'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','ano', 'turmaslist'));
     }
 
     /**
@@ -225,7 +227,7 @@ class PessoasController extends Controller{
         //Verifica se foi informado mora_com_os_pais, se não, seta como nulo.
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
 
-        //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00
+        //Converte a data de nascimento dd/mm/YY para YY-mm-dd
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
 
@@ -262,7 +264,7 @@ class PessoasController extends Controller{
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
             'estado' => $estado,
-            'morte' => -1,
+            'morte' => 2,
         ]);
 
         //Verifica atributos de anamnese, 
@@ -429,7 +431,7 @@ class PessoasController extends Controller{
         //Verifica se foi informado mora_com_os_pais, se não, seta como nulo.
         if(!isset($dataForm['mora_com_os_pais'])){$dataForm['mora_com_os_pais'] = null;}
 
-        //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00
+        //Converte a data de nascimento dd/mm/YY para YY-mm-dd
         $nascimento = explode('/', $dataForm['nascimento']);
         $dataForm['nascimento'] = $nascimento[2].'-'.$nascimento[1].'-'.$nascimento[0];
 

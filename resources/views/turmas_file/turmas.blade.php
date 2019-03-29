@@ -59,7 +59,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s10 xl4">
-                                    <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana
+                                    <i class="material-icons prefix">date_range</i>&emsp;&emsp;&emsp;Dias da semana
                                     <select name="data_semanal[]" multiple>
                                         @foreach ($dias_semana as $dia)
                                             <option value="{{$dia}}">{{$dia}}</option>
@@ -67,7 +67,7 @@
                                     </select>
                                 </div>
                                 <div class="input-field col s10 xl4">
-                                    <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos
+                                    <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp;&emsp;Núcleos
                                     <select name="nucleo_id">
                                         <option value="" selected disabled>Selecione o núcleo</option>
                                         @foreach ($nucleoslist as $nucleo)

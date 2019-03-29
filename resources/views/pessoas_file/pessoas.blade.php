@@ -58,6 +58,33 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input-field col s11 xl5">
+                                    <i class="material-icons prefix">art_track</i>&emsp;&emsp;&emsp;Filtro de turmas
+                                    <select name="turmas[]" multiple>
+                                        @foreach ($turmaslist as $turma)
+                                            <option value="{{$turma->id}}">{{$turma->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="input-field col s3 l2"><label>Morto:</label></div>
+                                    <div class="input-field col s10 l3">
+                                        <p>
+                                            <label>
+                                                <input value="1" name="morto" type="radio"/>
+                                                <span>Sim</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input value="2" name="morto" type="radio"/>
+                                                <span>Não</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3 l2"><label>Sexo:</label></div>
                                 <div class="input-field col s10 l3">
                                     <p>
