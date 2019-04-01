@@ -4,7 +4,7 @@
     <a href="{{route('pessoas.index')}}" class="breadcrumb">Pessoas</a>
     <a href="{{route('pessoas_turmas', $pessoa->id)}}" class="breadcrumb">turmas</a>
 @endsection
-@section('title') Turmas @endsection
+@section('title') Lista de turmas para vinculação <br> <h5><b>Nome da pessoa: {{$pessoa->nome}}</b></h5> @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
     @include('layouts.Sessoes.mensagem_yellow')

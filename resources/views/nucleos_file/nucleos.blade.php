@@ -20,7 +20,7 @@
                                 <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">filter_tilt_shift</i>
                                     <input name="nome" id="icon_nome" type="text" class="validate">
-                                    <label for="icon_nome">Nome da turma:</label>
+                                    <label for="icon_nome">Nome da núcleo:</label>
                                 </div>
                                 <div class="input-field col s10 xl5 right">
                                     <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo:
@@ -82,7 +82,7 @@
             <table class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
-                        <th>Nome da turma</th>
+                        <th>Nome da núcleo</th>
                         <th>Endereço</th>
                         <th>Situação</th>
                         @if(auth()->user()->id == 1)<th>Mudar estado</th>@endif

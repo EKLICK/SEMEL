@@ -5,7 +5,7 @@
             <div class="collapsible-body white">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('users.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-                    <b><a class="collection-item" href="{{route('register')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('register')}}" style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
                     <b><a class="collection-item" href="{{route('audits.index')}}" style="color: #039be5;"><i class="material-icons">access_time</i> Auditorias</a></b>
                 </div>
             </div>
@@ -17,7 +17,7 @@
     <div class="collapsible-body white">
         <div class="collection">
             <b><a class="collection-item" href="{{route('professor.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-            <b><a class="collection-item" href="{{route('professor.create')}}"style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+            <b><a class="collection-item" href="{{route('professor.create')}}"style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
         </div>
     </div>
 </li>
@@ -26,7 +26,7 @@
     <div class="collapsible-body white">
         <div class="collection">
             <b><a class="collection-item" href="{{route('pessoas.index')}}"style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-            <b><a class="collection-item" href="{{route('pessoas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+            <b><a class="collection-item" href="{{route('pessoas.create')}}" style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
         </div>
     </div>
 </li>
@@ -43,7 +43,7 @@
     <div class="collapsible-body white">
         <div class="collection">
             <b><a class="collection-item" href="{{route('doencas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+            <b><a class="collection-item" href="{{route('doencas.create')}}" style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
         </div>
     </div>
 </li>
@@ -54,7 +54,7 @@
             <div class="collapsible-body white">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-                    <b><a class="collection-item" href="{{route('turmas.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('turmas.create')}}" style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
                 </div>
             </div>
         </li>
@@ -63,7 +63,7 @@
             <div class="collapsible-body white">
                 <div class="collection">
                     <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>
-                    <b><a class="collection-item" href="{{route('nucleos.create')}}" style="color: #039be5;"><i class="material-icons">loupe</i> Cadastrar</a></b>
+                    <b><a class="collection-item" href="{{route('nucleos.create')}}" style="color: #039be5;"><i class="material-icons">add_to_queue</i> Adicionar</a></b>
                 </div>
             </div>
         </li>

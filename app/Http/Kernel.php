@@ -62,7 +62,6 @@ class Kernel extends HttpKernel{
         'Authenticate' => \App\Http\Middleware\Authenticate::class,
         'AdministracaoEProfessor' => \App\Http\Middleware\AdministracaoEProfessor::class,
         'Secretario' => \App\Http\Middleware\Secretario::class,
-        'SessionTimeout' => \App\Http\Middleware\SessionTimeout::class,
     ];
 
     /**

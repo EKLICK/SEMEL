@@ -6,7 +6,14 @@
     @endif
         <a href="{{route('professor_turmas', $professor->id)}}" class="breadcrumb">Turmas</a>
 @endsection
-@section('title') @if(auth()->user()->admin_professor == 1) Turmas @else Suas turmas @endif @endsection
+@section('title') @if(auth()->user()->admin_professor == 1)
+    @section('title') 
+        Lista de turmas para vinculação <br> <h5><b>Nome da professor: {{$professor->nome}}</b></h5> 
+    @endsection
+    @else 
+        Suas turmas 
+    @endif 
+@endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')   
     <div class="container z-depth-4">

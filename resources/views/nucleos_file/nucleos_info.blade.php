@@ -132,7 +132,7 @@
                 <div class="row">
                     <div class="row">
                         <div class="col s12">
-                            <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroturmas">Lista de turmas e turma do núcleo</a>
+                            <a class="waves-effect waves-light btn-large modal-trigger blue" href="#modalregistroturmas">Lista de turmas do núcleo</a>
                         </div>
                     </div>
                 </div>

@@ -281,9 +281,9 @@
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="morte_icon" class="material-icons prefix" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if ($pessoa->morte == -1) hidden @endif @endif>add_box</i>
-                        <input id="string_morte" name="string_morte" type="text" class="datepicker validate" value="@if(is_null(old('morte'))) @if($pessoa->morte != -1) {{$pessoa->morte}} @endif @else {{old('string_morte')}} @endif" @if(!is_null(old('morte'))) @if(old('morte') == 2) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>
-                        <label id="morte_label" for="string_morte" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>Convênio médico:</label>
+                        <i id="morte_icon" class="material-icons prefix" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if ($pessoa->morte == -1) hidden @endif @endif>event_busy</i>
+                        <input id="string_morte" name="string_morte" type="text" class="validate" value="@if(is_null(old('morte'))) @if($pessoa->morte != -1) {{$pessoa->morte}} @endif @else {{old('string_morte')}} @endif" @if(!is_null(old('morte'))) @if(old('morte') == 2) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>
+                        <label id="morte_label" for="string_morte" @if(!is_null(old('morte'))) @if(old('morte') != 1) hidden @endif @else @if($pessoa->morte == -1) hidden @endif @endif>Motivo do falecimento:</label>
                     </div>
                 </div>
                 <div class="row">

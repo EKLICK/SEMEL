@@ -468,6 +468,7 @@ class PessoasController extends Controller{
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
             'estado' => $estado,
+            'morte' => $dataForm['string_morte'],
         ]);
 
         return redirect()->Route('pessoas.index');
