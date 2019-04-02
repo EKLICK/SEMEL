@@ -22,7 +22,7 @@ class DoencaCreateEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nome'              => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,50',
+            'nome'              => 'required|string|between:3,50',
             'descricao'         => 'required|between:5,100',
         ];
     }
@@ -30,7 +30,6 @@ class DoencaCreateEditFormRequest extends FormRequest{
     public function messages(){
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
-            'nome.regex' => 'Insira um nome sem caractéres especiais!',
             'nome.between' => 'Insira um nome entre 3 e 50 caracteres!',
 
             'descricao.required' => 'O campo descrição é de preenchimento obrigatório!',

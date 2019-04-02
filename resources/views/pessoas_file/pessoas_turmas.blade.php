@@ -129,7 +129,7 @@
                 <tbody>
                     @foreach ($turmaslist as $turma)
                         <tr>
-                            <td><p>{{$turma->nome}}</p></td>
+                            <td><p>{{$turma->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             <td><p>{{$turma->quant_atual}} / {{$turma->limite}}</p><i class="small material-icons" @if($turma->qwuant_atual >= $turma->limite) style="color: yellow;" @else style="color: green;" @endif>sim_card_alert</i></td>
                             <td> 
@@ -174,7 +174,7 @@
                                         </a>
                                     </td>
                                 @else
-                                    <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
+                                    <td><p>Inativado</p><i class="small material-icons" style="color: #ffd600;" >sim_card_alert</i></td>
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar" href="#modalidturmaativar"
                                             data-idusuario="{{$pessoa->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$pessoa->nome}}" data-nometurma="{{$turma->nome}}">

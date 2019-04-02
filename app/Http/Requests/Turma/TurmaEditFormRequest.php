@@ -22,7 +22,7 @@ class TurmaEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nome'                  => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nome'                  => 'required|string|between:3,100',
             'limite'                => 'required|integer|max:200',
             'horario_inicial'       => ['required','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
             'horario_final'         => ['required','regex:/^[0-2][0-9]:[0-5][0-9]$/'],
@@ -36,7 +36,6 @@ class TurmaEditFormRequest extends FormRequest{
     public function messages(){
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
-            'nome.regex' => 'Insira um nome sem caractéres especiais!',
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'limite.required' => 'O campo limite é de preenchimento obrigatório!',

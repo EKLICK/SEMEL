@@ -22,7 +22,7 @@ class UserEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nick'                    => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:5,30',
+            'nick'                    => 'required|string|between:5,30',
             'email'                   => 'required|string|email|max:30|unique:users,email,'.$this->id.'|',
             'name'                    => 'sometimes|nullable|string|between:5,30|unique:users,name,'.$this->id.'|',
             'password'                => 'sometimes|nullable|string|between:5,30',
@@ -33,7 +33,6 @@ class UserEditFormRequest extends FormRequest{
     public function messages(){
         return[
             'nick.required' => 'O campo usuário é de preenchimento obrigatório!',
-            'nick.regex' => 'Insira um usuário sem caractéres especiais!',
             'nick.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de usuário!',
 
             'name.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de nome de administrador!',

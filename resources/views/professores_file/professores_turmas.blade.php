@@ -127,8 +127,8 @@
                     <tr>
                         <th>Nome da turma</th>
                         @if(auth()->user()->admin_professor == 1)
-                            <th>Estado</th>
                             <th>Núcleo pertencente</th>
+                            <th>Estado</th>
                             <th>Vinculo</th>
                             <th>Mudar vinculo</th>
                         @else
@@ -140,26 +140,26 @@
                 <tbody>
                     @foreach ($turmaslist as $turma)
                         <tr>
-                            <td><p>{{$turma->nome}}</p></td>
-                            <td> 
-                                <p>
-                                    @if($turma->inativo == 2)
-                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
-                                        @else Turma inativa @endif
-                                    @else 
-                                        @if($turma->nucleo->inativo == 2) Núcleo inativo
-                                        @else Turma ativa @endif @endif
-                                </p>
-                                <i class="small material-icons" 
-                                    @if($turma->inativo == 2 || $turma->nucleo->inativo == 2)  
-                                        style="color: red;" 
-                                    @else 
-                                        style="color: green;" 
-                                    @endif>sim_card_alert
-                                </i>
-                            </td>
+                            <td><p>{{$turma->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info_outline</i></a></td>
                             @if(auth()->user()->admin_professor == 1)
                                 <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
+                                <td> 
+                                    <p>
+                                        @if($turma->inativo == 2)
+                                            @if($turma->nucleo->inativo == 2) Núcleo inativo
+                                            @else Turma inativa @endif
+                                        @else 
+                                            @if($turma->nucleo->inativo == 2) Núcleo inativo
+                                            @else Turma ativa @endif @endif
+                                    </p>
+                                    <i class="small material-icons" 
+                                        @if($turma->inativo == 2 || $turma->nucleo->inativo == 2)  
+                                            style="color: red;" 
+                                        @else 
+                                            style="color: green;" 
+                                        @endif>sim_card_alert
+                                    </i>
+                                </td>
                                 @php $ids = -1; @endphp
                                 @if(isset($turma->professores)) 
                                     @for ($i = 0; $i < count($turma->professores); $i++) 
@@ -183,15 +183,11 @@
                                             </a>
                                         </td>
                                     @else
-                                        <td><p>Inativado</p><i class="small material-icons" style="color: yellow;" >sim_card_alert</i></td>
+                                        <td><p>Inativado</p><i class="small material-icons darken-1" style="color: #ffd600;" >sim_card_alert</i></td>
                                         <td><a class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar" href="#modalidturmaativar"
                                                 data-idusuario="{{$professor->id}}" data-idturma="{{$turma->id}}" data-nomeusuario="{{$professor->nome}}" data-nometurma="{{$turma->nome}}">
                                             <i class="material-icons right">speaker_notes</i>Ativar
                                             </a>
-                                        </td>
-                                        <td>
-                                            <a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a>
-                                            <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
                                         </td>
                                     @endif
                                 @endif

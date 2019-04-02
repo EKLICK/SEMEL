@@ -22,7 +22,7 @@ class NucleoCreateEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nome'                  => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'nome'                  => 'required|string|between:3,100',
             'bairro'                => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
             'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'numero_endereco'       => 'required|digits_between:0,15',
@@ -34,7 +34,6 @@ class NucleoCreateEditFormRequest extends FormRequest{
     public function messages(){
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
-            'nome.regex' => 'Insira um nome sem caractéres especiais!',
             'nome.between' => 'Insira um nome entre 3 ou 100 caracteres!',
 
             'bairro.required' => 'O campo bairro é de preenchimento obrigatório!',
