@@ -195,7 +195,7 @@
         </div>
     </div>
 
-    <div id="modalidturmavincular" class="modal">
+    <div id="modalidturmavincular" class="modal" style="width: 60%;">
         <div class="col s1.5 right">
             <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
         </div>

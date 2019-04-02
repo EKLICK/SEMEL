@@ -155,7 +155,6 @@ function convenio_medico_click(valor){
 
 function morte_click(valor){
     change(valor, $('#string_morte'), $('#morte_label'), $('#morte_icon'));
-    $('#string_morte').attr('required', 'required');
 }
 
 function toma_medicacao_click(valor){

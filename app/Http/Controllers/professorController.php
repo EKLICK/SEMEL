@@ -85,11 +85,11 @@ class ProfessorController extends Controller{
     //Função store: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de registro de professores.
     public function store(ProfessorCreateFormRequest $request){
         $dataForm = $request->all();
-
+        
         //Cria usuário no banco de dados com todos os atributos abaixo:
         $user = User::create([
             'nick' => $dataForm['nome'],
-            'name' => $dataForm['usuario'],
+            'name' => $dataForm['name'],
             'email' => strtolower($dataForm['email']),
             'password' => bcrypt($dataForm['password']),
             'admin_professor' => 0,

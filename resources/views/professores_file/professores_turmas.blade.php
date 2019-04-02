@@ -208,7 +208,7 @@
             @endif
         </div>
     </div>
-    <div id="modalidturmavincular" class="modal">
+    <div id="modalidturmavincular" class="modal" style="width: 60%;">
         <div class="col s1.5 right">
             <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
         </div>
@@ -220,7 +220,15 @@
                 <h4>Vincular</h4>
                 <h5 id="texto_id_vincular"></h5>
                 <hr>
-                <br>
+                <h5><b>Atenção:</b></h5>
+                <div class="row">
+                    <div class="input-field col s1">
+                        <i class="medium material-icons" style="color: red;" >sim_card_alert</i>
+                    </div>
+                    <div class="input-field col s11">
+                        <h6>Ao fazer o vinculo, o professor não poderá ser desvinculada, você terá opção somente de ativar e inativar o professor da turma!</h6>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s7">
                         <i class="material-icons prefix">comment</i>&emsp;&emsp; Comentario do vinculo (opcional):

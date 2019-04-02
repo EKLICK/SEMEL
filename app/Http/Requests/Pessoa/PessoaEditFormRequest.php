@@ -46,7 +46,7 @@ class PessoaEditFormRequest extends FormRequest{
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro', 'Viuva(o)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
             'morte'                 => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'string_morte'          => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ() ]+$/|',
+            'string_morte'          => 'sometimes|nullable|string',
         ];
     }
 

@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="{{$professor->cidade}}" @endif maxlength="15" required>
+                        <input name="cidade" id="bairro" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="{{$professor->cidade}}" @endif maxlength="70" required>
                         <label for="bairro">Cidade: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -50,7 +50,7 @@
                         </div>
                         <div id="div_bairro_string" @if(is_null(old('string_bairro')) && $professor->bairro == null) hidden @endif>
                             <i class="material-icons prefix">location_city</i>
-                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="@if(is_null(old('string_bairro'))) {{$professor->bairro}} @else {{old('string_bairro')}} @endif">
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="@if(is_null(old('string_bairro'))) {{$professor->bairro}} @else {{old('string_bairro')}} @endif" maxlength="70">
                             <label for="string_bairro">Bairro: <span style="color: red;">*</span></label>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$professor->rua}} @else {{old('rua')}} @endif" maxlength="15" required>
+                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$professor->rua}} @else {{old('rua')}} @endif" maxlength="70" required>
                         <label for="rua">Rua: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$professor->email}} @else {{old('email')}} @endif" maxlength="30" required>
+                        <input name="email" id="email" type="tel" class="validate" value="@if(is_null(old('email'))) {{$professor->email}} @else {{old('email')}} @endif" maxlength="80" required>
                         <label for="email">E-mail: <span style="color: red;">*</span></label>
                     </div>
                 </div>

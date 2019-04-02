@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif maxlength="15" required>
+                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif maxlength="70" required>
                         <label for="cidade">Cidade: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -48,7 +48,7 @@
                         </div>
                         <div id="div_bairro_string" @if(is_null(old('string_bairro'))) hidden @endif>
                             <i class="material-icons prefix">location_city</i>
-                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}" maxlength="15">
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}" maxlength="70">
                             <label for="string_bairro">Bairro: <span style="color: red;">*</span></label>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" maxlength="15" required>
+                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" maxlength="70" required>
                         <label for="rua">Rua: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" id="email" type="email" class="validate" value="{{old('email')}}" maxlength="30" required>
+                        <input name="email" id="email" id="email" type="email" class="validate" value="{{old('email')}}" maxlength="80" required>
                         <label for="email">E-mail: <span style="color: red;">*</span></label>
                     </div>
                 </div>
@@ -123,8 +123,8 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="usuario" id="usuario" type="text" class="validate" maxlength="30" required>
-                        <label for="usuario">Usuário: <span style="color: red;">*</span></label>
+                        <input name="name" id="name" type="text" class="validate" maxlength="30" required>
+                        <label for="name">Usuário: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">

@@ -264,10 +264,10 @@ class PessoasController extends Controller{
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
             'estado' => $estado,
-            'morte' => 2,
+            'morte' => -1,
         ]);
 
-        //Verifica atributos de anamnese, 
+        //Verifica atributos de anamnese,
         //se foi selecionado sim, adiciona ao campo de input (type=text).
         //Se foi selecionado não, adiciona -1 para o banco de dados.
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}

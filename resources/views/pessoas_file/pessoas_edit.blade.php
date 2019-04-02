@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" value="@if(is_null(old('cidade'))) {{$pessoa->cidade}} @else {{old('cidade')}} @endif" maxlength="30">
+                        <input name="cidade" id="cidade" type="text" class="validate" value="@if(is_null(old('cidade'))) {{$pessoa->cidade}} @else {{old('cidade')}} @endif" maxlength="70">
                         <label for="cidade">Cidade:</label>
                     </div>
                     <div class="input-field col s12 m5">
@@ -101,7 +101,7 @@
                         </div>
                         <div id="div_bairro_string" @if(is_null(old('string_bairro')) && $pessoa->bairro == null) hidden @endif>
                             <i class="material-icons prefix">location_city</i>
-                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="@if(is_null(old('string_bairro'))) {{$pessoa->bairro}} @else {{old('string_bairro')}} @endif" maxlength="15">
+                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="@if(is_null(old('string_bairro'))) {{$pessoa->bairro}} @else {{old('string_bairro')}} @endif" maxlength="70">
                             <label for="string_bairro">Bairro:</label>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate"  value="@if(is_null(old('rua'))) {{$pessoa->rua}} @else {{old('rua')}} @endif" maxlength="15">
+                        <input name="rua" id="rua" type="text" class="validate"  value="@if(is_null(old('rua'))) {{$pessoa->rua}} @else {{old('rua')}} @endif" maxlength="70">
                         <label for="rua">Rua:</label>
                     </div>
                     <div class="input-field col s12 m5">

@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="input-field col s11 m6 xl5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}" maxlength="15" required>
+                        <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}" maxlength="70" required>
                         <label for="icon_rua">Rua: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s11 m6 xl5">
