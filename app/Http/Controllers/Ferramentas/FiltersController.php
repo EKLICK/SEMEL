@@ -622,6 +622,7 @@ class filtersController extends Controller{
         else{
             //Cria paginate para os registros encontrados.
             $turmaslist = $turmaslist->paginate(10);
+            dd($turmaslist);
 
             return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana', 'dataForm'));
         }

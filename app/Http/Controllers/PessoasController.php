@@ -201,7 +201,7 @@ class PessoasController extends Controller{
             else{$dataForm['img_matricula'] = null;}
         }
 
-        //checar se convenio médico foi marcado
+        //Checar se convenio médico foi marcado
         if(isset($dataForm['convenio_medico'])){
             if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = null;}
         }
@@ -268,7 +268,7 @@ class PessoasController extends Controller{
         ]);
 
         //Verifica atributos de anamnese,
-        //se foi selecionado sim, adiciona ao campo de input (type=text).
+        //Se foi selecionado sim, adiciona ao campo de input (type=text).
         //Se foi selecionado não, adiciona -1 para o banco de dados.
         if(!empty($dataForm['doencas'])){$dataForm['possui_doenca'] = 1;}
         if($dataForm['toma_medicacao'] == 2){$dataForm['string_toma_medicacao'] = -1;}
@@ -363,7 +363,7 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
-        //Verifica se a imagem 3 por 4 foi passada pelo formulario.
+        //Verifica se a imagem 3 por 4 por arquivo foi passada pelo formulario.
         if(isset($dataForm['img_3x4'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
@@ -378,7 +378,9 @@ class PessoasController extends Controller{
             $dataForm += ['img_3x4' => null];
         }
 
+        //Verifica se a imagem 3 por 4 por webcam foi passada pelo formulario.
         if(isset($dataForm['foto_web'])){
+            //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
             $dataForm['foto_web'] = $this->saveDbImage3x4($request, 2);
         }

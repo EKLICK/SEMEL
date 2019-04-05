@@ -176,7 +176,9 @@ class RegisterController extends Controller{
         return redirect()->Route('users.index');
     }
 
+    //Função user_info: Seleciona informações necessarias para vizualização e retorna a página de informações do usuário.
     protected function user_info($id){
+        //Encontra o usuário no banco de dados.
         $user = User::find($id);
 
         return view ('auth.users_info', compact('user'));

@@ -152,7 +152,7 @@ Route::any('/procurar/doencas', 'Ferramentas\FiltersController@doencas_procurar'
 
 //FILTRO DE TURMAS
 //Rota turmas_procurar: Utilizado para filtrar registro de pessoas na página de registros de turmas.
-Route::any('/procurar/turmas','Ferramentas\FiltersController@turmas_procurar')->name('turmas_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::any('/procurar/turmas','Ferramentas\FiltersController@turmas_procurar')->name('turmas_procurar')->middleware('Authenticate');
 
 //FILTRO DE NÚCLEOS
 //Rota nucleos_procurar: Utilizado para filtrar registro de pessoas na página de registros de nÚcleos.

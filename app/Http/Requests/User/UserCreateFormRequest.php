@@ -42,7 +42,7 @@ class UserCreateFormRequest extends FormRequest{
 
             'name.required' => 'O campo nome do administrador é de preenchimento obrigatório!',
             'name.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de nome de administrador!',
-            'name.unique' => 'Usuário já cadastrado, utilize outro!',
+            'name.unique' => 'Usuário já cadastrado!',
 
             'password.required' => 'É necessario uma senha de cadastro para o registro!',
             'password.between' => 'Máximo de 30 caracteres e mínimo de 5 caracteres no campo de senha!',
