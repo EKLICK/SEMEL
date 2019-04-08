@@ -261,7 +261,7 @@ class RegisterController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id == 1){
+        if($user->can('autorizacao', 2)){
             //Se o número passado for menor que 1, define o número 1 na quantidade máxima.
             if($dataForm['quantidade'] < 1){ $dataForm['quantidade'] = 1;}
 

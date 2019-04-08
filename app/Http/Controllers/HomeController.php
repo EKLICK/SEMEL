@@ -29,13 +29,13 @@ class HomeController extends Controller{
     //Função index: Redireciona o usuário de acordo com suas expecificações de permissão.
     public function index(){
         //Verifica se o usuário é autenticado:
-        if(is_null(auth()->user()->admin_professor)){
+        if(is_null(auth()->user()->permissao)){
             //Caso não seja, é retornado para página de login.
             return view ('auth.login');
         }
         else {
             //Caso seja, verifica-se se o usuário é administrador:
-            if(auth()->user()->admin_professor == 1){
+            if($user->can('autorizacao', 3)){
                 //Se sim, é redirecionado para a rota de pessoas.index (registro de pessoas).
                 return view ('home');
             }

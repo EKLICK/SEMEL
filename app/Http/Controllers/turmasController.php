@@ -57,7 +57,7 @@ class TurmasController extends Controller{
     //Função create: Retorna a página de criação de registros de turmas.
     public function create(){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
         
         //Encontra todos os registros de nucleos.
         $nucleoslist = Nucleo::orderBy('nome')->get();
@@ -80,7 +80,7 @@ class TurmasController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Define a variavel dias_da_semana para compactar todos os dias da semana escolhidas e depois define para a criação.
         $dias_da_semana = '';
@@ -124,7 +124,7 @@ class TurmasController extends Controller{
     //Função edit: Retorna a página de edição de registros de turmas.
     public function edit($id){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);
@@ -155,7 +155,7 @@ class TurmasController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados.
         $turma = Turma::find($id);
@@ -227,7 +227,7 @@ class TurmasController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados.
         $turma = Turma::find($dataForm['turma_id']);

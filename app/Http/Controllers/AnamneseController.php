@@ -278,7 +278,7 @@ class AnamneseController extends Controller{
         $pessoa = Pessoa::find($anamnese->pessoas);
 
         //Se o usuário for professor, adicionar a variavel professor procurando o professor com o id do usuário e retornando para informações de anamneses
-        if(auth()->user()->admin_professor == 0){
+        if($user->can('autorizacao', 3)){
             //Enconta o professor no banco de dados.
             $professor = Professor::where('user_id', '=', auth()->user()->id)->first();
 

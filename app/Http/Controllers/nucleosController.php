@@ -56,7 +56,7 @@ class NucleosController extends Controller{
     //Função create: Retorna a página de criação de registros de núcleos.
     public function create(){
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -80,7 +80,7 @@ class NucleosController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Cria núcleo no banco de dados:
         $nucleo =  Nucleo::create($dataForm);
@@ -122,7 +122,7 @@ class NucleosController extends Controller{
         $nucleo = Nucleo::find($id);
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -147,7 +147,7 @@ class NucleosController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Encontra o professor no banco de dados.
         $nucleo = Nucleo::find($id);
@@ -223,7 +223,7 @@ class NucleosController extends Controller{
         $dataForm = $request->all();
 
         //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if(auth()->user()->id != 1){return redirect()->Route('pessoas.index');}
+        $this->authorize('autorizacao', 2);
 
         //Enconta o professor no banco de dados.
         $nucleo = Nucleo::find($dataForm['nucleo_id']);
