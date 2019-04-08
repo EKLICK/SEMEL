@@ -75,7 +75,7 @@ class RegisterController extends Controller{
     //Função index: Retorna a página de registros de usuários.
     protected function index(){
         //Encontra todos os registros de usuários e ordena por nick.
-        $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
+        $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->paginate(10);
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
@@ -107,10 +107,13 @@ class RegisterController extends Controller{
         ]);
 
         //Encontra todos os registros de usuários e ordena por nick.
-        $userslist = User::orderBy('nick')->where('id', '!=', 1)->get();
+        $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->paginate(10);
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
+
+        //Define um sessão em verde para informar a criação do usuário.
+        Session::put('mensagem_green', "Administrador criado com sucesso!");
         
         return view ('auth.users', compact('userslist','quantidade'));
     }
@@ -171,6 +174,26 @@ class RegisterController extends Controller{
 
             //Define um sessão em verde para informar a exclusão do usuário.
             Session::put('mensagem_green', "Usuário deletado com sucesso!");
+        }
+
+        return redirect()->Route('users.index');
+    }
+
+    //Função destroy: Deleta o usuário.
+    protected function restore(Request $request){
+        $dataForm = $request->all();
+
+        //Verifica se o usuário a ser restaurado possui o id diferente de 1
+        if($dataForm['id'] != 1){
+            //Se sim, encontra o usuário no banco de dados.
+            $user = User::withTrashed()->find($dataForm['id']);
+            if($user['deleted_at'] != null){
+                //Deleta o usuário
+                $user->restore();
+
+                //Define um sessão em verde para informar a restauração do usuário.
+                Session::put('mensagem_green', "Usuário restaurado com sucesso!");
+            }
         }
 
         return redirect()->Route('users.index');

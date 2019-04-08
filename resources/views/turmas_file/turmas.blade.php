@@ -146,7 +146,11 @@
                     @endforeach 
                 </tbody>
             </table>
-            {{$turmaslist->links()}}
+            @if(isset($dataForm))
+                {{$turmaslist->appends($dataForm)->links()}}
+            @else
+                {{$turmaslist->links()}}
+            @endif
             @if(auth()->user()->id == 1)
                 <br>
                 <div class="container">

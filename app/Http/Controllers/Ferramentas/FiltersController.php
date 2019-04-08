@@ -16,6 +16,7 @@ use App\Http\Requests\Professor\AlunoProcurarFormRequest;
 use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
+use App\http\Requests\User\UserProcurarFormRequest;
 
 //MODELOS PARA CONTROLE:
 use App\Professor;
@@ -32,10 +33,91 @@ use App\User;
 //Comentarios em cima, código comentado em baixo.
 class filtersController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
+
+    //Função usuario_procurar: Filtra conteudo de todos os registros de usuarios e retorna para a página de registro de usuarios.
+    public function usuarios_procurar(UserProcurarFormRequest $request){
+        $dataForm = $request->except('_tocken');
+
+        //Encontra todos os registros de usuarios no banco de dados com base nos parametros que foram passados no filtro.
+        $userslist = User::where(function($query) use ($dataForm){
+            //Verifica se o parametro "usuario" foi passado.
+            if(!empty($dataForm['usuario'])){
+                //Se sim:
+
+                //Adiciona o parametro nos filtros.
+                $filtro = $dataForm['usuario'];
+
+                //Constroi a query baseado neste parametro.
+                $query->where('name', 'like', $filtro."%")->where('id', '!=', 1);
+            }
+
+            //Verifica se o parametro "nome" foi passado.
+            if(!empty($dataForm['nome'])){
+                //Se sim:
+
+                //Adiciona o parametro nos filtros.
+                $filtro = $dataForm['nome'];
+
+                //Constroi a query baseado neste parametro.
+                $query->where('nick', 'like', $filtro."%")->where('id', '!=', 1);
+            }
+
+            //Verifica se o parametro "email" foi passado.
+            if(!empty($dataForm['email'])){
+                //Se sim:
+
+                //Adiciona o parametro nos filtros.
+                $filtro = $dataForm['email'];
+
+                //Constroi a query baseado neste parametro.
+                $query->where('email', '=', $filtro)->where('id', '!=', 1);
+            }
+
+            //Verifica se o parametro "telefone" foi passado.
+            if(!empty($dataForm['telefone'])){
+                //Se sim:
+
+                //Adiciona o parametro nos filtros;
+                $filtro = $dataForm['telefone'];
+
+                //Constroi a query baseado neste parametro.
+                $query->where('telefone', 'like', $filtro."%")->where('id', '!=', 1);
+            }
+
+            //Verifica se o parametro "tipo" foi passado.
+            if(isset($dataForm['tipo'])){
+                //Se sim:
+                
+                //Adiciona o parametro nos filtros;
+                $filtro = $dataForm['tipo'];
+
+                 //Constroi a query baseado neste parametro.
+                 $query->where('admin_professor', '=', $filtro)->where('id', '!=', 1);
+            }
+
+            //Verifica se o parametro "inativo" foi passado.
+            if(!empty($dataForm['inativo'])){
+                //Se sim:
+
+                //Constroi a query baseado neste parametro.
+                if($dataForm['inativo'] == '1'){
+                    $query->where('deleted_at', '!=', null)->where('id', '!=', 1);
+                }
+                else{
+                    $query->where('deleted_at', null)->where('id', '!=', 1);
+                }
+            }
+        })->withTrashed()->orderBy('nick')->paginate(10);
+        
+        //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
+        $quantidade = Quant::find(1);
+
+        return view ('auth.users', compact('userslist','quantidade','dataForm'));
+    }
+
     //Função pessoas_procurar: Filtra conteudo de todos os registros de pessoas e retorna para a página de registro de pessoas.
     public function pessoas_procurar(PessoaProcurarFormRequest $request){
         $dataForm = $request->except('_token');
-        $ano = date('Y');
         
         //Encontra todos os registros de pessoas no banco de dados com base nos parametros que foram passados no filtro.
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
@@ -436,7 +518,7 @@ class filtersController extends Controller{
             foreach($pessoaslistA as $id){array_push($ids, $id->id);}
 
             //Constroi a query baseado neste parametro.
-            $query->wherein('id', $ids);
+            $query->wherein('id', $ids)->get();
         })->orderBy('nome');
 
         //Encontra a turma no banco de dados que foi passada por parametro.
@@ -446,10 +528,8 @@ class filtersController extends Controller{
         $professor = Professor::find($dataForm['professorid']);
 
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($pessoaslist->get()).' pessoas cadastradas.');
+        Session::put('quant', count($pessoaslist).' pessoas cadastradas.');
 
-        //Cria paginate para os registros encontrados.
-        $pessoaslist = $pessoaslist->paginate(10);
 
         return view ('professores_file.professores_meus_alunos', compact('turma','pessoaslist','professor'));
     }
@@ -484,7 +564,7 @@ class filtersController extends Controller{
                 //Constroi a query baseado neste parametro.
                 $query->where('inativo', '=', $filtro."%");
             }
-
+            
             //Verifica se o parametro "limite" foi passado.
             if(!empty($dataForm['limite'])){
                 //Se sim:
@@ -622,7 +702,6 @@ class filtersController extends Controller{
         else{
             //Cria paginate para os registros encontrados.
             $turmaslist = $turmaslist->paginate(10);
-            dd($turmaslist);
 
             return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana', 'dataForm'));
         }

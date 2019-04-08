@@ -25,7 +25,6 @@ $('.timepicker').timepicker({
     }
 });
 
-
 //FORMATAÇÃO DE INPUTS:
 function fMasc(objeto,mascara) {
     obj=objeto

@@ -95,15 +95,5 @@
         <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/ajax.js')}}"></script>
-        <script>
-            $(document).ready(function(){
-                $('ul.tabs').tabs({
-                    responsiveThreshold : 2500,
-                });
-            });
-            $(document).ready(function(){
-                $('.sidenav').sidenav();
-            });
-        </script>
     </body>
 </html>

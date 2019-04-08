@@ -1,8 +1,27 @@
 //MODAL DELETE
-$(document).on('click', '#btn-delete', function(){
+$(document).on('click', '#btn_delete', function(){
+    if($(this).data('tipo') == 1){
+        $('#tipo_delete').text('Administrador');
+    }
+    else{
+        $('#tipo_delete').text('Professor')
+    }
     $('#id_delete').val($(this).data('id'));
-    $('#name_delete').val($(this).data('nome'));
+    $('#name_delete').text($(this).data('name'));
 });
+
+//MODAL RESTORE
+$(document).on('click', '#btn-restore', function(){
+    if($(this).data('tipo') == 1){
+        $('#tipo_restore').text('Administrador');
+    }
+    else{
+        $('#tipo_restore').text('Professor')
+    }
+    $('#id_restore').val($(this).data('id'));
+    $('#name_restore').text($(this).data('name'));
+});
+
 
 //MODAL PESSOA E PROFESSOR
 $(document).on('click', '.btn-modal_vincular', function(){
@@ -33,17 +52,6 @@ $(document).on('click', '#btn-modal_ativar_objeto', function(){
 $(document).on('click', '#btn-modal_inativar_objeto', function(){
     $('#id_modal_inativar').val($(this).data('idobjeto'));
     document.getElementById('texto_inativar').innerHTML = 'Você deseja inativar ' + $(this).data('nomeobjeto').bold() + '?';
-});
-
-$(document).on('click', '#btn_delete', function(){
-    if($(this).data('tipo') == 1){
-        $('#tipo_delete').text('Administrador');
-    }
-    else{
-        $('#tipo_delete').text('Professor')
-    }
-    $('#id_delete').val($(this).data('id'));
-    $('#name_delete').text($(this).data('name'));
 });
 
 //MODAL DOENÇAS-ANAMNESES

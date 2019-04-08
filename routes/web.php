@@ -10,22 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //ROTAS DE ADMINISTAÇÃO GERAL: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //Rota welcome: Utilizado para Logar no sistema com uma conta.
 Route::get('/', function(){return redirect()->route('login');})->name('welcome');
 
-Route::get('/usuarios','Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::get('/usuarios/edit/{id}','Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::post('/usuarios/create','Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::get('/usuario_info/{id}','Auth\RegisterController@user_info')->name('user_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::put('/usuarios/update/{id}','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-Route::delete('/usuarios/destroy/{id}','Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-
-//Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
-Route::post('/pessoa/quantidade','Auth\RegisterController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
-
-//Rota reset_sistema: Utilizado para retirar todas as pessoas de todas as turmas do sistema (resetar o sistema).
-Route::post('/resetar','Auth\RegisterController@reset')->name('reset_sistema')->middleware('Secretario','AdministracaoEProfessor','Authenticate');
+//Rota Home: Utilizado para acessar a página home padrão.
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Rota Decompose: Utilizado para abrir registro de todas as bibliotecas instaladas.
 Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index')->middleware('Secretario', 'Authenticate');
@@ -33,19 +24,62 @@ Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@ind
 //Rota de Logs: Utilizado para entrar na página de login.
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+
+//CONTROLE DE AUDITORIAS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //Rotas de Auditorias: Utilizado para acessar controle de auditorias.
 Auth::routes();
 
-//Rota Home: Utilizado para acessar a página home padrão.
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-//CONTROLE DE AUDITORIAS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//Rotas de audits.index: Utilizado para acessar controle expecifico de apresentação de auditorias..
+//Rotas de audits.index: Utilizado para acessar controle expecifico de apresentação de auditorias.
 Route::get('/audits','AuditsController@index')->name('audits.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota audits_info: Utilizado para entrar na página de informações da auditoria.
 Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+
+//ROTAS DE USUÁRIOS: |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+//Rota: users.index: Utilizado para ir na página de registros de usuários.
+Route::get('/usuarios','Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota: users.edit: Utilizado para ir na página de criação de usuários.
+Route::post('/usuarios/create','Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota: users.edit: Utilizado para ir na página de edição de usuários.
+Route::get('/usuarios/edit/{id}','Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota nucleo_info: Utilizado para editar as informações do usuário editado.
+Route::put('/usuarios/update/{id}','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota nucleo_info: Utilizado para entrar na página de informações de usuário.
+Route::get('/usuario_info/{id}','Auth\RegisterController@user_info')->name('user_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota nucleo_info: Utilizado para deletar o usuário no banco de dados.
+Route::delete('/usuarios/destroy/{id}','Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota nucleo_info: Utilizado para deletar o usuário no banco de dados.
+Route::get('/usuarios/restore','Auth\RegisterController@restore')->name('users.restore')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.
+Route::post('/pessoa/quantidade','Auth\RegisterController@define_quantidade')->name('define_quantidade')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota reset_sistema: Utilizado para retirar todas as pessoas de todas as turmas do sistema (resetar o sistema).
+Route::post('/resetar','Auth\RegisterController@reset')->name('reset_sistema')->middleware('Secretario','AdministracaoEProfessor','Authenticate');
+
+
+//CONTROLE DE PESSOAS: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+//Rotas de pessoas: Utilizado para acessar controle padrão de pessoas.
+Route::resource('pessoas','PessoasController')->middleware('Authenticate');
+
+//Rota pessoa_info: Utilizado para entrar na página de informações da pessoa.
+Route::get('/pessoas_info/{id}','PessoasController@pessoas_info')->name('pessoa_info')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rota pessoas_turmas: Utilizado para entrar na página de pessoas e turmas.
+Route::get('/pessoas_turmas/{id}','PessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rota pessoas_turmas_vincular: Utilizado para vincular pessoas em turmas.
+Route::post('/pessoas_turmas/vincular','PessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//Rotas pessoas_turmas_ativar_inativar: Utilizado para ativar ou inativar pessoas em turmas.
+Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE PROFESSORES: |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -66,23 +100,6 @@ Route::post('/professor_turmas/vincular','ProfessorController@professores_turmas
 
 //Rotas professores_turmas_ativar_inativar: Utilizado para ativar ou inativar professores em turmas.
 Route::post('/professores_turmas/ativar_inativar','ProfessorController@professores_turmas_ativar_inativar')->name('professores_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-
-//CONTROLE DE PESSOAS: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//Rotas de pessoas: Utilizado para acessar controle padrão de pessoas.
-Route::resource('pessoas','PessoasController')->middleware('Authenticate');
-
-//Rota pessoa_info: Utilizado para entrar na página de informações da pessoa.
-Route::get('/pessoas_info/{id}','PessoasController@pessoas_info')->name('pessoa_info')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Rota pessoas_turmas: Utilizado para entrar na página de pessoas e turmas.
-Route::get('/pessoas_turmas/{id}','PessoasController@pessoas_turmas')->name('pessoas_turmas')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Rota pessoas_turmas_vincular: Utilizado para vincular pessoas em turmas.
-Route::post('/pessoas_turmas/vincular','PessoasController@pessoas_turmas_vincular')->name('pessoas_turmas_vincular')->middleware('AdministracaoEProfessor', 'Authenticate');
-
-//Rotas pessoas_turmas_ativar_inativar: Utilizado para ativar ou inativar pessoas em turmas.
-Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_ativar_inativar')->name('pessoas_turmas_ativar_inativar')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 
 //CONTROLE DE ANAMNESES: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -137,6 +154,10 @@ Route::any('/professor_meus_alunos/procurar/', 'Ferramentas\FiltersController@pr
 
 //Rota professor_procurar: Utilizado para filtrar registro de professores na página de registros de professores.
 Route::any('/procurar/professor','Ferramentas\FiltersController@professor_procurar')->name('professor_procurar')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//FILTRO DE USUÁRIO:
+//Rota usuario_procurar: Utilizado para filtrar registro de usuarios na página de registros de usuarios.
+Route::any('/procurar/usuarios','Ferramentas\FiltersController@usuarios_procurar')->name('usuarios_procurar')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //FILTRO DE PESSOAS
 //Rota pessoas_procurar: Utilizado para filtrar registro de pessoas na página de registros de pessoas.
