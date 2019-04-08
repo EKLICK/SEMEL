@@ -34,8 +34,19 @@
                                 $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
                             @endphp
                             <td><h6>Data de criação:</h6></td>
-                            <td><h6>{{$horario[0]}}</h6></td>
+                            <td><h6>{{$horario[0]}}<br>{{$horario[1]}}</h6></td>
                         </tr>
+                        @if($user->deleted_at !=null)
+                            <tr>
+                                @php
+                                    $horario = explode(" ",$user->deleted_at);
+                                    $diamesano = explode("-", $horario[0]);
+                                    $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
+                                @endphp
+                                <td><h6>Data de exclusão:</h6></td>
+                                <td><h6>{{$horario[0]}}<br>{{$horario[1]}}</h6></td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -246,9 +246,9 @@
                                 <td><h6><b>Convenio médico:</b></h6></td>
                                 <td>
                                     <h6>
-                                        @if($pessoa->convenio_medico != null || $pessoa->convenio_medico == -1)
-                                            @if($pessoa->convenio_medico != null) {{$pessoa->convenio_medico}}
-                                            @else Não possui @endif
+                                        @if($pessoa->convenio_medico != null || $pessoa->convenio_medico != -1)
+                                            @if($pessoa->convenio_medico == -1) Não possui
+                                            @else {{$pessoa->convenio_medico}} @endif
                                         @else <i class="small material-icons" style="color: red;">assignment_late</i> @endif
                                     </h6>
                                 </td>
@@ -274,6 +274,15 @@
                             <tr>
                                 <td><h6><b>Está inativo:</b></h6></td>
                                 <td><h6>@if($pessoa->inativo == null) Sim @else Não @endif</h6></td>
+                            </tr>
+                            <tr>
+                                @php
+                                    $horario = explode(" ",$pessoa->created_at);
+                                    $diamesano = explode("-", $horario[0]);
+                                    $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
+                                @endphp
+                                <td><h6><b>Data de criação</b></h6></td>
+                                <td><h6>{{$horario[0]}}<br>{{$horario[1]}}</h6></td>
                             </tr>
                             @if($pessoa->morte != -1)
                                 <tr>

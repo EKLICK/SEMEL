@@ -85,6 +85,15 @@
                             <td><h6><b>RG:</b></h5></td>
                             <td><h6>{{$professor->rg}}</h6></td>
                         </tr>
+                        <tr>
+                            @php
+                                $horario = explode(" ",$professor->created_at);
+                                $diamesano = explode("-", $horario[0]);
+                                $horario[0] = $diamesano[2].'/'.$diamesano[1].'/'.$diamesano[0];
+                            @endphp
+                            <td><h6><b>Data de criação</b></h6></td>
+                            <td><h6>{{$horario[0]}}<br>{{$horario[1]}}</h6></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col s6">
