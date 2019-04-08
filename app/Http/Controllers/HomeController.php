@@ -35,7 +35,7 @@ class HomeController extends Controller{
         }
         else {
             //Caso seja, verifica-se se o usuário é administrador:
-            if($user->can('autorizacao', 3)){
+            if(auth()->user()->can('autorizacao', 3)){
                 //Se sim, é redirecionado para a rota de pessoas.index (registro de pessoas).
                 return view ('home');
             }

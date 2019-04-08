@@ -55,7 +55,7 @@ class NucleosController extends Controller{
 
     //Função create: Retorna a página de criação de registros de núcleos.
     public function create(){
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
@@ -79,7 +79,7 @@ class NucleosController extends Controller{
     public function store(NucleoCreateEditFormRequest $request){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Cria núcleo no banco de dados:
@@ -121,7 +121,7 @@ class NucleosController extends Controller{
         //Encontra o núcleo no banco de dados.
         $nucleo = Nucleo::find($id);
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
@@ -146,7 +146,7 @@ class NucleosController extends Controller{
     public function update(NucleoCreateEditFormRequest $request, $id){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Encontra o professor no banco de dados.
@@ -222,7 +222,7 @@ class NucleosController extends Controller{
     public function nucleos_ativar_inativar(Request $request){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Enconta o professor no banco de dados.

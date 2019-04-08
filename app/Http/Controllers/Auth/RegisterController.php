@@ -260,8 +260,8 @@ class RegisterController extends Controller{
     protected function define_quantidade(Request $request){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
-        if($user->can('autorizacao', 2)){
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
+        if(auth()->user()->can('autorizacao', 2)){
             //Se o número passado for menor que 1, define o número 1 na quantidade máxima.
             if($dataForm['quantidade'] < 1){ $dataForm['quantidade'] = 1;}
 

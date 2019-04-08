@@ -255,7 +255,7 @@ class ProfessorController extends Controller{
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
 
         //Checar se o usuário é um professor ou um administrador.
-        if($user->can('autorizacao', 3)){
+        if(auth()->user()->can('autorizacao', 3)){
             //Se for um administrador:
 
             //Encontra o professor no banco de dados.

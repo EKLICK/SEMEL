@@ -56,7 +56,7 @@ class TurmasController extends Controller{
 
     //Função create: Retorna a página de criação de registros de turmas.
     public function create(){
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
         
         //Encontra todos os registros de nucleos.
@@ -79,7 +79,7 @@ class TurmasController extends Controller{
     public function store(TurmaCreateFormRequest $request){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Define a variavel dias_da_semana para compactar todos os dias da semana escolhidas e depois define para a criação.
@@ -123,7 +123,7 @@ class TurmasController extends Controller{
 
     //Função edit: Retorna a página de edição de registros de turmas.
     public function edit($id){
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados. 
@@ -154,7 +154,7 @@ class TurmasController extends Controller{
     public function update(TurmaEditFormRequest $request, $id){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados.
@@ -226,7 +226,7 @@ class TurmasController extends Controller{
     public function turmas_ativar_inativar(Request $request){
         $dataForm = $request->all();
 
-        //Função acessivel apenas para o administrador 1, caso não seja o administrador 1, será bloqueado destas ações.
+        //Função acessivel apenas para o usuário do tipo 2, caso não seja o usuário do tipo 2, será bloqueado destas ações.
         $this->authorize('autorizacao', 2);
 
         //Encontra a turma no banco de dados.
