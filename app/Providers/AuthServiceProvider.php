@@ -23,6 +23,13 @@ class AuthServiceProvider extends ServiceProvider{
     public function boot(){
         $this->registerPolicies();
 
-        //
+        $gate->define('autorizacao', function($id_usuario, $permissao){
+            if($permissao - $id_usuario >= 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
     }
 }
