@@ -1,5 +1,5 @@
 @if(isset(auth()->user()->id))
-    @if(auth()->user()->id == 1)
+    @can('autorizacao', 2)
         <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Administração</div>
             <div class="collapsible-body white">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </li>
-    @endif
+    @endcan
 @endif
 <li>
     <div class="collapsible-header"><i class="material-icons">local_library</i>Professores</div>
@@ -48,7 +48,7 @@
     </div>
 </li>
 @if(isset(auth()->user()->id))
-    @if(auth()->user()->id == 1)
+    @can('autorizacao', 3)
         <li>
             <div class="collapsible-header"><i class="material-icons">art_track</i>Turmas</div>
             <div class="collapsible-body white">
@@ -72,5 +72,5 @@
             <b><a class="collection-item" href="{{route('turmas.index')}}" style="color: #039be5;">Turmas</a></b>
             <b><a class="collection-item" href="{{route('nucleos.index')}}" style="color: #039be5;">Nucleos</a></b>
         </div>
-    @endif
+    @endcan
 @endif

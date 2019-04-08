@@ -14,7 +14,7 @@ class Secretario{
      */
     public function handle($request, Closure $next){
         $user = \Auth::user();
-        if($user['id'] != 1){
+        if($user['permissao'] > 2){
             return redirect()->route('login');
         }
 

@@ -5,9 +5,9 @@
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
 @endsection
 @section('title') Usuários registrados 
-    @if(auth()->user()->id == 1)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">&emsp;Inativar em lote <i class="material-icons right">access_time</i>@endif</a>
+    @can('autorizacao', 2)<a href="#modalreset" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">&emsp;Inativar em lote <i class="material-icons right">access_time</i>@endcan</a>
     <br>
-    @if(auth()->user()->id == 1)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endif</a>
+    @can('autorizacao', 2)<a href="#modalquantbloqueio" class="waves-effect waves-light btn blue modal-trigger btn-modal_ativar right">Quantidade limite<i class="material-icons right">https</i>@endcan</a>
 @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')

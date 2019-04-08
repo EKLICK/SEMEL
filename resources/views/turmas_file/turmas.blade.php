@@ -93,8 +93,8 @@
                         <th>Nome da turma</th>
                         <th>Núcleo pertencente</th>
                         <th>Estado</th>
-                        @if(auth()->user()->id == 1)<th>Mudar estado</th>@endif
-                        @if(auth()->user()->id == 1)<th>Ações</th>@else<th>Informações</th>@endif
+                        @can('autorizacao', 2)<th>Mudar estado</th>@endcan
+                        @can('autorizacao', 2)<th>Ações</th>@else<th>Informações</th>@endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -121,7 +121,7 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
-                            @if(auth()->user()->id == 1)
+                            @can('autorizacao', 2)
                                 @if ($turma->inativo == 2)
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
@@ -137,10 +137,10 @@
                                         </a>
                                     </td>
                                 @endif
-                            @endif
+                            @endcan
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info</i></a>
-                                @if(auth()->user()->id == 1)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>@endif
+                                @can('autorizacao', 2)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$turma->nome}}" href="{{Route('turmas.edit', $turma->id)}}"><i class="small material-icons">edit</i></a>@endcan
                             </td>
                         </tr>
                     @endforeach 
@@ -151,17 +151,17 @@
             @else
                 {{$turmaslist->links()}}
             @endif
-            @if(auth()->user()->id == 1)
+            @can('autorizacao', 2)
                 <br>
                 <div class="container">
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar turma" href="{{Route('turmas.create')}}"><i class="material-icons">add_to_queue</i></a>
                     &emsp;&emsp;
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_turmas_pdf', json_encode($arrayturmas))}}"><i class="material-icons">assessment</i></a>
                 </div>
-            @endif
+            @endcan
         </div>
     </div>
-    @if(auth()->user()->id == 1)
+    @can('autorizacao', 2)
         <div id="modalobjetoativar" class="modal">
             <div class="col s1.5 right">
                 <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
@@ -217,5 +217,5 @@
                 </div>
             </form>
         </div>
-    @endif
+    @endcan
 @endsection

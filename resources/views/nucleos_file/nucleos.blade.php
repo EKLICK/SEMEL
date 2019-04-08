@@ -85,8 +85,8 @@
                         <th>Nome da núcleo</th>
                         <th>Endereço</th>
                         <th>Situação</th>
-                        @if(auth()->user()->id == 1)<th>Mudar estado</th>@endif
-                        @if(auth()->user()->id == 1)<th>Ações</th>@else<th>Informações</th>@endif
+                        @can('autorizacao', 3)<th>Mudar estado</th>@endcan
+                        @can('autorizacao', 3)<th>Ações</th>@else<th>Informações</th>@endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +97,7 @@
                             <td>{{$nucleo->nome}}</td>
                             <td><p>{{$nucleo->bairro}} <br> {{$nucleo->rua}} <br> {{$nucleo->numero_endereco}} {{$nucleo->complemento}}</p></td>
                             <td>@if($nucleo->inativo == 2) Inativo @else Ativo @endif <br><i class="small material-icons" @if($nucleo->inativo == 2) style="color: red;" @else style="color: green;" @endif>sim_card_alert</i></td>
-                            @if(auth()->user()->id == 1)
+                            @can('autorizacao', 3)
                                 @if ($nucleo->inativo == 2)
                                     <td>
                                         <a class="waves-effect waves-light btn blue modal-trigger" id="btn-modal_ativar_objeto" href="#modalobjetoativar"
@@ -113,10 +113,10 @@
                                         </a>
                                     </td>
                                 @endif
-                            @endif
+                            @endcan
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$nucleo->nome}}" href="{{route('nucleo_info', $nucleo->id)}}"><i class="small material-icons">info</i></a>
-                                @if(auth()->user()->id == 1)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>@endif
+                                @can('autorizacao', 3)<a class="tooltipped" data-position="top" data-tooltip="Editar {{$nucleo->nome}}" href="{{Route('nucleos.edit', $nucleo->id)}}"><i class="small material-icons">edit</i></a>@endcan
                             </td>
                         </tr>
                     @endforeach
@@ -127,18 +127,18 @@
             @else
                 {{$nucleoslist->links()}}
             @endif
-            @if(auth()->user()->id == 1)
+            @can('autorizacao', 3)
                 <br>
                 <div class="container">
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add_to_queue</i></a>
                     &emsp;&emsp;
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_nucleos_pdf', json_encode($arraynucleos))}}"><i class="material-icons">assessment</i></a>
                 </div>
-            @endif
+            @endcan
         </div>
     </div>
 
-    @if(auth()->user()->id == 1)
+    @can('autorizacao', 3)
         <div id="modalobjetoativar" class="modal">
             <div class="col s1.5 right">
                 <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
@@ -194,5 +194,5 @@
                 </div>
             </form>
         </div>
-    @endif
+    @endcan
 @endsection

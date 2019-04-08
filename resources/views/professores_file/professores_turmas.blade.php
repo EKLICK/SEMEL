@@ -1,18 +1,19 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    @if(auth()->user()->admin_professor == 1)
+    @can('autorizacao', 3)
         <a href="{{route('home')}}" class="breadcrumb">Home</a>
         <a href="{{route('professor.index')}}" class="breadcrumb">Professores</a>
-    @endif
+    @endcan
         <a href="{{route('professor_turmas', $professor->id)}}" class="breadcrumb">Turmas</a>
 @endsection
-@section('title') @if(auth()->user()->admin_professor == 1)
-    @section('title') 
-        Lista de turmas para vinculação <br> <h5><b>Nome da professor: {{$professor->nome}}</b></h5> 
-    @endsection
+@section('title') 
+    @can('autorizacao', 3)
+        @section('title') 
+            Lista de turmas para vinculação <br> <h5><b>Nome da professor: {{$professor->nome}}</b></h5> 
+        @endsection
     @else 
         Suas turmas 
-    @endif 
+    @endcan
 @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')   
@@ -126,7 +127,7 @@
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
-                        @if(auth()->user()->admin_professor == 1)
+                        @can('autorizacao', 3)
                             <th>Núcleo pertencente</th>
                             <th>Estado</th>
                             <th>Vinculo</th>
@@ -134,16 +135,16 @@
                         @else
                             <th>Estado</th>
                             <th>Lista de alunos</th>
-                        @endif
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($turmaslist as $turma)
                         <tr>
                             <td><p>{{$turma->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nome}}" href="{{route('turma_info', $turma->id)}}"><i class="small material-icons">info_outline</i></a></td>
-                            @if(auth()->user()->admin_professor == 1)
+                            @can('autorizacao', 3)
                                 <td><p>{{$turma->nucleo->nome}}</p> <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$turma->nucleo->nome}}" href="{{route('nucleo_info', $turma->nucleo->id)}}"><i class="small material-icons">info_outline</i></a></td>
-                            @endif
+                            @endcan
                             <td> 
                                 <p>
                                     @if($turma->inativo == 2)
@@ -161,7 +162,7 @@
                                     @endif>sim_card_alert
                                 </i>
                             </td>
-                            @if(auth()->user()->admin_professor == 1)
+                            @can('autorizacao', 3)
                                 @php $ids = -1; @endphp
                                 @if(isset($turma->professores)) 
                                     @for ($i = 0; $i < count($turma->professores); $i++) 
@@ -195,18 +196,18 @@
                                 @endif
                             @else
                                 <td><a class="tooltipped" data-position="top" data-tooltip="Alunos da {{$turma->nome}}" href="{{route('professor_meus_alunos', [$professor->id,$turma->id])}}"><i class="small material-icons">group</i></a></td>
-                            @endif
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            @if(auth()->user()->admin_professor == 1)
+            @can('autorizacao', 3)
                 @if(isset($dataForm))
                     {{$turmaslist->appends($dataForm)->links()}}
                 @else
                     {{$turmaslist->links()}}
                 @endif
-            @endif
+            @endcan
         </div>
     </div>
     <div id="modalidturmavincular" class="modal" style="width: 60%;">

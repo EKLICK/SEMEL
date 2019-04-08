@@ -24,7 +24,7 @@
                                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                                 <ul class="left hide-on-med-and-down">
                                     <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
-                                    <h6><b>Nível: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                                    <h6><b>Nível: &emsp;&emsp; @can('autorizacao', 3) Administrador @else Professor @endcan</b></h6>
                                 </ul>
                                 <ul id="nav-mobile" class="right">
                                     <li>
@@ -47,14 +47,14 @@
                 <div class="section">
                     <div class="col m2 hide-on-med-and-down">
                         <ul class="collapsible">
-                            @if(auth()->user()->admin_professor == 1)
+                            @can('autorizacao', 3)
                                 @include('layouts.menu')
                             @else
                                 <div class="collection">
-                                    <b><a class="collection-item" href="{{Route('professor_turmas', auth()->user()->admin_professor)}}" style="color: #039be5;">Minhas turmas</a></b>
+                                    <b><a class="collection-item" href="{{Route('professor_turmas', auth()->user()->permissao)}}" style="color: #039be5;">Minhas turmas</a></b>
                                     <b><a class="collection-item" href="{{Route('professor_info', $professor->id)}}" style="color: #039be5;">Minhas informações</a></b>
                                 </div>
-                            @endif
+                            @endcan
                         </ul>
                     </div>
                     <div class="col m12 l10">
@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col s12 blue white-text">
                     <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
-                    <h6><b>Nivel: &emsp;&emsp; @if(auth()->user()->admin_professor == 1) Administrador @else Professor @endif</b></h6>
+                    <h6><b>Nivel: &emsp;&emsp; @can('autorizacao', 3) Administrador @else Professor @endcan</b></h6>
                     </div>
                     <div class="col s12">
                         <div class="card">

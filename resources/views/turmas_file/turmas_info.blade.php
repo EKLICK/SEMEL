@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('breadcrumbs')
-    @if (auth()->user()->admin_professor == 1)
+    @can('autorizacao', 2)
         <a href="{{route('home')}}" class="breadcrumb">Home</a>
         <a href="{{route('turmas.index')}}" class="breadcrumb">Turmas</a>
     @else
         <a href="{{route('professor_turmas', 1)}}" class="breadcrumb">Minhas turmas</a>
-    @endif
+    @endcan
     <a href="{{route('turma_info', $turma->id)}}" class="breadcrumb">Informações</a>
 @endsection
 @section('title') Informações da Turma @endsection

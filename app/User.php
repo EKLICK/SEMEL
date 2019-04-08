@@ -23,7 +23,7 @@ class User extends Authenticatable implements Auditable{
      * @var array
      */
     protected $fillable = [
-        'nick', 'name', 'admin_professor', 'email', 'password',
+        'nick', 'name', 'permissao', 'email', 'password',
     ];
 
     /**
