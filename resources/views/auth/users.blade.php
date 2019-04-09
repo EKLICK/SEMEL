@@ -89,8 +89,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Usuário</th>
-                        <th>Email</th>
                         <th>Tipo de usuário</th>
+                        <th>Situação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -99,15 +99,15 @@
                         <tr>
                             <td><p>{{$user->id}}</p></td>
                             <td><p>{{$user->nick}}</p></td>
-                            <td><p>{{$user->email}}</p></td>
-                            <td><p>@if($user->admin_professor == 1) Administrador @else Professor @endif</p></td>
+                            <td><p>@if($user->permissao < 4) Administrador @else Professor @endif</p></td>
+                            <td>@if($user->deleted_at == null) Ativo @else Inativo @endif <i class="small material-icons" @if($user->deleted_at == null) style="color: green; vertical-align: -5px;" @else style="color: red; vertical-align: -5px;"  @endif>sim_card_alert</i></td>
                             <td>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->name}}" href="{{Route('user_info', $user->id)}}"><i class="small material-icons">info</i></a>
                                 <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$user->nick}}" href="{{Route('users.edit', $user->id)}}"><i class="small material-icons">edit</i></a>
                                 @if($user->deleted_at == null)
                                     <a id="btn_delete" class="tooltipped modal-trigger" data-position="top" data-tooltip="Deletar {{$user->nick}}" href="#modaldelete"
                                        data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}">
-                                       <i class="small material-icons">delete</i>
+                                       <i class="small material-icons">do_not_disturb</i>
                                     </a>
                                 @else
                                     <a id="btn-restore" class="tooltipped modal-trigger" data-position="top" data-tooltip="Restaurar {{$user->nick}}" href="#modalrestore"
@@ -128,6 +128,9 @@
             <br>
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar Administrador" href="{{route('register')}}"><i class="material-icons">add_to_queue</i></a>
+                @can('autorizacao', 1)
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1 right" data-position="top" data-tooltip="Adicionar cliente" href="{{route('secretario_register')}}"><i class="material-icons">add_to_queue</i></a>
+                @endcan
             </div>
         </div>
     </div>

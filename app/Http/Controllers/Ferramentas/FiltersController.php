@@ -40,6 +40,13 @@ class filtersController extends Controller{
 
         //Encontra todos os registros de usuarios no banco de dados com base nos parametros que foram passados no filtro.
         $userslist = User::where(function($query) use ($dataForm){
+            if(auth()->user()->can('autorizacao', 1)){
+               $query->where('permissao', '>', 1);
+            }
+            else{
+                $query->where('permissao', '>', 2);
+            }
+
             //Verifica se o parametro "usuario" foi passado.
             if(!empty($dataForm['usuario'])){
                 //Se sim:
@@ -48,7 +55,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['usuario'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('name', 'like', $filtro."%")->where('id', '!=', 1);
+                $query->where('name', 'like', $filtro."%");
             }
 
             //Verifica se o parametro "nome" foi passado.
@@ -59,7 +66,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['nome'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('nick', 'like', $filtro."%")->where('id', '!=', 1);
+                $query->where('nick', 'like', $filtro."%");
             }
 
             //Verifica se o parametro "email" foi passado.
@@ -70,7 +77,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['email'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('email', '=', $filtro)->where('id', '!=', 1);
+                $query->where('email', '=', $filtro);
             }
 
             //Verifica se o parametro "telefone" foi passado.
@@ -81,7 +88,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['telefone'];
 
                 //Constroi a query baseado neste parametro.
-                $query->where('telefone', 'like', $filtro."%")->where('id', '!=', 1);
+                $query->where('telefone', 'like', $filtro."%");
             }
 
             //Verifica se o parametro "tipo" foi passado.
@@ -92,7 +99,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['tipo'];
 
                  //Constroi a query baseado neste parametro.
-                 $query->where('admin_professor', '=', $filtro)->where('id', '!=', 1);
+                 $query->where('admin_professor', '=', $filtro);
             }
 
             //Verifica se o parametro "inativo" foi passado.
@@ -101,10 +108,10 @@ class filtersController extends Controller{
 
                 //Constroi a query baseado neste parametro.
                 if($dataForm['inativo'] == '1'){
-                    $query->where('deleted_at', '!=', null)->where('id', '!=', 1);
+                    $query->where('deleted_at', '!=', null);
                 }
                 else{
-                    $query->where('deleted_at', null)->where('id', '!=', 1);
+                    $query->where('deleted_at', null);
                 }
             }
         })->withTrashed()->orderBy('nick')->paginate(10);

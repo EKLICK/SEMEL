@@ -4,7 +4,7 @@
     <a class="breadcrumb" href="{{route('users.index')}}">Administradores</a>
     <a href="{{route('user_info', $user->id)}}" class="breadcrumb">Informações</a>
 @endsection
-@section('title') <h4>Informações do usuário: {{$user->id}} @endsection
+@section('title') <h4>Informações do usuário: {{$user->id}}</h4> @endsection
 @section('content')
     <div class="container">
         <div class="row">

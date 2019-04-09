@@ -24,6 +24,11 @@ Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@ind
 //Rota de Logs: Utilizado para entrar na página de login.
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+//Rota de secretario_register: Utilizado para ir na página de registros de secretarios.
+Route::get('/secretario/register','AdminMestreController@secretario_register')->name('secretario_register')->middleware('adminMestre', 'Secretario', 'AdministracaoEProfessor', 'Authenticate');
+
+//Rota de secretario_store: Utilizado para criar o novo secretarios.
+Route::post('/secretario/store','AdminMestreController@secretario_store')->name('secretario_store')->middleware('adminMestre', 'Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //CONTROLE DE AUDITORIAS: |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //Rotas de Auditorias: Utilizado para acessar controle de auditorias.
@@ -40,22 +45,22 @@ Route::get('/audits/info/{id}','AuditsController@info')->name('audits_info')->mi
 //Rota: users.index: Utilizado para ir na página de registros de usuários.
 Route::get('/usuarios','Auth\RegisterController@index')->name('users.index')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-//Rota: users.edit: Utilizado para ir na página de criação de usuários.
+//Rota: users.create: Utilizado para criar o novo usuários.
 Route::post('/usuarios/create','Auth\RegisterController@create')->name('users.create')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota: users.edit: Utilizado para ir na página de edição de usuários.
 Route::get('/usuarios/edit/{id}','Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-//Rota nucleo_info: Utilizado para editar as informações do usuário editado.
+//Rota  users.update: Utilizado para editar as informações do usuário editado.
 Route::put('/usuarios/update/{id}','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-//Rota nucleo_info: Utilizado para entrar na página de informações de usuário.
+//Rota users.info: Utilizado para entrar na página de informações de usuário.
 Route::get('/usuario_info/{id}','Auth\RegisterController@user_info')->name('user_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-//Rota nucleo_info: Utilizado para deletar o usuário no banco de dados.
+//Rota users.destroy: Utilizado para deletar o usuário no banco de dados.
 Route::delete('/usuarios/destroy/{id}','Auth\RegisterController@destroy')->name('users.destroy')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
-//Rota nucleo_info: Utilizado para deletar o usuário no banco de dados.
+//Rota users.restore: Utilizado para deletar o usuário no banco de dados.
 Route::get('/usuarios/restore','Auth\RegisterController@restore')->name('users.restore')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota define_quantidade: Utilizado para editar a quantidade limite de turmas que uma pessoa pode ter ativas ao mesmo tempo.

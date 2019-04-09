@@ -75,7 +75,12 @@ class RegisterController extends Controller{
     //Função index: Retorna a página de registros de usuários.
     protected function index(){
         //Encontra todos os registros de usuários e ordena por nick.
-        $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->paginate(10);
+        if(auth()->user()->can('autorizacao', 1)){
+            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 1)->paginate(10);
+        }
+        else{
+            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 2)->paginate(10);
+        }
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
@@ -93,20 +98,18 @@ class RegisterController extends Controller{
     //Função create: Retorna a página de criação de registros de usuários.
     protected function create(UserCreateFormRequest $request){
         $dataForm = $request->all();
-        
-        //Define sessão de informação para apresentação na página.
-        Session::put('mensagem_green', 'Administrador '.$dataForm['name'].' adicionado com sucesso!');
 
         //Cria histórico no banco de dados.
         User::create([
             'nick' => $dataForm['nick'],
             'name' => $dataForm['name'],
-            'admin_professor' => 1,
+            'admin_professor' => 3,
             'email' => $dataForm['email'],
             'password' => Hash::make($dataForm['password']),
         ]);
 
         //Encontra todos os registros de usuários e ordena por nick.
+        
         $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->paginate(10);
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
@@ -151,7 +154,7 @@ class RegisterController extends Controller{
         }
 
         //Verifica se o usuário editado é professor.
-        if($user->admin_professor == 0){
+        if($user->permissao == 4){
             //Se sim, muda o parametro de email no professor para o informado.
             $professor = Professor::where('user_id', '=', $id)->get()->last();
             $professor->update(['email' => $dataForm['email']]);
@@ -164,8 +167,8 @@ class RegisterController extends Controller{
     protected function destroy(Request $request){
         $dataForm = $request->all();
 
-        //Verifica se o usuário a ser deletado possui o id diferente de 1
-        if($dataForm['id'] != 1){
+        //Verifica se o usuário a ser deletado possui o tipo diferente de 1
+        if($dataForm['permissao'] != 1){
             //Se sim, encontra o usuário no banco de dados.
             $user = User::find($dataForm['id']);
 
@@ -183,8 +186,8 @@ class RegisterController extends Controller{
     protected function restore(Request $request){
         $dataForm = $request->all();
 
-        //Verifica se o usuário a ser restaurado possui o id diferente de 1
-        if($dataForm['id'] != 1){
+        //Verifica se o usuário a ser restaurado possui o tipo diferente de 1
+        if($dataForm['permissao'] != 1){
             //Se sim, encontra o usuário no banco de dados.
             $user = User::withTrashed()->find($dataForm['id']);
             if($user['deleted_at'] != null){

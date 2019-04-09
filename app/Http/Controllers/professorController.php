@@ -92,7 +92,7 @@ class ProfessorController extends Controller{
             'name' => $dataForm['name'],
             'email' => strtolower($dataForm['email']),
             'password' => bcrypt($dataForm['password']),
-            'admin_professor' => 0,
+            'admin_professor' => 4,
         ]);
 
         //Converte a data de nascimento dd/mm/YY para YY-mm-dd 00:00:00

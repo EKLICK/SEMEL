@@ -132,7 +132,7 @@
                 <div class="container">
                     <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar núcleo" href="{{route('nucleos.create')}}"><i class="material-icons">add_to_queue</i></a>
                     &emsp;&emsp;
-                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_nucleos_pdf', json_encode($arraynucleos))}}"><i class="material-icons">assessment</i></a>
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Relatório de turmas" href="{{route('menu_nucleos_pdf', json_encode($arraynucleos))}}"><i class="material-icons">picture_as_pdf</i></a>
                 </div>
             @endcan
         </div>
