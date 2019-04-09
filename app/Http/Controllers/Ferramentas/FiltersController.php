@@ -40,10 +40,13 @@ class filtersController extends Controller{
 
         //Encontra todos os registros de usuarios no banco de dados com base nos parametros que foram passados no filtro.
         $userslist = User::where(function($query) use ($dataForm){
+            //Verifica se o usuário logado é um usuário mestre.
             if(auth()->user()->can('autorizacao', 1)){
+                //Se sim, será filtrado os usuário de permissões do tipo 1.
                $query->where('permissao', '>', 1);
             }
             else{
+                //Se não, será filtrado os usuários do tipo 1 e 2.
                 $query->where('permissao', '>', 2);
             }
 

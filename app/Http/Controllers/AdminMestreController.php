@@ -7,23 +7,30 @@ use Illuminate\Http\Request;
 //MODELOS PARA CONTROLE:
 use App\User;
 
+//CONTROLE DE Administrador Mestre:
+//Comentarios em cima, código comentado em baixo.
 class AdminMestreController extends Controller{
+    //FUNÇÕES DE REDIRECIONAMENTO:
     protected function secretario_register(Request $request){    
         return view ('auth.secretario.secretario_register');
     }
 
+    //Função create: Retorna a página de criação de registros de secretarios.
     protected function secretario_store(Request $request){
         $dataForm = $request->all();
 
-        $userlist = User::all();
+        //Encontra todos os registros de usuários que possuem a permissão do tipo 2 (secretarios).
+        $secretarioslist = User::where('permissao', '==', 2);
 
-        foreach($userlist as $user){
-            if($user->permissao == 2 && $user->deleted_at == null){
+        //Percorre a lista de secretarios, assim que o sistema achar o secretario ativo no momento, ele será deletado.
+        foreach($secretarioslist as $secretarios){
+            if($secretarios->deleted_at == null){
                 $user->delete();
                 break;
             }
         }
 
+        //Cria o novo secretario no banco de dados.
         User::create([
             'nick' => $dataForm['nick'],
             'name' => $dataForm['name'],
