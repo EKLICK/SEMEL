@@ -87,7 +87,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
@@ -146,11 +146,6 @@
                     @endforeach 
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$turmaslist->appends($dataForm)->links()}}
-            @else
-                {{$turmaslist->links()}}
-            @endif
             @can('autorizacao', 2)
                 <br>
                 <div class="container">

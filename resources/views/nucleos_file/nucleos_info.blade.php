@@ -46,7 +46,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$histnucleo->links()}}
                 </div>
             </div>
             <div id="coluna2" class="col s12">

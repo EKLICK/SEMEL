@@ -84,7 +84,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -110,26 +110,23 @@
                                        <i class="small material-icons">do_not_disturb</i>
                                     </a>
                                 @else
-                                    <a id="btn-restore" class="tooltipped modal-trigger" data-position="top" data-tooltip="Restaurar {{$user->nick}}" href="#modalrestore"
-                                        data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}">
-                                        <i class="small material-icons">restore</i>
-                                    </a>
+                                    @if($user->permissao != 1)
+                                        <a id="btn-restore" class="tooltipped modal-trigger" data-position="top" data-tooltip="Restaurar {{$user->nick}}" href="#modalrestore"
+                                            data-id="{{$user->id}}" data-name="{{$user->nick}}" data-tipo="{{$user->admin_professor}}">
+                                            <i class="small material-icons">restore</i>
+                                        </a>
+                                    @endif
                                 @endif
                             </td>
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$userslist->appends($dataForm)->links()}}
-            @else
-                {{$userslist->links()}}
-            @endif
             <br>
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar Administrador" href="{{route('register')}}"><i class="material-icons">add_to_queue</i></a>
                 @can('autorizacao', 1)
-                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1 right" data-position="top" data-tooltip="Adicionar cliente" href="{{route('secretario_register')}}"><i class="material-icons">add_to_queue</i></a>
+                    <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1 right" data-position="top" data-tooltip="Criar novo secretario" href="{{route('secretario_register')}}"><i class="material-icons">remove_red_eye</i></a>
                 @endcan
             </div>
         </div>
@@ -173,7 +170,8 @@
         </form>
     </div>
 
-    <div id="modalrestore" class="modal"  style="width: 30%;">
+    @if($user->permissao != 1)
+        <div id="modalrestore" class="modal"  style="width: 30%;">
             <div class="col s1.5 right">
                 <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
             </div>
@@ -209,6 +207,7 @@
                 </div>
             </form>
         </div>
+    @endif
 
     <div id="modalreset" class="modal" style="width: 55%; height: 45%;">
         <div class="col s1.5 right">

@@ -159,7 +159,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -187,11 +187,6 @@
                     @endforeach
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$pessoaslist->appends($dataForm)->links()}}
-            @else
-                {{$pessoaslist->links()}}
-            @endif
             <br>
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar cliente" href="{{route('pessoas.create')}}"><i class="material-icons">add_to_queue</i></a>

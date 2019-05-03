@@ -32,7 +32,7 @@ class NucleosController extends Controller{
     //Função index: Retorna a página de registros de núcleos.
     public function index(){
         //Encontra todos os registros de núcleos e ordena por nome.
-        $nucleoslist = Nucleo::orderBy('nome')->paginate(10);
+        $nucleoslist = Nucleo::orderBy('nome')->get();
 
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -186,7 +186,7 @@ class NucleosController extends Controller{
         $nucleo = Nucleo::find($id);
 
         //Encontra todos o histórico do nucleo encontrado.
-        $histnucleo = HistoricoN::orderBy('created_at', 'desc')->where('nucleo_id', '=', $nucleo->id)->paginate(6);
+        $histnucleo = HistoricoN::orderBy('created_at', 'desc')->where('nucleo_id', '=', $nucleo->id)->get();
 
         //Contagem de pessoas:
         //A = Todas as pessoas (Atribuir ao A).

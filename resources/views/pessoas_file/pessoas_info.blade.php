@@ -20,7 +20,7 @@
         <div class="row">
             <div id="coluna1" class="col s12">
                 <div class="col s12">
-                    <table>
+                    <table id="employee_data">
                         <thead class="centered">
                             <tr>
                                 <th style='width: 90px;'>Estado</th>
@@ -52,7 +52,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$histpessoa->links()}}
                 </div>
             </div>
             <div id="coluna2" class="col s12">
@@ -331,7 +330,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <div id="modalregistroturmasnucleo" class="modal">

@@ -53,7 +53,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Id Usuário</th>
@@ -80,11 +80,6 @@
                     @endforeach 
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$auditslist->appends($dataForm)->links()}}
-            @else
-                {{$auditslist->links()}}
-            @endif
         </div>
     </div>
 @endsection

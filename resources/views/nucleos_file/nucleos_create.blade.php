@@ -31,38 +31,38 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">confirmation_number</i>
                         <input name="rua" id="icon_rua" type="text" class="validate" value="{{old('rua')}}" maxlength="70" required>
                         <label for="icon_rua">Rua: <span style="color: red;">*</span></label>
                     </div>
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">explore</i>
                         <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate" value="{{old('cep')}}" maxlength="10" required>
                         <label for="icon_cep">CEP: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">location_on</i>
                         <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="icon_numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" maxlength="5" required>
                         <label for="icon_numero_endereco">Número: <span style="color: red;">*</span></label>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">bookmark</i>
-                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}" maxlength="10">
-                        <label for="complemento">Complemento de endereço:</label>
+                        <input name="complemento" id="icon_complemento" type="text" class="validate" value="{{old('complemento')}}" maxlength="10">
+                        <label for="icon_complemento">Complemento de endereço:</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">phone</i>
                         <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="{{old('telefone')}}" maxlength="16" required>
                         <label for="icon_telefone">Telefone: <span style="color: red;">*</span></label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">description</i>
                         <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100">{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição do núcleo:</label>

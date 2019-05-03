@@ -117,12 +117,12 @@ class filtersController extends Controller{
                     $query->where('deleted_at', null);
                 }
             }
-        })->withTrashed()->orderBy('nick')->paginate(10);
+        })->withTrashed()->orderBy('nick')->get();
         
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);
 
-        return view ('auth.users', compact('userslist','quantidade','dataForm'));
+        return view ('auth.users', compact('userslist','quantidade'));
     }
 
     //Função pessoas_procurar: Filtra conteudo de todos os registros de pessoas e retorna para a página de registro de pessoas.
@@ -319,17 +319,14 @@ class filtersController extends Controller{
                 //Constroi a query baseado neste parametro.
                 $query->wherein('id', $ids);
             }
-        })->orderBy('nome');
+        })->orderBy('nome')->get();
 
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($pessoaslist->get()).' pessoas cadastradas.');
+        Session::put('quant', count($pessoaslist).' pessoas cadastradas.');
 
         $turmaslist = Turma::orderBy('nome')->get();
 
-        //Cria paginate para os registros encontrados.
-        $pessoaslist = $pessoaslist->paginate(10);
-
-        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'dataForm', 'turmaslist'));
+        return view ('pessoas_file.pessoas', compact('pessoaslist','bairroslist', 'ano', 'turmaslist'));
     }
 
     //Função professor_procurar: Filtra conteudo de todos os registros de professor e retorna para a página de registro de professor.
@@ -436,15 +433,12 @@ class filtersController extends Controller{
                 //Constroi a query baseado neste parametro.
                 $query->where('rua', 'like', $filtro."%");
             }
-        })->orderBy('nome');
+        })->orderBy('nome')->get();
         
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($professoreslist->get()).' professores cadastrados.');
+        Session::put('quant', count($professoreslist).' professores cadastrados.');
 
-        //Cria paginate para os registros encontrados.
-        $professoreslist = $professoreslist->paginate(10);
-
-        return view ('professores_file.professores', compact('professoreslist', 'turmaslist', 'dataForm'));
+        return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
 
     //Função pessoas_procurar_aluno: Filtra conteudo de todos os registros de pessoas e retorna para a página de professores e alunos.
@@ -529,7 +523,7 @@ class filtersController extends Controller{
 
             //Constroi a query baseado neste parametro.
             $query->wherein('id', $ids)->get();
-        })->orderBy('nome');
+        })->orderBy('nome')->get();
 
         //Encontra a turma no banco de dados que foi passada por parametro.
         $turma = Turma::find($dataForm['idturma']);
@@ -678,10 +672,10 @@ class filtersController extends Controller{
                     $query->wherein('id', $ids);
                 }
             }
-        })->orderBy('nome');
+        })->orderBy('nome')->get();
 
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($turmaslist->get()).' turmas cadastradas.');
+        Session::put('quant', count($turmaslist).' turmas cadastradas.');
 
         //Encontra todos os registros de núcleos no banco de dados
         $nucleoslist = Nucleo::all();
@@ -689,31 +683,22 @@ class filtersController extends Controller{
         //Criando array de dias da semana.
         $dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
         if($dataForm['id'] > 0){
-            //Cria paginate para os registros encontrados.
-            $turmaslist = $turmaslist->paginate(10);
-
             //Encontra o professor no banco de dados que foi passada por parametro.
             $professor = Professor::find($dataForm['id']);
 
-            return view ('professores_file.professores_turmas', compact('professor','turmaslist','nucleoslist','dias_semana','dataForm'));
+            return view ('professores_file.professores_turmas', compact('professor','turmaslist','nucleoslist','dias_semana'));
         }
         elseif ($dataForm['id'] < 0) {
-            //Cria paginate para os registros encontrados.
-            $turmaslist = $turmaslist->paginate(10);
-
             //Encontra a pessoa no banco de dados que foi passada por parametro.
             $pessoa = Pessoa::find(-$dataForm['id']);
 
             //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
             $quantidade = Quant::find(1);
 
-            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana', 'dataForm','quantidade'));
+            return view ('pessoas_file.pessoas_turmas', compact('pessoa', 'turmaslist', 'nucleoslist', 'dias_semana','quantidade'));
         }
         else{
-            //Cria paginate para os registros encontrados.
-            $turmaslist = $turmaslist->paginate(10);
-
-            return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana', 'dataForm'));
+            return view ('turmas_file.turmas', compact('turmaslist', 'nucleoslist', 'dias_semana'));
         }
     }
 
@@ -835,18 +820,15 @@ class filtersController extends Controller{
                 //Constroi a query baseado neste parametro.
                 $query->wherein('id', $ids);
             }
-        })->orderBy('ano', 'desc');
+        })->orderBy('ano', 'desc')->get();
 
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($anamneseslist->get()).' anamneses de '.$ano.' cadastradas.');
-
-        //Cria paginate para os registros encontrados.
-        $anamneseslist = $anamneseslist->paginate(10);
+        Session::put('quant', count($anamneseslist).' anamneses de '.$ano.' cadastradas.');
 
         //Encontra todos os registros de doenças no banco de dados.
         $doencaslist = Doenca::all();
 
-        return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano', 'doencaslist','dataForm'));
+        return view ('anamneses_file.anamneses', compact('anamneseslist', 'ano', 'doencaslist'));
     }
 
     //Função núcleos_procurar: Filtra conteudo de todos os registros de núcleos e retorna para a página de registro de núcleos.
@@ -920,13 +902,10 @@ class filtersController extends Controller{
                 //Constroi a query baseado neste parametro.
                 $query->where('cep', 'like', $filtro."%");
             }
-        })->orderBy('nome');
+        })->orderBy('nome')->get();
 
         //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($nucleoslist->get()).' núcleos cadastrados.');
-
-        //Cria paginate para os registros encontrados.
-        $nucleoslist = $nucleoslist->paginate(10);
+        Session::put('quant', count($nucleoslist).' núcleos cadastrados.');
 
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
@@ -940,23 +919,22 @@ class filtersController extends Controller{
     //Função doenças_procurar: Filtra conteudo de todos os registros de doenças e retorna para a página de registro de doenças.
     public function doencas_procurar(Request $request){
         $dataForm = $request->except('_token');
-	    dd('asfsf');
+
         //Encontra todos os registros de doenças no banco de dados e ordena por nome.
-        $doencaslist = Doenca::orderBy('nome')->paginate(10);
+        $doencaslist = Doenca::orderBy('nome')->get();
 
         //Verifica se o parametro "nome" foi passado.
         if($dataForm['nome'] != null){
             //Se sim:
 
             //Substitui o registro de doenças filtrando apenas o nome com o parametro passado pelo filtro.
-            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->paginate(10);
+            $doencaslist = Doenca::orderBy('nome')->where('nome', 'like', $dataForm['nome'].'%')->get();
         }
 
-        //Define variavel $count para informação de quantidade de registros.
-        $count = Doenca::all();
-        Session::put('quant', count($count).' doenças cadastradas.');
+        //Define variavel a informação de quantidade de registros.
+        Session::put('quant', count($doencaslist).' doenças cadastradas.');
 
-        return view ('doencas_file.doencas', compact('doencaslist','dataForm'));
+        return view ('doencas_file.doencas', compact('doencaslist'));
     }
 
     //Função audits_procurar: Filtra conteudo de todos os registros de auditorias e retorna para a página de registro de auditorias.
@@ -984,11 +962,11 @@ class filtersController extends Controller{
                         break;
                 }
             }
-
+            
             //Verifica se o parametro "tabelas" foi passado.
             if(isset($dataForm['tabelas'])){
                 //Se sim:
-
+                
                 //Adiciona o parametro nos filtros.
                 $filtro = $dataForm['tabelas'];
 
@@ -1028,17 +1006,14 @@ class filtersController extends Controller{
                         break;
                 }
             }
-        });
-
-        //Define sessão de informação com base na quantidade de registros achados.
-        Session::put('quant', count($auditslist->get()).' auditorias cadastradas.');
-
-        //Cria paginate para os registros encontrados.
-        $auditslist = $auditslist->paginate(10);
+        })->orderBy('created_at','desc')->get();
+        
+        //Define variavel a informação de quantidade de registros.
+        Session::put('quant', count($auditslist).' auditorias cadastradas.');
 
         //Criando array de de tabelas para filtro.
         $tabelas = ['Quantidade limite','Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
         
-        return view('audits_file.audits', compact('auditslist', 'tabelas', 'dataForm'));
+        return view('audits_file.audits', compact('auditslist', 'tabelas'));
     }
 }

@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col s12 m6">
-                <table class="responsive-table highlight bordered">
+                <table id="employee_data" class="responsive-table highlight bordered">
                     <tbody>
                         <tr>
                             <td><h6>Nome:</h6></td>

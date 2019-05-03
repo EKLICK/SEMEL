@@ -122,11 +122,6 @@
                     @endforeach
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$nucleoslist->appends($dataForm)->links()}}
-            @else
-                {{$nucleoslist->links()}}
-            @endif
             @can('autorizacao', 3)
                 <br>
                 <div class="container">

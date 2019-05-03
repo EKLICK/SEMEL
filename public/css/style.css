@@ -34,3 +34,5 @@ body{
   bottom: 10%;
   left:33.8%;  
 }
+
+.pagination > li.active > a, .pagination > li.active > span{background-color:#039be5;}

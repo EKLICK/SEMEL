@@ -123,7 +123,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da turma</th>
@@ -201,13 +201,6 @@
                     @endforeach
                 </tbody>
             </table>
-            @can('autorizacao', 3)
-                @if(isset($dataForm))
-                    {{$turmaslist->appends($dataForm)->links()}}
-                @else
-                    {{$turmaslist->links()}}
-                @endif
-            @endcan
         </div>
     </div>
     <div id="modalidturmavincular" class="modal" style="width: 60%;">

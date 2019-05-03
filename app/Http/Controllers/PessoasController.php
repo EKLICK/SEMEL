@@ -135,7 +135,7 @@ class PessoasController extends Controller{
         $ano = date('Y');
 
         //Encontra todos os registros de pessoas e ordena por nome.
-        $pessoaslist = Pessoa::orderBy('nome')->paginate(10);
+        $pessoaslist = Pessoa::orderBy('nome')->get();
         foreach($pessoaslist as $pessoa){
             //Converter YYYY-mm-dd para idade.
            $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
@@ -505,7 +505,7 @@ class PessoasController extends Controller{
         $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
 
         //Seleciona todo o histórico da pessoa encontrada.
-        $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->paginate(5);
+        $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->get();
 
         //Contagem de turmas:
         //A = Todas as turmas (Atribuir ao A).
@@ -545,7 +545,7 @@ class PessoasController extends Controller{
         $pessoa = Pessoa::find($id);
 
         //Encontra todas as turmas registradas.
-        $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->paginate(10);
+        $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->get();
 
         //Atribui count para definir sessão de informação.
         $count = Turma::all();

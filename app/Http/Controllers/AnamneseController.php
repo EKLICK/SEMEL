@@ -46,7 +46,7 @@ class AnamneseController extends Controller{
         $ano = date('Y');
 
         //Encontra todos os registros de pessoas e ordena por ano decrescente.
-        $anamneseslist = Anamnese::orderBy('ano','desc')->paginate();
+        $anamneseslist = Anamnese::orderBy('ano','desc')->get();
 
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::all();

@@ -15,15 +15,14 @@ class auditsController extends Controller{
     //Função index: Retorna a página de registros de auditorias.
     public function index(){
         //Encontra todos os registros de auditorias e ordena por nome.
-        $auditslist = Audit::orderBy('created_at','desc')->paginate(10);
+        $auditslist = Audit::orderBy('created_at','desc')->get();
 
 
         //Criando array de de tabelas para filtro.
         $tabelas = ['Quantidade limite','Usuários','Professores','Clientes','Anamneses','Doenças','Turmas','Núcleos'];
         
         //Define variavel $count para informação de quantidade de registros.
-        $count = Audit::all();
-        Session::put('quant', count($count).' auditorias cadastradas.');
+        Session::put('quant', count($auditslist).' auditorias cadastradas.');
 
         return view ('audits_file.audits', compact('auditslist','tabelas'));
     }

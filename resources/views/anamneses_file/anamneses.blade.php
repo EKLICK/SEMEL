@@ -128,7 +128,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome da pessoa</th>
@@ -151,11 +151,6 @@
                     @endforeach 
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$anamneseslist->appends($dataForm)->links()}}
-            @else
-                {{$anamneseslist->links()}}
-            @endif
         </div>
     </div>
 

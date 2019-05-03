@@ -33,7 +33,7 @@ class TurmasController extends Controller{
     //Função index: Retorna a página de registros de turmas.
     public function index(){
         //Encontra todos os registros de turmas e ordena por nome.
-        $turmaslist = Turma::orderBy('nome')->paginate(10);
+        $turmaslist = Turma::orderBy('nome')->get();
 
         //Encontra todos os registros de núcleos.
         $nucleoslist = Nucleo::all();
@@ -205,7 +205,7 @@ class TurmasController extends Controller{
         unset($dias[count($dias) - 1]);
 
         //Seleciona todos o histórico da turma encontrada.
-        $histturma = HistoricoT::orderBy('created_at', 'desc')->where('turma_id', '=', $turma->id)->paginate(6);
+        $histturma = HistoricoT::orderBy('created_at', 'desc')->where('turma_id', '=', $turma->id)->get();
 
         //Contagem de pessoas:
         //A = Todas as pessoas (Atribuir ao A).

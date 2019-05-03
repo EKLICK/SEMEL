@@ -71,7 +71,7 @@
                     </div>
                 </li>
             </ul>
-            <table class="centered responsive-table highlight bordered">
+            <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
                         <th>Nome do professor</th>
@@ -93,11 +93,6 @@
                     @endforeach 
                 </tbody>
             </table>
-            @if(isset($dataForm))
-                {{$professoreslist->appends($dataForm)->links()}}
-            @else
-                {{$professoreslist->links()}}
-            @endif
             <br>
             <div class="container">
                 <a class="tooltipped btn-floating btn-large waves-effect waves-light light-blue darken-1" data-position="top" data-tooltip="Adicionar professor" href="{{Route('professor.create')}}"><i class="material-icons">add_to_queue</i></a>

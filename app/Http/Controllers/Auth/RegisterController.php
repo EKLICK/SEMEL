@@ -76,10 +76,10 @@ class RegisterController extends Controller{
     protected function index(){
         //Encontra todos os registros de usuários e ordena por nick.
         if(auth()->user()->can('autorizacao', 1)){
-            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 1)->paginate(10);
+            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 1)->get();
         }
         else{
-            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 2)->paginate(10);
+            $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '>', 2)->get();
         }
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
@@ -110,7 +110,7 @@ class RegisterController extends Controller{
 
         //Encontra todos os registros de usuários e ordena por nick.
         
-        $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->paginate(10);
+        $userslist = User::withTrashed()->orderBy('nick')->where('id', '!=', 1)->get();
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);

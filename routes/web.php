@@ -211,3 +211,9 @@ Route::get('/menu_pdf/nucleos/{array}','Ferramentas\PDFController@menu_nucleos_p
 
 //Rotas nucleos_pdf: Utilizado para entrar na página de PDF de núcleos.
 Route::get('/pdf/nucleos/{array}','Ferramentas\PDFController@nucleos_pdf')->name('nucleos_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+
+
+
+
+Route::post('/request/ajax','Ferramentas\AjaxrequestController@ajaxRequest')->middleware('AdministracaoEProfessor', 'Authenticate');

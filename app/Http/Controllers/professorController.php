@@ -46,14 +46,13 @@ class ProfessorController extends Controller{
     //Função index: Retorna a página de registros de professores.
     public function index(){
         //Encontra todos os registros de professores e ordena por nome.
-        $professoreslist = Professor::orderBy('nome')->paginate(10);
+        $professoreslist = Professor::orderBy('nome')->get();
 
         //Encontra todos os registros de turmas.
         $turmaslist = Turma::all();
 
-        //Define variavel $count para informação de quantidade de registros.
-        $count = Professor::all();
-        Session::put('quant', count($count).' professores cadastrados.');
+        //Define variavel a informação de quantidade de registros.
+        Session::put('quant', count($professoreslist).' professores cadastrados.');
 
         return view ('professores_file.professores', compact('professoreslist', 'turmaslist'));
     }
@@ -223,7 +222,7 @@ class ProfessorController extends Controller{
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento'], 2);
 
         //Seleciona todo o histórico do professor encontrado.
-        $histprofessor = HistoricoPrT::orderBy('created_at', 'desc')->where('professor_id', '=', $professor->id)->paginate(5);
+        $histprofessor = HistoricoPrT::orderBy('created_at', 'desc')->where('professor_id', '=', $professor->id)->get();
 
         //Contagem de turmas:
         //A = Todas as turmas (Atribuir ao A).
@@ -262,11 +261,10 @@ class ProfessorController extends Controller{
             $professor = Professor::find($id);
 
             //Encontra todas as turmas registradas.
-            $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->paginate(10);
+            $turmaslist = Turma::orderBy('inativo')->orderBy('nome')->get();
 
-            //Atribui cout para definir sessão de informação.
-            $count = Turma::all();
-            Session::put('quant', count($turmaslist->all()).' turmas cadastradas.');
+            //Atribui a sessão de informação.
+            Session::put('quant', count($turmaslist).' turmas cadastradas.');
         }
         else{
             //Se for um professor:
