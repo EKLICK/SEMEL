@@ -92,6 +92,7 @@ function apagar_atestado(){
     document.getElementById('atestado_image').src = '../../../../img/unset_image_atestado.png';
     document.getElementById('img_atestado').value = '';
     document.getElementById('atestado').value = '';
+    $('#errorTxt9').show();
 }
 
 function apagar_web(){
@@ -219,24 +220,6 @@ function change_bairro(){
         $('#div_bairro_list').hide(400);
         $('#div_bairro_string').show(400);
     }
-}
-
-//OLD VALUES SELECTS
-function change_bairro_select(){
-    var bairro = document.getElementById('bairro_select');
-    $('#string_bairro').val(bairro.options[bairro.selectedIndex].value);
-}
-
-function old_doencas_function(){
-    $('#old_doencas').val($('#lista_de_pessoas').val());
-}
-
-function old_dias_function(){
-    $('#old_dias').val($('#lista_de_dias').val());
-}
-
-function old_nucleo_function(){
-    $('#old_nucleo').val($('#lista_de_nucleos').val());
 }
 
 $(document).keydown(function (event) {

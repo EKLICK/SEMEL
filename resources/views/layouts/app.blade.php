@@ -5,11 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>SEMEL</title>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         {!! MaterializeCSS::include_full() !!}
+
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('css/validation.css')}}">
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <script src="{{asset('js/jquery.validate.min.js')}}"></script>
     </head>
     <body>
         <header>
@@ -60,9 +68,9 @@
                         </ul>
                     </div>
                     <div class="col m12 l10">
-                        <div class="card-panel">
-                            <nav class="hide-on-med-and-down">
-                                <div class="nav-wrapper blue">
+                        <div class="card-panel" style="border-radius: 25px;">
+                            <nav class="hide-on-med-and-down" style="border-radius: 25px;">
+                                <div class="nav-wrapper blue" style="border-radius: 25px;">
                                     <div class="col s12">
                                         <b>@yield('breadcrumbs')</b>
                                     </div>
@@ -94,6 +102,7 @@
             </ul>
         @endguest
         <script>M.AutoInit();</script>
+        <script src="{{asset('js/messages_pt_BR.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/modais.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/ajax.js')}}"></script>

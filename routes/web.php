@@ -52,7 +52,7 @@ Route::post('/usuarios/create','Auth\RegisterController@create')->name('users.cr
 Route::get('/usuarios/edit/{id}','Auth\RegisterController@edit')->name('users.edit')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota  users.update: Utilizado para editar as informações do usuário editado.
-Route::put('/usuarios/update/{id}','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
+Route::put('/usuarios/update','Auth\RegisterController@update')->name('users.update')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
 
 //Rota users.info: Utilizado para entrar na página de informações de usuário.
 Route::get('/usuario_info/{id}','Auth\RegisterController@user_info')->name('user_info')->middleware('Secretario', 'AdministracaoEProfessor', 'Authenticate');
@@ -214,6 +214,9 @@ Route::get('/pdf/nucleos/{array}','Ferramentas\PDFController@nucleos_pdf')->name
 
 
 
-
+Route::get('/cpf/ajax','Ferramentas\AjaxValidationController@cpfValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/rg/ajax','Ferramentas\AjaxValidationController@rgValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/email/ajax','Ferramentas\AjaxValidationController@emailValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
+Route::get('/matricula/ajax','Ferramentas\AjaxValidationController@matriculaValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 Route::post('/request/ajax','Ferramentas\AjaxrequestController@ajaxRequest')->middleware('AdministracaoEProfessor', 'Authenticate');

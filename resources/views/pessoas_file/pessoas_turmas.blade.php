@@ -22,25 +22,25 @@
                             <div class="row">
                                 <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">group</i>
-                                    <input name="nome" id="icon_nome" type="text" class="validate">
                                     <label for="icon_nome">Nome da turma:</label>
+                                    <input name="nome" id="icon_nome" type="text">
                                 </div>
                                 <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">assignment</i>
-                                    <input id="limite_search" type="number" class="validate" name="limite">
                                     <label for="limite_search">Limite:</label>
+                                    <input id="limite_search" type="number" name="limite">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">hourglass_full</i>
-                                    <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker">
                                     <label for="icon_horario_inicial">Horário Inicial:</label>
+                                    <input name="horario_inicial" id="icon_horario_inicial" type="text" class="timepicker">
                                 </div>
                                 <div class="input-field col s12 m5 l5">
                                     <i class="material-icons prefix">hourglass_empty</i>
-                                    <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker">
                                     <label for="icon_horario_final">Horário Final:</label>
+                                    <input name="horario_final" id="icon_horario_final" type="text" class="timepicker">
                                 </div>
                             </div>
                             <div class="row">

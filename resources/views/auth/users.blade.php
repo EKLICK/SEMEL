@@ -23,12 +23,12 @@
                             <div class="row">
                                 <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="usuario_search" type="text" class="validate" name="usuario">
+                                    <input id="usuario_search" type="text" name="usuario">
                                     <label for="usuario_search">Usuário:</label>
                                 </div>
                                 <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="nome_search" type="text" class="validate" name="nome">
+                                    <input id="nome_search" type="text" name="nome">
                                     <label for="nome_search">Nome:</label>
                                 </div>
                             </div>
@@ -45,12 +45,12 @@
                             <div class="row">
                                 <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="email_search" name="email" type="text" class="validate">
+                                    <input id="email_search" name="email" type="text">
                                     <label for="email_search">E-mail:</label>
                                 </div>
                                 <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">phone</i>
-                                    <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel" class="validate">
+                                    <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel">
                                     <label for="icon_telephone">Telephone:</label>
                                 </div>
                             </div>
@@ -225,12 +225,12 @@
                     @csrf
                     <div class="input-field col s6">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="text" class="validate"  required>
+                        <input name="name" id="icon_name" type="text"  required>
                         <label for="icon_name">Usuário:</label>
                     </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="icon_lockout" type="password" class="validate" required>
+                        <input name="password" id="icon_lockout" type="password" required>
                         <label for="icon_lockout">Senha:</label>
                     </div>
                     <br>
@@ -260,7 +260,7 @@
                     @csrf
                     <div class="input-field col s6">
                             <i class="material-icons prefix">enhanced_encryption</i>
-                            <input name="quantidade" id="quantidade" type="number" class="validate">
+                            <input name="quantidade" id="quantidade" type="number" required>
                             <label for="quantidade">Quantidade [bloqueio]: </label>
                     </div>
                     <div class="input-field col s4 right">

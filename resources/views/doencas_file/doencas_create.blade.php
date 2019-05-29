@@ -6,21 +6,22 @@
 @endsection
 @section('title') Criar doença @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('doencas.store')}}" method="post">
+            <form id="formulario" class="col s12" action="{{route('doencas.store')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="input-field col s12 m8 l4">
-                        <i class="material-icons prefix">new_releases</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
+                        <i class="material-icons prefix">new_releases</i> 
                         <label for="nome">Nome da doença: <span style="color: red;">*</span></label>
+                        <input name="nome" id="nome" type="text" class="validate" data-error=".errorTxt1" maxlength="100">
+                        <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" class="materialize-textarea" maxlength="100" required>{{old('descricao')}}</textarea>
                         <label for="descricao">Observação <span style="color: red;">*</span></label>
+                        <textarea name="descricao" id="descricao" class="materialize-textarea" data-error=".errorTxt2" maxlength="100"></textarea>
+                        <div class="errorTxt2"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -32,4 +33,5 @@
             </form>
         </div>
     </div>
+    <script src="{{asset('js/validation/validation-doencas.js')}}"></script>
 @endsection

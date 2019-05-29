@@ -6,116 +6,115 @@
 @endsection
 @section('title') Criar professor @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('professor.store')}}" method="post">
+            <form id="formulario" class="col s12" action="{{route('professor.store')}}" method="post">
                 @csrf
                 <h6>Registro do perfil do professor:</h6>
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="nome" id="nome" type="text" class="validate" value="{{old('nome')}}" maxlength="100" required>
                         <label for="nome">Nome: <span style="color: red;">*</span></label>
+                        <input name="nome" id="nome" type="text" maxlength="100">
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">child_friendly</i>
-                        <input name="nascimento" id="nascimento" type="text" class="datepicker validate" value="{{old('nascimento')}}" maxlength="10" required>
                         <label for="nascimento">Nascimento: <span style="color: red;">*</span></label>
+                        <input name="nascimento" id="nascimento" type="text" class="datepicker" maxlength="10">
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">recent_actors</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="matricula" type="text" class="validate" value="{{old('matricula')}}" maxlength="30" required>
                         <label for="matricula">Matricula: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="matricula" id="matricula" type="text" maxlength="30">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">business</i>
-                        <input name="cidade" id="cidade" type="text" class="validate" @if(!is_null(old('cidade'))) value="{{old('cidade')}}" @else value="São Leopoldo" @endif maxlength="70" required>
                         <label for="cidade">Cidade: <span style="color: red;">*</span></label>
+                        <input name="cidade" id="cidade" type="text" value="São Leopoldo" maxlength="70">
                     </div>
                     <div class="input-field col s12 m5">
-                        <a class="btn-floating right light-blue darken-1" style="margin-top: -10%;" onclick="change_bairro()"><i class="material-icons">cached</i></a>
-                        <div id="div_bairro_list" @if(!is_null(old('string_bairro'))) hidden @endif>
+                        <a onclick="change_bairro()" class="waves-effect waves-light btn-floating right" style="margin-top: -10%; background-color: #039be5;"><i class="material-icons">cached</i></a>
+                        <div id="div_bairro_list" hidden>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
                             <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
-                                    <option value="{{$bairro}}" @if(old('string_bairro') == $bairro) selected @endif>{{$bairro}}</option>
+                                    <option value="{{$bairro}}">{{$bairro}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div id="div_bairro_string" @if(is_null(old('string_bairro'))) hidden @endif>
+                        <div id="div_bairro_string" hidden>
                             <i class="material-icons prefix">location_city</i>
-                            <input id="string_bairro" name="string_bairro" type="text" class="validate" value="{{old('string_bairro')}}" maxlength="70">
                             <label for="string_bairro">Bairro: <span style="color: red;">*</span></label>
+                            <input id="string_bairro" name="string_bairro" type="text" maxlength="70">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="{{old('rua')}}" maxlength="70" required>
-                        <label for="rua">Rua: <span style="color: red;">*</span></label>
+                            <label for="rua">Rua: <span style="color: red;">*</span></label>i>
+                        <input name="rua" id="rua" type="text" maxlength="70">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="{{old('cep')}}" maxlength="10" required>
                         <label for="cep">CEP: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" maxlength="10">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" value="{{old('numero_endereco')}}" maxlength="5" required>
                         <label for="numero_endereco">Número: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" maxlength="5">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">location_on</i>
-                        <input name="complemento" id="complemento" type="text" class="validate" value="{{old('complemento')}}" maxlength="10">
                         <label for="complemento">Complemento de endereço:</label>
+                        <input name="complemento" id="complemento" type="text" maxlength="10">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" class="validate" value="{{old('telefone')}}" maxlength="16" required>
                         <label for="telephone">Telefone: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="telephone" type="tel" maxlength="16">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" id="email" type="email" class="validate" value="{{old('email')}}" maxlength="80" required>
                         <label for="email">E-mail: <span style="color: red;">*</span></label>
+                        <input name="email" id="email" type="email" maxlength="80">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" class="validate" value="{{old('cpf')}}" maxlength="14" required>
                         <label for="cpf">CPF: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf" id="cpf" type="text" maxlength="14">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <input name="rg" id="rg" type="text" class="validate" value="{{old('rg')}}" maxlength="13" required>
                         <label for="rg">RG: <span style="color: red;">*</span></label>
+                        <input name="rg" id="rg" type="text" maxlength="13">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
                         <i class="material-icons prefix">school</i>
-                        <input name="formacao" id="formacao" type="text" class="validate" value="{{old('formacao')}}" maxlength="30" required>
                         <label for="formacao">Formação: <span style="color: red;">*</span></label>
+                        <input name="formacao" id="formacao" type="text" maxlength="30">
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">book</i>
-                        <input name="curso" id="curso" type="text" class="validate" value="{{old('curso')}}" maxlength="30" required>
                         <label for="curso">Curso: <span style="color: red;">*</span></label>
+                        <input name="curso" id="curso" type="text" maxlength="30">
                     </div>
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">directions_bike</i>
-                        <input name="cref" id="cref" type="text" class="validate" value="{{old('cref')}}" maxlength="30" required>
                         <label for="cref">CREF: <span style="color: red;">*</span></label>
+                        <input name="cref" id="cref" type="text" maxlength="30">
                     </div>
                 </div>
                 <br><br>
@@ -123,20 +122,19 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="name" type="text" class="validate" maxlength="30" required>
                         <label for="name">Usuário: <span style="color: red;">*</span></label>
+                        <input name="name" id="name" type="text" maxlength="30">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="lockout" type="password" class="validate" maxlength="30" required>
                         <label for="lockout">Senha: <span style="color: red;">*</span></label>
+                        <input name="password" id="lockout" type="password" maxlength="30">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="lock" type="password" class="validate" maxlength="30" required>
-                        <label for="lock">Confirmar senha: <span style="color: red;">*</span></label>
+                        <input name="confirm_password" id="lock" type="password" maxlength="30">
                     </div>
                 </div>
                 <div class="container">
@@ -148,4 +146,5 @@
             </form>
         </div>
     </div>
+    <script src="{{asset('js/validation/validation-professores/validation-professores-create.js')}}"></script>
 @endsection

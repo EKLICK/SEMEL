@@ -129,6 +129,10 @@ class TurmasController extends Controller{
         //Encontra a turma no banco de dados. 
         $turma = Turma::find($id);
 
+        //Retirando milisegundos padrão do banco de dados nos campos da turma.
+        $turma->horario_inicial = substr($turma->horario_inicial, 0, 5);
+        $turma->horario_final = substr($turma->horario_final, 0, 5);
+
         //Encontra o núcleo no banco de dados.
         $nucleoslist = Nucleo::all();
 

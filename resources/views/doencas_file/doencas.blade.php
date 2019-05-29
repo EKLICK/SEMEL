@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="input-field col s12 xl4">
                                     <i class="material-icons prefix">warning</i>
-                                    <input name="nome" id="icon_nome" type="text" class="validate">
+                                    <input name="nome" id="icon_nome" type="text">
                                     <label for="icon_nome">Nome da doença:</label>
                                 </div>
                             </div>

@@ -193,7 +193,6 @@ class AnamneseController extends Controller{
         //Busca os valores antigos da anamnese.
         $oldanamnese = (array)$anamnese;
 
-        
         //Verifica atributos de anamnese, 
         //se foi selecionado sim, adiciona ao campo de input (type=text).
         //Se foi selecionado não, adiciona -1 para o banco de dados.
@@ -241,7 +240,7 @@ class AnamneseController extends Controller{
         ]);
 
         //Edita a vinculação doenças na anamnese se elas foram informadas no formulario.
-        $anamnese->doencas()->sync($dataForm['doencas']);
+        if(isset($dataForm['doencas'])){$anamnese->doencas()->sync($dataForm['doencas']);}
 
         //busca os valores novos da turma.
         $newanamnese = (array)$anamnese;

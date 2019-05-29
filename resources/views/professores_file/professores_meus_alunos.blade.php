@@ -20,24 +20,24 @@
                             <div class="row">
                                 <div class="input-field col s11 m6 l5">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="nome_search" type="text" class="validate" name="nome">
                                     <label for="nome_search">Nome:</label>
+                                    <input id="nome_search" type="text" name="nome">
                                 </div>
                                 <div class="col s3 m1 l1"><label>Idade:</label></div>
                                 <div class="input-field col s4 m2 l2">
-                                    <input id="de_search" type="text" class="datepicker validate" name="de">
                                     <label for="de_search">De:</label>
+                                    <input id="de_search" type="text" class="datepicker" name="de">
                                 </div>
                                 <div class="input-field col s4 m2 l2">
-                                    <input id="ate_search" type="text" class="datepicker validate" name="ate">
                                     <label for="ate_search">Até:</label>
+                                    <input id="ate_search" type="text" class="datepicker" name="ate">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s11 m6 l5">
                                     <i class="material-icons prefix">phone</i>
-                                    <input name="telefone" id="icon_telephone" type="tel" class="validate">
                                     <label for="icon_telephone">Telephone:</label>
+                                    <input name="telefone" id="icon_telephone" type="tel">
                                 </div>
                                 <div class="input-field col s3 m1 l1"><label>Sexo:</label></div>
                                 <div class="input-field col s8 m4 l3">

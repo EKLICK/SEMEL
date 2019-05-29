@@ -18,43 +18,46 @@
                             <div class="row">
                                 <div class="input-field col s11 m11 xl6">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input placeholder="Nome da pessoa" id="nome_search" type="text" class="validate" name="nome">
+                                    <label for="nome_search">Nome da pessoa</label>
+                                    <input id="nome_search" type="text" name="nome">
                                 </div>
                                 <div class="input-field col s3 m3 xl1"><i class="material-icons prefix">date_range</i></div>
                                 <div class="input-field col s4 m4 xl2">
-                                    <input id="de_search" type="text" class="datepicker validate" name="de">
                                     <label for="de_search">De:</label>
+                                    <input id="de_search" type="text" class="datepicker" name="de">
                                 </div>
                                 <div class="input-field col s4 m4 xl2">
-                                    <input id="ate_search" type="text" class="datepicker validate" name="ate">
                                     <label for="ate_search">Até:</label>
+                                    <input id="ate_search" type="text" class="datepicker" name="ate">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s11 m11 xl3">
                                     <i class="material-icons prefix">assignment_ind</i>
-                                    <input placeholder="RG" id="rg_search" type="text" class="validate" name=rg>
+                                    <label for="rg_search">RG</label>
+                                    <input id="rg_search" type="text" name=rg>
                                 </div>
                                 <div class="input-field col s11 m11 xl4">
                                     <i class="material-icons prefix">credit_card</i>
-                                    <input onkeydown="javascript: fMasc(this, mCPF)" placeholder="CPF" id="cpf_search" type="text" class="validate" name="cpf">
+                                    <label for="cpf_search">CPF</label>
+                                    <input onkeydown="javascript: fMasc(this, mCPF)" id="cpf_search" type="text" name="cpf">
                                 </div>
                                 <div class="input-field col s11 m11 xl4">
                                     <i class="material-icons prefix">phone</i>
-                                    <input onkeydown="javascript: fMasc(this, mTel)" placeholder="Telefone" id="telefone_search" type="text" class="validate" name="telefone">
                                     <label for="telefone_search">Telefone</label>
+                                    <input onkeydown="javascript: fMasc(this, mTel)" id="telefone_search" type="text" name="telefone">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s11 m11 xl5">
                                     <i class="material-icons prefix">confirmation_number</i>
-                                    <input name="rua" id="rua" type="text" class="validate">
                                     <label for="rua">Rua:</label>
+                                    <input name="rua" id="rua" type="text">
                                 </div>
                                 <div class="input-field col s11 xl6">
                                     <i class="material-icons prefix">location_city</i>
-                                    <input placeholder="Bairro" id="bairro_search" type="text" class="validate" name="bairro">
                                     <label for="bairro_search">Bairro</label>
+                                    <input id="bairro_search" type="text" name="bairro">
                                 </div>
                             </div>
                             <div class="row">

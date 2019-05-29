@@ -6,65 +6,70 @@
 @endsection
 @section('title') Editar {{$nucleo->nome}} @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('nucleos.update', $nucleo->id)}}" method="post">
+            <form id="formulario" class="col s12" action="{{route('nucleos.update', $nucleo->id)}}" method="post">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <div class="row">
                     <div class="input-field col s11 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="@if(is_null(old('nome'))) {{$nucleo->nome}} @else {{old('nome')}} @endif" maxlength="30" required>
                         <label for="icon_nome">Nome do núcleo: <span style="color: red;">*</span></label>
+                        <input name="nome" id="icon_nome" type="text" value="{{$nucleo->nome}}" data-error=".errorTxt1" maxlength="30">
+                        <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s11 m5">
-                        <input type="text" name="string_bairro" id="string_bairro" value="{{old('string_bairro')}}" hidden>
                         <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
-                        <select name="bairro" onchange="change_bairro_select()" id="bairro_select" required>
+                        <select name="bairro" id="bairro_select" data-error=".errorTxt2">
                             <option value="" selected disabled>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
-                                <option value="{{$bairro}}" @if(is_null(old('string_bairro'))) @if($bairro == $nucleo->bairro) selected @endif @else @if(old('string_bairro') == $bairro) selected @endif @endif>{{$bairro}}</option>
+                                <option value="{{$bairro}}" @if($bairro == $nucleo->bairro) selected @endif>{{$bairro}}</option>
                             @endforeach
                         </select>
+                        <div class="input-field">
+                            <div class="errorTxt2"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input name="rua" id="rua" type="text" class="validate" value="@if(is_null(old('rua'))) {{$nucleo->rua}} @else {{old('rua')}} @endif" maxlength="15" required>
-                        <label for="rua">Rua: <span style="color: red;">*</span></label>
+                        <label for="icon_rua">Rua: <span style="color: red;">*</span></label>
+                        <input name="rua" id="icon_rua" type="text" value="{{$nucleo->rua}}" data-error=".errorTxt3" maxlength="100">
+                        <div class="errorTxt3"></div>
                     </div>
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">explore</i>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" class="validate" value="@if(is_null(old('cep'))) {{$nucleo->cep}} @else {{old('cep')}} @endif" maxlength="10" required>
-                        <label for="cep">CEP: <span style="color: red;">*</span></label>
+                        <label for="icon_cep">CEP: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" value="{{$nucleo->cep}}" data-error=".errorTxt4" maxlength="10">
+                        <div class="errorTxt4"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">location_on</i>
-                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" class="validate" @if(is_null(old('numero_endereco'))) value="{{$nucleo->numero_endereco}}" @else value="{{old('numero_endereco')}}" @endif maxlength="5" required>
                         <label for="numero_endereco">Número: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mNum)" name="numero_endereco" id="numero_endereco" type="number" value="{{$nucleo->numero_endereco}}" data-error=".errorTxt5" maxlength="5">
+                        <div class="errorTxt5"></div>
                     </div>
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">bookmark</i>
-                        <input name="complemento" id="icon_complemento" type="text" class="validate" value="@if(is_null(old('complemento'))) {{$nucleo->complemento}} @else {{old('complemento')}} @endif" maxlength="10">
                         <label for="icon_complemento">Complemento:</label>
+                        <input name="complemento" id="icon_complemento" type="text" value="{{$nucleo->complemento}}" data-error=".errorTxt6" maxlength="10">
+                        <div class="errorTxt6"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">phone</i>
-                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" class="validate" value="@if(is_null(old('telefone'))) {{$nucleo->telefone}} @else {{old('telefone')}} @endif" maxlength="16" required>
                         <label for="icon_telefone">Telefone: <span style="color: red;">*</span></label>
+                        <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telefone" type="text" value="{{$nucleo->telefone}}" data-error=".errorTxt7" maxlength="16">
+                        <div class="errorTxt7"></div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s11 m6 xl5">
+                    <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea" maxlength="100">@if(is_null(old('descricao'))) {{$nucleo->descricao}} @else {{old('descricao')}} @endif</textarea>
                         <label for="descricao">Descrição do núcleo:</label>
+                        <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea" maxlength="100">{{$nucleo->descricao}}</textarea>
                     </div>
                     <div class="container">
                         <div class="input-field col s11 m3 right">
@@ -76,4 +81,5 @@
             </form>
         </div>
     </div>
+    <script src="{{asset('js/validation/validation-nucleos/validation-nucleos-edit.js')}}"></script>
 @endsection

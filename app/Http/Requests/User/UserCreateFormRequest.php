@@ -22,7 +22,7 @@ class UserCreateFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nick'                    => 'required|string|between:5,30',
+            'nick'                    => 'required|string|between:5,100',
             'email'                   => 'required|email|max:30|unique:users',
             'name'                    => 'required|string|between:5,30|unique:users',
             'password'                => 'required|string|between:5,30',

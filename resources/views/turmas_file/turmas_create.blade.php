@@ -6,80 +6,90 @@
 @endsection
 @section('title') Criar turma @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('turmas.store')}}" method="post">
+            <form id="formulario" class="col s12" action="{{route('turmas.store')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
-                        <input name="nome" id="icon_nome" type="text" class="validate" value="{{old('nome')}}" maxlength="30" required>
                         <label for="icon_nome">Turma da turma: <span style="color: red;">*</span></label>
+                        <input name="nome" id="icon_nome" type="text" data-error=".errorTxt1" maxlength="30">
+                        <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment</i>
-                        <input name="limite" id="icon_limite" type="number" class="validate" value="{{old('limite')}}" required>
                         <label for="icon_limite">Limite: <span style="color: red;">*</span></label>
+                        <input name="limite" id="icon_limite" type="number" data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_full</i>
-                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="validate timepicker" value="{{old('horario_inicial')}}" maxlength="8" required>
                         <label for="icon_horario_inicial">Horário Inicial: <span style="color: red;">*</span></label>
+                        <input name="horario_inicial" id="icon_horario_inicial" type="text" class="timepicker" data-error=".errorTxt3" maxlength="8">
+                        <div class="errorTxt3"></div>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">hourglass_empty</i>
-                        <input name="horario_final" id="icon_horario_final" type="text" class="validate timepicker" value="{{old('horario_final')}}" maxlength="8" required>
                         <label for="icon_horario_final">Horário Final: <span style="color: red;">*</span></label>
+                        <input name="horario_final" id="icon_horario_final" type="text" class="timepicker" data-error=".errorTxt4" maxlength="8">
+                        <div class="errorTxt4"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
-                        <input type="text" name="old_dias" id="old_dias" value="{{old('old_dias')}}" hidden>
-                        @php $old_ids_dias = explode(',', old('old_dias')) @endphp
-                        <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana <span style="color: red;">*</span>
-                        <select multiple name="data_semanal[]" id="lista_de_dias" onchange="old_dias_function()" required>
+                        <i class="material-icons prefix">date_range</i>&emsp;&emsp;&emsp;Dias da semana <span style="color: red;">*</span>
+                        <select multiple name="data_semanal[]" id="lista_de_dias" data-error=".errorTxt5">
                             @foreach ($dias_semana as $dia)
-                                <option value="{{$dia}}" @foreach ($old_ids_dias as $old_dia) @if($dia == $old_dia) selected @endif @endforeach>{{$dia}}</option>
+                                <option value="{{$dia}}">{{$dia}}</option>
                             @endforeach
                         </select>
+                        <div class="input-field">
+                            <div class="errorTxt2"></div>
+                        </div>
                     </div>
                     <div class="input-field col s12 m5">
-                        <input type="text" name="old_nucleo" id="old_nucleo" value="{{old('old_nucleo')}}"  hidden>
-                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos <span style="color: red;">*</span>
-                        <select name="nucleo_id" id="lista_de_nucleos" onchange="old_nucleo_function()" required>
+                        <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp;&emsp;Núcleos <span style="color: red;">*</span>
+                        <select name="nucleo_id" id="lista_de_nucleos" data-error=".errorTxt6">
                             <option value="" selected disabled>Selecione o núcleo</option>
                             @foreach ($nucleoslist as $nucleo)
-                                <option value="{{$nucleo->id}}" @if($nucleo->id == old('old_nucleo')) selected @endif>{{$nucleo->nome}}</option>
+                                <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
                             @endforeach
                         </select>
+                        <div class="input-field">
+                            <div class="errorTxt2"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100">{{old('descricao')}}</textarea>
                         <label for="icon_descricao">Descrição da turma:</label>
+                        <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8 m5 xl4">
+                        <input type="text" name="radiovalidation" id="radiovalidation" data-error=".errorTxt7" hidden>
                         <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativo | inativo: <span style="color: red;">*</span>
                         <div style="margin-left: 30%;">
                             <p>
                                 <label>
-                                    <input value="1" name="inativo" type="radio" @if(old('inativo') == 1) checked @endif/>
+                                    <input value="1" name="inativo" type="radio"/>
                                     <span>Ativo</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input value="2" name="inativo" type="radio" @if(old('inativo') == 2) checked @endif/>
+                                    <input value="2" name="inativo" type="radio"/>
                                     <span>Inativo</span>
                                 </label>
                             </p>
+                        </div>
+                        <div class="input-field">
+                            <div class="errorTxt7" id="errorTxt7"></div>
                         </div>
                     </div>
                     <div class="container">
@@ -92,4 +102,5 @@
             </form>
         </div>
     </div>
+    <script src="{{asset('js/validation/validation-turmas/validation-turmas-create.js')}}"></script>
 @endsection

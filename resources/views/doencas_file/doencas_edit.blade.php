@@ -6,22 +6,23 @@
 @endsection
 @section('title') Editar {{$doenca->nome}} @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
-    <div class="container edicao-criacao">
+    <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('doencas.update', $doenca->id)}}" method="post">
+            <form id="formulario" class="col s12" action="{{route('doencas.update', $doenca->id)}}" method="post">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <div class="row">
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">new_releases</i>
-                        <input name="nome" id="icon_prefix" type="text" class="validate" value="{{$doenca->nome}}" maxlength="30" required>
-                        <label for="icon_prefix">Nome: <span style="color: red;">*</span></label>
+                        <label for="nome">Nome da doença: <span style="color: red;">*</span></label>
+                        <input name="nome" id="nome" type="text" class="validate" value="{{$doenca->nome}}" data-error=".errorTxt1" maxlength="100">
+                        <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">description</i>
-                        <textarea name="descricao" id="descricao" class="materialize-textarea" maxlength="100" required>{{$doenca->descricao}}</textarea>
                         <label for="descricao">Observação <span style="color: red;">*</span></label>
+                        <textarea name="descricao" id="descricao" class="materialize-textarea" data-error=".errorTxt2" maxlength="100">{{$doenca->descricao}}</textarea>
+                        <div class="errorTxt2"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -33,4 +34,5 @@
             </form>
         </div>
     </div>
+    <script src="{{asset('js/validation/validation-doencas.js')}}"></script>
 @endsection

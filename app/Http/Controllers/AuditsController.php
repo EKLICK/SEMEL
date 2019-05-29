@@ -10,7 +10,7 @@ use App\Audit;
 
 //CONTROLE DE AUDITORIAS:
 //Comentarios em cima, código comentado em baixo.
-class auditsController extends Controller{
+class AuditsController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
     //Função index: Retorna a página de registros de auditorias.
     public function index(){

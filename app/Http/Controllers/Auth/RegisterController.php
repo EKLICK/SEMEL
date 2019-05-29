@@ -124,17 +124,17 @@ class RegisterController extends Controller{
     //Função edit: Retorna a página de edição de registros de usuários.
     protected function edit($id){
         //Encontra a usuário no banco de dados.
-        $user = User::find($id);
+        $user = User::withTrashed()->find($id);
 
         return view('auth.users_edit', compact('user'));
     }
 
     //Função update: Faz as mudanças necessarias para adicionar no banco de dados e retorna a página de index.
-    protected function update(UserEditFormRequest $request, $id){
+    protected function update(UserEditFormRequest $request){
         $dataForm = $request->all();
 
         //Encontra a usuário no banco de dados.
-        $user = User::find($id);
+        $user = User::withTrashed()->find($dataForm['id']);
 
         //Para editar a senha do usuário, é necessario confirma o usuário e senha antiga.
         //Verifica se os parametros para redefinição de senha foram passados.

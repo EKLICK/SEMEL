@@ -17,6 +17,7 @@ use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
 
 //MODELOS PARA CONTROLE:
 use App\Pessoa;
+use App\Professor;
 use App\Nucleo;
 use App\Doenca;
 use App\Turma;
@@ -161,6 +162,19 @@ class PessoasController extends Controller{
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::orderBy('nome')->get();
 
+        $listacpfpessoas = Pessoa::all('cpf');
+        $listacpfprofessores = Professor::all('cpf');
+
+        $listacpf = [];
+
+        foreach($listacpfpessoas as $cpf){
+            array_push($listacpf, $cpf->cpf);
+        }
+        foreach($listacpfprofessores as $cpf){
+            array_push($listacpf, $cpf->cpf);
+        }
+        $listacpf = array_filter($listacpf);
+        
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
                         'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',

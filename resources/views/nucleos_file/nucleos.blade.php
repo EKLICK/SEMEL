@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">filter_tilt_shift</i>
-                                    <input name="nome" id="icon_nome" type="text" class="validate">
+                                    <input name="nome" id="icon_nome" type="text">
                                     <label for="icon_nome">Nome da núcleo:</label>
                                 </div>
                                 <div class="input-field col s10 xl5 right">
@@ -52,19 +52,19 @@
                                 </div>
                                 <div class="input-field col s10 xl3">
                                     <i class="material-icons prefix">confirmation_number</i>
-                                    <input name="rua" id="icon_rua" type="text" class="validate">
+                                    <input name="rua" id="icon_rua" type="text">
                                     <label for="icon_rua">Rua:</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s10 xl4">
                                     <i class="material-icons prefix">location_on</i>
-                                    <input name="numero_endereco" id="icon_numero_endereco" type="number" class="validate">
+                                    <input name="numero_endereco" id="icon_numero_endereco" type="number">
                                     <label for="icon_numero_endereco">Numero de endereço:</label>
                                 </div>
                                 <div class="input-field col s10 xl3">
                                     <i class="material-icons prefix">location_city</i>
-                                    <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" class="validate">
+                                    <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text">
                                     <label for="icon_cep">CEP:</label>
                                 </div>
                             </div>
