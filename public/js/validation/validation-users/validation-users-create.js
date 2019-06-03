@@ -10,7 +10,7 @@ jQuery.validator.addMethod("uniqueEmailValidation", function(value, element){
         type: "GET",
         url:'/email/ajax',
         dataType: 'json',
-        data: {email: email, tabela: 2}
+        data: {email: email}
     }).done(function (data){
         valor = data;
     })

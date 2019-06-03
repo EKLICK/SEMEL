@@ -12,8 +12,6 @@
 */
 
 //ROTAS DE ADMINISTAÇÃO GERAL: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//Rota welcome: Utilizado para Logar no sistema com uma conta.
-Route::get('/', function(){return redirect()->route('login');})->name('welcome');
 
 //Rota Home: Utilizado para acessar a página home padrão.
 Route::get('/home', 'HomeController@index')->name('home');
