@@ -38,7 +38,8 @@ class PessoasController extends Controller{
     //Ferramenta saveDbImage3x4: Salva a imagem 3 por 4 vindo das requisições do formulario.
     public function saveDbImage3x4($req, $op){
         $data = $req->all();
-        $num = rand(1111, 9999);
+        date_default_timezone_set('America/sao_paulo');
+        $num = date('Y-m-d_H:i:s_u');
         $dir = "img/img_3x4";
         $ex = '.png';
         if($op == 1){
@@ -61,10 +62,11 @@ class PessoasController extends Controller{
     //Ferramenta saveDbImageMatricula: Salva a imagem de matricula vindo das requisições do formulario.
     public function saveDbImageMatricula($req){
         $data = $req->all();
-        $imagem = $req->file('img_matricula');
-        $num = rand(1111, 9999);
+        date_default_timezone_set('America/sao_paulo');
+        $num = date('Y-m-d_H:i:s_u');
         $dir = "img/img_matricula";
         $ex = $imagem->guessClientExtension();
+        $imagem = $req->file('img_matricula');
         $nomeImagem = "imagem_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_matricula'] = $dir."/".$nomeImagem;
@@ -74,10 +76,11 @@ class PessoasController extends Controller{
     //Ferramenta saveDbImageMatricula: Salva a imagem de atestado vindo das requisições do formulario.
     public function saveDbImageAtestado($req){
         $data = $req->all();
-        $imagem = $req->file('img_atestado');
-        $num = rand(1111, 9999);
+        date_default_timezone_set('America/sao_paulo');
+        $num = date('Y-m-d_H:i:s_u');
         $dir = "img/img_atestado";
         $ex = $imagem->guessClientExtension();
+        $imagem = $req->file('img_atestado');
         $nomeImagem = "imagem_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_estado'] = $dir."/".$nomeImagem;

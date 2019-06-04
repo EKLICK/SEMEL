@@ -30,10 +30,11 @@ class AnamneseController extends Controller{
     //Ferramenta saveDbImageAtestado: Salva a imagem de atestado vindo das requisições do formulario.
     public function saveDbImageAtestado($req){
         $data = $req->all();
-        $imagem = $req->file('img_atestado');
-        $num = rand(1111, 9999);
+        date_default_timezone_set('America/sao_paulo');
+        $num = date('Y-m-d_H:i:s_u');
         $dir = "img/img_atestado";
         $ex = $imagem->guessClientExtension();
+        $imagem = $req->file('img_atestado');
         $nomeImagem = "imagem_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_estado'] = $dir."/".$nomeImagem;

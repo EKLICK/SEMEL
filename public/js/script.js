@@ -25,6 +25,26 @@ $('.timepicker').timepicker({
     }
 });
 
+$(document).ready(function(){
+    $('#employee_data').DataTable({
+
+        "ordering": false,
+        "searching": false,
+        "info":     false,
+        "bLengthChange": false,
+        "oLanguage": {
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sEmptyTable": "Nenhum registro encontrado",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+          }
+    });
+});
+
 //FORMATAÇÃO DE INPUTS:
 function fMasc(objeto,mascara) {
     obj=objeto
@@ -297,21 +317,3 @@ function muda_foto(){
         document.getElementById('muda_foto').innerHTML = 'Trocar para Pastas&emsp;&nbsp; <i class="material-icons">satellite</i>';
     }
 }
-
-$(document).ready(function(){
-    $('#employee_data').DataTable({
-
-        "ordering": false,
-        "searching": false,
-        "info":     false,
-        "bLengthChange": false,
-        "oLanguage": {
-            "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
-            },
-          }
-    });
-});
