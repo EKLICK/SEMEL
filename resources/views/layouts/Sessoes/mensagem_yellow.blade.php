@@ -1,12 +1,12 @@
 @if(Session::get('mensagem_yellow'))
     <script>
-        toastr["success"]("{{Session::get('mensagem_yellow')}}")
+        toastr["warning"]("{{Session::get('mensagem_yellow')}}")
         toastr.options = {
             "closeButton": false,
             "debug": false,
             "newestOnTop": false,
             "progressBar": false,
-            "positionClass": "toast-bottom-left",
+            "positionClass": "toast-top-full-width",
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": "300",
