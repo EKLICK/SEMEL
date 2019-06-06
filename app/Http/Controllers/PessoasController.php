@@ -164,19 +164,6 @@ class PessoasController extends Controller{
     public function create(){
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::orderBy('nome')->get();
-
-        $listacpfpessoas = Pessoa::all('cpf');
-        $listacpfprofessores = Professor::all('cpf');
-
-        $listacpf = [];
-
-        foreach($listacpfpessoas as $cpf){
-            array_push($listacpf, $cpf->cpf);
-        }
-        foreach($listacpfprofessores as $cpf){
-            array_push($listacpf, $cpf->cpf);
-        }
-        $listacpf = array_filter($listacpf);
         
         //Criando array de bairros de São Leopoldo.
         $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
