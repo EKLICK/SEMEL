@@ -12,6 +12,15 @@
                         </div>
                         <div class="col s5 right" style="margin-top: 8%; margin-right: 10%;">
                             @include('layouts.Sessoes.mensagem_red')
+                            @if(Session::get('expirado'))
+                                <div class="center-align sessao">
+                                    <div class="chip red lighten-2">
+                                        {{Session::get('expirado')}}
+                                        <i class="close material-icons">close</i>
+                                    </div>
+                                </div>
+                                {{Session::forget('expirado')}}
+                            @endif
                         </div>
                     </div>
                     <div class="row">
