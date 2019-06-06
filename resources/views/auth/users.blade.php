@@ -170,7 +170,7 @@
         </form>
     </div>
 
-    @if($user->permissao != 1)
+    @can('autorizacao', 2)
         <div id="modalrestore" class="modal"  style="width: 30%;">
             <div class="col s1.5 right">
                 <a class="modal-close"><i class="material-icons medium" style="color: red;">cancel</i></a>
@@ -207,7 +207,7 @@
                 </div>
             </form>
         </div>
-    @endif
+    @endcan
 
     <div id="modalreset" class="modal" style="width: 55%; height: 45%;">
         <div class="col s1.5 right">

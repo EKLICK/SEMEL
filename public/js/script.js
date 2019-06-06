@@ -27,7 +27,6 @@ $('.timepicker').timepicker({
 
 $(document).ready(function(){
     $('#employee_data').DataTable({
-
         "ordering": false,
         "searching": false,
         "info":     false,
@@ -296,7 +295,6 @@ if(document.getElementById('capture') != null){
         document.getElementById("img_web").src = context.toDataURL('img/img_3x4');
         var codigo = context.toDataURL();
         document.getElementById('web_image').value = codigo;
-
         stop();
     })
 }

@@ -14,6 +14,7 @@
 //ROTAS DE ADMINISTAÇÃO GERAL: |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 //Rota Home: Utilizado para acessar a página home padrão.
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Rota Decompose: Utilizado para abrir registro de todas as bibliotecas instaladas.
