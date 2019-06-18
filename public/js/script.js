@@ -282,7 +282,7 @@ function foto() {
         video.srcObject = stream;
         video.play();
     }, function(error) {
-        setTimeout(function(){alert('Wecam inativo: \n' + error);}, 350);
+        setTimeout(function(){alert('Webcam inativo: \n' + error);}, 350);
         $('#fotomodal').modal('close');
     });
 };

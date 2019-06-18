@@ -47,7 +47,7 @@
                             <td><p>{{$doenca->nome}}</p></td>
                             <td><p>{{$doenca->descricao}}</p></td>
                             <td>
-                                <a class="tooltipped" data-position="top" data-tooltip="Informações de {{$doenca->nome}}" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons">edit</i></a>
+                                <a class="tooltipped" data-position="top" data-tooltip="Editar Doença" href="{{Route('doencas.edit', $doenca->id)}}"><i class="small material-icons">edit</i></a>
                             </td>
                         </tr>
                     @endforeach 

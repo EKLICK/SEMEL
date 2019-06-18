@@ -24,8 +24,8 @@ class NucleoCreateEditFormRequest extends FormRequest{
         return [
             'nome'                  => 'required|string|between:3,100',
             'bairro'                => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
-            'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'numero_endereco'       => 'required|digits_between:0,15',
+            'rua'                   => 'required',
+            'numero_endereco'       => 'required',
             'cep'                   => 'required|max:10|min:10',
             'descricao'             => 'sometimes|nullable|between:5,100',
         ];

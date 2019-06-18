@@ -39,7 +39,7 @@ class PessoasController extends Controller{
     public function saveDbImage3x4($req, $op){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y-m-d_H:i:s_u');
+        $num = date('Y_m_d_H.i.s_u');
         $dir = "img/img_3x4";
         $ex = '.png';
         if($op == 1){
@@ -63,10 +63,10 @@ class PessoasController extends Controller{
     public function saveDbImageMatricula($req){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y-m-d_H:i:s_u');
+        $num = date('Y_m_d_H.i.s_u');
         $dir = "img/img_matricula";
-        $ex = $imagem->guessClientExtension();
         $imagem = $req->file('img_matricula');
+        $ex = $imagem->guessClientExtension();
         $nomeImagem = "imagem_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_matricula'] = $dir."/".$nomeImagem;
@@ -77,10 +77,10 @@ class PessoasController extends Controller{
     public function saveDbImageAtestado($req){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y-m-d_H:i:s_u');
+        $num = date('Y_m_d_H.i.s_u');
         $dir = "img/img_atestado";
-        $ex = $imagem->guessClientExtension();
         $imagem = $req->file('img_atestado');
+        $ex = $imagem->guessClientExtension();
         $nomeImagem = "imagem_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_estado'] = $dir."/".$nomeImagem;

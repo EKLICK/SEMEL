@@ -18,7 +18,7 @@ class AdminMestreController extends Controller{
     //Função create: Retorna a página de criação de registros de secretarios.
     protected function secretario_store(Request $request){
         $dataForm = $request->all();
-
+        
         //Encontra todos os registros de usuários que possuem a permissão do tipo 2 (secretarios).
         $secretarioslist = User::where('permissao', '==', 2);
 
@@ -34,7 +34,7 @@ class AdminMestreController extends Controller{
         User::create([
             'nick' => $dataForm['nick'],
             'name' => $dataForm['name'],
-            'admin_professor' => 2,
+            'permissao' => 2,
             'email' => $dataForm['email'],
             'password' => Hash::make($dataForm['password']),
         ]);

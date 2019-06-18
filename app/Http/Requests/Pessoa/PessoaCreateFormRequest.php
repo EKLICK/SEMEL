@@ -43,7 +43,7 @@ class PessoaCreateFormRequest extends FormRequest{
             'filhos'                => 'digits_between:0,4|min:0',
             'irmaos'                => 'digits_between:0,4|min:0',
             'convenio_medico'       => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado', 'Solteiro', 'Viuva(o)'])],
+            'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado(a)', 'Solteiro(a)', 'Viuvo(a)', 'Divorciado(a)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
             'atestado'              => ['required','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],

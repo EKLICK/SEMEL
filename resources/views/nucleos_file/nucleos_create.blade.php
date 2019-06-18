@@ -76,7 +76,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s11 m5 xl3">
-                        <input type="text" name="radiovalidation" id="radiovalidation" data-error=".errorTxt6" hidden>
+                        <input type="text" name="radiovalidation" id="radiovalidation" data-error=".errorTxt7" hidden>
                         <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo: <span style="color: red;">*</span>
                         <div style="margin-left: 30%;">
                             <p>
@@ -93,7 +93,7 @@
                             </p>
                         </div>
                         <div class="input-field">
-                            <div class="errorTxt6" id="errorTxt6"></div>
+                            <div class="errorTxt6" id="errorTxt7"></div>
                         </div>
                     </div>
                     <div class="input-field col s11 m3 right">

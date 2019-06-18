@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">group</i>
-                        <label for="icon_nome">Turma da turma: <span style="color: red;">*</span></label>
+                        <label for="icon_nome">Nome da turma: <span style="color: red;">*</span></label>
                         <input name="nome" id="icon_nome" type="text" data-error=".errorTxt1" maxlength="30">
                         <div class="errorTxt1"></div>
                     </div>

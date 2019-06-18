@@ -246,13 +246,13 @@
                         Estado Civil:
                         <p>
                             <label>
-                                <input value="Solteiro" name="estado_civil" type="radio"/>
+                                <input value="Solteiro(a)" name="estado_civil" type="radio"/>
                                 <span>Solteiro(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Casado" name="estado_civil" type="radio"/>
+                                <input value="Casado(a)" name="estado_civil" type="radio"/>
                                 <span>Casado(a)</span>
                             </label>
                         </p>
@@ -260,6 +260,12 @@
                             <label>
                                 <input value="Viuva(o)" name="estado_civil" type="radio"/>
                                 <span>Viuvo(a)</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input value="Divorciado(a)" name="estado_civil" type="radio"/>
+                                <span>Divorciado(a)</span>
                             </label>
                         </p>
                     </div>

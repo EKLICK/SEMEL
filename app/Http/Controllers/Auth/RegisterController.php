@@ -103,7 +103,7 @@ class RegisterController extends Controller{
         User::create([
             'nick' => $dataForm['nick'],
             'name' => $dataForm['name'],
-            'admin_professor' => 3,
+            'permissao' => 3,
             'email' => $dataForm['email'],
             'password' => Hash::make($dataForm['password']),
         ]);

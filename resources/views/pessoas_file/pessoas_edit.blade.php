@@ -246,20 +246,26 @@
                         Estado Civil:
                         <p>
                             <label>
-                                <input value="Solteiro" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Solteiro') checked @endif/>
+                                <input value="Solteiro(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Solteiro') checked @endif/>
                                 <span>Solteiro(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Casado" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Casado') checked @endif/>
+                                <input value="Casado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Casado') checked @endif/>
                                 <span>Casado(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Viuva(o)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Viuva(o)') checked @endif/>
+                                <input value="Viuvo(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Viuva(o)') checked @endif/>
                                 <span>Viuvo(a)</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input value="Divorciado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Divorciado(o)') checked @endif/>
+                                <span>Divorciado(a)</span>
                             </label>
                         </p>
                     </div>
