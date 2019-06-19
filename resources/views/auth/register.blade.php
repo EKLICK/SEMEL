@@ -33,13 +33,13 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <label for="icon_lockout">Senha: <span style="color: red;">*</span></label>
-                        <input name="password" id="icon_lockout" type="password" maxlength="30">
+                        <label for="password">Senha: <span style="color: red;">*</span></label>
+                        <input name="password" id="password" type="password" maxlength="30">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <label for="icon_lock">Confirmar senha: <span style="color: red;">*</span></label>
-                        <input name="confirm_password" id="icon_lock" type="password" maxlength="30">
+                        <label for="confirm_password">Confirmar senha: <span style="color: red;">*</span></label>
+                        <input name="confirm_password" id="confirm_password" type="password" maxlength="30">
                     </div>
                 </div>
                 <div class="row">

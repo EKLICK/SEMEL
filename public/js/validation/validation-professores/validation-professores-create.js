@@ -13,7 +13,7 @@ jQuery.validator.addMethod("nascimentoValidation", function(value, element){
 }, "Data de nascimento inválida")
 
 jQuery.validator.addMethod("bairroValidation", function(value, element){
-    if($('#bairro_select').is(':selected') || $('#string_bairro').val() != ''){
+    if($('#bairro_selected').val() != '' || $('#string_bairro').val() != ''){
         return true
     }
     return false
@@ -172,13 +172,13 @@ $(document).ready(function(){
             },
             cref: {
                 required: true,
-                maxlength: 255
+                maxlength: 255,
             },
             name: 'required',
             password: 'required',
             confirm_password: {
                 required: true,
-                equalTo: 'password'
+                equalTo: '#password',
             }
         },
         errorElement : 'div',

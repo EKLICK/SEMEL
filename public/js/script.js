@@ -167,6 +167,7 @@ function change_img_atestado(){
     }
 };
 
+
 //EDIÇÃO E CRIAÇÃO DE ANAMNESES
 function convenio_medico_click(valor){
     change(valor, $('#string_convenio_medico'), $('#convenio_label'), $('#convenio_icon'));
@@ -233,12 +234,17 @@ function change_bairro(){
             $('#bairro_select').append('<option value="'+array_bairro[i]+'">'+array_bairro[i]+'</option>');
         }
         $('select').formSelect();
+        $('#bairro_selected').val('');
     }
     else{
         $('#string_bairro').val('');
         $('#div_bairro_list').hide(400);
         $('#div_bairro_string').show(400);
     }
+}
+
+function bairro_selected_enable(){
+    $('#bairro_selected').val('1');
 }
 
 $(document).keydown(function (event) {

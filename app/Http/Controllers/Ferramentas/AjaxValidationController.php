@@ -111,19 +111,26 @@ class AjaxValidationController extends Controller{
 
         //Armazena todos os emails das pessoas na variavel $listaemails.
         foreach($listar as $email){
-            array_push($listaemails, $listar['email']);
+            array_push($listaemails, $email['email']);
         }
         
         //Verifica se foi passado um id (significa que o usuário está editando um administrador ou professor).
         if(isset($dataForm['id'])){
             //Tenta encontrar o email na tabela de administrador.
-            $id = User::withTrashed()->find($dataForm['id']);
+            
+            if(isset($dataForm['prof'])){
+                $id = Professor::find($dataForm['id']);
+            }
+            else{
+                $id = User::find($dataForm['id']);
+            }
 
             //Retira o email encontrado da lista de emails para não alertar que o email já foi registrado.
             unset($listaemails[array_search($id['email'], $listaemails)]);
+            return response()->json($id['email']);
         }
-        
-        return response()->json(!in_array($dataForm['email'], $listaemails));
+
+        //return response()->json(!in_array($dataForm['email'], $listaemails));
     }
 
     //Função matriculaValidation: retorna se a matricula digitado é único no banco de dados.

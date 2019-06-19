@@ -209,8 +209,8 @@ class NucleosController extends Controller{
         //C = Todas as turmas inativas (Subtrai A pelo B e adiciona o número ao C).
         $a = 0; $b = 0; $c = 0;
         foreach($nucleo->turmas as $turma){
-            if($turma->inativo == 1){$a++;}
-            $b++;
+            if($turma->inativo == 1){$b++;}
+            $a++;
         }
         $c = $a - $b;
         $dadosgerais2 = [$a,$b,$c];

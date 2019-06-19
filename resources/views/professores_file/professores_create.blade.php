@@ -35,10 +35,11 @@
                         <input name="cidade" id="cidade" type="text" value="São Leopoldo" maxlength="70">
                     </div>
                     <div class="input-field col s12 m5">
+                        <input type="text" id="bairro_selected" value="" hidden>
                         <a onclick="change_bairro()" class="waves-effect waves-light btn-floating right" style="margin-top: -10%; background-color: #039be5;"><i class="material-icons">cached</i></a>
-                        <div id="div_bairro_list" hidden>
+                        <div id="div_bairro_list">
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
-                            <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
+                            <select name="bairro" id="bairro_select" onchange="bairro_selected_enable()">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
                                     <option value="{{$bairro}}">{{$bairro}}</option>
@@ -129,12 +130,13 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock_outline</i>
-                        <label for="lockout">Senha: <span style="color: red;">*</span></label>
-                        <input name="password" id="lockout" type="password" maxlength="30">
+                        <label for="password">Senha: <span style="color: red;">*</span></label>
+                        <input name="password" id="password" type="password" maxlength="30">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">lock</i>
-                        <input name="confirm_password" id="lock" type="password" maxlength="30">
+                        <label for="confirm_password">Confirmação de senha: <span style="color: red;">*</span></label>
+                        <input name="confirm_password" id="confirm_password" type="password" maxlength="30">
                     </div>
                 </div>
                 <div class="container">

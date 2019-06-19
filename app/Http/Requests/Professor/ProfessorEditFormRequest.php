@@ -27,7 +27,7 @@ class ProfessorEditFormRequest extends FormRequest{
             'nascimento'            => 'required|date-format:d/m/Y',
             'bairro'                => 'required_without:string_bairro','max:100',
             'string_bairro'         => 'required_without:bairro','max:100',
-            'rua'                   => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'rua'                   => 'required',
             'numero_endereco'       => 'required|digits_between:0,15',
             'cep'                   => 'required|max:10|min:10',
             'telefone'              => 'required|max:16|min:8',
