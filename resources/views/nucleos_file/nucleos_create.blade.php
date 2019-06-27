@@ -93,7 +93,7 @@
                             </p>
                         </div>
                         <div class="input-field">
-                            <div class="errorTxt6" id="errorTxt7"></div>
+                            <div class="errorTxt7" id="errorTxt7"></div>
                         </div>
                     </div>
                     <div class="input-field col s11 m3 right">

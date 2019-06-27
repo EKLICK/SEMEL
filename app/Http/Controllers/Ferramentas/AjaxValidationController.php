@@ -127,10 +127,9 @@ class AjaxValidationController extends Controller{
 
             //Retira o email encontrado da lista de emails para não alertar que o email já foi registrado.
             unset($listaemails[array_search($id['email'], $listaemails)]);
-            return response()->json($id['email']);
         }
 
-        //return response()->json(!in_array($dataForm['email'], $listaemails));
+        return response()->json(!in_array($dataForm['email'], $listaemails));
     }
 
     //Função matriculaValidation: retorna se a matricula digitado é único no banco de dados.

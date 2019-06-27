@@ -212,10 +212,20 @@ Route::get('/menu_pdf/nucleos/{array}','Ferramentas\PDFController@menu_nucleos_p
 Route::get('/pdf/nucleos/{array}','Ferramentas\PDFController@nucleos_pdf')->name('nucleos_pdf')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 
+//CONTROLE DE Validation com AJAX: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
+//AJAX DE CPF
+//Rota /cpf/ajax: Utilido para passar valor booleano se o CPF está registrado no sistema ou não.
 Route::get('/cpf/ajax','Ferramentas\AjaxValidationController@cpfValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/rg/ajax','Ferramentas\AjaxValidationController@rgValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/email/ajax','Ferramentas\AjaxValidationController@emailValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
-Route::get('/matricula/ajax','Ferramentas\AjaxValidationController@matriculaValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
 
-Route::post('/request/ajax','Ferramentas\AjaxrequestController@ajaxRequest')->middleware('AdministracaoEProfessor', 'Authenticate');
+//AJAX DE RG
+//Rota /rg/ajax: Utilido para passar valor booleano se o RG está registrado no sistema ou não.
+Route::get('/rg/ajax','Ferramentas\AjaxValidationController@rgValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//AJAX DE EMAIL
+//Rota /email/ajax: Utilido para passar valor booleano se o EMAIL está registrado no sistema ou não.
+Route::get('/email/ajax','Ferramentas\AjaxValidationController@emailValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
+
+//AJAX DE MATRICULA
+//Rota /matricula/ajax: Utilido para passar valor booleano se a Matricula está registrado no sistema ou não.
+Route::get('/matricula/ajax','Ferramentas\AjaxValidationController@matriculaValidation')->middleware('AdministracaoEProfessor', 'Authenticate');

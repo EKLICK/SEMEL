@@ -32,10 +32,6 @@
                         <td><h6>{{$audit->event}}</h6></td>
                     </tr>
                     <tr>
-                        <td><h6>URL:</h6></td>
-                        <td><h6>{{$audit->url}}</h6></td>
-                    </tr>
-                    <tr>
                         <td><h6>Ip address:</h6></td>
                         <td><h6>@if($audit->ip_address == '::1') Localhost @else {{$audit->ip_address}} @endif</h6></td>
                     </tr>
@@ -44,12 +40,16 @@
             <div class="col s7">
                 <table>
                     <tr>
+                        <td><h6>URL:</h6></td>
+                        <td><h6>{{$audit->url}}</h6></td>
+                    </tr>
+                    <tr>
                         <td><h6>Tags:</h6></td>
                         <td><h6>@if($audit->tags == null) Nenhuma tag comentada @else {{$audit->tags}} @endif</h6></td>
                     </tr>
                     <tr>
                         <td><h6>Old value:</h6></td>
-                        <td >
+                        <td>
                             <h6>
                                 @if($audit->old_values == '[]') 
                                     nenhum valor substituido 

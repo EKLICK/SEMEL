@@ -44,8 +44,8 @@
                                     <i class="material-icons prefix">verified_user</i>&emsp;&emsp;&emsp;Tipo de usuário
                                     <select name="tipo">
                                         <option value="" selected disabled>Selecione o tipo de usuário</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="0">Professor</option>
+                                        <option value="2">Administrador</option>
+                                        <option value="4">Professor</option>
                                     </select>
                                 </div>
                             </div>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 //MODELOS PARA CONTROLE:
 use App\User;
+use App\Quant;
 
 //CONTROLE DE Administrador Mestre:
 //Comentarios em cima, código comentado em baixo.
@@ -23,10 +26,12 @@ class AdminMestreController extends Controller{
         $secretarioslist = User::where('permissao', '==', 2);
 
         //Percorre a lista de secretarios, assim que o sistema achar o secretario ativo no momento, ele será deletado.
-        foreach($secretarioslist as $secretarios){
-            if($secretarios->deleted_at == null){
-                $user->delete();
-                break;
+        if($secretarioslist != null){
+            foreach($secretarioslist as $secretarios){
+                if($secretarios->deleted_at == null){
+                    $user->delete();
+                    break;
+                }
             }
         }
 

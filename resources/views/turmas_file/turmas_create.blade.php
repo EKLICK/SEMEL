@@ -47,7 +47,7 @@
                             @endforeach
                         </select>
                         <div class="input-field">
-                            <div class="errorTxt2"></div>
+                            <div class="errorTxt5"></div>
                         </div>
                     </div>
                     <div class="input-field col s12 m5">
@@ -59,7 +59,7 @@
                             @endforeach
                         </select>
                         <div class="input-field">
-                            <div class="errorTxt2"></div>
+                            <div class="errorTxt6"></div>
                         </div>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ $(document).ready(function(){
             },
             confirm_password: {
                 required: true,
-                equalTo: 'password'
+                equalTo: '#password'
             }
         },
         errorElement : 'div',

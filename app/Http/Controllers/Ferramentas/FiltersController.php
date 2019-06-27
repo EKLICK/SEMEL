@@ -102,7 +102,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['tipo'];
 
                  //Constroi a query baseado neste parametro.
-                 $query->where('admin_professor', '=', $filtro);
+                 $query->where('permissao', '=', $filtro);
             }
 
             //Verifica se o parametro "inativo" foi passado.
@@ -384,7 +384,7 @@ class filtersController extends Controller{
                 $filtro = $dataForm['email'];
 
                 //Encontra o usuário que possui o email passado por parametros para filtros.
-                $useremails = User::all()->where('email', 'like', $filtro)->where('admin_professor', '=', 0)->last();
+                $useremails = User::all()->where('email', 'like', $filtro)->where('permissao', '=', 2)->last();
 
                 //Constroi a query baseado neste parametro.
                 $query->where('user_id', '=', $useremails->id);
