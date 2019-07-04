@@ -184,14 +184,15 @@ $(document).ready(function() {
                 uniqueCPFValidation: true,
                 cpf: true
             },
-            cpf_resposavel: {
+            cpf_responsavel: {
                 minlength: 14,
                 maxlength: 14,
+                cpf: true
             },
             rg: {
                 minlength: 6,
                 maxlength: 13,
-                uniqueRGValidation: true
+                uniqueRGValidation: true,
             },
             rg_responsavel: {
                 minlength: 6,
@@ -205,15 +206,15 @@ $(document).ready(function() {
                 maxlength: 15
             },
             cep: {
-                minlength: 10,
-                maxlength: 10
+                minlength: 9,
+                maxlength: 9
             },
             telefone:{
-                minlength: 8,
+                minlength: 6,
                 maxlength: 16
             },
             telefone_emergencia:{
-                minlength: 8,
+                minlength: 6,
                 maxlength: 16
             },
             nome_do_pai: {

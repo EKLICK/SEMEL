@@ -1,30 +1,29 @@
-var data = new Date;
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    yearRange: [1930, data.getFullYear()],
-    i18n: {
-        today: 'Hoje',
-        clear: 'Limpar',
-        cancel: 'Cancelar',
-        done: 'Ok',
-        nextMonth: 'Próximo mês',
-        previousMonth: 'Mês anterior',
-        weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-        weekdays: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
-        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-        months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    }
-});
+    var data = new Date;
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        yearRange: [1930, data.getFullYear()],
+        i18n: {
+            today: 'Hoje',
+            clear: 'Limpar',
+            cancel: 'Cancelar',
+            done: 'Ok',
+            nextMonth: 'Próximo mês',
+            previousMonth: 'Mês anterior',
+            weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            weekdays: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        },
+    });
 
-$('.timepicker').timepicker({
-    twelveHour: false,
-    i18n: {
-        cancel: 'Cancelar',
-        done: 'Ok',
-    }
-});
-
+    $('.timepicker').timepicker({
+        twelveHour: false,
+        i18n: {
+            cancel: 'Cancelar',
+            done: 'Ok',
+        },
+    });
 $(document).ready(function(){
     $('#employee_data').DataTable({
         "ordering": false,
@@ -83,8 +82,7 @@ function mCPF(cpf){
 
 function mCEP(cep){
     cep=cep.replace(/\D/g,"")
-    cep=cep.replace(/^(\d{2})(\d)/,"$1.$2")
-    cep=cep.replace(/\.(\d{3})(\d)/,".$1-$2")
+    cep=cep.replace(/^(\d{5})(\d)/,"$1-$2")
     return cep
 }
 
@@ -241,10 +239,7 @@ function change_bairro(){
         $('#div_bairro_list').hide(400);
         $('#div_bairro_string').show(400);
     }
-}
-
-function bairro_selected_enable(){
-    $('#bairro_selected').val('1');
+    $('#selectorbairrovalidation').val('');
 }
 
 $(document).keydown(function (event) {

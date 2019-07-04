@@ -41,21 +41,22 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m5">
+                        <input type="text" name="selectordatavalidation" id="selectordatavalidation" value="1" data-error=".errorTxt5" hidden>
                         <i class="material-icons prefix">date_range</i>&emsp;&emsp; Dias da semana <span style="color: red;">*</span>
-                        <select multiple name="data_semanal[]" id="lista_de_dias" data-error=".errorTxt5">
+                        <select multiple name="data_semanal[]" id="lista_de_dias">
                             @foreach ($dias_semana as $dia)
-                                <option value="{{$dia}}">{{$dia}}</option>
+                                <option value="{{$dia}}" @foreach($datas_escolhidas as $data_escolhida) @if($data_escolhida == $dia) selected @endif @endforeach>{{$dia}}</option>
                             @endforeach
                         </select>
                         <div class="input-field">
-                            <div class="errorTxt5"></div>
+                            <div class="errorTxt5" id="errorTxt5"></div>
                         </div>
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">filter_tilt_shift</i>&emsp;&emsp; Núcleos <span style="color: red;">*</span>
                         <select name="nucleo_id" id="lista_de_nucleos">
                             @foreach ($nucleoslist as $nucleo)
-                                <option value="{{$nucleo->id}}">{{$nucleo->nome}}</option>
+                                <option value="{{$nucleo->id}}" @if($turma->nucleo_id == $nucleo->id) selected @endif>{{$nucleo->nome}}</option>
                             @endforeach
                         </select>
                     </div>

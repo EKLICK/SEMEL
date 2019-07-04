@@ -22,8 +22,8 @@ $(document).ready(function() {
             },
             cep: {
                 required: true,
-                minlength: 10,
-                maxlength: 10
+                minlength: 9,
+                maxlength: 9
             },
             numero_endereco: {
                 required: true,
@@ -34,7 +34,7 @@ $(document).ready(function() {
             },
             telefone: {
                 required: true, 
-                minlength: 16,
+                minlength: 6,
                 maxlength: 16
             },
             descricao: {

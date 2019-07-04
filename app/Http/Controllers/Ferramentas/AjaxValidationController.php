@@ -137,13 +137,13 @@ class AjaxValidationController extends Controller{
         $dataForm = $request->all();
 
         //Encontra todos os registros de matricula de professor.
-        $listargprofessores = Professor::all('matricula');
-        
+        $listamatriculaprofessores = Professor::all('matricula');
+
         //Criar uma variavel para armazenar todas as matriculas encontradas.
         $listamatriculas = [];
 
         //Armazena todas as matriculas dos professores na variavel $listamatriculas.
-        foreach($listargprofessores as $email){
+        foreach($listamatriculaprofessores as $matricula){
             array_push($listamatriculas, $matricula['matricula']);
         }
         
@@ -155,7 +155,7 @@ class AjaxValidationController extends Controller{
             //Retira a matricula encontrado da lista de emails para não alertar que a matricula já foi registrado.
             unset($listamatriculas[array_search($id['matricula'], $listamatriculas)]);
         }
-        
+
         return response()->json(!in_array($dataForm['matricula'], $listamatriculas));
     }
 }

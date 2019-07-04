@@ -88,7 +88,7 @@ Route::post('/pessoas_turmas/ativar_inativar','PessoasController@pessoas_turmas_
 
 //CONTROLE DE PROFESSORES: |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //RotaS de professores: Utilizado para acessar controle padrão de professores.
-Route::resource('professor','ProfessorController')->middleware('AdministracaoEProfessor');
+Route::resource('professor','ProfessorController')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //Rota Professor_info: Utilizado para entrar na página de informações do professor (Página com acesso de professores).
 Route::get('/professors_info/{id}','ProfessorController@professor_info')->name('professor_info')->middleware('Authenticate');
@@ -215,17 +215,17 @@ Route::get('/pdf/nucleos/{array}','Ferramentas\PDFController@nucleos_pdf')->name
 //CONTROLE DE Validation com AJAX: |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 //AJAX DE CPF
-//Rota /cpf/ajax: Utilido para passar valor booleano se o CPF está registrado no sistema ou não.
+//Rota /cpf/ajax: Utilizado para passar valor booleano se o CPF está registrado no sistema ou não.
 Route::get('/cpf/ajax','Ferramentas\AjaxValidationController@cpfValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //AJAX DE RG
-//Rota /rg/ajax: Utilido para passar valor booleano se o RG está registrado no sistema ou não.
+//Rota /rg/ajax: Utilizado para passar valor booleano se o RG está registrado no sistema ou não.
 Route::get('/rg/ajax','Ferramentas\AjaxValidationController@rgValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //AJAX DE EMAIL
-//Rota /email/ajax: Utilido para passar valor booleano se o EMAIL está registrado no sistema ou não.
+//Rota /email/ajax: Utilizado para passar valor booleano se o EMAIL está registrado no sistema ou não.
 Route::get('/email/ajax','Ferramentas\AjaxValidationController@emailValidation')->middleware('AdministracaoEProfessor', 'Authenticate');
 
 //AJAX DE MATRICULA
-//Rota /matricula/ajax: Utilido para passar valor booleano se a Matricula está registrado no sistema ou não.
+//Rota /matricula/ajax: Utilizado para passar valor booleano se a Matricula está registrado no sistema ou não.
 Route::get('/matricula/ajax','Ferramentas\AjaxValidationController@matriculaValidation')->middleware('AdministracaoEProfessor', 'Authenticate');

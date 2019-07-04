@@ -64,7 +64,8 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
                         <label for="cpf_responsavel">CPF do responsavel:</label>
-                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" type="text" maxlength="14">
+                        <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" data-error=".tee" type="text" maxlength="14">
+                        <div class="tee" id="tee"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -112,7 +113,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
                         <label for="cep">CEP:</label>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" maxlength="10">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" maxlength="9">
                     </div>
                 </div>
                 <div class="row">
@@ -258,7 +259,7 @@
                         </p>
                         <p>
                             <label>
-                                <input value="Viuva(o)" name="estado_civil" type="radio"/>
+                                <input value="Viuvo(a)" name="estado_civil" type="radio"/>
                                 <span>Viuvo(a)</span>
                             </label>
                         </p>

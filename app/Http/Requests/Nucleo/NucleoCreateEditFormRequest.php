@@ -23,10 +23,10 @@ class NucleoCreateEditFormRequest extends FormRequest{
     public function rules(){
         return [
             'nome'                  => 'required|string|between:3,100',
-            'bairro'                => 'required|regex:/^[A-Za-z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',
+            'bairro'                => 'required',
             'rua'                   => 'required',
             'numero_endereco'       => 'required',
-            'cep'                   => 'required|max:10|min:10',
+            'cep'                   => 'required|max:9|min:9',
             'descricao'             => 'sometimes|nullable|between:5,100',
         ];
     }

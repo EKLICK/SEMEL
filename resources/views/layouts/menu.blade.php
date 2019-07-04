@@ -48,7 +48,7 @@
     </div>
 </li>
 @if(isset(auth()->user()->id))
-    @can('autorizacao', 3)
+    @can('autorizacao', 2)
         <li>
             <div class="collapsible-header"><i class="material-icons">art_track</i>Turmas</div>
             <div class="collapsible-body white">

@@ -15,8 +15,6 @@ class Authenticate extends Middleware{
 
     protected function redirectTo($request){
         if (!$request->expectsJson()) {
-            Session::put('expirado', 'Sessão expirada!');
-
             return route('login');
         }
     }

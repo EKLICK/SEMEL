@@ -40,7 +40,7 @@
                         <a  onclick="change_bairro()" class="waves-effect waves-light btn-floating right" style="margin-top: -10%; background-color: #039be5;"><i class="material-icons">cached</i></a>
                         <div id="div_bairro_list" @if($professor->bairro != null) hidden @endif>
                             <i class="material-icons prefix">location_city</i>&emsp;&emsp; Bairros <span style="color: red;">*</span>
-                            <select name="bairro" onchange="change_bairro_select()" id="bairro_select">
+                            <select name="bairro" id="bairro_select">
                                 <option value="" selected disabled>Selecione o bairro</option>
                                 @foreach ($bairroslist as $bairro)
                                     <option value="{{$bairro}}">{{$bairro}}</option>
@@ -52,6 +52,7 @@
                             <label for="string_bairro">Bairro: <span style="color: red;">*</span></label>
                             <input id="string_bairro" name="string_bairro" type="text" value="{{$professor->bairro}}" maxlength="70">
                         </div>
+                        <input type="text" name="selectorbairrovalidation" id="selectorbairrovalidation" value='1' hidden>
                     </div>
                 </div>
                 <div class="row">
@@ -63,7 +64,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
                         <label for="cep">CEP: <span style="color: red;">*</span></label>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" value="{{$professor->cep}}" maxlength="10">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" value="{{$professor->cep}}" maxlength="9">
                     </div>
                 </div>
                 <div class="row">

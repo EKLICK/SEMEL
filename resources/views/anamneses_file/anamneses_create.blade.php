@@ -10,7 +10,7 @@
     @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
-            <form class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">
+            <form id="formulario" class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="pessoas_id" value="{{$pessoa->id}}" hidden>
                 <div class="row">

@@ -4,10 +4,15 @@ $.validator.setDefaults({
 
 $(document).ready(function() {
     $('input[type=radio][name=inativo]').change(function() {
-        $('#errorTxt6').hide();
+        $('#errorTxt7').hide();
         $('#radiovalidation').val('1');
     });
 
+    $('#bairro_select').change(function() {
+        $('#errorTxt2').hide();
+        $('#selectorvalidation').val('1');
+    })
+    
     $('#formulario').validate({
         rules: {
             nome: {
@@ -15,7 +20,9 @@ $(document).ready(function() {
                 minlength: 5,
                 maxlength: 100
             },
-            bairro: "required",
+            selectorvalidation: {
+                required: true
+            },
             rua: {
                 required: true,
                 minlength: 5,
@@ -23,8 +30,8 @@ $(document).ready(function() {
             },
             cep: {
                 required: true,
-                minlength: 10,
-                maxlength: 10
+                minlength: 9,
+                maxlength: 9
             },
             numero_endereco: {
                 required: true,
@@ -35,7 +42,7 @@ $(document).ready(function() {
             },
             telefone: {
                 required: true, 
-                minlength: 16,
+                minlength: 6,
                 maxlength: 16
             },
             descricao: {

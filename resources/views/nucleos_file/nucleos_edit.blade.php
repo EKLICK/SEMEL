@@ -41,7 +41,7 @@
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">explore</i>
                         <label for="icon_cep">CEP: <span style="color: red;">*</span></label>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" value="{{$nucleo->cep}}" data-error=".errorTxt4" maxlength="10">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" value="{{$nucleo->cep}}" data-error=".errorTxt4" maxlength="9">
                         <div class="errorTxt4"></div>
                     </div>
                 </div>

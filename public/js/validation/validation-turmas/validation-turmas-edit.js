@@ -13,10 +13,35 @@ jQuery.validator.addMethod("timeValidationFinal", function(value, element){
 }, "Tempo definido inválido")
 
 $(document).ready(function() {
-    $('input[type=radio][name=inativo]').change(function() {
-        $('#errorTxt7').hide();
-        $('#radiovalidation').val('1');
-    });
+    $('#lista_de_dias').change(function() {
+        if($("#lista_de_dias :selected").val() != null){
+            $('#errorTxt5').hide();
+            $('#selectordatavalidation').val('1');
+        }
+        else{
+            $('#errorTxt5').show();
+            $('#selectordatavalidation').val('');
+        }
+    })
+
+    $('#icon_horario_inicial').change(function() {
+        if(this.value == ''){
+            $('#errorTxt3').show();
+        }
+        else{
+            $('#errorTxt3').hide();
+        }
+    })
+
+    $('#icon_horario_final').change(function() {
+
+        if(this.value == ''){
+            $('#errorTxt4').show();
+        }
+        else{
+            $('#errorTxt4').hide();
+        }
+    })
 
     $('#formulario').validate({
         rules: {
@@ -29,7 +54,6 @@ $(document).ready(function() {
                 required: true,
                 number: true
             },
-            
             horario_inicial: {
                 required: true,
                 timeValidationInicial: true
@@ -38,7 +62,7 @@ $(document).ready(function() {
                 required: true,
                 timeValidationFinal: true
             },
-            'data_semanal[]': 'required',
+            selectordatavalidation: 'required',
         },
         errorElement : 'div',
         errorPlacement: function(error, element){

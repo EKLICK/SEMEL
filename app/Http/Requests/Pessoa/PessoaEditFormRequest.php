@@ -34,7 +34,7 @@ class PessoaEditFormRequest extends FormRequest{
             'rua'                   => 'sometimes|nullable',
             'numero_endereco'       => 'sometimes|nullable|digits_between:0,15',
             'bairro'                => 'sometimes|nullable',
-            'cep'                   => 'sometimes|nullable||max:10|min:10',
+            'cep'                   => 'sometimes|nullable||max:9|min:9',
             'telefone'              => 'sometimes|nullable|max:16|min:8',
             'telefone_emergencia'   => 'sometimes|nullable|max:16|min:8',
             'nome_do_pai'           => 'sometimes|nullable|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,100',

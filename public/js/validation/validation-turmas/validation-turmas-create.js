@@ -18,6 +18,41 @@ $(document).ready(function() {
         $('#radiovalidation').val('1');
     });
 
+    $('#lista_de_dias').change(function() {
+        if($("#lista_de_dias :selected").val() != null){
+            $('#errorTxt5').hide();
+            $('#selectordatavalidation').val('1');
+        }
+        else{
+            $('#errorTxt5').show();
+            $('#selectordatavalidation').val('');
+        }
+    })
+
+    $('#lista_de_nucleos').change(function() {
+        $('#errorTxt6').hide();
+        $('#selectornucleosvalidation').val('1');
+    })
+
+    $('#icon_horario_inicial').change(function() {
+        if(this.value == ''){
+            $('#errorTxt3').show();
+        }
+        else{
+            $('#errorTxt3').hide();
+        }
+    })
+
+    $('#icon_horario_final').change(function() {
+
+        if(this.value == ''){
+            $('#errorTxt4').show();
+        }
+        else{
+            $('#errorTxt4').hide();
+        }
+    })
+
     $('#formulario').validate({
         rules: {
             nome: {
@@ -37,8 +72,8 @@ $(document).ready(function() {
                 required: true,
                 timeValidationFinal: true
             },
-            'data_semanal[]': 'required',
-            nucleo_id: 'required',
+            selectordatavalidation: 'required',
+            selectornucleosvalidation: 'required',
             radiovalidation: 'required'
         },
         errorElement : 'div',

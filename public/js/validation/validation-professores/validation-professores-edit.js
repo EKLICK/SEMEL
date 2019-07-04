@@ -12,12 +12,20 @@ jQuery.validator.addMethod("nascimentoValidation", function(value, element){
     return regex.test($('#nascimento').val());
 }, "Data de nascimento inválida")
 
-jQuery.validator.addMethod("bairroValidation", function(value, element){
-    if($('#bairro_select').is(':selected') || $('#string_bairro').val() != ''){
-        return true
-    }
-    return false
-}, "Este campo é requerido")
+jQuery.validator.addMethod("uniqueMatriculaValidation", function(value, element){
+    var matricula = $('#matricula').val();
+    var valor;
+    $.ajax({
+        async: false,
+        type: "GET",
+        url:'/matricula/ajax',
+        dataType: 'json',
+        data: {matricula: matricula}
+    }).done(function (data){
+        valor = data;
+    })
+    return valor;
+}, "Matricula já regitrado no sistema.")
 
 jQuery.validator.addMethod("uniqueEmailValidation", function(value, element){
     var email = $('#email').val();
@@ -94,6 +102,34 @@ jQuery.validator.addMethod("uniqueRGValidation", function(value, element){
 }, "RG já regitrado no sistema.")
 
 $(document).ready(function(){
+    $('#nascimento').change(function() {
+        if(this.value == ''){
+            $('#nascimento-error').show();
+        }
+        else{
+            $('#nascimento-error').hide();
+        }
+    })
+
+    $('#bairro_select').change(function() {
+        validatadeSelectorBairro(this.value)
+    })
+
+    $('#string_bairro').keyup(function() {
+        validatadeSelectorBairro(this.value)
+    })
+
+    function validatadeSelectorBairro(valor){
+        if(valor != ''){
+            $('#selectorbairrovalidation-error').hide();
+            $('#selectorbairrovalidation').val('1');
+        }
+        else{
+            $('#selectorbairrovalidation-error6').show();
+            $('#selectorbairrovalidation').val('');
+        }
+    }
+
     $("#formulario").validate({
         rules: {
             nome: {
@@ -106,17 +142,17 @@ $(document).ready(function(){
                 required: true,
                 nascimentoValidation: true
             },
-            matricula: 'required',
-            cidade: 'required',
-            bairro: {
-                maxlength: 100,
-                bairroValidation: true
+            matricula: {
+                required: true,
+                uniqueMatriculaValidation: true
             },
+            cidade: 'required',
+            selectorbairrovalidation: 'required',
             rua: 'required',
             cep: {
                 required: true,
-                minlength: 10,
-                maxlength: 10,
+                minlength: 9,
+                maxlength: 9,
             },
             numero_endereco: {
                 minlength: 0,
@@ -125,7 +161,7 @@ $(document).ready(function(){
             },
             telefone: {
                 minlength: 6,
-                maxlength: 18,
+                maxlength: 16,
                 required: true,
             },
             email: {
@@ -160,8 +196,12 @@ $(document).ready(function(){
                 maxlength: 255
             },
             name: 'required',
-            password: 'required',
+            password: {
+                required: true,
+                minlength: 5
+            },
             confirm_password: {
+                minlength: 5,
                 required: true,
                 equalTo: 'password'
             }

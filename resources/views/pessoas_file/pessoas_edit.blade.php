@@ -114,7 +114,7 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">explore</i>
                         <label for="cep">CEP:</label>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" value="{{$pessoa->cep}}" maxlength="10">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="cep" type="text" value="{{$pessoa->cep}}" maxlength="9">
                     </div>
                 </div>
                 <div class="row">

@@ -6,6 +6,16 @@
 @endsection
 @section('title') Criar núcleo @endsection
 @section('content')
+@if(isset($errors) && count($errors) > 0)
+    @foreach($errors->all() as $error)
+        <div style="margin-left: 15%; margin-top: 1%;">
+            <div class="chip red lighten-2">
+                {{$error}}
+                <i class="close material-icons">close</i>
+            </div>
+        </div>
+    @endforeach
+@endif
     <div class="container">
         <div class="row">
             <form id="formulario" class="col s12" action="{{route('nucleos.store')}}" method="post">
@@ -20,15 +30,16 @@
                         <div class="errorTxt1"></div>
                     </div>
                     <div class="col s11 m5">
+                        <input type="text" name="selectorvalidation" id="selectorvalidation" data-error=".errorTxt2" hidden>
                         <i class="material-icons prefix">location_city</i>&emsp; Bairros <span style="color: red;">*</span>
-                        <select name="bairro" id="bairro_select" data-error=".errorTxt2">
+                        <select name="bairro" id="bairro_select">
                             <option value="" disabled selected>Selecione o bairro</option>
                             @foreach ($bairroslist as $bairro)
                                 <option value="{{$bairro}}">{{$bairro}}</option>
                             @endforeach
                         </select>
                         <div class="input-field">
-                            <div class="errorTxt2"></div>
+                            <div class="errorTxt2" id="errorTxt2"></div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +53,7 @@
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">explore</i>
                         <label for="icon_cep">CEP: <span style="color: red;">*</span></label>
-                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" data-error=".errorTxt4" maxlength="10">
+                        <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text" data-error=".errorTxt4" maxlength="9">
                         <div class="errorTxt4"></div>
                     </div>
                 </div>
@@ -75,7 +86,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s11 m5 xl3">
+                    <div class="input-field col s11 m5 xl4">
                         <input type="text" name="radiovalidation" id="radiovalidation" data-error=".errorTxt7" hidden>
                         <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Núcleo ativo | inativo: <span style="color: red;">*</span>
                         <div style="margin-left: 30%;">

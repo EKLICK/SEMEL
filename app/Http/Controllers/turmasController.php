@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 //REQUESTS PARA CONTROLE:
-use App\Http\Requests\Turma\TurmaEditFormRequest;
 use App\Http\Requests\Turma\TurmaCreateFormRequest;
+use App\Http\Requests\Turma\TurmaEditFormRequest;
 use App\Http\Requests\Turma\TurmaProcurarFormRequest;
 
 //MODELOS PARA CONTROLE:
@@ -142,7 +142,7 @@ class TurmasController extends Controller{
         //Separa dias da semana da turma e atribui na variavel $datas_escolhidas e retida o ultima array em branco.
         $datas_escolhidas = explode(',', $turma['data_semanal']);
         unset($datas_escolhidas[count($datas_escolhidas) - 1]);
-
+        
         return view ('turmas_file.turmas_edit', compact('turma', 'nucleoslist', 'dias_semana', 'datas_escolhidas'));
     }
 

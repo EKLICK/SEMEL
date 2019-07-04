@@ -29,7 +29,7 @@ class ProfessorCreateFormRequest extends FormRequest{
             'string_bairro'            => 'required_without:bairro','max:100',
             'rua'                      => 'required',
             'numero_endereco'          => 'required|digits_between:0,15',
-            'cep'                      => 'required|max:10|min:10',
+            'cep'                      => 'required|max:9|min:9',
             'telefone'                 => 'required|max:16|min:8',
             'email'                    => 'required|string|email|max:255|unique:users',
             'cpf'                      => 'required|cpf|max:14|min:14|unique:pessoas|unique:professores|',

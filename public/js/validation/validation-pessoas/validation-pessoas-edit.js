@@ -139,9 +139,10 @@ $(document).ready(function() {
                 uniqueCPFValidation: true,
                 cpf: true
             },
-            cpf_resposavel: {
+            cpf_responsavel: {
                 minlength: 14,
                 maxlength: 14,
+                cpf: true
             },
             rg: {
                 minlength: 6,
@@ -155,12 +156,12 @@ $(document).ready(function() {
                 ruaValidation: true
             },
             numero_endereco: {
-                minlength: 0,
-                maxlength: 15
+                minlength: 6,
+                maxlength: 16
             },
             cep: {
-                minlength: 10,
-                maxlength: 10
+                minlength: 9,
+                maxlength: 9
             },
             telefone:{
                 minlength: 8,
