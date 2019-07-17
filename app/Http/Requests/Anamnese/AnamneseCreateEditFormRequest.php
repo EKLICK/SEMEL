@@ -30,7 +30,7 @@ class AnamneseCreateEditFormRequest extends FormRequest{
             'dor_muscular'          => ['required', Rule::in(['1', '2']),],
             'dor_articular'         => ['required', Rule::in(['1', '2']),],
             'doencas_id'            => 'sometimes|nullable|integer|exists:doencas,id',
-            'atestado'              => ['required','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
+            'atestado'              => ['required','nullable','regex:/\.((pdf))+$/'],
         ];
     }
 
@@ -39,7 +39,7 @@ class AnamneseCreateEditFormRequest extends FormRequest{
             'atestado.required' => 'É necessario atestado para completar a anamnese',
             'toma_medicacao.required' => 'É necessário responder se a pessoa toma algum medicamento',
             'alergia_medicacao.required' => 'É necessário responder se a pessoa tem alergia á algum medicamento',
-            'fumante.required' => 'É necessário responder a pessoa fuma',
+            'fumante.required' => 'É necessário responder se a pessoa fuma',
             'cirurgia.required' => 'É necessário responder se a pessoa já fez cirurgia',
             'dor_ossea.required' => 'É necessário responder se a pessoa possui dor óssea',
             'dor_muscular.required' => 'É necessário responder se a pessoa possui dor muscular',

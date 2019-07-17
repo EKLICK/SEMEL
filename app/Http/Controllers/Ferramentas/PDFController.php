@@ -73,7 +73,7 @@ class PDFController extends Controller{
         //Transforma a string passada para um array de ids.
         $list = $this->returnIds($list);
 
-        //Se algum id que esta na lista de ids, porém não foi passado pelo formulario, será anulado no relatório.
+        //Se algum id que esta na lista de ids, porém não foi passado pelo formulário, será anulado no relatório.
         foreach($list as $id){
             if(!isset($dataForm[$id])){
                 $key = array_search($id, $list);

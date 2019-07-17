@@ -35,11 +35,11 @@ class PessoasController extends Controller{
      */
 
     //FUNÇÃO DE FERRAMENTAS:
-    //Ferramenta saveDbImage3x4: Salva a imagem 3 por 4 vindo das requisições do formulario.
+    //Ferramenta saveDbImage3x4: Salva a imagem 3 por 4 vindo das requisições do formulário.
     public function saveDbImage3x4($req, $op){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y_m_d_H.i.s_u');
+        $num = date('Y_m_d_H.i.s');
         $dir = "img/img_3x4";
         $ex = '.png';
         if($op == 1){
@@ -59,29 +59,29 @@ class PessoasController extends Controller{
         }
     }
 
-    //Ferramenta saveDbImageMatricula: Salva a imagem de matricula vindo das requisições do formulario.
+    //Ferramenta saveDbImageMatricula: Salva o pdf de matricula vindo das requisições do formulário.
     public function saveDbImageMatricula($req){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y_m_d_H.i.s_u');
+        $num = date('Y_m_d_H.i.s');
         $dir = "img/img_matricula";
         $imagem = $req->file('img_matricula');
         $ex = $imagem->guessClientExtension();
-        $nomeImagem = "imagem_".$num.".".$ex;
+        $nomeImagem = "pdf_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_matricula'] = $dir."/".$nomeImagem;
         return $data['img_matricula'];
     }
 
-    //Ferramenta saveDbImageMatricula: Salva a imagem de atestado vindo das requisições do formulario.
+    //Ferramenta saveDbImageMatricula: Salva o pdf de atestado vindo das requisições do formulário.
     public function saveDbImageAtestado($req){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
-        $num = date('Y_m_d_H.i.s_u');
+        $num = date('Y_m_d_H.i.s');
         $dir = "img/img_atestado";
         $imagem = $req->file('img_atestado');
         $ex = $imagem->guessClientExtension();
-        $nomeImagem = "imagem_".$num.".".$ex;
+        $nomeImagem = "pdf_".$num.".".$ex;
         $imagem->move($dir, $nomeImagem);
         $data['img_estado'] = $dir."/".$nomeImagem;
         return $data['img_estado'];
@@ -115,17 +115,16 @@ class PessoasController extends Controller{
         return 1;
     }
 
-    //Ferramenta mostrar_nascimento: retornar a data de nascimento (YYYY-mm-dd) convertida em idade e (dd/mm/YYYY).
-    public function mostrar_nascimento($data, $opcao){
+    //Ferramenta mostrar_data: retornar a data (YYYY-mm-dd) convertida em idade e (dd/mm/YYYY).
+    public function mostrar_data($data, $opcao){
         $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-        $dia_hora = explode(' ', $data);
-        list($ano, $mes, $dia) = explode('-', $dia_hora[0]);
+        list($ano, $mes, $dia) = explode('-', $data);
 
         //Caso 1: Converte de YYYY-mm-dd para idade.
         //Caso 2: Converte de idade para dd/mm/YYYY.
         if($opcao == 1){
             $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-            $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);;
+            $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
         }
         else{
             $data = $dia.'/'.$mes.'/'.$ano;
@@ -142,7 +141,7 @@ class PessoasController extends Controller{
         $pessoaslist = Pessoa::orderBy('nome')->get();
         foreach($pessoaslist as $pessoa){
             //Converter YYYY-mm-dd para idade.
-           $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 1);
+           $pessoa['nascimento'] = $this->mostrar_data($pessoa['nascimento'], 1);
         }
 
         $turmaslist = Turma::orderBy('nome')->get();
@@ -166,10 +165,10 @@ class PessoasController extends Controller{
         $doencaslist = Doenca::orderBy('nome')->get();
         
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
                         
         return view ('pessoas_file.pessoas_create', compact('doencaslist','bairroslist'));
     }
@@ -268,7 +267,7 @@ class PessoasController extends Controller{
             'mora_com_os_pais' => $dataForm['mora_com_os_pais'],
             'matricula' => $dataForm['img_matricula'],
             'estado' => $estado,
-            'morte' => -1,
+            'morte' => null,
         ]);
 
         //Verifica atributos de anamnese,
@@ -305,7 +304,7 @@ class PessoasController extends Controller{
             'pessoas_id' => $pessoa->id,
         ]);
         
-        //Vincula doenças na anamnese se elas foram informadas no formulario.
+        //Vincula doenças na anamnese se elas foram informadas no formulário.
         if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
 
         //Define sessões de informação para apresentação na página.
@@ -338,16 +337,19 @@ class PessoasController extends Controller{
         $pessoa = Pessoa::find($id);
 
         //Converter YYYY-mm-dd para dd/mm/YYYY.
-        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+        $pessoa['nascimento'] = $this->mostrar_data($pessoa['nascimento'], 2);
+        if($pessoa['morte'] != null){
+            $pessoa['morte'] = $this->mostrar_data($pessoa['morte'], 2);
+        }
 
         //Encontra todos os registros de doenças.
         $doencaslist = Doenca::orderBy('nome')->get();
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
         
         return view ('pessoas_file.pessoas_edit', compact('doencaslist','bairroslist','pessoa'));
     }
@@ -367,7 +369,7 @@ class PessoasController extends Controller{
         //Encontra a pessoa no banco de dados.
         $pessoa = Pessoa::find($id);
 
-        //Verifica se a imagem 3 por 4 por arquivo foi passada pelo formulario.
+        //Verifica se a imagem 3 por 4 por arquivo foi passada pelo formulário.
         if(isset($dataForm['img_3x4'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
@@ -382,7 +384,7 @@ class PessoasController extends Controller{
             $dataForm += ['img_3x4' => null];
         }
 
-        //Verifica se a imagem 3 por 4 por webcam foi passada pelo formulario.
+        //Verifica se a imagem 3 por 4 por webcam foi passada pelo formulário.
         if(isset($dataForm['foto_web'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($pessoa['foto'])){unlink($pessoa['foto']);}
@@ -404,26 +406,43 @@ class PessoasController extends Controller{
             $dataForm['rg_responsavel'] = null;
         }
         else{
-            //Verifica se a imagem de matricula foi passada pelo formulario.
-            if(isset($dataForm['img_matricula'])){
-                //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
-                if(!empty($pessoa['matricula'])){unlink($pessoa['matricula']);}
-                $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
-            }
-            elseif(isset($pessoa['matricula'])){
-                //Se a imagem não foi passada, porém permanece com o link antigo, apenas repeto o valor que está no banco de dados para criação
-                $dataForm += ['img_matricula' => $pessoa['matricula']];
+            //Verifica se a imagem de matricula foi passada pelo formulário.
+            if(isset($dataForm['matricula'])){
+                if($pessoa['matricula'] == $dataForm['matricula']){
+                    //Se o pdf não foi passada, porém permanece com o link antigo, apenas repete o valor que está no banco de dados para criação
+                    $dataForm += ['img_matricula' => $pessoa['matricula']];
+                }
+                else{
+                    //Se sim, remove imagem antiga e salva o pdf novo no banco de dados.
+                    if(!empty($pessoa['matricula'])){unlink($pessoa['matricula']);}
+                    $dataForm['img_matricula'] = $this->saveDbImageMatricula($request);
+                }
             }
             else{
-                //Se não, atribuir nulo e deleta a imagem.
+                //Atribui o valor 'img_matricula' para null.
                 $dataForm += ['img_matricula' => null];
+
+                //Verifica de a pessoa não possui uma matricula registrada.
+                if($pessoa['matricula'] != null){
+                    //Se não, atribuir nulo e deleta o pdf.
+                    unlink($pessoa['matricula']);
+                }
             }
         }
         //checar se convenio médico foi marcado.
         if($dataForm['convenio_medico'] == 2){$dataForm['string_convenio_medico'] = -1;}
 
         //checar se falecimento da pessoa foi marcada.
-        if($dataForm['morte'] == 2){$dataForm['string_morte'] = -1;}
+        if($dataForm['morte'] == 2){
+            $dataForm['string_morte'] = null;
+        }
+        else{
+            if($dataForm['string_morte'] != ''){
+                //Converte a data de falecimento dd/mm/YY para YY-mm-dd
+                $falecimento = explode('/', $dataForm['string_morte']);
+                $dataForm['string_morte'] = $falecimento[2].'-'.$falecimento[1].'-'.$falecimento[0];
+            }
+        }
 
         //Verifica se foi informado bairro, se não, seta como nulo.
         if(!isset($dataForm['bairro'])){$dataForm['bairro'] = null;}
@@ -500,13 +519,16 @@ class PessoasController extends Controller{
         $pessoa = Pessoa::find($id);
 
         //Atribui idade da pessoa a variavel $idade utilizando função de conversão.
-        $idade = $this->mostrar_nascimento($pessoa->nascimento, 1);
+        $idade = $this->mostrar_data($pessoa->nascimento, 1);
 
         //Encontra a ultima anamnese da pessoa no banco de dados.
         $anamnese = $pessoa->anamneses->last();
 
         //Converter YYYY-mm-dd para dd/mm/YYYY.
-        $pessoa['nascimento'] = $this->mostrar_nascimento($pessoa['nascimento'], 2);
+        $pessoa['nascimento'] = $this->mostrar_data($pessoa['nascimento'], 2);
+        if($pessoa['morte'] != null){
+            $pessoa['morte'] = $this->mostrar_data($pessoa['morte'], 2);
+        }
 
         //Seleciona todo o histórico da pessoa encontrada.
         $histpessoa = HistoricoPT::orderBy('created_at', 'desc')->where('pessoa_id', '=', $pessoa->id)->get();

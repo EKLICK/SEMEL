@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider{
@@ -22,7 +23,6 @@ class AuthServiceProvider extends ServiceProvider{
      */
     public function boot(){
         $this->registerPolicies();
-
         Gate::define('autorizacao', function($id_usuario, $permissao){
             if($permissao - $id_usuario->permissao >= 0){
                 return true;

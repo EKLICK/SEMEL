@@ -2,6 +2,15 @@ $.validator.setDefaults({
     ignore: []
 });
 
+jQuery.validator.addMethod("fileValidation", function(value, element){
+    if($('#atestado').val() == ''){
+        return false
+    }
+    else{
+        return true
+    }
+}, "Este campo é requerido.")
+
 $(document).ready(function() {
     $("#atestado").change(function(){
         $("#atestado").delay(100);
@@ -12,7 +21,9 @@ $(document).ready(function() {
 
     $('#formulario').validate({
         rules: {
-            atestado: 'required',
+            img_atestado: {
+                fileValidation: true,
+            },
         },
         errorElement : 'div',
         errorPlacement: function(error, element){

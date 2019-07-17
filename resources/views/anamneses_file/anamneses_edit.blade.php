@@ -187,7 +187,7 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l7 xl5">
                         <div class="file-field input-field">
-                            <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
+                            <p>Atestado médico (.pdf):  <span style="color: red;">*</span></p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
                                 <input onchange="change_img_atestado()" id="img_atestado" type="file" name="img_atestado">
@@ -201,9 +201,6 @@
                                 <div class="errorTxt9" id="errorTxt9"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12 m12 xl6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed imagensparafoto" src="@if(!is_null($anamnese->atestado)) {{asset($anamnese->atestado)}} @else {{asset('/img/unset_image_atestado.png')}} @endif">
                     </div>
                 </div>
                 <div class="row">

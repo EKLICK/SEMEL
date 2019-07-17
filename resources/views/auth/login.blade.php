@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="container">
+        <div class="container"w>
             <br><br>
             <form action="{{route('login')}}" method="post">
                 @csrf
-                <div class="card">
-                    <div class="row card-action light-blue darken-1">
+                <div class="card" style="border-radius: 25px;">
+                    <div class="row card-action light-blue darken-1" style="border-radius: 25px;">
                         <div class="col s5">
                             <h3 style="color: white;"><b>Fazer Login</b></h3>
                         </div>

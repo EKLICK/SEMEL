@@ -80,7 +80,7 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Telefone de emergencia</b></h5></td>
+                        <h5><b>Telefone de emergência</b></h5></td>
                     </div>
                     <div class="input-field col s1">
                         <i class="material-icons prefix" style="color:red;">cancel</i>

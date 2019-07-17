@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s10 xl4">
+                                <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">location_city</i>&emsp;&emsp;&emsp;Bairros
                                     <select name="bairro">
                                         <option value="" selected disabled>Selecione o núcleo</option>
@@ -50,19 +50,19 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-field col s10 xl3">
+                                <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">confirmation_number</i>
                                     <input name="rua" id="icon_rua" type="text">
                                     <label for="icon_rua">Rua:</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s10 xl4">
+                                <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">location_on</i>
                                     <input name="numero_endereco" id="icon_numero_endereco" type="number">
                                     <label for="icon_numero_endereco">Numero de endereço:</label>
                                 </div>
-                                <div class="input-field col s10 xl3">
+                                <div class="input-field col s10 xl5">
                                     <i class="material-icons prefix">location_city</i>
                                     <input onkeydown="javascript: fMasc(this, mCEP)" name="cep" id="icon_cep" type="text">
                                     <label for="icon_cep">CEP:</label>

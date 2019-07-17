@@ -24,8 +24,4 @@ class Pessoa extends model implements Auditable{
     public function anamneses(){
         return $this->hasMany(Anamnese::class, 'pessoas_id');
     }
-
-    public function bairro(){
-        return $this->BelongsTo(Bairro::class);
-    }
 }

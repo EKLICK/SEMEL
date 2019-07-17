@@ -156,7 +156,7 @@ class RegisterController extends Controller{
         //Verifica se o usuário editado é professor.
         if($user->permissao == 4){
             //Se sim, muda o parametro de email no professor para o informado.
-            $professor = Professor::where('user_id', '=', $id)->get()->last();
+            $professor = Professor::where('user_id', '=', $dataForm['id'])->get()->last();
             $professor->update(['email' => $dataForm['email']]);
         }
         
@@ -167,11 +167,11 @@ class RegisterController extends Controller{
     protected function destroy(Request $request){
         $dataForm = $request->all();
 
-        //Verifica se o usuário a ser deletado possui o tipo diferente de 1
-        if($dataForm['permissao'] != 1){
-            //Se sim, encontra o usuário no banco de dados.
-            $user = User::find($dataForm['id']);
+        //Encontra o usuário no banco de dados.
+        $user = User::find($dataForm['id']);
 
+        //Verifica se o usuário a ser deletado possui o tipo diferente de 1
+        if($user['permissao'] != 1){
             //Deleta o usuário
             $user->delete();
 
@@ -186,10 +186,11 @@ class RegisterController extends Controller{
     protected function restore(Request $request){
         $dataForm = $request->all();
 
+        //Encontra o usuário no banco de dados.
+        $user = User::withTrashed()->find($dataForm['id']);
+
         //Verifica se o usuário a ser restaurado possui o tipo diferente de 1
-        if($dataForm['permissao'] != 1){
-            //Se sim, encontra o usuário no banco de dados.
-            $user = User::withTrashed()->find($dataForm['id']);
+        if($user['permissao'] != 1){
             if($user['deleted_at'] != null){
                 //Deleta o usuário
                 $user->restore();
@@ -214,8 +215,13 @@ class RegisterController extends Controller{
     protected function reset(Request $request){
         $dataForm = $request->all();
         
-        //Encontra o usuário 1 no banco de dados.
-        $user = User::find(1);
+        //Encontra o usuário secretario ativo ou o administrador mestre no banco de dados.
+        if(auth()->user()->can('autorizacao', 1)){
+            $user = User::where('permissao', '=', 1)->where('deleted_at', '=', null)->get()->last();
+        }
+        else{
+            $user = User::where('permissao', '=', 2)->where('deleted_at', '=', null)->get()->last();
+        }
 
         //Verifica se o usuário possui os parametros corretos para a utilização da ferramenta.
         if((Hash::check($dataForm['password'], $user['password'])) && ($user->name == $dataForm['name'])){

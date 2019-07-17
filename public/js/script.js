@@ -100,13 +100,11 @@ function apagar_3_4(){
 }
 
 function apagar_matricula(){
-    document.getElementById('matricula_image').src = '../../../../img/unset_image_matricula.png';
     document.getElementById('img_matricula').value = '';
     document.getElementById('matricula').value = '';
 }
 
 function apagar_atestado(){
-    document.getElementById('atestado_image').src = '../../../../img/unset_image_atestado.png';
     document.getElementById('img_atestado').value = '';
     document.getElementById('atestado').value = '';
     $('#errorTxt9').show();
@@ -119,7 +117,7 @@ function apagar_web(){
 
 function change_img_3x4(){
     string = document.getElementById("img_3x4").value.split('.');
-    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
+    if(string[string.length-1] == 'pdf' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
         var reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById("3x4_image").src = e.target.result;
@@ -135,36 +133,19 @@ function change_img_3x4(){
 
 function change_img_matricula(){
     string = document.getElementById("img_matricula").value.split('.');
-    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById("matricula_image").src = e.target.result;
-        };
-        
-        reader.readAsDataURL(document.getElementById("img_matricula").files[0]);
-    }
-    else{
+    if(string[string.length-1] != 'pdf'){
         apagar_matricula();
-        alert('Ocorreu um erro no upload da imagem, por favor tente novamente!')
+        alert('Arquivo de matricula inválido.')
     }
 };
 
 function change_img_atestado(){
     string = document.getElementById("img_atestado").value.split('.');
-    if(string[string.length-1] == 'img' || string[string.length-1] == 'jpg' || string[string.length-1] == 'png'){
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById("atestado_image").src = e.target.result;
-        };
-        
-        reader.readAsDataURL(document.getElementById("img_atestado").files[0]);
-    }
-    else{
+    if(string[string.length-1] != 'pdf'){
         apagar_atestado();
-        alert('Ocorreu um erro no upload da imagem, por favor tente novamente!')
+        alert('Arquivo de atestado inválido.')
     }
 };
-
 
 //EDIÇÃO E CRIAÇÃO DE ANAMNESES
 function convenio_medico_click(valor){
@@ -203,6 +184,24 @@ function fumante_click(valor){
     change(valor, $('#string_fumante'), $('#fumante_label'), $('#fumante_icon'));
 }
 
+//FILTRO DE FALECIDOS NA PÁGINA DE LISTA DE PESSOAS
+function falecido_click(valor){
+    if(valor == 'N'){
+        $('#falecimento_icon').hide(400);
+        $('#falecimento_label_de').hide(400);
+        $('#de_fal_search').hide(400);
+        $('#falecimento_label_ate').hide(400);
+        $('#ate_fal_search').hide(400);
+    }
+    else{
+        $('#falecimento_icon').show(400);
+        $('#falecimento_label_de').show(400);
+        $('#de_fal_search').show(400);
+        $('#falecimento_label_ate').show(400);
+        $('#ate_fal_search').show(400);
+    }
+}
+
 function change(a,b,c,d){
     if(a == 'N'){
         b.hide(400);
@@ -224,10 +223,10 @@ function change_bairro(){
         $('#string_bairro').val('');
         $('#bairro_select').empty();
         $('#bairro_select').append('<option value="" selected disabled>Selecione o bairro</option>');
-        var array_bairro = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                            'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                            'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                            'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        var array_bairro = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                            'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                            'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                            'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
         for(var i = 0; i < array_bairro.length; i++){
             $('#bairro_select').append('<option value="'+array_bairro[i]+'">'+array_bairro[i]+'</option>');
         }

@@ -23,7 +23,7 @@ class PessoaCreateFormRequest extends FormRequest{
     public function rules(){
         return [
             '3x4'                   => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
-            'matricula'             => ['sometimes','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
+            'matricula'             => ['sometimes','nullable','regex:/\.((pdf))+$/'],
             'nome'                  => 'required|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|between:3,50',
             'nascimento'            => 'required|date-format:d/m/Y',
             'sexo'                  => ['required', Rule::in(['M','F'])],
@@ -46,7 +46,7 @@ class PessoaCreateFormRequest extends FormRequest{
             'estado_civil'          => ['sometimes','nullable', Rule::in(['Casado(a)', 'Solteiro(a)', 'Viuvo(a)', 'Divorciado(a)'])],
             'mora_com_os_pais'      => ['sometimes','nullable', Rule::in(['1', '2']),],
 
-            'atestado'              => ['required','nullable','regex:/\.((png)|(jpg)|(jpeg)|(img))+$/'],
+            'atestado'              => ['required','nullable','regex:/\.((pdf))+$/'],
             'toma_medicacao'        => ['required','nullable', Rule::in(['1', '2']),],
             'alergia_medicacao'     => ['required','nullable', Rule::in(['1', '2']),],
             'fumante'               => ['required','nullable', Rule::in(['1', '2']),],

@@ -25,7 +25,6 @@ $(document).ready(function() {
             },
             rua: {
                 required: true,
-                minlength: 5,
                 maxlength: 100
             },
             cep: {

@@ -23,12 +23,12 @@
                                 </div>
                                 <div class="input-field col s3 m3 xl1"><i class="material-icons prefix">date_range</i></div>
                                 <div class="input-field col s4 m4 xl2">
-                                    <label for="de_search">De:</label>
-                                    <input id="de_search" type="text" class="datepicker" name="de">
+                                    <label for="de_search">Idade miníma:</label>
+                                    <input id="de_search" type="number" name="de">
                                 </div>
                                 <div class="input-field col s4 m4 xl2">
-                                    <label for="ate_search">Até:</label>
-                                    <input id="ate_search" type="text" class="datepicker" name="ate">
+                                    <label for="ate_search">Idade máxima:</label>
+                                    <input id="ate_search" type="number" name="ate">
                                 </div>
                             </div>
                             <div class="row">
@@ -71,20 +71,29 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="input-field col s3 l2"><label>Morto:</label></div>
+                                    <div class="input-field col s3 l2"><label>Falecido:</label></div>
                                     <div class="input-field col s10 l3">
                                         <p>
                                             <label>
-                                                <input value="1" name="morto" type="radio"/>
+                                                <input onclick="falecido_click('S')" value="1" name="falecido" type="radio"/>
                                                 <span>Sim</span>
                                             </label>
                                         </p>
                                         <p>
                                             <label>
-                                                <input value="2" name="morto" type="radio"/>
+                                                <input onclick="falecido_click('N')" value="2" name="falecido" type="radio"/>
                                                 <span>Não</span>
                                             </label>
                                         </p>
+                                    </div>
+                                    <div class="input-field col s3 m3 l1 xl1"><i id="falecimento_icon" class="material-icons prefix" hidden>date_range</i></div>
+                                    <div class="input-field col s4 m4 l2">
+                                        <label id="falecimento_label_de" for="de_fal_search" hidden>Data mínima:</label>
+                                        <input id="de_fal_search" name="de_fal_search" type="text" class="datepicker" hidden>
+                                    </div>
+                                    <div class="input-field col s4 m4 l2">
+                                        <label id="falecimento_label_ate" for="ate_fal_search" hidden>Data máxima:</label>
+                                        <input id="ate_fal_search" name="ate_fal_search" type="text" class="datepicker" hidden>
                                     </div>
                             </div>
                             <div class="row">
@@ -107,14 +116,20 @@
                                 <div class="input-field col s10 l3">
                                     <p>
                                         <label>
-                                            <input value="Casado" name="estado_civil" type="radio"/>
-                                            <span>Casado</span>
+                                            <input value="Solteiro(a)" name="estado_civil" type="radio"/>
+                                            <span>Solteiro(a)</span>
                                         </label>
                                     </p>
                                     <p>
                                         <label>
-                                            <input value="Solteiro" name="estado_civil" type="radio"/>
-                                            <span>Solteiro</span>
+                                            <input value="Casado(a)" name="estado_civil" type="radio"/>
+                                            <span>Casado(a)</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input value="Viuvo(a)" name="estado_civil" type="radio"/>
+                                            <span>Viuvo(a)</span>
                                         </label>
                                     </p>
                                 </div>

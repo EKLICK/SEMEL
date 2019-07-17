@@ -14,13 +14,14 @@ jQuery.validator.addMethod("nascimentoValidation", function(value, element){
 
 jQuery.validator.addMethod("uniqueMatriculaValidation", function(value, element){
     var matricula = $('#matricula').val();
+    var id = $('#id').val();
     var valor;
     $.ajax({
         async: false,
         type: "GET",
         url:'/matricula/ajax',
         dataType: 'json',
-        data: {matricula: matricula}
+        data: {matricula: matricula, id: id}
     }).done(function (data){
         valor = data;
     })

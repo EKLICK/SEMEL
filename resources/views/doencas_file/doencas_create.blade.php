@@ -14,7 +14,7 @@
                     <div class="input-field col s12 m8 l4">
                         <i class="material-icons prefix">new_releases</i> 
                         <label for="nome">Nome da doença: <span style="color: red;">*</span></label>
-                        <input name="nome" id="nome" type="text" class="validate" data-error=".errorTxt1" maxlength="100">
+                        <input name="nome" id="nome" type="text" class="validate" data-error=".errorTxt1" maxlength="30">
                         <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s12 m8 l4">

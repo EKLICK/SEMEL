@@ -9,15 +9,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 
-//REQUEST PARA CONTROLE
-use App\Http\Requests\Professor\ProfessorProcurarFormRequest;
-use App\Http\Requests\Anamnese\AnamneseProcurarFormRequest;
-use App\Http\Requests\Professor\AlunoProcurarFormRequest;
-use App\Http\Requests\Pessoa\PessoaProcurarFormRequest;
-use App\Http\Requests\Nucleo\NucleoProcurarFormRequest;
-use App\Http\Requests\Turma\TurmaProcurarFormRequest;
-use App\http\Requests\User\UserProcurarFormRequest;
-
 //MODELOS PARA CONTROLE:
 use App\Professor;
 use App\Anamnese;
@@ -35,7 +26,7 @@ class filtersController extends Controller{
     //FUNÇÕES DE REDIRECIONAMENTO:
 
     //Função usuario_procurar: Filtra conteudo de todos os registros de usuarios e retorna para a página de registro de usuarios.
-    public function usuarios_procurar(UserProcurarFormRequest $request){
+    public function usuarios_procurar(Request $request){
         $dataForm = $request->except('_tocken');
 
         //Encontra todos os registros de usuarios no banco de dados com base nos parametros que foram passados no filtro.
@@ -83,17 +74,6 @@ class filtersController extends Controller{
                 $query->where('email', '=', $filtro);
             }
 
-            //Verifica se o parametro "telefone" foi passado.
-            if(!empty($dataForm['telefone'])){
-                //Se sim:
-
-                //Adiciona o parametro nos filtros;
-                $filtro = $dataForm['telefone'];
-
-                //Constroi a query baseado neste parametro.
-                $query->where('telefone', 'like', $filtro."%");
-            }
-
             //Verifica se o parametro "tipo" foi passado.
             if(isset($dataForm['tipo'])){
                 //Se sim:
@@ -126,9 +106,10 @@ class filtersController extends Controller{
     }
 
     //Função pessoas_procurar: Filtra conteudo de todos os registros de pessoas e retorna para a página de registro de pessoas.
-    public function pessoas_procurar(PessoaProcurarFormRequest $request){
+    public function pessoas_procurar(Request $request){
+        $ano = date('Y');
         $dataForm = $request->except('_token');
-        
+
         //Encontra todos os registros de pessoas no banco de dados com base nos parametros que foram passados no filtro.
         $pessoaslist = Pessoa::where(function($query) use($dataForm){
             //Verifica se o parametro "nome" foi passado.
@@ -140,36 +121,6 @@ class filtersController extends Controller{
 
                 //Constroi a query baseado neste parametro.
                 $query->where('nome', 'like', $filtro."%");
-            }
-
-            //Verifica se o parametro "de" foi passado.
-            if(!empty($dataForm['de'])){
-                //Se sim:
-
-                //Adiciona o parametro nos filtros;
-                $filtro = explode(' ',$dataForm['de']);
-
-                //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd.
-                list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia;
-
-                //Constroi a query baseado neste parametro.
-                $query->where('nascimento',  '>=', $nascimento);
-            }
-
-            //Verifica se o parametro "ate" foi passado.
-            if(!empty($dataForm['ate'])){
-                //Se sim:
-
-                //Adiciona o parametro nos filtros;
-                $filtro = explode(' ',$dataForm['ate']);
-
-                //Converte o filtro de dd/mm/YYYY para YYYY:mm:dd 00:00:00.
-                list($dia, $mes, $ano) = explode('/', $filtro[0]);
-                $nascimento = $ano.'-'.$mes.'-'.$dia;
-
-                //Constroi a query baseado neste parametro.
-                $query->where('nascimento',  '<=', $nascimento);
             }
 
             //Verifica se o parametro "rg" foi passado.
@@ -248,15 +199,37 @@ class filtersController extends Controller{
                 $query->wherein('id', $ids);
             }
 
-            //Verifica se o parametro "morto" foi passado.
-            if(!empty($dataForm['morto'])){
+            //Verifica se o parametro "falecido" foi passado.
+            if(!empty($dataForm['falecido'])){
                 //Se sim:
-                
-                //Adiciona o parametro nos filtros;
-                $filtro = $dataForm['morto'];
 
-                //Constroi a query baseado neste parametro.
-                $query->where('morte', '=', $filtro);
+                //Verifica se o parametro é igual a null (não faleciddo).
+                if($dataForm['falecido'] != null){
+                    $query->where('morte', '!=', null);
+                    //Verifica se a procura de falecidos começando por uma data expecifica é verdadeira.
+                    if(!empty($dataForm['de_fal_search'])){
+
+                        //Converte a data de falecimento de dd/mm/YYYY para YYYY-mm-dd;
+                        list($dia, $mes, $ano) = explode('/', $dataForm['de_fal_search']);
+                        $nascimento = $ano.'-'.$mes.'-'.$dia;
+
+                        //Constroi a query baseado neste parametro.
+                        $query->where('morte', '>=', $nascimento);
+                    }
+
+                    //Verifica se a procura de falecidos terminando por uma data expecifica é verdadeira.
+                    if(!empty($dataForm['ate_fal_search'])){
+                        //Converte a data de falecimento de dd/mm/YYYY para YYYY-mm-dd;
+                        list($dia, $mes, $ano) = explode('/', $dataForm['ate_fal_search']);
+                        $nascimento = $ano.'-'.$mes.'-'.$dia;
+
+                        //Constroi a query baseado neste parametro.
+                        $query->where('morte', '<=', $nascimento);
+                    }
+                }
+                else{
+                    $query->where('morte', '=', null);
+                }
             }
 
             //Verifica se o parametro "sexo" foi passado.
@@ -294,8 +267,6 @@ class filtersController extends Controller{
 
             //Verifica se o parametro "atualizado" foi passado.
             if(!empty($dataForm['atualizado'])){
-                $ano = date('Y');
-
                 //Define a variavel $ids para filtrar os ids que serão passados.
                 $ids = [];
 
@@ -321,6 +292,44 @@ class filtersController extends Controller{
             }
         })->orderBy('nome')->get();
 
+        //Verifica se o parametro "de" foi passado.
+        if(!empty($dataForm['de'])){
+            //Se sim:
+
+            //Cria a data de hoje para calculos
+            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+
+            //Percorre a lista de pessoas para retirar pessoas de idade abaixo da idade filtrada.
+            for($i = 0; $i < count($pessoaslist); $i++){
+                list($ano, $mes, $dia) = explode('-', $pessoaslist[$i]['nascimento']);
+                $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+                $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+                if($dataForm['de'] > $data){
+                    unset($pessoaslist[$i]);
+                }
+            }
+        }
+
+        //Verifica se o parametro "ate" foi passado.
+        if(!empty($dataForm['ate'])){
+            //Se sim:
+
+            //Cria a data de hoje para calculos
+            $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+
+            //Percorre a lista de pessoas para retirar pessoas de idade abaixo da idade filtrada.
+            for($i = 0; $i < count($pessoaslist); $i++){
+                list($ano, $mes, $dia) = explode('-', $pessoaslist[$i]['nascimento']);
+                $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+                $data = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+
+                if($dataForm['ate'] < $data){
+                    unset($pessoaslist[$i]);
+                }
+            }
+            
+        }
+
         //Define sessão de informação com base na quantidade de registros achados.
         Session::put('quant', count($pessoaslist).' pessoas cadastradas.');
 
@@ -330,7 +339,7 @@ class filtersController extends Controller{
     }
 
     //Função professor_procurar: Filtra conteudo de todos os registros de professor e retorna para a página de registro de professor.
-    public function professor_procurar(ProfessorProcurarFormRequest $request){
+    public function professor_procurar(Request $request){
         $dataForm = $request->except('_token');
 
         //Encontra todos os registros de professores no banco de dados com base nos parametros que foram passados no filtro
@@ -442,7 +451,7 @@ class filtersController extends Controller{
     }
 
     //Função pessoas_procurar_aluno: Filtra conteudo de todos os registros de pessoas e retorna para a página de professores e alunos.
-    public function professor_procurar_aluno(AlunoProcurarFormRequest $request){
+    public function professor_procurar_aluno(Request $request){
         $dataForm = $request->except('_token');
 
         //Encontra todos os registros de pessoas no banco de dados com base nos parametros que foram passados no filtro
@@ -542,7 +551,7 @@ class filtersController extends Controller{
     //Se o parametro "id" for maior que 0, retorna para página de professores e turmas.
     //Se o parametro "id" for menor que 0, retorna para página de pessoas e turmas.
     //Se o parametro "id" for igual que 0, retorna para página de registros de turmas.
-    public function turmas_procurar(TurmaProcurarFormRequest $request){
+    public function turmas_procurar(Request $request){
         $dataForm = $request->except('_token');
 
         //Encontra todos os registros de turmas no banco de dados com base nos parametros que foram passados no filtro
@@ -703,7 +712,7 @@ class filtersController extends Controller{
     }
 
     //Função anamnese_procurar: Filtra conteudo de todos os registros de anamneses e retorna para a página de registro de anamneses.
-    public function anamnese_procurar(AnamneseProcurarFormRequest $request){
+    public function anamnese_procurar(Request $request){
         $ano = date('Y');
         $dataForm = $request->except('_token');
 
@@ -832,7 +841,7 @@ class filtersController extends Controller{
     }
 
     //Função núcleos_procurar: Filtra conteudo de todos os registros de núcleos e retorna para a página de registro de núcleos.
-    public function nucleos_procurar(NucleoProcurarFormRequest $request){
+    public function nucleos_procurar(Request $request){
         $dataForm = $request->except('_token');
 
         //Encontra todos os registros de núcleos no banco de dados com base nos parametros que foram passados no filtro.
@@ -908,10 +917,10 @@ class filtersController extends Controller{
         Session::put('quant', count($nucleoslist).' núcleos cadastrados.');
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
 
         return view ('nucleos_file.nucleos', compact('nucleoslist','dataForm','bairroslist'));
     }
@@ -970,15 +979,15 @@ class filtersController extends Controller{
                 //Adiciona o parametro nos filtros.
                 $filtro = $dataForm['tabelas'];
 
-                //Switch de escolhe:
-                //Se o valor foi 0: constroi query encontrando todas as auditorias que são da tabela de quant_pessoas_turmas.
-                //Se o valor foi 1: constroi query encontrando todas as auditorias que são da tabela de users.
-                //Se o valor foi 2: constroi query encontrando todas as auditorias que são da tabela de professores.
-                //Se o valor foi 3: constroi query encontrando todas as auditorias que são da tabela de pessoas.
-                //Se o valor foi 4: constroi query encontrando todas as auditorias que são da tabela de anamneses.
-                //Se o valor foi 5: constroi query encontrando todas as auditorias que são da tabela de doencas.
-                //Se o valor foi 6: constroi query encontrando todas as auditorias que são da tabela de turmas.
-                //Se o valor foi 7: constroi query encontrando todas as auditorias que são da tabela de nucleos.
+                //Switch de escolhas:
+                //Se o valor foi 0: constroi a query encontrando todas as auditorias que são da tabela de quant_pessoas_turmas.
+                //Se o valor foi 1: constroi a query encontrando todas as auditorias que são da tabela de users.
+                //Se o valor foi 2: constroi a query encontrando todas as auditorias que são da tabela de professores.
+                //Se o valor foi 3: constroi a query encontrando todas as auditorias que são da tabela de pessoas.
+                //Se o valor foi 4: constroi a query encontrando todas as auditorias que são da tabela de anamneses.
+                //Se o valor foi 5: constroi a query encontrando todas as auditorias que são da tabela de doencas.
+                //Se o valor foi 6: constroi a query encontrando todas as auditorias que são da tabela de turmas.
+                //Se o valor foi 7: constroi a query encontrando todas as auditorias que são da tabela de nucleos.
                 switch ($filtro[0]) {
                     case 0:
                         $query->where('auditable_type', '=', 'App\quant')->get();

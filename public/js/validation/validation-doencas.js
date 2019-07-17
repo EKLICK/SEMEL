@@ -7,8 +7,7 @@ $(document).ready(function(){
         rules: {
             nome: {
                 required: true,
-                minlength: 5,
-                maxlength: 100
+                maxlength: 30
             },
             descricao: {
                 required: true,

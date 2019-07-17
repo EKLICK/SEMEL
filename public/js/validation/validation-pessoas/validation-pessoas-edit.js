@@ -12,6 +12,16 @@ jQuery.validator.addMethod("nascimentoValidation", function(value, element){
     return regex.test($('#nascimento').val());
 }, "Data de nascimento inválida")
 
+jQuery.validator.addMethod("falecimentoValidation", function(value, element){
+    if($('#string_morte').val() != ''){
+        regex = new RegExp('^[0-3][0-9]\/[0-3][0-9]\/(?:[0-9]{2})?[0-9]{2}$');
+        return regex.test($('#string_morte').val());
+    }
+    else{
+        return true;
+    }
+}, "Data de falecimento inválida")
+
 jQuery.validator.addMethod("uniqueCPFValidation", function(value, element){
     var cpf = $('#cpf').val();
     var id = $('#id').val();
@@ -29,7 +39,7 @@ jQuery.validator.addMethod("uniqueCPFValidation", function(value, element){
         return valor;
     }
     return true;
-}, "CPF já regitrado no sistema.")
+}, "CPF já registrado no sistema.")
 
 jQuery.validator.addMethod("cpf", function (value, element) {
     value = jQuery.trim(value);
@@ -74,7 +84,7 @@ jQuery.validator.addMethod("uniqueRGValidation", function(value, element){
         return valor;
     }
     return true;
-}, "RG já regitrado no sistema.")
+}, "RG já registrado no sistema.")
 
 jQuery.validator.addMethod("ruaValidation", function(value, element){
     var valor = $('#rua').val();
@@ -156,19 +166,19 @@ $(document).ready(function() {
                 ruaValidation: true
             },
             numero_endereco: {
-                minlength: 6,
-                maxlength: 16
+                minlength: 0,
+                maxlength: 15
             },
             cep: {
                 minlength: 9,
                 maxlength: 9
             },
             telefone:{
-                minlength: 8,
+                minlength: 6,
                 maxlength: 16
             },
             telefone_emergencia:{
-                minlength: 8,
+                minlength: 6,
                 maxlength: 16
             },
             nome_do_pai: {
@@ -188,6 +198,9 @@ $(document).ready(function() {
                 minlength: 0,
                 maxlength: 50
             },
+            string_morte: {
+                falecimentoValidation: true
+            }
         },
         errorElement : 'div',
         errorPlacement: function(error, element){

@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
-                        <label for="icon_nick">Nome do @if($user->admin_professor == 1) administrador @else professor @endif: <span style="color: red;">*</span></label>
+                        <label for="icon_nick">Nome do @if($user->permissao < 4) administrador @else professor @endif: <span style="color: red;">*</span></label>
                         <input name="nick" id="icon_nick" type="text" value="{{$user->nick}}" maxlength="30">
                     </div>
                     <div class="input-field col s12 m5">

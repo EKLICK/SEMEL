@@ -156,12 +156,12 @@
                         O usuário fuma? <span style="color: red;">*</span>
                         <p>
                             <label>
-                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if($ultimaanamnese->fumante == 1) checked @endif/>
+                                <input onclick="fumante_click('S')" value="1" name="fumante" type="radio" @if($ultimaanamnese->fumante != -1) checked @endif/>
                                 <span>Sim</span>
                             </label>
                             &emsp;&emsp;
                             <label>
-                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if($ultimaanamnese->fumante == 2) checked @endif/>
+                                <input onclick="fumante_click('N')" value="2" name="fumante" type="radio" @if($ultimaanamnese->fumante == -1) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
@@ -175,7 +175,7 @@
                 <div class="row">
                     <div class="input-field col s12 m5">
                         Possui doenças?
-                        <select multiple name="doencas[]" id="lista_de_pessoas">
+                        <select multiple name="doencas[]" id="lista_de_doencas">
                             @foreach ($doencaslist as $doenca)
                                 <option value="{{$doenca->id}}" @foreach($ultimaanamnese->doencas as $doencaconfirm) @if($doenca->id == $doencaconfirm->id) selected @endif @endforeach>{{$doenca->nome}}</option>
                             @endforeach
@@ -189,7 +189,7 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l7 xl5">
                         <div class="file-field input-field">
-                            <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
+                            <p>Atestado médico (.pdf):  <span style="color: red;">*</span></p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
                                 <input onchange="change_img_atestado()" id="img_atestado" type="file" name="img_atestado">
@@ -197,15 +197,12 @@
                             <a onclick="apagar_atestado()" class="waves-effect waves-light btn blue" style="margin-left: 5%;">Limpar</a>
                             <br><br><br>
                             <div class="file-path-wrapper">
-                                <input id="atestado" name="atestado" class="file-path" type="text" data-error=".errorTxt9" value="{{$ultimaanamnese->atestado}}">
+                                <input id="atestado" name="atestado" class="file-path" type="text" data-error=".errorTxt1">
                             </div>
                             <div class="input-field">
-                                <div class="errorTxt1" id="errorTxt9"></div>
+                                <div class="errorTxt1" id="errorTxt1"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12 m12 xl6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed imagensparafoto" src="@if(!is_null($ultimaanamnese->atestado)) {{asset($ultimaanamnese->atestado)}} @else {{asset('/img/unset_image_atestado.png')}} @endif">
                     </div>
                 </div>
                 <div class="row">

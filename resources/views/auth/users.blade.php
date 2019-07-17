@@ -18,6 +18,7 @@
 @endsection
 @section('content')
     @include('layouts.Sessoes.mensagem_green')
+    @include('layouts.Sessoes.mensagem_red')
     <div class="container z-depth-4">
         <div class="card-panel">
             @include('layouts.Sessoes.quant')
@@ -41,24 +42,17 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s11 xl5">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="email_search" name="email" type="text">
+                                    <label for="email_search">E-mail:</label>
+                                </div>
+                                <div class="input-field col s11 xl5">
                                     <i class="material-icons prefix">verified_user</i>&emsp;&emsp;&emsp;Tipo de usuário
                                     <select name="tipo">
                                         <option value="" selected disabled>Selecione o tipo de usuário</option>
                                         <option value="2">Administrador</option>
                                         <option value="4">Professor</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s11 xl5">
-                                    <i class="material-icons prefix">email</i>
-                                    <input id="email_search" name="email" type="text">
-                                    <label for="email_search">E-mail:</label>
-                                </div>
-                                <div class="input-field col s11 xl5">
-                                    <i class="material-icons prefix">phone</i>
-                                    <input onkeydown="javascript: fMasc(this, mTel)" name="telefone" id="icon_telephone" type="tel">
-                                    <label for="icon_telephone">Telephone:</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -146,7 +140,7 @@
         <form action="{{route('users.destroy', 'delete')}}" method="POST">
             @method('DELETE')
             @csrf
-            <input class="validate" name="id" type="number" id="id_delete" hidden>
+            <input name="id" type="number" id="id_delete" hidden>
             <div class="modal-content">
                 <div class="row">
                     <h4>Deletar</h4>
@@ -228,17 +222,17 @@
             </div>
             <br>
             <div class="row">
-                <form action="{{route('reset_sistema')}}" method="POST">
+                <form id="formulario" action="{{route('reset_sistema')}}" method="POST">
                     @csrf
                     <div class="input-field col s6">
                         <i class="material-icons prefix">perm_contact_calendar</i>
-                        <input name="name" id="icon_name" type="text"  required>
-                        <label for="icon_name">Usuário:</label>
+                        <input name="name" id="name" type="text"  required>
+                        <label for="name">Usuário:</label>
                     </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">lock_outline</i>
-                        <input name="password" id="icon_lockout" type="password" required>
-                        <label for="icon_lockout">Senha:</label>
+                        <input name="password" id="password" type="password" required>
+                        <label for="password">Senha:</label>
                     </div>
                     <br>
                     <div class="input-field col s12 center">

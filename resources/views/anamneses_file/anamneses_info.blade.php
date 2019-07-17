@@ -13,16 +13,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col s6">
-                <table>
-                    <tr>
-                        <h6><b>Atestado médico:</b></h6>
-                        <td><img id="atestado_image" class="materialboxed imagensparafoto" src="{{asset($anamnese->atestado)}}"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row">
             <div class="col s12 m6">
                 <table id="employee_data" class="responsive-table highlight bordered">
                     <tbody>
@@ -37,8 +27,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><h6>Ano documentada:</h6></td>
-                            <td><h6>{{$anamnese->ano}}</h6></td>
+                            <td>Atestado médico:</td>
+                            <td><a class="waves-effect waves-light btn blue" href="{{asset($anamnese->atestado)}}">&ensp;Atestado.pdf&ensp;</a></td>
                         </tr>
                         <tr>
                             <td><h6>Peso:</h6></td>
@@ -54,6 +44,10 @@
             <div class="col s12 m6">
                 <table class="responsive-table highlight bordered">
                     <tbody>
+                        <tr>
+                            <td><h6>Ano documentada:</h6></td>
+                            <td><h6>{{$anamnese->ano}}</h6></td>
+                        </tr>
                         <tr>
                             <td><h6>Possui doença:</h6></td>
                             <td>

@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <td><h6>Tipo de usuário:</h6></td>
-                            <td><h6>@if($user->admin_professor == 1) Administrador @else Professor @endif</h6></td>
+                            <td><h6>@if($user->permissao < 4) Administrador @else Professor @endif</h6></td>
                         </tr>
                         <tr>
                             @php

@@ -23,12 +23,12 @@ class AdminMestreController extends Controller{
         $dataForm = $request->all();
         
         //Encontra todos os registros de usuários que possuem a permissão do tipo 2 (secretarios).
-        $secretarioslist = User::where('permissao', '==', 2);
-
+        $secretarioslist = User::where('permissao', '=', 2)->get();
         //Percorre a lista de secretarios, assim que o sistema achar o secretario ativo no momento, ele será deletado.
-        if($secretarioslist != null){
-            foreach($secretarioslist as $secretarios){
-                if($secretarios->deleted_at == null){
+        if(count($secretarioslist) != 0){
+            foreach($secretarioslist as $secretario){
+                if($secretario->deleted_at == null){
+                    $user = User::find($secretario['id']);
                     $user->delete();
                     break;
                 }
@@ -45,7 +45,7 @@ class AdminMestreController extends Controller{
         ]);
 
         //Encontra todos os registros de usuários e ordena por nick.
-        $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '!=', 1)->paginate(10);
+        $userslist = User::withTrashed()->orderBy('nick')->where('permissao', '!=', 1)->get();
 
         //Encontra o número definido como limite de quantidade de turmas que uma pessoa pode ter no sistema.
         $quantidade = Quant::find(1);

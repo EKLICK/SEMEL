@@ -28,7 +28,7 @@ jQuery.validator.addMethod("uniqueCPFValidation", function(value, element){
         return valor;
     }
     return true;
-}, "CPF já regitrado no sistema.")
+}, "CPF já registrado no sistema.")
 
 jQuery.validator.addMethod("cpf", function (value, element) {
     value = jQuery.trim(value);
@@ -72,7 +72,7 @@ jQuery.validator.addMethod("uniqueRGValidation", function(value, element){
         return valor;
     }
     return true;
-}, "RG já regitrado no sistema.")
+}, "RG já registrado no sistema.")
 
 jQuery.validator.addMethod("ruaValidation", function(value, element){
     var valor = $('#rua').val();
@@ -117,6 +117,15 @@ jQuery.validator.addMethod("pessoaEmergenciaValidation", function(value, element
         return true;
     }
 }, "O nome da mãe não pode ter números ou caracteres inválidos")
+
+jQuery.validator.addMethod("fileValidation", function(value, element){
+    if($('#atestado').val() == ''){
+        return false
+    }
+    else{
+        return true
+    }
+}, "Este campo é requerido.")
 
 $(document).ready(function() {
     $('input[type=radio][name=sexo]').change(function() {
@@ -242,7 +251,7 @@ $(document).ready(function() {
             dor_muscularvalidation: 'required',
             dor_articularvalidation: 'required',
             fumantevalidation: 'required',
-            atestado: 'required',
+            img_atestado: {fileValidation: true},
         },
         errorElement : 'div',
         errorPlacement: function(error, element){

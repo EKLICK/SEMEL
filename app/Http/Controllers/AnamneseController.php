@@ -27,7 +27,7 @@ class AnamneseController extends Controller{
      */
 
     //FUNÇÃO DE FERRAMENTAS:
-    //Ferramenta saveDbImageAtestado: Salva a imagem de atestado vindo das requisições do formulario.
+    //Ferramenta saveDbImageAtestado: Salva a imagem de atestado vindo das requisições do formulário.
     public function saveDbImageAtestado($req){
         $data = $req->all();
         date_default_timezone_set('America/sao_paulo');
@@ -138,7 +138,7 @@ class AnamneseController extends Controller{
             'pessoas_id' => $dataForm['pessoas_id'],
         ]);
 
-        //Vincula doenças na anamnese se elas foram informadas no formulario.
+        //Vincula doenças na anamnese se elas foram informadas no formulário.
         if(isset($dataForm['doencas'])){$anamnese->doencas()->attach($dataForm['doencas']);}
 
         //Define sessões de informação para apresentação na página.
@@ -206,7 +206,7 @@ class AnamneseController extends Controller{
         if($dataForm['dor_articular'] == 2){$dataForm['string_dor_articular'] = -1;}
         if($dataForm['fumante'] == 2){$dataForm['string_fumante'] = -1;}
 
-        //Verifica se a imagem de atestado foi passada pelo formulario.
+        //Verifica se a imagem de atestado foi passada pelo formulário.
         if(isset($dataForm['img_atestado'])){
             //Se sim, remove imagem antiga e salva imagem nova no banco de dados.
             if(!empty($anamnese['atestado'])){unlink($anamnese['atestado']);}
@@ -240,7 +240,7 @@ class AnamneseController extends Controller{
             'pessoas_id' => $dataForm['pessoa_id'],
         ]);
 
-        //Edita a vinculação doenças na anamnese se elas foram informadas no formulario.
+        //Edita a vinculação doenças na anamnese se elas foram informadas no formulário.
         if(isset($dataForm['doencas'])){$anamnese->doencas()->sync($dataForm['doencas']);}
 
         //busca os valores novos da turma.

@@ -66,10 +66,10 @@ class ProfessorController extends Controller{
     //Função create: Retorna a página de criação de registros de professores.
     public function create(){
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
 
         return view ('professores_file.professores_create', compact('bairroslist'));
     }
@@ -106,7 +106,7 @@ class ProfessorController extends Controller{
 
         //Criar o professor
         Professor::create($dataForm);
-
+        
         //Adiciona uma sessão de alerta verde.
         Session::put('mensagem_green', $dataForm['nome'].' adicionado(a) com sucesso!');
 
@@ -142,10 +142,10 @@ class ProfessorController extends Controller{
         $professor['nascimento'] = $this->mostrar_nascimento($professor['nascimento']);
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
 
         return view ('professores_file.professores_edit', compact('professor', 'user','bairroslist'));
     }

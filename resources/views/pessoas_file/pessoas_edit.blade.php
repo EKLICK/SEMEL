@@ -195,7 +195,7 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l7 xl5">
                         <div class="file-field input-field">
-                            <p>matricula escolar (.img | .png | .jpg):</p>
+                            <p>matricula escolar (.pdf):</p>
                             <div class="btn blue">
                                 <span>matricula escolar</span>
                                 <input onchange="change_img_matricula()" id="img_matricula" type="file" name="img_matricula">
@@ -206,9 +206,6 @@
                                 <input id="matricula" name="matricula" class="file-path" type="text" value="{{$pessoa->matricula}}">
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12 m12 xl5 right" style="margin-top: -0.1%;">
-                        <img id="matricula_image" class="materialboxed imagensparafoto" src="@if(!is_null($pessoa->matricula)) {{asset($pessoa->matricula)}} @else {{asset('/img/unset_image_matricula.png')}} @endif">
                     </div>
                 </div>             
                 <div class="row">
@@ -246,25 +243,25 @@
                         Estado Civil:
                         <p>
                             <label>
-                                <input value="Solteiro(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Solteiro') checked @endif/>
+                                <input value="Solteiro(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Solteiro(a)') checked @endif/>
                                 <span>Solteiro(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Casado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Casado') checked @endif/>
+                                <input value="Casado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Casado(a)') checked @endif/>
                                 <span>Casado(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Viuvo(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Viuva(o)') checked @endif/>
+                                <input value="Viuvo(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Viuvo(a)') checked @endif/>
                                 <span>Viuvo(a)</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input value="Divorciado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Divorciado(o)') checked @endif/>
+                                <input value="Divorciado(a)" name="estado_civil" type="radio" @if($pessoa->estado_civil == 'Divorciado(a)') checked @endif/>
                                 <span>Divorciado(a)</span>
                             </label>
                         </p>
@@ -275,21 +272,21 @@
                         A pessoa faleceu?
                         <p>
                             <label>
-                                <input onclick="morte_click('S')" value="1" name="morte" type="radio" @if($pessoa->morte != -1) checked @endif/>
+                                <input onclick="morte_click('S')" value="1" name="morte" type="radio" @if($pessoa->morte != null) checked @endif/>
                                 <span>Sim</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input onclick="morte_click('N')" value="2" name="morte" type="radio" @if($pessoa->morte == -1) checked @endif/>
+                                <input onclick="morte_click('N')" value="2" name="morte" type="radio" @if($pessoa->morte == null) checked @endif/>
                                 <span>Não</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s12 m6">
-                        <i id="morte_icon" class="material-icons prefix" @if($pessoa->morte == -1) hidden @endif>event_busy</i>
-                        <label id="morte_label" for="string_morte" @if($pessoa->morte == -1) hidden @endif>Motivo do falecimento:</label>
-                        <input id="string_morte" name="string_morte" type="text" @if($pessoa->morte != -1) value="{{$pessoa->morte}}" @else hidden @endif>
+                        <i id="morte_icon" class="material-icons prefix" @if($pessoa->morte == null) hidden @endif>event_busy</i>
+                        <label id="morte_label" for="string_morte" @if($pessoa->morte == null) hidden @endif>Data do falecimento:</label>
+                        <input id="string_morte" name="string_morte" class="datepicker" type="text" @if($pessoa->morte != null) value="{{$pessoa->morte}}" @else hidden @endif>
                     </div>
                 </div>
                 <div class="row">

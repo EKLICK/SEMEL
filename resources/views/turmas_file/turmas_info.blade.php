@@ -144,7 +144,7 @@
                     <table class="centered">
                         <thead>
                             <tr>
-                                <th>Nome da dpessoa</th>
+                                <th>Nome da pessoa</th>
                                 <th>Telefone</th>
                                 <th>Mais Informações</th>
                             </tr>
@@ -172,7 +172,7 @@
                     <table class="centered">
                         <thead>
                             <tr>
-                                <th>Nome da dpessoa</th>
+                                <th>Nome da pessoa</th>
                                 <th>Telefone</th>
                                 <th>Mais Informações</th>
                             </tr>

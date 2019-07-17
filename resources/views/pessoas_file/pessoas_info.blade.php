@@ -74,9 +74,11 @@
                                 <tr>
                                     <h6><b>Matricula:</b></h6>
                                     @if(!is_null($pessoa->matricula))
-                                        <td><img id="matricula_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset($pessoa->matricula)}}"></td>
+                                        <td><a class="waves-effect waves-light btn" href="{{asset($pessoa->matricula)}}">Matricula.pdf</td>
+                                        <td><i class="small material-icons" style="color: green;">assignment_turned_ins</i></td>
                                     @else
-                                        <td><img id="matricula_image" class="materialboxed" style="width: 200px; height: 150px; border: solid 5px black" src="{{asset('/img/unset_image_matricula.png')}}"></td>
+                                        <td>Usuário sem matricula.</td>
+                                        <td><i class="small material-icons" style="color: red;">assignment_late</i></td>
                                     @endif
                                 </tr>
                             </table>
@@ -188,10 +190,6 @@
                                     </h6>
                                 </td>
                             </tr>
-                        </table>
-                    </div>
-                    <div class="col s6">
-                        <table>
                             <tr>
                                 <td><h6><b>Telefone de emergência:</b></h6></td>
                                 <td>
@@ -201,6 +199,10 @@
                                     </h6>
                                 </td>
                             </tr>
+                        </table>
+                    </div>
+                    <div class="col s6">
+                        <table>
                             <tr>
                                 <td><h6><b>Sexo:</b></h5></td>
                                 <td><h6>@if ($pessoa->sexo == 'M') Masculino @else Feminino @endif</h6></td>
@@ -283,7 +285,7 @@
                                 <td><h6><b>Data de criação</b></h6></td>
                                 <td><h6>{{$horario[0]}}<br>{{$horario[1]}}</h6></td>
                             </tr>
-                            @if($pessoa->morte != -1)
+                            @if($pessoa->morte != null)
                                 <tr>
                                     <td><h6><b>Data de falecimento:</b></h6></td>
                                     <td><h6>{{$pessoa->morte}}</h6></td>

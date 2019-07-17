@@ -35,10 +35,10 @@ class NucleosController extends Controller{
         $nucleoslist = Nucleo::orderBy('nome')->get();
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
 
         //Define variavel $count para informação de quantidade de registros.
         $count = Nucleo::all();
@@ -59,10 +59,10 @@ class NucleosController extends Controller{
         $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
         
         
         return view ('nucleos_file.nucleos_create', compact('bairroslist'));
@@ -125,10 +125,10 @@ class NucleosController extends Controller{
         $this->authorize('autorizacao', 2);
 
         //Criando array de bairros de São Leopoldo.
-        $bairroslist = ['ARROIO DA MANTEIGA','BOA VISTA','CAMPESTRE','CAMPINA','CENTRO','CRISTO REI','DUQUE DE CAXIAS',
-                        'FAZENDA SAO BORJA','FEITORIA','FIAO','JARDIM AMERICA','MORRO DO ESPELHO','PADRE REUS','PINHEIRO',
-                        'RIO BRANCO','RIO DOS SINOS','SANTA TEREZA','SANTO ANDRE','SANTOS DUMONT','SAO JOAO BATISTA',
-                        'SAO JOSE','SAO MIGUEL','SCHARLAU','VICENTINA'];
+        $bairroslist = ['Arroio da Manteiga','Boa Vista','Campestre','Campina','Centro','Cristo Rei','Duque de Caxias',
+                        'Fazenda Sao Borja','Feitoria','Fiao','Jardim America','Morro do Espelho','Padre Reus','Pinheiro',
+                        'Rio Branco','Rio dos Sinos','Santa Tereza','Santo Andre','Santos Dumont','Sao Joao Batista',
+                        'Sao Jose','Sao Miguel','Scharlau','Vicentina'];
         
         
         return view ('nucleos_file.nucleos_edit', compact('nucleo','bairroslist'));
@@ -192,14 +192,14 @@ class NucleosController extends Controller{
         //A = Todas as pessoas (Atribuir ao A).
         //B = Todas as pessoas ativas (Se o pivot inativo é 1, contar para B).
         //C = Todas as pessoas inativas (Subtrai A pelo B e adiciona o número ao C).
-        $a = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
-                                                        id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
-                                                            Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 
-                                                                id = '.$id.')) GROUP BY id')));
-        $b = count(DB::select(DB::raw('SELECT * FROM Pessoas WHERE 
-                                                        id IN(SELECT Pessoa_id FROM Turmas_pessoas WHERE 
-                                                            Turma_id IN(SELECT Turma_id FROM Nucleos WHERE 
-                                                                id = '.$id.') and inativo = 1) GROUP BY id')));
+        $a = count(DB::select(DB::raw('SELECT * FROM pessoas WHERE 
+                                                        id IN(SELECT pessoa_id FROM turmas_pessoas WHERE 
+                                                            turma_id IN(SELECT turma_id FROM nucleos WHERE 
+                                                                id = '.$id.')) ORDER BY id')));
+        $b = count(DB::select(DB::raw('SELECT * FROM pessoas WHERE 
+                                                        id IN(SELECT pessoa_id FROM turmas_pessoas WHERE 
+                                                            turma_id IN(SELECT turma_id FROM nucleos WHERE 
+                                                                id = '.$id.') and inativo = 1) ORDER BY id')));
         $c = $a - $b;
         $dadosgerais = [$a,$b,$c];
 

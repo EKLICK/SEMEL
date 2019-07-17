@@ -23,14 +23,13 @@ class DoencaCreateEditFormRequest extends FormRequest{
     public function rules(){
         return [
             'nome'              => 'required|string|between:3,50',
-            'descricao'         => 'required|between:5,100',
+            'descricao'         => 'required|max:100',
         ];
     }
 
     public function messages(){
         return[
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
-            'nome.between' => 'Insira um nome entre 3 e 50 caracteres!',
 
             'descricao.required' => 'O campo descrição é de preenchimento obrigatório!',
             'descricao.between' => 'A descrição deve estar entre 5 e 100 caracteres'

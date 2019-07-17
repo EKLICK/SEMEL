@@ -22,7 +22,7 @@
     </div>
 </li>
 <li>
-    <div class="collapsible-header"><i class="material-icons">people</i>Usuarios</div>
+    <div class="collapsible-header"><i class="material-icons">people</i>Usuários</div>
     <div class="collapsible-body white">
         <div class="collection">
             <b><a class="collection-item" href="{{route('pessoas.index')}}"style="color: #039be5;"><i class="material-icons">folder</i> Registros</a></b>

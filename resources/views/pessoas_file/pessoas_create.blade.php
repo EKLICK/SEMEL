@@ -7,6 +7,16 @@
 @section('title') Criar pessoa @endsection
 @section('content')
     <div class="container">
+            @if(isset($errors) && count($errors) > 0)
+            @foreach($errors->all() as $error)
+                <div style="margin-left: 15%; margin-top: 1%;">
+                    <div class="chip red lighten-2">
+                        {{$error}}
+                        <i class="close material-icons">close</i>
+                    </div>
+                </div>
+            @endforeach
+        @endif
         <div class="row">
             <form id="formulario" class="col s12" action="{{route('pessoas.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -63,7 +73,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">credit_card</i>
-                        <label for="cpf_responsavel">CPF do responsavel:</label>
+                        <label for="cpf_responsavel">CPF do responsável:</label>
                         <input onkeydown="javascript: fMasc(this, mCPF)" name="cpf_responsavel" id="cpf_responsavel" data-error=".tee" type="text" maxlength="14">
                         <div class="tee" id="tee"></div>
                     </div>
@@ -76,7 +86,7 @@
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">assignment_ind</i>
-                        <label for="rg_responsavel">RG do responsavel:</label>
+                        <label for="rg_responsavel">RG do responsável:</label>
                         <input name="rg_responsavel" id="rg_responsavel" type="text" maxlength="13">
                     </div>
                 </div>
@@ -194,7 +204,7 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l7 xl5">
                         <div class="file-field input-field">
-                            <p>matricula escolar (.img | .png | .jpg):</p>
+                            <p>matricula escolar (.pdf):</p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
                                 <input onchange="change_img_matricula()" id="img_matricula" type="file" name="img_matricula">
@@ -205,9 +215,6 @@
                                 <input id="matricula" name="matricula" class="file-path" type="text">
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12 m12 xl5 right" style="margin-top: -0.1%;">
-                        <img id="matricula_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_matricula.png')}}">
                     </div>
                 </div>
                 <div class="row">
@@ -463,7 +470,7 @@
                 <div class="row">
                     <div class="input-field col s12 m8 l7 xl5">
                         <div class="file-field input-field">
-                            <p>Atestado médico (.img | .png | .jpg):  <span style="color: red;">*</span></p>
+                            <p>Atestado médico (.pdf):  <span style="color: red;">*</span></p>
                             <div class="btn blue">
                                 <span>Abrir arquivo</span>
                                 <input onchange="change_img_atestado()" id="img_atestado" type="file" name="img_atestado">
@@ -477,9 +484,6 @@
                                 <div class="errorTxt9" id="errorTxt9"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12 m12 xl6 right" style="margin-top: -0.1%;">
-                        <img id="atestado_image" class="materialboxed imagensparafoto" src="{{asset('/img/unset_image_atestado.png')}}">
                     </div>
                 </div>
                 <div class="row">
