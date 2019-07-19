@@ -75,18 +75,18 @@
                 <div class="row">
                     <div class="input-field col s8 m5 xl4">
                         <input type="text" name="radiovalidation" id="radiovalidation" data-error=".errorTxt7" hidden>
-                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativo | inativo: <span style="color: red;">*</span>
+                        <i class="material-icons prefix">sim_card_alert</i>&emsp;&emsp; Turma ativa | inativa: <span style="color: red;">*</span>
                         <div style="margin-left: 30%;">
                             <p>
                                 <label>
                                     <input value="1" name="inativo" type="radio"/>
-                                    <span>Ativo</span>
+                                    <span>Ativa</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
                                     <input value="2" name="inativo" type="radio"/>
-                                    <span>Inativo</span>
+                                    <span>Inativa</span>
                                 </label>
                             </p>
                         </div>

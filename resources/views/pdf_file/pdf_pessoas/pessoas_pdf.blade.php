@@ -22,8 +22,8 @@
                         @if($opcoes_colunas[0] == 1)<th style="width: 200px;">Endereço</th>@endif
                         @if($opcoes_colunas[1] == 1)<th style="width: 110px;">Telefone</th>@endif
                         @if($opcoes_colunas[2] == 1)<th style="width: 100px;">Data de nascimento</th>@endif
-                        @if($opcoes_colunas[3] == 1)<th>RG</th>@endif
-                        @if($opcoes_colunas[4] == 1)<th>Usuário morto?</th>@endif
+                        @if($opcoes_colunas[3] == 1)<th style="width: 70px;">RG</th>@endif
+                        @if($opcoes_colunas[4] == 1)<th style="width: 80px;">Usuário falecido?</th>@endif
                     </tr>
                     <tr>
                         @if($opcoes_colunas[0] == 1)
@@ -59,7 +59,7 @@
                             @endif
                         @endif
                         @if($opcoes_colunas[4] == 1)
-                            <td>@if($pessoa->morte == -1) Não @else Sim @endif</td>
+                            <td>@if($pessoa->morte == null) Não @else Sim @endif</td>
                         @endif
                     </tr>
                 </table>
