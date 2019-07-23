@@ -27,7 +27,7 @@ $(document).ready(function(){
             },
             email: {
                 required: true,
-                maxlength: 30,
+                maxlength: 50,
                 uniqueEmailValidation: true
             },
             name: {

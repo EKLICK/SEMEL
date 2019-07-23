@@ -16,12 +16,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
                         <label for="icon_nick">Nome do @if($user->permissao < 4) administrador @else professor @endif: <span style="color: red;">*</span></label>
-                        <input name="nick" id="icon_nick" type="text" value="{{$user->nick}}" maxlength="30">
+                        <input name="nick" id="icon_nick" type="text" value="{{$user->nick}}" maxlength="50">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
                         <label for="icon_email">E-mail: <span style="color: red;">*</span></label>
-                        <input name="email" id="icon_email" type="email" value="{{$user->email}}" maxlength="30">
+                        <input name="email" id="icon_email" type="email" value="{{$user->email}}" maxlength="50">
                     </div>
                 </div>
                 <br><br><br>

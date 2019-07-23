@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="input-field col s12 m10 l5">
                         <i class="material-icons prefix">description</i>
-                        <label for="icon_descricao">Descrição da turma:</label>
+                        <label for="icon_descricao">Complemento da turma:</label>
                         <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100"></textarea>
                     </div>
                 </div>

@@ -119,11 +119,34 @@ jQuery.validator.addMethod("pessoaEmergenciaValidation", function(value, element
 }, "O nome da mãe não pode ter números ou caracteres inválidos")
 
 jQuery.validator.addMethod("fileValidation", function(value, element){
-    if($('#atestado').val() == ''){
-        return false
+    var nascimento = $('#nascimento').val();
+    if(nascimento == ''){
+        return false;
     }
     else{
-        return true
+        var data = nascimento.split('/');
+        var atual = new Date;
+        var data_atual = [atual.getDate(), atual.getMonth() + 1, atual.getFullYear()]
+
+        data[2] = +data[2];
+        data[1] = +data[1];
+        data[0] = +data[0];
+
+        var idade = data_atual[2] - data[2];
+
+        if (data_atual[1] < data[1] || data_atual[1] == data[1] && data_atual[0] < data[0]) {idade--;}
+        
+        if(idade > 50){
+            if($('#atestado').val() == ''){
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true;
+        }
     }
 }, "Este campo é requerido.")
 
@@ -255,7 +278,6 @@ $(document).ready(function() {
         },
         errorElement : 'div',
         errorPlacement: function(error, element){
-            console.log(error);
             var placement = $(element).data('error');
             if (placement){
                 $(placement).append(error)

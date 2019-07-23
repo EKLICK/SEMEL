@@ -22,10 +22,15 @@ class AnamneseProcurarFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'toma_medicacao'        => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'fumante'               => ['sometimes','nullable', Rule::in(['1', '2']),],
-            'cirurgia'              => ['sometimes','nullable', Rule::in(['1', '2']),],
+            'toma_medicacao'        => ['required', Rule::in(['1', '2']),],
+            'alergia_medicacao'     => ['required', Rule::in(['1', '2']),],
+            'fumante'               => ['required', Rule::in(['1', '2']),],
+            'cirurgia'              => ['required', Rule::in(['1', '2']),],
+            'dor_ossea'             => ['required', Rule::in(['1', '2']),],
+            'dor_muscular'          => ['required', Rule::in(['1', '2']),],
+            'dor_articular'         => ['required', Rule::in(['1', '2']),],
             'doencas_id'            => 'sometimes|nullable|integer|exists:doencas,id',
+            'atestado'              => ['sometimes','nullable','regex:/\.((pdf))+$/'],
         ];
     }
 }

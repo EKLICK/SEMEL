@@ -13,6 +13,7 @@
             <form id="formulario" class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="pessoas_id" value="{{$pessoa->id}}" hidden>
+                <input type="text" id="nascimentoValid" value="{{$pessoa->nascimento}}" hidden>
                 <div class="row">
                     <div class="input-field col s12 m3">
                         <i class="material-icons prefix">local_parking</i>

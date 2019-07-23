@@ -30,7 +30,7 @@ class AnamneseCreateEditFormRequest extends FormRequest{
             'dor_muscular'          => ['required', Rule::in(['1', '2']),],
             'dor_articular'         => ['required', Rule::in(['1', '2']),],
             'doencas_id'            => 'sometimes|nullable|integer|exists:doencas,id',
-            'atestado'              => ['required','nullable','regex:/\.((pdf))+$/'],
+            'atestado'              => ['sometimes','nullable','regex:/\.((pdf))+$/'],
         ];
     }
 

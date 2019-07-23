@@ -33,7 +33,10 @@
                             @else
                                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                                 <ul class="left hide-on-med-and-down">
-                                    <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
+                                    @php
+                                        $nickusuario = explode(' ', auth()->user()->nick);
+                                    @endphp
+                                    <h6><b>Usuário: &emsp;{{$nickusuario[0]}}</b></h6>
                                     <h6><b>Nível: &emsp;&emsp; @can('autorizacao', 3) Administrador @else Professor @endcan</b></h6>
                                 </ul>
                                 <ul id="nav-mobile" class="right">

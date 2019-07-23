@@ -68,7 +68,7 @@
                     </div>
                     <div class="input-field col s11 m5 xl5">
                         <i class="material-icons prefix">description</i>
-                        <label for="descricao">Descrição do núcleo:</label>
+                        <label for="descricao">Complemento do núcleo:</label>
                         <textarea name="descricao" id="descricao" type="textarea" class="materialize-textarea" maxlength="100">{{$nucleo->descricao}}</textarea>
                     </div>
                     <div class="container">

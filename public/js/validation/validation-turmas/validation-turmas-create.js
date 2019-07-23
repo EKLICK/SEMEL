@@ -35,7 +35,8 @@ $(document).ready(function() {
     })
 
     $('#icon_horario_inicial').change(function() {
-        if(this.value == ''){
+        regex = new RegExp('^[0-2][0-9]:[0-5][0-9]$');
+        if(this.value == '' || regex.test(this.value) == false){
             $('#errorTxt3').show();
         }
         else{
@@ -44,8 +45,8 @@ $(document).ready(function() {
     })
 
     $('#icon_horario_final').change(function() {
-
-        if(this.value == ''){
+        regex = new RegExp('^[0-2][0-9]:[0-5][0-9]$');
+        if(this.value == '' || regex.test(this.value) == false){
             $('#errorTxt4').show();
         }
         else{

@@ -82,7 +82,7 @@
             <table id="employee_data" class="centered responsive-table highlight bordered">
                 <thead>
                     <tr>
-                        <th>Nome da núcleo</th>
+                        <th>Nome do núcleo</th>
                         <th>Endereço</th>
                         <th>Situação</th>
                         @can('autorizacao', 3)<th>Mudar estado</th>@endcan

@@ -64,8 +64,8 @@
                             <td><h6>@if($turma->inativo == 1) Não @else Sim @endif</h6></td>
                         </tr>
                         <tr>
-                            <td><h6><b>Descrição:</b></h6></td>
-                            <td><h6>@if (isset($turma->descricao)) {{$turma->descricao}} @else Nenhuma descrição escrita @endif</h6></td>
+                            <td><h6><b>Complemento:</b></h6></td>
+                            <td><h6>@if (isset($turma->descricao)) {{$turma->descricao}} @else Nenhum complemento escrito @endif</h6></td>
                         </tr>
                         <tr>
                             <td><h6><b>Horario Inicial:<br>Horario Final:</b></h6></td>

@@ -22,8 +22,8 @@ class UserEditFormRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'nick'                    => 'required|string|between:5,30',
-            'email'                   => 'required|string|email|max:30|unique:users,email,'.$this->id.'|',
+            'nick'                    => 'required|string|between:5,100',
+            'email'                   => 'required|string|email|max:50|unique:users,email,'.$this->id.'|',
             'name'                    => 'sometimes|nullable|string|between:5,30|unique:users,name,'.$this->id.'|',
             'password'                => 'sometimes|nullable|string|between:5,30',
             'confirm_password'        => 'sometimes|nullable|required_with:password|same:password',

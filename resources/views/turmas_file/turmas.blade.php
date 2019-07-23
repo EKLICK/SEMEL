@@ -92,7 +92,7 @@
                     <tr>
                         <th>Nome da turma</th>
                         <th>Núcleo pertencente</th>
-                        <th>Estado</th>
+                        <th>Situação</th>
                         @can('autorizacao', 2)<th>Mudar estado</th>@endcan
                         @can('autorizacao', 2)<th>Ações</th>@else<th>Informações</th>@endcan
                     </tr>

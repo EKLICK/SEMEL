@@ -80,7 +80,7 @@
                     <div class="row">
                         <div class="input-field col s11 m5 xl5">
                             <i class="material-icons prefix">description</i>
-                            <label for="icon_descricao">Descrição do núcleo:</label>
+                            <label for="icon_descricao">Complemento do núcleo:</label>
                             <textarea name="descricao" id="icon_descricao" type="textarea" class="materialize-textarea" maxlength="100"></textarea>
                         </div>
                     </div>

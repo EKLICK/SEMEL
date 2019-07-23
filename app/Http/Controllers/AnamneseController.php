@@ -82,11 +82,11 @@ class AnamneseController extends Controller{
         $ultimaanamnese = Anamnese::where('pessoas_id', '=', $id)->get()->last();
 
         //Calcula nascimento de dd:mm:YYYY 00:00:00 para idade.
-        $data = explode(' ', $pessoa['nascimento']);
-        list($dia, $mes, $ano) = explode('-', $data[0]);
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        list($ano, $mes, $dia) = explode('-', $pessoa['nascimento']);
         $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
-        $pessoa['nascimento'] = (int)floor((((($ano - $nascimento) / 60) / 60) / 24) / 365.25);;
-
+        $pessoa['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
+        
         return view ('anamneses_file.anamneses_create', compact('pessoa','doencaslist','ultimaanamnese'));
     }
 
@@ -172,6 +172,12 @@ class AnamneseController extends Controller{
 
         //Encontra todos os registros de doenças. 
         $doencaslist = Doenca::all();
+
+        //Calcula nascimento de dd:mm:YYYY 00:00:00 para idade.
+        $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        list($ano, $mes, $dia) = explode('-', $anamnese->pessoas['nascimento']);
+        $nascimento = mktime(0, 0, 0, $mes, $dia, $ano);
+        $anamnese->pessoas['nascimento'] = (int)floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
 
         return view ('anamneses_file.anamneses_edit', compact ('anamnese','doencaslist'));
     }

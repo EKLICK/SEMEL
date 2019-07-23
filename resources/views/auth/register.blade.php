@@ -14,12 +14,12 @@
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">person_pin</i>
                         <label for="icon_nick">Nome do administrador: <span style="color: red;">*</span></label>
-                        <input name="nick" id="icon_nick" type="text" maxlength="30">
+                        <input name="nick" id="icon_nick" type="text" maxlength="50">
                     </div>
                     <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
                         <label for="icon_email">E-mail: <span style="color: red;">*</span></label>
-                        <input name="email" id="icon_email" type="email" maxlength="30">
+                        <input name="email" id="icon_email" type="email" maxlength="50">
                     </div>
                 </div>
                 <br>

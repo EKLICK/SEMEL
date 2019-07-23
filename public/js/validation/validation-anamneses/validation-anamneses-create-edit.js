@@ -3,11 +3,22 @@ $.validator.setDefaults({
 });
 
 jQuery.validator.addMethod("fileValidation", function(value, element){
-    if($('#atestado').val() == ''){
-        return false
+    var idade = $('#nascimentoValid').val();
+    if(idade == ''){
+        return false;
     }
-    else{
-        return true
+    else{  
+        if(idade > 50){
+            if($('#atestado').val() == ''){
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true;
+        }
     }
 }, "Este campo é requerido.")
 

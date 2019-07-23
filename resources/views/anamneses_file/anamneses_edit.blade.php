@@ -12,6 +12,7 @@
                 @csrf
                 <input type="text" name="ano" id="ano" value="{{date('Y')}}" hidden>
                 <input type="number" name="pessoa_id" value="{{$anamnese->pessoas->id}}" hidden>
+                <input type="text" id="nascimentoValid" value="{{$anamnese->pessoas->nascimento}}" hidden>
                 <input type="hidden" name="_method" value="PUT">
                 <div class="row">
                     <h4 class="center">Nome do Usuário: {{$anamnese->pessoas->nome}}</h4>

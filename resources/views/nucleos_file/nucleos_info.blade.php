@@ -65,15 +65,16 @@
                         </tr>
                         <tr>
                             <td><h6><b>Numero de endereço:</b></h6></td>
-                            <td><h6>{{$nucleo->numero_endereco}}</h6></td>
+                            <td><h6>{{$nucleo->numero_endereco}}@if(isset($nucleo->complemento)), {{$nucleo->complemento}}@endif</h6></td>
+
                         </tr>
                         <tr>
                             <td><h6><b>CEP:</b></h6></td>
                             <td><h6>{{$nucleo->cep}}</h6></td>
                         </tr>
                         <tr>
-                            <td><h6><b>Descrição:</b></h6></td>
-                            <td><h6>@if($nucleo->descricao == null) Sem comentário @else {{$nucleo->descricao}}@endif</h6></td>
+                            <td><h6><b>Complemento:</b></h6></td>
+                            <td><h6>@if($nucleo->descricao == null) Nnehum complemento de núcleo. @else {{$nucleo->descricao}}@endif</h6></td>
                         </tr>
                         <tr>
                             <td><h6><b>Está inativo:</b></h6></td>
