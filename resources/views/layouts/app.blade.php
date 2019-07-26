@@ -74,9 +74,7 @@
                         <div class="card-panel" style="border-radius: 25px;">
                             <nav class="hide-on-med-and-down" style="border-radius: 25px;">
                                 <div class="nav-wrapper blue" style="border-radius: 25px;">
-                                    <div class="col s12">
-                                        <b>@yield('breadcrumbs')</b>
-                                    </div>
+                                    <div class="container"><b>@yield('breadcrumbs')</b></div>
                                 </div>
                             </nav>
                             <div class="container">
@@ -91,7 +89,8 @@
             <ul class="sidenav grey lighten-2" id="mobile-demo">
                 <div class="row">
                     <div class="col s12 blue white-text">
-                    <h6><b>Usuário: &emsp;{{auth()->user()->nick}}</b></h6>
+                    @php $nickusuario = explode(' ', auth()->user()->nick); @endphp
+                    <h6><b>Usuário: &emsp;{{$nickusuario[0]}}</b></h6>
                     <h6><b>Nivel: &emsp;&emsp; @can('autorizacao', 3) Administrador @else Professor @endcan</b></h6>
                     </div>
                     <div class="col s12">

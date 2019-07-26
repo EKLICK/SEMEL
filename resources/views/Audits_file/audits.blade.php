@@ -5,7 +5,7 @@
 @endsection
 @section('title') Auditorias registradas @endsection
 @section('content')
-    <div class="container z-depth-4">
+    <div class="z-depth-4">
         <div class="card-panel">
             @include('layouts.Sessoes.quant')
             <ul class="collapsible">

@@ -7,7 +7,6 @@
 @endsection
 @section('title') Anamneses de <?php $nomes = explode(' ',$pessoa->nome);?> {{$nomes[0]}} @endsection
 @section('content')
-    @include('layouts.Sessoes.errors')
     <div class="container">
         <div class="row">
             <form id="formulario" class="col s12" action="{{route('anamneses.store')}}" method="post" enctype="multipart/form-data">

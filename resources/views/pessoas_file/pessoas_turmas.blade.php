@@ -9,7 +9,7 @@
     @include('layouts.Sessoes.mensagem_green')
     @include('layouts.Sessoes.mensagem_yellow')
     @include('layouts.Sessoes.mensagem_red')
-    <div class="container z-depth-4">
+    <div class="z-depth-4">
         <div class="card-panel">
             @include('layouts.Sessoes.quant')
             <ul class="collapsible">
