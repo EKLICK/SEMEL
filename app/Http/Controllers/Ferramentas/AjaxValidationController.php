@@ -117,7 +117,6 @@ class AjaxValidationController extends Controller{
         //Verifica se foi passado um id (significa que o usuário está editando um administrador ou professor).
         if(isset($dataForm['id'])){
             //Tenta encontrar o email na tabela de administrador.
-            
             if(isset($dataForm['prof'])){
                 $id = Professor::find($dataForm['id']);
             }

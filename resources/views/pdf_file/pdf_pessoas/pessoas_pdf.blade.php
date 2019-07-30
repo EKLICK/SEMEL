@@ -15,12 +15,12 @@
         <div class="container"><h3>Quantidade total de pessoas no relatório: {{count($pessoaslist)}}</h3></div>
         <br>
         @foreach ($pessoaslist as $pessoa)
-            <div style="border-style: solid; border-color: #999999; border-width: 2px;">
+            <div>
                 <h3 style="margin-left: 2%;">Nome: <b>{{$pessoa->nome}}</b></h3>
                 <table>
                     <tr>
-                        @if($opcoes_colunas[0] == 1)<th style="width: 200px;">Endereço</th>@endif
-                        @if($opcoes_colunas[1] == 1)<th style="width: 110px;">Telefone</th>@endif
+                        @if($opcoes_colunas[0] == 1)<th style="width: 100px;">Endereço</th>@endif
+                        @if($opcoes_colunas[1] == 1)<th style="width: 100px;">Telefone</th>@endif
                         @if($opcoes_colunas[2] == 1)<th style="width: 100px;">Data de nascimento</th>@endif
                         @if($opcoes_colunas[3] == 1)<th style="width: 70px;">RG</th>@endif
                         @if($opcoes_colunas[4] == 1)<th style="width: 80px;">Usuário falecido?</th>@endif

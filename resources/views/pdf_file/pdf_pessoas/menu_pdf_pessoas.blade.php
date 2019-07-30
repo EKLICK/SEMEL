@@ -80,28 +80,6 @@
                 <hr>
                 <div class="row">
                     <div class="input-field col s6">
-                        <h5><b>Telefone de emergência</b></h5></td>
-                    </div>
-                    <div class="input-field col s1">
-                        <i class="material-icons prefix" style="color:red;">cancel</i>
-                    </div>
-                    <div class="input-field col s2" style="margin-top:3%;">
-                        <div class="switch">
-                            <label>
-                                Não
-                                <input name="telefone_emergencia" type="checkbox" checked>
-                                <span class="lever"></span>
-                                Sim
-                            </label>
-                        </div>
-                    </div>
-                    <div class="input-field col s2">
-                        <i class="material-icons prefix" style="color:green;">check_circle</i>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="input-field col s6">
                         <h5><b>Data de nascimento</b></h5></td>
                     </div>
                     <div class="input-field col s1">

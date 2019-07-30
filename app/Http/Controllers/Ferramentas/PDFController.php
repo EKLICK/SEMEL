@@ -65,7 +65,6 @@ class PDFController extends Controller{
         $opcoes_colunas = [];
         if(isset($dataForm['endereco'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
         if(isset($dataForm['telefone'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
-        if(isset($dataForm['telefone_emergencia'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
         if(isset($dataForm['data_nascimento'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
         if(isset($dataForm['rg'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
         if(isset($dataForm['morto'])){array_push($opcoes_colunas, 1);}else{array_push($opcoes_colunas, 0);}
@@ -90,7 +89,7 @@ class PDFController extends Controller{
             $pessoaslist = Pessoa::whereIn('id', $list)->orderBy('created_at')->get();
         }
 
-        return \PDF::loadview('pdf_file.pdf_pessoas.pessoas_pdf', compact('pessoaslist','opcoes_colunas'))->stream('PDF_registro_pessoas'.'.pdf');
+        return \PDF::loadview('pdf_file.pdf_pessoas.pessoas_pdf', compact('pessoaslist','opcoes_colunas'))->setPaper('a4', 'landscape')->stream('PDF_registro_pessoas'.'.pdf');
     }
 
     public function turmas_pdf(Request $request, $list){

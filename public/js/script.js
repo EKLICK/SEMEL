@@ -302,8 +302,8 @@ if(document.getElementById('capture') != null){
 function muda_foto(){
     var diva = document.getElementById('image_file');
     var divb = document.getElementById('image_web');
-    apagar_3_4()
-    apagar_web()
+    apagar_3_4();
+    apagar_web();
     if (diva.style.display == "none"){
         diva.style.display = "block";
         divb.style.display = "none";
